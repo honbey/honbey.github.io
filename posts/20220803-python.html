@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Python</h1>
+</header>
+<div id="outline-container-orgc4dfec8" class="outline-2">
+<h2 id="orgc4dfec8">Some Useful Modules</h2>
+<div class="outline-text-2" id="text-orgc4dfec8">
+</div>
+<div id="outline-container-orgcf71864" class="outline-3">
+<h3 id="orgcf71864">numpy - Scientific calculation</h3>
+<div class="outline-text-3" id="text-orgcf71864">
+<p>
+Numpy remove scientific notation:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
+<span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
+np.set_printoptions(suppress=<span style="color: #D0372D;">True</span>, formatter={
+    <span style="color: #008000;">'float_kind'</span>: <span style="color: #008000;">'{:0.1f}'</span>.<span style="color: #006FE0;">format</span>
+})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfa0c55f" class="outline-3">
+<h3 id="orgfa0c55f">sqlaichemy - <a href="20220821-database.html#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></h3>
+</div>
+
+<div id="outline-container-org066c51f" class="outline-3">
+<h3 id="org066c51f">re - <a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regex</a>p</h3>
+</div>
+
+<div id="outline-container-ID-49846a46-321d-40b6-9ced-9791a2d43d5e" class="outline-3">
+<h3 id="ID-49846a46-321d-40b6-9ced-9791a2d43d5e">seleium - Headless browser</h3>
+<div class="outline-text-3" id="text-org7d2eaf1">
+<p>
+Selenium use specific browser:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">from</span> selenium <span style="color: #0000FF;">import</span> webdriver
+
+<span style="color: #BA36A5;">driver_path</span> = <span style="color: #008000;">"C:/Users/username/PycharmProjects/chromedriver.exe"</span>
+<span style="color: #BA36A5;">brave_path</span> = <span style="color: #008000;">"C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"</span>
+
+<span style="color: #BA36A5;">option</span> = webdriver.ChromeOptions()
+option.<span style="color: #BA36A5;">binary_location</span> = brave_path
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">option.add_argument("--incognito") OPTIONAL</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">option.add_argument("--headless") OPTIONAL</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create new Instance of Chrome</span>
+<span style="color: #BA36A5;">browser</span> = webdriver.Chrome(executable_path=driver_path, chrome_options=option)
+
+browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0985c06" class="outline-2">
+<h2 id="org0985c06">Dict</h2>
+<div class="outline-text-2" id="text-org0985c06">
+</div>
+<div id="outline-container-ID-66cc9aaa-af3c-40e9-b380-c51b42eab498" class="outline-3">
+<h3 id="ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">Seven method to merge dictionary in Python</h3>
+<div class="outline-text-3" id="text-orgce73aca">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> = {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
+</pre>
+</div>
+<ol class="org-ol">
+<li><p>
+update()
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">from</span> copy <span style="color: #0000FF;">import</span> deepcopy
+<span style="color: #BA36A5;">ab</span> = deepcopy(a)
+ab.update(b)
+</pre>
+</div></li>
+<li><p>
+use <code>**</code> to destruct
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = {**a, **b}
+</pre>
+</div></li>
+<li><p>
+itertools
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">import</span> itertools
+<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(itertools.chain(a.items(), b.items()))
+</pre>
+</div></li>
+<li><p>
+ChainMap
+This method will not update the value of same key.
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">from</span> collections <span style="color: #0000FF;">import</span> ChainMap
+<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(ChainMap(a, b))
+</pre>
+</div></li>
+<li><p>
+dict.items()
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(a.items() | b.items())
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">or</span>
+<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(<span style="color: #006FE0;">list</span>(a.items() + <span style="color: #006FE0;">list</span>(b.items())))
+</pre>
+</div></li>
+<li><p>
+Pythonnic
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = {k:v <span style="color: #0000FF;">for</span> d <span style="color: #0000FF;">in</span> [a, b] <span style="color: #0000FF;">for</span> k, v <span style="color: #0000FF;">in</span> d.items()}
+</pre>
+</div></li>
+<li><p>
+Python 3.9
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = a | b
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org7e39f13" class="outline-2">
+<h2 id="org7e39f13"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
+<div class="outline-text-2" id="text-org7e39f13">
+</div>
+<div id="outline-container-org5f64105" class="outline-3">
+<h3 id="org5f64105">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org5f64105">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://github.com/streamlit/streamlit/commit/80d9979d5f4a00217743d607078a1d867fad8acf</span>
+<span style="color: #0000FF;">import</span> os
+
+<span style="color: #BA36A5;">app_root</span> = <span style="color: #008000;">'/data/app'</span>
+<span style="color: #BA36A5;">filename</span> = <span style="color: #008000;">'../../etc/passwd'</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">abspath = os.path.join(app_root, filename)</span>
+<span style="color: #BA36A5;">abspath</span> = os.path.realpath(os.path.join(app_root, filename))
+
+<span style="color: #0000FF;">if</span> os.path.commonprefix([app_root, abspath]) != app_root:
+    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">'403 forbidden'</span>)
+<span style="color: #0000FF;">else</span>:
+    <span style="color: #006FE0;">print</span>(abspath)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfd5c9d8" class="outline-2">
+<h2 id="orgfd5c9d8">playground</h2>
+<div class="outline-text-2" id="text-orgfd5c9d8">
+<div class="org-src-container">
+<pre class="src src-python-jit">print('Hello world')
+</pre>
+</div>
+<div class="klipsify div" id="orge88bfe4">
+<script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
+<script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
+
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

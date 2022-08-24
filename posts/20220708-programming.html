@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programming</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Programming</h1>
+</header>
+<div id="outline-container-org84c14e2" class="outline-2">
+<h2 id="org84c14e2">相关知识</h2>
+<div class="outline-text-2" id="text-org84c14e2">
+<ul class="org-ul">
+<li><a href="20220708-concurrency_parallel.html#ID-af9f4833-5713-468e-9c11-ad8b1c23222c">Concurrency/Parallel</a> 并发/并行</li>
+<li><a href="20220708-synchronous_asynchronous.html#ID-c31e51cf-dba3-46de-a06b-a2160fda517b">Synchronous/Asynchronous</a> 同步/异步 &amp; 阻塞/非阻塞</li>
+<li>John Von Neumann Architecture <a href="20220708-hardware.html#ID-5734cc7e-836b-4b5b-a7a9-e47e0a930c8a">冯 - 诺以曼体系</a></li>
+<li>Memory and Register <a href="memory_and_register.html#ID-2fee860b-01d1-48e5-a19c-8df0d5ffa346">内存与寄存器</a></li>
+<li><a href="20220821-database.html#ID-557eccab-2519-4dab-9bc1-9df54a593b65">Database</a> 数据库</li>
+<li><a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regexp</a> 正则表达式</li>
+</ul>
+</div>
+
+<div id="outline-container-org1ccb1c3" class="outline-3">
+<h3 id="org1ccb1c3">ASCII</h3>
+<div class="outline-text-3" id="text-org1ccb1c3">
+<pre class="example">
+0  NUT
+48 10
+65 A
+97 a
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0ab10dd" class="outline-2">
+<h2 id="org0ab10dd">编程语言</h2>
+<div class="outline-text-2" id="text-org0ab10dd">
+</div>
+<div id="outline-container-orgab19f43" class="outline-3">
+<h3 id="orgab19f43">C/C++</h3>
+<div class="outline-text-3" id="text-orgab19f43">
+<ul class="org-ul">
+<li><a href="install_opencv.html#ID-f927f9e9-fc25-4855-ad0c-3dcb2bcd96be">安装 OpenCV</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge785e05" class="outline-3">
+<h3 id="orge785e05"><a href="lua_base.html#ID-ddc79726-17a1-415f-b1b3-e7446fc13f77">Lua</a></h3>
+</div>
+<div id="outline-container-orga11d8ac" class="outline-3">
+<h3 id="orga11d8ac"><a href="20220803-python.html#ID-798fccc4-bc5f-4e5d-9272-f9ac8baaf74d">Python</a></h3>
+</div>
+</div>
+
+<div id="outline-container-org876419d" class="outline-2">
+<h2 id="org876419d">算法与数据结构</h2>
+<div class="outline-text-2" id="text-org876419d">
+<ul class="org-ul">
+<li><a href="data_structure_graph.html#ID-2c814e9c-c0bd-4155-8ab3-44e98a136151">图</a>
+<ul class="org-ul">
+<li><a href="data_structure_graph.html#ID-cf710117-1489-43c3-b428-51bce5e2a25c">广度优先遍历</a></li>
+<li><a href="data_structure_graph.html#ID-b57c3ec5-bb6e-4d6f-915a-47083b7e6ba4">深度优先遍历</a></li>
+<li><a href="data_structure_graph.html#ID-7827e4bf-f416-4549-b6b1-fdf83440f006">拓扑排序</a></li>
+</ul></li>
+<li><a href="union_find.html#ID-ace34e9a-ec1d-413a-be22-cf9a6fe3fab9">Union Find</a>
+<ul class="org-ul">
+<li><a href="union_find.html#ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4">Quick Find</a></li>
+<li><a href="union_find.html#ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f">Quick Union</a></li>
+<li><a href="union_find.html#ID-437552bc-25e7-425c-8090-854a9c6f7e67">Weighted Union Find</a></li>
+</ul></li>
+<li><a href="20220730-skip_list.html#ID-5b550aea-f832-4b51-a7e1-205e6c7d8288">Skip List</a></li>
+</ul>
+</div>
+
+<div id="outline-container-org199232f" class="outline-3">
+<h3 id="org199232f"><a href="_machine_learning.html#ID-19ef770d-3cfd-4006-877e-51270f459663">机器学习</a></h3>
+</div>
+
+<div id="outline-container-ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f" class="outline-3">
+<h3 id="ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f">倍率定理</h3>
+<div class="outline-text-3" id="text-org98f593f">
+<p>
+如果 \[T(N)\sim aN^b\lg N\]，那么
+\[\frac{T(2N)}{N} \sim 2^b\]
+，进而可以推出常见的增长数量级函数均会出现这种情况，指数级别除外.
+</p>
+
+<p>
+证明：
+\[\frac{T(2N)}{N}=\frac{a(2N^b)\lg(2N)}{aN^b\lg N}\]
+\[=a^b(1+\frac{\lg 2}{\lg N})\sim 2^b\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-ID-2ca9075c-70b6-45e0-9ad2-b5baabccbdcf" class="outline-3">
+<h3 id="ID-2ca9075c-70b6-45e0-9ad2-b5baabccbdcf">常见近似函数</h3>
+<div class="outline-text-3" id="text-orgc16736f">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">描述</th>
+<th scope="col" class="org-left">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">调和级数求和</td>
+<td class="org-left">\[H_N=\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+\cdots +\frac{1}{N}=\ln(N+1)+\gamma \sim \ln N\quad \gamma\approx0.5772156...\]</td>
+</tr>
+
+<tr>
+<td class="org-left">等差数列求和</td>
+<td class="org-left">\(1+2+3+\cdots+N=\frac{N(N+1)}{2}\sim N^2\)</td>
+</tr>
+
+<tr>
+<td class="org-left">等比数列求和</td>
+<td class="org-left">\(T_a(n)=a^0+a^1+a^2+\cdots +a^n=\frac{(a^{n+1}-1)}{a-1}\sim a^N\)</td>
+</tr>
+
+<tr>
+<td class="org-left">斯特灵公式</td>
+<td class="org-left">\(\lg N!=\lg 1+\lg 2+\lg 3+\cdots+\lg N\sim N\lg N\)</td>
+</tr>
+
+<tr>
+<td class="org-left">几何分布</td>
+<td class="org-left">\((1-\lambda)\cdot[1+2\lambda+3\lambda^2+4\lambda^3+\cdots]=\frac{1}{1-\lambda}\sim O(1)\quad0<\lambda<1\)</td>
+</tr>
+
+<tr>
+<td class="org-left">收敛级数</td>
+<td class="org-left">\(1+\frac{1}{2^2}+\frac{1}{3^2}+\cdots \sim 1\)</td>
+</tr>
+
+<tr>
+<td class="org-left">幂方级数</td>
+<td class="org-left">\(\sum_{k=0}^n k^d \approx \int_0^n x^{d+1}dx = \frac{1}{d+1}x^{d+1}\lvert_0^n = \frac{1}{d+1}n^{d+1} \sim n^{d+1}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">指数函数</td>
+<td class="org-left">\((1-\frac{1}{x})^x\sim\frac{1}{e}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">二项式系数</td>
+<td class="org-left">\(\tbinom{N}{k}\sim\frac{N^k}{k!}\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3" class="outline-3">
+<h3 id="ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3">AQ</h3>
+<div class="outline-text-3" id="text-orgddaf884">
+</div>
+<div id="outline-container-org9ec18eb" class="outline-4">
+<h4 id="org9ec18eb">18问</h4>
+<div class="outline-text-4" id="text-org9ec18eb">
+<ol class="org-ol">
+<li>请简单解释算法是什么？
+算法是一个定义良好的计算过程，它将一些值作为输入并产生相应的输出值。简单来说，它是将输入转换为输出的一系列计算步骤。</li>
+
+<li>解释什么是快速排序算法？
+快速排序算法能够快速排序列表或查询。它基于分割交换排序的原则，这种类型的算法占用空间较小，它将待排序列表分为三个主要部分：
+小于 Pivot 的元素
+枢轴元素 Pivot（选定的比较值）
+大于 Pivot 的元素</li>
+
+<li>解释算法的时间复杂度？
+算法的时间复杂度表示程序运行完成所需的总时间，它通常用大 O 表示法来表示。</li>
+
+<li>请问用于时间复杂度的符号类型是什么？
+用于时间复杂度的符号类型包括：
+Big Oh：它表示小于或等于目标多项式
+Big Omega：它表示大于或等于目标多项式
+Big Theta：它表示与目标多项式相等
+Little Oh：它表示小于目标多项式
+Little Omega：它表示大于目标多项</li>
+
+<li>解释二分法检索如何工作
+在二分法检索中，我们先确定数组的中间位置，然后将要查找的值与数组中间位置的值进行比较，若小于数组中间值，则要查找的值应位于该中间值之前，依此类推，不断缩小查找范围，直至得到终结果</li>
+
+<li>解释是否可以使用二分法检索链表？
+由于随机访问在链表中是不可接受的，所以不可能到达 O(1) 时间。因此，对于链表来说，二分法检索是不可以的（对顺序链表或排序后的链表是可以的）</li>
+
+<li>解释什么是堆排序？
+堆排序可以看成是选择排序的改进，它可以定义为基于比较的排序算法。它将其输入划分为未排序和排序的区域，通过不断消除最小元素并将其移动到排序区域来收缩未排序区域。</li>
+
+<li>说明什么是 <a href="20220730-skip_list.html#ID-5b550aea-f832-4b51-a7e1-205e6c7d8288">Skip List</a> ？
+Skip list 数据结构化的方法，它允许算法在符号表或字典中搜索、删除和插入元素。在 Skip list 中，每个元素由一个节点表示。搜索函数返回与key相关的值的内容。插入操作将指定的键与新值相关联，删除操作可删除指定的键。</li>
+
+<li>解释插入排序算法的空间复杂度是多少？
+插入排序是一种就地排序算法，这意味着它不需要额外的或仅需要少量的存储空间。对于插入排序，它只需要将单个列表元素存储在初始数据的外侧，从而使空间复杂度为 O(1) 。</li>
+
+<li>解释什么是“哈希算法”，它们用于什么？
+“哈希算法”是一个哈希函数，它使用任意长度的字符串，并将其减少为唯一的固定长度字符串。它用于密码有效性、消息和数据完整性以及许多其他加密系统。</li>
+
+<li>解释如何查找链表是否有循环？
+要知道链表是否有循环，我们将采用两个指针的方法。如果保留两个指针，并且在处理两个节点之后增加一个指针，并且在处理每个节点之后，遇到指针指向同一个节点的情况，这只有在链表有循环时才会发生。</li>
+
+<li>解释加密算法的工作原理？
+加密是将明文转换为称为“密文”的密码格式的过程。要转换文本，算法使用一系列被称为“键”的位来进行计算。密钥越大，创建密文的潜在模式数越多。大多数加密算法使用长度约为 64 到 128 位的固定输入块，而有些则使用流方法。</li>
+
+<li>列出一些常用的加密算法？
+一些常用的加密算法是：
+3-way
+Blowfish
+CAST
+CMEA
+GOST
+DES(Triple DES)
+IDEA
+LOKI</li>
+
+<li>解释一个算法的最佳情况和最坏情况之间有什么区别？
+最佳情况：算法的最佳情况解释为算法执行最佳的数据排列。例如，我们进行二分法检索，如果目标值位于正在搜索的数据中心，则这就是最佳情况，最佳情况时间复杂度为 0 。
+最差情况：给定算法的最差输入参考。例如快速排序，如果选择关键值的子列表的最大或最小元素，则会导致最差情况出现，这将导致时间复杂度快速退化到 O(n<sup>2</sup>) 。</li>
+
+<li>解释什么是基数排序算法？
+基数排序又称“桶子法”，是通过比较数字将其分配到不同的“桶里”来排序元素的。它是线性排序算法之一。</li>
+
+<li>解释什么是递归算法？
+递归算法是一个解决复杂问题的方法，将问题分解成较小的子问题，直到分解的足够小，可以轻松解决问题为止。通常，它涉及一个调用自身的函数。</li>
+
+<li>提到递归算法的三个定律是什么？
+所有递归算法必须遵循三个规律
+<ul class="org-ul">
+<li>递归算法必须有一个基点</li>
+<li>递归算法必须有一个趋向基点的状态变化过程</li>
+<li>递归算法必须自我调用</li>
+</ul></li>
+
+<li>解释什么是冒泡排序算法？
+冒泡排序算法也称为下沉排序。在这种类型的排序中，要排序的列表的相邻元素之间互相比较。如果它们按顺序排列错误，将交换值并以正确的顺序排列，直到最终结果“浮”出水面。</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0b95d02" class="outline-2">
+<h2 id="org0b95d02">Operating System</h2>
+<div class="outline-text-2" id="text-org0b95d02">
+<ul class="org-ul">
+<li><a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a></li>
+<li><a href="20220819-macos.html#ID-cfd1e009-299d-4838-88af-ceadd998a30f">macOS</a></li>
+<li><a href="20220815-windows.html#ID-d007eb95-2979-41c9-97de-af76c61ed952">Windows</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

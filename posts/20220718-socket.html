@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Socket</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Socket</h1>
+</header><ul class="org-ul">
+<li>Socket 编程
+<ul class="org-ul">
+<li>针对 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 应该如何 Socket 编程？</li>
+<li>listen 时候参数 backlog 的意义？</li>
+<li>accept 发送在三次握手的哪一步？</li>
+<li>客户端调用 close 了，连接断开的流程是什么？</li>
+</ul></li>
+</ul>
+<div id="outline-container-orgf7b9fd5" class="outline-2">
+<h2 id="orgf7b9fd5">Socket 编程</h2>
+<div class="outline-text-2" id="text-orgf7b9fd5">
+
+<figure id="orga4ddc29">
+<img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
+</figure>
+
+<ol class="org-ol">
+<li>服务端和客户端初始化 <code>socket</code> ，得到文件描述符</li>
+<li>服务端调用 <code>bind</code> ，将绑定 IP 和端口</li>
+<li>服务端调用 <code>listen</code> ，进行监听</li>
+<li>服务端调用 <code>accept</code> ，等待客户端连接</li>
+<li>客户端调用 <code>conncet</code> ，向服务端的地址和端口发起连接请求</li>
+<li>服务端 <code>accept</code> 返回用于传输的 <code>socket</code> 的文件描述符</li>
+<li>客户端 <code>wirte</code> 写入数据；服务器调用 <code>read</code> 读取数据</li>
+<li>客户端断开连接时，会调用 <code>close</code> ，那么服务端 <code>read</code> 读取数据的时候，就会读取到 EOF ，待处理完数据后，服务端调用 <code>close</code> ，表示连接关闭。</li>
+</ol>
+
+<p>
+服务器调用 <code>accept</code> 时，连接成功了会返回一个已完成连接的 <code>socket</code> ，后续用来传输数据，所以监听的 <code>socket</code> 和真正用来传输数据的 <code>socket</code> ，一个叫监听 <code>socket</code> ，一个叫作已完成连接 <code>socket</code> 。成功建立连接后，双方开始通过 <code>read</code> 和 <code>write</code> 读写数据，就像往一个文件流里写东西一样。
+</p>
+
+<p>
+客户端 connect 成功返回是在第二次握手，服务端 accept 成功返回实在第三次握手成功之后。
+</p>
+</div>
+
+<div id="outline-container-org332a001" class="outline-3">
+<h3 id="org332a001">backlog</h3>
+<div class="outline-text-3" id="text-org332a001">
+<p>
+Linux 内核会维护两个队列：
+</p>
+<ul class="org-ul">
+<li>未完成连接队列（SYN 队列）   ：接收到一个 SYN 建立连接请求，处于 <code>SYN_RCVD</code> 状态</li>
+<li>已完成连接队列（Accpet 队列）：已完成 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 三次握手的过程，处于 <code>ESTABLISHED</code> 状态</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #006699;">listen</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">socketfd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">backlog</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+<p>
+<code>socketfd</code> 为 <code>socket</code> 文件描述符， <code>backlog</code> 为 SYN 队列的大小， Linux 2.2 后， <code>backlog</code> 为 Accpet 队列的大小。
+但上限值是内核参数 <code>somaxconn</code> 的大小，即 <code>Accpet 队列长度 = min(backlog, somaxconn)</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9" class="outline-3">
+<h3 id="ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></h3>
+<div class="outline-text-3" id="text-orgaedd0a7">
+<p>
+配置是否关闭 nagle 算法。
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #006699;">setsockopt</span><span style="color: #707183;">(</span>sock_fd, <span style="color: #D0372D;">IPPROTO_TCP</span>, <span style="color: #D0372D;">TCP_NODELAY</span>, <span style="color: #7388D6;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #7388D6;">)</span>&amp;value, <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6;">(</span><span style="color: #6434A3;">int</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f" class="outline-3">
+<h3 id="ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></h3>
+<div class="outline-text-3" id="text-org0fcee37">
+<p>
+功能类似于在发送数据管道出口处插入一个“塞子”，使得发送数据全部被阻塞，直到取消 <code>TCP_CORK</code> 选项（即拔去塞子）或被阻塞数据长度已超过 <code>MSS</code> 才将其发送出去。
+<code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #006699;">setsockopt</span><span style="color: #707183;">(</span>sock_fd, <span style="color: #D0372D;">IPPROTO_TCP</span>, <span style="color: #D0372D;">TCP_CORK</span>, <span style="color: #7388D6;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #7388D6;">)</span>&amp;value, <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6;">(</span><span style="color: #6434A3;">int</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org42a7043" class="outline-3">
+<h3 id="org42a7043"><code>SO_LINGER</code></h3>
+<div class="outline-text-3" id="text-org42a7043">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">l_onoff</span>;  <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Linger active</span><span style="color: #8D8D84;"> */</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">l_linger</span>; <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">How long to linger for</span><span style="color: #8D8D84;"> */</span>
+<span style="color: #707183;">}</span>;
+</pre>
+</div>
+<p>
+在 Linux 系统中，设置了 <code>SO_LINGER</code> 即 <code>l_onoff</code> 为 1 时<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>：
+<code>l_linger</code> 为 0 则导致所有数据丢失且连接立即中止。
+<code>l_linger</code> 非 0 则：
+</p>
+<ol class="org-ol">
+<li>待发送的数据全部得到了对端确认，返回值 0</li>
+<li>发生信号中断或异常（比如意外收到对端发送过来的数据）或超时，返回值 0</li>
+</ol>
+
+<p>
+一种使用方法<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>：
+</p>
+<ol class="org-ol">
+<li>设置 <code>SO_LINGER</code> 选项 <code>l_onoff</code> 非 0 而 <code>l_linger</code> 为 0</li>
+<li>调用函数 <code>shutdown(sock_fd, SHUT_WR)</code></li>
+<li>设置超时计时器</li>
+<li>调用函数 <code>read(sock_fd)</code> 阻塞等待，直到读到 <code>EOF</code> 或被超时器中断</li>
+<li>执行函数 <code>close(sock_fd)</code> 或者 <code>exit(0)</code> 进程退出</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e722b7" class="outline-2">
+<h2 id="org0e722b7">Reference</h2>
+<div class="outline-text-2" id="text-org0e722b7">
+<ul class="org-ul">
+<li>图解网络-小林coding-v3.0.pdf</li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Socket选项系列之SO_LINGER，链接：<a href="http://www.lenky.info/archives/2013/02/2220">http://www.lenky.info/archives/2013/02/2220</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

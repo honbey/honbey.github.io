@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSL/TLS</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">SSL/TLS</h1>
+</header><div id="outline-container-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607" class="outline-2">
+<h2 id="ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS Protocol</h2>
+<div class="outline-text-2" id="text-org1a9e7dd">
+<p>
+两层协议
+</p>
+<pre class="example">
+握手协议 | 密码改变协议 | 告警协议
+           记录协议
+</pre>
+
+<p>
+SSL 记录协议负责对上层的数据进行分块、压缩、计算并添加 HMAC 、加密（<a href="20220708-information_security.html#ID-a7820960-a5b2-4562-bf64-cd207f5c9986">先压缩再加密</a>）
+</p>
+<pre class="example">
+内容类型 | 主版本号 | 子版本号 | 压缩长度
+           压缩数据
+           消息认证码
+</pre>
+</div>
+</div>
+
+<div id="outline-container-ID-6e2417e2-47b1-4a17-bedc-665791718239" class="outline-2">
+<h2 id="ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS 通信过程</h2>
+<div class="outline-text-2" id="text-org2120054">
+<ol class="org-ol">
+<li><p>
+TCP 三次握手
+SYN, ACK 的含义：<a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>
+</p>
+<pre class="example">
+Client                   Server
+   |     -----SYN----&gt;     |
+   |     &lt;--SYN+ACK---     |
+   |     -----ACK----&gt;     |
+Client                   Server
+</pre></li>
+
+<li><p>
+SSL 握手（TLS 1.2 - <a href="https://datatracker.ietf.org/doc/html/rfc5246">RFC5246</a>）
+</p>
+<pre class="example">
+Client                                        Server
+
+ClientHello           ------&gt;
+                                         ServerHello
+                                        Certificate*
+                                  ServerKeyExchange*
+                                 CertificateRequest*
+                      &lt;------        ServerHelloDone
+Certificate*
+ClientKeyExchange
+CertificateVerify*
+[ChangeCipherSpec]
+Finished              ------&gt;
+                                  [ChangeCipherSpec]
+                      &lt;------               Finished
+</pre>
+<p>
+4 messages as 2 RTT(Round-Trip Time).
+使用 Wireshark 抓包分析：<a href="wireshark.html#ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</a>
+</p></li>
+
+<li><p>
+承载应用层 HTTP 协议
+</p>
+<pre class="example">
+Client                                        Server
+Application Data      &lt;-----&gt;       Application Data
+</pre></li>
+</ol>
+</div>
+
+<div id="outline-container-ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad" class="outline-3">
+<h3 id="ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">SSL Handshake 阶段交换的信息</h3>
+<div class="outline-text-3" id="text-orge35e6ba">
+<p>
+ClientHello:
+</p>
+<ul class="org-ul">
+<li>TLS Version</li>
+<li>Client Random</li>
+<li>(Sessio ID)</li>
+<li><a href="#ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">Cipher</a> Suites</li>
+</ul>
+
+<p>
+ServerHello:
+</p>
+<ul class="org-ul">
+<li>TLS Version</li>
+<li>Server Random</li>
+<li>Session ID</li>
+<li>Cipher Suite</li>
+<li>(Extension)</li>
+</ul>
+
+<p>
+Certificate: 服务器的<a href="20220712-digital_certificate.html#ID-b82db81e-5b68-4061-a513-8bea9e8b90b1">数字证书</a>，一般都是单向认证，除非服务器附带 <code>CertificateRequest</code> 以请求验证客户端的证书
+</p>
+
+<p>
+ServerHelloDone: 服务器的 HELLO 结束
+</p>
+
+<p>
+ClientKeyExchange:
+</p>
+<ul class="org-ul">
+<li>PriKey_Server {pre-master} ，即使用服务器公钥加密的 pre-master</li>
+</ul>
+
+<p>
+ChangeCipherSpec: 告诉对方开始使用对称加密的会话密钥进行通信
+</p>
+
+<p>
+Finished: Encrypted Handshake Message ，把之前所有发送的数据通过摘要算法计算摘要，再使用会话密钥（master secret）加密，方便服务器验证加密通信是否可用和之前的握手信息是否被篡改
+</p>
+
+<p>
+<a href="https://blog.csdn.net/dog250/article/details/5717162">三个随机数的作用</a>：
+</p>
+<blockquote>
+<p>
+ssl3_send_client_key_exchange 是 openssl 中客户端确定密钥的函数，同时也发送了“一部分”数据给服务器，这一部分数据就是所谓的 pre_master ，不管是客户端还是服务器都根据对端传过来的 pre_master 和自己计算出来的另一部分数据来生成最终的对称密钥，生成过程中需要 hello 消息中的随机数，这样生成的密钥才不会每次都一样。由于 ssl 协议中 dh 份额来源于证书，而证书又是静态的，因此十分有必要引入一种随机因素来保证通过静态证书导出的密钥份额协商出来的密钥的随机性。同时这也是 pre_master 的意义，那就是随机，对于 rsa 密钥交换算法来说， pre-master-key 本身就是一个随机数，再加上 hello 消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥，但是对于 dh ，包括 ecdh 算法(不考虑匿名 dh 和瞬时 dh)，就只有 hello 消息中的两个随机数因子了。
+pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么 pre master secret 就有可能被猜出来，那么仅适用 pre master secret 作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上 pre master secret 三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438" class="outline-2">
+<h2 id="ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">SSL Cipher</h2>
+<div class="outline-text-2" id="text-org75a3632">
+<p>
+例如： <code>TLS_RSA_WITH_AES_128_GCM_SHA256</code>
+是由 密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法 组成。
+一般 <code>WITH</code> 前的那一部分由两部分组成，第一部分约定密钥交换算法，第二部分约定证书的验证算法，此例中只有 <code>RSA</code> 说明握手时密钥交换算法和签名算法都是使用 <code>RSA</code> 。
+</p>
+
+<p>
+握手完成后，使用 <code>AES</code> 的 <code>GCM</code> 分组模式进行对称加解密。
+</p>
+
+<p>
+摘要算法 <code>SHA256</code> 用于消息认证和产生随机数。
+</p>
+
+<p>
+但是用 RSA 算法协商会话密钥的方法不能保证<a href="20220708-information_security.html#ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全</a>，一旦服务器的私钥泄漏，过去被第三方截获的所有 SSL/TLS 通讯密文都会被破解。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org52f9903" class="outline-2">
+<h2 id="org52f9903">离散对数 DH 算法</h2>
+<div class="outline-text-2" id="text-org52f9903">
+<p>
+<a href="20220712-discrete_logarithm.html#ID-455a29f5-1968-4678-a091-f8383b31e817">Discrete Logarithm</a> - 离散对数
+</p>
+
+<p>
+通信双方 Alice 和 Bob 需要确定模数和底数作为算法的参数，即 P 和 G。
+</p>
+
+<p>
+Alice: \(A \equiv G^{a} \mod P\)
+</p>
+
+<p>
+Bob: \(B \equiv G^{b} \mod P\)
+</p>
+
+<p>
+Alice -&gt;   Bob: A , P, G
+</p>
+
+<p>
+Bob   -&gt; Alice: B
+</p>
+
+<p>
+Alice: Calculate \(B^{a} \mod P\) 得到 K ，
+</p>
+
+<p>
+Bob:   Calculate \(A^{b} \mod P\) 同样也是得到 K ，于是双方以 K 作为会话密钥进行通信。
+</p>
+
+<p>
+离散对数的幂运算满足交换律，
+\[B^{a} \mod P & \equiv (G^{b})^{a} \mod P \equiv (G^{a})^{b} \mod P \equiv A^{a} \mod P\]
+</p>
+
+<p>
+此算法在服务器固定 DH 公私钥时被称为 static DH ，现在已经基本不用了，转而使用 DHE(Diffie Hellman Ephemeral) 算法，即双方每次通信时都随机生成一对公私钥。
+</p>
+</div>
+
+<div id="outline-container-org01c1e5e" class="outline-3">
+<h3 id="org01c1e5e">DHE 密钥交换</h3>
+<div class="outline-text-3" id="text-org01c1e5e">
+<blockquote>
+<p>
+Diffie Hellman
+</p>
+</blockquote>
+<p>
+工作流程（简略版，需要考虑<a href="20220708-information_security.html#ID-510ee87b-ee9d-4263-9344-b688c9f6f32f">中间人攻击</a>，在数字证书体系下，是可以防止中间人攻击的）：
+</p>
+<pre class="example">
+Client                              Server
+
+Hello                 ------&gt;
+                    (Generate PriKey_S and PubKey_S)
+                                               Hello
+                                            PubKey_S
+                      &lt;------           Certificate*
+(Generate PriKey_C and PubKey_C)
+PubKey_C
+Finished              ------&gt;
+
+PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
+
+                      &lt;------               Finished
+</pre>
+
+<p>
+每一次通讯的 PriKey, PubKey 都是实时生成的， PriKey 存在于内存中，不会出现在 TLS 报文中，若不知道当时的私钥 PriKey 则无法破解当时的 TLS 加密报文。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org72de113" class="outline-3">
+<h3 id="org72de113">ECDHE</h3>
+<div class="outline-text-3" id="text-org72de113">
+<p>
+提高 DHE 的性能，使用 ECC 椭圆曲线的特性计算公钥及会话密钥。过程：
+</p>
+<ol class="org-ol">
+<li>Alice 和 Bob 事先确定好使用哪种椭圆曲线（曲线方程），以及曲线上的基点 G 点，公开传输</li>
+<li>Alice 和 Bob 各自随机生成一个随机数作为私钥 a, b，并与基点相乘得到公钥 A = aG, B = bG</li>
+<li>双方各自交换公钥 A, B ，Alice 计算点 (x_a, y_a) = aB ，Bob 计算点 (x_b, x_b) = bA
+由于椭圆曲线满足乘法交换律和结合律，所以 aB = abG = baG = bA ，所以双方计算得到的点是一样的，可作为会话密钥</li>
+</ol>
+
+<p>
+<code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code> 握手解析：
+</p>
+
+<ol class="org-ol">
+<li>C -&gt; S:
+<ul class="org-ul">
+<li>Client Hello
+<ul class="org-ul">
+<li>Version</li>
+<li>Random_C</li>
+<li>Cipher Suites</li>
+</ul></li>
+</ul></li>
+<li>S -&gt; C:
+<ul class="org-ul">
+<li>Server Hello
+<ul class="org-ul">
+<li>Version</li>
+<li>Random_S</li>
+<li>Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+密钥协商 ECDHE; 签名算法 RSA; 对称加密 AES256GCM; 摘要算法 SHA384</li>
+<li>Extensions</li>
+</ul></li>
+<li>Certificate</li>
+<li>Server Key Exchange
+<ul class="org-ul">
+<li>EC Diffie-Hellman Params
+<ul class="org-ul">
+<li>Curve Type</li>
+<li>Named Curve</li>
+<li>PubKey_S</li>
+<li>Signature
+利用 RSA 算法对 PubKey_S 进行签名，防止<a href="20220708-information_security.html#ID-510ee87b-ee9d-4263-9344-b688c9f6f32f">中间人攻击</a></li>
+</ul></li>
+</ul></li>
+<li>Server Hello Done</li>
+</ul></li>
+<li><p>
+C -&gt; S:
+</p>
+<ul class="org-ul">
+<li>Client Key Exchange
+<ul class="org-ul">
+<li>EC Diffie-Hellman Client Params
+<ul class="org-ul">
+<li>PubKey_C</li>
+</ul></li>
+</ul></li>
+<li>Change Cipher Spec(Change Cipher Spec Protocol)</li>
+<li>Encrypted Handshake Message
+将之前发送所有消息做一个摘要，再用会话密钥加密
+会话密钥由 Random_C, Random_S, K 共同生成</li>
+</ul>
+<p>
+这一步后客户端就可以开始发送上层协议的数据了 (TLS False Start)
+</p></li>
+<li>S -&gt; C:
+<ul class="org-ul">
+<li>Change Cipher Spec(Change Cipher Spec Protocol)</li>
+<li>Encrypted Handshake Message</li>
+</ul></li>
+</ol>
+
+<p>
+在 ECDHE 过程中，双方的 <b>临时私钥</b> 在内存的存在时间非常短（毫秒），可近似认为满足 PFS 。
+</p>
+
+<p>
+与 RSA 的比较：RSA 密钥交换实际上是 Key Transmission ， Session Key 在客户端侧产生，然后通过服务器的证书公钥加密后发送给服务器，而 DHE 双方都会计算出 Session Key ，并且相关部分参数只存在于内存中，不会出现在报文中，满足<a href="20220708-information_security.html#ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全</a>。
+</p>
+
+<p>
+DHE 安全性论文：
+</p>
+<blockquote>
+<p>
+@misc{cryptoeprint:2011/219,
+      author = {Tibor Jager and Florian Kohlar and Sven Schäge and Jörg Schwenk},
+      title = {On the Security of TLS-DHE in the Standard Model},
+      howpublished = {Cryptology ePrint Archive, Paper 2011/219},
+      year = {2011},
+      note = {\url{https://eprint.iacr.org/2011/219}},
+      url = {<a href="https://eprint.iacr.org/2011/219">https://eprint.iacr.org/2011/219</a>}
+}
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-334fbed6-d0b8-4818-876c-61f6b7cc4335" class="outline-2">
+<h2 id="ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</h2>
+<div class="outline-text-2" id="text-org25e2ca5">
+<p>
+<b>Session ID 和 Session Ticket 都不满足<a href="20220708-information_security.html#ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全</a>，一旦加密会话密钥的密钥被破解或泄漏，前面被截获的报文都会被破解。以下三种会话复用技术都且无法抵御重放攻击。</b>
+</p>
+</div>
+
+<div id="outline-container-org95f4c24" class="outline-3">
+<h3 id="org95f4c24">Session ID</h3>
+<div class="outline-text-3" id="text-org95f4c24">
+<p>
+客户端和服务器首次 TLS 握手建立连接后，双方在内存中缓存会话密钥，并用唯一的 Session ID 来表示，即 Session ID 作为 key ，会话密钥作为 value 。
+当客户端再次连接时，在 HELLO 消息中带上 Session ID ，服务器收到后就会从内存找到该会话密钥，在 1 个 RTT 中建立 TLS 通信。
+Session ID 定期失效。
+</p>
+
+<p>
+问题：
+服务器需要额外的资源保存 Session ID ，占用内存资源。
+面对负载均衡的情况，无法保证客户端的连接会命中上次访问过的服务器。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org78c0edc" class="outline-3">
+<h3 id="org78c0edc">Session Ticket</h3>
+<div class="outline-text-3" id="text-org78c0edc">
+<p>
+客户端和服务器首次 TLS 握手建立连接后，服务器会将会话密钥加密后作为 Ticket 发送给客户端，由客户端缓存该 Ticket。
+当客户端再次连接时，会发送 Ticket ，服务器解密后就可以获取上一次的会话密钥，验证有效期后无问题就可以建立 TLS 通信。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgce78504" class="outline-3">
+<h3 id="orgce78504">Pre-shared Key</h3>
+<div class="outline-text-3" id="text-orgce78504">
+<p>
+类似 Session Ticket ，但可以直接在 HTTP 请求中带上 Pre-shared Key ，在 0 RTT 内恢复会话。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org13b9433" class="outline-2">
+<h2 id="org13b9433">Reference</h2>
+<div class="outline-text-2" id="text-org13b9433">
+<ul class="org-ul">
+<li>图解网络-小林coding-v3.0.pdf</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

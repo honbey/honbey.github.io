@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>格式化字符漏洞</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">格式化字符漏洞</h1>
+</header>
+<div id="outline-container-orgb9a2145" class="outline-2">
+<h2 id="orgb9a2145">1</h2>
+<div class="outline-text-2" id="text-orgb9a2145">
+<p>
+运行结果
+</p>
+
+<figure id="orgd548dd0">
+<img src="../images/format_string_vulnerabilities_1.png" alt="format_string_vulnerabilities_1.png">
+
+</figure>
+
+<p>
+Release
+</p>
+
+<figure id="org57457d3">
+<img src="../images/format_string_vulnerabilities_2.png" alt="format_string_vulnerabilities_2.png">
+
+</figure>
+
+<p>
+调试
+</p>
+
+<figure id="orgbc806cd">
+<img src="../images/format_string_vulnerabilities_3.png" alt="format_string_vulnerabilities_3.png">
+
+</figure>
+
+<figure id="org15f2792">
+<img src="../images/format_string_vulnerabilities_4.png" alt="format_string_vulnerabilities_4.png">
+
+</figure>
+
+<p>
+第一个 printf 函数格式化， a, b 被压入栈桢中， printf 函数输出 EBP-8 和 EBP-4 处的整型值。而第二个 printf 函数格式化输出没有参数，汇编代码中也没有相应的值传递，可能传递的是 ESP 和 ESP+4 处的值
+</p>
+
+
+<figure id="org5e4bdc4">
+<img src="../images/format_string_vulnerabilities_5.png" alt="format_string_vulnerabilities_5.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org0862c08" class="outline-2">
+<h2 id="org0862c08">2</h2>
+<div class="outline-text-2" id="text-org0862c08">
+
+<figure id="org872f70e">
+<img src="../images/format_string_vulnerabilities_6.png" alt="format_string_vulnerabilities_6.png">
+
+</figure>
+
+<p>
+Debug 和 Release 版本读取的内存数据不相同，因为对应的 3<sub>5.exe</sub> 文件结构不一样，加载到内存时就不一样。
+</p>
+
+<p>
+main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，argv[] 表示参数，argv[0] 为可执行程序的名字，本例中就是 &ldquo;3<sub>5.exe</sub>&rdquo; , argv[1] 代表第二个参数，也就是程序的第一个参数，用于利用格式化串漏洞读取内存数据。
+</p>
+
+<blockquote>
+<p>
+理论上我们编写的程序中要包含对这两个参数进行检查的代码，如
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #0000FF;">if</span><span style="color: #707183;">(</span>argc != <span style="color: #D0372D;">1</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"error! usage: 3_5.exe"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+<p>
+这种不需要额外参数的程序 argc 值为 1 ，增加一个 if 判断防止多输入的参数造成危害
+</p>
+
+<figure id="orgce1fb18">
+<img src="../images/format_string_vulnerabilities_7.png" alt="format_string_vulnerabilities_7.png">
+
+</figure>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-org91dd1a9" class="outline-2">
+<h2 id="org91dd1a9">3</h2>
+<div class="outline-text-2" id="text-org91dd1a9">
+
+<figure id="orgcc5c01a">
+<img src="../images/format_string_vulnerabilities_8.png" alt="format_string_vulnerabilities_8.png">
+
+</figure>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/format_string_vulnerabilities_9.png" alt="format_string_vulnerabilities_9.png"></td>
+<td class="org-left"><img src="../images/format_string_vulnerabilities_10.png" alt="format_string_vulnerabilities_10.png"></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+%n 会将打印总长度保存到对应参数的地址中的，所以图中 0x12ff76 处的值变为了 14<sub>(16)</sub> ，实现了内存的写入
+</p>
+
+
+<figure id="org0917d1f">
+<img src="../images/format_string_vulnerabilities_11.png" alt="format_string_vulnerabilities_11.png">
+
+</figure>
+
+<p>
+另一版本
+</p>
+
+<figure id="orgaae444c">
+<img src="../images/format_string_vulnerabilities_12.png" alt="format_string_vulnerabilities_12.png">
+
+</figure>
+
+<p>
+通过调试可以看到 EBP 被修改成 17<sub>(16)</sub> 即打印的字符数，实现了内存写入，结果程序无法得到正确的 old EBP，return 0 时会报错
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/format_string_vulnerabilities_13.png" alt="format_string_vulnerabilities_13.png"></td>
+<td class="org-left"><img src="../images/format_string_vulnerabilities_14.png" alt="format_string_vulnerabilities_14.png"></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+格式化字符串漏洞的产生原理和漏洞利用，对于 2 我以前在 Linux 下的 c 语言都会对 argc 进行检查，但没有想到，利用命令行参数可以这么轻易的读取内存中的数据。3 的内存写入让我有认识到了一种新的攻击方法，利用格式化字符串漏洞加上指针可以向特定内存地址写入自己构建的值。
+</p>
+</div>
+
+<div id="outline-container-orgb2113ab" class="outline-3">
+<h3 id="orgb2113ab">源代码</h3>
+<div class="outline-text-3" id="text-orgb2113ab">
+<ul class="org-ul">
+<li><p>
+1
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i_a</span> = <span style="color: #D0372D;">77</span>, <span style="color: #BA36A5;">i_b</span> = <span style="color: #D0372D;">44</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span>, i_a, i_b<span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+2
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span>argv<span style="color: #909183;">[</span><span style="color: #D0372D;">1</span><span style="color: #909183;">]</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+3
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">num</span> = <span style="color: #D0372D;">0x61616161</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Before:num=%#x \n"</span>, num<span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"%.20d%n\n"</span>, num, &amp;num<span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"After:num=%#x \n"</span>, num<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

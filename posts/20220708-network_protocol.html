@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network Protocol</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Network Protocol</h1>
+</header><p>
+OSI(Open System Interconnection) Model: 7 Layers.
+Host layers: Applicatin, Presentation, Session, Transport, Media layers: Network, Data Link, Physical.
+应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。
+</p>
+
+<p>
+TCP/IP Model: 4 layers: Application, Transport, Network, Link.
+应用层、传输层、网络层、链路层。
+</p>
+
+<p>
+可以使用 <a href="wireshark.html#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</a> 抓包，用 <a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</a> 分析网络问题。
+</p>
+
+<table>
+<caption class="t-above"><span class="table-number">Table 1:</span> Function of layer</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Layer</th>
+<th scope="col" class="org-left">Protocol data unit</th>
+<th scope="col" class="org-left">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Application</td>
+<td class="org-left">Data</td>
+<td class="org-left">High-level APIs, including resource sharing, remote file access</td>
+</tr>
+
+<tr>
+<td class="org-left">Presentation</td>
+<td class="org-left">Data</td>
+<td class="org-left">Translation of data between a networking service and an application; including character encoding, data compression and encryption/decryption</td>
+</tr>
+
+<tr>
+<td class="org-left">Session</td>
+<td class="org-left">Data</td>
+<td class="org-left">Managing communication sessions, i.e., continuous exchange of information in the form of multiple back-and-forth transmissions between two nodes</td>
+</tr>
+
+<tr>
+<td class="org-left">Transport</td>
+<td class="org-left">Segment, Datagram</td>
+<td class="org-left">Reliable transmission of data segments between points on a network, including segmentation, acknowledgement and multiplexing</td>
+</tr>
+
+<tr>
+<td class="org-left">Network</td>
+<td class="org-left">Packet</td>
+<td class="org-left">Structuring and managing a multi-node network, including addressing, routing and traffic control</td>
+</tr>
+
+<tr>
+<td class="org-left">Data link</td>
+<td class="org-left">Frame</td>
+<td class="org-left">Transmission of data frames between two nodes connected by a physical layer</td>
+</tr>
+
+<tr>
+<td class="org-left">Physical</td>
+<td class="org-left">Bit, Symbol</td>
+<td class="org-left">Transmission and reception of raw bit streams over a physical medium</td>
+</tr>
+</tbody>
+</table>
+
+<div id="outline-container-ID-1c9aef4e-3ee5-4313-8357-7ae59c86c732" class="outline-2">
+<h2 id="ID-1c9aef4e-3ee5-4313-8357-7ae59c86c732">Protocol</h2>
+<div class="outline-text-2" id="text-org6a87813">
+<ul class="org-ul">
+<li>Layer 7 - Application
+<a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a>, FTP, Telnet, SSH, SMTP</li>
+<li>Layer 6 - Presentation
+MIME, XDR</li>
+<li>Layer 5 - Session
+<a href="20220712-ssl_tls.html#ID-1265f63a-96d0-4360-b5d4-55440b7ded1a">SSL/TLS</a></li>
+<li>Layer 4 - Transport
+<a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>, UDP, SCTP</li>
+<li>Layer 3 - Network
+IP, IPsec, ICMP, IGMP, OSPF, RIP</li>
+<li>Layer 2 - Data link
+PPP, Vlan, PPPoE</li>
+<li>Layer 1 - Physical
+cable/fiber</li>
+</ul>
+
+<p>
+协议的三要素：
+</p>
+<ul class="org-ul">
+<li>语法：即数据与控制信息的结构或格式；</li>
+<li>语义：即需要发出何种控制信息，完成何种动作以及做出何种响应；</li>
+<li>同步：即事件实现顺序的详细说明。</li>
+</ul>
+
+<blockquote>
+<p>
+协：两个以上的参与者
+议：行为约定和规范
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgf59ffb7" class="outline-2">
+<h2 id="orgf59ffb7">Underlay/Overlay</h2>
+<div class="outline-text-2" id="text-orgf59ffb7">
+<p>
+原文：<a href="https://blog.csdn.net/qq_35029061/article/details/125682812">https://blog.csdn.net/qq_35029061/article/details/125682812</a>
+</p>
+
+<p>
+搭建大规模的云计算环境需要数据中心突破多种技术难题，其中虚拟化是云计算最为显著的特征。要满足虚拟机在数据中心任意网络位置之间都可以无感知迁移，就需要引入一些新的网络技术，Overlay 技术就是在这样的背景下产生的。
+</p>
+
+<p>
+Overlay 网络是通过网络虚拟化技术，在同一张 Underlay 网络上构建出的一张或者多张虚拟的逻辑网络。不同的 Overlay 网络虽然共享 Underlay 网络中的设备和线路，但是 Overlay 网络中的业务与 Underlay 网络中的物理组网和互联技术相互解耦。 Overlay 网络的多实例化，既可以服务于同一租户的不同业务（如多个部门），也可以服务于不同租户，是 SD-WAN 以及数据中心等解决方案使用的核心组网技术。
+</p>
+
+<p>
+P network: Provider network 运营商核心网络
+C network: Customer network 客户网络
+P device : 运营商网络核心设备
+PE device: 运营商网络边缘设备，用于连接 P network 和 C network
+CE device: 客户网络边缘设备，用于连接 P network 和 C network
+</p>
+</div>
+
+<div id="outline-container-org0ec3863" class="outline-3">
+<h3 id="org0ec3863">Underlay 网络</h3>
+<div class="outline-text-3" id="text-org0ec3863">
+<p>
+由多种类型的设备互联而成的物理网络，负责网络之间的数据包传输。
+典型的 Underlay 网络中，互联的设备可以是各类型交换机、路由器、负载均衡设备、防火墙等，但网络的各个设备间必须通过路由协议来保证 IP 的连通性。 Underlay 可以是二层也可以是三层网络，二层网络通常应用于以太网，通过 VALN 进行划分。三层网络的典型应用就是互联网，其在同一个自治域使用 OSPF, IS-IS 等协议进行路由控制，在各个自治域之间采用 BGP 等协议进行路由传递与互联。也有 MPLS 这种介于二三层的 WAN 技术搭建的 Underlay 网络。
+Underlay 网络存在的问题：
+</p>
+<ul class="org-ul">
+<li>由于硬件根据目的 IP 地址进行数据包的转发，所以传输的路径依赖十分严重</li>
+<li>新增或变更业务需要对现有底层网络进行修改，重新配置耗时严重</li>
+<li>互联网不能保证私密通信的安全要求</li>
+<li>网络切片和网络分段实现复杂，无法做到网络资源的按需分配</li>
+<li>多路径转发繁琐，无法融合和多个底层网络来实现负载均衡</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb58f240" class="outline-3">
+<h3 id="orgb58f240">Overlay 网络</h3>
+<div class="outline-text-3" id="text-orgb58f240">
+<p>
+采用网络虚拟化技术在 Underlay 网络之上创建虚拟的 Overlay 网络。
+在 Overlay 网络中，设备之间可以通过逻辑链路，按照需求完成互联形成 Overlay 网络，相互连接的 Overlay 设备之间建立隧道，数据包准备传输出去时，设备为数据包添加新的 IP 头部和隧道头部，并且屏蔽掉内层的 IP 头部，数据包根据新的 IP 头部进行转发。当数据包传到另一个设备后，外部的 IP 头部和隧道头部将被丢弃，得到原始的数据包，整个过程 Overlay 网络并不感知 Underlay 网络。
+Overlay 网络有多种规范： VXLAN, NVGRE, SST, GRE, NVO3, EVPN 等。
+利用 SDN(Software Defined Network) 引入了控制器后，Overlay 网络的优点：
+</p>
+<ul class="org-ul">
+<li>流量传输不依赖于特定路线。Overlay 网络使用隧道技术，可以灵活选择不同的底层链路，使用多种方式保证流量的稳定传输</li>
+<li>Overlay 网络可以按照需求建立不同的虚拟拓扑组网，无需对底层网络作出修改</li>
+<li>通过加密手段可以保护流量在互联网上的通信</li>
+<li>支持网络切片和网络分段，将不同的业务分割开来，可以实现网络的自由分配</li>
+<li>支持多路径转发，在 Overlay 网络中，流量可以从源传输到目的地可以通过多条路径，从而实现负载均衡，最大化利用线路的带宽</li>
+</ul>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">item</th>
+<th scope="col" class="org-left">Underay</th>
+<th scope="col" class="org-left">overlay</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">数据传输</td>
+<td class="org-left">通过网络设备如路由器、交换机传输</td>
+<td class="org-left">沿着节点间的虚拟链路进行传输</td>
+</tr>
+
+<tr>
+<td class="org-left">包封装和开销</td>
+<td class="org-left">发生在网络的二层和三层</td>
+<td class="org-left">需要跨越源和目的封装数据包，产生额外的开销</td>
+</tr>
+
+<tr>
+<td class="org-left">报文控制</td>
+<td class="org-left">面向硬件</td>
+<td class="org-left">面向软件</td>
+</tr>
+
+<tr>
+<td class="org-left">部署时间</td>
+<td class="org-left">上线新服务设置大量配置，耗时多</td>
+<td class="org-left">只需要改虚拟网络中的拓扑结构，可快速部署</td>
+</tr>
+
+<tr>
+<td class="org-left">多路径转发</td>
+<td class="org-left">因为可扩展性低，会产生更多的开销和网络复杂度</td>
+<td class="org-left">支持虚拟网络内的多路径转发</td>
+</tr>
+
+<tr>
+<td class="org-left">扩展性</td>
+<td class="org-left">底层网络一旦搭建好，新增设备较为困难，可扩展性差</td>
+<td class="org-left">扩展性强，VLAN 支持 4096 个标识符，VXLAN 支持 1600 万</td>
+</tr>
+
+<tr>
+<td class="org-left">协议</td>
+<td class="org-left">以太网协议、 VLAN 、路由协议</td>
+<td class="org-left">VXLAN, NVGRE, SST, GRE, NVO3, EVPN</td>
+</tr>
+
+<tr>
+<td class="org-left">多租户管理</td>
+<td class="org-left">需要使用基于 NAT 或 VRF 的隔离，在大型网络中是个挑战</td>
+<td class="org-left">能够管理多个租户之间的重叠 IP 地址</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Overlay 技术简单理解就是把⼀个逻辑网络建立在⼀个实体网络之上。其大体框架是对基础网络不进行大规模修改的条件下，实现应用在网络上的承载，并能与其它网络业务分离，并且以基于 IP 的基础网络技术为主。
+</p>
+
+<p>
+Overlay 可以理解是一种隧道封装技术，这样大家都不会陌生，像 IPv4inIPv4, GRE, MPLS 等都是典型的隧道技术，相当于直接在源网络和目标网络之间直接拉了一根“光纤”。不过，现有的这些隧道技术都是点到点的隧道协议，只能点对点建立隧道。
+</p>
+
+<p>
+Overlay 技术是通过点到多点的隧道封装协议，完全忽略中间网络的结构和细节，把整个中间网络虚拟成一台“巨大无比的二层交换机”， 实现虚拟机在数据中心网络里随时随地迁移。同时， Overlay 技术中采用扩展的隔离标识位数，能够突破 VLAN 的 4094 个数量限制，支持高达 16M 用户，并在必要时可将广播流量转化为组播流量，避免广播数据泛滥。
+</p>
+
+<p>
+Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 三大技术。
+</p>
+</div>
+</div>
+<div id="outline-container-orgdfdd392" class="outline-3">
+<h3 id="orgdfdd392">网络 Overlay</h3>
+<div class="outline-text-3" id="text-orgdfdd392">
+<p>
+主要针对物理服务器，物理交换机作为边缘设备（物理交换机为 VTEP 节点）。
+</p>
+
+<p>
+网络 Overlay 指的是隧道封装在物理交换机上完成，通过控制协议对边缘的网络设备完成网络构建和扩展。网络 Overlay 是基于目前数据中心网络面临的问题而出现的，传统的网络普遍采用 STP 环网技术，后来出现了虚拟化，如今虚拟化技术已经飞入寻常数据中心中，但可以进行虚拟化的网络设备数量毕竟有限，对于大型的数据中心接入网络设备都会有数千台，为解决大规模环网问题出现了 EVI, TRILL, VPLS, LISP, VXLAN 等等新技术，其中 Trill 的升级版就是网络 Overlay ，网络 Overlay 依仗的主要技术就是 VXLAN 。
+</p>
+
+<p>
+在网络 Overlay 中，要求所有的物理接入交换机都能支持 VXLAN ，物理服务器支持 SR-IOV 功能，使虚拟机通过 SR-IOV 技术直接与物理交换机相连，虚拟机的流量在接入交换机上进行 VXLAN 报文的封装和卸载，对于非虚拟化服务器，直接连接支持 VXLAN 接入交换机，服务器流量在接入交换机上进行 VXLAN 报文封装和卸载。
+</p>
+
+<p>
+在 VXLAN 网络和 VLAN 网络之间要部署 VXLAN GW 交换机，实现 VXLAN 网络主机与 VLAN 网络主机之间的通信。
+</p>
+
+<p>
+目前，网络设备的主流芯片已经实现了 VXLAN 技术，对于在数据中心里部署网络 Overlay 提供了可能。网络 Overlay 的优势在于物理网络设备性能转发性能比较高，可以支持非虚拟化的物理服务器之间的组网互通。
+</p>
+</div>
+</div>
+<div id="outline-container-orgfb7b9a4" class="outline-3">
+<h3 id="orgfb7b9a4">主机 Overlay</h3>
+<div class="outline-text-3" id="text-orgfb7b9a4">
+<p>
+针对虚拟化， vSwitch 作为网络边缘设备（vSwitch 为 VTEP 节点）。
+</p>
+
+<p>
+主机 Overlay 指的是隧道封装在服务器的 vSwitch 上完成，不用增加新的网络设备即可完成 Overlay 部署，可以支持虚拟化的服务器之间组网互通。主机 Overlay 使用服务器上的 vSwitch 软件实现 VXLAN 网络功能， VXLAN 技术中的 VTEP, VXLAN GW, VXLAN IP GW 均通过安装在服务器上的 vSwitch 软件实现，只需要物理网络设备支持 IP 转发即可，所有 IP 可达的主机即可构建一个大范围二层网络。
+</p>
+
+<p>
+这种主机 Overlay 技术实现，屏蔽了物理网络的模型与拓扑差异，将物理网络的技术实现与计算虚拟化的关键要求分离开来，几乎可以支持以太网在任意网络上的透传，使得云的计算资源调度范围空前扩大。为了使得 VXLAN Overlay 网络更加简化运行管理，便于云的服务提供，各厂家使用集中控制的模型，将分散在多个物理服务器上的 vSwitch 构成一个大型的、虚拟化的分布式 Overlay vSwitch ，只要在分布式 vSwitch 范围内，虚拟机在不同物理服务器上的迁移，便被视为在一个虚拟的设备上迁移，如此大大降低了云中资源的调度难度和复杂度。
+</p>
+
+<p>
+首先是 MAC 和 ARP 地址容量的问题，网络 Overlay 通过基于会话的 MAC 学习来扩充 MAC 地址容量，主机 Overlay 则是通过 L2oIP 数据封装来扩充 MAC 地址容量；其次 VLAN 容量问题，网络 Overlay 和主机 Overlay 都通过 VXLAN 技术实现，可提供 16M 的 VLAN 标识，可以满足多业务隔离的需求；再次虚拟机迁移问题，网络 Overlay 采用大二层设计，主推 Fabric Path 和 Trill 应用，主机 Overlay 更加强调隧道封装，不关心网络是二层和三层，通过主机 Overlay 可以很好地实现异地数据中心之间虚拟机迁移。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge698097" class="outline-3">
+<h3 id="orge698097">Overlay 网络构成</h3>
+<div class="outline-text-3" id="text-orge698097">
+<ul class="org-ul">
+<li>边缘设备：与虚拟机直接相连的设备</li>
+<li>控制平面：主要负责虚拟隧道的建立维护以及主机可达性信息的通告</li>
+<li>转发平面：承载 Overlay 报文的物理网络</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf76869" class="outline-2">
+<h2 id="orgbf76869">网络工具</h2>
+<div class="outline-text-2" id="text-orgbf76869">
+</div>
+<div id="outline-container-orgddbcd55" class="outline-3">
+<h3 id="orgddbcd55"><code>ss</code></h3>
+</div>
+<div id="outline-container-orge8cbbf2" class="outline-3">
+<h3 id="orge8cbbf2"><code>netstat</code></h3>
+</div>
+<div id="outline-container-orgbc2e133" class="outline-3">
+<h3 id="orgbc2e133"><code>socat</code></h3>
+</div>
+</div>
+
+<div id="outline-container-org72fdb25" class="outline-2">
+<h2 id="org72fdb25">NAT</h2>
+<div class="outline-text-2" id="text-org72fdb25">
+<p>
+Network Address Translation: 网络地址转换。
+</p>
+</div>
+
+<div id="outline-container-orgfcd3733" class="outline-3">
+<h3 id="orgfcd3733">NAT 网关闲谈</h3>
+<div class="outline-text-3" id="text-orgfcd3733">
+<p>
+NAT 网关： VM &#x2013;&#x2014;&gt; NAT Gateway &#x2013;&#x2014;&gt; Internet
+</p>
+
+<p>
+Mesh Failure Detection:
+</p>
+<pre class="example">
+       Arbitator          Backup Arbitator
+
+Datapath Node      ---&gt;       Datapath Node
+        Prober     &lt;---               Prober
+          ^  |                ^        |
+          |  v                |        |
+          |__ Datapath Node __| &lt;------|
+                       Prober
+</pre>
+
+<p>
+错误检测 Recap:
+</p>
+<ul class="org-ul">
+<li>单点故障 节点、交换机</li>
+<li>容量的雪崩效应 设置阈值，容灾熔断</li>
+<li>容灾操作常规化</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd85c9ae" class="outline-2">
+<h2 id="orgd85c9ae">Reference</h2>
+<div class="outline-text-2" id="text-orgd85c9ae">
+<ul class="org-ul">
+<li>《计算机网络（第7版）》谢希仁 著</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

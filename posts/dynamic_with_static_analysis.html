@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>动静结合分析</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">动静结合分析</h1>
+</header>
+<div id="outline-container-orgca23d99" class="outline-2">
+<h2 id="orgca23d99">源代码</h2>
+<div class="outline-text-2" id="text-orgca23d99">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">string.h</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdlib.h</span><span style="color: #707183;">&gt;</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">Attack</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"Hello!:-)\n"</span><span style="color: #7388D6;">)</span>;
+    exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span>
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">s_passwd</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span> = <span style="color: #008000;">"ABCDE"</span>;
+    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">str</span><span style="color: #7388D6;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6;">]</span>;
+    <span style="color: #6434A3;">FILE</span> *<span style="color: #BA36A5;">f_o</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>!<span style="color: #909183;">(</span>f_o = fopen<span style="color: #709870;">(</span><span style="color: #008000;">"C:\\Program Files\\Microsoft Visual Studio\\MyProjects\\reverseProject\\Debug\\passwd.txt"</span>, <span style="color: #008000;">"r"</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span> exit<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>;
+    fscanf<span style="color: #7388D6;">(</span>f_o, <span style="color: #008000;">"%s"</span>, str<span style="color: #7388D6;">)</span>;
+
+    str<span style="color: #7388D6;">[</span><span style="color: #D0372D;">5</span><span style="color: #7388D6;">]</span> = <span style="color: #D0372D;">0</span>;
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6;">(</span>strcmp<span style="color: #909183;">(</span>str, s_passwd<span style="color: #909183;">)</span> == <span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"OK\n"</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #0000FF;">else</span> printf<span style="color: #7388D6;">(</span><span style="color: #008000;">"NO\n"</span><span style="color: #7388D6;">)</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    fun<span style="color: #7388D6;">()</span>;
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+<span style="color: #707183;">}</span>
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">passwd.txt(Hex)</span>
+<span style="color: #D0372D;">6161</span> <span style="color: #D0372D;">6161</span> <span style="color: #D0372D;">6262</span> <span style="color: #D0372D;">6262</span> <span style="color: #D0372D;">6363</span> <span style="color: #D0372D;">6363</span> <span style="color: #D0372D;">6464</span> <span style="color: #D0372D;">6464</span>
+<span style="color: #D0372D;">6565</span> <span style="color: #D0372D;">6565</span> <span style="color: #D0372D;">3010</span> <span style="color: #D0372D;">40</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org03c5c11" class="outline-2">
+<h2 id="org03c5c11">分析过程</h2>
+<div class="outline-text-2" id="text-org03c5c11">
+</div>
+<div id="outline-container-org53c1673" class="outline-3">
+<h3 id="org53c1673">静态分析</h3>
+<div class="outline-text-3" id="text-org53c1673">
+</div>
+<div id="outline-container-org81d8183" class="outline-4">
+<h4 id="org81d8183">fun() 函数运行流程</h4>
+<div class="outline-text-4" id="text-org81d8183">
+<p>
+先找到 fun 函数入口点 0x00401080 ，之后分析 fun 函数（总流程的图太模糊了，不知道当初怎么截的图）
+</p>
+
+<figure id="orgb3c7c01">
+<img src="../images/dynamic_with_static_analysis_1.png" alt="dynamic_with_static_analysis_1.png">
+
+</figure>
+
+
+<figure id="orgfa88cf0">
+<img src="../images/dynamic_with_static_analysis_2.png" alt="dynamic_with_static_analysis_2.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org781227b" class="outline-4">
+<h4 id="org781227b">子函数运行流程</h4>
+<div class="outline-text-4" id="text-org781227b">
+<p>
+仔细观察 fun 函数的流程，可以看到 fun 的 fopen() 分支，如果没有文件就直接 exit(0) ，程序结束。但在下面一个 if  分支，两种情况后又会继续向下执行，符合代码流程。静态分析还可以看到相应的汇编代码和虚拟地址，为动态分析提供流程指导
+</p>
+
+<figure id="org19cabd0">
+<img src="../images/dynamic_with_static_analysis_3.png" alt="dynamic_with_static_analysis_3.png">
+
+</figure>
+
+
+<figure id="org07417d6">
+<img src="../images/dynamic_with_static_analysis_4.png" alt="dynamic_with_static_analysis_4.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org840669d" class="outline-3">
+<h3 id="org840669d">动态分析</h3>
+<div class="outline-text-3" id="text-org840669d">
+</div>
+<div id="outline-container-org0e8aea0" class="outline-4">
+<h4 id="org0e8aea0">fun() 函数初始化</h4>
+<div class="outline-text-4" id="text-org0e8aea0">
+<p>
+利用 ollydbg 进行动态调试，程序运行到 0x00401096 处会把 0x0012fed8~0x0012ff28 ，51 个单位内存都置零，为 fun 函数栈帧初始化内存，fun 栈帧大小有 54 个内存单位。
+</p>
+
+<p>
+0x0012fecc 为 ESP，0x0012ff2c 为 EBP ，0x0012ff2c ~ 0x0012ff80 为 Windows 内核函数的栈帧。 0x0012ff30 是 RET 地址。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf464928" class="outline-4">
+<h4 id="orgf464928">shellcode 构建</h4>
+<div class="outline-text-4" id="text-orgf464928">
+<p>
+初始化内存后，会在 EBP-0x8 处为 fun 函数中的变量 passwd[6] 在内存中开辟空间并置为相应的值（赋值“ABCDE” 内存中即 44434241 cccc0045）。
+</p>
+
+<p>
+fscanf 函数会在 passwd[6] 往低地址的方向选择内存，即 EBP-0x14(20) 0x0012ff18 执行 fscanf 函数，这处地址的值是本函数的返回地址，为了执行完 fscanf 后能正常返回。
+</p>
+
+<p>
+str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。所以我们对 shellcode 构建，前 20 字节可以随便写，21~24 字节要是我们寻找到的 JMP ESP 指令
+</p>
+
+<figure id="org621cb1a">
+<img src="../images/dynamic_with_static_analysis_5.png" alt="dynamic_with_static_analysis_5.png">
+
+</figure>
+
+
+<figure id="org2ae6136">
+<img src="../images/dynamic_with_static_analysis_6.png" alt="dynamic_with_static_analysis_6.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-orgf16bb1b" class="outline-4">
+<h4 id="orgf16bb1b">shellcode 执行</h4>
+<div class="outline-text-4" id="text-orgf16bb1b">
+<p>
+进行缓冲区溢出攻击后，fun 函数栈帧及原 windows 内核函数的栈帧已被 shellcode 覆盖，fun 函数返回地址处的指令是 JMP ESP，而 fun 返回后 ESP 就是 0x0012ff34，是我们填充的 0x90 指令，此后程序按照我们的 shellcode 执行，直到执行完 shellcode 中 exitThread 函数后程序运行结束
+</p>
+
+<figure id="orga0a3e76">
+<img src="../images/dynamic_with_static_analysis_7.png" alt="dynamic_with_static_analysis_7.png">
+
+</figure>
+
+<figure id="org8ee548e">
+<img src="../images/dynamic_with_static_analysis_8.png" alt="dynamic_with_static_analysis_8.png">
+
+</figure>
+
+<figure id="orgd19a1c0">
+<img src="../images/dynamic_with_static_analysis_9.png" alt="dynamic_with_static_analysis_9.png">
+
+</figure>
+
+<p>
+程序运行结果
+</p>
+
+<figure id="org2b60ec5">
+<img src="../images/dynamic_with_static_analysis_10.png" alt="dynamic_with_static_analysis_10.png">
+
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+
+img {
+  width: 100%;
+}
+
+#postamble, #preamble {
+  max-width: 60em;
+  margin: auto;
+}

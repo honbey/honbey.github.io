@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wireshark and tcpdump</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Wireshark and tcpdump</h1>
+</header>
+<div id="outline-container-ID-0cab26c8-3627-4e10-a7f9-535945a56511" class="outline-2">
+<h2 id="ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</h2>
+<div class="outline-text-2" id="text-org748b822">
+<p>
+封包？数据帧？报文？
+</p>
+<ul class="org-ul">
+<li>封包列表
+<ul class="org-ul">
+<li>捕获时间</li>
+<li>协议</li>
+<li>源、目的地址</li>
+</ul></li>
+<li>封包详细信息</li>
+</ul>
+
+<p>
+常见协议：<a href="20220708-network_protocol.html#ID-e1bacc12-32cc-41f9-931e-6e6489fd0a60">network_protocol</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a78e29" class="outline-2">
+<h2 id="org8a78e29">显示过滤器</h2>
+<div class="outline-text-2" id="text-org8a78e29">
+<p>
+针对已经捕获的报文进行过滤。 <b>一条基本的表达式由过滤项、过滤关系、过滤值组成</b> ，例如：
+</p>
+<pre class="example">
+过滤项 关系 过滤值
+ip.src == 192.168.1.1
+协  协议     确定值
+议  字段
+</pre>
+</div>
+
+<div id="outline-container-org5bddb0c" class="outline-4">
+<h4 id="org5bddb0c">过滤项</h4>
+<div class="outline-text-4" id="text-org5bddb0c">
+<ul class="org-ul">
+<li>协议</li>
+<li>协议字段</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org20d0669" class="outline-4">
+<h4 id="org20d0669">常用字段</h4>
+<div class="outline-text-4" id="text-org20d0669">
+<ul class="org-ul">
+<li>address
+<ul class="org-ul">
+<li>源、目的 IP</li>
+<li>源、目的 MAC</li>
+<li>网段</li>
+</ul></li>
+<li>port
+<ul class="org-ul">
+<li>源、目的 IP</li>
+</ul></li>
+<li>length
+<ul class="org-ul">
+<li>报文长度</li>
+</ul></li>
+<li>contains
+<ul class="org-ul">
+<li>查询 payload 中的关键字</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org13043b8" class="outline-3">
+<h3 id="org13043b8">过滤关系</h3>
+<div class="outline-text-3" id="text-org13043b8">
+<ul class="org-ul">
+<li>大于
+<ul class="org-ul">
+<li>gt</li>
+<li>&gt;</li>
+</ul></li>
+<li>大于等于
+<ul class="org-ul">
+<li>ge</li>
+<li>&gt;=</li>
+</ul></li>
+<li>小于
+<ul class="org-ul">
+<li>lt</li>
+<li>&lt;</li>
+</ul></li>
+<li>小于等于
+<ul class="org-ul">
+<li>le</li>
+<li>&lt;=</li>
+</ul></li>
+<li>等于
+<ul class="org-ul">
+<li>eq</li>
+<li>==</li>
+</ul></li>
+<li>不等于
+<ul class="org-ul">
+<li>ne</li>
+<li>!=</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-orgb7e8e81" class="outline-4">
+<h4 id="orgb7e8e81">复合表达式</h4>
+<div class="outline-text-4" id="text-orgb7e8e81">
+<ul class="org-ul">
+<li>与
+<ul class="org-ul">
+<li>and</li>
+<li>&amp;&amp;</li>
+</ul></li>
+<li>或
+<ul class="org-ul">
+<li>or</li>
+<li>||</li>
+</ul></li>
+<li>非
+<ul class="org-ul">
+<li>not</li>
+<li>!</li>
+</ul></li>
+<li>异或
+<ul class="org-ul">
+<li>xor</li>
+<li>^^</li>
+</ul></li>
+<li>分片
+<ul class="org-ul">
+<li>[..]</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaacc4c0" class="outline-4">
+<h4 id="orgaacc4c0">过滤值</h4>
+<div class="outline-text-4" id="text-orgaacc4c0">
+<ul class="org-ul">
+<li>应满足过滤项的格式</li>
+</ul>
+
+<p>
+例子：
+</p>
+<pre class="example">
+eth.src == 04:f9:38:ad:13:26
+即筛选源 MAC 是 04:f9:38:ad:13:26 的包
+
+eth.type == 0x00
+筛选网络层使用 ip 协议的数据包
+
+ip.src != 192.168.1.1
+筛选源地址是 192.168.1.1 之外的数据包
+
+ip.addr = 192.168.1.0/24
+筛选出这一网段的数据包
+
+http contains "xxx"
+查询 http payload 报文中包含 xxx 字符串的包
+
+http.request.method == GET
+筛选 http 包中的 get 请求数据包
+
+ip.src == 192.168.1.1 &amp;&amp; tcp[13]&amp;2
+筛选源地址为 192.168.1.1 并且类型为 SYN 的数据包
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-ef271e3d-eb0b-445e-b142-87ce48b892bd" class="outline-2">
+<h2 id="ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</h2>
+<div class="outline-text-2" id="text-org3c2ea69">
+<p>
+提前设置好规则，只捕获符合过滤规则的报文。伯克利包捕获表达式： <b>一条基本的表达式由捕获项、捕获参数、捕获值组成</b> ，例如：
+</p>
+<pre class="example">
+捕获项  参数   捕获值
+ip  src host 192.168.1.1
+协  数据       确定值
+议  流向
+</pre>
+</div>
+
+<div id="outline-container-org89bfb49" class="outline-4">
+<h4 id="org89bfb49">捕获项</h4>
+<div class="outline-text-4" id="text-org89bfb49">
+<ul class="org-ul">
+<li>协议</li>
+<li>数据流向</li>
+</ul>
+
+<p>
+协议默认为所有协议，流向默认为 <code>src or dst</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0c2a529" class="outline-4">
+<h4 id="org0c2a529">捕获参数</h4>
+<div class="outline-text-4" id="text-org0c2a529">
+<ul class="org-ul">
+<li>host (default)</li>
+<li>net</li>
+<li>port</li>
+<li>&#x2026;</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org721b596" class="outline-4">
+<h4 id="org721b596">捕获值</h4>
+<div class="outline-text-4" id="text-org721b596">
+<p>
+应满足捕获项的格式
+</p>
+
+<p>
+例子：
+</p>
+<pre class="example">
+tcp src portrange 0-65535 and tcp dst port 80
+捕获源端口为 0-65535 且目的端口为 80 的流量
+
+vlan 10 and ip src net 192.168.1.0/24
+捕获 vlan id 为 10 且源网段为 192.168.1.0/24 的所有流量
+
+port 25 and portrange 110-143
+捕获电子邮件流量
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7d271d1" class="outline-3">
+<h3 id="org7d271d1">数据包解析</h3>
+<div class="outline-text-3" id="text-org7d271d1">
+<ul class="org-ul">
+<li>Protocol in frame</li>
+</ul>
+<p>
+数据包整体架构，与五层模型相对应
+</p>
+<ul class="org-ul">
+<li>Type</li>
+</ul>
+<p>
+代表网络层应使用何种协议模块来处理
+</p>
+<ul class="org-ul">
+<li>Protocol</li>
+</ul>
+<p>
+代表传输层应使用何种模块来处理
+</p>
+<ul class="org-ul">
+<li>Dst Port</li>
+</ul>
+<p>
+代表应用层应使用的协议及标识连接符
+</p>
+<ul class="org-ul">
+<li>User-Agent</li>
+</ul>
+<p>
+用户标识
+</p>
+<ul class="org-ul">
+<li>Server</li>
+</ul>
+<p>
+中间件类型
+</p>
+
+<p>
+追踪流 -&gt; http 流
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfd5f102" class="outline-3">
+<h3 id="orgfd5f102">捕获远程主机数据包</h3>
+<div class="outline-text-3" id="text-orgfd5f102">
+<ul class="org-ul">
+<li>需要在被远程捕获的设备上安装 WinPcap，并且该程序运行此应用程序</li>
+<li>网络可达，默认 2002 端口</li>
+</ul>
+
+<p>
+捕获-&gt;选项-&gt;管理接口-&gt;远程接口
+</p>
+
+<p>
+认证方为 Windows 用户名及密码， <b>必须使用账密登录？</b>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-f74ee637-220d-44c1-8049-32559ba21103" class="outline-2">
+<h2 id="ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</h2>
+<div class="outline-text-2" id="text-org85e30e2">
+<ol class="org-ol">
+<li>用服务端的私钥
+编辑-&gt;首选项-&gt;Protocol-&gt;TLS-&gt;RSA keys list</li>
+<li>用客户端的私钥
+通过设置环境变量截取浏览器的 <code>master_secret</code>, 进而实现解密 <a href="20220712-ssl_tls.html#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS</a> 的目的，具体方式（Windows）环境变量中新建用户变量 <code>SSLKEYLOGFILE=C:\path\sslkey.log</code> 文件，之后再 Wireshark 中 <a href="20220712-ssl_tls.html#ID-1265f63a-96d0-4360-b5d4-55440b7ded1a">TLS</a> 配置中制定该文件位置即可</li>
+</ol>
+
+<p>
+抓到的包可参照 <a href="20220712-ssl_tls.html#ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">SSL Handshake 阶段交换的信息</a> 进行分析。
+</p>
+</div>
+</div>
+
+<div id="outline-container-ID-fc764106-fe91-4d27-9655-b3daa38fa2e3" class="outline-2">
+<h2 id="ID-fc764106-fe91-4d27-9655-b3daa38fa2e3">图片取证</h2>
+<div class="outline-text-2" id="text-orgee7c081">
+<ol class="org-ol">
+<li>利用 <code>http contains xxx</code> 定位到请求图片的包</li>
+<li>追踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>/<a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a> 流</li>
+<li>以原始数据 Sava as 为文件</li>
+<li>使用文本编辑器去除报文头</li>
+<li>改后缀名为图片</li>
+</ol>
+
+
+<figure id="org2d662af">
+<img src="../images/wireshark_jepg_obtain_evidence_1.png" alt="wireshark_jepg_obtain_evidence_1.png">
+
+</figure>
+
+<figure id="orgab2d184">
+<img src="../images/wireshark_jepg_obtain_evidence_2.png" alt="wireshark_jepg_obtain_evidence_2.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3" class="outline-2">
+<h2 id="ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3">AIM 取证</h2>
+<div class="outline-text-2" id="text-org9268cc9">
+<p>
+类比于聊天软件的取证分析。
+</p>
+
+<p>
+Wireshark 支持 AIM 解密，右键 -&gt; decode as -&gt; <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> port 443 &#x2026; AIM，即可解密 AIM 数据包。
+</p>
+
+
+<figure id="org02e3d1f">
+<img src="../images/wireshark_aim_obtain_evidence_1.png" alt="wireshark_aim_obtain_evidence_1.png">
+
+</figure>
+</div>
+
+
+<div id="outline-container-org655bbd0" class="outline-4">
+<h4 id="org655bbd0">前置问题</h4>
+<div class="outline-text-4" id="text-org655bbd0">
+<ul class="org-ul">
+<li>What is the name of Ann&rsquo;s IM buddy?</li>
+<li>What was the first comment in the captured IM conversation?</li>
+<li>What is the name of the file Ann transferred?</li>
+<li>What is the magic number of the file you want to extract(first four bytes)?</li>
+<li>What was the MD5sum of the file?</li>
+<li>What is the secret recipe?</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org188dc26" class="outline-4">
+<h4 id="org188dc26">1</h4>
+<div class="outline-text-4" id="text-org188dc26">
+<p>
+解密 AIM 数据包后，找到协议为 AIM Message 的数据包
+</p>
+
+<figure id="org23faa6c">
+<img src="../images/wireshark_aim_obtain_evidence_2.png" alt="wireshark_aim_obtain_evidence_2.png">
+
+</figure>
+
+<p>
+Buddy 为 Sec558user1
+</p>
+</div>
+</div>
+
+<div id="outline-container-org47c11c6" class="outline-4">
+<h4 id="org47c11c6">2</h4>
+<div class="outline-text-4" id="text-org47c11c6">
+<p>
+从 1 中的包中的 Message Block 中可以得到第一条消息的内容，即
+</p>
+<pre class="example">
+ValueMessage: Here's the secret recipe... I just downloaded it from the file server. Just copy to a thumb drive and you're good to go &amp;gt;:-)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org401aa04" class="outline-4">
+<h4 id="org401aa04">3</h4>
+<div class="outline-text-4" id="text-org401aa04">
+<p>
+输入 data 进行筛选，跟踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 流，找到文件名
+</p>
+
+<figure id="org60c6bd6">
+<img src="../images/wireshark_aim_obtain_evidence_3.png" alt="wireshark_aim_obtain_evidence_3.png">
+
+</figure>
+
+<p>
+文件名为 recipe.docx
+</p>
+</div>
+</div>
+
+<div id="outline-container-org19bbee8" class="outline-4">
+<h4 id="org19bbee8">4</h4>
+<div class="outline-text-4" id="text-org19bbee8">
+<p>
+选择 Ann 发送的数据，以原始数据 save as -&gt; recipe.bin
+</p>
+
+<figure id="org40cb4e8">
+<img src="../images/wireshark_aim_obtain_evidence_4.png" alt="wireshark_aim_obtain_evidence_4.png">
+
+</figure>
+
+<figure id="orgba4e423">
+<img src="../images/wireshark_aim_obtain_evidence_5.png" alt="wireshark_aim_obtain_evidence_5.png">
+
+</figure>
+
+<p>
+magic number 为 50 4B 03 04
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7296f5e" class="outline-4">
+<h4 id="org7296f5e">5</h4>
+<div class="outline-text-4" id="text-org7296f5e">
+<p>
+计算文件 MD5。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org785d106" class="outline-4">
+<h4 id="org785d106">6</h4>
+<div class="outline-text-4" id="text-org785d106">
+<p>
+删除 magic number 之前的数据，另存为 docx 文件即可
+</p>
+
+<figure id="orga1b05fc">
+<img src="../images/wireshark_aim_obtain_evidence_6.png" alt="wireshark_aim_obtain_evidence_6.png">
+
+</figure>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-ID-d92036a4-851d-42e7-aec9-5c698f5aa94d" class="outline-2">
+<h2 id="ID-d92036a4-851d-42e7-aec9-5c698f5aa94d">邮件取证</h2>
+<div class="outline-text-2" id="text-orgcc554d7">
+<p>
+以 SMTP 为例子，若要解决用户认证，如果没加密的话可根据 334 状态码可以找到用户名和密码， base64 解码后就可得到用户名和密码
+</p>
+<pre class="example">
+YW5uQGFiYy5kZWY=
+YWRtaW4=
+</pre>
+
+<p>
+base64 解码后得到
+</p>
+<pre class="example">
+ann@abc.def
+admin
+</pre>
+
+
+<figure id="org1894dae">
+<img src="../images/wireshark_email_obtain_evidence_1.png" alt="wireshark_email_obtain_evidence_1.png">
+
+</figure>
+
+<p>
+邮件基本信息、正文
+</p>
+
+<figure id="orge95de35">
+<img src="../images/wireshark_email_obtain_evidence_2.png" alt="wireshark_email_obtain_evidence_2.png">
+
+</figure>
+
+<p>
+邮件附件
+</p>
+
+<figure id="orgc99af9a">
+<img src="../images/wireshark_email_obtain_evidence_3.png" alt="wireshark_email_obtain_evidence_3.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-orga15f516" class="outline-2">
+<h2 id="orga15f516">附件</h2>
+<div class="outline-text-2" id="text-orga15f516">
+<p>
+<a href="../resources/wireshark_http_with_jepgs.cap">../resources/wireshark_http_with_jepgs.cap</a>
+<a href="../resources/wireshark_evidence01.pcap">../resources/wireshark_evidence01.pcap</a>
+<a href="../resources/wireshark_email.pcap">../resources/wireshark_email.pcap</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-ID-6e2b5695-8c56-43db-bc20-6a18802ea836" class="outline-2">
+<h2 id="ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</h2>
+<div class="outline-text-2" id="text-org7c92c70">
+<p>
+Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -&gt; iptables -&gt; application -&gt; iptables -&gt; tcpdump -&gt; packet</code> 。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">tcpdump &lt;option&gt; &lt;proto&gt; &lt;dir&gt; &lt;type&gt;
+</pre>
+</div>
+
+<p>
+常用参数：
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Argument</th>
+<th scope="col" class="org-left">&#x00ad;&#x00ad;</th>
+<th scope="col" class="org-left">Caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-i [interface]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">指定网络接口（网卡）</td>
+</tr>
+
+<tr>
+<td class="org-left">-n</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">不进行主机解析，还可以 <code>-nn, -N</code></td>
+</tr>
+
+<tr>
+<td class="org-left">-c [cnt]</td>
+<td class="org-left"><code>--count</code></td>
+<td class="org-left">指定抓取的包数</td>
+</tr>
+
+<tr>
+<td class="org-left">-w [file.pcap]</td>
+<td class="org-left"><code>--write</code></td>
+<td class="org-left">将抓到的包写入指定文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-r [file.pcap]</td>
+<td class="org-left"><code>--read</code></td>
+<td class="org-left">读取抓包文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-t</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">时间的显示，还可以 <code>-tt, -ttt, -tttt</code></td>
+</tr>
+
+<tr>
+<td class="org-left">-v</td>
+<td class="org-left"><code>--verbose</code></td>
+<td class="org-left">详细输出，还可以 <code>-v, -vv, -vvv</code></td>
+</tr>
+
+<tr>
+<td class="org-left">-x</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">数据包头部显示为十六进制，还可以 <code>-x, -xx, -X, -XX</code></td>
+</tr>
+
+<tr>
+<td class="org-left">-Q [in,out,inout]</td>
+<td class="org-left"><code>--direction</code></td>
+<td class="org-left">指定入方向或出方向或不限</td>
+</tr>
+
+<tr>
+<td class="org-left">-A</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">以 ASCII 码显示数据包</td>
+</tr>
+
+<tr>
+<td class="org-left">-l</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">基于行的输出</td>
+</tr>
+
+<tr>
+<td class="org-left">-q</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">简洁地打印输出</td>
+</tr>
+
+<tr>
+<td class="org-left">-s [number]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">指定截取的字节数，为 0 表示截取全部报文</td>
+</tr>
+
+<tr>
+<td class="org-left">-S</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">使用绝对序列号</td>
+</tr>
+
+<tr>
+<td class="org-left">-C [file-size]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">保存到文件中时检查此文件的大小，超过就另建文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-F [file]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">使用文件中的内容作为过滤表达式</td>
+</tr>
+
+<tr>
+<td class="org-left">-D</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">列出可用网络接口</td>
+</tr>
+
+<tr>
+<td class="org-left">-e</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">每行打印输出将包含数据包的数据链路层头部信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-E</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">解密 IPsec 数据</td>
+</tr>
+
+<tr>
+<td class="org-left">-L [interface]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">列出指定网络接口所支持的数据链路层</td>
+</tr>
+
+<tr>
+<td class="org-left">-Z [user]</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">抓包时受权限的限制</td>
+</tr>
+
+<tr>
+<td class="org-left">-d</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">打印易读格式，还可以 <code>-dd, -ddd</code> ，分别为 C ，十进制</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<a href="#ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</a>可以抓取符合条件的数据包。
+</p>
+
+<p>
+还有一些关键字可以使用，如：
+</p>
+<ul class="org-ul">
+<li><code>if</code>: 网络接口名</li>
+<li><code>proc</code>: 进程名</li>
+<li><code>pid</code>: 进程 pid</li>
+<li><code>svc</code>: service class</li>
+<li><code>dir</code>: 方向 in, out</li>
+<li><code>eproc</code>: effective process name</li>
+<li><code>epid</code>: effective process ID</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

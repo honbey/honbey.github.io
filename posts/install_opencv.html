@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-24 Wed 23:58 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>安装 OpenCV</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet"
+                    href="../resources/style.css"
+                    type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">安装 OpenCV</h1>
+</header>
+<div id="outline-container-org74d088f" class="outline-2">
+<h2 id="org74d088f">编译安装 OpenCV on <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a></h2>
+<div class="outline-text-2" id="text-org74d088f">
+<p>
+以 Ubuntu 和 OpenCV 4.0.0 为例
+</p>
+</div>
+
+<div id="outline-container-ID-a9599827-5c7e-49c6-8056-ce206ce04268" class="outline-3">
+<h3 id="ID-a9599827-5c7e-49c6-8056-ce206ce04268">Ubuntu 编译安装 OpenCV</h3>
+<div class="outline-text-3" id="text-orgbdb6257">
+<ol class="org-ol">
+<li><p>
+安装依赖
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> apt update
+<span style="color: #6434A3;">sudo</span> apt upgrade
+<span style="color: #6434A3;">sudo</span> apt-get install build-essential cmake unzip pkg-config
+<span style="color: #6434A3;">sudo</span> apt-get install libjpeg-dev libpng-dev libtiff-dev
+<span style="color: #6434A3;">sudo</span> apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+<span style="color: #6434A3;">sudo</span> apt-get install libxvidcore-dev libx264-dev
+<span style="color: #6434A3;">sudo</span> apt-get install libgtk-3-dev libatlas-base-dev gfortran
+</pre>
+</div></li>
+
+<li><p>
+下载源码
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">cd</span> ~
+wget https://github.com/opencv/opencv/archive/4.0.0.zip
+wget https://github.com/opencv/opencv_contrib/archive/4.0.0.zip
+</pre>
+</div></li>
+
+<li><p>
+解压移动
+</p>
+<blockquote>
+<p>
+同时也编译 <code>opencv_contrib</code> ，这之中有许多有用的模块，虽然我很多用不到
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-bash">unzip opencv.zip
+unzip opencv_contrib.zip
+<span style="color: #6434A3;">mv</span> opencv-4.0.0 opencv
+<span style="color: #6434A3;">mv</span> opencv_contrib-4.0.0 opencv_contrib
+</pre>
+</div></li>
+
+<li><p>
+编译安装
+</p>
+<blockquote>
+<p>
+漫长的编译之旅，~make~ 将产生数 G 的文件
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">cd</span> opencv
+<span style="color: #6434A3;">mkdir</span> build
+<span style="color: #6434A3;">cd</span> build
+cmake -D <span style="color: #BA36A5;">CMAKE_BUILD_TYPE</span>=RELEASE <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">CMAKE_INSTALL_PREFIX</span>=/usr/local <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">BUILD_EXAMPLES</span>=ON <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">INSTALL_C_EXAMPLES</span>=OFF <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">OPENCV_EXTRA_MODULES_PATH</span>=~/opencv_contrib/modules ..
+<span style="color: #6434A3;">make</span> -j4
+<span style="color: #6434A3;">sudo</span> <span style="color: #6434A3;">make</span> install
+</pre>
+</div>
+<p>
+执行 <code>make</code> 时可能会出错，因为 <code>cmake</code> 的时可以因为网络问题一些东西没有下载到本地，导致 <code>make</code> 出错，提示是缺少名如 <code>boostdesc_xxx.i, vgg_generated_xxx.i</code> 的文件，可以从 CMakeError.log 中获取相应下载地址手动下载，有了 boostdesc_xxx,vgg_generated_xxx,xfeatures2d 等相关的文件后，编译就不会出错了，但是 <code>cmake</code> 时因网络问题，应该还会有几个文件没有下载，如 ippicv 这个可以提高 OpenCV 的性能，还有 <code>face_landmark_model.dat</code> 用于面部识别的模型，可以选择使用 <code>export ALL_PROXY=portocol://ip:port</code> 指令让终端使用代理。
+</p></li>
+
+<li><p>
+测试
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">opencv_version
+</pre>
+</div>
+<p>
+这条命令会让终端输出版本号，也可以编译一个简单的程序验证：
+</p></li>
+
+<li><p>
+Source Code
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"> <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">filename: cvTest.cpp</span>
+<span style="color: #808080;"> #include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">iostream</span><span style="color: #707183;">&gt;</span>
+<span style="color: #808080;"> #include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">opencv2/opencv.hpp</span><span style="color: #707183;">&gt;</span>
+
+ <span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span>
+ <span style="color: #707183;">{</span>
+   <span style="color: #0000FF;">if</span> <span style="color: #7388D6;">(</span>argc != <span style="color: #D0372D;">1</span><span style="color: #7388D6;">)</span> <span style="color: #7388D6;">{</span> <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">the program only need one parameter</span>
+     <span style="color: #D0372D;">std</span>::cout &lt;&lt; <span style="color: #008000;">"error! usage: cvTest.out"</span> &lt;&lt; <span style="color: #D0372D;">std</span>::endl;
+   <span style="color: #7388D6;">}</span>
+
+   <span style="color: #D0372D;">cv</span>::<span style="color: #6434A3;">Mat</span> <span style="color: #BA36A5;">img</span><span style="color: #7388D6;">(</span><span style="color: #D0372D;">200</span>, <span style="color: #D0372D;">200</span>, <span style="color: #D0372D;">CV_8UC1</span><span style="color: #7388D6;">)</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">create a image</span>
+   <span style="color: #D0372D;">cv</span>::namedWindow<span style="color: #7388D6;">(</span><span style="color: #008000;">"cvTest"</span>, <span style="color: #D0372D;">cv</span>::<span style="color: #D0372D;">WINDOW_AUTOSIZE</span><span style="color: #7388D6;">)</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">create a window</span>
+   <span style="color: #D0372D;">cv</span>::imshow<span style="color: #7388D6;">(</span><span style="color: #008000;">"cvTest"</span>, img<span style="color: #7388D6;">)</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">show 'img' in the window</span>
+
+   <span style="color: #D0372D;">cv</span>::waitKey<span style="color: #7388D6;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6;">)</span>; <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">press any key to close the window</span>
+   <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+ <span style="color: #707183;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+Compile it(with [CMakeLists.txt](#CMakeLists-txt))
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"> cmake .
+ <span style="color: #6434A3;">make</span> &amp;&amp; ./cvTest
+</pre>
+</div>
+<p>
+出现一张 200×200 的黑色图片就说明 OpenCV 安装成功且 CMake 也配置正确。
+</p>
+
+<p>
+我是使用的 FedoraRemix WSL，执行 <code>./cvTest</code> 时出现如下错误： <code>error while loading shared libraries: libQt5Core.so.5: cannot open shared object file: No such file or directory</code>
+可以使用如下指令解决（参见 <a href="https://github.com/Microsoft/WSL/issues/3023">GitHub issue</a>）：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"> <span style="color: #6434A3;">sudo</span> strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5
+
+ <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/sh</span>
+
+ <span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span> -x /usr/lib64/libQt5Core.so.5 <span style="color: #707183;">]</span>; <span style="color: #0000FF;">then</span>
+     <span style="color: #707183;">(</span><span style="color: #006FE0;">set</span> -x; strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5<span style="color: #707183;">)</span>
+ <span style="color: #0000FF;">fi</span>
+
+ <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">This "atomic bomb" workaround helps too:</span>
+ <span style="color: #6434A3;">find</span> /lib /usr/lib /usr/libexec -name <span style="color: #008000;">'*.so'</span> | xargs strip --remove-section=.note.ABI-tag
+</pre>
+</div></li>
+</ol>
+</div>
+
+<div id="outline-container-org3871e38" class="outline-4">
+<h4 id="org3871e38">QT + OpenCV</h4>
+<div class="outline-text-4" id="text-org3871e38">
+<p>
+在 .pro 文件添加以下内容：
+</p>
+<pre class="example">
+INCLUDEPATH += \
+    /usr/local/include/opencv4
+
+LIBS += -L/usr/local/lib64 \
+    -lopencv_aruco \
+    -lopencv_bgsegm \
+    -lopencv_bioinspired \
+    -lopencv_calib3d \
+    -lopencv_ccalib \
+    -lopencv_core \
+    -lopencv_datasets \
+    -lopencv_dnn_objdetect \
+    -lopencv_dnn \
+    -lopencv_dnn_superres \
+    -lopencv_dpm \
+    -lopencv_face \
+    -lopencv_features2d \
+    -lopencv_flann \
+    -lopencv_freetype \
+    -lopencv_fuzzy \
+    -lopencv_gapi \
+    -lopencv_hfs \
+    -lopencv_highgui \
+    -lopencv_imgcodecs \
+    -lopencv_img_hash \
+    -lopencv_imgproc \
+    -lopencv_line_descriptor \
+    -lopencv_ml \
+    -lopencv_objdetect \
+    -lopencv_optflow \
+    -lopencv_phase_unwrapping \
+    -lopencv_photo \
+    -lopencv_plot \
+    -lopencv_quality \
+    -lopencv_reg \
+    -lopencv_rgbd \
+    -lopencv_saliency \
+    -lopencv_shape \
+    -lopencv_stereo \
+    -lopencv_stitching \
+    -lopencv_structured_light \
+    -lopencv_superres \
+    -lopencv_surface_matching \
+    -lopencv_text \
+    -lopencv_tracking \
+    -lopencv_videoio \
+    -lopencv_video \
+    -lopencv_videostab \
+    -lopencv_xfeatures2d \
+    -lopencv_ximgproc \
+    -lopencv_xobjdetect \
+    -lopencv_xphoto
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3f98a89" class="outline-4">
+<h4 id="org3f98a89">CMakeLists.txt</h4>
+<div class="outline-text-4" id="text-org3f98a89">
+<div class="org-src-container">
+<pre class="src src-cmake"><span style="color: #006699;">cmake_minimum_required</span>(VERSION <span style="color: #D0372D;">2.8</span>)
+<span style="color: #006699;">project</span>( cvTest )
+<span style="color: #006699;">find_package</span>( OpenCV REQUIRED )
+<span style="color: #006699;">include_directories</span>( ${<span style="color: #BA36A5;">OpenCV_INCLUDE_DIRS</span>} )
+<span style="color: #006699;">add_executable</span>( cvTest cvTest.cpp )
+<span style="color: #006699;">target_link_libraries</span>( cvTest ${<span style="color: #BA36A5;">OpenCV_LIBS</span>} )
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-104dae41-fe65-4945-8f12-7007b2debfad" class="outline-3">
+<h3 id="ID-104dae41-fe65-4945-8f12-7007b2debfad">FedoraRemix WSL 编译 OpenCV</h3>
+<div class="outline-text-3" id="text-org37e498e">
+<p>
+最新版的 FedoraRemix WSL 也就是 Fedora 31 ，直接从官方仓库安装的 OpenCV 无法读取视频，发现是 FFmpeg 没有安装，官方仓库没有 FFmpeg，可以添加其他仓库安装 FFmpeg，我选择是编译安装，顺便把官方仓库安装的 OpenCV 卸载了，改用编译安装的 OpenCV。
+</p>
+<ol class="org-ol">
+<li><p>
+安装依赖
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> dnf install python-devel <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Python&#25903;&#25345;</span>
+<span style="color: #6434A3;">sudo</span> dnf install ncurses-devel nasm yasm <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#20026;&#32534;&#35793;FFmpeg</span>
+<span style="color: #6434A3;">sudo</span> dnf install gtk+ gtk+-devel gtk2 gtk2-devel gtkglext-devel <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">OpenCV&#25152;&#20381;&#36182;&#30340;&#22270;&#24418;&#21270;&#30028;&#38754;</span>
+<span style="color: #6434A3;">sudo</span> dnf install libavc1394 libavc1394-devel libdc1394 libdc1394-devel <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">DC1394&#35270;&#39057;&#25903;&#25345;</span>
+<span style="color: #6434A3;">sudo</span> dnf install openjpeg-devel libjpeg-devel libpng-devel libtiff-devel
+</pre>
+</div></li>
+
+<li>下载源码
+参考前文：<a href="#ID-a9599827-5c7e-49c6-8056-ce206ce04268">Ubuntu 编译安装 OpenCV</a>
+FFmpeg 下载链接： <a href="https://ffmpeg.org/releases/ffmpeg-4.2.2.tar.bz2">FFmpeg</a></li>
+
+<li><p>
+编译 FFmpeg
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">cd</span>
+unzip FFmpeg-n4.2.2.zip
+<span style="color: #6434A3;">cd</span> FFmpeg-n4.2.2
+./configure --disable-static --enable-shared
+<span style="color: #6434A3;">make</span> &amp;&amp; <span style="color: #6434A3;">sudo</span> <span style="color: #6434A3;">make</span> install
+</pre>
+</div>
+<p>
+主要是 <code>--enabel-shared</code> ，可输入 <code>./configure --help</code> 查看更多编译选项，如 <code>--enable-libx264 --enable-avresample --disabled-swresample</code> 等。
+</p>
+
+<p>
+但执行 <code>ffmpeg</code> 出现了找不到链接库的错误，解决方法是在 <code>/etc/ld.conf.d/</code> 下新建一个文件 <code>ffmpeg.conf</code> ，添加内容： <code>/usr/local/lib</code> 到这个新建的文件中
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> vi /etc/ld.so.conf.d/ffmpeg.conf
+<span style="color: #6434A3;">sudo</span> ldconfig
+ffmpeg
+</pre>
+</div></li>
+
+<li><p>
+编译 OpenCV
+编译前先执行下列指令，不然会导致 <code>FFmpeg</code> 找不到
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">PKG_CONFIG_PATH</span>=/usr/local/lib/pkgconfig:PKG_CONFIG_PATH
+</pre>
+</div>
+
+<p>
+然后进入 OpenCV 目录进行编译
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">cd</span> opencv <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#36827;&#20837; OpenCV &#28304;&#30721;&#25152;&#22312;&#30446;&#24405;</span>
+<span style="color: #6434A3;">mkdir</span> build
+<span style="color: #6434A3;">cd</span> build
+cmake -D <span style="color: #BA36A5;">CMAKE_BUILD_TYPE</span>=RELEASE <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">CMAKE_INSTALL_PREEIX</span>=/usr/local <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">BUILD_EXAMPLES</span>=ON <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">BUILD_OPENCV_PYTHON2</span>=OFF <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">BUILD_OPENCV_PYTHON3</span>=ON <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">INSTALL_C_EXAMPLES</span>=OFF <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">INSTALL_PYTHON_EXAMPLES</span>=ON <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">OPENCV_EXTRA_MODULES_PATH</span>=~/opencv_contrib/modules <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">WITH_CUDA</span>=OFF <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">WITH_FFMPEG</span>=ON <span style="color: #008000;">\</span>
+    -D <span style="color: #BA36A5;">WITH_OPENGL</span>=ON ..
+<span style="color: #6434A3;">make</span> -j4 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#22810;&#32447;&#31243;&#32534;&#35793;&#65292;&#21152;&#24555;&#36895;&#24230;</span>
+<span style="color: #6434A3;">sudo</span> <span style="color: #6434A3;">make</span> install
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce6318c" class="outline-2">
+<h2 id="orgce6318c">直接安装 OpenCV</h2>
+<div class="outline-text-2" id="text-orgce6318c">
+<p>
+从官方仓库安装的版本一般都不是最新版，如果要安装最新版的话最好老老实实的编译安装。
+</p>
+</div>
+
+<div id="outline-container-org57d26f0" class="outline-3">
+<h3 id="org57d26f0">Fedora</h3>
+<div class="outline-text-3" id="text-org57d26f0">
+<p>
+Fedora 是 Red Hat 的社区版本，软件版本都比较新，Fedora 31 现在最新的 OpenCV 版本是 3.4.6，可以通过下列命令直接安装。
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> dnf install opencv opencv-devel opencv-contrib
+</pre>
+</div>
+<p>
+CentOS 系统的话把 <code>dnf</code> 换成 <code>yum</code> 就行，CentOS 8 可直接使用 <code>dnf</code> 安装。CentOS 7.6 通过此方法安装的是 OpenCV 2.4.5。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeff33a7" class="outline-3">
+<h3 id="orgeff33a7"><a href="20220819-macos.html#ID-cfd1e009-299d-4838-88af-ceadd998a30f">macOS</a></h3>
+<div class="outline-text-3" id="text-orgeff33a7">
+<p>
+未安装 brew 先安装 brew 包管理器，安装 brew，如果有梯子的话使用
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">ALL_PROXY</span>=127.0.0.1:1086
+</pre>
+</div>
+<p>
+再用 <code>curl ip.sb</code> 或者 <code>curl ip.gs</code> 验证，这时终端进入全局代理模式，这样下载速度就取决于你的梯子速度了。没有梯子的话可以从把源改成国内源的如清华源、中科大源或者阿里源。
+</p>
+
+<p>
+安装完 brew 再执行
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">brew install opencv
+</pre>
+</div>
+<p>
+brew 会安装很多依赖，全部完成后就安装了 OpenCV，通过 brew 安装的是最新版的 OpenCV，目前是 4.1.2。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf859316" class="outline-3">
+<h3 id="orgf859316"><a href="20220815-windows.html#ID-d007eb95-2979-41c9-97de-af76c61ed952">Windows</a></h3>
+<div class="outline-text-3" id="text-orgf859316">
+<p>
+Windows 系统可以从官方下载编译后的压缩包，压缩包一般都有对应的 vc 版本。之后 Visual Studio 若要使用 OpenCV 的话还需要配置工程属性。
+</p>
+
+<p>
+附表：
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 1:</span> relationship between VC and VS</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Visual C++ Version</th>
+<th scope="col" class="org-left">Visual Studio Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">VC12</td>
+<td class="org-left">VS2013</td>
+</tr>
+
+<tr>
+<td class="org-left">VC14</td>
+<td class="org-left">VS2015</td>
+</tr>
+
+<tr>
+<td class="org-left">VC15</td>
+<td class="org-left">VS2017</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>
