@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-25 Thu 21:35 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;; </span><span style="color: #8D8D84; font-style: italic;">$DOOMDIR/config.el -*- lexical-binding: t; -*-</span>
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Place your private configuration here! Remember, you do not need to run 'doom</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">sync' after modifying this file!</span>
+
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Some functionality uses this to identify you, e.g. GPG configuration, email</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">clients, file templates and snippets.</span>
+(setq user-full-name <span style="color: #008000;">"Honbey Zhang"</span>
+      user-mail-address <span style="color: #008000;">"git@honbey.com"</span>)
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Doom exposes five (optional) variables for controlling fonts in Doom. Here</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">are the three important ones:</span>
+<span style="color: #8D8D84;">;;</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">+ `</span><span style="color: #D0372D; font-style: italic;">doom-font</span><span style="color: #8D8D84; font-style: italic;">'</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">+ `</span><span style="color: #D0372D; font-style: italic;">doom-variable-pitch-font</span><span style="color: #8D8D84; font-style: italic;">'</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">+ `</span><span style="color: #D0372D; font-style: italic;">doom-big-font</span><span style="color: #8D8D84; font-style: italic;">' -- used for `</span><span style="color: #D0372D; font-style: italic;">doom-big-font-mode</span><span style="color: #8D8D84; font-style: italic;">'; use this for</span>
+<span style="color: #8D8D84;">;;   </span><span style="color: #8D8D84; font-style: italic;">presentations or streaming.</span>
+<span style="color: #8D8D84;">;;</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">They all accept either a font-spec, font string ("Input Mono-12"), or xlfd</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">font string. You generally only need these two:</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)</span>
+<span style="color: #8D8D84;">;;       </span><span style="color: #8D8D84; font-style: italic;">doom-variable-pitch-font (font-spec :family "sans" :size 13))</span>
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">There are two ways to load a theme. Both assume the theme is installed and</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">available. You can either set `</span><span style="color: #D0372D; font-style: italic;">doom-theme</span><span style="color: #8D8D84; font-style: italic;">' or manually load a theme with the</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">`</span><span style="color: #D0372D; font-style: italic;">load-theme</span><span style="color: #8D8D84; font-style: italic;">' function. This is the default:</span>
+(load-theme 'leuven t)
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">If you use `</span><span style="color: #D0372D; font-style: italic;">org</span><span style="color: #8D8D84; font-style: italic;">' and don't want your org files in the default location below,</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">change `</span><span style="color: #D0372D; font-style: italic;">org-directory</span><span style="color: #8D8D84; font-style: italic;">'. It must be set before org loads!</span>
+(setq org-directory <span style="color: #008000;">"~/org"</span>)
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">This determines the style of line numbers in effect. If set to `</span><span style="color: #D0372D; font-style: italic;">nil</span><span style="color: #8D8D84; font-style: italic;">', line</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">numbers are disabled. For relative line numbers, set this to `</span><span style="color: #D0372D; font-style: italic;">relative</span><span style="color: #8D8D84; font-style: italic;">'.</span>
+(setq display-line-numbers-type t)
+
+
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Here are some additional functions/macros that could help you configure Doom:</span>
+<span style="color: #8D8D84;">;;</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">- `</span><span style="color: #D0372D; font-style: italic;">load!</span><span style="color: #8D8D84; font-style: italic;">' for loading external *.el files relative to this one</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">- `</span><span style="color: #D0372D; font-style: italic;">use-package!</span><span style="color: #8D8D84; font-style: italic;">' for configuring packages</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">- `</span><span style="color: #D0372D; font-style: italic;">after!</span><span style="color: #8D8D84; font-style: italic;">' for running code after a package has loaded</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">- `</span><span style="color: #D0372D; font-style: italic;">add-load-path!</span><span style="color: #8D8D84; font-style: italic;">' for adding directories to the `</span><span style="color: #D0372D; font-style: italic;">load-path</span><span style="color: #8D8D84; font-style: italic;">', relative to</span>
+<span style="color: #8D8D84;">;;   </span><span style="color: #8D8D84; font-style: italic;">this file. Emacs searches the `</span><span style="color: #D0372D; font-style: italic;">load-path</span><span style="color: #8D8D84; font-style: italic;">' when you load packages with</span>
+<span style="color: #8D8D84;">;;   </span><span style="color: #8D8D84; font-style: italic;">`</span><span style="color: #D0372D; font-style: italic;">require</span><span style="color: #8D8D84; font-style: italic;">' or `</span><span style="color: #D0372D; font-style: italic;">use-package</span><span style="color: #8D8D84; font-style: italic;">'.</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">- `</span><span style="color: #D0372D; font-style: italic;">map!</span><span style="color: #8D8D84; font-style: italic;">' for binding new keys</span>
+<span style="color: #8D8D84;">;;</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">To get information about any of these functions/macros, move the cursor over</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">This will open documentation for it, including demos of how they are used.</span>
+<span style="color: #8D8D84;">;;</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">You can also try 'gd' (or 'C-c c d') to jump to their definition and see how</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">they are implemented.</span>
+(prefer-coding-system 'utf-8)
+(set-language-environment <span style="color: #008000;">"UTF-8"</span>)
+
+(tool-bar-mode <span style="color: #D0372D;">0</span>)
+(menu-bar-mode <span style="color: #D0372D;">0</span>)
+(scroll-bar-mode <span style="color: #D0372D;">0</span>)
+
+(setq make-backup-files nil)
+(setq inhibit-startup-message t)
+
+(setq python-shell-virtualenv-path <span style="color: #008000;">"/opt/data/pyvenv/work"</span>)
+(setq system-time-locale <span style="color: #008000;">"C"</span>)
+
+(setq-default mac-option-modifier 'meta)
+(setq writeroom-fullscreen-effect 'maximized)
+(global-set-key (kbd <span style="color: #008000;">"C-x w f"</span>) 'toggle-frame-fullscreen)
+
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(setq browse-url-browser-function 'browse-url-chromium)</span>
+
+(<span style="color: #0000FF;">if</span> (display-graphic-p)
+    (<span style="color: #0000FF;">dolist</span> (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset (font-spec <span style="color: #006FE0;">:family</span> <span style="color: #008000;">"&#26999;&#20307;-&#31616;"</span> <span style="color: #006FE0;">:size</span> <span style="color: #D0372D;">14</span>))))
+
+(add-hook 'org-mode-hook (<span style="color: #0000FF;">lambda</span> () (setq truncate-lines nil)))
+
+(add-to-list 'auto-mode-alist '(<span style="color: #008000;">"\\.\\(org\\|org_archive\\|txt\\)$"</span> . org-mode))
+(setenv <span style="color: #008000;">"PATH"</span> (concat <span style="color: #008000;">"/Library/TeX/texbin"</span> <span style="color: #008000;">":"</span> (getenv <span style="color: #008000;">"PATH"</span>)))
+(setq exec-path (append '(<span style="color: #008000;">"/Library/TeX/texbin"</span>) exec-path))
+
+(setq org-hide-emphasis-markers t)
+
+(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">org-toggle-emphasis</span> ()
+  <span style="color: #036A07;">"Toggle hiding/showing of org emphasize markers."</span>
+  (interactive)
+  (<span style="color: #0000FF;">if</span> org-hide-emphasis-markers
+      (set-variable 'org-hide-emphasis-markers nil)
+    (set-variable 'org-hide-emphasis-markers t))
+  (org-mode-restart))
+
+(after! org
+  (setq org-preview-latex-default-process 'dvisvgm)
+  (setq org-latex-create-formula-image-program 'dvisvgm)
+
+
+  (setq org-todo-keywords
+      '((sequence <span style="color: #008000;">"</span><span style="color: #ffa500; font-weight: bold;">TODO</span><span style="color: #008000;">(t!/!)"</span> <span style="color: #008000;">"NEXT(n!/!)"</span> <span style="color: #008000;">"STRT(s!/!)"</span> <span style="color: #008000;">"|"</span> <span style="color: #008000;">"DONE(d!)"</span>)
+        (sequence <span style="color: #008000;">"WAIT(w@/!)"</span> <span style="color: #008000;">"HOLD(h@/!)"</span> <span style="color: #008000;">"|"</span> <span style="color: #008000;">"KILL(k@/!)"</span> <span style="color: #008000;">"CALL"</span> <span style="color: #008000;">"MEET"</span> <span style="color: #008000;">"WORK"</span> <span style="color: #008000;">"CHAT"</span>)))
+
+  (setq org-todo-keyword-faces
+      '((<span style="color: #008000;">"</span><span style="color: #ffa500; font-weight: bold;">TODO</span><span style="color: #008000;">"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"red"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"NEXT"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"magenta"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"STAT"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"blue"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"DONE"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"forest green"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"HOLD"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"orange"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"WAIT"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"orange"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"KILL"</span> <span style="color: #006FE0;">:background</span> <span style="color: #008000;">"gray"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"black"</span>)
+        (<span style="color: #008000;">"MEET"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"green"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"CALL"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"green"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"CHAT"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"green"</span> <span style="color: #006FE0;">:weight</span> bold)
+        (<span style="color: #008000;">"WORK"</span> <span style="color: #006FE0;">:foreground</span> <span style="color: #008000;">"green"</span> <span style="color: #006FE0;">:weight</span> bold)
+       ))
+
+  (setq org-todo-state-tags-triggers
+      (quote ((<span style="color: #008000;">"KILL"</span> (<span style="color: #008000;">"KILL"</span> . t))
+              (<span style="color: #008000;">"WAIT"</span> (<span style="color: #008000;">"WAIT"</span> . t))
+              (<span style="color: #008000;">"HOLD"</span> (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"HOLD"</span> . t))
+              (done (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"HOLD"</span>))
+              (<span style="color: #008000;">"</span><span style="color: #ffa500; font-weight: bold;">TODO</span><span style="color: #008000;">"</span> (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"KILL"</span>) (<span style="color: #008000;">"HOLD"</span>))
+              (<span style="color: #008000;">"NEXT"</span> (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"KILL"</span>) (<span style="color: #008000;">"HOLD"</span>))
+              (<span style="color: #008000;">"STAT"</span> (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"KILL"</span>) (<span style="color: #008000;">"HOLD"</span>))
+              (<span style="color: #008000;">"DONE"</span> (<span style="color: #008000;">"WAIT"</span>) (<span style="color: #008000;">"KILL"</span>) (<span style="color: #008000;">"HOLD"</span>)))))
+
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-clock-into-drawer t)
+  (setq org-clock-out-remove-zero-time-clocks t)
+
+  (setq org-agenda-files (list <span style="color: #008000;">"~/org"</span>))
+
+  (setq org-default-notes-file <span style="color: #008000;">"~/org/refile.org"</span>)
+  (setq org-capture-templates
+      '(
+        (<span style="color: #008000;">"t"</span> <span style="color: #008000;">"Todo"</span>
+         entry (file+headline org-default-notes-file <span style="color: #008000;">"Todo"</span>)
+         <span style="color: #008000;">"* </span><span style="color: #ffa500; font-weight: bold;">TODO</span><span style="color: #008000;"> %?\n%U\n%a\n"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t)
+        (<span style="color: #008000;">"r"</span> <span style="color: #008000;">"Respond"</span>
+         entry (file+headline org-default-notes-file <span style="color: #008000;">"Respond Email"</span>)
+         <span style="color: #008000;">"* NEXT Respond to ~%:from~ on /%:subject/ :email:\nSCHEDULED: %t\n%U\n%a\n"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t
+         <span style="color: #006FE0;">:immediate-finish</span> t)
+        (<span style="color: #008000;">"i"</span> <span style="color: #008000;">"Interrupt"</span>
+         entry (file org-default-notes-file)
+         <span style="color: #008000;">"* NEXT Respond to %^{Who?} on /%^{What?}/\nSCHEDULED: %T\n%U\n%a\n"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t)
+        (<span style="color: #008000;">"n"</span> <span style="color: #008000;">"Note"</span>
+         entry (file+headline org-default-notes-file <span style="color: #008000;">"Note"</span>)
+         <span style="color: #008000;">"* %? :note:\n%i\n%U\n%a"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t)
+        (<span style="color: #008000;">"l"</span> <span style="color: #008000;">"Link"</span> entry
+         (file+headline org-default-notes-file <span style="color: #008000;">"Link"</span>)
+         <span style="color: #008000;">"* [[%c][%?]] :bookmark:\n%i\n%U\n"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t)
+        (<span style="color: #008000;">"j"</span> <span style="color: #008000;">"Journal"</span>
+         entry (file+datetree <span style="color: #008000;">"~/org/journal.org"</span>)
+         <span style="color: #008000;">"* %?\n%i\n%U\n%a\n"</span>
+         <span style="color: #006FE0;">:clock-in</span> t
+         <span style="color: #006FE0;">:clock-resume</span> t
+         <span style="color: #006FE0;">:tree-type</span> month)
+        (<span style="color: #008000;">"J"</span> <span style="color: #008000;">"Repeated Journal"</span>
+         entry (file+headline <span style="color: #008000;">"~/org/journal.org"</span> <span style="color: #008000;">"Journal"</span>)
+         <span style="color: #008000;">"* NEXT %?\n:PROPERTIES:\n:STYLE: repeated journal\n:REPEAT_TO_STATE: NEXT\n:END:\n%U%a\nSCHEDULED: %(format-time-string \"%&lt;&lt;%Y-%m-%d %a ++1w/1m&gt;&gt;\")\n"</span>)
+        (<span style="color: #008000;">"h"</span> <span style="color: #008000;">"Habit"</span>
+         entry (file+headline <span style="color: #008000;">"~/org/journal.org"</span> <span style="color: #008000;">"Habit"</span>)
+         <span style="color: #008000;">"* NEXT %?\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n%U%a\nSCHEDULED: %(format-time-string \"%&lt;&lt;%Y-%m-%d %a .+1d/3d&gt;&gt;\")\n"</span>)
+        ))
+  (setq org-id-track-globally t)
+  (setq org-id-link-to-org-use-id 'create-if-interactive)
+  (add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create)
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '(
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(ditaa . t)</span>
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(plantuml . t)</span>
+      (dot . t)
+      (python . t)
+      (sh .t )
+      (latex . t)
+            (org . t)
+      (javascript . t)
+  ))
+  (setq org-confirm-babel-evaluate nil)
+)
+
+(after! org-roam
+  (setq org-roam-directory (expand-file-name <span style="color: #008000;">"roam"</span> org-directory))
+
+  (setq org-roam-capture-templates
+      '((<span style="color: #008000;">"d"</span> <span style="color: #008000;">"default"</span> plain
+         <span style="color: #008000;">"%?"</span>
+         <span style="color: #006FE0;">:if-new</span> (file+head <span style="color: #008000;">"%&lt;%Y%m%d&gt;-${slug}.org"</span> <span style="color: #008000;">"#+title: ${title}\n#+created: %U\n#+filetags: \n\n"</span>)
+         <span style="color: #006FE0;">:unnarrowed</span> t
+         <span style="color: #006FE0;">:immediate-finish</span> t
+         )))
+)
+
+(setq org-publish-project-alist
+      '((<span style="color: #008000;">"org"</span>
+         <span style="color: #006FE0;">:base-directory</span> <span style="color: #008000;">"~/org/roam"</span>
+         <span style="color: #006FE0;">:exclude</span> <span style="color: #008000;">"^_.*\.org"</span> <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">regexp</span>
+         <span style="color: #006FE0;">:publishing-function</span> org-html-publish-to-html
+         <span style="color: #006FE0;">:publishing-directory</span> <span style="color: #008000;">"~/org/public/posts"</span>
+         <span style="color: #006FE0;">:htmlized-source</span> t
+         <span style="color: #006FE0;">:headline-levels</span> <span style="color: #D0372D;">5</span>
+         <span style="color: #006FE0;">:auto-sitemap</span> t
+         <span style="color: #006FE0;">:sitemap-filename</span> <span style="color: #008000;">"sitemap.org"</span>
+         <span style="color: #006FE0;">:sitemap-title</span> <span style="color: #008000;">"Honbey &#30340; Web &#24320;&#21457;&#35760;&#24405;"</span>
+         <span style="color: #006FE0;">:sitemap-sort-files</span> anti-chronologically
+         <span style="color: #006FE0;">:sitemap-file-entry-format</span> <span style="color: #008000;">"%d %t"</span>
+         <span style="color: #006FE0;">:makeindex</span> nil
+         <span style="color: #006FE0;">:section-numbers</span> nil
+         <span style="color: #006FE0;">:with-toc</span> nil
+         <span style="color: #006FE0;">:html-head-include-default-style</span> nil
+         <span style="color: #006FE0;">:html-validation-link</span> nil
+         <span style="color: #006FE0;">:html-doctype</span> <span style="color: #008000;">"html5"</span>
+         <span style="color: #006FE0;">:html-html5-fancy</span> t
+         <span style="color: #006FE0;">:html-link-use-abs-url</span> t
+         <span style="color: #006FE0;">:html-postamble</span> <span style="color: #008000;">"&lt;a href=\"https://beian.miit.gov.cn\" target=\"_blank\"&gt;&#28248;ICP&#35777;019014083&#21495;&lt;/a&gt;"</span>
+         <span style="color: #006FE0;">:html-head</span> <span style="color: #008000;">"&lt;link rel=\"stylesheet\" href=\"../resources/orgmode.css\" type=\"text/css\"/&gt;</span>
+<span style="color: #008000;">                     &lt;link rel=\"stylesheet\" href=\"../resources/style.css\" type=\"text/css\"/&gt;"</span>
+        )
+        (<span style="color: #008000;">"images"</span>
+         <span style="color: #006FE0;">:base-directory</span> <span style="color: #008000;">"~/org/images"</span>
+         <span style="color: #006FE0;">:publishing-directory</span> <span style="color: #008000;">"~/org/public/images"</span>
+         <span style="color: #006FE0;">:base-extension</span> <span style="color: #008000;">"jpg\\|gif\\|png"</span>
+         <span style="color: #006FE0;">:exclude</span> <span style="color: #008000;">"^_.*\.png"</span>
+         <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">:publishing-directory "/ssh:user@host:~/html/images/"</span>
+         <span style="color: #006FE0;">:publishing-function</span> org-publish-attachment
+        )
+        (<span style="color: #008000;">"resources"</span>
+         <span style="color: #006FE0;">:base-directory</span> <span style="color: #008000;">"~/org/resources"</span>
+         <span style="color: #006FE0;">:publishing-directory</span> <span style="color: #008000;">"~/org/public/resources"</span>
+         <span style="color: #006FE0;">:base-extension</span> <span style="color: #008000;">".*"</span>
+         <span style="color: #006FE0;">:exclude</span> <span style="color: #008000;">"mymind\\|pdf\\|docx\\|xlsx\\|pptx"</span>
+         <span style="color: #006FE0;">:publishing-function</span> org-publish-attachment
+        )
+        (<span style="color: #008000;">"website"</span> <span style="color: #006FE0;">:components</span> (<span style="color: #008000;">"org"</span> <span style="color: #008000;">"images"</span> <span style="color: #008000;">"resources"</span>))
+))
+</pre>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>
