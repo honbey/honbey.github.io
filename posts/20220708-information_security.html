@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-26 Fri 07:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Information Security</title>
@@ -18,7 +18,7 @@
 信息安全三要素：
 </p>
 <ul class="org-ul">
-<li>Confidentiality 保密性</li>
+<li>Confidentiality 机密性</li>
 <li>Integrity       完整性</li>
 <li>Availability    可用性</li>
 </ul>
@@ -71,6 +71,10 @@
 <h2 id="org964cf19">安全概念</h2>
 <div class="outline-text-2" id="text-org964cf19">
 </div>
+<div id="outline-container-orgce9614c" class="outline-3">
+<h3 id="orgce9614c"><a href="20220825-information_theory.html#ID-188b327f-8e78-4df1-97eb-9d619aea3cab">Information Theory</a></h3>
+</div>
+
 <div id="outline-container-ID-7454fb68-68de-4c17-b738-476cb79ed1fb" class="outline-3">
 <h3 id="ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></h3>
 <div class="outline-text-3" id="text-orgb615e70">
@@ -110,22 +114,6 @@ Man in the Middle Attack
 </div>
 </div>
 
-<div id="outline-container-org60a2573" class="outline-2">
-<h2 id="org60a2573">信息论</h2>
-<div class="outline-text-2" id="text-org60a2573">
-</div>
-<div id="outline-container-ID-a7820960-a5b2-4562-bf64-cd207f5c9986" class="outline-3">
-<h3 id="ID-a7820960-a5b2-4562-bf64-cd207f5c9986">先压缩再加密</h3>
-<div class="outline-text-3" id="text-orgf336439">
-<p>
-加密的本质是将原始信息混进随机背景中掩盖起来，信息熵会增大，导致加密后的数据可以说几乎没有冗余（取决于加密算法的模式）。
-压缩的本质是利用信息本身存在冗余这一点，利用编码技术去除冗余。
-所以说加密后再压缩是没有意义的，达不到压缩减少体积的目的，所以需要先压缩再加密。
-</p>
-</div>
-</div>
-</div>
-
 <div id="outline-container-org6cfed29" class="outline-2">
 <h2 id="org6cfed29">新概念</h2>
 <div class="outline-text-2" id="text-org6cfed29">
@@ -134,7 +122,7 @@ Man in the Middle Attack
 <h3 id="org18c6980">SASE (Safe Access Service Edge)</h3>
 <div class="outline-text-3" id="text-org18c6980">
 <p>
-安全访问服务边缘。是 Gartner 推出的一种架构和实现方式，旨在满足“客户端到云”时代要求的安全解决方案，包含 SD-WAN(Software-Defined Wide Area Network), SWG(Secure Web Gateway), CASB(Cloud Access Security Broker), ZTNA(Zero-Trust Network Access), FWaaS(FireWall as a Service) 。
+安全访问服务边缘。是 <a href="https://www.gartner.com/en">Gartner</a> 推出的一种架构和实现方式，旨在满足“客户端到云”时代要求的安全解决方案，包含 SD-WAN(Software-Defined Wide Area Network), SWG(Secure Web Gateway), CASB(Cloud Access Security Broker), ZTNA(Zero-Trust Network Access), FWaaS(FireWall as a Service) 。
 </p>
 </div>
 </div>

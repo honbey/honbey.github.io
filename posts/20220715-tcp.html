@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-26 Fri 07:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TCP</title>
@@ -64,9 +64,9 @@
 <ul class="org-ul">
 <li>TCP 四次挥手和状态变迁？</li>
 <li>为什么挥手要四次？</li>
-<li>为什么 TIME<sub>WAIT</sub> 等待的时间是 2MSL ?</li>
-<li>为什么需要 TIME<sub>WAIT</sub> 状态？</li>
-<li>如何优化 TIME<sub>WAIT</sub> ?</li>
+<li>为什么 TIME_WAIT 等待的时间是 2MSL ?</li>
+<li>为什么需要 TIME_WAIT 状态？</li>
+<li>如何优化 TIME_WAIT ?</li>
 <li>如果已经建立了连接，但客户端突然出现故障怎么办？</li>
 </ul></li>
 </ul>
@@ -172,7 +172,7 @@ Connections: 用于保证可靠性和流量控制维护的某些状态信息。�
 </p>
 
 <p>
-对于服务器来说，通常是监听一个服务端口，等待客户端的连接，理论上最大的 TCP 连接数为：客户端 IP 数 x 客户端端口数 (2<sup>32</sup> x 2<sup>16</sup>) ，但受限于文件描述符（ulimit）和内存限制。
+对于服务器来说，通常是监听一个服务端口，等待客户端的连接，理论上最大的 TCP 连接数为：客户端 IP 数 x 客户端端口数 (2^32 x 2^16) ，但受限于文件描述符（ulimit）和内存限制。
 </p>
 
 <p>
@@ -268,7 +268,7 @@ F 为 Hash 算法，根据四元组和可选的秘密生成一个随机数值，
 <h3 id="org9568996">SYN 攻击</h3>
 <div class="outline-text-3" id="text-org9568996">
 <p>
-攻击者段时间内伪造不同 IP 地址的 SYN 报文，服务器接收到 SYN 报文进入 SYN<sub>RCVD</sub> （半连接）状态，但回应的 SYN + ACK 报文无法得到未知 IP 主机的应答，久而久之占满 SYN 接收队列（未连接队列），导致服务器不能为正常用户服务。
+攻击者段时间内伪造不同 IP 地址的 SYN 报文，服务器接收到 SYN 报文进入 SYN_RCVD （半连接）状态，但回应的 SYN + ACK 报文无法得到未知 IP 主机的应答，久而久之占满 SYN 接收队列（未连接队列），导致服务器不能为正常用户服务。
 </p>
 
 <p>
@@ -518,7 +518,7 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 <h2 id="orgd40a77b">TCP 有限状态机</h2>
 <div class="outline-text-2" id="text-orgd40a77b">
 
-<figure id="org8dddc83">
+<figure id="orgce49aae">
 <img src="../images/20220715-tcp_1.png" alt="20220715-tcp_1.png">
 
 </figure>
@@ -667,7 +667,7 @@ Fast Retransmit: 不以时间为驱动，而以数据驱动重传。
 <blockquote>
 <p>
 Linux:
-net.ipv4.tcp<sub>sack</sub>
+net.ipv4.tcp_sack
 </p>
 </blockquote>
 </div>
@@ -740,7 +740,7 @@ net.ipv4.tcp<sub>sack</sub>
 
 <blockquote>
 <p>
-Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64KB ，不能满足如今的需要，在 TCP option 字段中定义窗口扩大因子，用于扩大 TCP 通告窗口，其值大小是 2<sup>14</sup> ，这样 TCP 最大窗口大小从 16 位扩展到 30 位，最大窗口值 1GB 。
+Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64KB ，不能满足如今的需要，在 TCP option 字段中定义窗口扩大因子，用于扩大 TCP 通告窗口，其值大小是 2^{14} ，这样 TCP 最大窗口大小从 16 位扩展到 30 位，最大窗口值 1GB 。
 </p>
 </blockquote>
 </div>
@@ -775,7 +775,7 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </ol>
 <p>
 满足任意一条就可以发送数据。
-可以设置 Socket <a href="20220718-socket.html#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9">TCP<sub>NODELAY</sub></a> 关闭此算法。
+可以设置 Socket <a href="20220718-socket.html#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9">TCP_NODELAY</a> 关闭此算法。
 </p>
 </div>
 </div>
@@ -984,7 +984,7 @@ tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_tra
 </div>
 
 
-<figure id="org672289d">
+<figure id="org2e5e4d1">
 <img src="../images/tcp_nagle_minshall.png" alt="tcp_nagle_minshall.png">
 
 </figure>

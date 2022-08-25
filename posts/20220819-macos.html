@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-26 Fri 07:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>macOS</title>
@@ -15,13 +15,39 @@
 <header>
 <h1 class="title">macOS</h1>
 </header>
+<div id="outline-container-org0a28d54" class="outline-2">
+<h2 id="org0a28d54">Finder</h2>
+<div class="outline-text-2" id="text-org0a28d54">
+</div>
+<div id="outline-container-orga1a7afe" class="outline-3">
+<h3 id="orga1a7afe">Remove recent files</h3>
+<div class="outline-text-3" id="text-orga1a7afe">
+<div class="org-src-container">
+<pre class="src src-bash">xattr -c ./*
+</pre>
+</div>
+<p>
+<a href="https://github.com/honbey/script/blob/master/linux/mac/remove_recent_used_files_list.sh">remove<sub>recent</sub><sub>used</sub><sub>files</sub><sub>list.sh</sub></a>
+</p>
+</div>
+</div>
+<div id="outline-container-org9d1f543" class="outline-3">
+<h3 id="org9d1f543">The App package is broken</h3>
+<div class="outline-text-3" id="text-org9d1f543">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> xattr -rd com.app.quarantine
+</pre>
+</div>
+</div>
+</div>
+</div>
 <div id="outline-container-org04736ee" class="outline-2">
 <h2 id="org04736ee">Shortcuts</h2>
 <div class="outline-text-2" id="text-org04736ee">
 </div>
-<div id="outline-container-orge080c1d" class="outline-3">
-<h3 id="orge080c1d">Request API and Run JavaScript</h3>
-<div class="outline-text-3" id="text-orge080c1d">
+<div id="outline-container-orgbd7c7a2" class="outline-3">
+<h3 id="orgbd7c7a2">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
+<div class="outline-text-3" id="text-orgbd7c7a2">
 <blockquote>
 <ol class="org-ol">
 <li><a href="https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0">https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0</a></li>
