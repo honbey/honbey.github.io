@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-08-26 Fri 20:34 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MyHomeKit</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">MyHomeKit</h1>
+</header>
+<div id="outline-container-org393b198" class="outline-2">
+<h2 id="org393b198">Network</h2>
+<div class="outline-text-2" id="text-org393b198">
+<ul class="org-ul">
+<li><p>
+中国电信<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 300M 光纤宽带
+有公网 IP ，支持 IPv6 ，问了客服上下行速率表，省略了 50M 以下的
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 1:</span> 上下行速率</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">下行带宽</th>
+<th scope="col" class="org-left">上行带宽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">50M</td>
+<td class="org-left">10M</td>
+</tr>
+
+<tr>
+<td class="org-left">100M</td>
+<td class="org-left">20M</td>
+</tr>
+
+<tr>
+<td class="org-left">200M/300M</td>
+<td class="org-left">30M</td>
+</tr>
+
+<tr>
+<td class="org-left">500M</td>
+<td class="org-left">30M</td>
+</tr>
+
+<tr>
+<td class="org-left">1000M</td>
+<td class="org-left">30M</td>
+</tr>
+</tbody>
+</table>
+<p>
+这也太不对等了，看到上行都没有升级 1000M 的欲望了。
+</p></li>
+<li><p>
+中国电信<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 30G/月 通用流量
+2020年10月时在学校测的最高速度，测一次速下载加上传差不多 2G 流量。在深圳测的就没超过 300M。
+</p>
+
+<figure id="orgecb03e8">
+<img src="../images/myhomekit_5g_speed_on_hainanu.jpg" alt="myhomekit_5g_speed_on_hainanu.jpg">
+
+</figure></li>
+<li>中国联通天际通Go<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> 2000G/月 4G 流量
+现在租的房子这速率最高 2MB/s ，试了下在公司有 5~6MB/s。</li>
+<li>华为云<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> ECS 1M BGP
+用作管理，业务用其他的 IP 地址和带宽。</li>
+</ul>
+</div>
+<div id="outline-container-org0a0f523" class="outline-3">
+<h3 id="org0a0f523">Virtual Private Network with GNB<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
+<div class="outline-text-3" id="text-org0a0f523">
+<p>
+五个节点。
+</p>
+<pre class="example">
+1001|10.1.0.1|255.255.255.0
+1002|10.1.0.2|255.255.255.0
+1003|10.1.0.3|255.255.255.0
+1004|10.1.0.4|255.255.255.0
+1005|10.1.0.5|255.255.255.0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3076e9a" class="outline-2">
+<h2 id="org3076e9a">Device</h2>
+<div class="outline-text-2" id="text-org3076e9a">
+<ul class="org-ul">
+<li>📶Router
+<ul class="org-ul">
+<li>360 P2 2017.07</li>
+<li>Huawei WiFi AX3 2021.01</li>
+<li>Huawei 4G CPE 3 2022.04</li>
+</ul></li>
+<li>💻Laptop
+<ul class="org-ul">
+<li>Microsoft Surface New Pro m3 4G+128G 2018.03</li>
+<li>Apple MacBook Air M1 8G+256G 2020.12</li>
+<li>HP Omen 15.6 i7-7700K 32G+512G+1T 2022.01</li>
+</ul></li>
+<li>📱Phone
+<ul class="org-ul">
+<li>Honor X10 6G+128G 2022.07</li>
+</ul></li>
+<li>🎧Headphone
+<ul class="org-ul">
+<li>Huawei Freebuds Pro 2020.10</li>
+</ul></li>
+<li>⌚Watch
+<ul class="org-ul">
+<li>Huawei Watch GT 2022PE 2022.01</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org65f9db3" class="outline-2">
+<h2 id="org65f9db3">Reference</h2>
+<div class="outline-text-2" id="text-org65f9db3">
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.189.cn/hn/">https://www.189.cn/hn/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://consumer.huawei.com/cn/support/content/zh-cn15822291/">https://consumer.huawei.com/cn/support/content/zh-cn15822291/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.huaweicloud.com/">https://www.huaweicloud.com/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://github.com/gnbdev/gnb">https://github.com/gnbdev/gnb</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>
