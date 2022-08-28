@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:35 -->
+<!-- 2022-08-28 Sun 10:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Regex</title>
@@ -14,7 +14,10 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Regex</h1>
-</header>
+</header><p>
+GROK
+</p>
+
 <div id="outline-container-org17499b7" class="outline-2">
 <h2 id="org17499b7">Group</h2>
 <div class="outline-text-2" id="text-org17499b7">
@@ -36,23 +39,23 @@
 </div>
 </div>
 
-<div id="outline-container-org61e91e1" class="outline-2">
-<h2 id="org61e91e1">Assertions</h2>
-<div class="outline-text-2" id="text-org61e91e1">
+<div id="outline-container-org124fbc6" class="outline-2">
+<h2 id="org124fbc6">Zero-width Assertions</h2>
+<div class="outline-text-2" id="text-org124fbc6">
 <p>
-Positive lookahead  肯定性正向预查： <code>(?=exp)</code>  断言自身出现的位置的 <b>后面</b>    能匹配表达式 exp
+Positive lookahead  肯定性正向预查： <code>ABC(?=exp)</code>  ABC 断言自身出现的位置的 <b>后面</b>    能匹配表达式 exp
 </p>
 
 <p>
-Negative lookahead  否定性正向预查： <code>(?!exp)</code>  断言自身出现的位置的 <b>后面</b> <b>不</b> 能匹配表达式 exp
+Negative lookahead  否定性正向预查： <code>ABC(?!exp)</code>  ABC 断言自身出现的位置的 <b>后面</b> <b>不</b> 能匹配表达式 exp
 </p>
 
 <p>
-Positive lookbehind 肯定性反向预查： <code>(?&lt;=exp)</code> 断言自身出现的位置的 <b>前面</b>    能匹配表达式 exp
+Positive lookbehind 肯定性反向预查： <code>(?&lt;=exp)ABC</code> ABC 断言自身出现的位置的 <b>前面</b>    能匹配表达式 exp
 </p>
 
 <p>
-Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)</code> 断言自身出现的位置的 <b>前面</b> <b>不</b> 能匹配表达式 exp
+Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断言自身出现的位置的 <b>前面</b> <b>不</b> 能匹配表达式 exp
 </p>
 
 <p>
