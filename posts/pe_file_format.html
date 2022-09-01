@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:35 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PE 文件格式</title>
@@ -18,14 +18,14 @@
 分析所使用的 exe 程序的源代码见：<a href="overflow_attack.html#ID-0c6a4a3b-bcc6-461c-a5db-118fdf4cdfa2">寻找栈溢出</a>。
 </p>
 
-<div id="outline-container-orgf97bcc6" class="outline-2">
-<h2 id="orgf97bcc6">Release 版本</h2>
-<div class="outline-text-2" id="text-orgf97bcc6">
+<div id="outline-container-orgd331756" class="outline-2">
+<h2 id="orgd331756">Release 版本</h2>
+<div class="outline-text-2" id="text-orgd331756">
 <p>
 Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本的程序进行了各种优化，比如精简掉无关的函数调用等，使得程序在文件大小和运行速度上都比较优秀
 </p>
 
-<figure id="orgf28ca2e">
+<figure id="org09c84d9">
 <img src="../images/pe_file_format_1.png" alt="pe_file_format_1.png">
 
 </figure>
@@ -33,9 +33,9 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 </div>
 
 
-<div id="outline-container-org9db9551" class="outline-2">
-<h2 id="org9db9551">Debug 版本</h2>
-<div class="outline-text-2" id="text-org9db9551">
+<div id="outline-container-orge9a6ed8" class="outline-2">
+<h2 id="orge9a6ed8">Debug 版本</h2>
+<div class="outline-text-2" id="text-orge9a6ed8">
 <p>
 前面部分中的 DOS MZ 文件头以及 DOS 插桩程序和 Release 版本一样，这一部分是 PE 文件格式通用格式。MS-DOS Stub Program 之后的近百个字节的作用不知用处。
 </p>
@@ -44,7 +44,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 地址 0x3C 处的 D0 标识了 PE 文件真正的开始位置，从 0xD0 开始，PE 头前面的文件头标识，也就是 signature 都是相同的，之后就是 PE 文件头信息
 </p>
 
-<figure id="org37d2a47">
+<figure id="org02d3095">
 <img src="../images/pe_file_format_2.png" alt="pe_file_format_2.png">
 
 </figure>
@@ -54,7 +54,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 文件头标识了运行环境 i386 ，节的数量 5，这个文件的符号表指针和符号数量均为 0 ，可选头信心的大小 00E0 ，文件特征值 010E ，二进制 0000 0001 0000 1110 的含义： 0002（exe 文件）+ 0004（不存在行信息）+ 0008（不存在符号信息）+ 0100（32 位机器），以二进制位取值来对 PE 文件进行说明
 </p>
 
-<figure id="orgdf90095">
+<figure id="orgda6d0fd">
 <img src="../images/pe_file_format_3.png" alt="pe_file_format_3.png">
 
 </figure>
@@ -63,15 +63,14 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 可选头大小 224 字节，标识了代码区、数据区、栈区、堆区的大小，还有程序入口点地址 Address of Entry Point 位于文件 0xF8 处，值为 00001650 。还包含了某些节表的地址和大小信息
 </p>
 
-<figure id="org8f8926b">
+<figure id="org45940a0">
 <img src="../images/pe_file_format_4.png" alt="pe_file_format_4.png">
 
 </figure>
 
 
 <p>
-节表，提供每一节的具体信息，在文件的其实位置、大小，内存映射关系、节表类型等。节表的结构都是一样的。
-含义：
+节表，提供每一节的具体信息，在文件的其实位置、大小，内存映射关系、节表类型等。节表的结构都是一样的。含义：
 </p>
 <ul class="org-ul">
 <li>节名；</li>
@@ -87,7 +86,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 </ul>
 
 
-<figure id="orgfaac428">
+<figure id="org6365f1a">
 <img src="../images/pe_file_format_5.png" alt="pe_file_format_5.png">
 
 </figure>
@@ -102,7 +101,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指向对应外部函数的内存相对虚拟地址， DLL 间用双字 0 分隔
 </p>
 
-<figure id="org7d5cabd">
+<figure id="orge475bad">
 <img src="../images/pe_file_format_6.png" alt="pe_file_format_6.png">
 
 </figure>
@@ -112,15 +111,15 @@ IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指
 IDT 表记录 PE 文件要导入的库文件及函数的信息，实验所用的这个文件只导入了 kernel32.dll 这一个 dll 文件。表项先指出 IAT 的 RVA，和 PE 头中的完全对应。之后两个不清楚，在之后是 dll 文件名这个字符串的 RVA，命名表的 RVA。表项 2 全为 0
 </p>
 
-<figure id="orgb848f77">
+<figure id="org2836904">
 <img src="../images/pe_file_format_7.png" alt="pe_file_format_7.png">
 
 </figure>
 </div>
 
-<div id="outline-container-orgfc966a6" class="outline-4">
-<h4 id="orgfc966a6">参考链接</h4>
-<div class="outline-text-4" id="text-orgfc966a6">
+<div id="outline-container-org1877463" class="outline-4">
+<h4 id="org1877463">参考链接</h4>
+<div class="outline-text-4" id="text-org1877463">
 <p>
 <a href="https://www.cnblogs.com/findumars/p/5037657.html">PE 文件格式 - 博客园</a>
 </p>

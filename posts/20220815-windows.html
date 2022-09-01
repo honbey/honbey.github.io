@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-09-01 Thu 22:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
@@ -15,12 +15,13 @@
 <header>
 <h1 class="title">Windows</h1>
 </header>
-<div id="outline-container-org12dcda8" class="outline-2">
-<h2 id="org12dcda8">PowerShell</h2>
-<div class="outline-text-2" id="text-org12dcda8">
-<p>
-Specific PowerShell as SSH terminal on Windows:
-</p>
+<div id="outline-container-orgae55787" class="outline-2">
+<h2 id="orgae55787">PowerShell</h2>
+<div class="outline-text-2" id="text-orgae55787">
+</div>
+<div id="outline-container-org3e10f4a" class="outline-3">
+<h3 id="org3e10f4a">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-org3e10f4a">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -29,10 +30,12 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Wi
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Program Files\PowerShell\7\pwsh.exe" -PropertyType String -Force
 </pre>
 </div>
+</div>
+</div>
 
-<p>
-Remove command history of PowerShell:
-</p>
+<div id="outline-container-org7446a40" class="outline-3">
+<h3 id="org7446a40">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org7446a40">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
@@ -41,6 +44,296 @@ Remove-Item (Get-PSReadlineOption).HistorySavePath
 </div>
 </div>
 </div>
+
+<div id="outline-container-org9983f00" class="outline-2">
+<h2 id="org9983f00">Registry</h2>
+<div class="outline-text-2" id="text-org9983f00">
+</div>
+<div id="outline-container-org7e20f5a" class="outline-3">
+<h3 id="org7e20f5a">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org7e20f5a">
+<div class="org-src-container">
+<pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb6e41b7" class="outline-4">
+<h4 id="orgb6e41b7">Clear login record</h4>
+<div class="outline-text-4" id="text-orgb6e41b7">
+<div class="org-src-container">
+<pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
+reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
+<span style="color: #006FE0;">del</span> <span style="color: #008000;">"%USERPROFILE%\My Documents\Default.rdp"</span> /<span style="color: #6434A3;">a</span>
+@<span style="color: #0000FF;">exit</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge2aa5a8" class="outline-2">
+<h2 id="orge2aa5a8">Hyper-V</h2>
+<div class="outline-text-2" id="text-orge2aa5a8">
+</div>
+<div id="outline-container-orgaf4f40c" class="outline-3">
+<h3 id="orgaf4f40c">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-orgaf4f40c">
+<ol class="org-ol">
+<li>Enter Debug mode</li>
+<li>Execute <code>mount -0 remount,re/mnt</code></li>
+<li>Execute <code>vi /mnt/grub/menu.lst</code></li>
+<li>Input <code>nomodeset</code> after <code>quiet</code> around <code>Android-x86 xx-rcx</code></li>
+<li>Restart VM</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa51000" class="outline-2">
+<h2 id="orgfa51000">Useful info</h2>
+<div class="outline-text-2" id="text-orgfa51000">
+<p>
+Software - UWP:
+</p>
+<ul class="org-ul">
+<li>WSL (Windows Subsystem of <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a>, not WSL2)</li>
+<li>Minecraft (<a href="minecraft.html#ID-d5529dd0-e6d0-4bcc-9afe-ca830e085acc">Bedrock Edition</a>)</li>
+<li>Windows Terminal</li>
+<li><a href="#orgae55787">PowerShell</a></li>
+<li>QuickLook</li>
+<li>Translucent TB</li>
+<li>X410</li>
+</ul>
+
+<p>
+Software - x86/x64:
+</p>
+<ul class="org-ul">
+<li>7zip</li>
+<li>Draw.io</li>
+<li>Huorong</li>
+<li>(×) SpeedPan X</li>
+</ul>
+
+<p>
+Software - x86/x64 by scoop:
+</p>
+<ul class="org-ul">
+<li>captura</li>
+<li>dismplusplus</li>
+<li>ffmpeg</li>
+<li>git</li>
+<li>llvm</li>
+<li>lua</li>
+<li>make</li>
+<li>memreduct</li>
+<li>neovim</li>
+<li>obs-studio</li>
+<li><a href="20220803-python.html#ID-798fccc4-bc5f-4e5d-9272-f9ac8baaf74d">python</a></li>
+<li>screentogif</li>
+<li>spacesniffer</li>
+<li>sublime-text</li>
+<li>vcredist2022</li>
+<li>vlc</li>
+<li><a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">wireshark</a></li>
+</ul>
+
+<p>
+Shortcut Keyboard: <code>win + r</code>.
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 1:</span> some commands</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">control</td>
+<td class="org-left">Control Panel</td>
+</tr>
+
+<tr>
+<td class="org-left">calc</td>
+<td class="org-left">Calculator</td>
+</tr>
+
+<tr>
+<td class="org-left">shutdown</td>
+<td class="org-left">Auto Shutdown</td>
+</tr>
+
+<tr>
+<td class="org-left">regedit</td>
+<td class="org-left">Registry Editor</td>
+</tr>
+
+<tr>
+<td class="org-left">slmgr</td>
+<td class="org-left">Show System Activation Info</td>
+</tr>
+
+<tr>
+<td class="org-left">taskmgr</td>
+<td class="org-left">Task Manager</td>
+</tr>
+
+<tr>
+<td class="org-left">snippingtool</td>
+<td class="org-left">Screenshot Tool</td>
+</tr>
+
+<tr>
+<td class="org-left">explorer</td>
+<td class="org-left">Resource Explorer</td>
+</tr>
+
+<tr>
+<td class="org-left">notepad</td>
+<td class="org-left">Open Notepad</td>
+</tr>
+
+<tr>
+<td class="org-left">winver</td>
+<td class="org-left">Windows Version</td>
+</tr>
+
+<tr>
+<td class="org-left">write</td>
+<td class="org-left">Write Board</td>
+</tr>
+
+<tr>
+<td class="org-left">mspaint</td>
+<td class="org-left">Microsoft Paint</td>
+</tr>
+
+<tr>
+<td class="org-left">diskpart</td>
+<td class="org-left">Disk Tool</td>
+</tr>
+
+<tr>
+<td class="org-left">ncpa.cpl</td>
+<td class="org-left">Show Network Driver</td>
+</tr>
+
+<tr>
+<td class="org-left">gpedit.msc</td>
+<td class="org-left">Group Policy Editor</td>
+</tr>
+
+<tr>
+<td class="org-left">service.msc</td>
+<td class="org-left">Show and Manage Services</td>
+</tr>
+
+<tr>
+<td class="org-left">compmgmt.msc</td>
+<td class="org-left">Computer Management</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgdf8910e" class="outline-3">
+<h3 id="orgdf8910e">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-orgdf8910e">
+<table>
+<caption class="t-above"><span class="table-number">Table 2:</span> usage of shutdown</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">shutdown /s /t 600</td>
+<td class="org-left">shutdown after 600 seconds</td>
+</tr>
+
+<tr>
+<td class="org-left">shutdown /r /t 600</td>
+<td class="org-left">restart  after 600 seconds</td>
+</tr>
+
+<tr>
+<td class="org-left">shutdown /a</td>
+<td class="org-left">cancel all schedular opeartion</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org1a6d463" class="outline-3">
+<h3 id="org1a6d463">Operate disk</h3>
+<div class="outline-text-3" id="text-org1a6d463">
+<p>
+<code>diskpart</code>
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 3:</span> usage of diskpart</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">list disk</td>
+<td class="org-left">List all mount disk</td>
+</tr>
+
+<tr>
+<td class="org-left">select disk &lt;disk<sub>no</sub>.&gt;</td>
+<td class="org-left">Select disk by no.</td>
+</tr>
+
+<tr>
+<td class="org-left">clean</td>
+<td class="org-left">Clean current disk, including partition table</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Some configurations of Windows and Microsoft&rsquo;s products: <a href="https://gitee.com/honbey/config">https://gitee.com/honbey/config</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

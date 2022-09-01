@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wireshark and tcpdump</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">Wireshark and tcpdump</h1>
 </header>
-<div id="outline-container-ID-0cab26c8-3627-4e10-a7f9-535945a56511" class="outline-2">
-<h2 id="ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</h2>
-<div class="outline-text-2" id="text-org748b822">
+<div id="outline-container-org323187c" class="outline-2">
+<h2 id="org323187c">Wireshark</h2>
+<div class="outline-text-2" id="text-org323187c">
 <p>
 封包？数据帧？报文？
 </p>
@@ -37,9 +37,9 @@
 </div>
 </div>
 
-<div id="outline-container-org8a78e29" class="outline-2">
-<h2 id="org8a78e29">显示过滤器</h2>
-<div class="outline-text-2" id="text-org8a78e29">
+<div id="outline-container-orgd301718" class="outline-2">
+<h2 id="orgd301718">显示过滤器</h2>
+<div class="outline-text-2" id="text-orgd301718">
 <p>
 针对已经捕获的报文进行过滤。 <b>一条基本的表达式由过滤项、过滤关系、过滤值组成</b> ，例如：
 </p>
@@ -51,18 +51,18 @@ ip.src == 192.168.1.1
 </pre>
 </div>
 
-<div id="outline-container-org5bddb0c" class="outline-4">
-<h4 id="org5bddb0c">过滤项</h4>
-<div class="outline-text-4" id="text-org5bddb0c">
+<div id="outline-container-orgeba4396" class="outline-4">
+<h4 id="orgeba4396">过滤项</h4>
+<div class="outline-text-4" id="text-orgeba4396">
 <ul class="org-ul">
 <li>协议</li>
 <li>协议字段</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org20d0669" class="outline-4">
-<h4 id="org20d0669">常用字段</h4>
-<div class="outline-text-4" id="text-org20d0669">
+<div id="outline-container-orga0e594e" class="outline-4">
+<h4 id="orga0e594e">常用字段</h4>
+<div class="outline-text-4" id="text-orga0e594e">
 <ul class="org-ul">
 <li>address
 <ul class="org-ul">
@@ -87,9 +87,9 @@ ip.src == 192.168.1.1
 </div>
 
 
-<div id="outline-container-org13043b8" class="outline-3">
-<h3 id="org13043b8">过滤关系</h3>
-<div class="outline-text-3" id="text-org13043b8">
+<div id="outline-container-org002e416" class="outline-3">
+<h3 id="org002e416">过滤关系</h3>
+<div class="outline-text-3" id="text-org002e416">
 <ul class="org-ul">
 <li>大于
 <ul class="org-ul">
@@ -124,9 +124,9 @@ ip.src == 192.168.1.1
 </ul>
 </div>
 
-<div id="outline-container-orgb7e8e81" class="outline-4">
-<h4 id="orgb7e8e81">复合表达式</h4>
-<div class="outline-text-4" id="text-orgb7e8e81">
+<div id="outline-container-orge4ce6f6" class="outline-4">
+<h4 id="orge4ce6f6">复合表达式</h4>
+<div class="outline-text-4" id="text-orge4ce6f6">
 <ul class="org-ul">
 <li>与
 <ul class="org-ul">
@@ -156,9 +156,9 @@ ip.src == 192.168.1.1
 </div>
 </div>
 
-<div id="outline-container-orgaacc4c0" class="outline-4">
-<h4 id="orgaacc4c0">过滤值</h4>
-<div class="outline-text-4" id="text-orgaacc4c0">
+<div id="outline-container-orge54ae1c" class="outline-4">
+<h4 id="orge54ae1c">过滤值</h4>
+<div class="outline-text-4" id="text-orge54ae1c">
 <ul class="org-ul">
 <li>应满足过滤项的格式</li>
 </ul>
@@ -193,9 +193,9 @@ ip.src == 192.168.1.1 &amp;&amp; tcp[13]&amp;2
 </div>
 </div>
 
-<div id="outline-container-ID-ef271e3d-eb0b-445e-b142-87ce48b892bd" class="outline-2">
-<h2 id="ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</h2>
-<div class="outline-text-2" id="text-org3c2ea69">
+<div id="outline-container-org5d21b3a" class="outline-2">
+<h2 id="org5d21b3a">捕获过滤器</h2>
+<div class="outline-text-2" id="text-org5d21b3a">
 <p>
 提前设置好规则，只捕获符合过滤规则的报文。伯克利包捕获表达式： <b>一条基本的表达式由捕获项、捕获参数、捕获值组成</b> ，例如：
 </p>
@@ -207,9 +207,9 @@ ip  src host 192.168.1.1
 </pre>
 </div>
 
-<div id="outline-container-org89bfb49" class="outline-4">
-<h4 id="org89bfb49">捕获项</h4>
-<div class="outline-text-4" id="text-org89bfb49">
+<div id="outline-container-org3cb7c1d" class="outline-4">
+<h4 id="org3cb7c1d">捕获项</h4>
+<div class="outline-text-4" id="text-org3cb7c1d">
 <ul class="org-ul">
 <li>协议</li>
 <li>数据流向</li>
@@ -221,9 +221,9 @@ ip  src host 192.168.1.1
 </div>
 </div>
 
-<div id="outline-container-org0c2a529" class="outline-4">
-<h4 id="org0c2a529">捕获参数</h4>
-<div class="outline-text-4" id="text-org0c2a529">
+<div id="outline-container-org581a900" class="outline-4">
+<h4 id="org581a900">捕获参数</h4>
+<div class="outline-text-4" id="text-org581a900">
 <ul class="org-ul">
 <li>host (default)</li>
 <li>net</li>
@@ -233,9 +233,9 @@ ip  src host 192.168.1.1
 </div>
 </div>
 
-<div id="outline-container-org721b596" class="outline-4">
-<h4 id="org721b596">捕获值</h4>
-<div class="outline-text-4" id="text-org721b596">
+<div id="outline-container-org7ef5937" class="outline-4">
+<h4 id="org7ef5937">捕获值</h4>
+<div class="outline-text-4" id="text-org7ef5937">
 <p>
 应满足捕获项的格式
 </p>
@@ -256,9 +256,9 @@ port 25 and portrange 110-143
 </div>
 </div>
 
-<div id="outline-container-org7d271d1" class="outline-3">
-<h3 id="org7d271d1">数据包解析</h3>
-<div class="outline-text-3" id="text-org7d271d1">
+<div id="outline-container-org63bb97c" class="outline-3">
+<h3 id="org63bb97c">数据包解析</h3>
+<div class="outline-text-3" id="text-org63bb97c">
 <ul class="org-ul">
 <li>Protocol in frame</li>
 </ul>
@@ -302,9 +302,9 @@ port 25 and portrange 110-143
 </div>
 </div>
 
-<div id="outline-container-orgfd5f102" class="outline-3">
-<h3 id="orgfd5f102">捕获远程主机数据包</h3>
-<div class="outline-text-3" id="text-orgfd5f102">
+<div id="outline-container-orgd0b6bab" class="outline-3">
+<h3 id="orgd0b6bab">捕获远程主机数据包</h3>
+<div class="outline-text-3" id="text-orgd0b6bab">
 <ul class="org-ul">
 <li>需要在被远程捕获的设备上安装 WinPcap，并且该程序运行此应用程序</li>
 <li>网络可达，默认 2002 端口</li>
@@ -321,14 +321,12 @@ port 25 and portrange 110-143
 </div>
 </div>
 
-<div id="outline-container-ID-f74ee637-220d-44c1-8049-32559ba21103" class="outline-2">
-<h2 id="ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</h2>
-<div class="outline-text-2" id="text-org85e30e2">
+<div id="outline-container-org935c22b" class="outline-2">
+<h2 id="org935c22b">HTTPS 取证</h2>
+<div class="outline-text-2" id="text-org935c22b">
 <ol class="org-ol">
-<li>用服务端的私钥
-编辑-&gt;首选项-&gt;Protocol-&gt;TLS-&gt;RSA keys list</li>
-<li>用客户端的私钥
-通过设置环境变量截取浏览器的 <code>master_secret</code>, 进而实现解密 <a href="20220712-ssl_tls.html#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS</a> 的目的，具体方式（Windows）环境变量中新建用户变量 <code>SSLKEYLOGFILE=C:\path\sslkey.log</code> 文件，之后再 Wireshark 中 <a href="20220712-ssl_tls.html#ID-1265f63a-96d0-4360-b5d4-55440b7ded1a">TLS</a> 配置中制定该文件位置即可</li>
+<li>用服务端的私钥编辑-&gt;首选项-&gt;Protocol-&gt;TLS-&gt;RSA keys list</li>
+<li>用客户端的私钥通过设置环境变量截取浏览器的 <code>master_secret</code>, 进而实现解密 <a href="20220712-ssl_tls.html#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS</a> 的目的，具体方式（Windows）环境变量中新建用户变量 <code>SSLKEYLOGFILE=C:\path\sslkey.log</code> 文件，之后再 Wireshark 中 <a href="20220712-ssl_tls.html#ID-1265f63a-96d0-4360-b5d4-55440b7ded1a">TLS</a> 配置中制定该文件位置即可</li>
 </ol>
 
 <p>
@@ -337,9 +335,9 @@ port 25 and portrange 110-143
 </div>
 </div>
 
-<div id="outline-container-ID-fc764106-fe91-4d27-9655-b3daa38fa2e3" class="outline-2">
-<h2 id="ID-fc764106-fe91-4d27-9655-b3daa38fa2e3">图片取证</h2>
-<div class="outline-text-2" id="text-orgee7c081">
+<div id="outline-container-org11b57f8" class="outline-2">
+<h2 id="org11b57f8">图片取证</h2>
+<div class="outline-text-2" id="text-org11b57f8">
 <ol class="org-ol">
 <li>利用 <code>http contains xxx</code> 定位到请求图片的包</li>
 <li>追踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>/<a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a> 流</li>
@@ -349,21 +347,21 @@ port 25 and portrange 110-143
 </ol>
 
 
-<figure id="orge76de52">
+<figure id="orgfc6866a">
 <img src="../images/wireshark_jepg_obtain_evidence_1.png" alt="wireshark_jepg_obtain_evidence_1.png">
 
 </figure>
 
-<figure id="orgeb20f29">
+<figure id="org49cf5e2">
 <img src="../images/wireshark_jepg_obtain_evidence_2.png" alt="wireshark_jepg_obtain_evidence_2.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3" class="outline-2">
-<h2 id="ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3">AIM 取证</h2>
-<div class="outline-text-2" id="text-org9268cc9">
+<div id="outline-container-org43d9d31" class="outline-2">
+<h2 id="org43d9d31">AIM 取证</h2>
+<div class="outline-text-2" id="text-org43d9d31">
 <p>
 类比于聊天软件的取证分析。
 </p>
@@ -373,16 +371,16 @@ Wireshark 支持 AIM 解密，右键 -&gt; decode as -&gt; <a href="20220715-tcp
 </p>
 
 
-<figure id="org6cd2cd8">
+<figure id="org7d5713f">
 <img src="../images/wireshark_aim_obtain_evidence_1.png" alt="wireshark_aim_obtain_evidence_1.png">
 
 </figure>
 </div>
 
 
-<div id="outline-container-org655bbd0" class="outline-4">
-<h4 id="org655bbd0">前置问题</h4>
-<div class="outline-text-4" id="text-org655bbd0">
+<div id="outline-container-orgde991bc" class="outline-4">
+<h4 id="orgde991bc">前置问题</h4>
+<div class="outline-text-4" id="text-orgde991bc">
 <ul class="org-ul">
 <li>What is the name of Ann&rsquo;s IM buddy?</li>
 <li>What was the first comment in the captured IM conversation?</li>
@@ -394,14 +392,14 @@ Wireshark 支持 AIM 解密，右键 -&gt; decode as -&gt; <a href="20220715-tcp
 </div>
 </div>
 
-<div id="outline-container-org188dc26" class="outline-4">
-<h4 id="org188dc26">1</h4>
-<div class="outline-text-4" id="text-org188dc26">
+<div id="outline-container-orgffc6b9d" class="outline-4">
+<h4 id="orgffc6b9d">1</h4>
+<div class="outline-text-4" id="text-orgffc6b9d">
 <p>
 解密 AIM 数据包后，找到协议为 AIM Message 的数据包
 </p>
 
-<figure id="org08066d8">
+<figure id="org810b385">
 <img src="../images/wireshark_aim_obtain_evidence_2.png" alt="wireshark_aim_obtain_evidence_2.png">
 
 </figure>
@@ -412,9 +410,9 @@ Buddy 为 Sec558user1
 </div>
 </div>
 
-<div id="outline-container-org47c11c6" class="outline-4">
-<h4 id="org47c11c6">2</h4>
-<div class="outline-text-4" id="text-org47c11c6">
+<div id="outline-container-orgfb02279" class="outline-4">
+<h4 id="orgfb02279">2</h4>
+<div class="outline-text-4" id="text-orgfb02279">
 <p>
 从 1 中的包中的 Message Block 中可以得到第一条消息的内容，即
 </p>
@@ -424,14 +422,14 @@ ValueMessage: Here's the secret recipe... I just downloaded it from the file ser
 </div>
 </div>
 
-<div id="outline-container-org401aa04" class="outline-4">
-<h4 id="org401aa04">3</h4>
-<div class="outline-text-4" id="text-org401aa04">
+<div id="outline-container-org8ab2b34" class="outline-4">
+<h4 id="org8ab2b34">3</h4>
+<div class="outline-text-4" id="text-org8ab2b34">
 <p>
 输入 data 进行筛选，跟踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 流，找到文件名
 </p>
 
-<figure id="orga63b73a">
+<figure id="org57a1e71">
 <img src="../images/wireshark_aim_obtain_evidence_3.png" alt="wireshark_aim_obtain_evidence_3.png">
 
 </figure>
@@ -442,19 +440,19 @@ ValueMessage: Here's the secret recipe... I just downloaded it from the file ser
 </div>
 </div>
 
-<div id="outline-container-org19bbee8" class="outline-4">
-<h4 id="org19bbee8">4</h4>
-<div class="outline-text-4" id="text-org19bbee8">
+<div id="outline-container-org10f982c" class="outline-4">
+<h4 id="org10f982c">4</h4>
+<div class="outline-text-4" id="text-org10f982c">
 <p>
 选择 Ann 发送的数据，以原始数据 save as -&gt; recipe.bin
 </p>
 
-<figure id="org141bd2d">
+<figure id="orgdcf33cc">
 <img src="../images/wireshark_aim_obtain_evidence_4.png" alt="wireshark_aim_obtain_evidence_4.png">
 
 </figure>
 
-<figure id="orgb1c1873">
+<figure id="org941b88a">
 <img src="../images/wireshark_aim_obtain_evidence_5.png" alt="wireshark_aim_obtain_evidence_5.png">
 
 </figure>
@@ -465,23 +463,23 @@ magic number 为 50 4B 03 04
 </div>
 </div>
 
-<div id="outline-container-org7296f5e" class="outline-4">
-<h4 id="org7296f5e">5</h4>
-<div class="outline-text-4" id="text-org7296f5e">
+<div id="outline-container-orga845000" class="outline-4">
+<h4 id="orga845000">5</h4>
+<div class="outline-text-4" id="text-orga845000">
 <p>
 计算文件 MD5。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org785d106" class="outline-4">
-<h4 id="org785d106">6</h4>
-<div class="outline-text-4" id="text-org785d106">
+<div id="outline-container-org4a8cde5" class="outline-4">
+<h4 id="org4a8cde5">6</h4>
+<div class="outline-text-4" id="text-org4a8cde5">
 <p>
 删除 magic number 之前的数据，另存为 docx 文件即可
 </p>
 
-<figure id="org0dd2483">
+<figure id="org9912be4">
 <img src="../images/wireshark_aim_obtain_evidence_6.png" alt="wireshark_aim_obtain_evidence_6.png">
 
 </figure>
@@ -490,9 +488,9 @@ magic number 为 50 4B 03 04
 </div>
 
 
-<div id="outline-container-ID-d92036a4-851d-42e7-aec9-5c698f5aa94d" class="outline-2">
-<h2 id="ID-d92036a4-851d-42e7-aec9-5c698f5aa94d">邮件取证</h2>
-<div class="outline-text-2" id="text-orgcc554d7">
+<div id="outline-container-orgc8b494e" class="outline-2">
+<h2 id="orgc8b494e">邮件取证</h2>
+<div class="outline-text-2" id="text-orgc8b494e">
 <p>
 以 SMTP 为例子，若要解决用户认证，如果没加密的话可根据 334 状态码可以找到用户名和密码， base64 解码后就可得到用户名和密码
 </p>
@@ -510,7 +508,7 @@ admin
 </pre>
 
 
-<figure id="org01eeacb">
+<figure id="org03833bc">
 <img src="../images/wireshark_email_obtain_evidence_1.png" alt="wireshark_email_obtain_evidence_1.png">
 
 </figure>
@@ -519,7 +517,7 @@ admin
 邮件基本信息、正文
 </p>
 
-<figure id="org280c625">
+<figure id="orgcbd5197">
 <img src="../images/wireshark_email_obtain_evidence_2.png" alt="wireshark_email_obtain_evidence_2.png">
 
 </figure>
@@ -528,16 +526,16 @@ admin
 邮件附件
 </p>
 
-<figure id="org818e646">
+<figure id="org8800208">
 <img src="../images/wireshark_email_obtain_evidence_3.png" alt="wireshark_email_obtain_evidence_3.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orga15f516" class="outline-2">
-<h2 id="orga15f516">附件</h2>
-<div class="outline-text-2" id="text-orga15f516">
+<div id="outline-container-org8b2fae3" class="outline-2">
+<h2 id="org8b2fae3">附件</h2>
+<div class="outline-text-2" id="text-org8b2fae3">
 <p>
 <a href="../resources/wireshark_http_with_jepgs.cap">../resources/wireshark_http_with_jepgs.cap</a>
 <a href="../resources/wireshark_evidence01.pcap">../resources/wireshark_evidence01.pcap</a>
@@ -546,9 +544,9 @@ admin
 </div>
 </div>
 
-<div id="outline-container-ID-6e2b5695-8c56-43db-bc20-6a18802ea836" class="outline-2">
-<h2 id="ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</h2>
-<div class="outline-text-2" id="text-org7c92c70">
+<div id="outline-container-org596ecc0" class="outline-2">
+<h2 id="org596ecc0">tcpdump</h2>
+<div class="outline-text-2" id="text-org596ecc0">
 <p>
 Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -&gt; iptables -&gt; application -&gt; iptables -&gt; tcpdump -&gt; packet</code> 。
 </p>
@@ -714,7 +712,7 @@ Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -
 </table>
 
 <p>
-<a href="#ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</a>可以抓取符合条件的数据包。
+<a href="#org5d21b3a">捕获过滤器</a>可以抓取符合条件的数据包。
 </p>
 
 <p>

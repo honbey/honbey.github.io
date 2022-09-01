@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nginx</title>
@@ -15,47 +15,47 @@
 <header>
 <h1 class="title">Nginx</h1>
 </header>
-<div id="outline-container-ID-be569bdd-a489-4bd8-b266-4b253d21e532" class="outline-2">
-<h2 id="ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</h2>
-<div class="outline-text-2" id="text-orga3dccff">
+<div id="outline-container-org275522f" class="outline-2">
+<h2 id="org275522f">Nginx</h2>
+<div class="outline-text-2" id="text-org275522f">
 <ul class="org-ul">
-<li><a href="#ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Directives</a></li>
-<li><a href="#ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</a></li>
+<li><a href="#org8600d7c">Directives</a></li>
+<li><a href="#org34373cf">Variables</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4" class="outline-2">
-<h2 id="ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Directives</h2>
-<div class="outline-text-2" id="text-orga960b92">
+<div id="outline-container-org8600d7c" class="outline-2">
+<h2 id="org8600d7c">Directives</h2>
+<div class="outline-text-2" id="text-org8600d7c">
 </div>
-<div id="outline-container-org53db4da" class="outline-3">
-<h3 id="org53db4da">sendfile</h3>
-<div class="outline-text-3" id="text-org53db4da">
+<div id="outline-container-org7e6771b" class="outline-3">
+<h3 id="org7e6771b">sendfile</h3>
+<div class="outline-text-3" id="text-org7e6771b">
 <p>
 默认 off ，配置是否由 Linux 内核直接读取文件（ <a href="20220724-linux.html#ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">System Call</a> ），而不是通过 read, write 来操作。
 </p>
 </div>
 </div>
-<div id="outline-container-org165bc13" class="outline-3">
-<h3 id="org165bc13">tcp_nopush</h3>
-<div class="outline-text-3" id="text-org165bc13">
+<div id="outline-container-org8d2be28" class="outline-3">
+<h3 id="org8d2be28">tcp_nopush</h3>
+<div class="outline-text-3" id="text-org8d2be28">
 <p>
 默认 off ，配置是否开启 socket 的 <a href="20220718-socket.html#ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-orgf7ca66a" class="outline-3">
-<h3 id="orgf7ca66a">tcp_nodelay</h3>
-<div class="outline-text-3" id="text-orgf7ca66a">
+<div id="outline-container-org9c2ae70" class="outline-3">
+<h3 id="org9c2ae70">tcp_nodelay</h3>
+<div class="outline-text-3" id="text-org9c2ae70">
 <p>
 默认 on ，配置是否关闭 nagle 算法，即 <a href="20220718-socket.html#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-orgda1da41" class="outline-3">
-<h3 id="orgda1da41">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
-<div class="outline-text-3" id="text-orgda1da41">
+<div id="outline-container-org9da857e" class="outline-3">
+<h3 id="org9da857e">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
+<div class="outline-text-3" id="text-org9da857e">
 <div class="org-src-container">
 <pre class="src src-nginx">log_format combined '$remote_addr - $remote_user [$time_local] "$request" '
                     '$status $body_bytes_sent "$http_referer" '
@@ -113,13 +113,13 @@ access_log     /var/data/log/nginx/json_access.log json_analytics buffer=4k flus
 </div>
 </div>
 
-<div id="outline-container-ID-57aa149c-9e95-499b-855d-d49bcbbe5400" class="outline-2">
-<h2 id="ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</h2>
-<div class="outline-text-2" id="text-org9031a7f">
+<div id="outline-container-org34373cf" class="outline-2">
+<h2 id="org34373cf">Variables</h2>
+<div class="outline-text-2" id="text-org34373cf">
 </div>
-<div id="outline-container-orge1af064" class="outline-3">
-<h3 id="orge1af064">upstream_response_length</h3>
-<div class="outline-text-3" id="text-orge1af064">
+<div id="outline-container-org14ea3fe" class="outline-3">
+<h3 id="org14ea3fe">upstream_response_length</h3>
+<div class="outline-text-3" id="text-org14ea3fe">
 <blockquote>
 <p>
 $upstream_response_length

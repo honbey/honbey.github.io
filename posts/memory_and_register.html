@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:35 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
@@ -15,11 +15,11 @@
 <header>
 <h1 class="title">内存与寄存器</h1>
 </header>
-<div id="outline-container-orgc93e20a" class="outline-2">
-<h2 id="orgc93e20a">函数栈帧</h2>
-<div class="outline-text-2" id="text-orgc93e20a">
+<div id="outline-container-org3da20db" class="outline-2">
+<h2 id="org3da20db">函数栈帧</h2>
+<div class="outline-text-2" id="text-org3da20db">
 
-<figure id="org620f21b">
+<figure id="orgc8e8e83">
 <img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
@@ -27,9 +27,9 @@
 </div>
 
 
-<div id="outline-container-orgc79fae0" class="outline-2">
-<h2 id="orgc79fae0">常用寄存器</h2>
-<div class="outline-text-2" id="text-orgc79fae0">
+<div id="outline-container-org71e7f01" class="outline-2">
+<h2 id="org71e7f01">常用寄存器</h2>
+<div class="outline-text-2" id="text-org71e7f01">
 <table>
 
 
@@ -75,14 +75,14 @@
 </div>
 
 
-<div id="outline-container-org83454ac" class="outline-2">
-<h2 id="org83454ac">程序执行过程中内存和寄存器的变化</h2>
-<div class="outline-text-2" id="text-org83454ac">
+<div id="outline-container-orgc0ef730" class="outline-2">
+<h2 id="orgc0ef730">程序执行过程中内存和寄存器的变化</h2>
+<div class="outline-text-2" id="text-orgc0ef730">
 <p>
 给 a 赋值后
 </p>
 
-<figure id="org68d0c31">
+<figure id="org43035f9">
 <img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -92,7 +92,7 @@
 </p>
 
 
-<figure id="org160584f">
+<figure id="org62f3d4d">
 <img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -101,7 +101,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org5a04cf0">
+<figure id="org55fc416">
 <img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -110,43 +110,42 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="org587afe0">
+<figure id="org5449f3c">
 <img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
 
 <p>
-当 fun 函数执行完毕，fun 函数的栈帧将被 OS 回收，EBP 将重新指向原 EBP 指向的内存，而 ESP 指向了原 ESP+4 的内存地址，说明发生了 POP 操作，弹出了返回地址 0x401093，原 ESP 的值是当前 EIP 的值，这个地址被存入了 EIP 中，也就是被 CPU 执行了，以便继续执行 main 函数。
-最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
+当 fun 函数执行完毕，fun 函数的栈帧将被 OS 回收，EBP 将重新指向原 EBP 指向的内存，而 ESP 指向了原 ESP+4 的内存地址，说明发生了 POP 操作，弹出了返回地址 0x401093，原 ESP 的值是当前 EIP 的值，这个地址被存入了 EIP 中，也就是被 CPU 执行了，以便继续执行 main 函数。最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="org7367cdd">
+<figure id="orgbfe17d4">
 <img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
 </div>
 
-<div id="outline-container-org7aceba3" class="outline-3">
-<h3 id="org7aceba3">源代码</h3>
-<div class="outline-text-3" id="text-org7aceba3">
+<div id="outline-container-orgc2b34a5" class="outline-3">
+<h3 id="orgc2b34a5">源代码</h3>
+<div class="outline-text-3" id="text-orgc2b34a5">
 <p>
 一个简单的加法函数和主函数，主函数中调用 fun() 实现两个变量的加法运算
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #707183;">&lt;</span><span style="color: #008000;">stdio.h</span><span style="color: #707183;">&gt;</span>
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_m</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_n</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_m</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_n</span>) {
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i_local</span>;
     i_local = _m + _n;
-<span style="color: #707183;">}</span>
+}
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span><span style="color: #7388D6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span>[]) {
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span> = <span style="color: #D0372D;">0x1111</span>;
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">b</span> = <span style="color: #D0372D;">0x2222</span>;
-    fun<span style="color: #7388D6;">(</span>a, b<span style="color: #7388D6;">)</span>;
+    fun(a, b);
     <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-<span style="color: #707183;">}</span>
+}
 </pre>
 </div>
 </div>

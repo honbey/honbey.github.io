@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-28 Sun 12:42 -->
+<!-- 2022-09-01 Thu 22:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -18,74 +18,73 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga0b21da">Intro</a></li>
-<li><a href="#org15d846d">Doom configuration files</a>
+<li><a href="#orgdd2786d">Intro</a></li>
+<li><a href="#orge682d05">Doom configuration files</a>
 <ul>
-<li><a href="#org75362bd">init.el</a>
+<li><a href="#org66857e5">init.el</a>
 <ul>
-<li><a href="#org78677cf">Input (<code>:input</code>)</a></li>
-<li><a href="#orga9738d7">Complement</a></li>
-<li><a href="#org177a96b">User Interface</a></li>
-<li><a href="#org14df332">Editor</a></li>
-<li><a href="#orge315835">Emacs builtin stuff</a></li>
-<li><a href="#org5a6ed66">Terminal</a></li>
-<li><a href="#orgf16d752">Checkers</a></li>
-<li><a href="#org36e20b6">Tools</a></li>
-<li><a href="#org12334eb">Operating system</a></li>
-<li><a href="#orgf252a14">Language support</a></li>
-<li><a href="#orgc666ced">Email</a></li>
-<li><a href="#orgc22625a">Applications</a></li>
-<li><a href="#orgbad4cfd">Configuration</a></li>
+<li><a href="#org5584250">Input (<code>:input</code>)</a></li>
+<li><a href="#orgda4edf9">Complement</a></li>
+<li><a href="#org245cf7b">User Interface</a></li>
+<li><a href="#org15725ce">Editor</a></li>
+<li><a href="#org8c3e0e3">Emacs builtin stuff</a></li>
+<li><a href="#org7adb493">Terminal</a></li>
+<li><a href="#org29240e6">Checkers</a></li>
+<li><a href="#org6df7ef2">Tools</a></li>
+<li><a href="#org46b3dfa">Operating system</a></li>
+<li><a href="#orgcbd88eb">Language support</a></li>
+<li><a href="#org7075da9">Email</a></li>
+<li><a href="#org571098a">Applications</a></li>
+<li><a href="#orgc3d5095">Configuration</a></li>
 </ul>
 </li>
-<li><a href="#org8f41d3c">Additional packages</a></li>
+<li><a href="#org7d9dff7">Additional packages</a></li>
 </ul>
 </li>
-<li><a href="#orgb7ce4c3">General Emacs settings</a>
+<li><a href="#org5de3b48">General Emacs settings</a>
 <ul>
-<li><a href="#orgedecc74">User information</a></li>
-<li><a href="#org68a6e81">Shared information</a></li>
-<li><a href="#orgf47db06">Secrets</a></li>
-<li><a href="#org90b8297">Undo and auto-save</a>
+<li><a href="#orgd33bb1a">User information</a></li>
+<li><a href="#org36a988a">Shared information</a></li>
+<li><a href="#orgf2b9931">Secrets</a></li>
+<li><a href="#org1ac0226">Undo and auto-save</a>
 <ul>
-<li><a href="#org606242e">Undo</a></li>
-<li><a href="#org9a710ed">Auto-save</a></li>
+<li><a href="#org537b7e1">Undo</a></li>
+<li><a href="#orgd66fc4f">Auto-save</a></li>
 </ul>
 </li>
-<li><a href="#orgf998f46">Theme and User interface</a></li>
-<li><a href="#orgb9dcde0">Editing</a></li>
-<li><a href="#org6bf5fec">Browser</a></li>
-<li><a href="#orgf57a2de">Language</a>
+<li><a href="#org78e4dab">Theme and User interface</a></li>
+<li><a href="#orga4abb4b">Editing</a></li>
+<li><a href="#orge797a6d">Browser</a></li>
+<li><a href="#org389595c">Language</a>
 <ul>
-<li><a href="#org9309c63">Org</a></li>
-<li><a href="#orge4ec018">Python</a></li>
+<li><a href="#org036ee02">Org</a></li>
+<li><a href="#org76191ce">Python</a></li>
 </ul>
 </li>
-<li><a href="#org8b24993">Roam</a></li>
-<li><a href="#orgc83cda3">Publish orgmode</a></li>
+<li><a href="#org8a87ef5">Roam</a></li>
+<li><a href="#org492d06d">Publish orgmode</a></li>
 </ul>
 </li>
-<li><a href="#org0e979d5"></a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orga0b21da" class="outline-2">
-<h2 id="orga0b21da">Intro</h2>
-<div class="outline-text-2" id="text-orga0b21da">
+<div id="outline-container-orgdd2786d" class="outline-2">
+<h2 id="orgdd2786d">Intro</h2>
+<div class="outline-text-2" id="text-orgdd2786d">
 <p>
 Learning from Doomemacs Documents<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and GitHub<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org15d846d" class="outline-2">
-<h2 id="org15d846d">Doom configuration files</h2>
-<div class="outline-text-2" id="text-org15d846d">
+<div id="outline-container-orge682d05" class="outline-2">
+<h2 id="orge682d05">Doom configuration files</h2>
+<div class="outline-text-2" id="text-orge682d05">
 </div>
-<div id="outline-container-org75362bd" class="outline-3">
-<h3 id="org75362bd">init.el</h3>
-<div class="outline-text-3" id="text-org75362bd">
+<div id="outline-container-org66857e5" class="outline-3">
+<h3 id="org66857e5">init.el</h3>
+<div class="outline-text-3" id="text-org66857e5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #8D8D84;">;;; </span><span style="color: #8D8D84; font-style: italic;">init.el -*- coding: utf-8-unix; lexical-binding: t; -*-</span>
 
@@ -138,56 +137,56 @@ Learning from Doomemacs Documents<sup><a id="fnr.1" class="footref" href="#fn.1"
 </div>
 </div>
 
-<div id="outline-container-org78677cf" class="outline-4">
-<h4 id="org78677cf">Input (<code>:input</code>)</h4>
-<div class="outline-text-4" id="text-org78677cf">
+<div id="outline-container-org5584250" class="outline-4">
+<h4 id="org5584250">Input (<code>:input</code>)</h4>
+<div class="outline-text-4" id="text-org5584250">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgaaf8081">chinese
+<pre class="src src-emacs-lisp" id="orgc1c4985"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">chinese</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga9738d7" class="outline-4">
-<h4 id="orga9738d7">Complement</h4>
-<div class="outline-text-4" id="text-orga9738d7">
+<div id="outline-container-orgda4edf9" class="outline-4">
+<h4 id="orgda4edf9">Complement</h4>
+<div class="outline-text-4" id="text-orgda4edf9">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org4df327f"><span style="color: #707183;">(</span>vertico +icons<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp" id="orgc7b71bc"><span style="color: #707183;">(</span>vertico +icons<span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span>company +childframe<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org177a96b" class="outline-4">
-<h4 id="org177a96b">User Interface</h4>
-<div class="outline-text-4" id="text-org177a96b">
+<div id="outline-container-org245cf7b" class="outline-4">
+<h4 id="org245cf7b">User Interface</h4>
+<div class="outline-text-4" id="text-org245cf7b">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org622e923">deft
+<pre class="src src-emacs-lisp" id="orgf14367b"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">deft</span>
 doom
 doom-dashboard
 hl-todo
 modeline
 ophints
 <span style="color: #707183;">(</span>popup +defaults<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #006699;">treemacs</span> +lsp<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>vc-gutter +diff-hl +pretty<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>window-select +numbers<span style="color: #707183;">)</span>
-workspaces
-zen
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(treemacs +lsp)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(vc-gutter +diff-hl +pretty)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(window-select +numbers)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">workspaces</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">zen</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org14df332" class="outline-4">
-<h4 id="org14df332">Editor</h4>
-<div class="outline-text-4" id="text-org14df332">
+<div id="outline-container-org15725ce" class="outline-4">
+<h4 id="org15725ce">Editor</h4>
+<div class="outline-text-4" id="text-org15725ce">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org3c130f1"><span style="color: #707183;">(</span>evil +everywhere<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp" id="org50dbedb"><span style="color: #707183;">(</span>evil +everywhere<span style="color: #707183;">)</span>
 file-templates
 fold
-<span style="color: #707183;">(</span><span style="color: #D0372D;">format</span> +onsave<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(format +onsave)</span>
 multiple-cursors
 snippets
 <span style="color: #BA36A5;">word-wrap</span>
@@ -196,134 +195,133 @@ snippets
 </div>
 </div>
 
-<div id="outline-container-orge315835" class="outline-4">
-<h4 id="orge315835">Emacs builtin stuff</h4>
-<div class="outline-text-4" id="text-orge315835">
+<div id="outline-container-org8c3e0e3" class="outline-4">
+<h4 id="org8c3e0e3">Emacs builtin stuff</h4>
+<div class="outline-text-4" id="text-org8c3e0e3">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org857f255"><span style="color: #707183;">(</span><span style="color: #006699;">dired</span> +dirvish +icons<span style="color: #707183;">)</span>
-electric
+<pre class="src src-emacs-lisp" id="orga549cb8"><span style="color: #707183;">(</span><span style="color: #006699;">dired</span> +icons<span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #006699;">ibuffer</span> +icons<span style="color: #707183;">)</span>
-undo
-vc
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">electric</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">undo</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">vc</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5a6ed66" class="outline-4">
-<h4 id="org5a6ed66">Terminal</h4>
-<div class="outline-text-4" id="text-org5a6ed66">
+<div id="outline-container-org7adb493" class="outline-4">
+<h4 id="org7adb493">Terminal</h4>
+<div class="outline-text-4" id="text-org7adb493">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org0109d4b">vterm
+<pre class="src src-emacs-lisp" id="orgb54418d"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">vterm</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf16d752" class="outline-4">
-<h4 id="orgf16d752">Checkers</h4>
-<div class="outline-text-4" id="text-orgf16d752">
+<div id="outline-container-org29240e6" class="outline-4">
+<h4 id="org29240e6">Checkers</h4>
+<div class="outline-text-4" id="text-org29240e6">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org5eb33ec"><span style="color: #707183;">(</span>syntax +childframe<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>spell +aspell<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>grammar +lsp<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp" id="org0f4d881">syntax
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(spell +aspell)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(grammar +lsp)</span>
 </pre>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-org36e20b6" class="outline-4">
-<h4 id="org36e20b6">Tools</h4>
-<div class="outline-text-4" id="text-org36e20b6">
+<div id="outline-container-org6df7ef2" class="outline-4">
+<h4 id="org6df7ef2">Tools</h4>
+<div class="outline-text-4" id="text-org6df7ef2">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org4e4dda3">ein
+<pre class="src src-emacs-lisp" id="org1701545"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">ein</span>
 pdf
-rgb
-gist
-make
-tmux
-direnv
-upload
-biblio
-tree-sitter
-editorconfig
-<span style="color: #707183;">(</span><span style="color: #006699;">lsp</span> +peek<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #006699;">docker</span> +lsp<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #006699;">magit</span> +forge<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #BA36A5;">debugger</span> +lsp<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">rgb</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">gist</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">make</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">tmux</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">direnv</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">upload</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">biblio</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">tree-sitter</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">editorconfig</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(lsp +peek)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(docker +lsp)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(magit +forge)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(debugger +lsp)</span>
 <span style="color: #707183;">(</span><span style="color: #D0372D;">eval</span> +overlay<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>lookup +docsets +dictionary +offline<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(lookup +docsets +dictionary +offline)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org12334eb" class="outline-4">
-<h4 id="org12334eb">Operating system</h4>
-<div class="outline-text-4" id="text-org12334eb">
+<div id="outline-container-org46b3dfa" class="outline-4">
+<h4 id="org46b3dfa">Operating system</h4>
+<div class="outline-text-4" id="text-org46b3dfa">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org751dfe3"><span style="color: #707183;">(</span><span style="color: #006FE0;">:if</span> <span style="color: #BA36A5;">IS-MAC</span> macos<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>tty +osc<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp" id="org967fd2e"><span style="color: #707183;">(</span><span style="color: #006FE0;">:if</span> <span style="color: #BA36A5;">IS-MAC</span> macos<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(tty +osc)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf252a14" class="outline-4">
-<h4 id="orgf252a14">Language support</h4>
-<div class="outline-text-4" id="text-orgf252a14">
+<div id="outline-container-orgcbd88eb" class="outline-4">
+<h4 id="orgcbd88eb">Language support</h4>
+<div class="outline-text-4" id="text-orgcbd88eb">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org542710a">data
+<pre class="src src-emacs-lisp" id="org1880f2b"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">data</span>
 plantuml
 emacs-lisp
-common-lisp
-php
-javascript
-<span style="color: #707183;">(</span>ess +lsp<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>yaml +lsp<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #006699;">markdown</span> +grip<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>lua +lsp +fennel<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>web +tree-sitter<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>cc +lsp +tree-sitter<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>sh +lsp +tree-sitter<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>json +lsp +tree-sitter<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>rust +lsp +tree-sitter<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">common-lisp</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">php</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">javascript</span>
+markdown
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(ess +lsp)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(yaml +lsp)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(lua +lsp +fennel)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(web +tree-sitter)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(cc +lsp +tree-sitter)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(sh +lsp +tree-sitter)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(json +lsp +tree-sitter)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(rust +lsp +tree-sitter)</span>
 <span style="color: #707183;">(</span>latex +lsp +latexmk +fold<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>python +lsp +pyenv +pyright +tree-sitter<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>org +pretty +jupyter +pandoc +journal +roam2<span style="color: #707183;">)</span>
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(python +lsp +pyenv +pyright +tree-sitter)</span>
+<span style="color: #707183;">(</span>org +pretty +pandoc +journal +roam2<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc666ced" class="outline-4">
-<h4 id="orgc666ced">Email</h4>
-<div class="outline-text-4" id="text-orgc666ced">
+<div id="outline-container-org7075da9" class="outline-4">
+<h4 id="org7075da9">Email</h4>
+<div class="outline-text-4" id="text-org7075da9">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgba9b6ef"><span style="color: #707183;">(</span><span style="color: #006FE0;">:if</span> <span style="color: #7388D6;">(</span><span style="color: #006699;">executable-find</span> <span style="color: #008000;">"mu"</span><span style="color: #7388D6;">)</span> <span style="color: #7388D6;">(</span>mu4e +org<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp" id="orgeee29c6"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(:if (executable-find "mu") (mu4e +org))</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc22625a" class="outline-4">
-<h4 id="orgc22625a">Applications</h4>
-<div class="outline-text-4" id="text-orgc22625a">
+<div id="outline-container-org571098a" class="outline-4">
+<h4 id="org571098a">Applications</h4>
+<div class="outline-text-4" id="text-org571098a">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org84a3044">calendar
-everywhere
-rss
+<pre class="src src-emacs-lisp" id="orgc49ef16">calendar
+<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">everywhere</span>
+<span style="color: #707183;">(</span>rss +org<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgbad4cfd" class="outline-4">
-<h4 id="orgbad4cfd">Configuration</h4>
-<div class="outline-text-4" id="text-orgbad4cfd">
+<div id="outline-container-orgc3d5095" class="outline-4">
+<h4 id="orgc3d5095">Configuration</h4>
+<div class="outline-text-4" id="text-orgc3d5095">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org11b17c6">literate
+<pre class="src src-emacs-lisp" id="org3cc6ec1">literate
 <span style="color: #707183;">(</span>default +bindings +smartparens<span style="color: #707183;">)</span>
 </pre>
 </div>
@@ -331,9 +329,9 @@ rss
 </div>
 </div>
 
-<div id="outline-container-org8f41d3c" class="outline-3">
-<h3 id="org8f41d3c">Additional packages</h3>
-<div class="outline-text-3" id="text-org8f41d3c">
+<div id="outline-container-org7d9dff7" class="outline-3">
+<h3 id="org7d9dff7">Additional packages</h3>
+<div class="outline-text-3" id="text-org7d9dff7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">-*- coding: utf-8-unix; no-byte-compile: t; -*-</span>
 </pre>
@@ -342,13 +340,13 @@ rss
 </div>
 </div>
 
-<div id="outline-container-orgb7ce4c3" class="outline-2">
-<h2 id="orgb7ce4c3">General Emacs settings</h2>
-<div class="outline-text-2" id="text-orgb7ce4c3">
+<div id="outline-container-org5de3b48" class="outline-2">
+<h2 id="org5de3b48">General Emacs settings</h2>
+<div class="outline-text-2" id="text-org5de3b48">
 </div>
-<div id="outline-container-orgedecc74" class="outline-3">
-<h3 id="orgedecc74">User information</h3>
-<div class="outline-text-3" id="text-orgedecc74">
+<div id="outline-container-orgd33bb1a" class="outline-3">
+<h3 id="orgd33bb1a">User information</h3>
+<div class="outline-text-3" id="text-orgd33bb1a">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">user-full-name</span> <span style="color: #008000;">"Honbey Zhang"</span>
       <span style="color: #BA36A5;">user-mail-address</span> <span style="color: #008000;">"git@honbey.com"</span><span style="color: #707183;">)</span>
@@ -357,9 +355,9 @@ rss
 </div>
 </div>
 
-<div id="outline-container-org68a6e81" class="outline-3">
-<h3 id="org68a6e81">Shared information</h3>
-<div class="outline-text-3" id="text-org68a6e81">
+<div id="outline-container-org36a988a" class="outline-3">
+<h3 id="org36a988a">Shared information</h3>
+<div class="outline-text-3" id="text-org36a988a">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">defvar</span> <span style="color: #BA36A5;">+my/lang-mother-tongue</span> <span style="color: #008000;">"zh"</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #0000FF;">defvar</span> <span style="color: #BA36A5;">+my/lang-main</span>          <span style="color: #008000;">"en"</span><span style="color: #707183;">)</span>
@@ -369,25 +367,25 @@ rss
 </div>
 </div>
 
-<div id="outline-container-orgf47db06" class="outline-3">
-<h3 id="orgf47db06">Secrets</h3>
-<div class="outline-text-3" id="text-orgf47db06">
+<div id="outline-container-orgf2b9931" class="outline-3">
+<h3 id="orgf2b9931">Secrets</h3>
+<div class="outline-text-3" id="text-orgf2b9931">
 <p>
 TODO: gpg
 </p>
 </div>
 </div>
 
-<div id="outline-container-org90b8297" class="outline-3">
-<h3 id="org90b8297">Undo and auto-save</h3>
-<div class="outline-text-3" id="text-org90b8297">
+<div id="outline-container-org1ac0226" class="outline-3">
+<h3 id="org1ac0226">Undo and auto-save</h3>
+<div class="outline-text-3" id="text-org1ac0226">
 </div>
-<div id="outline-container-org606242e" class="outline-4">
-<h4 id="org606242e">Undo</h4>
+<div id="outline-container-org537b7e1" class="outline-4">
+<h4 id="org537b7e1">Undo</h4>
 </div>
-<div id="outline-container-org9a710ed" class="outline-4">
-<h4 id="org9a710ed">Auto-save</h4>
-<div class="outline-text-4" id="text-org9a710ed">
+<div id="outline-container-orgd66fc4f" class="outline-4">
+<h4 id="orgd66fc4f">Auto-save</h4>
+<div class="outline-text-4" id="text-orgd66fc4f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">package!</span> super-save
   <span style="color: #006FE0;">:disable</span> t<span style="color: #707183;">)</span>
@@ -414,9 +412,9 @@ TODO: gpg
 </div>
 </div>
 
-<div id="outline-container-orgf998f46" class="outline-3">
-<h3 id="orgf998f46">Theme and User interface</h3>
-<div class="outline-text-3" id="text-orgf998f46">
+<div id="outline-container-org78e4dab" class="outline-3">
+<h3 id="org78e4dab">Theme and User interface</h3>
+<div class="outline-text-3" id="text-org78e4dab">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #006699;">load-theme</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">leuven</span> t<span style="color: #707183;">)</span>
 
@@ -437,9 +435,9 @@ TODO: gpg
 </div>
 </div>
 
-<div id="outline-container-orgb9dcde0" class="outline-3">
-<h3 id="orgb9dcde0">Editing</h3>
-<div class="outline-text-3" id="text-orgb9dcde0">
+<div id="outline-container-orga4abb4b" class="outline-3">
+<h3 id="orga4abb4b">Editing</h3>
+<div class="outline-text-3" id="text-orga4abb4b">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #006699;">prefer-coding-system</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">utf-8</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #006699;">set-language-environment</span> <span style="color: #008000;">"UTF-8"</span><span style="color: #707183;">)</span>
@@ -460,17 +458,17 @@ TODO: gpg
 </div>
 </div>
 
-<div id="outline-container-org6bf5fec" class="outline-3">
-<h3 id="org6bf5fec">Browser</h3>
+<div id="outline-container-orge797a6d" class="outline-3">
+<h3 id="orge797a6d">Browser</h3>
 </div>
 
-<div id="outline-container-orgf57a2de" class="outline-3">
-<h3 id="orgf57a2de">Language</h3>
-<div class="outline-text-3" id="text-orgf57a2de">
+<div id="outline-container-org389595c" class="outline-3">
+<h3 id="org389595c">Language</h3>
+<div class="outline-text-3" id="text-org389595c">
 </div>
-<div id="outline-container-org9309c63" class="outline-4">
-<h4 id="org9309c63">Org</h4>
-<div class="outline-text-4" id="text-org9309c63">
+<div id="outline-container-org036ee02" class="outline-4">
+<h4 id="org036ee02">Org</h4>
+<div class="outline-text-4" id="text-org036ee02">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-directory</span> <span style="color: #008000;">"~/org"</span><span style="color: #707183;">)</span>
 
@@ -524,8 +522,8 @@ TODO: gpg
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-done</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">time</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-into-drawer t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-out-remove-zero-time-clocks t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-into-drawer</span> t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-out-remove-zero-time-clocks</span> t<span style="color: #7388D6;">)</span>
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-agenda-files</span> <span style="color: #909183;">(</span><span style="color: #D0372D;">list</span> <span style="color: #008000;">"~/org"</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
 
@@ -578,12 +576,12 @@ TODO: gpg
     <span style="color: #0000FF;">'</span><span style="color: #BA36A5;">org-babel-load-languages</span>
     <span style="color: #0000FF;">'</span><span style="color: #909183;">(</span>
       <span style="color: #709870;">(</span>plantuml . t<span style="color: #709870;">)</span>
-      <span style="color: #709870;">(</span>dot . t<span style="color: #709870;">)</span>
-      <span style="color: #709870;">(</span>python . t<span style="color: #709870;">)</span>
-      <span style="color: #709870;">(</span>sh .t <span style="color: #709870;">)</span>
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(dot . t)</span>
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(sh .t )</span>
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(javascript . t)</span>
+      <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(python . t)</span>
       <span style="color: #709870;">(</span>latex . t<span style="color: #709870;">)</span>
-                        <span style="color: #709870;">(</span>org . t<span style="color: #709870;">)</span>
-      <span style="color: #709870;">(</span>javascript . t<span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>org . t<span style="color: #709870;">)</span>
   <span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-confirm-babel-evaluate</span> nil<span style="color: #7388D6;">)</span>
 <span style="color: #707183;">)</span>
@@ -592,20 +590,20 @@ TODO: gpg
 </div>
 </div>
 
-<div id="outline-container-orge4ec018" class="outline-4">
-<h4 id="orge4ec018">Python</h4>
-<div class="outline-text-4" id="text-orge4ec018">
+<div id="outline-container-org76191ce" class="outline-4">
+<h4 id="org76191ce">Python</h4>
+<div class="outline-text-4" id="text-org76191ce">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">python-shell-virtualenv-path</span> <span style="color: #008000;">"/opt/data/pyvenv/work"</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> python-shell-virtualenv-path <span style="color: #008000;">"/opt/data/pyvenv/work"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8b24993" class="outline-3">
-<h3 id="org8b24993">Roam</h3>
-<div class="outline-text-3" id="text-org8b24993">
+<div id="outline-container-org8a87ef5" class="outline-3">
+<h3 id="org8a87ef5">Roam</h3>
+<div class="outline-text-3" id="text-org8a87ef5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">after!</span> org-roam
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-roam-directory</span> <span style="color: #909183;">(</span><span style="color: #D0372D;">expand-file-name</span> <span style="color: #008000;">"roam"</span> <span style="color: #BA36A5;">org-directory</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
@@ -623,9 +621,9 @@ TODO: gpg
 </div>
 </div>
 
-<div id="outline-container-orgc83cda3" class="outline-3">
-<h3 id="orgc83cda3">Publish orgmode</h3>
-<div class="outline-text-3" id="text-orgc83cda3">
+<div id="outline-container-org492d06d" class="outline-3">
+<h3 id="org492d06d">Publish orgmode</h3>
+<div class="outline-text-3" id="text-org492d06d">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-publish-project-alist</span>
       <span style="color: #0000FF;">'</span><span style="color: #7388D6;">(</span><span style="color: #909183;">(</span><span style="color: #008000;">"org"</span>
@@ -674,12 +672,6 @@ TODO: gpg
 </div>
 </div>
 </div>
-
-<div id="outline-container-org0e979d5" class="outline-2">
-<h2 id="org0e979d5"></h2>
-<div class="outline-text-2" id="text-org0e979d5">
-</div>
-</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -689,7 +681,7 @@ TODO: gpg
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-The origin dot file is <a href="https://raw.githubusercontent.com/abougouffa/dotfiles/main/dot_doom.d/config.org">abougouffa/dotfiles/dot<sub>doom.d</sub>/config.el], the [[https://abdelhakbougouffa.pro/posts/config/#this-file][blog</a> of author. Thank you very much.
+The origin dot file is <a href="https://raw.githubusercontent.com/abougouffa/dotfiles/main/dot_doom.d/config.org">abougouffa/dotfiles/dot_doom.d/config.el</a>, the <a href="https://abdelhakbougouffa.pro/posts/config/#this-file">blog</a> of author. Thank you very much.
 </p></div></div>
 
 

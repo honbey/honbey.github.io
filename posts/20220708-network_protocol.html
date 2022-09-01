@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:34 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Network Protocol</title>
@@ -91,9 +91,9 @@ TCP/IP Model: 4 layers: Application, Transport, Network, Link.
 </tbody>
 </table>
 
-<div id="outline-container-ID-1c9aef4e-3ee5-4313-8357-7ae59c86c732" class="outline-2">
-<h2 id="ID-1c9aef4e-3ee5-4313-8357-7ae59c86c732">Protocol</h2>
-<div class="outline-text-2" id="text-org6a87813">
+<div id="outline-container-org7fa1aee" class="outline-2">
+<h2 id="org7fa1aee">Protocol</h2>
+<div class="outline-text-2" id="text-org7fa1aee">
 <ul class="org-ul">
 <li>Layer 7 - Application
 <a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a>, FTP, Telnet, SSH, SMTP</li>
@@ -122,16 +122,15 @@ cable/fiber</li>
 
 <blockquote>
 <p>
-协：两个以上的参与者
-议：行为约定和规范
+协：两个以上的参与者议：行为约定和规范
 </p>
 </blockquote>
 </div>
 </div>
 
-<div id="outline-container-orgf59ffb7" class="outline-2">
-<h2 id="orgf59ffb7">Underlay/Overlay</h2>
-<div class="outline-text-2" id="text-orgf59ffb7">
+<div id="outline-container-orgfa6cbe3" class="outline-2">
+<h2 id="orgfa6cbe3">Underlay/Overlay</h2>
+<div class="outline-text-2" id="text-orgfa6cbe3">
 <p>
 原文：<a href="https://blog.csdn.net/qq_35029061/article/details/125682812">https://blog.csdn.net/qq_35029061/article/details/125682812</a>
 </p>
@@ -153,12 +152,11 @@ CE device: 客户网络边缘设备，用于连接 P network 和 C network
 </p>
 </div>
 
-<div id="outline-container-org0ec3863" class="outline-3">
-<h3 id="org0ec3863">Underlay 网络</h3>
-<div class="outline-text-3" id="text-org0ec3863">
+<div id="outline-container-org03f24f2" class="outline-3">
+<h3 id="org03f24f2">Underlay 网络</h3>
+<div class="outline-text-3" id="text-org03f24f2">
 <p>
-由多种类型的设备互联而成的物理网络，负责网络之间的数据包传输。
-典型的 Underlay 网络中，互联的设备可以是各类型交换机、路由器、负载均衡设备、防火墙等，但网络的各个设备间必须通过路由协议来保证 IP 的连通性。 Underlay 可以是二层也可以是三层网络，二层网络通常应用于以太网，通过 VALN 进行划分。三层网络的典型应用就是互联网，其在同一个自治域使用 OSPF, IS-IS 等协议进行路由控制，在各个自治域之间采用 BGP 等协议进行路由传递与互联。也有 MPLS 这种介于二三层的 WAN 技术搭建的 Underlay 网络。
+由多种类型的设备互联而成的物理网络，负责网络之间的数据包传输。典型的 Underlay 网络中，互联的设备可以是各类型交换机、路由器、负载均衡设备、防火墙等，但网络的各个设备间必须通过路由协议来保证 IP 的连通性。 Underlay 可以是二层也可以是三层网络，二层网络通常应用于以太网，通过 VALN 进行划分。三层网络的典型应用就是互联网，其在同一个自治域使用 OSPF, IS-IS 等协议进行路由控制，在各个自治域之间采用 BGP 等协议进行路由传递与互联。也有 MPLS 这种介于二三层的 WAN 技术搭建的 Underlay 网络。
 Underlay 网络存在的问题：
 </p>
 <ul class="org-ul">
@@ -171,14 +169,12 @@ Underlay 网络存在的问题：
 </div>
 </div>
 
-<div id="outline-container-orgb58f240" class="outline-3">
-<h3 id="orgb58f240">Overlay 网络</h3>
-<div class="outline-text-3" id="text-orgb58f240">
+<div id="outline-container-org6f630af" class="outline-3">
+<h3 id="org6f630af">Overlay 网络</h3>
+<div class="outline-text-3" id="text-org6f630af">
 <p>
-采用网络虚拟化技术在 Underlay 网络之上创建虚拟的 Overlay 网络。
-在 Overlay 网络中，设备之间可以通过逻辑链路，按照需求完成互联形成 Overlay 网络，相互连接的 Overlay 设备之间建立隧道，数据包准备传输出去时，设备为数据包添加新的 IP 头部和隧道头部，并且屏蔽掉内层的 IP 头部，数据包根据新的 IP 头部进行转发。当数据包传到另一个设备后，外部的 IP 头部和隧道头部将被丢弃，得到原始的数据包，整个过程 Overlay 网络并不感知 Underlay 网络。
-Overlay 网络有多种规范： VXLAN, NVGRE, SST, GRE, NVO3, EVPN 等。
-利用 SDN(Software Defined Network) 引入了控制器后，Overlay 网络的优点：
+采用网络虚拟化技术在 Underlay 网络之上创建虚拟的 Overlay 网络。在 Overlay 网络中，设备之间可以通过逻辑链路，按照需求完成互联形成 Overlay 网络，相互连接的 Overlay 设备之间建立隧道，数据包准备传输出去时，设备为数据包添加新的 IP 头部和隧道头部，并且屏蔽掉内层的 IP 头部，数据包根据新的 IP 头部进行转发。当数据包传到另一个设备后，外部的 IP 头部和隧道头部将被丢弃，得到原始的数据包，整个过程 Overlay 网络并不感知 Underlay 网络。
+Overlay 网络有多种规范： VXLAN, NVGRE, SST, GRE, NVO3, EVPN 等。利用 SDN(Software Defined Network) 引入了控制器后，Overlay 网络的优点：
 </p>
 <ul class="org-ul">
 <li>流量传输不依赖于特定路线。Overlay 网络使用隧道技术，可以灵活选择不同的底层链路，使用多种方式保证流量的稳定传输</li>
@@ -273,9 +269,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </p>
 </div>
 </div>
-<div id="outline-container-orgdfdd392" class="outline-3">
-<h3 id="orgdfdd392">网络 Overlay</h3>
-<div class="outline-text-3" id="text-orgdfdd392">
+<div id="outline-container-org2fa90b5" class="outline-3">
+<h3 id="org2fa90b5">网络 Overlay</h3>
+<div class="outline-text-3" id="text-org2fa90b5">
 <p>
 主要针对物理服务器，物理交换机作为边缘设备（物理交换机为 VTEP 节点）。
 </p>
@@ -297,9 +293,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb7b9a4" class="outline-3">
-<h3 id="orgfb7b9a4">主机 Overlay</h3>
-<div class="outline-text-3" id="text-orgfb7b9a4">
+<div id="outline-container-org385527a" class="outline-3">
+<h3 id="org385527a">主机 Overlay</h3>
+<div class="outline-text-3" id="text-org385527a">
 <p>
 针对虚拟化， vSwitch 作为网络边缘设备（vSwitch 为 VTEP 节点）。
 </p>
@@ -318,9 +314,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </div>
 </div>
 
-<div id="outline-container-orge698097" class="outline-3">
-<h3 id="orge698097">Overlay 网络构成</h3>
-<div class="outline-text-3" id="text-orge698097">
+<div id="outline-container-orged10e09" class="outline-3">
+<h3 id="orged10e09">Overlay 网络构成</h3>
+<div class="outline-text-3" id="text-orged10e09">
 <ul class="org-ul">
 <li>边缘设备：与虚拟机直接相连的设备</li>
 <li>控制平面：主要负责虚拟隧道的建立维护以及主机可达性信息的通告</li>
@@ -330,32 +326,32 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </div>
 </div>
 
-<div id="outline-container-orgbf76869" class="outline-2">
-<h2 id="orgbf76869">网络工具</h2>
-<div class="outline-text-2" id="text-orgbf76869">
+<div id="outline-container-orgc8cd429" class="outline-2">
+<h2 id="orgc8cd429">网络工具</h2>
+<div class="outline-text-2" id="text-orgc8cd429">
 </div>
-<div id="outline-container-orgddbcd55" class="outline-3">
-<h3 id="orgddbcd55"><code>ss</code></h3>
+<div id="outline-container-org8788b08" class="outline-3">
+<h3 id="org8788b08"><code>ss</code></h3>
 </div>
-<div id="outline-container-orge8cbbf2" class="outline-3">
-<h3 id="orge8cbbf2"><code>netstat</code></h3>
+<div id="outline-container-orgd97feda" class="outline-3">
+<h3 id="orgd97feda"><code>netstat</code></h3>
 </div>
-<div id="outline-container-orgbc2e133" class="outline-3">
-<h3 id="orgbc2e133"><code>socat</code></h3>
+<div id="outline-container-orga3c8cf9" class="outline-3">
+<h3 id="orga3c8cf9"><code>socat</code></h3>
 </div>
 </div>
 
-<div id="outline-container-org72fdb25" class="outline-2">
-<h2 id="org72fdb25">NAT</h2>
-<div class="outline-text-2" id="text-org72fdb25">
+<div id="outline-container-orgb10e1b9" class="outline-2">
+<h2 id="orgb10e1b9">NAT</h2>
+<div class="outline-text-2" id="text-orgb10e1b9">
 <p>
 Network Address Translation: 网络地址转换。
 </p>
 </div>
 
-<div id="outline-container-orgfcd3733" class="outline-3">
-<h3 id="orgfcd3733">NAT 网关闲谈</h3>
-<div class="outline-text-3" id="text-orgfcd3733">
+<div id="outline-container-org5224a2a" class="outline-3">
+<h3 id="org5224a2a">NAT 网关闲谈</h3>
+<div class="outline-text-3" id="text-org5224a2a">
 <p>
 NAT 网关： VM &#x2013;&#x2014;&gt; NAT Gateway &#x2013;&#x2014;&gt; Internet
 </p>
@@ -385,9 +381,9 @@ Datapath Node      ---&gt;       Datapath Node
 </div>
 </div>
 </div>
-<div id="outline-container-orgd85c9ae" class="outline-2">
-<h2 id="orgd85c9ae">Reference</h2>
-<div class="outline-text-2" id="text-orgd85c9ae">
+<div id="outline-container-orge666ccc" class="outline-2">
+<h2 id="orge666ccc">Reference</h2>
+<div class="outline-text-2" id="text-orge666ccc">
 <ul class="org-ul">
 <li>《计算机网络（第7版）》谢希仁 著</li>
 </ul>

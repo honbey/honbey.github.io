@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:35 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Socket</title>
@@ -23,11 +23,12 @@
 <li>客户端调用 close 了，连接断开的流程是什么？</li>
 </ul></li>
 </ul>
-<div id="outline-container-orgf7b9fd5" class="outline-2">
-<h2 id="orgf7b9fd5">Socket 编程</h2>
-<div class="outline-text-2" id="text-orgf7b9fd5">
 
-<figure id="orgc0473b1">
+<div id="outline-container-org305e7cd" class="outline-2">
+<h2 id="org305e7cd">Socket 编程</h2>
+<div class="outline-text-2" id="text-org305e7cd">
+
+<figure id="orgf9a3649">
 <img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
@@ -53,9 +54,9 @@
 </p>
 </div>
 
-<div id="outline-container-org332a001" class="outline-3">
-<h3 id="org332a001">backlog</h3>
-<div class="outline-text-3" id="text-org332a001">
+<div id="outline-container-org0f37fa9" class="outline-3">
+<h3 id="org0f37fa9">backlog</h3>
+<div class="outline-text-3" id="text-org0f37fa9">
 <p>
 Linux 内核会维护两个队列：
 </p>
@@ -65,49 +66,48 @@ Linux 内核会维护两个队列：
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #006699;">listen</span><span style="color: #707183;">(</span><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">socketfd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">backlog</span><span style="color: #707183;">)</span>
+<pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #006699;">listen</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">socketfd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">backlog</span>)
 </pre>
 </div>
 <p>
-<code>socketfd</code> 为 <code>socket</code> 文件描述符， <code>backlog</code> 为 SYN 队列的大小， Linux 2.2 后， <code>backlog</code> 为 Accpet 队列的大小。
-但上限值是内核参数 <code>somaxconn</code> 的大小，即 <code>Accpet 队列长度 = min(backlog, somaxconn)</code> 。
+<code>socketfd</code> 为 <code>socket</code> 文件描述符， <code>backlog</code> 为 SYN 队列的大小， Linux 2.2 后， <code>backlog</code> 为 Accpet 队列的大小。但上限值是内核参数 <code>somaxconn</code> 的大小，即 <code>Accpet 队列长度 = min(backlog, somaxconn)</code> 。
 </p>
 </div>
 </div>
 
-<div id="outline-container-ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9" class="outline-3">
-<h3 id="ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></h3>
-<div class="outline-text-3" id="text-orgaedd0a7">
+<div id="outline-container-org5488e07" class="outline-3">
+<h3 id="org5488e07"><code>TCP_NODELAY</code></h3>
+<div class="outline-text-3" id="text-org5488e07">
 <p>
 配置是否关闭 nagle 算法。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006699;">setsockopt</span><span style="color: #707183;">(</span>sock_fd, <span style="color: #D0372D;">IPPROTO_TCP</span>, <span style="color: #D0372D;">TCP_NODELAY</span>, <span style="color: #7388D6;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #7388D6;">)</span>&amp;value, <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6;">(</span><span style="color: #6434A3;">int</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;
+<pre class="src src-c"><span style="color: #006699;">setsockopt</span>(sock_fd, IPPROTO_TCP, TCP_NODELAY, (<span style="color: #6434A3;">char</span> *)&amp;value, <span style="color: #0000FF;">sizeof</span>(<span style="color: #6434A3;">int</span>));
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f" class="outline-3">
-<h3 id="ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></h3>
-<div class="outline-text-3" id="text-org0fcee37">
+<div id="outline-container-orge3e01af" class="outline-3">
+<h3 id="orge3e01af"><code>TCP_CORK</code></h3>
+<div class="outline-text-3" id="text-orge3e01af">
 <p>
 功能类似于在发送数据管道出口处插入一个“塞子”，使得发送数据全部被阻塞，直到取消 <code>TCP_CORK</code> 选项（即拔去塞子）或被阻塞数据长度已超过 <code>MSS</code> 才将其发送出去。
 <code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006699;">setsockopt</span><span style="color: #707183;">(</span>sock_fd, <span style="color: #D0372D;">IPPROTO_TCP</span>, <span style="color: #D0372D;">TCP_CORK</span>, <span style="color: #7388D6;">(</span><span style="color: #6434A3;">char</span> *<span style="color: #7388D6;">)</span>&amp;value, <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6;">(</span><span style="color: #6434A3;">int</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;
+<pre class="src src-c"><span style="color: #006699;">setsockopt</span>(sock_fd, IPPROTO_TCP, TCP_CORK, (<span style="color: #6434A3;">char</span> *)&amp;value, <span style="color: #0000FF;">sizeof</span>(<span style="color: #6434A3;">int</span>));
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org42a7043" class="outline-3">
-<h3 id="org42a7043"><code>SO_LINGER</code></h3>
-<div class="outline-text-3" id="text-org42a7043">
+<div id="outline-container-orgffd63df" class="outline-3">
+<h3 id="orgffd63df"><code>SO_LINGER</code></h3>
+<div class="outline-text-3" id="text-orgffd63df">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #707183;">{</span>
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> {
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">l_onoff</span>;  <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Linger active</span><span style="color: #8D8D84;"> */</span>
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">l_linger</span>; <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">How long to linger for</span><span style="color: #8D8D84;"> */</span>
-<span style="color: #707183;">}</span>;
+};
 </pre>
 </div>
 <p>
@@ -133,11 +133,11 @@ Linux 内核会维护两个队列：
 </div>
 </div>
 </div>
-<div id="outline-container-org0e722b7" class="outline-2">
-<h2 id="org0e722b7">Reference</h2>
-<div class="outline-text-2" id="text-org0e722b7">
+<div id="outline-container-org61a1169" class="outline-2">
+<h2 id="org61a1169">Reference</h2>
+<div class="outline-text-2" id="text-org61a1169">
 <ul class="org-ul">
-<li>图解网络-小林coding-v3.0.pdf</li>
+<li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>
 </div>
 </div>
@@ -146,7 +146,7 @@ Linux 内核会维护两个队列：
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-Socket选项系列之SO_LINGER，链接：<a href="http://www.lenky.info/archives/2013/02/2220">http://www.lenky.info/archives/2013/02/2220</a>
+Socket 选项系列之 SO_LINGER，链接：<a href="http://www.lenky.info/archives/2013/02/2220">http://www.lenky.info/archives/2013/02/2220</a>
 </p></div></div>
 
 

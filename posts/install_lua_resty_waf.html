@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-25 Thu 21:35 -->
+<!-- 2022-08-31 Wed 18:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>安装使用 lua-resty-waf</title>
@@ -19,14 +19,14 @@
 域名：<a href="https://freewisdom.cn">https://freewisdom.cn</a>
 </p>
 
-<div id="outline-container-org7adab9c" class="outline-2">
-<h2 id="org7adab9c">安装 OpenResty</h2>
-<div class="outline-text-2" id="text-org7adab9c">
+<div id="outline-container-orgf0b6ee2" class="outline-2">
+<h2 id="orgf0b6ee2">安装 OpenResty</h2>
+<div class="outline-text-2" id="text-orgf0b6ee2">
 <p>
 安装依赖
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">dnf install pcre-devel openssl-devel gcc gcc-c++ <span style="color: #6434A3;">curl</span>
+<pre class="src src-bash">dnf install pcre-devel openssl-devel gcc gcc-c++ curl
 </pre>
 </div>
 
@@ -35,7 +35,7 @@
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">wget https://openresty.org/package/centos/openresty.repo
-<span style="color: #6434A3;">mv</span> openresty.repo /etc/yum.repos.d/
+mv openresty.repo /etc/yum.repos.d/
 </pre>
 </div>
 
@@ -57,9 +57,9 @@
 </div>
 </div>
 
-<div id="outline-container-org6ad491a" class="outline-2">
-<h2 id="org6ad491a">将 Nginx 迁移到 OpenResty</h2>
-<div class="outline-text-2" id="text-org6ad491a">
+<div id="outline-container-org5ee867b" class="outline-2">
+<h2 id="org5ee867b">将 Nginx 迁移到 OpenResty</h2>
+<div class="outline-text-2" id="text-org5ee867b">
 <p>
 停止 nginx 服务
 </p>
@@ -73,7 +73,7 @@
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">
-<span style="color: #6434A3;">find</span> / -name nginx.conf -type f
+find / -name nginx.conf -type f
 
 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">/etc/nginx/nginx.conf</span>
 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">/usr/local/openresty/nginx/conf/nginx.conf</span>
@@ -89,7 +89,7 @@ openresty 对应的 nginx 配置目录为 <code>/usr/local/openresty/nginx/conf/
 复制配置
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">cp</span> /etc/nginx/conf.d/* /usr/local/openresty/nginx/conf/
+<pre class="src src-bash">cp /etc/nginx/conf.d/* /usr/local/openresty/nginx/conf/
 </pre>
 </div>
 
@@ -104,16 +104,16 @@ openresty 对应的 nginx 配置目录为 <code>/usr/local/openresty/nginx/conf/
 </div>
 </div>
 
-<div id="outline-container-org5e50a15" class="outline-2">
-<h2 id="org5e50a15">安装 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org5e50a15">
+<div id="outline-container-org3a7c642" class="outline-2">
+<h2 id="org3a7c642">安装 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-org3a7c642">
 <p>
 克隆代码
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">git</span> clone https://github.com/p0pr0ck5/lua-resty-waf.git
-<span style="color: #6434A3;">git</span> submodule init
-<span style="color: #6434A3;">git</span> submodule update
+<pre class="src src-bash">git clone https://github.com/p0pr0ck5/lua-resty-waf.git
+git submodule init
+git submodule update
 </pre>
 </div>
 
@@ -151,11 +151,11 @@ dnf install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l
 要使得 lua 5.1 正常运行，需要链接一些资源文件
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">find</span><span style="color: #8D8D84; font-style: italic;"> / -name libreadline.so</span>
-<span style="color: #6434A3;">cd</span> /usr/lib64
-<span style="color: #6434A3;">ln</span> -s libreadline.so.7.0 libreadline.so.6
-<span style="color: #6434A3;">ln</span> -s libncurses.so.6.1 libncurses.so.5
-<span style="color: #6434A3;">ln</span> -s libtinfo.so.6.1 libtinfo.so.5
+<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">find / -name libreadline.so</span>
+<span style="color: #006FE0;">cd</span> /usr/lib64
+ln -s libreadline.so.7.0 libreadline.so.6
+ln -s libncurses.so.6.1 libncurses.so.5
+ln -s libtinfo.so.6.1 libtinfo.so.5
 </pre>
 </div>
 
@@ -201,9 +201,9 @@ openresty
 
 
 
-<div id="outline-container-org07a10ec" class="outline-2">
-<h2 id="org07a10ec">测试 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org07a10ec">
+<div id="outline-container-org5c222b1" class="outline-2">
+<h2 id="org5c222b1">测试 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-org5c222b1">
 <p>
 测试网址：
 </p>
@@ -217,56 +217,56 @@ https://xampp.freewisdom.cn/
 </p>
 <div class="org-src-container">
 <pre class="src src-json">{
-  <span style="color: #0000FF;">"timestamp"</span>: <span style="color: #D0372D;">1614936394</span>,
-  <span style="color: #0000FF;">"client"</span>: <span style="color: #008000;">"107.150.120.83"</span>,
-  <span style="color: #0000FF;">"method"</span>: <span style="color: #008000;">"GET"</span>,
-  <span style="color: #0000FF;">"uri"</span>: <span style="color: #008000;">"/"</span>,
-  <span style="color: #0000FF;">"id"</span>: <span style="color: #008000;">"e62f6b10a7f0a593de01"</span>,
-  <span style="color: #0000FF;">"alerts"</span>: [
+  "timestamp": 1614936394,
+  "client": "107.150.120.83",
+  "method": "GET",
+  "uri": "/",
+  "id": "e62f6b10a7f0a593de01",
+  "alerts": [
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"SQL Tautologies"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">41005</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">2</span>
+      "msg": "SQL Tautologies",
+      "id": 41005,
+      "match": 2
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"SQL Injection character anomaly - ARGS"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">41015</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
+      "msg": "SQL Injection character anomaly - ARGS",
+      "id": 41015,
+      "match": 1
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting)"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42043</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">9</span>
+      "msg": "XSS (Cross-Site Scripting)",
+      "id": 42043,
+      "match": 9
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting)"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42059</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
+      "msg": "XSS (Cross-Site Scripting)",
+      "id": 42059,
+      "match": 1
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - HTML Tag Handler"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42069</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
+      "msg": "XSS (Cross-Site Scripting) - HTML Tag Handler",
+      "id": 42069,
+      "match": 1
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - JS Fragments"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42076</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">9</span>
+      "msg": "XSS (Cross-Site Scripting) - JS Fragments",
+      "id": 42076,
+      "match": 9
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - IE Filter"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42083</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
+      "msg": "XSS (Cross-Site Scripting) - IE Filter",
+      "id": 42083,
+      "match": 1
     },
     {
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"Request score greater than score threshold"</span>,
-      <span style="color: #0000FF;">"logdata"</span>: <span style="color: #D0372D;">28</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">99001</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">28</span>
+      "msg": "Request score greater than score threshold",
+      "logdata": 28,
+      "id": 99001,
+      "match": 28
     }
   ],
-  <span style="color: #0000FF;">"uri_args"</span>: {
-    <span style="color: #0000FF;">"id"</span>: <span style="color: #008000;">"&lt;script&gt;alert(123)&lt;/script&gt;"</span>
+  "uri_args": {
+    "id": "&lt;script&gt;alert(123)&lt;/script&gt;"
   }
 }
 </pre>
@@ -274,13 +274,13 @@ https://xampp.freewisdom.cn/
 </div>
 
 
-<div id="outline-container-org3b8fe33" class="outline-3">
-<h3 id="org3b8fe33">附录</h3>
-<div class="outline-text-3" id="text-org3b8fe33">
+<div id="outline-container-orgbc1c1c3" class="outline-3">
+<h3 id="orgbc1c1c3">附录</h3>
+<div class="outline-text-3" id="text-orgbc1c1c3">
 </div>
-<div id="outline-container-org8187c30" class="outline-4">
-<h4 id="org8187c30">nginx.conf</h4>
-<div class="outline-text-4" id="text-org8187c30">
+<div id="outline-container-org4c60a46" class="outline-4">
+<h4 id="org4c60a46">nginx.conf</h4>
+<div class="outline-text-4" id="text-org4c60a46">
 <div class="org-src-container">
 <pre class="src src-nginx">#user  nobody;
 worker_processes  1;
@@ -360,39 +360,39 @@ http {
 </div>
 </div>
 
-<div id="outline-container-org8490894" class="outline-4">
-<h4 id="org8490894">www.conf</h4>
-<div class="outline-text-4" id="text-org8490894">
+<div id="outline-container-org1385ae9" class="outline-4">
+<h4 id="org1385ae9">www.conf</h4>
+<div class="outline-text-4" id="text-org1385ae9">
 <div class="org-src-container">
-<pre class="src src-bash">    server <span style="color: #707183;">{</span>
+<pre class="src src-bash">    server {
         listen       <span style="color: #D0372D;">443</span>;
         server_name  freewisdom.cn;
         root         /var/web/public;
         index        index.html index.htm;
         <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">error_log logs/www.error.log;</span>
 
-        location / <span style="color: #7388D6;">{</span>
+        location / {
             <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">expires 7d;</span>
-            access_by_lua_block <span style="color: #909183;">{</span>
+            access_by_lua_block {
                 <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new<span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
                 -- define options that will be inherited across all scopes
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"debug"</span>, true<span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"mode"</span>, <span style="color: #008000;">"ACTIVE"</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"debug"</span>, true)
+                waf:set_option(<span style="color: #008000;">"mode"</span>, <span style="color: #008000;">"ACTIVE"</span>)
 
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_target"</span>, <span style="color: #008000;">"file"</span><span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_target_path"</span>, <span style="color: #008000;">"/tmp/event.log"</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"event_log_target"</span>, <span style="color: #008000;">"file"</span>)
+                waf:set_option(<span style="color: #008000;">"event_log_target_path"</span>, <span style="color: #008000;">"/tmp/event.log"</span>)
 
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"debug_log_level"</span>, ngx.DEBUG<span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_altered_only"</span>, false<span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_request_arguments"</span>, true<span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_request_body"</span>, true<span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_verbosity"</span>, <span style="color: #D0372D;">4</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"debug_log_level"</span>, ngx.DEBUG)
+                waf:set_option(<span style="color: #008000;">"event_log_altered_only"</span>, false)
+                waf:set_option(<span style="color: #008000;">"event_log_request_arguments"</span>, true)
+                waf:set_option(<span style="color: #008000;">"event_log_request_body"</span>, true)
+                waf:set_option(<span style="color: #008000;">"event_log_verbosity"</span>, <span style="color: #D0372D;">4</span>)
 
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">30</span><span style="color: #709870;">)</span>
-                waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_buffer_size"</span>, <span style="color: #D0372D;">128</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">30</span>)
+                waf:set_option(<span style="color: #008000;">"event_log_buffer_size"</span>, <span style="color: #D0372D;">128</span>)
 
                 -- this may be desirable for low-traffic or testing sites
                 -- by default, event logs are not written until the buffer is full
@@ -400,59 +400,59 @@ http {
                 --
                 -- this is only necessary when configuring a remote TCP/UDP
                 -- socket server for event logs. otherwise, this is ignored
-                -- waf:set_option<span style="color: #709870;">(</span><span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">5</span><span style="color: #709870;">)</span>
+                -- waf:set_option(<span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">5</span>)
 
                 -- run the firewall
-                waf:exec<span style="color: #709870;">()</span>
-            <span style="color: #909183;">}</span>
+                waf:exec()
+            }
 
-            header_filter_by_lua_block <span style="color: #909183;">{</span>
+            header_filter_by_lua_block {
                 <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-                -- note that options set<span style="color: #0000FF;"> in</span> previous handlers <span style="color: #709870;">(</span><span style="color: #0000FF;">in</span> the same scope<span style="color: #709870;">)</span>
+                -- note that options set<span style="color: #0000FF;"> in</span> previous handlers (<span style="color: #0000FF;">in</span> the same scope)
                 -- do not need to be set again
-                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new<span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-                waf:exec<span style="color: #709870;">()</span>
-            <span style="color: #909183;">}</span>
+                waf:exec()
+            }
 
-            body_filter_by_lua_block <span style="color: #909183;">{</span>
+            body_filter_by_lua_block {
                 <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new<span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-                waf:exec<span style="color: #709870;">()</span>
-            <span style="color: #909183;">}</span>
+                waf:exec()
+            }
 
-            log_by_lua_block <span style="color: #909183;">{</span>
+            log_by_lua_block {
                 <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new<span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-                -- waf:exec<span style="color: #709870;">()</span>
-                waf:write_log_events<span style="color: #709870;">()</span>
-            <span style="color: #909183;">}</span>
-        <span style="color: #7388D6;">}</span>
+                -- waf:exec()
+                waf:write_log_events()
+            }
+        }
 
-        location ~ .*<span style="color: #008000;">\.</span><span style="color: #7388D6;">(</span>php?|cgi|pl|py<span style="color: #7388D6;">)</span>$ <span style="color: #7388D6;">{</span>
+        location ~ .*<span style="color: #008000;">\.</span>(php?|cgi|pl|py)$ {
             deny all;
-        <span style="color: #7388D6;">}</span>
+        }
 
-        location ~ /<span style="color: #008000;">\.</span>ht <span style="color: #7388D6;">{</span>
+        location ~ /<span style="color: #008000;">\.</span>ht {
             deny all;
-        <span style="color: #7388D6;">}</span>
+        }
 
-        location ~ /.+<span style="color: #008000;">\.</span><span style="color: #7388D6;">(</span>inc|conf|cnf<span style="color: #7388D6;">)</span> <span style="color: #7388D6;">{</span>
+        location ~ /.+<span style="color: #008000;">\.</span>(inc|conf|cnf) {
             deny all;
-        <span style="color: #7388D6;">}</span>
+        }
 
         <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">fastcgi_intercept_errors on;</span>
 
         error_page <span style="color: #D0372D;">404</span> /404.html;
-            <span style="color: #BA36A5;">location</span> = /404.html <span style="color: #7388D6;">{</span>
+            <span style="color: #BA36A5;">location</span> = /404.html {
             root /var/web/public;
-        <span style="color: #7388D6;">}</span>
-    <span style="color: #707183;">}</span>
+        }
+    }
 </pre>
 </div>
 </div>
@@ -461,9 +461,9 @@ http {
 
 
 
-<div id="outline-container-org378a0ab" class="outline-3">
-<h3 id="org378a0ab">参考链接</h3>
-<div class="outline-text-3" id="text-org378a0ab">
+<div id="outline-container-org4b66494" class="outline-3">
+<h3 id="org4b66494">参考链接</h3>
+<div class="outline-text-3" id="text-org4b66494">
 <ol class="org-ol">
 <li><a href="http://openresty.org/cn/">OpenResty 中文文档</a></li>
 <li><a href="https://github.com/p0pr0ck5/lua-resty-waf">p0pr0ck5/lua-resty-waf</a></li>
