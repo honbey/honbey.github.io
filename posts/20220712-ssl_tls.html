@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSL/TLS</title>
@@ -35,9 +35,9 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">SSL/TLS</h1>
-</header><div id="outline-container-orgf889a53" class="outline-2">
-<h2 id="orgf889a53">SSL/TLS Protocol</h2>
-<div class="outline-text-2" id="text-orgf889a53">
+</header><div id="outline-container-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607" class="outline-2">
+<h2 id="ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS Protocol</h2>
+<div class="outline-text-2" id="text-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">
 <p>
 两层协议
 </p>
@@ -57,9 +57,9 @@ SSL 记录协议负责对上层的数据进行分块、压缩、计算并添加 
 </div>
 </div>
 
-<div id="outline-container-org6825469" class="outline-2">
-<h2 id="org6825469">HTTPS 通信过程</h2>
-<div class="outline-text-2" id="text-org6825469">
+<div id="outline-container-ID-6e2417e2-47b1-4a17-bedc-665791718239" class="outline-2">
+<h2 id="ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS 通信过程</h2>
+<div class="outline-text-2" id="text-ID-6e2417e2-47b1-4a17-bedc-665791718239">
 <ol class="org-ol">
 <li><p>
 TCP 三次握手
@@ -106,9 +106,9 @@ Application Data      &lt;-----&gt;       Application Data
 </ol>
 </div>
 
-<div id="outline-container-orgd22154e" class="outline-3">
-<h3 id="orgd22154e">SSL Handshake 阶段交换的信息</h3>
-<div class="outline-text-3" id="text-orgd22154e">
+<div id="outline-container-ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad" class="outline-3">
+<h3 id="ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">SSL Handshake 阶段交换的信息</h3>
+<div class="outline-text-3" id="text-ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">
 <p>
 ClientHello:
 </p>
@@ -116,7 +116,7 @@ ClientHello:
 <li>TLS Version</li>
 <li>Client Random</li>
 <li>(Sessio ID)</li>
-<li><a href="#org86faa69">Cipher</a> Suites</li>
+<li><a href="#ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">Cipher</a> Suites</li>
 </ul>
 
 <p>
@@ -166,9 +166,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </div>
 </div>
 
-<div id="outline-container-org86faa69" class="outline-2">
-<h2 id="org86faa69">SSL Cipher</h2>
-<div class="outline-text-2" id="text-org86faa69">
+<div id="outline-container-ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438" class="outline-2">
+<h2 id="ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">SSL Cipher</h2>
+<div class="outline-text-2" id="text-ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">
 <p>
 例如： <code>TLS_RSA_WITH_AES_128_GCM_SHA256</code>
 是由 密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法 组成。
@@ -189,9 +189,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </div>
 </div>
 
-<div id="outline-container-org53b2bed" class="outline-2">
-<h2 id="org53b2bed">离散对数 DH 算法</h2>
-<div class="outline-text-2" id="text-org53b2bed">
+<div id="outline-container-org5eda0df" class="outline-2">
+<h2 id="org5eda0df">离散对数 DH 算法</h2>
+<div class="outline-text-2" id="text-org5eda0df">
 <p>
 <a href="20220712-discrete_logarithm.html#ID-455a29f5-1968-4678-a091-f8383b31e817">Discrete Logarithm</a> - 离散对数
 </p>
@@ -234,9 +234,9 @@ Bob:   Calculate \(A^{b} \mod P\) 同样也是得到 K ，于是双方以 K 作�
 </p>
 </div>
 
-<div id="outline-container-orgd185d0a" class="outline-3">
-<h3 id="orgd185d0a">DHE 密钥交换</h3>
-<div class="outline-text-3" id="text-orgd185d0a">
+<div id="outline-container-orgc968478" class="outline-3">
+<h3 id="orgc968478">DHE 密钥交换</h3>
+<div class="outline-text-3" id="text-orgc968478">
 <blockquote>
 <p>
 Diffie Hellman
@@ -268,9 +268,9 @@ PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
 </div>
 </div>
 
-<div id="outline-container-org4942eec" class="outline-3">
-<h3 id="org4942eec">ECDHE</h3>
-<div class="outline-text-3" id="text-org4942eec">
+<div id="outline-container-org21c630c" class="outline-3">
+<h3 id="org21c630c">ECDHE</h3>
+<div class="outline-text-3" id="text-org21c630c">
 <p>
 提高 DHE 的性能，使用 ECC 椭圆曲线的特性计算公钥及会话密钥。过程：
 </p>
@@ -372,17 +372,17 @@ DHE 安全性论文：
 </div>
 </div>
 
-<div id="outline-container-orgf68ce6e" class="outline-2">
-<h2 id="orgf68ce6e">TLS session resumption</h2>
-<div class="outline-text-2" id="text-orgf68ce6e">
+<div id="outline-container-ID-334fbed6-d0b8-4818-876c-61f6b7cc4335" class="outline-2">
+<h2 id="ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</h2>
+<div class="outline-text-2" id="text-ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">
 <p>
 <b>Session ID 和 Session Ticket 都不满足<a href="20220708-information_security.html#ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全</a>，一旦加密会话密钥的密钥被破解或泄漏，前面被截获的报文都会被破解。以下三种会话复用技术都且无法抵御重放攻击。</b>
 </p>
 </div>
 
-<div id="outline-container-orgdef5540" class="outline-3">
-<h3 id="orgdef5540">Session ID</h3>
-<div class="outline-text-3" id="text-orgdef5540">
+<div id="outline-container-orgacfec70" class="outline-3">
+<h3 id="orgacfec70">Session ID</h3>
+<div class="outline-text-3" id="text-orgacfec70">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，双方在内存中缓存会话密钥，并用唯一的 Session ID 来表示，即 Session ID 作为 key ，会话密钥作为 value 。
 当客户端再次连接时，在 HELLO 消息中带上 Session ID ，服务器收到后就会从内存找到该会话密钥，在 1 个 RTT 中建立 TLS 通信。
@@ -397,9 +397,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-org7e87a8b" class="outline-3">
-<h3 id="org7e87a8b">Session Ticket</h3>
-<div class="outline-text-3" id="text-org7e87a8b">
+<div id="outline-container-orgd2dbf9c" class="outline-3">
+<h3 id="orgd2dbf9c">Session Ticket</h3>
+<div class="outline-text-3" id="text-orgd2dbf9c">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，服务器会将会话密钥加密后作为 Ticket 发送给客户端，由客户端缓存该 Ticket。
 当客户端再次连接时，会发送 Ticket ，服务器解密后就可以获取上一次的会话密钥，验证有效期后无问题就可以建立 TLS 通信。
@@ -407,9 +407,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-orga3fadf5" class="outline-3">
-<h3 id="orga3fadf5">Pre-shared Key</h3>
-<div class="outline-text-3" id="text-orga3fadf5">
+<div id="outline-container-org3fa5834" class="outline-3">
+<h3 id="org3fa5834">Pre-shared Key</h3>
+<div class="outline-text-3" id="text-org3fa5834">
 <p>
 类似 Session Ticket ，但可以直接在 HTTP 请求中带上 Pre-shared Key ，在 0 RTT 内恢复会话。
 </p>
@@ -417,13 +417,13 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-orge904905" class="outline-2">
-<h2 id="orge904905">TLS Extension</h2>
-<div class="outline-text-2" id="text-orge904905">
+<div id="outline-container-org5a35d79" class="outline-2">
+<h2 id="org5a35d79">TLS Extension</h2>
+<div class="outline-text-2" id="text-org5a35d79">
 </div>
-<div id="outline-container-orgf34a994" class="outline-3">
-<h3 id="orgf34a994">ALPN</h3>
-<div class="outline-text-3" id="text-orgf34a994">
+<div id="outline-container-org7bece0b" class="outline-3">
+<h3 id="org7bece0b">ALPN</h3>
+<div class="outline-text-3" id="text-org7bece0b">
 <p>
 ALPN(Application Layer Protocol Negotiation) 是 TLS 的扩展，允许在安全连接的基础上进行应用层协议的协商。ALPN 支持任意应用层协议的协商，目前应用最多是 HTTP2 的协商。在 2016 年， ALPN 已经完全替代 NPN 了。
 </p>
@@ -437,9 +437,9 @@ ALPN allows the application layer to negotiate which protocol to use over the se
 </div>
 </div>
 
-<div id="outline-container-orgc7b2cae" class="outline-2">
-<h2 id="orgc7b2cae">Reference</h2>
-<div class="outline-text-2" id="text-orgc7b2cae">
+<div id="outline-container-org4b1cffa" class="outline-2">
+<h2 id="org4b1cffa">Reference</h2>
+<div class="outline-text-2" id="text-org4b1cffa">
 <ul class="org-ul">
 <li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>

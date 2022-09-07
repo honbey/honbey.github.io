@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">Linux</h1>
 </header>
-<div id="outline-container-orgb814773" class="outline-2">
-<h2 id="orgb814773">Architecture</h2>
-<div class="outline-text-2" id="text-orgb814773">
+<div id="outline-container-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3" class="outline-2">
+<h2 id="ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">Architecture</h2>
+<div class="outline-text-2" id="text-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">
 <pre class="example">
    Application
 Shell | Lib Function
@@ -27,9 +27,9 @@ Shell | Lib Function
 </div>
 </div>
 
-<div id="outline-container-org0c7fc78" class="outline-2">
-<h2 id="org0c7fc78">I/O</h2>
-<div class="outline-text-2" id="text-org0c7fc78">
+<div id="outline-container-ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407" class="outline-2">
+<h2 id="ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">I/O</h2>
+<div class="outline-text-2" id="text-ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">
 <p>
 传统 I/O （缓存 I/O）：硬盘 -&gt; 内核缓冲区 -&gt; 用户缓冲区 -&gt; 内核 socket 缓冲区 -&gt; 协议引擎
 </p>
@@ -43,9 +43,9 @@ sendfile（<a href="20220708-hardware.html#ID-3bc17eaf-8d5c-48d4-8efa-58f9429b27
 </p>
 </div>
 
-<div id="outline-container-org1d84dac" class="outline-3">
-<h3 id="org1d84dac">零拷贝技术 - sendfile</h3>
-<div class="outline-text-3" id="text-org1d84dac">
+<div id="outline-container-orgdfdd35c" class="outline-3">
+<h3 id="orgdfdd35c">零拷贝技术 - sendfile</h3>
+<div class="outline-text-3" id="text-orgdfdd35c">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/sendfile.h&gt;</span>
 <span style="color: #6434A3;">ssize_t</span> <span style="color: #006699;">snedfile</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">out_fd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">in_fd</span>, <span style="color: #6434A3;">off_t</span>* <span style="color: #BA36A5;">offset</span>, <span style="color: #6434A3;">size_t</span> <span style="color: #BA36A5;">count</span>);
@@ -59,13 +59,13 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 </div>
 </div>
 
-<div id="outline-container-orgad2df62" class="outline-2">
-<h2 id="orgad2df62">Useful Command</h2>
-<div class="outline-text-2" id="text-orgad2df62">
+<div id="outline-container-orgcd46638" class="outline-2">
+<h2 id="orgcd46638">Useful Command</h2>
+<div class="outline-text-2" id="text-orgcd46638">
 </div>
-<div id="outline-container-org8093119" class="outline-3">
-<h3 id="org8093119">Let non-root/normal user use port which less then 1024</h3>
-<div class="outline-text-3" id="text-org8093119">
+<div id="outline-container-org7c44183" class="outline-3">
+<h3 id="org7c44183">Let non-root/normal user use port which less then 1024</h3>
+<div class="outline-text-3" id="text-org7c44183">
 <div class="org-src-container">
 <pre class="src src-bash">setcap <span style="color: #BA36A5;">cap_net_bind_service</span>=+eip /path/executable_program
 </pre>
@@ -73,9 +73,9 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 </div>
 </div>
 
-<div id="outline-container-org1ac7253" class="outline-3">
-<h3 id="org1ac7253">Recover files on Linux</h3>
-<div class="outline-text-3" id="text-org1ac7253">
+<div id="outline-container-ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c" class="outline-3">
+<h3 id="ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">Recover files on Linux</h3>
+<div class="outline-text-3" id="text-ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">backup sector</span>
 dd <span style="color: #BA36A5;">if</span>=/path/filename <span style="color: #BA36A5;">of</span>=/dev/vda1

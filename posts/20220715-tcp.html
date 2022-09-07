@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TCP</title>
@@ -128,9 +128,9 @@ RFC:
 <li><a href="https://datatracker.ietf.org/doc/html/rfc793-">RFC793</a></li>
 </ul>
 
-<div id="outline-container-org8b5c63d" class="outline-2">
-<h2 id="org8b5c63d">TCP Connection</h2>
-<div class="outline-text-2" id="text-org8b5c63d">
+<div id="outline-container-orgc522731" class="outline-2">
+<h2 id="orgc522731">TCP Connection</h2>
+<div class="outline-text-2" id="text-orgc522731">
 <p>
 IP 协议是不可靠的，不保证网络包的交付、按序交付和数据的完整性，所以出现了 TCP 这个用于可靠数据传输的协议，能确保接收端接收到的网络包是无损坏、无间隔、非冗余和按序的。
 总的来说， TCP 是 <b>面向连接的</b> 、 <b>可靠的</b> 、 <b>基于字节流</b> 的传输层通信协议。
@@ -194,9 +194,9 @@ TCP 计算负载的数据长度： TCP 数据的长度 = IP 总长度 - IP 首�
 </p>
 </div>
 
-<div id="outline-container-orgbceb4ea" class="outline-3">
-<h3 id="orgbceb4ea">半连接队列和全连接队列</h3>
-<div class="outline-text-3" id="text-orgbceb4ea">
+<div id="outline-container-org2d80c38" class="outline-3">
+<h3 id="org2d80c38">半连接队列和全连接队列</h3>
+<div class="outline-text-3" id="text-org2d80c38">
 <p>
 LISTEN:
 <code>Recv-Q</code> 当前全连接队列大小
@@ -220,9 +220,9 @@ LISTEN:
 </div>
 </div>
 </div>
-<div id="outline-container-orgcaeb806" class="outline-2">
-<h2 id="orgcaeb806">Handshake</h2>
-<div class="outline-text-2" id="text-orgcaeb806">
+<div id="outline-container-orgabf8b60" class="outline-2">
+<h2 id="orgabf8b60">Handshake</h2>
+<div class="outline-text-2" id="text-orgabf8b60">
 <pre class="example">
 Client                   Server
    |     -----SYN----&gt;     |
@@ -251,9 +251,9 @@ ACK_2 : Ack Num = Server_ISN + 1
 </ul>
 </div>
 
-<div id="outline-container-org03b7427" class="outline-3">
-<h3 id="org03b7427">初始序列号</h3>
-<div class="outline-text-3" id="text-org03b7427">
+<div id="outline-container-org8c9cd65" class="outline-3">
+<h3 id="org8c9cd65">初始序列号</h3>
+<div class="outline-text-3" id="text-org8c9cd65">
 <p>
 如果一个已经失效的连接被重用了，但是该旧连接的历史报文还残留在网络中，如果序列号相同，那么就无法分辨出该报文是不是历史报文，而若造成历史报文被新的连接接受了，则会产生数据错乱。
 一方面每次建立连接前重新初始化一个序列号主要是为了通信双方能够根据序号将不属于本连接的数据报丢弃。另一方面为了安全性，防止黑客伪造相同的序列号的 TCP 报文从而造成被会话劫持等攻击。
@@ -264,9 +264,9 @@ F 为 Hash 算法，根据四元组和可选的秘密生成一个随机数值，
 </div>
 </div>
 
-<div id="outline-container-orgc0ca60a" class="outline-3">
-<h3 id="orgc0ca60a">SYN 攻击</h3>
-<div class="outline-text-3" id="text-orgc0ca60a">
+<div id="outline-container-org02ef535" class="outline-3">
+<h3 id="org02ef535">SYN 攻击</h3>
+<div class="outline-text-3" id="text-org02ef535">
 <p>
 攻击者段时间内伪造不同 IP 地址的 SYN 报文，服务器接收到 SYN 报文进入 SYN_RCVD （半连接）状态，但回应的 SYN + ACK 报文无法得到未知 IP 主机的应答，久而久之占满 SYN 接收队列（未连接队列），导致服务器不能为正常用户服务。
 </p>
@@ -294,9 +294,9 @@ Linux 处理 TCP 连接的流程：
 </div>
 </div>
 
-<div id="outline-container-org40ff233" class="outline-3">
-<h3 id="org40ff233">四次挥手</h3>
-<div class="outline-text-3" id="text-org40ff233">
+<div id="outline-container-org5de7fac" class="outline-3">
+<h3 id="org5de7fac">四次挥手</h3>
+<div class="outline-text-3" id="text-org5de7fac">
 <pre class="example">
       TCP A                                                TCP B
 
@@ -366,9 +366,9 @@ so_linger.l_linger = <span style="color: #D0372D;">0</span>;
 </ul>
 </div>
 </div>
-<div id="outline-container-org7c3307b" class="outline-3">
-<h3 id="org7c3307b">TCP 保活</h3>
-<div class="outline-text-3" id="text-org7c3307b">
+<div id="outline-container-org3252f07" class="outline-3">
+<h3 id="org3252f07">TCP 保活</h3>
+<div class="outline-text-3" id="text-org3252f07">
 <p>
 定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测保温，该探测包含的数据非常少，如果连续几个探测保温都没有得到响应，则认为当前 TCP 连接已经死亡，系统内核将错误通知给上层应用程序。
 </p>
@@ -394,9 +394,9 @@ net.ipv4.tcp_keepalive_probes = 9  # 探测次数 9    次
 </div>
 </div>
 
-<div id="outline-container-org4142f7a" class="outline-2">
-<h2 id="org4142f7a">MTU MSS</h2>
-<div class="outline-text-2" id="text-org4142f7a">
+<div id="outline-container-orgc304f83" class="outline-2">
+<h2 id="orgc304f83">MTU MSS</h2>
+<div class="outline-text-2" id="text-orgc304f83">
 <p>
 MTU(Maximum Transmission Unit): 一个网络包的最大长度，以太网一般为 1500 字节
 MSS(Maximun Segment Size)     : 除去 IP 和 TCP 头部后，一个网络包所能容纳的 TCP 数据的最大长度
@@ -415,9 +415,9 @@ MSS(Maximun Segment Size)     : 除去 IP 和 TCP 头部后，一个网络包所
 </p>
 </div>
 
-<div id="outline-container-orgbc11789" class="outline-3">
-<h3 id="orgbc11789">PMTU</h3>
-<div class="outline-text-3" id="text-orgbc11789">
+<div id="outline-container-orgfe13623" class="outline-3">
+<h3 id="orgfe13623">PMTU</h3>
+<div class="outline-text-3" id="text-orgfe13623">
 <p>
 Path MTU Discovery: 路径 MTU 发现协议，利用 IP 数据包头的 DF(Don&rsquo;t Fragment) 字段表示不允许分片，这样在链路中遇到路由器的 MTU 小于 IP 报文的长度时，路由器会通过 ICMP 协议通知发送端数据需要分片及自己的 MTU 大小。
 </p>
@@ -425,9 +425,9 @@ Path MTU Discovery: 路径 MTU 发现协议，利用 IP 数据包头的 DF(Don&r
 </div>
 </div>
 
-<div id="outline-container-org107e0fa" class="outline-2">
-<h2 id="org107e0fa">Header Format</h2>
-<div class="outline-text-2" id="text-org107e0fa">
+<div id="outline-container-org5ddecbe" class="outline-2">
+<h2 id="org5ddecbe">Header Format</h2>
+<div class="outline-text-2" id="text-org5ddecbe">
 <pre class="example">
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -456,9 +456,9 @@ Acknowledgment Number: 指下一次 <b>期望</b> 收到的数据的序列号（
 </p>
 </div>
 
-<div id="outline-container-orgc3d1a35" class="outline-3">
-<h3 id="orgc3d1a35">Flags</h3>
-<div class="outline-text-3" id="text-orgc3d1a35">
+<div id="outline-container-orgf556c47" class="outline-3">
+<h3 id="orgf556c47">Flags</h3>
+<div class="outline-text-3" id="text-orgf556c47">
 <table>
 <caption class="t-above"><span class="table-number">Table 1:</span> Function of flags of TCP</caption>
 
@@ -514,19 +514,19 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 </div>
 </div>
 
-<div id="outline-container-org4dd32e2" class="outline-2">
-<h2 id="org4dd32e2">TCP 有限状态机</h2>
-<div class="outline-text-2" id="text-org4dd32e2">
+<div id="outline-container-orgb7f0f4e" class="outline-2">
+<h2 id="orgb7f0f4e">TCP 有限状态机</h2>
+<div class="outline-text-2" id="text-orgb7f0f4e">
 
-<figure id="orge26bd5d">
+<figure id="org99dd88e">
 <img src="../images/20220715-tcp_1.png" alt="20220715-tcp_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org9397e0e" class="outline-2">
-<h2 id="org9397e0e">TCP <a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">安全</a>问题</h2>
-<div class="outline-text-2" id="text-org9397e0e">
+<div id="outline-container-org8261558" class="outline-2">
+<h2 id="org8261558">TCP <a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">安全</a>问题</h2>
+<div class="outline-text-2" id="text-org8261558">
 <p>
 在 TCP 协议下，利用伪造的数据包，可以：
 </p>
@@ -539,9 +539,9 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 </ul>
 </div>
 
-<div id="outline-container-orgb5f0efa" class="outline-3">
-<h3 id="orgb5f0efa">会话劫持</h3>
-<div class="outline-text-3" id="text-orgb5f0efa">
+<div id="outline-container-org9c3dbf8" class="outline-3">
+<h3 id="org9c3dbf8">会话劫持</h3>
+<div class="outline-text-3" id="text-org9c3dbf8">
 <p>
 伪造数据包让一方接受这个伪造的数据包的攻击方式，一台计算机可以有多个并发的TCP会话，因此它需要知道一个数据包属于哪一个TCP会话。TCP使用4元组来唯一确定一个会话： 源IP地址、目的IP地址、源端口号、目的端口号，这4个域称为TCP会话的特征。
 为了伪造数据包，除了上面四个特征必须符合外，还有一个关键的序列号必须符合。
@@ -574,9 +574,9 @@ end(pkt, verbose=<span style="color: #D0372D;">0</span>)
 </div>
 </div>
 
-<div id="outline-container-orgbb88e86" class="outline-3">
-<h3 id="orgbb88e86">身份仿冒</h3>
-<div class="outline-text-3" id="text-orgbb88e86">
+<div id="outline-container-org792a335" class="outline-3">
+<h3 id="org792a335">身份仿冒</h3>
+<div class="outline-text-3" id="text-org792a335">
 <p>
 C - Sender
 S - receiver
@@ -596,9 +596,9 @@ M 仿冒 C 的地址与 S 通信，M 虽然不会收到 S 发来的报文，但�
 </div>
 </div>
 
-<div id="outline-container-org742afeb" class="outline-3">
-<h3 id="org742afeb">DoS 攻击</h3>
-<div class="outline-text-3" id="text-org742afeb">
+<div id="outline-container-org3cf2e2a" class="outline-3">
+<h3 id="org3cf2e2a">DoS 攻击</h3>
+<div class="outline-text-3" id="text-org3cf2e2a">
 <p>
 M 可以预测 C 和 S 的序列号，在 C 和 S 的通信过程中，假冒任意一方的 IP 地址，频繁抢先一部发送错误的报文：
 </p>
@@ -610,9 +610,9 @@ M 可以预测 C 和 S 的序列号，在 C 和 S 的通信过程中，假冒任
 </div>
 </div>
 
-<div id="outline-container-orgaa68999" class="outline-2">
-<h2 id="orgaa68999">TCP 重要机制</h2>
-<div class="outline-text-2" id="text-orgaa68999">
+<div id="outline-container-org8091afd" class="outline-2">
+<h2 id="org8091afd">TCP 重要机制</h2>
+<div class="outline-text-2" id="text-org8091afd">
 <p>
 需要 TCP 通过采样 RTT 的时间，进行加权平均，算出一个平滑的 RTT 值，这个值会根据网络变化而不断变化；除了采样 RTT ，还要采样 RTT 的波动范围，这样避免如果 RTT 又一个大的波动的话，而导致很难被发现的情况。
 </p>
@@ -637,9 +637,9 @@ Linux 系统中：
 </p>
 </div>
 
-<div id="outline-container-org89c610c" class="outline-3">
-<h3 id="org89c610c">超时重传</h3>
-<div class="outline-text-3" id="text-org89c610c">
+<div id="outline-container-orgd4e9387" class="outline-3">
+<h3 id="orgd4e9387">超时重传</h3>
+<div class="outline-text-3" id="text-orgd4e9387">
 <p>
 超时重传：发送数据时，设置一个定时器，当超出指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据。
 即在 <b>数据包丢失</b> 和 <b>确认应答丢失</b> 这两种情况下发生超时重传。超时重传时间 (RTO, Retransmission Timeout) 一般设置是略大于报文往返 RTT 值。
@@ -648,9 +648,9 @@ Linux 系统中：
 </div>
 </div>
 
-<div id="outline-container-org1f59c0f" class="outline-3">
-<h3 id="org1f59c0f">快速重传</h3>
-<div class="outline-text-3" id="text-org1f59c0f">
+<div id="outline-container-org7032581" class="outline-3">
+<h3 id="org7032581">快速重传</h3>
+<div class="outline-text-3" id="text-org7032581">
 <p>
 Fast Retransmit: 不以时间为驱动，而以数据驱动重传。
 即在某个 TCP 报文丢失时，在超时定时器过期前，连续发送 3 个 ACK 报文，表示有报文丢失，需要重传。
@@ -658,9 +658,9 @@ Fast Retransmit: 不以时间为驱动，而以数据驱动重传。
 </div>
 </div>
 
-<div id="outline-container-org8b59b1a" class="outline-3">
-<h3 id="org8b59b1a">SACK(Selective Acknowledgment)</h3>
-<div class="outline-text-3" id="text-org8b59b1a">
+<div id="outline-container-org5511e06" class="outline-3">
+<h3 id="org5511e06">SACK(Selective Acknowledgment)</h3>
+<div class="outline-text-3" id="text-org5511e06">
 <p>
 在 TCP 头部选项字段里加一个 SACK ，可以将已缓存的数据告诉发送方，这样发送方就知道哪些数据收到了，哪些没收到，于是发送方就可以只重传丢失的数据。
 </p>
@@ -673,18 +673,18 @@ net.ipv4.tcp_sack
 </div>
 </div>
 
-<div id="outline-container-orgf0271cd" class="outline-3">
-<h3 id="orgf0271cd">D-SACK(Duplicate SACK)</h3>
-<div class="outline-text-3" id="text-orgf0271cd">
+<div id="outline-container-org231bd9d" class="outline-3">
+<h3 id="org231bd9d">D-SACK(Duplicate SACK)</h3>
+<div class="outline-text-3" id="text-org231bd9d">
 <p>
 使用 SACK 告诉发送方有哪些数据被重复接收了。在 ACK 丢包和因为网络延时而导致重传报文比原报文先到的时候可以告诉发送方哪些数据被重复接收了。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6769544" class="outline-3">
-<h3 id="org6769544">滑动窗口</h3>
-<div class="outline-text-3" id="text-org6769544">
+<div id="outline-container-orgd364517" class="outline-3">
+<h3 id="orgd364517">滑动窗口</h3>
+<div class="outline-text-3" id="text-orgd364517">
 <p>
 在一定的窗口大小内，无需等待确认应答，而可以继续发送数据的最大值。窗口的实现实际上是操作系统开辟的一个缓存空间，发送方主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据，如果按期收到确认应答，此时数据就可以从缓冲区清除。
 </p>
@@ -746,9 +746,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </div>
 </div>
 
-<div id="outline-container-org6f1db14" class="outline-3">
-<h3 id="org6f1db14">流量控制</h3>
-<div class="outline-text-3" id="text-org6f1db14">
+<div id="outline-container-org835a572" class="outline-3">
+<h3 id="org835a572">流量控制</h3>
+<div class="outline-text-3" id="text-org835a572">
 <p>
 滑动窗口本质上是操作系统的缓冲区，会被操作系统调整。
 例如说上层应用没有及时从缓冲区读取数据，会造成接收窗口减少并通知发送方。这种情况下可能导致窗口会收缩为 0 ，即窗口关闭，发送方会定时发送窗口探测报文，以便知道接受方的窗口是否发生了改变。
@@ -780,9 +780,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </div>
 </div>
 
-<div id="outline-container-orgcff3359" class="outline-3">
-<h3 id="orgcff3359">拥塞控制</h3>
-<div class="outline-text-3" id="text-orgcff3359">
+<div id="outline-container-org21571f8" class="outline-3">
+<h3 id="org21571f8">拥塞控制</h3>
+<div class="outline-text-3" id="text-org21571f8">
 <p>
 在网络出现拥堵时，如果继续发送⼤量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是⼀重传就会导致⽹络的负担更重，于是会导致更⼤的延迟以及更多的丢包，这个情况就会进⼊恶性循环被不断地放⼤。
 </p>
@@ -804,9 +804,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </ul>
 </div>
 
-<div id="outline-container-org9788601" class="outline-4">
-<h4 id="org9788601">慢启动</h4>
-<div class="outline-text-4" id="text-org9788601">
+<div id="outline-container-org1279070" class="outline-4">
+<h4 id="org1279070">慢启动</h4>
+<div class="outline-text-4" id="text-org1279070">
 <p>
 TCP 连接在刚建立完成后，首先进入慢启动阶段，一点一点提高发送数据包的数量：当发送方每收到一个 ACK ，拥塞窗口 <code>cwnd</code> 就加 1 。拥塞窗口呈指数增长。
 慢启动阈值 <code>ssthresh(slow start threshold)</code> ，小于此值使用慢启动算法，大于等于此值使用拥塞避免算法。
@@ -814,18 +814,18 @@ TCP 连接在刚建立完成后，首先进入慢启动阶段，一点一点提�
 </div>
 </div>
 
-<div id="outline-container-org236feb6" class="outline-4">
-<h4 id="org236feb6">拥塞避免</h4>
-<div class="outline-text-4" id="text-org236feb6">
+<div id="outline-container-org0820eea" class="outline-4">
+<h4 id="org0820eea">拥塞避免</h4>
+<div class="outline-text-4" id="text-org0820eea">
 <p>
 一般 <code>ssthresh</code> 的大小是 65535 字节，进入拥塞避免阶段，每当收到一个 ACK 时， <code>cwnd</code> 增加 <code>1/cwnd</code> ，也就是要收到 <code>cwnd</code> 个 ACK ，能才增加 1 <code>cwnd/MSS</code> 。此时拥塞窗口呈线性增长。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org33e1e74" class="outline-4">
-<h4 id="org33e1e74">拥塞发生</h4>
-<div class="outline-text-4" id="text-org33e1e74">
+<div id="outline-container-orgefab96e" class="outline-4">
+<h4 id="orgefab96e">拥塞发生</h4>
+<div class="outline-text-4" id="text-orgefab96e">
 <p>
 重传机制：超时重传和快速重传。
 超时重传时：
@@ -851,9 +851,9 @@ ssthresh = cwnd
 </div>
 </div>
 
-<div id="outline-container-org627de3a" class="outline-4">
-<h4 id="org627de3a">快速恢复</h4>
-<div class="outline-text-4" id="text-org627de3a">
+<div id="outline-container-org05af942" class="outline-4">
+<h4 id="org05af942">快速恢复</h4>
+<div class="outline-text-4" id="text-org05af942">
 <p>
 在快速重传已经改变 <code>cwnd</code> 和 <code>ssthresh</code> 的基础上：
 </p>
@@ -874,13 +874,13 @@ ssthresh = cwnd
 </div>
 </div>
 </div>
-<div id="outline-container-orgd65a9d6" class="outline-2">
-<h2 id="orgd65a9d6">TCP 的一些算法</h2>
-<div class="outline-text-2" id="text-orgd65a9d6">
+<div id="outline-container-org06adf3e" class="outline-2">
+<h2 id="org06adf3e">TCP 的一些算法</h2>
+<div class="outline-text-2" id="text-org06adf3e">
 </div>
-<div id="outline-container-org119801b" class="outline-3">
-<h3 id="org119801b">Nagle</h3>
-<div class="outline-text-3" id="text-org119801b">
+<div id="outline-container-org7481eae" class="outline-3">
+<h3 id="org7481eae">Nagle</h3>
+<div class="outline-text-3" id="text-org7481eae">
 <p>
 小包：包长度小于 MSS 的包；
 大包：包长度等于 MSS 的包。
@@ -968,9 +968,9 @@ tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_tra
 </p>
 </div>
 
-<div id="outline-container-org4f8746b" class="outline-4">
-<h4 id="org4f8746b">改进的 Nagle - Minshall</h4>
-<div class="outline-text-4" id="text-org4f8746b">
+<div id="outline-container-org2cc748a" class="outline-4">
+<h4 id="org2cc748a">改进的 Nagle - Minshall</h4>
+<div class="outline-text-4" id="text-org2cc748a">
 <p>
 确保在一个 RTT 内只有一个当前连接的小包，可以在一定程度上的缓解因为 Nagle 和 DelayAck 同时开启时奇数小包阻塞的问题。
 </p>
@@ -984,26 +984,26 @@ tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_tra
 </div>
 
 
-<figure id="orgb08c2d6">
+<figure id="orga7a77ff">
 <img src="../images/tcp_nagle_minshall.png" alt="tcp_nagle_minshall.png">
 
 </figure>
 </div>
 </div>
 </div>
-<div id="outline-container-orge976a0c" class="outline-3">
-<h3 id="orge976a0c">Delayed Acknowledgment</h3>
+<div id="outline-container-orgfe9d953" class="outline-3">
+<h3 id="orgfe9d953">Delayed Acknowledgment</h3>
 </div>
-<div id="outline-container-orgf6e59dc" class="outline-3">
-<h3 id="orgf6e59dc">Per-Host PASW(Protect Against Wrapped Sequences)</h3>
+<div id="outline-container-orgb12d3ef" class="outline-3">
+<h3 id="orgb12d3ef">Per-Host PASW(Protect Against Wrapped Sequences)</h3>
 </div>
-<div id="outline-container-orga92ccec" class="outline-3">
-<h3 id="orga92ccec">SYN Cookies</h3>
+<div id="outline-container-org1c36307" class="outline-3">
+<h3 id="org1c36307">SYN Cookies</h3>
 </div>
 </div>
-<div id="outline-container-org0d9b955" class="outline-2">
-<h2 id="org0d9b955">Reference</h2>
-<div class="outline-text-2" id="text-org0d9b955">
+<div id="outline-container-org7a25ff6" class="outline-2">
+<h2 id="org7a25ff6">Reference</h2>
+<div class="outline-text-2" id="text-org7a25ff6">
 <ul class="org-ul">
 <li>图解网络-小林coding-v3.0.pdf</li>
 </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-11882</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">CVE-2017-11882</h1>
 </header>
-<div id="outline-container-orge2d4dc8" class="outline-2">
-<h2 id="orge2d4dc8">Introduction</h2>
-<div class="outline-text-2" id="text-orge2d4dc8">
+<div id="outline-container-org544d3b1" class="outline-2">
+<h2 id="org544d3b1">Introduction</h2>
+<div class="outline-text-2" id="text-org544d3b1">
 <p>
 CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上的所有 office 版本及 Windows 操作系统。该漏洞的成因是 EQNEDT32.EXE 进程在读入包含 MathType 的 ole 数据时，在拷贝公式字体名称时没有对名称长度进行校验，从而造成栈缓冲区溢出，是一个非常经典的栈溢出漏洞。上次出现这么典型的 office 栈溢出漏洞是著名的 CVE-2012-0158。
 </p>
@@ -29,9 +29,9 @@ CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上
 </ul>
 </div>
 
-<div id="outline-container-orgaa1d0ce" class="outline-3">
-<h3 id="orgaa1d0ce">步骤</h3>
-<div class="outline-text-3" id="text-orgaa1d0ce">
+<div id="outline-container-orge1b2746" class="outline-3">
+<h3 id="orge1b2746">步骤</h3>
+<div class="outline-text-3" id="text-orge1b2746">
 <ol class="org-ol">
 <li><p>
 Bash
@@ -66,9 +66,9 @@ run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-sty
 </div>
 </div>
 
-<div id="outline-container-org4a32b9e" class="outline-3">
-<h3 id="org4a32b9e">参考链接</h3>
-<div class="outline-text-3" id="text-org4a32b9e">
+<div id="outline-container-org339ff38" class="outline-3">
+<h3 id="org339ff38">参考链接</h3>
+<div class="outline-text-3" id="text-org339ff38">
 <p>
 <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11882">cve.mitre.org</a>
 <a href="https://www.freebuf.com/vuls/154462.html">www.freebuf.com</a>

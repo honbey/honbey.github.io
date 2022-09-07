@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSRF</title>
@@ -36,9 +36,9 @@
 <header>
 <h1 class="title">SSRF</h1>
 </header>
-<div id="outline-container-org60c5b02" class="outline-2">
-<h2 id="org60c5b02">服务器端请求伪造</h2>
-<div class="outline-text-2" id="text-org60c5b02">
+<div id="outline-container-org939c544" class="outline-2">
+<h2 id="org939c544">服务器端请求伪造</h2>
+<div class="outline-text-2" id="text-org939c544">
 <p>
 Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者构造请求，由服务端发起请求的安全漏洞。形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，但又没有对目标地址做严格过滤与限制，导致攻击者可以传入任意的地址来让后端服务器对其发起请求，并返回数据<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
@@ -51,16 +51,16 @@ Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者�
 来源于知乎<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，顺便尝试下 graphviz 画图：
 </p>
 
-<figure id="org1ecda9c">
+<figure id="orgb4caa91">
 <img src="../images/ssrf_img1.png" alt="ssrf_img1.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orge1fc9d4" class="outline-2">
-<h2 id="orge1fc9d4">存在 SSRF 隐患的 PHP 函数</h2>
-<div class="outline-text-2" id="text-orge1fc9d4">
+<div id="outline-container-ID-ee36975c-00cc-43e0-b777-93ce7df935e2" class="outline-2">
+<h2 id="ID-ee36975c-00cc-43e0-b777-93ce7df935e2">存在 SSRF 隐患的 PHP 函数</h2>
+<div class="outline-text-2" id="text-ID-ee36975c-00cc-43e0-b777-93ce7df935e2">
 <ul class="org-ul">
 <li><p>
 <code>file_get_contents()</code>
@@ -127,9 +127,9 @@ if (isset($_POST['url'])){
 </ul>
 </div>
 
-<div id="outline-container-org9cb5dcc" class="outline-3">
-<h3 id="org9cb5dcc">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org9cb5dcc">
+<div id="outline-container-org3bd5e64" class="outline-3">
+<h3 id="org3bd5e64">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org3bd5e64">
 <div class="org-src-container">
 <pre class="src src-php">&lt;?php
 # ssrf.php
@@ -201,22 +201,22 @@ bash shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
 </div>
 </div>
 
-<div id="outline-container-org2c23b63" class="outline-2">
-<h2 id="org2c23b63">SSRF 漏洞</h2>
-<div class="outline-text-2" id="text-org2c23b63">
+<div id="outline-container-org5a77f44" class="outline-2">
+<h2 id="org5a77f44">SSRF 漏洞</h2>
+<div class="outline-text-2" id="text-org5a77f44">
 </div>
-<div id="outline-container-org0fb8247" class="outline-3">
-<h3 id="org0fb8247">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
-<div class="outline-text-3" id="text-org0fb8247">
-</div>
-</div>
-<div id="outline-container-orgc2b3c9d" class="outline-3">
-<h3 id="orgc2b3c9d">Discuz 3.4X SSRF</h3>
+<div id="outline-container-ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6" class="outline-3">
+<h3 id="ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
+<div class="outline-text-3" id="text-ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6">
 </div>
 </div>
-<div id="outline-container-orgddb09be" class="outline-2">
-<h2 id="orgddb09be">绕过 URL 白名单或禁内网 IP 地址</h2>
-<div class="outline-text-2" id="text-orgddb09be">
+<div id="outline-container-orgb74e43a" class="outline-3">
+<h3 id="orgb74e43a">Discuz 3.4X SSRF</h3>
+</div>
+</div>
+<div id="outline-container-org57475d2" class="outline-2">
+<h2 id="org57475d2">绕过 URL 白名单或禁内网 IP 地址</h2>
+<div class="outline-text-2" id="text-org57475d2">
 <ul class="org-ul">
 <li>@</li>
 <li>IP 地址转换为其他进制</li>

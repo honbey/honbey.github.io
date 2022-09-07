@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lua 语言基础</title>
@@ -15,25 +15,25 @@
 <header>
 <h1 class="title">Lua 语言基础</h1>
 </header>
-<div id="outline-container-org16c37ab" class="outline-2">
-<h2 id="org16c37ab">Lua</h2>
-<div class="outline-text-2" id="text-org16c37ab">
+<div id="outline-container-orgc5b579c" class="outline-2">
+<h2 id="orgc5b579c">Lua</h2>
+<div class="outline-text-2" id="text-orgc5b579c">
 <p>
 TOC:
 </p>
 <ul class="org-ul">
-<li><a href="#orge31c752">Lua 数据类型</a></li>
-<li><a href="#org89fad29">Lua 函数</a></li>
-<li><a href="#org9955fd6">Lua 字符串</a></li>
-<li><a href="#orge44543e">Lua 数组</a></li>
-<li><a href="#orge979ec6">Lua 迭代器</a></li>
-<li><a href="#org5868ccf">Lua 表 table</a></li>
-<li><a href="#org4abea09">Lua 元表 Metatable</a></li>
-<li><a href="#org5d29162">Lua 模块与包</a></li>
-<li><a href="#org7c75af5">Lua 协同程序 coroutine</a></li>
-<li><a href="#orgdd91e7a">Lua I/O</a></li>
-<li><a href="#org3ffb7ec">Lua 错误处理</a></li>
-<li><a href="#orgbbf503e">Lua 垃圾回收</a></li>
+<li><a href="#ID-9380063e-36ea-4175-80ec-8d143dc2c749">Lua 数据类型</a></li>
+<li><a href="#ID-2432f320-c6ae-44a4-a886-d801b8674f94">Lua 函数</a></li>
+<li><a href="#ID-09c26f8e-676d-4c1a-b392-0a4fe169411d">Lua 字符串</a></li>
+<li><a href="#ID-797f8520-7bfd-42d3-81e8-600c8f05a2df">Lua 数组</a></li>
+<li><a href="#ID-36033706-44ec-40c9-9f1f-9e52517c7ca4">Lua 迭代器</a></li>
+<li><a href="#ID-66bd9f20-0480-4713-8800-fad492574a46">Lua 表 table</a></li>
+<li><a href="#ID-83e40e27-ad20-4167-9486-d244c010cfc4">Lua 元表 Metatable</a></li>
+<li><a href="#ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3">Lua 模块与包</a></li>
+<li><a href="#ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e">Lua 协同程序 coroutine</a></li>
+<li><a href="#ID-9f98a4a7-80be-4291-82ea-f383031c724b">Lua I/O</a></li>
+<li><a href="#ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">Lua 错误处理</a></li>
+<li><a href="#ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c">Lua 垃圾回收</a></li>
 </ul>
 
 <p>
@@ -48,9 +48,9 @@ TOC:
 </p>
 </div>
 
-<div id="outline-container-orga3d5dbc" class="outline-3">
-<h3 id="orga3d5dbc">交互式</h3>
-<div class="outline-text-3" id="text-orga3d5dbc">
+<div id="outline-container-org9513ab6" class="outline-3">
+<h3 id="org9513ab6">交互式</h3>
+<div class="outline-text-3" id="text-org9513ab6">
 <div class="org-src-container">
 <pre class="src src-bash">lua
 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">or</span>
@@ -60,9 +60,9 @@ lua -i
 </div>
 </div>
 
-<div id="outline-container-org7bc8769" class="outline-3">
-<h3 id="org7bc8769">注释</h3>
-<div class="outline-text-3" id="text-org7bc8769">
+<div id="outline-container-org1b704b6" class="outline-3">
+<h3 id="org1b704b6">注释</h3>
+<div class="outline-text-3" id="text-org1b704b6">
 <p>
 特例：shebang <code>#~/usr/bin/env lua</code>
 </p>
@@ -88,18 +88,18 @@ lua -i
 </div>
 </div>
 
-<div id="outline-container-orgb4fc143" class="outline-3">
-<h3 id="orgb4fc143">标示符</h3>
-<div class="outline-text-3" id="text-orgb4fc143">
+<div id="outline-container-org69b8e3f" class="outline-3">
+<h3 id="org69b8e3f">标示符</h3>
+<div class="outline-text-3" id="text-org69b8e3f">
 <p>
 定义变量，以字母 <code>a-zA-Z</code> 或下划线 <code>_</code> 开头，后接数字、字母、下划线组成，不允许使用特殊字符如 <code>@, $, %</code> 来定义标示符，区分大小写
 </p>
 </div>
 </div>
 
-<div id="outline-container-org99d5f5b" class="outline-3">
-<h3 id="org99d5f5b">Lua 关键字</h3>
-<div class="outline-text-3" id="text-org99d5f5b">
+<div id="outline-container-org68dae5f" class="outline-3">
+<h3 id="org68dae5f">Lua 关键字</h3>
+<div class="outline-text-3" id="text-org68dae5f">
 <pre class="example">
 | and      | break | do    | else   |
 | elseif   | end   | false | for    |
@@ -110,9 +110,9 @@ lua -i
 </pre>
 </div>
 </div>
-<div id="outline-container-org41c6963" class="outline-3">
-<h3 id="org41c6963">Lua 运算符</h3>
-<div class="outline-text-3" id="text-org41c6963">
+<div id="outline-container-org8c1d8d2" class="outline-3">
+<h3 id="org8c1d8d2">Lua 运算符</h3>
+<div class="outline-text-3" id="text-org8c1d8d2">
 <p>
 算术运算符：
 </p>
@@ -156,9 +156,9 @@ lua -i
 </ul>
 </div>
 
-<div id="outline-container-org04e9878" class="outline-4">
-<h4 id="org04e9878">运算符优先级</h4>
-<div class="outline-text-4" id="text-org04e9878">
+<div id="outline-container-org767b0c7" class="outline-4">
+<h4 id="org767b0c7">运算符优先级</h4>
+<div class="outline-text-4" id="text-org767b0c7">
 <pre class="example">
 ^
 not  - (unary)
@@ -177,9 +177,9 @@ or
 </div>
 </div>
 
-<div id="outline-container-org23b8cda" class="outline-3">
-<h3 id="org23b8cda">Lua 变量</h3>
-<div class="outline-text-3" id="text-org23b8cda">
+<div id="outline-container-orgc3b6f32" class="outline-3">
+<h3 id="orgc3b6f32">Lua 变量</h3>
+<div class="outline-text-3" id="text-orgc3b6f32">
 <p>
 lua 的变量默认都是全局变量，除非使用 local 进行声明
 </p>
@@ -198,13 +198,13 @@ lua 的变量默认都是全局变量，除非使用 local 进行声明
 </div>
 </div>
 
-<div id="outline-container-orgd0307d8" class="outline-3">
-<h3 id="orgd0307d8">Lua 语法结构</h3>
-<div class="outline-text-3" id="text-orgd0307d8">
+<div id="outline-container-org75bc897" class="outline-3">
+<h3 id="org75bc897">Lua 语法结构</h3>
+<div class="outline-text-3" id="text-org75bc897">
 </div>
-<div id="outline-container-orge91d05e" class="outline-4">
-<h4 id="orge91d05e">循环</h4>
-<div class="outline-text-4" id="text-orge91d05e">
+<div id="outline-container-org76e2aa2" class="outline-4">
+<h4 id="org76e2aa2">循环</h4>
+<div class="outline-text-4" id="text-org76e2aa2">
 <ul class="org-ul">
 <li>while</li>
 <li>for</li>
@@ -239,9 +239,9 @@ end
 </div>
 </div>
 
-<div id="outline-container-org21c01a8" class="outline-4">
-<h4 id="org21c01a8">流程控制</h4>
-<div class="outline-text-4" id="text-org21c01a8">
+<div id="outline-container-org17253b7" class="outline-4">
+<h4 id="org17253b7">流程控制</h4>
+<div class="outline-text-4" id="text-org17253b7">
 <ul class="org-ul">
 <li>if elseif else</li>
 </ul>
@@ -264,9 +264,9 @@ end
 </div>
 
 
-<div id="outline-container-orge31c752" class="outline-2">
-<h2 id="orge31c752">Lua 数据类型</h2>
-<div class="outline-text-2" id="text-orge31c752">
+<div id="outline-container-ID-9380063e-36ea-4175-80ec-8d143dc2c749" class="outline-2">
+<h2 id="ID-9380063e-36ea-4175-80ec-8d143dc2c749">Lua 数据类型</h2>
+<div class="outline-text-2" id="text-ID-9380063e-36ea-4175-80ec-8d143dc2c749">
 <table>
 
 
@@ -332,9 +332,9 @@ end
 </div>
 </div>
 
-<div id="outline-container-org89fad29" class="outline-2">
-<h2 id="org89fad29">Lua 函数</h2>
-<div class="outline-text-2" id="text-org89fad29">
+<div id="outline-container-ID-2432f320-c6ae-44a4-a886-d801b8674f94" class="outline-2">
+<h2 id="ID-2432f320-c6ae-44a4-a886-d801b8674f94">Lua 函数</h2>
+<div class="outline-text-2" id="text-ID-2432f320-c6ae-44a4-a886-d801b8674f94">
 <div class="org-src-container">
 <pre class="src src-lua">optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
   function_body
@@ -348,9 +348,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </p>
 </div>
 
-<div id="outline-container-org67e4ea5" class="outline-3">
-<h3 id="org67e4ea5">可变参数</h3>
-<div class="outline-text-3" id="text-org67e4ea5">
+<div id="outline-container-org4552aa0" class="outline-3">
+<h3 id="org4552aa0">可变参数</h3>
+<div class="outline-text-3" id="text-org4552aa0">
 <p>
 在函数列表中使用三点 <code>...</code> 表示函数有可变的参数，在函数中使用 <code>{...}</code> 表示由所有变长参数构成的数组，也可使用 <code>select("#", ...)</code> 来获取可变参数的数量， <code>select(n, ...)</code> 返回从起点 n 开始到结束位置的所有参数列表，固定参数必须放在变长参数之前。
 </p>
@@ -359,9 +359,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </div>
 
 
-<div id="outline-container-org9955fd6" class="outline-2">
-<h2 id="org9955fd6">Lua 字符串</h2>
-<div class="outline-text-2" id="text-org9955fd6">
+<div id="outline-container-ID-09c26f8e-676d-4c1a-b392-0a4fe169411d" class="outline-2">
+<h2 id="ID-09c26f8e-676d-4c1a-b392-0a4fe169411d">Lua 字符串</h2>
+<div class="outline-text-2" id="text-ID-09c26f8e-676d-4c1a-b392-0a4fe169411d">
 <p>
 表示方法：
 </p>
@@ -376,9 +376,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </p>
 </div>
 
-<div id="outline-container-org0fd36a2" class="outline-3">
-<h3 id="org0fd36a2">字符串方法</h3>
-<div class="outline-text-3" id="text-org0fd36a2">
+<div id="outline-container-org99ea643" class="outline-3">
+<h3 id="org99ea643">字符串方法</h3>
+<div class="outline-text-3" id="text-org99ea643">
 <table>
 
 
@@ -472,9 +472,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </div>
 </div>
 
-<div id="outline-container-orgf1668c9" class="outline-3">
-<h3 id="orgf1668c9">匹配模式</h3>
-<div class="outline-text-3" id="text-orgf1668c9">
+<div id="outline-container-org0bab3e6" class="outline-3">
+<h3 id="org0bab3e6">匹配模式</h3>
+<div class="outline-text-3" id="text-org0bab3e6">
 <p>
 单个字符与其自身匹配 (除 <code>^$()%*+-?</code> 外)
 </p>
@@ -628,17 +628,17 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </div>
 </div>
 
-<div id="outline-container-orge44543e" class="outline-2">
-<h2 id="orge44543e">Lua 数组</h2>
-<div class="outline-text-2" id="text-orge44543e">
+<div id="outline-container-ID-797f8520-7bfd-42d3-81e8-600c8f05a2df" class="outline-2">
+<h2 id="ID-797f8520-7bfd-42d3-81e8-600c8f05a2df">Lua 数组</h2>
+<div class="outline-text-2" id="text-ID-797f8520-7bfd-42d3-81e8-600c8f05a2df">
 <p>
 <b><b>相同数据类型按一定顺序排列的集合</b></b>
 </p>
 </div>
 
-<div id="outline-container-orga72a6a4" class="outline-3">
-<h3 id="orga72a6a4">一维数组</h3>
-<div class="outline-text-3" id="text-orga72a6a4">
+<div id="outline-container-orge6627a2" class="outline-3">
+<h3 id="orge6627a2">一维数组</h3>
+<div class="outline-text-3" id="text-orge6627a2">
 <div class="org-src-container">
 <pre class="src src-lua">array = { "Lua", "Language" }
 
@@ -653,9 +653,9 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </p>
 </div>
 </div>
-<div id="outline-container-org813bd0a" class="outline-3">
-<h3 id="org813bd0a">多维数组</h3>
-<div class="outline-text-3" id="text-org813bd0a">
+<div id="outline-container-org1f6371b" class="outline-3">
+<h3 id="org1f6371b">多维数组</h3>
+<div class="outline-text-3" id="text-org1f6371b">
 <p>
 多维数组即数组中包含数组或一维数组的索引键对应一个数组
 </p>
@@ -663,17 +663,17 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </div>
 </div>
 
-<div id="outline-container-orge979ec6" class="outline-2">
-<h2 id="orge979ec6">Lua 迭代器</h2>
-<div class="outline-text-2" id="text-orge979ec6">
+<div id="outline-container-ID-36033706-44ec-40c9-9f1f-9e52517c7ca4" class="outline-2">
+<h2 id="ID-36033706-44ec-40c9-9f1f-9e52517c7ca4">Lua 迭代器</h2>
+<div class="outline-text-2" id="text-ID-36033706-44ec-40c9-9f1f-9e52517c7ca4">
 <p>
 迭代器 iterator 是一种对象，能够用来遍历标准模板库容器中的部分或全部元素，每个迭代对象代表容器中的确定的地址，Lua 的迭代器是一种支持指针的结构。
 </p>
 </div>
 
-<div id="outline-container-org578365e" class="outline-3">
-<h3 id="org578365e">泛型 for 迭代器</h3>
-<div class="outline-text-3" id="text-org578365e">
+<div id="outline-container-orgdb9e30f" class="outline-3">
+<h3 id="orgdb9e30f">泛型 for 迭代器</h3>
+<div class="outline-text-3" id="text-orgdb9e30f">
 <p>
 泛型 for 在内部保存迭代函数、状态常量、控制变量
 </p>
@@ -693,9 +693,9 @@ end
 </div>
 </div>
 
-<div id="outline-container-org13ae3a6" class="outline-3">
-<h3 id="org13ae3a6">无状态的迭代器</h3>
-<div class="outline-text-3" id="text-org13ae3a6">
+<div id="outline-container-org39366ae" class="outline-3">
+<h3 id="org39366ae">无状态的迭代器</h3>
+<div class="outline-text-3" id="text-org39366ae">
 <p>
 指不保留任何状态的迭代器
 </p>
@@ -749,9 +749,9 @@ end
 </div>
 </div>
 
-<div id="outline-container-orgdc0d909" class="outline-3">
-<h3 id="orgdc0d909">多状态的迭代器</h3>
-<div class="outline-text-3" id="text-orgdc0d909">
+<div id="outline-container-orgf40e2ad" class="outline-3">
+<h3 id="orgf40e2ad">多状态的迭代器</h3>
+<div class="outline-text-3" id="text-orgf40e2ad">
 <p>
 保存多个状态信息的迭代器，最简单方式是闭包，或者将所有的状态信息封装到 表 table 内，将 table 作为迭代器的状态常量
 </p>
@@ -785,9 +785,9 @@ end
 </div>
 
 
-<div id="outline-container-org5868ccf" class="outline-2">
-<h2 id="org5868ccf">Lua 表 table</h2>
-<div class="outline-text-2" id="text-org5868ccf">
+<div id="outline-container-ID-66bd9f20-0480-4713-8800-fad492574a46" class="outline-2">
+<h2 id="ID-66bd9f20-0480-4713-8800-fad492574a46">Lua 表 table</h2>
+<div class="outline-text-2" id="text-ID-66bd9f20-0480-4713-8800-fad492574a46">
 <p>
 table 是关联型数组，可以使用任意类型的值（除 nil）作为数组的索引，同时 Lua 通过 table 来解决模块 (module), 包 (package) 和对象 (Object)的
 </p>
@@ -810,9 +810,9 @@ mytable = nil
 </div>
 </div>
 
-<div id="outline-container-org326d50d" class="outline-3">
-<h3 id="org326d50d">常用方法</h3>
-<div class="outline-text-3" id="text-org326d50d">
+<div id="outline-container-org9fa9458" class="outline-3">
+<h3 id="org9fa9458">常用方法</h3>
+<div class="outline-text-3" id="text-org9fa9458">
 <table>
 
 
@@ -882,17 +882,17 @@ print("tbl 长度   ", #tbl)
 </div>
 </div>
 
-<div id="outline-container-org5d29162" class="outline-2">
-<h2 id="org5d29162">Lua 模块与包</h2>
-<div class="outline-text-2" id="text-org5d29162">
+<div id="outline-container-ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3" class="outline-2">
+<h2 id="ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3">Lua 模块与包</h2>
+<div class="outline-text-2" id="text-ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3">
 <p>
 Lua 的模块是由变量、函数等已知元素组成的 table
 </p>
 </div>
 
-<div id="outline-container-orgf1014da" class="outline-3">
-<h3 id="orgf1014da">require 函数</h3>
-<div class="outline-text-3" id="text-orgf1014da">
+<div id="outline-container-org56788ae" class="outline-3">
+<h3 id="org56788ae">require 函数</h3>
+<div class="outline-text-3" id="text-org56788ae">
 <div class="org-src-container">
 <pre class="src src-lua">require("module")
 
@@ -902,9 +902,9 @@ require "module"
 </div>
 </div>
 
-<div id="outline-container-org30d7f66" class="outline-3">
-<h3 id="org30d7f66">加载机制</h3>
-<div class="outline-text-3" id="text-org30d7f66">
+<div id="outline-container-orgb54ddc6" class="outline-3">
+<h3 id="orgb54ddc6">加载机制</h3>
+<div class="outline-text-3" id="text-orgb54ddc6">
 <p>
 require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA<sub>PATH</sub> 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化
 </p>
@@ -917,9 +917,9 @@ require 用于搜索 Lua 文件的路径是存放在全局变量 package.path �
 </div>
 </div>
 
-<div id="outline-container-org0d7fd4a" class="outline-3">
-<h3 id="org0d7fd4a">C 包</h3>
-<div class="outline-text-3" id="text-org0d7fd4a">
+<div id="outline-container-orgc40a861" class="outline-3">
+<h3 id="orgc40a861">C 包</h3>
+<div class="outline-text-3" id="text-orgc40a861">
 <p>
 C 包在使用以前必须首先加载并连接，在大多数系统中最容易的实现方式是通过动态连接库机制
 </p>
@@ -949,9 +949,9 @@ f()
 </div>
 
 
-<div id="outline-container-org4abea09" class="outline-2">
-<h2 id="org4abea09">Lua 元表 Metatable</h2>
-<div class="outline-text-2" id="text-org4abea09">
+<div id="outline-container-ID-83e40e27-ad20-4167-9486-d244c010cfc4" class="outline-2">
+<h2 id="ID-83e40e27-ad20-4167-9486-d244c010cfc4">Lua 元表 Metatable</h2>
+<div class="outline-text-2" id="text-ID-83e40e27-ad20-4167-9486-d244c010cfc4">
 <p>
 允许改变 table 的行为，每个行为关联了对应的元方法
 </p>
@@ -969,9 +969,9 @@ f()
 </ul>
 </div>
 
-<div id="outline-container-orgcb027da" class="outline-3">
-<h3 id="orgcb027da"><code>__index</code> 元方法</h3>
-<div class="outline-text-3" id="text-orgcb027da">
+<div id="outline-container-orgc5533f9" class="outline-3">
+<h3 id="orgc5533f9"><code>__index</code> 元方法</h3>
+<div class="outline-text-3" id="text-orgc5533f9">
 <p>
 定义了表在索引失败的情况下该怎么办
 </p>
@@ -1027,9 +1027,9 @@ mytable = setmetatable({key = "value1"}, {__index = {key2 = "metatablevalue"}})
 </div>
 </div>
 
-<div id="outline-container-org2169303" class="outline-3">
-<h3 id="org2169303"><code>__newindex</code> 元方法</h3>
-<div class="outline-text-3" id="text-org2169303">
+<div id="outline-container-org4e38d92" class="outline-3">
+<h3 id="org4e38d92"><code>__newindex</code> 元方法</h3>
+<div class="outline-text-3" id="text-org4e38d92">
 <p>
 <code>__newindex</code> 用来对表更新，当给 table 一个缺少的索引赋值，解释器就会查找 <code>__newindex</code> 元方法：如果存在就调用这个函数而不进行赋值操作
 </p>
@@ -1076,27 +1076,27 @@ print(mytable.key1, mytable.key2)
 </div>
 </div>
 
-<div id="outline-container-orgf13ebe7" class="outline-3">
-<h3 id="orgf13ebe7"><code>__call</code> 元方法</h3>
-<div class="outline-text-3" id="text-orgf13ebe7">
+<div id="outline-container-org83a4f92" class="outline-3">
+<h3 id="org83a4f92"><code>__call</code> 元方法</h3>
+<div class="outline-text-3" id="text-org83a4f92">
 <p>
 在 Lua 调用 table 的一个值时调用
 </p>
 </div>
 </div>
 
-<div id="outline-container-org46f2157" class="outline-3">
-<h3 id="org46f2157"><code>__string</code> 元方法</h3>
-<div class="outline-text-3" id="text-org46f2157">
+<div id="outline-container-org45c74dc" class="outline-3">
+<h3 id="org45c74dc"><code>__string</code> 元方法</h3>
+<div class="outline-text-3" id="text-org45c74dc">
 <p>
 修改 table 的输出行为
 </p>
 </div>
 </div>
 
-<div id="outline-container-org15794fa" class="outline-3">
-<h3 id="org15794fa">其他元方法</h3>
-<div class="outline-text-3" id="text-org15794fa">
+<div id="outline-container-org28946d5" class="outline-3">
+<h3 id="org28946d5">其他元方法</h3>
+<div class="outline-text-3" id="text-org28946d5">
 <div class="org-src-container">
 <pre class="src src-lua">__add    +
 __sub    -
@@ -1114,17 +1114,17 @@ __le     &lt;=
 </div>
 </div>
 
-<div id="outline-container-org7c75af5" class="outline-2">
-<h2 id="org7c75af5">Lua 协同程序 coroutine</h2>
-<div class="outline-text-2" id="text-org7c75af5">
+<div id="outline-container-ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e" class="outline-2">
+<h2 id="ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e">Lua 协同程序 coroutine</h2>
+<div class="outline-text-2" id="text-ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e">
 <p>
 Lua 协同程序 (coroutine) 与线程比较类似：拥有独立的堆栈，独立的局部变量，独立的指令指针，同时又与其它协同程序共享全局变量和其它大部分东西
 </p>
 </div>
 
-<div id="outline-container-orge5b9ed1" class="outline-3">
-<h3 id="orge5b9ed1">线程和协同程序区别</h3>
-<div class="outline-text-3" id="text-orge5b9ed1">
+<div id="outline-container-orga0ab555" class="outline-3">
+<h3 id="orga0ab555">线程和协同程序区别</h3>
+<div class="outline-text-3" id="text-orga0ab555">
 <p>
 线程与协同程序的主要区别在于，一个具有多个线程的程序可以同时运行几个线程，而协同程序却需要彼此协作的运行；在任一指定时刻只有一个协同程序在运行，并且这个正在运行的协同程序只有在明确的被要求挂起的时候才会被挂起
 </p>
@@ -1135,9 +1135,9 @@ Lua 协同程序 (coroutine) 与线程比较类似：拥有独立的堆栈，独
 </div>
 </div>
 
-<div id="outline-container-org8c380b8" class="outline-3">
-<h3 id="org8c380b8">基本方法</h3>
-<div class="outline-text-3" id="text-org8c380b8">
+<div id="outline-container-org0673e3e" class="outline-3">
+<h3 id="org0673e3e">基本方法</h3>
+<div class="outline-text-3" id="text-org0673e3e">
 <table>
 
 
@@ -1227,9 +1227,9 @@ consumer()
 </div>
 </div>
 
-<div id="outline-container-orgdd91e7a" class="outline-2">
-<h2 id="orgdd91e7a">Lua I/O</h2>
-<div class="outline-text-2" id="text-orgdd91e7a">
+<div id="outline-container-ID-9f98a4a7-80be-4291-82ea-f383031c724b" class="outline-2">
+<h2 id="ID-9f98a4a7-80be-4291-82ea-f383031c724b">Lua I/O</h2>
+<div class="outline-text-2" id="text-ID-9f98a4a7-80be-4291-82ea-f383031c724b">
 <ul class="org-ul">
 <li>简单模式：拥有一个当前输入文件和当前输出文件，并且提供对这些文件的相关操作</li>
 <li>完全模式：使用外部的文件句柄来实现，以一种面向对象的形式，将所有的文件操作定义为文件句柄的方法</li>
@@ -1256,9 +1256,9 @@ mode:
 </div>
 
 
-<div id="outline-container-orgaa05161" class="outline-3">
-<h3 id="orgaa05161">简单模式</h3>
-<div class="outline-text-3" id="text-orgaa05161">
+<div id="outline-container-org20e3043" class="outline-3">
+<h3 id="org20e3043">简单模式</h3>
+<div class="outline-text-3" id="text-org20e3043">
 <p>
 🌰
 </p>
@@ -1317,9 +1317,9 @@ io.lines(optional file name) 返回一个迭代函数，每次调用获取文件
 </div>
 </div>
 
-<div id="outline-container-org5b30b86" class="outline-3">
-<h3 id="org5b30b86">完全模式</h3>
-<div class="outline-text-3" id="text-org5b30b86">
+<div id="outline-container-org3b53a35" class="outline-3">
+<h3 id="org3b53a35">完全模式</h3>
+<div class="outline-text-3" id="text-org3b53a35">
 <p>
 同一时间处理多个文件，使用 <a href="function_name">function_name</a> 来代替 io.function<sub>name</sub> 方法
 </p>
@@ -1378,13 +1378,13 @@ offset 默认为 0
 </div>
 
 
-<div id="outline-container-org3ffb7ec" class="outline-2">
-<h2 id="org3ffb7ec">Lua 错误处理</h2>
-<div class="outline-text-2" id="text-org3ffb7ec">
+<div id="outline-container-ID-56dfdc61-5be3-40b1-8825-c2523bb2f006" class="outline-2">
+<h2 id="ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">Lua 错误处理</h2>
+<div class="outline-text-2" id="text-ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">
 </div>
-<div id="outline-container-org6f17596" class="outline-3">
-<h3 id="org6f17596">assert()</h3>
-<div class="outline-text-3" id="text-org6f17596">
+<div id="outline-container-org264b71f" class="outline-3">
+<h3 id="org264b71f">assert()</h3>
+<div class="outline-text-3" id="text-org264b71f">
 <p>
 assert(argument, message)
 </p>
@@ -1395,9 +1395,9 @@ assert 首先检查第一个参数，若没问题，assert 不做任何事情；
 </div>
 </div>
 
-<div id="outline-container-org76f6ea4" class="outline-3">
-<h3 id="org76f6ea4">error()</h3>
-<div class="outline-text-3" id="text-org76f6ea4">
+<div id="outline-container-orgef21b04" class="outline-3">
+<h3 id="orgef21b04">error()</h3>
+<div class="outline-text-3" id="text-orgef21b04">
 <p>
 error(message[, level])
 </p>
@@ -1417,9 +1417,9 @@ level 参数指示获得错误的位置
 </div>
 </div>
 
-<div id="outline-container-org4cc40ce" class="outline-3">
-<h3 id="org4cc40ce">pcall, xpcall</h3>
-<div class="outline-text-3" id="text-org4cc40ce">
+<div id="outline-container-orgad5764f" class="outline-3">
+<h3 id="orgad5764f">pcall, xpcall</h3>
+<div class="outline-text-3" id="text-orgad5764f">
 <p>
 pcall 接收一个函数和要传递给后者的参数，并执行，返回值 true / false, errorinfo
 </p>
@@ -1439,15 +1439,15 @@ xpcall 相比与 pcall 接收第二个参数：一个错误处理函数，当错
 </div>
 </div>
 
-<div id="outline-container-orge625b74" class="outline-3">
-<h3 id="orge625b74">debug 库</h3>
+<div id="outline-container-orga8f9241" class="outline-3">
+<h3 id="orga8f9241">debug 库</h3>
 </div>
 </div>
 
 
-<div id="outline-container-orgbbf503e" class="outline-2">
-<h2 id="orgbbf503e">Lua 垃圾回收</h2>
-<div class="outline-text-2" id="text-orgbbf503e">
+<div id="outline-container-ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c" class="outline-2">
+<h2 id="ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c">Lua 垃圾回收</h2>
+<div class="outline-text-2" id="text-ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c">
 <p>
 Lua 运行了一个垃圾收集器来收集所有死对象，实现了一个增量标记-扫描收集器。使用两个标记来控制垃圾收集循环，单位都是百分数
 </p>

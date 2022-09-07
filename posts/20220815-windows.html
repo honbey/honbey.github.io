@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 00:11 -->
+<!-- 2022-09-08 Thu 01:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
@@ -15,13 +15,13 @@
 <header>
 <h1 class="title">Windows</h1>
 </header>
-<div id="outline-container-org0c1c000" class="outline-2">
-<h2 id="org0c1c000">PowerShell</h2>
-<div class="outline-text-2" id="text-org0c1c000">
+<div id="outline-container-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf" class="outline-2">
+<h2 id="ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</h2>
+<div class="outline-text-2" id="text-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">
 </div>
-<div id="outline-container-org4fd90e5" class="outline-3">
-<h3 id="org4fd90e5">Specific PowerShell as SSH terminal on Windows</h3>
-<div class="outline-text-3" id="text-org4fd90e5">
+<div id="outline-container-org0c80527" class="outline-3">
+<h3 id="org0c80527">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-org0c80527">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -33,9 +33,9 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 </div>
 </div>
 
-<div id="outline-container-org03a5869" class="outline-3">
-<h3 id="org03a5869">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org03a5869">
+<div id="outline-container-org0408618" class="outline-3">
+<h3 id="org0408618">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org0408618">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
@@ -45,22 +45,22 @@ Remove-Item (Get-PSReadlineOption).HistorySavePath
 </div>
 </div>
 
-<div id="outline-container-org26cbb6d" class="outline-2">
-<h2 id="org26cbb6d">Registry</h2>
-<div class="outline-text-2" id="text-org26cbb6d">
+<div id="outline-container-org34ee39d" class="outline-2">
+<h2 id="org34ee39d">Registry</h2>
+<div class="outline-text-2" id="text-org34ee39d">
 </div>
-<div id="outline-container-orgeb2966b" class="outline-3">
-<h3 id="orgeb2966b">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orgeb2966b">
+<div id="outline-container-orgb945e69" class="outline-3">
+<h3 id="orgb945e69">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgb945e69">
 <div class="org-src-container">
 <pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org752a992" class="outline-4">
-<h4 id="org752a992">Clear login record</h4>
-<div class="outline-text-4" id="text-org752a992">
+<div id="outline-container-org52a9e37" class="outline-4">
+<h4 id="org52a9e37">Clear login record</h4>
+<div class="outline-text-4" id="text-org52a9e37">
 <div class="org-src-container">
 <pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
 reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
@@ -73,13 +73,13 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-org8848777" class="outline-2">
-<h2 id="org8848777">Hyper-V</h2>
-<div class="outline-text-2" id="text-org8848777">
+<div id="outline-container-org6ffe646" class="outline-2">
+<h2 id="org6ffe646">Hyper-V</h2>
+<div class="outline-text-2" id="text-org6ffe646">
 </div>
-<div id="outline-container-orge98b925" class="outline-3">
-<h3 id="orge98b925">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
-<div class="outline-text-3" id="text-orge98b925">
+<div id="outline-container-orgc5b7dd7" class="outline-3">
+<h3 id="orgc5b7dd7">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-orgc5b7dd7">
 <ol class="org-ol">
 <li>Enter Debug mode</li>
 <li>Execute <code>mount -0 remount,re/mnt</code></li>
@@ -91,9 +91,9 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-org7c4265c" class="outline-2">
-<h2 id="org7c4265c">Useful info</h2>
-<div class="outline-text-2" id="text-org7c4265c">
+<div id="outline-container-org5807d4f" class="outline-2">
+<h2 id="org5807d4f">Useful info</h2>
+<div class="outline-text-2" id="text-org5807d4f">
 <p>
 Software - UWP:
 </p>
@@ -101,7 +101,7 @@ Software - UWP:
 <li>WSL (Windows Subsystem of <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a>, not WSL2)</li>
 <li>Minecraft (<a href="minecraft.html#ID-d5529dd0-e6d0-4bcc-9afe-ca830e085acc">Bedrock Edition</a>)</li>
 <li>Windows Terminal</li>
-<li><a href="#org0c1c000">PowerShell</a></li>
+<li><a href="#ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</a></li>
 <li>QuickLook</li>
 <li>Translucent TB</li>
 <li>X410</li>
@@ -247,9 +247,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </table>
 </div>
 
-<div id="outline-container-orga55975b" class="outline-3">
-<h3 id="orga55975b">Automatic shutdown</h3>
-<div class="outline-text-3" id="text-orga55975b">
+<div id="outline-container-orgac4fc1a" class="outline-3">
+<h3 id="orgac4fc1a">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-orgac4fc1a">
 <table>
 <caption class="t-above"><span class="table-number">Table 2:</span> usage of shutdown</caption>
 
@@ -284,9 +284,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </div>
 </div>
 
-<div id="outline-container-org0f1c21c" class="outline-3">
-<h3 id="org0f1c21c">Operate disk</h3>
-<div class="outline-text-3" id="text-org0f1c21c">
+<div id="outline-container-orgcbf8aee" class="outline-3">
+<h3 id="orgcbf8aee">Operate disk</h3>
+<div class="outline-text-3" id="text-orgcbf8aee">
 <p>
 <code>diskpart</code>
 </p>
