@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-07 Wed 23:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python</title>
@@ -23,7 +23,7 @@
 <h3 id="orgd66d841">numpy - Scientific calculation</h3>
 <div class="outline-text-3" id="text-orgd66d841">
 <p>
-Numpy remove scientific notation:
+Numpy remove scientific notation<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
@@ -73,9 +73,9 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 <h2 id="orge3ffa53">Dict</h2>
 <div class="outline-text-2" id="text-orge3ffa53">
 </div>
-<div id="outline-container-org929e9d2" class="outline-3">
-<h3 id="org929e9d2">Seven method to merge dictionary in Python</h3>
-<div class="outline-text-3" id="text-org929e9d2">
+<div id="outline-container-org3e1b1f6" class="outline-3">
+<h3 id="org3e1b1f6">Merge dictionary in Python</h3>
+<div class="outline-text-3" id="text-org3e1b1f6">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> = {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
 </pre>
@@ -152,12 +152,11 @@ Example:
 <h2 id="org0c4175a"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
 <div class="outline-text-2" id="text-org0c4175a">
 </div>
-<div id="outline-container-orgd8a109e" class="outline-3">
-<h3 id="orgd8a109e">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orgd8a109e">
+<div id="outline-container-orgdd2ba93" class="outline-3">
+<h3 id="orgdd2ba93">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgdd2ba93">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://github.com/streamlit/streamlit/commit/80d9979d5f4a00217743d607078a1d867fad8acf</span>
 <span style="color: #0000FF;">import</span> os
 
 <span style="color: #BA36A5;">app_root</span> = <span style="color: #008000;">'/data/app'</span>
@@ -174,8 +173,63 @@ Example:
 </div>
 </div>
 </div>
-</div>
+<div id="outline-container-org021ec1f" class="outline-3">
+<h3 id="org021ec1f">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
+<div class="outline-text-3" id="text-org021ec1f">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">import</span> ipaddress
+<span style="color: #0000FF;">import</span> dns.resolver
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Configure the whitelist to check</span>
+<span style="color: #BA36A5;">DOMAINS_WHITELIST</span> = [<span style="color: #008000;">"baidu.com"</span>, <span style="color: #008000;">"labslinux"</span>]
+<span style="color: #BA36A5;">DNS_RESOLVER</span> = dns.resolver.Resolver()
+DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="color: #008000;">"1.1.1.1"</span>]
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">verify_dns_records</span>(domain, records, <span style="color: #006FE0;">type</span>):
+    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">False</span>
+    <span style="color: #0000FF;">if</span> records <span style="color: #0000FF;">is</span> <span style="color: #0000FF;">not</span> <span style="color: #D0372D;">None</span>:
+        <span style="color: #0000FF;">for</span> record <span style="color: #0000FF;">in</span> records:
+            value = record.to_text().strip()
+            <span style="color: #0000FF;">try</span>:
+                ip = ipaddress.ip_address(value)
 
+                <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> ip.is_global:
+                    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] DNS record type '%s' for domain name '%s' resolve to</span>
+<span style="color: #008000;">                    a non public IP address '%s'!"</span> % (<span style="color: #006FE0;">type</span>, domain, value))
+                    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
+            <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">ValueError</span>:
+                error_detected = <span style="color: #D0372D;">True</span>
+                <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] '%s' is not valid IP address!"</span> % value)
+    <span style="color: #0000FF;">return</span> error_detected
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">check</span>():
+    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">False</span>
+    <span style="color: #0000FF;">for</span> domain <span style="color: #0000FF;">in</span> DOMAINS_WHITELIST:
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Get the IPs of the current domain</span>
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">See https://en.wikipedia.org/wiki/List_of_DNS_record_types</span>
+        <span style="color: #0000FF;">try</span>:
+            <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A = IPv4 address record</span>
+            <span style="color: #BA36A5;">ip_v4_records</span> = DNS_RESOLVER.query(domain, <span style="color: #008000;">"A"</span>)
+        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> <span style="color: #BA36A5;">e</span>:
+            ip_v4_records = <span style="color: #D0372D;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s\n"</span> % (domain,e))
+        <span style="color: #0000FF;">try</span>:
+           ip_v6_records = DNS_RESOLVER.query(domain, <span style="color: #008000;">"AAAA"</span>)
+        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> <span style="color: #BA36A5;">e</span>:
+            ip_v6_records = <span style="color: #D0372D;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s\n"</span> % (domain,e))
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Verify the IPs obtained</span>
+        <span style="color: #0000FF;">if</span> verify_dns_records(domain, ip_v4_records, <span style="color: #008000;">"A"</span>)
+        <span style="color: #0000FF;">or</span> verify_dns_records(domain, ip_v6_records, <span style="color: #008000;">"AAAA"</span>):
+            <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
+    <span style="color: #0000FF;">return</span> error_detected
+<span style="color: #0000FF;">if</span> <span style="color: #006FE0;">__name__</span>== <span style="color: #008000;">"__main__"</span>:
+    <span style="color: #0000FF;">if</span> check():
+        <span style="color: #D0372D;">exit</span>(<span style="color: #D0372D;">1</span>)
+    <span style="color: #0000FF;">else</span>:
+        <span style="color: #D0372D;">exit</span>(<span style="color: #D0372D;">0</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
 <div id="outline-container-org11879e4" class="outline-2">
 <h2 id="org11879e4">playground</h2>
 <div class="outline-text-2" id="text-org11879e4">
@@ -183,7 +237,7 @@ Example:
 <pre class="src src-python-jit">print('Hello world')
 </pre>
 </div>
-<div class="klipsify div" id="org7c00da5">
+<div class="klipsify div" id="org457926a">
 <script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
 <script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
@@ -191,7 +245,25 @@ Example:
 </div>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+参考 <a href="https://stackoverflow.com/questions/9777783/suppress-scientific-notation-in-numpy-when-creating-array-from-nested-list">stackoverflow 的回答</a>， <a href="https://numpy.org/doc/stable/reference/generated/numpy.set_printoptions.html">官方文档</a>有每个配置项的说明。
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+参考 <a href="https://github.com/streamlit/streamlit/commit/80d9979d5f4a00217743d607078a1d867fad8acf">streamlit 的补丁</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+参考 <a href="https://blog.csdn.net/qq_34974749/article/details/112424693">CSDN 博主 oxff644 的文章《SSRF漏洞原理及应用》</a>
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

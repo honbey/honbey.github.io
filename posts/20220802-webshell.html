@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-07 Wed 23:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Webshell</title>
@@ -14,25 +14,7 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Webshell</h1>
-</header><p>
-Webshell 通常是黑客用于控制网站服务器的文件，通常以 php, jsp, asp, asp.net 等载体存在于服务器网站目录下。
-</p>
-
-<p>
-Webshell 处置流程：
-</p>
-<ol class="org-ol">
-<li>确认文件是否为正常业务文件，排除误报的情况</li>
-<li>确认是 Webshell 后，若业务允许，需要立即隔离当前主机</li>
-<li>进行攻击溯源，修复导致 Webshell 的相关漏洞</li>
-<li>删除已存在的 Webshell</li>
-<li>对当前主机进行全面排查，确保清除所有已存在的后门</li>
-<li>安排主机及业务重新上线</li>
-</ol>
-<p>
-总的来说就是：排查、清除、关站，看有没有修复的可能。
-</p>
-
+</header>
 <div id="outline-container-orge415aac" class="outline-2">
 <h2 id="orge415aac">PHP Webshell</h2>
 <div class="outline-text-2" id="text-orge415aac">
@@ -123,7 +105,62 @@ function iJG($BHM) {
 </div>
 </div>
 </div>
+
+<div id="outline-container-org0ae09fa" class="outline-2">
+<h2 id="org0ae09fa">ASP Webshell</h2>
+<div class="outline-text-2" id="text-org0ae09fa">
 </div>
+<div id="outline-container-org0c8e3b2" class="outline-3">
+<h3 id="org0c8e3b2">Global.asax</h3>
+<div class="outline-text-3" id="text-org0c8e3b2">
+<p>
+文件说明<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+</div>
+</div>
+<div id="outline-container-org244b8ef" class="outline-3">
+<h3 id="org244b8ef">ILSpy</h3>
+<div class="outline-text-3" id="text-org244b8ef">
+<p>
+.NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&amp;more) - cross-platform!<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.cnblogs.com/supersnowyao/p/8159251.html">Global.asax 文件说明 - SuperSnowYao - 博客园</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://github.com/icsharpcode/ILSpy">https://github.com/icsharpcode/ILSpy</a>
+</p>
+
+<p class="footpara">
+Webshell 通常是黑客用于控制网站服务器的文件，通常以 php, jsp, asp, asp.net 等载体存在于服务器网站目录下。
+</p>
+
+<p class="footpara">
+Webshell 处置流程：
+</p>
+<ol class="org-ol">
+<li>确认文件是否为正常业务文件，排除误报的情况</li>
+<li>确认是 Webshell 后，若业务允许，需要立即隔离当前主机</li>
+<li>进行攻击溯源，修复导致 Webshell 的相关漏洞</li>
+<li>删除已存在的 Webshell</li>
+<li>对当前主机进行全面排查，确保清除所有已存在的后门</li>
+<li>安排主机及业务重新上线</li>
+</ol>
+<p class="footpara">
+总的来说就是：排查、清除、关站，看有没有修复的可能。
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

