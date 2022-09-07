@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nginx</title>
@@ -15,47 +15,47 @@
 <header>
 <h1 class="title">Nginx</h1>
 </header>
-<div id="outline-container-org275522f" class="outline-2">
-<h2 id="org275522f">Nginx</h2>
-<div class="outline-text-2" id="text-org275522f">
+<div id="outline-container-org4ab65ac" class="outline-2">
+<h2 id="org4ab65ac">Nginx</h2>
+<div class="outline-text-2" id="text-org4ab65ac">
 <ul class="org-ul">
-<li><a href="#org8600d7c">Directives</a></li>
-<li><a href="#org34373cf">Variables</a></li>
+<li><a href="#orgb76ce0b">Directives</a></li>
+<li><a href="#org1f2c0b9">Variables</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8600d7c" class="outline-2">
-<h2 id="org8600d7c">Directives</h2>
-<div class="outline-text-2" id="text-org8600d7c">
+<div id="outline-container-orgb76ce0b" class="outline-2">
+<h2 id="orgb76ce0b">Directives</h2>
+<div class="outline-text-2" id="text-orgb76ce0b">
 </div>
-<div id="outline-container-org7e6771b" class="outline-3">
-<h3 id="org7e6771b">sendfile</h3>
-<div class="outline-text-3" id="text-org7e6771b">
+<div id="outline-container-org4820c4b" class="outline-3">
+<h3 id="org4820c4b">sendfile</h3>
+<div class="outline-text-3" id="text-org4820c4b">
 <p>
 默认 off ，配置是否由 Linux 内核直接读取文件（ <a href="20220724-linux.html#ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">System Call</a> ），而不是通过 read, write 来操作。
 </p>
 </div>
 </div>
-<div id="outline-container-org8d2be28" class="outline-3">
-<h3 id="org8d2be28">tcp_nopush</h3>
-<div class="outline-text-3" id="text-org8d2be28">
+<div id="outline-container-orga086f5c" class="outline-3">
+<h3 id="orga086f5c">tcp_nopush</h3>
+<div class="outline-text-3" id="text-orga086f5c">
 <p>
 默认 off ，配置是否开启 socket 的 <a href="20220718-socket.html#ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-org9c2ae70" class="outline-3">
-<h3 id="org9c2ae70">tcp_nodelay</h3>
-<div class="outline-text-3" id="text-org9c2ae70">
+<div id="outline-container-org86d7fe6" class="outline-3">
+<h3 id="org86d7fe6">tcp_nodelay</h3>
+<div class="outline-text-3" id="text-org86d7fe6">
 <p>
 默认 on ，配置是否关闭 nagle 算法，即 <a href="20220718-socket.html#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-org9da857e" class="outline-3">
-<h3 id="org9da857e">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
-<div class="outline-text-3" id="text-org9da857e">
+<div id="outline-container-orgb631ff2" class="outline-3">
+<h3 id="orgb631ff2">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
+<div class="outline-text-3" id="text-orgb631ff2">
 <div class="org-src-container">
 <pre class="src src-nginx">log_format combined '$remote_addr - $remote_user [$time_local] "$request" '
                     '$status $body_bytes_sent "$http_referer" '
@@ -113,13 +113,13 @@ access_log     /var/data/log/nginx/json_access.log json_analytics buffer=4k flus
 </div>
 </div>
 
-<div id="outline-container-org34373cf" class="outline-2">
-<h2 id="org34373cf">Variables</h2>
-<div class="outline-text-2" id="text-org34373cf">
+<div id="outline-container-org1f2c0b9" class="outline-2">
+<h2 id="org1f2c0b9">Variables</h2>
+<div class="outline-text-2" id="text-org1f2c0b9">
 </div>
-<div id="outline-container-org14ea3fe" class="outline-3">
-<h3 id="org14ea3fe">upstream_response_length</h3>
-<div class="outline-text-3" id="text-org14ea3fe">
+<div id="outline-container-org3b652c6" class="outline-3">
+<h3 id="org3b652c6">upstream_response_length</h3>
+<div class="outline-text-3" id="text-org3b652c6">
 <blockquote>
 <p>
 $upstream_response_length

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Socket</title>
@@ -24,11 +24,11 @@
 </ul></li>
 </ul>
 
-<div id="outline-container-org305e7cd" class="outline-2">
-<h2 id="org305e7cd">Socket 编程</h2>
-<div class="outline-text-2" id="text-org305e7cd">
+<div id="outline-container-org79c8971" class="outline-2">
+<h2 id="org79c8971">Socket 编程</h2>
+<div class="outline-text-2" id="text-org79c8971">
 
-<figure id="orgf9a3649">
+<figure id="orgcc1bc81">
 <img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
@@ -54,9 +54,9 @@
 </p>
 </div>
 
-<div id="outline-container-org0f37fa9" class="outline-3">
-<h3 id="org0f37fa9">backlog</h3>
-<div class="outline-text-3" id="text-org0f37fa9">
+<div id="outline-container-orgec5e485" class="outline-3">
+<h3 id="orgec5e485">backlog</h3>
+<div class="outline-text-3" id="text-orgec5e485">
 <p>
 Linux 内核会维护两个队列：
 </p>
@@ -70,14 +70,15 @@ Linux 内核会维护两个队列：
 </pre>
 </div>
 <p>
-<code>socketfd</code> 为 <code>socket</code> 文件描述符， <code>backlog</code> 为 SYN 队列的大小， Linux 2.2 后， <code>backlog</code> 为 Accpet 队列的大小。但上限值是内核参数 <code>somaxconn</code> 的大小，即 <code>Accpet 队列长度 = min(backlog, somaxconn)</code> 。
+<code>socketfd</code> 为 <code>socket</code> 文件描述符， <code>backlog</code> 为 SYN 队列的大小， Linux 2.2 后， <code>backlog</code> 为 Accpet 队列的大小。
+但上限值是内核参数 <code>somaxconn</code> 的大小，即 <code>Accpet 队列长度 = min(backlog, somaxconn)</code> 。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5488e07" class="outline-3">
-<h3 id="org5488e07"><code>TCP_NODELAY</code></h3>
-<div class="outline-text-3" id="text-org5488e07">
+<div id="outline-container-orgfd9f7ba" class="outline-3">
+<h3 id="orgfd9f7ba"><code>TCP_NODELAY</code></h3>
+<div class="outline-text-3" id="text-orgfd9f7ba">
 <p>
 配置是否关闭 nagle 算法。
 </p>
@@ -87,9 +88,9 @@ Linux 内核会维护两个队列：
 </div>
 </div>
 </div>
-<div id="outline-container-orge3e01af" class="outline-3">
-<h3 id="orge3e01af"><code>TCP_CORK</code></h3>
-<div class="outline-text-3" id="text-orge3e01af">
+<div id="outline-container-org6e022a2" class="outline-3">
+<h3 id="org6e022a2"><code>TCP_CORK</code></h3>
+<div class="outline-text-3" id="text-org6e022a2">
 <p>
 功能类似于在发送数据管道出口处插入一个“塞子”，使得发送数据全部被阻塞，直到取消 <code>TCP_CORK</code> 选项（即拔去塞子）或被阻塞数据长度已超过 <code>MSS</code> 才将其发送出去。
 <code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
@@ -100,9 +101,9 @@ Linux 内核会维护两个队列：
 </div>
 </div>
 </div>
-<div id="outline-container-orgffd63df" class="outline-3">
-<h3 id="orgffd63df"><code>SO_LINGER</code></h3>
-<div class="outline-text-3" id="text-orgffd63df">
+<div id="outline-container-orgd5dd503" class="outline-3">
+<h3 id="orgd5dd503"><code>SO_LINGER</code></h3>
+<div class="outline-text-3" id="text-orgd5dd503">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> {
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">l_onoff</span>;  <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Linger active</span><span style="color: #8D8D84;"> */</span>
@@ -133,9 +134,9 @@ Linux 内核会维护两个队列：
 </div>
 </div>
 </div>
-<div id="outline-container-org61a1169" class="outline-2">
-<h2 id="org61a1169">Reference</h2>
-<div class="outline-text-2" id="text-org61a1169">
+<div id="outline-container-orgcfa86b3" class="outline-2">
+<h2 id="orgcfa86b3">Reference</h2>
+<div class="outline-text-2" id="text-orgcfa86b3">
 <ul class="org-ul">
 <li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>

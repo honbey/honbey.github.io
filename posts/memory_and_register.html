@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
@@ -15,11 +15,11 @@
 <header>
 <h1 class="title">内存与寄存器</h1>
 </header>
-<div id="outline-container-org3da20db" class="outline-2">
-<h2 id="org3da20db">函数栈帧</h2>
-<div class="outline-text-2" id="text-org3da20db">
+<div id="outline-container-org132e047" class="outline-2">
+<h2 id="org132e047">函数栈帧</h2>
+<div class="outline-text-2" id="text-org132e047">
 
-<figure id="orgc8e8e83">
+<figure id="org081a165">
 <img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
@@ -27,9 +27,9 @@
 </div>
 
 
-<div id="outline-container-org71e7f01" class="outline-2">
-<h2 id="org71e7f01">常用寄存器</h2>
-<div class="outline-text-2" id="text-org71e7f01">
+<div id="outline-container-orge4b6aab" class="outline-2">
+<h2 id="orge4b6aab">常用寄存器</h2>
+<div class="outline-text-2" id="text-orge4b6aab">
 <table>
 
 
@@ -75,14 +75,14 @@
 </div>
 
 
-<div id="outline-container-orgc0ef730" class="outline-2">
-<h2 id="orgc0ef730">程序执行过程中内存和寄存器的变化</h2>
-<div class="outline-text-2" id="text-orgc0ef730">
+<div id="outline-container-orge31dee6" class="outline-2">
+<h2 id="orge31dee6">程序执行过程中内存和寄存器的变化</h2>
+<div class="outline-text-2" id="text-orge31dee6">
 <p>
 给 a 赋值后
 </p>
 
-<figure id="org43035f9">
+<figure id="orgeb1afa5">
 <img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -92,7 +92,7 @@
 </p>
 
 
-<figure id="org62f3d4d">
+<figure id="orgc193edc">
 <img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -101,7 +101,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org55fc416">
+<figure id="org718830f">
 <img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -110,24 +110,25 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="org5449f3c">
+<figure id="org3d04a70">
 <img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
 
 <p>
-当 fun 函数执行完毕，fun 函数的栈帧将被 OS 回收，EBP 将重新指向原 EBP 指向的内存，而 ESP 指向了原 ESP+4 的内存地址，说明发生了 POP 操作，弹出了返回地址 0x401093，原 ESP 的值是当前 EIP 的值，这个地址被存入了 EIP 中，也就是被 CPU 执行了，以便继续执行 main 函数。最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
+当 fun 函数执行完毕，fun 函数的栈帧将被 OS 回收，EBP 将重新指向原 EBP 指向的内存，而 ESP 指向了原 ESP+4 的内存地址，说明发生了 POP 操作，弹出了返回地址 0x401093，原 ESP 的值是当前 EIP 的值，这个地址被存入了 EIP 中，也就是被 CPU 执行了，以便继续执行 main 函数。
+最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="orgbfe17d4">
+<figure id="orgcade966">
 <img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
 </div>
 
-<div id="outline-container-orgc2b34a5" class="outline-3">
-<h3 id="orgc2b34a5">源代码</h3>
-<div class="outline-text-3" id="text-orgc2b34a5">
+<div id="outline-container-org0490d59" class="outline-3">
+<h3 id="org0490d59">源代码</h3>
+<div class="outline-text-3" id="text-org0490d59">
 <p>
 一个简单的加法函数和主函数，主函数中调用 fun() 实现两个变量的加法运算
 </p>

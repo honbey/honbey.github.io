@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-07 Wed 23:11 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Redis</title>
@@ -16,9 +16,9 @@
 <h1 class="title">Redis</h1>
 </header>
 
-<div id="outline-container-orge5dfb31" class="outline-2">
-<h2 id="orge5dfb31">基本数据结构</h2>
-<div class="outline-text-2" id="text-orge5dfb31">
+<div id="outline-container-org2dbd902" class="outline-2">
+<h2 id="org2dbd902">基本数据结构</h2>
+<div class="outline-text-2" id="text-org2dbd902">
 <p>
 参考来源<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
@@ -40,9 +40,9 @@ list, hash, set, zset 四种是容器型数据结构，共享以下规则：
 </ul>
 </div>
 
-<div id="outline-container-orgcf18676" class="outline-3">
-<h3 id="orgcf18676">string</h3>
-<div class="outline-text-3" id="text-orgcf18676">
+<div id="outline-container-orgd1711de" class="outline-3">
+<h3 id="orgd1711de">string</h3>
+<div class="outline-text-3" id="text-orgd1711de">
 <p>
 Redis 中最简单也是最广泛使用的数据结构，内部是一个字符数组，通过预分配（冗余分配），即对字符数组预先分配一定空间，达到扩容阈值时，再按规则进行扩容。 Redis 中的扩容规则：
 </p>
@@ -83,9 +83,9 @@ incrby key increment
 </div>
 </div>
 </div>
-<div id="outline-container-orgb547152" class="outline-3">
-<h3 id="orgb547152">list</h3>
-<div class="outline-text-3" id="text-orgb547152">
+<div id="outline-container-org1fb7c90" class="outline-3">
+<h3 id="org1fb7c90">list</h3>
+<div class="outline-text-3" id="text-org1fb7c90">
 <p>
 双向链表数据结构，支持前后顺序遍历。使用场景如异步队列。
 Redis 底层的 list 是一个 quicklist ，由多个 ziplist 组成成的双向列表， ziplist 指一块连续的内存存储空间。 Redis 对于 list 的存储，当元素个数少时，使用一块连续的内存，以减少为元素增加 prev 和 next 指针带来的内存消耗。同时减少内存碎片。
@@ -117,9 +117,9 @@ ltrim key begin end
 </div>
 </div>
 </div>
-<div id="outline-container-org3e3c9b6" class="outline-3">
-<h3 id="org3e3c9b6">hash</h3>
-<div class="outline-text-3" id="text-org3e3c9b6">
+<div id="outline-container-org53241b2" class="outline-3">
+<h3 id="org53241b2">hash</h3>
+<div class="outline-text-3" id="text-org53241b2">
 <p>
 hash 相当于根据散列值分布的无序字典，内部的元素通过键值对的方式存储。 Redis 中 hash 底层是由数组 + 链表组成的。
 Redis 的 hash 的 value 只能是 string ，扩容采用 rehash 。
@@ -147,9 +147,9 @@ hincrby dict key increment
 </div>
 </div>
 </div>
-<div id="outline-container-org3dda669" class="outline-3">
-<h3 id="org3dda669">set</h3>
-<div class="outline-text-3" id="text-org3dda669">
+<div id="outline-container-org514633e" class="outline-3">
+<h3 id="org514633e">set</h3>
+<div class="outline-text-3" id="text-org514633e">
 <p>
 set 内部的键值是无序的、唯一的，内部实现了一个所有 value 为 null 的特殊字典。
 </p>
@@ -172,9 +172,9 @@ spop set [count=1]
 </div>
 </div>
 </div>
-<div id="outline-container-orgfcd3a14" class="outline-3">
-<h3 id="orgfcd3a14">zset</h3>
-<div class="outline-text-3" id="text-orgfcd3a14">
+<div id="outline-container-orgc32abc6" class="outline-3">
+<h3 id="orgc32abc6">zset</h3>
+<div class="outline-text-3" id="text-orgc32abc6">
 <p>
 通过 value 的 score （权重）进行排序，排序通过 <a href="20220730-skip_list.html#ID-5b550aea-f832-4b51-a7e1-205e6c7d8288">Skip List</a> 实现。
 </p>
@@ -205,9 +205,9 @@ zrem set key [key ...]
 </div>
 </div>
 
-<div id="outline-container-orgd633aa4" class="outline-2">
-<h2 id="orgd633aa4">Redis 写文件落盘&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h2>
-<div class="outline-text-2" id="text-orgd633aa4">
+<div id="outline-container-org7b80ad2" class="outline-2">
+<h2 id="org7b80ad2">Redis 写文件落盘&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h2>
+<div class="outline-text-2" id="text-org7b80ad2">
 <div class="org-src-container">
 <pre class="src src-redis">flushall
 config set dir C:\phpstudy_pro\WWW\one.php.local\

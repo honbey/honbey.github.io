@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>log</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">log</h1>
 </header>
-<div id="outline-container-org26c636e" class="outline-2">
-<h2 id="org26c636e">日志分析发展<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
-<div class="outline-text-2" id="text-org26c636e">
+<div id="outline-container-org9d4b837" class="outline-2">
+<h2 id="org9d4b837">日志分析发展<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-org9d4b837">
 <ol class="org-ol">
 <li>Local Storage + Pssh Scan 跳板机上各种脚本，使用 shell 封装脚本查询；</li>
 <li>Central Storage + Inverted Index 典型代表 ElasticSearch ； Lucene + Restful API + ELK(Logstash + Kibana) + Distribution；
@@ -43,19 +43,22 @@ TP &amp; AP
 </ul>
 </div>
 
-<div id="outline-container-org21ecbad" class="outline-3">
-<h3 id="org21ecbad">例<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> - <a href="20220724-nginx.html#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a></h3>
-<div class="outline-text-3" id="text-org21ecbad">
+<div id="outline-container-org9f80ba1" class="outline-3">
+<h3 id="org9f80ba1">例<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> - <a href="20220724-nginx.html#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a></h3>
+<div class="outline-text-3" id="text-org9f80ba1">
 <ol class="org-ol">
-<li>第一阶段（数据产生 1 分钟内）：程序要看到实时业务，运营客服人员需要查看轨迹定位问题。这种场景一般都在小时内， 查询频率比较高；在出问题后查询频率较高，需要对全部日志进行快速查询。</li>
-<li>第二阶段（数据产生 1 - 2 小时左右）：业务需要洞察数据，一般都是小时级或天级别。查询频率一般，往往也都是针对于聚合后的数据；要求分析能力，百万次的特征查询或几十次 / 天的数据透视。</li>
-<li>第三阶段（一天后）：审计需要，业务需要看趋势数据。查询频率比较低，往往是点查（例如回溯一个历史问题）。着重考虑成本，查询频率比较低。</li>
+<li>第一阶段（数据产生 1 分钟内）：程序要看到实时业务，运营客服人员需要查看轨迹定位问题。这种场景一般都在小时内， 查询频率比较高；
+在出问题后查询频率较高，需要对全部日志进行快速查询。</li>
+<li>第二阶段（数据产生 1 - 2 小时左右）：业务需要洞察数据，一般都是小时级或天级别。查询频率一般，往往也都是针对于聚合后的数据；
+要求分析能力，百万次的特征查询或几十次 / 天的数据透视。</li>
+<li>第三阶段（一天后）：审计需要，业务需要看趋势数据。查询频率比较低，往往是点查（例如回溯一个历史问题）。
+着重考虑成本，查询频率比较低。</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org938b69f" class="outline-3">
-<h3 id="org938b69f">定量分析<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
-<div class="outline-text-3" id="text-org938b69f">
+<div id="outline-container-orgcaf9634" class="outline-3">
+<h3 id="orgcaf9634">定量分析<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-orgcaf9634">
 <p>
 原始数据量为 X，倒排索引的数据量为原始数据的 a 倍，列存储空间为原始数据的 b 倍，需要预留的空间（例如 redo log, reserved space ） 为 c 倍，每 GB 介质成本是 e，为了保证可靠性，需要的副本是 d。
 </p>
@@ -70,9 +73,9 @@ TP &amp; AP
 </div>
 </div>
 </div>
-<div id="outline-container-org392721e" class="outline-2">
-<h2 id="org392721e">日志解析<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h2>
-<div class="outline-text-2" id="text-org392721e">
+<div id="outline-container-org5eaec94" class="outline-2">
+<h2 id="org5eaec94">日志解析<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h2>
+<div class="outline-text-2" id="text-org5eaec94">
 <p>
 日志是一种半结构化数据，由特定的代码生成的。（也可以是结构化数据，如 JSON）。
 </p>
@@ -88,9 +91,9 @@ TP &amp; AP
 </p>
 </div>
 </div>
-<div id="outline-container-orgd3dc733" class="outline-2">
-<h2 id="orgd3dc733">Reference</h2>
-<div class="outline-text-2" id="text-orgd3dc733">
+<div id="outline-container-org405e58a" class="outline-2">
+<h2 id="org405e58a">Reference</h2>
+<div class="outline-text-2" id="text-org405e58a">
 </div>
 </div>
 <div id="footnotes">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HTTP</title>
@@ -50,9 +50,9 @@
 </ul></li>
 </ul>
 
-<div id="outline-container-org9413056" class="outline-2">
-<h2 id="org9413056">HTTP 基本概念</h2>
-<div class="outline-text-2" id="text-org9413056">
+<div id="outline-container-org421909d" class="outline-2">
+<h2 id="org421909d">HTTP 基本概念</h2>
+<div class="outline-text-2" id="text-org421909d">
 <p>
 HTTP 是超文本传输协议（HyperText Transfer Protocol），可以分成 3 个部分：
 </p>
@@ -67,17 +67,22 @@ HTTP 是超文本传输协议（HyperText Transfer Protocol），可以分成 3 
 </p>
 
 <p>
-HTTP 的优点：简单、灵活和易于扩展、应用广泛和跨平台。简单：由 <code>请求行 + 请求头部 + 请求内容</code> 组成，请求行是文本，头部是 key-value 结构的文本形式，请求内容可多样。灵活和易于扩展：各类请求方法、 URI/URL 、状态码、头部字段等没有被固定死，允许开发人员自定义和扩充。HTTP 是应用层协议，下层协议可变化。应用广泛和跨平台：各类设备的浏览器都支持。
+HTTP 的优点：简单、灵活和易于扩展、应用广泛和跨平台。
+简单：由 <code>请求行 + 请求头部 + 请求内容</code> 组成，请求行是文本，头部是 key-value 结构的文本形式，请求内容可多样。
+灵活和易于扩展：各类请求方法、 URI/URL 、状态码、头部字段等没有被固定死，允许开发人员自定义和扩充。HTTP 是应用层协议，下层协议可变化。
+应用广泛和跨平台：各类设备的浏览器都支持。
 </p>
 
 <p>
-HTTP 的缺点：无状态、明文传输不安全。无状态：服务器不会记录 HTTP 的状态，不需要额外的资源来记录状态信息，能减轻服务器负担，节约 CPU 和内存。但对于关联性操作不友好，所以出现了 Cookie 等用于身份认证的技术。明文传输不安全：无法防御窃听、假冒、篡改攻击，无保证信息的机密性和完整性。
+HTTP 的缺点：无状态、明文传输不安全。
+无状态：服务器不会记录 HTTP 的状态，不需要额外的资源来记录状态信息，能减轻服务器负担，节约 CPU 和内存。但对于关联性操作不友好，所以出现了 Cookie 等用于身份认证的技术。
+明文传输不安全：无法防御窃听、假冒、篡改攻击，无保证信息的机密性和完整性。
 </p>
 </div>
 
-<div id="outline-container-org3db8311" class="outline-3">
-<h3 id="org3db8311">状态码</h3>
-<div class="outline-text-3" id="text-org3db8311">
+<div id="outline-container-org4411b0b" class="outline-3">
+<h3 id="org4411b0b">状态码</h3>
+<div class="outline-text-3" id="text-org4411b0b">
 <table>
 <caption class="t-above"><span class="table-number">Table 1:</span> 常见状态码</caption>
 
@@ -130,9 +135,9 @@ HTTP 的缺点：无状态、明文传输不安全。无状态：服务器不会
 </div>
 </div>
 
-<div id="outline-container-orgeda1d79" class="outline-3">
-<h3 id="orgeda1d79">常见字段</h3>
-<div class="outline-text-3" id="text-orgeda1d79">
+<div id="outline-container-orgeb2248e" class="outline-3">
+<h3 id="orgeb2248e">常见字段</h3>
+<div class="outline-text-3" id="text-orgeb2248e">
 <p>
 HTTP 的 header 是 key-value 结构，key 在规范中不允许使用下划线 <code>_</code> 连接两个单词，需使用 <code>-</code> ，不允许使用 <code>@</code> 。
 </p>
@@ -149,9 +154,9 @@ Accpet-Encoding: 客户端表明自己能接受的压缩方法
 </div>
 </div>
 
-<div id="outline-container-orga0de5ed" class="outline-3">
-<h3 id="orga0de5ed">请求方法</h3>
-<div class="outline-text-3" id="text-orga0de5ed">
+<div id="outline-container-orgba6a370" class="outline-3">
+<h3 id="orgba6a370">请求方法</h3>
+<div class="outline-text-3" id="text-orgba6a370">
 <p>
 GET: 从服务器获取指定 URL 的资源，如文本、页面、图片等
 POST: 向服务器的指定 URL 提交数据，数据存在于 body 中
@@ -166,20 +171,27 @@ POST 是不安全且不幂等的，每次操作会修改服务器上的资源，
 </div>
 </div>
 
-<div id="outline-container-orgc67607d" class="outline-2">
-<h2 id="orgc67607d">HTTP/1.1</h2>
-<div class="outline-text-2" id="text-orgc67607d">
+<div id="outline-container-orgd85d9f2" class="outline-2">
+<h2 id="orgd85d9f2">HTTP/1.1</h2>
+<div class="outline-text-2" id="text-orgd85d9f2">
 <p>
-长连接：既持久连接，减少了 TCP 连接的重复建立和断开而额外造成的开销，减轻服务器负载。管道网络传输：客户端可以发起多个请求，不必等待响应，继而发送第二个请求，减少整体的响应时间。
+长连接：既持久连接，减少了 TCP 连接的重复建立和断开而额外造成的开销，减轻服务器负载。
+管道网络传输：客户端可以发起多个请求，不必等待响应，继而发送第二个请求，减少整体的响应时间。
 </p>
 
 <p>
-问题：对头阻塞：服务器还是按照请求顺序进行响应，若前面的请求因某种原因而被阻塞时，后面排队的请求也被阻塞了，导致客户端一直获取不到响应。冗余：请求/响应 header 没有压缩，只能压缩 body 部分，每次都要重复发送 header 造成了冗余。其他：没有请求优先级的控制，请求只能从客户端发起，服务器只能被动响应。
+问题：
+对头阻塞：服务器还是按照请求顺序进行响应，若前面的请求因某种原因而被阻塞时，后面排队的请求也被阻塞了，导致客户端一直获取不到响应。
+冗余：请求/响应 header 没有压缩，只能压缩 body 部分，每次都要重复发送 header 造成了冗余。
+其他：没有请求优先级的控制，请求只能从客户端发起，服务器只能被动响应。
 </p>
 
 <p>
 局限性：
-Web 网页越来越大，平均网页长度不断增大。单位动不动就是 MB 。资源越来越多，很多网页都有 100 个以上的资源。内容样式多样，图片流量占比越来越大。实时性要求高，要求更快的速度。
+Web 网页越来越大，平均网页长度不断增大。单位动不动就是 MB 。
+资源越来越多，很多网页都有 100 个以上的资源。
+内容样式多样，图片流量占比越来越大。
+实时性要求高，要求更快的速度。
 </p>
 
 <p>
@@ -187,14 +199,15 @@ Web 网页越来越大，平均网页长度不断增大。单位动不动就是 
 </p>
 
 <p>
-优化：将小图合成大图传输，在客户端使用 JavaScript 切割，图片 Base64 编码传输；打包 JS 和 CSS 静态文件；将页面资源分散到不同的域名，提升并发连接数上限。
+优化：
+将小图合成大图传输，在客户端使用 JavaScript 切割，图片 Base64 编码传输；打包 JS 和 CSS 静态文件；将页面资源分散到不同的域名，提升并发连接数上限。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org798d163" class="outline-2">
-<h2 id="org798d163">HTTP/2</h2>
-<div class="outline-text-2" id="text-org798d163">
+<div id="outline-container-org35dda4c" class="outline-2">
+<h2 id="org35dda4c">HTTP/2</h2>
+<div class="outline-text-2" id="text-org35dda4c">
 <pre class="example">
     HTTP
  HPack Stream
@@ -203,23 +216,31 @@ Web 网页越来越大，平均网页长度不断增大。单位动不动就是 
     IP
 </pre>
 <p>
-头部压缩：同时发送多个请求，header 是一样或相似的，使用 HPACK 算法在服务器和客户端同时维护一张 header 信息表，字段存入此表，生成索引号，遇到重复字段，只发送索引号。二进制格式：全面采用二进制格式，header 和 body 统称为帧 （frame）：头信息帧和数据帧。这样对于计算机来说，直接解析二进制报文就可以得到信息，提高数据传输效率。数据流：每个请求或响应的所有数据包，称为一个数据流（stream），数据流有一个独一无二的编号，客户端发出的数据流编号为奇数，服务器发出的数据流编号为偶数。客户端可以指定数据流的优先级，让服务器优先响应。多路复用：在一个连接中并发多个请求或响应，而不用按顺序一一对应，而不是 HTTP/1.1 那样的串行。服务器推送：服务器可以提前把要用到的资源文件主动发送给客户端（Server Push/Cache Push）。
+头部压缩：同时发送多个请求，header 是一样或相似的，使用 HPACK 算法在服务器和客户端同时维护一张 header 信息表，字段存入此表，生成索引号，遇到重复字段，只发送索引号。
+二进制格式：全面采用二进制格式，header 和 body 统称为帧 （frame）：头信息帧和数据帧。这样对于计算机来说，直接解析二进制报文就可以得到信息，提高数据传输效率。
+数据流：每个请求或响应的所有数据包，称为一个数据流（stream），数据流有一个独一无二的编号，客户端发出的数据流编号为奇数，服务器发出的数据流编号为偶数。客户端可以指定数据流的优先级，让服务器优先响应。
+多路复用：在一个连接中并发多个请求或响应，而不用按顺序一一对应，而不是 HTTP/1.1 那样的串行。
+服务器推送：服务器可以提前把要用到的资源文件主动发送给客户端（Server Push/Cache Push）。
 </p>
 
 <p>
-问题：多个 HTTP 请求复用一个 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 连接，下层的 TCP 协议不知道有多少个 HTTP 请求，导致一旦传输层发生了丢包，就会出发 TCP 的重传机制，这样在一个 TCP 连接中的所有 HTTP 请求都必须等待这个丢了的包被重传回来。
+问题：
+多个 HTTP 请求复用一个 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 连接，下层的 TCP 协议不知道有多少个 HTTP 请求，导致一旦传输层发生了丢包，就会出发 TCP 的重传机制，这样在一个 TCP 连接中的所有 HTTP 请求都必须等待这个丢了的包被重传回来。
 </p>
 
 <p>
-只改变了应用层，兼容 HTTP/1.1 ，没有改变协议语义，改变了协议语法，相比 HTTP/1.1 改动点：头部压缩，避免重复信息的多次传输，将 ASCII 编码改成二进制编码，提高效率。
+只改变了应用层，兼容 HTTP/1.1 ，没有改变协议语义，改变了协议语法，相比 HTTP/1.1 改动点：
+头部压缩，避免重复信息的多次传输，将 ASCII 编码改成二进制编码，提高效率。
 </p>
 </div>
 
-<div id="outline-container-org0dd1dbc" class="outline-3">
-<h3 id="org0dd1dbc">HPack 算法</h3>
-<div class="outline-text-3" id="text-org0dd1dbc">
+<div id="outline-container-org2d0ae25" class="outline-3">
+<h3 id="org2d0ae25">HPack 算法</h3>
+<div class="outline-text-3" id="text-org2d0ae25">
 <p>
-静态字典；动态字典；Huffman 编码进行压缩。客户端和服务器都会建立和维护字典，用长度较小的索引号代替 header ，再使用 Huffman 编码压缩数据。静态字典：HTTP/2 规则有 61 组高频出现的字符串和字段。
+静态字典；动态字典；Huffman 编码进行压缩。
+客户端和服务器都会建立和维护字典，用长度较小的索引号代替 header ，再使用 Huffman 编码压缩数据。
+静态字典：HTTP/2 规则有 61 组高频出现的字符串和字段。
 </p>
 
 <table>
@@ -345,7 +366,8 @@ Web 网页越来越大，平均网页长度不断增大。单位动不动就是 
 </table>
 
 <p>
-非固定的 Header Value 是变化的，会经过 Huffman 编码后发送出去。根据 <a href="https://datatracker.ietf.org/doc/html/rfc7541">RFC7541</a> 规范，如果头部字段属于静态表范围，并且 Value 是变化的，那么他的 HTTP/2 头部的前 2 位固定为 01 ，头部格式如图：
+非固定的 Header Value 是变化的，会经过 Huffman 编码后发送出去。
+根据 <a href="https://datatracker.ietf.org/doc/html/rfc7541">RFC7541</a> 规范，如果头部字段属于静态表范围，并且 Value 是变化的，那么他的 HTTP/2 头部的前 2 位固定为 01 ，头部格式如图：
 </p>
 <pre class="example">
   0   1   2   3   4   5   6   7
@@ -362,14 +384,15 @@ HTTP/2 头部因为是二进制编码，不需要冒号空格和末尾的 <code>
 </p>
 
 <p>
-动态表编码：Index 从 62 开始，在编码解码时更新。例如若客户端发送了一个 <code>custom-header</code> 字段，双方更新自己的动态表，添加一个 Index 号 62 ，下一次根据规范发送 62 就行了。但动态表生效需要是 <b>同一个连接，重复传输完全相同的 HTTP 头部</b> 。如果字段在一个连接上只发送了一次，或者重复传输时，字段变化了，动态表就无法被充分利用。服务器一般有 <code>http2_max_requests</code> 限制一个连接能传输的请求数量，避免动态表无线增大。
+动态表编码：Index 从 62 开始，在编码解码时更新。例如若客户端发送了一个 <code>custom-header</code> 字段，双方更新自己的动态表，添加一个 Index 号 62 ，下一次根据规范发送 62 就行了。但动态表生效需要是 <b>同一个连接，重复传输完全相同的 HTTP 头部</b> 。如果字段在一个连接上只发送了一次，或者重复传输时，字段变化了，动态表就无法被充分利用。
+服务器一般有 <code>http2_max_requests</code> 限制一个连接能传输的请求数量，避免动态表无线增大。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org9c2becb" class="outline-3">
-<h3 id="org9c2becb">二进制帧</h3>
-<div class="outline-text-3" id="text-org9c2becb">
+<div id="outline-container-org01816c5" class="outline-3">
+<h3 id="org01816c5">二进制帧</h3>
+<div class="outline-text-3" id="text-org01816c5">
 <pre class="example">
     +-----------------------------------------------+
     |                 Length (24)                   |
@@ -471,9 +494,9 @@ Flags 可以携带控制信息如 <code>END_HEADERS, END_STREAM, PRIORITY</code>
 </div>
 </div>
 
-<div id="outline-container-orgc9508ef" class="outline-3">
-<h3 id="orgc9508ef">并发传输</h3>
-<div class="outline-text-3" id="text-orgc9508ef">
+<div id="outline-container-org4c6986a" class="outline-3">
+<h3 id="org4c6986a">并发传输</h3>
+<div class="outline-text-3" id="text-org4c6986a">
 <p>
 1 个 TCP 连接包含 1 个或多个 Stream ， Stream 是 HTTP/2 并发的关键技术；
 Stream 里可以包含 1 个或多个 Message ， Message 对应 HTTP/1 中的请求或响应，由 header 和 body 组成；
@@ -486,9 +509,9 @@ HTTP 消息可以由多个 Frame 构成，1 个 Frame 可以由多个 TCP 报文
 </div>
 </div>
 
-<div id="outline-container-orge93086a" class="outline-3">
-<h3 id="orge93086a">服务器主动推送</h3>
-<div class="outline-text-3" id="text-orge93086a">
+<div id="outline-container-orgb76f006" class="outline-3">
+<h3 id="orgb76f006">服务器主动推送</h3>
+<div class="outline-text-3" id="text-orgb76f006">
 <p>
 <a href="20220724-nginx.html#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a> 主动推送设置：
 </p>
@@ -510,9 +533,9 @@ HTTP 消息可以由多个 Frame 构成，1 个 Frame 可以由多个 TCP 报文
 </div>
 </div>
 
-<div id="outline-container-orgbf2a439" class="outline-2">
-<h2 id="orgbf2a439">HTTP/3</h2>
-<div class="outline-text-2" id="text-orgbf2a439">
+<div id="outline-container-org2a9142a" class="outline-2">
+<h2 id="org2a9142a">HTTP/3</h2>
+<div class="outline-text-2" id="text-org2a9142a">
 <pre class="example">
     HTTP
  QPack Stream
@@ -549,24 +572,27 @@ HTTP/3 也是使用二进制帧，但不需要 Stream 了， Stream 由 QUIC 实
 </p>
 </div>
 
-<div id="outline-container-orge7713de" class="outline-3">
-<h3 id="orge7713de">QUIC（Quick UDP Internet Connection）协议</h3>
-<div class="outline-text-3" id="text-orge7713de">
+<div id="outline-container-orgc2da90e" class="outline-3">
+<h3 id="orgc2da90e">QUIC（Quick UDP Internet Connection）协议</h3>
+<div class="outline-text-3" id="text-orgc2da90e">
 <p>
-无队头阻塞：每个数据包都有一个序号唯一标识，当某个 Stream 流中的一个数据包丢失了，即使该流的其他数据包到达了，数据也无法被 HTTP/3 读取，直到 QUIC 重传丢失的报文。但 <b>这个流不会影响到其他流</b> 。多个 Stream 间是独立的，不像 HTTP/2 那样多个流复用一个 TCP 连接。更快的连接建立：对于 HTTP/1 和 HTTP/2 ， TCP 和 TLS 是分层的，分别属于内核实现的传输层和 OpenSSL 实现的表示/会话层，难以合并在一起，需要分批握手。 HTTP/3 在传输数据前需要 QUIC 握手，需要 1 RTT ，目的是确认双方的 <b>连接ID</b> ，连接 ID 可以用于连接迁移。 QUIC 包含了 TLS 1.3 ，仅需 1 RTT 就可以完成建立连接与密钥协商，在第二次连接的时候，应用数据包可以和 QUIC 握手信息（连接信息 + TLS 信息）一起发送，达到 0-RTT 的效果。连接迁移：不使用 TCP 的四元组来“绑定”链接，通过 <b>连接ID</b> 来标记通信的两个端点，客户端和服务器可以各自选择一组 ID 来标记自己，当网络发生变化导致 IP 地址改变，只要仍保有上下文信息（连接 ID 、 TLS 密钥），就可以“无缝”地复用原连接，消除重连的成本。
+无队头阻塞：每个数据包都有一个序号唯一标识，当某个 Stream 流中的一个数据包丢失了，即使该流的其他数据包到达了，数据也无法被 HTTP/3 读取，直到 QUIC 重传丢失的报文。但 <b>这个流不会影响到其他流</b> 。多个 Stream 间是独立的，不像 HTTP/2 那样多个流复用一个 TCP 连接。
+更快的连接建立：对于 HTTP/1 和 HTTP/2 ， TCP 和 TLS 是分层的，分别属于内核实现的传输层和 OpenSSL 实现的表示/会话层，难以合并在一起，需要分批握手。 HTTP/3 在传输数据前需要 QUIC 握手，需要 1 RTT ，目的是确认双方的 <b>连接ID</b> ，连接 ID 可以用于连接迁移。 QUIC 包含了 TLS 1.3 ，仅需 1 RTT 就可以完成建立连接与密钥协商，在第二次连接的时候，应用数据包可以和 QUIC 握手信息（连接信息 + TLS 信息）一起发送，达到 0-RTT 的效果。
+连接迁移：不使用 TCP 的四元组来“绑定”链接，通过 <b>连接ID</b> 来标记通信的两个端点，客户端和服务器可以各自选择一组 ID 来标记自己，当网络发生变化导致 IP 地址改变，只要仍保有上下文信息（连接 ID 、 TLS 密钥），就可以“无缝”地复用原连接，消除重连的成本。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org165268e" class="outline-3">
-<h3 id="org165268e">QPack</h3>
-<div class="outline-text-3" id="text-org165268e">
+<div id="outline-container-org45e404d" class="outline-3">
+<h3 id="org45e404d">QPack</h3>
+<div class="outline-text-3" id="text-org45e404d">
 <p>
 静态表扩大到 91 项。
 </p>
 
 <p>
-<a href="#org0dd1dbc">HPack的动态表</a>在首次请求-响应后，双方会将未包含在静态表中的 header 项更新到各自的动态表中，接着后续传输时仅用 1 个数字 Index 表示，然后对方可以根据 Index 查到对应的数据，提高传输效率。但在丢包的情况下，会导致双方动态表不同步，造成阻塞。而 QPack 有两个特殊的 <b>单向</b> 流，用于同步双方的动态表：
+<a href="#org2d0ae25">HPack的动态表</a>在首次请求-响应后，双方会将未包含在静态表中的 header 项更新到各自的动态表中，接着后续传输时仅用 1 个数字 Index 表示，然后对方可以根据 Index 查到对应的数据，提高传输效率。但在丢包的情况下，会导致双方动态表不同步，造成阻塞。
+而 QPack 有两个特殊的 <b>单向</b> 流，用于同步双方的动态表：
 </p>
 <ul class="org-ul">
 <li>QPack Encoder Stream: 用于将一个字典（key-value）传递给对方，客户端可以通过这个 Stream 发送不属于静态表的 HTTP header</li>
@@ -576,9 +602,9 @@ HTTP/3 也是使用二进制帧，但不需要 Stream 了， Stream 由 QUIC 实
 </div>
 </div>
 
-<div id="outline-container-org4029c3b" class="outline-2">
-<h2 id="org4029c3b">HTTPS = HTTP + <a href="20220712-ssl_tls.html#ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS</a></h2>
-<div class="outline-text-2" id="text-org4029c3b">
+<div id="outline-container-orgb54597f" class="outline-2">
+<h2 id="orgb54597f">HTTPS = HTTP + <a href="20220712-ssl_tls.html#ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS</a></h2>
+<div class="outline-text-2" id="text-orgb54597f">
 <p>
 <a href="20220712-ssl_tls.html#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS</a> 需要向 CA 申请证书，确保服务器的身份是可信的。
 HTTPS 实现的功能有：信息加密、校验机制、身份证书，同时使用非对称加密生成会话密钥，使用对称加密通信保证机密性，使用<a href="20220708-information_security.html#ID-35bc095a-cdee-4661-bc1e-74909ceb66e2">摘要</a>算法实现完整性，使用数字证书防止假冒。
@@ -588,15 +614,18 @@ HTTPS 实现的功能有：信息加密、校验机制、身份证书，同时�
 如何提高 HTTPS 的性能？1️⃣ TLS 握手阶段；2️⃣ 对称加密报文传输阶段。
 </p>
 <ol class="org-ol">
-<li>软件升级：升级 Linux 系统内核版本，升级 OpenSSL 。协议优化：使用 TLS 1.3（合并了 HELLO 和公钥交换消息） 及 ECDHE 密钥交换算法且选择 x25519 曲线。证书优化：使用 ECDSA 证书，相比 RSA 证书，在同样的安全强度下，ECC 的密钥长度短的多。避免使用 CRT（Certificate Revocation List）验证证书，而使用 OCSP（Online Certificate Status Protocol）向 CA（Certificate Authority）发送证书查询请求以得到证书的有效状态或使用 OCSP Stapling 让服务器缓存一个从 CA 得到的时间戳和签名的响应以证明证书的有效性。会话复用：（<a href="20220712-ssl_tls.html#ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</a>）Session ID / Session Ticket / Pre-shared Key。</li>
+<li>软件升级：升级 Linux 系统内核版本，升级 OpenSSL 。
+协议优化：使用 TLS 1.3（合并了 HELLO 和公钥交换消息） 及 ECDHE 密钥交换算法且选择 x25519 曲线。
+证书优化：使用 ECDSA 证书，相比 RSA 证书，在同样的安全强度下，ECC 的密钥长度短的多。避免使用 CRT（Certificate Revocation List）验证证书，而使用 OCSP（Online Certificate Status Protocol）向 CA（Certificate Authority）发送证书查询请求以得到证书的有效状态或使用 OCSP Stapling 让服务器缓存一个从 CA 得到的时间戳和签名的响应以证明证书的有效性。
+会话复用：（<a href="20220712-ssl_tls.html#ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</a>）Session ID / Session Ticket / Pre-shared Key。</li>
 <li>使用支持 AES-NI 的 CPU ，对于不支持 AES-NI 的设备，可选择使用 CHACHA20 ，可以适当选择 AES128。</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org6643058" class="outline-2">
-<h2 id="org6643058">Web 访问过程</h2>
-<div class="outline-text-2" id="text-org6643058">
+<div id="outline-container-orgd6cb90f" class="outline-2">
+<h2 id="orgd6cb90f">Web 访问过程</h2>
+<div class="outline-text-2" id="text-orgd6cb90f">
 <ol class="org-ol">
 <li><p>
 浏览器解析 URL
@@ -624,9 +653,9 @@ protocol://domain/path/file?parameter=...#anchor
 </div>
 </div>
 
-<div id="outline-container-orgd429945" class="outline-2">
-<h2 id="orgd429945">Reference</h2>
-<div class="outline-text-2" id="text-orgd429945">
+<div id="outline-container-orgcb0953a" class="outline-2">
+<h2 id="orgcb0953a">Reference</h2>
+<div class="outline-text-2" id="text-orgcb0953a">
 <ul class="org-ul">
 <li>图解网络-小林coding-v3.0.pdf</li>
 </ul>

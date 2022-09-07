@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-31 Wed 18:52 -->
+<!-- 2022-09-08 Thu 00:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Union Find</title>
@@ -86,9 +86,9 @@ main function:
 </pre>
 </div>
 
-<div id="outline-container-orgd965184" class="outline-2">
-<h2 id="orgd965184">Quick Find</h2>
-<div class="outline-text-2" id="text-orgd965184">
+<div id="outline-container-orgc92db61" class="outline-2">
+<h2 id="orgc92db61">Quick Find</h2>
+<div class="outline-text-2" id="text-orgc92db61">
 <p>
 利用传递性，若 4 与 3 相连，3 又与 8 相连，那么 4 一定与 8 相连。
 </p>
@@ -114,9 +114,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org57aaaf1" class="outline-3">
-<h3 id="org57aaaf1">分析</h3>
-<div class="outline-text-3" id="text-org57aaaf1">
+<div id="outline-container-org794f616" class="outline-3">
+<h3 id="org794f616">分析</h3>
+<div class="outline-text-3" id="text-org794f616">
 <p>
 对于每一对输入，~Union()~ 都需要扫描整个 <code>id_</code> 数组。
 </p>
@@ -133,9 +133,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-orgd6f74eb" class="outline-2">
-<h2 id="orgd6f74eb">Quick Union</h2>
-<div class="outline-text-2" id="text-orgd6f74eb">
+<div id="outline-container-org6fdec2d" class="outline-2">
+<h2 id="org6fdec2d">Quick Union</h2>
+<div class="outline-text-2" id="text-org6fdec2d">
 <p>
 利用树来表示触点间的关系。
 </p>
@@ -159,9 +159,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org290b528" class="outline-3">
-<h3 id="org290b528">分析</h3>
-<div class="outline-text-3" id="text-org290b528">
+<div id="outline-container-orgc0b22c6" class="outline-3">
+<h3 id="orgc0b22c6">分析</h3>
+<div class="outline-text-3" id="text-orgc0b22c6">
 <p>
 <code>Find()</code> 方法访问数组的次数为 1 加上给定触点所对应的节点的深度的两倍。 <code>Union()</code> 和 <code>Connected()</code> 访问数组的次数为两次 <code>Find()</code> 操作（如果 <code>Union</code> 中给定的两个触点分别存在于不同的树中则还需要加 1）。
 </p>
@@ -178,9 +178,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org26dd6a7" class="outline-2">
-<h2 id="org26dd6a7">Weighted Union Find</h2>
-<div class="outline-text-2" id="text-org26dd6a7">
+<div id="outline-container-org8667e0a" class="outline-2">
+<h2 id="org8667e0a">Weighted Union Find</h2>
+<div class="outline-text-2" id="text-org8667e0a">
 <div class="org-src-container">
 <pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> {
 <span style="color: #0000FF;">private</span>:
@@ -246,17 +246,19 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org7b29233" class="outline-3">
-<h3 id="org7b29233">分析</h3>
-<div class="outline-text-3" id="text-org7b29233">
+<div id="outline-container-org6b8cc75" class="outline-3">
+<h3 id="org6b8cc75">分析</h3>
+<div class="outline-text-3" id="text-org6b8cc75">
 <p>
 对于 N 个触点，加权 quick union 算法构造的森林中的任意节点的深度最多为 \(\lg N\)。
 </p>
 
 <p>
 证明:
-森林中大小为 \(k\) 的树高度最多为 \(\lg k\)。当 \(k = 1\) 时，\(D = 0\)
-根据归纳法，我们假设大小为 \(i\) 的树的高度最多为 \(\lg i\)，其中 \(i < k\)。设 \(i \le j\) 且 \(i + j = k\)
+森林中大小为 \(k\) 的树高度最多为 \(\lg k\)。
+当 \(k = 1\) 时，\(D = 0\)
+根据归纳法，我们假设大小为 \(i\) 的树的高度最多为 \(\lg i\)，其中 \(i < k\)。
+设 \(i \le j\) 且 \(i + j = k\)
 当我们将大小为 \(i\) 和大小为 \(j\) 的树归并时，quick union 算法会使小树中所有节点的深度增加 1，但它们所在的树的大小为 \(i + j = k\)，而 \(1 + \lg i = \lg(i+i) \le \lg(i+j) = \lg k\)，性质成立。
 </p>
 
@@ -268,7 +270,8 @@ main function:
 
 <blockquote>
 <p>
-cell-probe 模型：一种计算模型，我们只会记录对随机内存的访问，内存大小足以保存所有输入且假设其他操作均没有成本。
+cell-probe 模型：
+一种计算模型，我们只会记录对随机内存的访问，内存大小足以保存所有输入且假设其他操作均没有成本。
 </p>
 </blockquote>
 </div>
