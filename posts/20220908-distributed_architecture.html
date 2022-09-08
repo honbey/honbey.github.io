@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-09-08 Thu 20:11 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Distributed System</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Distributed System</h1>
+</header>
+<div id="outline-container-org278de6c" class="outline-2">
+<h2 id="org278de6c">NPC</h2>
+<div class="outline-text-2" id="text-org278de6c">
+<ul class="org-ul">
+<li>Network delay</li>
+<li>Process Pause</li>
+<li>Clock drift</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgeea0202" class="outline-2">
+<h2 id="orgeea0202">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-orgeea0202">
+<p>
+分布式架构的两个方向：
+</p>
+<ul class="org-ul">
+<li>冗余</li>
+<li>拆分</li>
+</ul>
+
+<p>
+如何缓存，缓存、事务、会话、链路等如何保持一致，唯一 ID，如何加锁？
+</p>
+
+<p>
+Command Query Responsibility Segregation, CQRS ，读写分离。
+</p>
+
+<p>
+Replication Load Balancing Service, RLBS ，负载均衡。
+</p>
+
+<p>
+Heartbeat ，心跳。
+</p>
+
+<p>
+Lease ，租约。
+</p>
+
+<p>
+Leader &amp; Follow ，领导者和跟随者。
+</p>
+
+<p>
+Fencing ， 屏蔽/围栏。
+</p>
+
+<p>
+Quorum ，法定人数。
+</p>
+
+<p>
+High-Water Mark ，高水位线。
+</p>
+
+<p>
+Phi Accrual Failure Detection ，累积故障检测。
+</p>
+
+<p>
+Write-ahead Log ，预写日志。
+</p>
+
+<p>
+Fragment Log ，分段日志。
+</p>
+
+<p>
+Checksum ，校验。
+</p>
+
+<p>
+Bloom Filter ，布隆过滤器：隆过滤器由一个长度为 m 比特的位数组（bit array）与 k 个哈希函数（hash function）组成的数据结构。原理是当一个元素被加入集合时，通过 K 个散列函数将这个元素映射成一个位数组中的 K 个点，把它们置为 1。检索时，我们只要看看这些点是不是都是 1 就大约知道集合中有没有它了，也就是说，如果这些点有任何一个 0 ，则被检元素 <b>一定</b> 不在；如果都是 1 ，则被检元素很 <b><b>可能</b></b> 在。
+</p>
+</div>
+
+<div id="outline-container-ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e" class="outline-3">
+<h3 id="ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">CAP 定理</h3>
+<div class="outline-text-3" id="text-ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">
+<p>
+CAP 定理指出，分布式系统 不可能 同时提供下面三个要求：
+</p>
+<ul class="org-ul">
+<li>Consistency: 一致性，操作更新完成并返回客户端之后，所有节点数据完全一致</li>
+<li>Availability: 可用性，服务一直可用</li>
+<li>Partition tolerance: 分区容错性，分布式系统在遇到某节点或网络分区故障的时候，仍然能够对外提供满足一致性和可用性的服务</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe" class="outline-3">
+<h3 id="ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">BASE 理论</h3>
+<div class="outline-text-3" id="text-ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">
+<p>
+BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追求最终一致性
+</p>
+<ul class="org-ul">
+<li>Basically Available: 基本可用，指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用</li>
+<li>Soft State: 软状态，允许系统存在中间状态，而该中间状态不会影响系统整体可用性</li>
+<li>Eventual Consistency: 最终一致性，最终一致性是指系统中的所有数据副本经过一定时间后，最终能够达到一致的状态</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-ID-c279b82f-1eca-437f-a951-48a9be96cec4" class="outline-3">
+<h3 id="ID-c279b82f-1eca-437f-a951-48a9be96cec4">PACELEC 定理<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-ID-c279b82f-1eca-437f-a951-48a9be96cec4">
+<p>
+如果有一个分区（&rsquo;P&rsquo;），分布式系统可以在可用性和一致性（即 &rsquo;A&rsquo; 和 &rsquo;C&rsquo;）之间进行权衡；
+</p>
+
+<p>
+否则（&rsquo;E&rsquo;），当系统在没有分区的情况下正常运行时，系统可以在延迟（&rsquo;L&rsquo;）和一致性（&rsquo;C&rsquo;）之间进行权衡。
+</p>
+</div>
+</div>
+<div id="outline-container-org3d18ad5" class="outline-3">
+<h3 id="org3d18ad5">Paxos 共识算法</h3>
+<div class="outline-text-3" id="text-org3d18ad5">
+<p>
+Paxos 算法解决的问题是分布式共识性问题，即一个分布式系统中的各个进程如何就某个值（决议）通过共识达成一致
+</p>
+
+<p>
+角色划分：
+</p>
+<ul class="org-ul">
+<li>Proposer: 提出提案 Proposal，包含编号 + value</li>
+<li>Acceptor: 参与决策，回应 Proposers 的提案；当一个提案，被半数以上的 Acceptor 接受，则该提案被批准，每个 acceptor 只能批准一个提案</li>
+<li>Learner: 不参与决策，获取最新的提案 value</li>
+</ul>
+
+<p>
+其工作流程：
+</p>
+<ol class="org-ol">
+<li>一个或多个提议进程 (Proposer) 可以发起提案 (Proposal)，</li>
+<li>Paxos 算法使所有提案中的某一个提案，在所有进程中达成一致。</li>
+<li>系统中的多数派同时认可该提案，即达成了一致</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60" class="outline-3">
+<h3 id="ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</h3>
+<div class="outline-text-3" id="text-ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">
+<p>
+共识算法的一种。
+</p>
+
+<p>
+角色划分：
+</p>
+<ul class="org-ul">
+<li>Leader: 领导者，接受客户端请求，并向 Follower 同步请求，当数据同步到大多数节点上后告诉 Follower 提交日志</li>
+<li>Follow: 接受并持久化 Leader 同步的数据，在 Leader 告之日志可以提交之后，提交</li>
+<li>Candidate: Leader 选举过程中的临时角色，向其他节点拉选票，得到多数的晋升为 leader，选举完成之后不存在这个角色</li>
+</ul>
+
+<p>
+工作流程：
+</p>
+<ol class="org-ol">
+<li>leader 接受请求，并转发给 follow</li>
+<li>当大部分 follow 响应之后，leader 通知所有的 follow 提交请求、同时自己也提交请求并告诉调用方 ok</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f" class="outline-3">
+<h3 id="ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">ZAB 协议</h3>
+<div class="outline-text-3" id="text-ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">
+<p>
+ZAB (Zookeeper Atomic Broadcast) 协议是为分布式协调服务 ZooKeeper 专门设计的一种支持崩溃恢复的一致性协议，基于该协议，ZooKeeper 实现了一种 主从模式的系统架构来保持集群中各个副本之间的数据一致性<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>。其核心思想是 Leader 再接受到事务请求之后，通过给 Follower，当半数以上的 Follower 返回 ACK 之后，Leader 提交提案，并向 Follower 发送 commit 信息。
+</p>
+
+<p>
+角色划分：
+</p>
+<ul class="org-ul">
+<li>Leader: 负责整个 Zookeeper 集群工作机制中的核心
+<ul class="org-ul">
+<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
+<li>集群内部各服务器的调度者</li>
+</ul></li>
+<li>Follower：Leader 的追随者
+<ul class="org-ul">
+<li>处理客户端的非实物请求，转发事务请求给 Leader 服务器</li>
+<li>参与事务请求 Proposal 的投票</li>
+<li>参与 Leader 选举投票</li>
+</ul></li>
+<li>Observer：是 zookeeper 自 3.3.0 开始引入的一个角色，
+<ul class="org-ul">
+<li>它不参与事务请求 Proposal 的投票，</li>
+<li>也不参与 Leader 选举投票</li>
+<li>只提供非事务的服务（查询），通常在不影响集群事务处理能力的前提下提升集群的非事务处理能力。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02" class="outline-3">
+<h3 id="ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">2PC 协议</h3>
+<div class="outline-text-3" id="text-ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">
+<p>
+Two-Phase Commit Protocol，两阶段提交协议，主要是为了解决强一致性，中心化的强一致性协议。
+</p>
+
+<p>
+角色划分：
+</p>
+<ul class="org-ul">
+<li>协调节点 (coordinator)：中心化</li>
+<li>参与者节点 (partcipant)：多个</li>
+</ul>
+
+<p>
+工作流程：
+</p>
+<ol class="org-ol">
+<li>协调节点接收请求，然后向参与者节点提交 precommit</li>
+<li>当所有的参与者都回复 ok 之后，协调节点再给所有的参与者节点提交 commit</li>
+<li>所有的都返回 ok 之后，才表明这个数据确认提交</li>
+</ol>
+
+<p>
+当第一个阶段，有一个参与者失败，则所有的参与者节点都回滚。
+</p>
+</div>
+</div>
+<div id="outline-container-ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8" class="outline-3">
+<h3 id="ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">3PC 协议</h3>
+<div class="outline-text-3" id="text-ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">
+<p>
+在两阶段的基础上进行扩展，将第一阶段划分两部，cancommit + precommit，第三阶段则为 docommit<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> 。
+</p>
+
+<ol class="org-ol">
+<li>cancommit，协调者会去询问各个参与者是否能够正常执行事务，参与者根据自身情况回复一个预估值，相对于真正的执行事务，这个过程是轻量的</li>
+<li>precommit，协调者会根据第一阶段的询盘结果采取相应操作，若所有参与者都返回 ok，则协调者向参与者提交事务执行 （但不提交） 通知；否则通知参与者 abort 回滚</li>
+
+<li>docommit，如果第二阶段事务未中断，那么本阶段协调者将会依据事务执行返回的结果来决定提交或回滚事务，若所有参与者正常执行，则提交；否则协调者 + 参与者回滚</li>
+</ol>
+
+<p>
+在第三阶段如果因为协调者或网络问题，导致参与者迟迟不能收到来自协调者的 commit 或 rollback 请求，那么参与者将不会如两阶段提交中那样陷入阻塞，而是等待超时后继续 commit，相对于两阶段提交虽然降低了同步阻塞，但仍然无法完全避免数据的不一致
+</p>
+</div>
+</div>
+
+<div id="outline-container-ID-6eff229c-2a85-4619-b874-898ee209ff1e" class="outline-3">
+<h3 id="ID-6eff229c-2a85-4619-b874-898ee209ff1e">Gossip 协议</h3>
+<div class="outline-text-3" id="text-ID-6eff229c-2a85-4619-b874-898ee209ff1e">
+<p>
+消息同步协议。
+Gossip 协议，顾名思义，就像流言蜚语一样，利用一种随机、带有传染性的方式，将信息传播到整个网络中，并在一定时间内，使得系统内的所有节点数据一致。Gossip 协议通过上面的特性，可以保证系统能在极端情况下（比如集群中只有一个节点在运行）也能运行。<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>
+</p>
+
+<p>
+工作流程：
+</p>
+<ol class="org-ol">
+<li>周期性的传播（感染）消息，通常周期时间为 1s</li>
+<li>被感染的节点，随机选择 n 个相邻节点，传播消息</li>
+<li>每次传播消息都选择还没有发送过的节点进行传播</li>
+<li>收到消息的节点，不会传播给向它发送消息的节点</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-ID-adf2a647-ac1f-492f-ada6-f2e89e98029f" class="outline-3">
+<h3 id="ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">Quorum NWR 算法</h3>
+<div class="outline-text-3" id="text-ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">
+<p>
+用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup>
+</p>
+
+<ul class="org-ul">
+<li>N ，表示副本数，又叫做复制因子（Replication Factor）。也就是说，N 表示集群中同一份数据有多少个副本</li>
+<li>W ，又称写一致性级别（Write Consistency Level），表示成功完成 W 个副本更新写入，才会视为本次写操作成功</li>
+<li>R ，又称读一致性级别（Read Consistency Level），表示读取一个数据对象时需要读 R 个副本，才会视为本次读操作成功</li>
+</ul>
+
+<p>
+Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一个操作的执行则需要获取最小的读票数，写票数；通常来讲写票数 W 一般需要超过 N/2，即我们通常说的得到半数以上的票才表示数据写入成功
+</p>
+
+<p>
+事实上当 W=N、R=1 时，即所谓的 WARO (Write All Read One)。就是 CAP 理论中 CP 模型的场景
+</p>
+</div>
+</div>
+<div id="outline-container-ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2" class="outline-3">
+<h3 id="ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">PBFT 拜占庭算法</h3>
+<div class="outline-text-3" id="text-ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">
+<p>
+拜占庭算法主要针对的是分布式场景下无响应，或者响应不可信的情况下的容错问题。
+</p>
+
+<p>
+工作流程：
+</p>
+<ol class="org-ol">
+<li>客户端向主节点发起请求，主节点接受请求之后，向其他节点广播 pre-prepare 消息</li>
+<li>节点接受 pre-prepare 消息之后，若同意请求，则向其他节点广播 prepare 消息；</li>
+<li>当一个节点接受到 2f+1 个 prepare 新消息，则进入 commit 阶段，并广播 commit 消息</li>
+<li>当收到 2f+1 个 commit 消息后（包括自己），代表大多数节点已经进入 commit 阶段，这一阶段已经达成共识，于是节点就会执行请求，写入数据</li>
+</ol>
+
+<p>
+相比 Raft 算法完全不适应有人作恶的场景，PBFT 算法能容忍 (n 1)/3 个恶意节点（也可以是故障节点）。另外，相比 PoW 算法，PBFT 的优点是不消耗算力。PBFT 算法是 O(n^2) 的消息复杂度的算法，所以以及随着消息数 的增加，网络时延对系统运行的影响也会越大，这些都限制了运行 PBFT 算法的分布式系统的规模，也决定了 PBFT 算法适用于中小型分布式系统。
+</p>
+</div>
+</div>
+<div id="outline-container-ID-290fd01a-474c-4934-90a6-a5cf33617838" class="outline-3">
+<h3 id="ID-290fd01a-474c-4934-90a6-a5cf33617838">PoW 算法</h3>
+<div class="outline-text-3" id="text-ID-290fd01a-474c-4934-90a6-a5cf33617838">
+<p>
+工作量证明 (Proof Of Work，简称 PoW)，同样应用于分布式下的一致性场景，区别于前面的 Raft, PBFT, Paxos 采用投票机制达成共识方案，PoW 采用工作量证明。客户端需要做一定难度的工作才能得出一个结果，验证方却很容易通过结果来检查出客户端是不是做了相应的工作，通过消耗一定工作量，增加消息伪造的成本。
+</p>
+
+<p>
+大量应用于区块链 block chain 中。
+</p>
+</div>
+</div>
+<div id="outline-container-ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3" class="outline-3">
+<h3 id="ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">主备</h3>
+<div class="outline-text-3" id="text-ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">
+<p>
+功能一致，平常由 主 提供服务，主 宕机或进程等挂掉后，备 由待机状态快速转为服务状态。
+</p>
+
+<p>
+采用冗余进行容灾，但白白浪费一半（1 主 1备）的资源。切换方式：
+</p>
+<ul class="org-ul">
+<li>人工</li>
+<li>VIP + keepalive</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c" class="outline-3">
+<h3 id="ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">主从</h3>
+<div class="outline-text-3" id="text-ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">
+<p>
+主从一般又叫做读写分离，主提供读写能力，而从则只提供读能力。
+</p>
+
+<p>
+鉴于当下的互联网应用，绝大多数都是读多写少的场景；读更容易成为性能瓶颈，所以采用读写分离，可以有效的提高整个集群的响应能力。
+</p>
+
+<p>
+主从架构可以区分为：一主多从 + 一主一从再多从。
+</p>
+
+<p>
+主从模式的主要特点在于：
+</p>
+<ul class="org-ul">
+<li>添加从，源头依然是数据冗余的思想</li>
+<li>读写分离：主负责读写，从只负责读，可以视为负载均衡策略</li>
+<li>从需要向主同步数据，所若有的从都同步与主，对主的压力依然可能很大；所以就有了主从从的模式</li>
+</ul>
+
+<p>
+需要考虑：
+</p>
+<ul class="org-ul">
+<li>主从延迟</li>
+<li>主的写瓶颈</li>
+<li>主挂之后如何选主</li>
+</ul>
+</div>
+
+<div id="outline-container-org8985540" class="outline-4">
+<h4 id="org8985540">多主多从</h4>
+<div class="outline-text-4" id="text-org8985540">
+<p>
+着重考虑主之间的数据一致性问题。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-ID-4be9fb56-f87e-456f-b79d-175c03445d53" class="outline-3">
+<h3 id="ID-4be9fb56-f87e-456f-b79d-175c03445d53">普通集群</h3>
+<div class="outline-text-3" id="text-ID-4be9fb56-f87e-456f-b79d-175c03445d53">
+<p>
+无主节点，集群中所有的应用职能对等，没有主次之分，一个请求可以被集群中任意一个服务响应。
+</p>
+
+<p>
+对于普通集群模式而言，需要考虑：
+</p>
+<ul class="org-ul">
+<li>资源竞争：如何确保一个资源在同一时刻只能被一个业务操作，如现在同时来了申请退款和货物出库的请求，如果不对这个订单进行加锁，两个请求同时响应，将会导致发货又退款了，导致财货两失</li>
+<li>数据一致性：如何确保所有的实例数据都是一致的，或者最终是一致的？如应用服务使用 jvm 缓存，那么如何确保所有实例的 jvm 缓存一致？</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-ID-567df9e8-cd39-48a7-95cc-d7744a3234b7" class="outline-3">
+<h3 id="ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">数据分片</h3>
+<div class="outline-text-3" id="text-ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">
+<p>
+按照数据拆分的思路来处理，将全量的数据，通过一定规则拆分到多个系统中，每个系统包含部分的数据，减小单个节点的压力，主要用于解决数据量大的场景。
+</p>
+
+<p>
+ES 的索引分片。
+</p>
+</div>
+</div>
+<div id="outline-container-org2bfa3d0" class="outline-3">
+<h3 id="org2bfa3d0">一致性 Hash 算法</h3>
+<div class="outline-text-3" id="text-org2bfa3d0">
+<p>
+通过对数据项的键进行哈希处理映射其在环上的位置，然后顺时针遍历环以查找位置大于该项位置的第一个节点，将每个由键标识的数据分配给 hash 环中的一个节点，节点添加删除，对整个集群而言，仅影响其直接邻居，其他节点不受影响。
+</p>
+
+<p>
+例如 A, B, C, D 四个节点，hash % 16，则：
+</p>
+<ul class="org-ul">
+<li>A -&gt; 0,1,2,3</li>
+<li>B -&gt; 4,5,6,7</li>
+<li>C -&gt; 8,9,10,11</li>
+<li>D -&gt; 12,13,14,15</li>
+</ul>
+
+<p>
+在 10 处增加一个节点 C2，则：
+</p>
+<ul class="org-ul">
+<li>A  -&gt; 0,1,2,3</li>
+<li>B  -&gt; 4,5,6,7</li>
+<li>C  -&gt; 8,9</li>
+<li>C2 -&gt; 10,11</li>
+<li>D  -&gt; 12,13,14,15</li>
+</ul>
+<p>
+可以看到，就 C 受到了影响。
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://my.oschina.net/u/566591/blog/5563844">万字总结：分布式系统的38个知识点 - 小灰灰Blog的个人空间 - OSCHINA - 中文开源技术交流社区</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://medium.com/@nishantparmar/distributed-system-design-patterns-2d20908fecfc">https://medium.com/@nishantparmar/distributed-system-design-patterns-2d20908fecfc</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://segmentfault.com/a/1190000037550497">https://segmentfault.com/a/1190000037550497</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://segmentfault.com/a/1190000012534071">https://segmentfault.com/a/1190000012534071</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zhuanlan.zhihu.com/p/41228196">https://zhuanlan.zhihu.com/p/41228196</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6" role="doc-backlink">6</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://developer.aliyun.com/article/53498">https://developer.aliyun.com/article/53498</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

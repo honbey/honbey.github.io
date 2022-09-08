@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 01:44 -->
+<!-- 2022-09-08 Thu 20:12 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -190,7 +190,7 @@ ophints           <span style="color: #8D8D84;">; </span><span style="color: #8D
 <span style="color: #707183;">(</span>vc-gutter +pretty<span style="color: #707183;">)</span> <span style="color: #8D8D84;">; </span><span style="color: #8D8D84; font-style: italic;">vcs diff in the fringe</span>
 vi-tilde-fringe   <span style="color: #8D8D84;">; </span><span style="color: #8D8D84; font-style: italic;">fringe tildes to mark beyond EOB</span>
 <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">window-select     ; visually switch windows</span>
-<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">workspaces        ; tab emulation, persistence &amp; separate workspaces</span>
+workspaces        <span style="color: #8D8D84;">; </span><span style="color: #8D8D84; font-style: italic;">tab emulation, persistence &amp; separate workspaces</span>
 <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">zen               ; distraction-free coding or writing</span>
 </pre>
 </div>
@@ -575,8 +575,8 @@ TODO: gpg
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-done</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">time</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-into-drawer t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-out-remove-zero-time-clocks t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-into-drawer</span> t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-out-remove-zero-time-clocks</span> t<span style="color: #7388D6;">)</span>
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-agenda-files</span> <span style="color: #909183;">(</span><span style="color: #D0372D;">list</span> <span style="color: #008000;">"~/org"</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
 
@@ -730,8 +730,8 @@ TODO: gpg
 <h2 id="org47e85fa">Commands</h2>
 <div class="outline-text-2" id="text-org47e85fa">
 <div class="org-src-container">
-<pre class="src src-bash">sed -i <span style="color: #008000;">''</span> -r <span style="color: #008000;">'/:CUSTOM_ID:[a-z0-9-]+/d'</span> *
-sed -i <span style="color: #008000;">''</span> -r <span style="color: #008000;">'s/:ID:([ ]+)([a-z0-9-]+)/:ID:\1\2\n:CUSTOM_ID: \2/'</span> *
+<pre class="src src-bash">sed -i <span style="color: #008000;">''</span> -r <span style="color: #008000;">'/:CUSTOM_ID: ID-[a-z0-9-]+/d'</span> *
+sed -i <span style="color: #008000;">''</span> -r <span style="color: #008000;">'s/:ID:([ ]+)([a-z0-9-]+)/:ID:\1\2\n:CUSTOM_ID: ID-\2/'</span> *
 </pre>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 01:44 -->
+<!-- 2022-09-08 Thu 20:12 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
@@ -19,7 +19,7 @@
 <h2 id="orge14ad65">函数栈帧</h2>
 <div class="outline-text-2" id="text-orge14ad65">
 
-<figure id="orgfefb026">
+<figure id="orgf4c4e45">
 <img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
@@ -82,7 +82,7 @@
 给 a 赋值后
 </p>
 
-<figure id="orgef45375">
+<figure id="org060f6a5">
 <img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -92,7 +92,7 @@
 </p>
 
 
-<figure id="org669987c">
+<figure id="orgf5ed844">
 <img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -101,7 +101,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org4f29033">
+<figure id="org0207fce">
 <img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -110,7 +110,7 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="org252f4cd">
+<figure id="org8f75a1a">
 <img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
@@ -120,7 +120,7 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="orgedcd6a7">
+<figure id="orgb40e61c">
 <img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>

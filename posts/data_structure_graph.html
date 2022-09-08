@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 01:44 -->
+<!-- 2022-09-08 Thu 20:12 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>图</title>
@@ -54,7 +54,7 @@
 对于一个有向图，顶点 i 所对应的 <b>行中的数字之和等于顶点 i 的出度</b> ，对应的 <b>列中的数字之和等于顶点 i 的入度</b> 。
 </p>
 
-<figure id="orgae50c41">
+<figure id="org973cefd">
 <img src="../images/data_structure_graph_adjoin_matrix_1.png" alt="data_structure_graph_adjoin_matrix_1.png">
 
 </figure>
@@ -68,7 +68,7 @@
 对于有 n 个结点，e 条边的无向图，采用邻接表存储表示需要存储 <b>n 个头结点和 2e 个表结点</b> ，每个结点有两个域。同时，对于有 n 个结点，e 条边的无向图，可以在 \(O(n+e)\)  时间内确定无向图中边的总数。而对于有向图，通过对某个顶点的链表中的结点计数，可以得到该顶点的出度，但是对于该顶点的入度很难确定
 </p>
 
-<figure id="org61d974f">
+<figure id="org170589a">
 <img src="../images/data_structure_graph_adjoin_table_1.png" alt="data_structure_graph_adjoin_table_1.png">
 
 </figure>
@@ -133,7 +133,7 @@
 <h3 id="org39a5097">其他表示法</h3>
 <div class="outline-text-3" id="text-org39a5097">
 
-<figure id="org81d73fe">
+<figure id="org430091b">
 <img src="../images/data_structure_graph_mixed_expression_1.png" alt="data_structure_graph_mixed_expression_1.png">
 
 </figure>
@@ -158,7 +158,7 @@
 </p>
 
 
-<figure id="orge69f8be">
+<figure id="org93cebfb">
 <img src="../images/data_structure_graph_depth_first_traversal_1.png" alt="data_structure_graph_depth_first_traversal_1.png">
 
 </figure>
@@ -195,7 +195,7 @@
 从访问起始顶点 a 开始，并把 a 标记为已访问，然后，访问 a 的邻接表中的每一个顶点。在访问过 a 的邻接表中所有顶点后，访问与 a 的邻接表中的第一个顶点相邻，且未被访问过的所有顶点。这样就需要一个队列，把当前访问的顶点保存在这个队列中，在当前顶点的邻接表中的有顶点被访问过时，从队列中取出一个顶点，然后访问该顶点的邻接表中的所有顶点。在此搜索过程中，未被访问的顶点被访问，且存入队列，已经访问过的顶点不再被访问。当队列为空时，搜索就结束了。时间复杂度量级为 \(O(n^2)\)
 </p>
 
-<figure id="org5522fb8">
+<figure id="org0e49346">
 <img src="../images/data_structure_graph_breadth_first_traversal_1.png" alt="data_structure_graph_breadth_first_traversal_1.png">
 
 </figure>
