@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-09-12 Mon 22:21 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux ~fork()~</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Linux <code>fork()</code></h1>
+</header>
+<div id="outline-container-org5adc27e" class="outline-2">
+<h2 id="org5adc27e"><code>fork()</code></h2>
+<div class="outline-text-2" id="text-org5adc27e">
+<p>
+在 Linux 中创建一个新进程的唯一方法是使用 fork() 函数。fork() 函数是 Linux 中一个非常重要的函数，和以往遇到的函数有一些区别，因为 fork() 函数看起来执行一次却返回两个值<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+
+<p>
+fork() 函数用于从已存在的进程中创建一个新进程。新进程称为子进程，而原进程称为父进程。使用 fork() 函数得到的子进程是父进程的一个复制品，它从父进程处继承了整个进程的地址空间，包括进程的 <b>上下文、代码段、进程堆栈、内存信息、打开的文件描述符、符号控制设定、进程优先级、进程组号、当前工作目录、根目录、资源限制和控制终端</b> 等，而子进程所独有的只有它的 <b>进程号、资源使用和计时器</b> 等。<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+</p>
+
+<p>
+在父进程中执行 fork() 函数时，父进程会复制一个子进程，而且父子进程的代码从 fork() 函数的返回开始分别在两个地址空间中同时运行，从而使两个进程分别获得所属 fork() 函数的返回值，其中在父进程中的返回值是子进程的 pid ，而在子进程中返回 0 。因此，可以通过 <b>返回值</b> 来判断该进程的父进程还是子进程。
+</p>
+</div>
+
+<div id="outline-container-org9ed4744" class="outline-3">
+<h3 id="org9ed4744">使用 fork()</h3>
+<div class="outline-text-3" id="text-org9ed4744">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/types.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+
+<span style="color: #6434A3;">pid_t</span> <span style="color: #006699;">fork</span>(<span style="color: #6434A3;">void</span>);
+
+<span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;"> * Return:</span>
+<span style="color: #8D8D84; font-style: italic;"> * 0   child process</span>
+<span style="color: #8D8D84; font-style: italic;"> * &gt; 0 the pid of child process</span>
+<span style="color: #8D8D84; font-style: italic;"> * -1  error</span>
+<span style="color: #8D8D84;">*/</span>
+</pre>
+</div>
+
+<p>
+当系统的进程数达到最大， errno 为 EAGAIN ；
+内存不足时， errno 为 ENOMEM 。
+</p>
+
+<p>
+<code>while((p1 = fork()) == -1)</code>:
+</p>
+<ol class="org-ol">
+<li>fork() 函数是在当前进程中新建立一个子进程，如果这个创建子进程失败，那么返回 -1，这个实际是把创建进程的返回值 和-1 比较看看是否创建失败</li>
+<li>因为是写在 while 语句里，那么当创建失败之后，如果在 while 里面没有 break 或者跳出，当 while 执行体执行结束后又会执行 <code>(p1 = fork()) == -1</code> ，等于不断重复创建子进程一直</li>
+</ol>
+<p>
+到创建成功为止
+</p>
+<ol class="org-ol">
+<li>注意这里会返回两次，因为父进程创建子进程的时候复制了父进程的地址空间，那么父子进程地址空间的语句执行都在等待 fork() 返回的那句话里，所以返回两次是父进程返回一个，返回的是子进程的 PID，子进程返回一次，返回的是 0 。</li>
+</ol>
+</div>
+
+<div id="outline-container-org2303829" class="outline-4">
+<h4 id="org2303829">例子</h4>
+<div class="outline-text-4" id="text-org2303829">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/types.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">args</span>)
+{
+  <span style="color: #6434A3;">pid_t</span> <span style="color: #BA36A5;">result</span>;
+  result = fork();
+  <span style="color: #0000FF;">if</span> (-<span style="color: #D0372D;">1</span> == result) {
+    printf(<span style="color: #008000;">"Fork error\n"</span>);
+  } <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (<span style="color: #D0372D;">0</span> == result) {
+    printf(<span style="color: #008000;">"The returned value is %d\n"</span>, result);
+    printf(<span style="color: #008000;">"In child process!\nMy PID is %d\n"</span>, getpid());
+  } <span style="color: #0000FF;">else</span> {
+    printf(<span style="color: #008000;">"The returned value is %d\n"</span>, result);
+    printf(<span style="color: #008000;">"In father process!\nMy PID is %d\n"</span>, getpid());
+  }
+  <span style="color: #0000FF;">for</span> (;;) ;
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
+</pre>
+</div>
+<p>
+The returned value is 5787
+The returned value is 0
+In child process!
+My PID is 5787
+In father process!
+My PID is 5786
+</p>
+
+<p>
+根据 PID 可以看出父进程先运行，子进程后运行，但子进程执行可能在前。
+</p>
+
+<p>
+<code>cat /proc/5786/maps | md5sum</code> 与 <code>cat /proc/5787/maps | md5sum</code> 完全一样，父子进程的内存映射具体如下：
+</p>
+<pre class="example">
+563e9d45c000-563e9d45d000 r--p 00000000 08:01 1076422                    /var/data/workspace/linux-fork/a.out
+563e9d45d000-563e9d45e000 r-xp 00001000 08:01 1076422                    /var/data/workspace/linux-fork/a.out
+563e9d45e000-563e9d45f000 r--p 00002000 08:01 1076422                    /var/data/workspace/linux-fork/a.out
+563e9d45f000-563e9d460000 r--p 00002000 08:01 1076422                    /var/data/workspace/linux-fork/a.out
+563e9d460000-563e9d461000 rw-p 00003000 08:01 1076422                    /var/data/workspace/linux-fork/a.out
+563e9dec9000-563e9deea000 rw-p 00000000 00:00 0                          [heap]
+7fd489800000-7fd489828000 r--p 00000000 08:01 919998                     /usr/lib/x86_64-linux-gnu/libc.so.6
+7fd489828000-7fd489996000 r-xp 00028000 08:01 919998                     /usr/lib/x86_64-linux-gnu/libc.so.6
+7fd489996000-7fd4899ee000 r--p 00196000 08:01 919998                     /usr/lib/x86_64-linux-gnu/libc.so.6
+7fd4899ee000-7fd4899f2000 r--p 001ed000 08:01 919998                     /usr/lib/x86_64-linux-gnu/libc.so.6
+7fd4899f2000-7fd4899f4000 rw-p 001f1000 08:01 919998                     /usr/lib/x86_64-linux-gnu/libc.so.6
+7fd4899f4000-7fd489a01000 rw-p 00000000 00:00 0
+7fd489b1d000-7fd489b20000 rw-p 00000000 00:00 0
+7fd489b33000-7fd489b35000 rw-p 00000000 00:00 0
+7fd489b35000-7fd489b36000 r--p 00000000 08:01 917934                     /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fd489b36000-7fd489b5b000 r-xp 00001000 08:01 917934                     /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fd489b5b000-7fd489b65000 r--p 00026000 08:01 917934                     /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fd489b65000-7fd489b67000 r--p 0002f000 08:01 917934                     /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fd489b67000-7fd489b69000 rw-p 00031000 08:01 917934                     /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffd61342000-7ffd61363000 rw-p 00000000 00:00 0                          [stack]
+7ffd61372000-7ffd61376000 r--p 00000000 00:00 0                          [vvar]
+7ffd61376000-7ffd61378000 r-xp 00000000 00:00 0                          [vdso]
+</pre>
+
+<p>
+当父进程调用了 fork() ，父 子进程分别在两个地址空间同时运行，同时运行 fork() 后面的代码，此例中 fork() 后有 if 逻辑判断使得父 子进程表现出不同的行为。而 fork () 的返回值在父进程中返回子进程的 PID ，而在子进程中返回 0 。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0a0abd1" class="outline-3">
+<h3 id="org0a0abd1">vfork()</h3>
+<div class="outline-text-3" id="text-org0a0abd1">
+<p>
+为了加快 fork() 执行速度，vfork() 不产生父进程的副本，而是允许父子进程可访问相同的物理内存，伪装了对进程空间的真实复制，当子进程需要改变内存中的数据时才复制父进程。也被称为 “写操作时复制 (copy-on-write) ”技术。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c5d19f" class="outline-2">
+<h2 id="org2c5d19f"><code>exec()</code></h2>
+<div class="outline-text-2" id="text-org2c5d19f">
+<p>
+exec() 提供了一个在进程中启动另一个程序执行的方法，可以根据指定的文件名或目录名找到可执行文件（也可以是脚本文件），并用其 <b>取代原调用进程的数据段、代码段和堆栈段</b> ，执行完之后，原调用进程的内容除了进程以外，其他全部被新的进程替换了。
+</p>
+
+<p>
+使用的两种情况：
+</p>
+<ol class="org-ol">
+<li>当进程认为自己不能再为系统和用户作出贡献时，调用 exec() 函数族的任意一个函数让自己重生</li>
+<li>如果一个进程想执行另一个程序，可以用 fork() 函数新建一个进程，然后调用 exec() 函数族的任意一个函数，这样看起来就像通过执行应用程序而产生了一个新进程</li>
+</ol>
+</div>
+
+<div id="outline-container-orgd8062c9" class="outline-3">
+<h3 id="orgd8062c9">使用 exec()</h3>
+<div class="outline-text-3" id="text-orgd8062c9">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execl</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>, <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">arg</span>, ...);
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execv</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[]);
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execle</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>, <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">arg</span>, ... , <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">envp</span>[]);
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execve</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[], ... , <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">envp</span>[]);
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execlp</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">file</span>, <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">arg</span>, ...);
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">execvp</span>(<span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">file</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[]);
+
+<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Return -1: error</span><span style="color: #8D8D84;"> */</span>
+</pre>
+</div>
+
+<p>
+说明：
+</p>
+<ol class="org-ol">
+<li>path 为完整的文件目录，而 file 会自动在 $PATH 所指定的目录下进行查找</li>
+<li>第 5 个字母为 l 时，代表以 list 列表逐个列举的传参方式，而 v 代表以 vector 将所有参数整体构造指针数组传递，参数必须以 NULL 结束</li>
+<li>第 6 个字母为 e 时，代表 environment ，同时 envp 指定环境变量</li>
+<li>实际上最终执行的只有 execve() 这个函数</li>
+</ol>
+
+<p>
+常见返回 -1 的错误原因：
+</p>
+<ol class="org-ol">
+<li>找不到文件或路径， errno 为 ENOENT</li>
+<li>数据 argv 和 envp 为用 NULL 结尾， errno 为 EFAUL</li>
+<li>没用对应可执行文件的运行权限， errno 为 EACCES</li>
+</ol>
+</div>
+
+<div id="outline-container-org9b40c4b" class="outline-4">
+<h4 id="org9b40c4b">例子 - 1</h4>
+<div class="outline-text-4" id="text-org9b40c4b">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[])
+{
+  printf(<span style="color: #008000;">"father process pid is %d\n"</span>, getpid());
+  <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ret</span> = <span style="color: #D0372D;">0</span>;
+  <span style="color: #0000FF;">if</span> ((ret = execlp(<span style="color: #008000;">"ps"</span>, <span style="color: #008000;">"ps"</span>, <span style="color: #008000;">"-ef"</span>, <span style="color: #D0372D;">NULL</span>)) &lt; <span style="color: #D0372D;">0</span>) {
+    printf(<span style="color: #008000;">"Execlp error\n"</span>);
+  }
+  printf(<span style="color: #008000;">"child process pid is %d, ret = %d\n"</span>, getpid(), ret);
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
+</pre>
+</div>
+<p>
+father process pid is 6300
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
+</p>
+
+<p>
+<code>printf("child process pid is %d, ret = %d\n", getpid(), ret);</code> 不会执行，因为原进程的内容被 ps 进程完全替换了。
+</p>
+</div>
+</div>
+<div id="outline-container-orgee679de" class="outline-4">
+<h4 id="orgee679de">例子 - 2</h4>
+<div class="outline-text-4" id="text-orgee679de">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
+
+<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[])
+{
+  printf(<span style="color: #008000;">"father process pid is %d\n"</span>, getpid());
+  <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ret</span> = <span style="color: #D0372D;">0</span>;
+  <span style="color: #0000FF;">if</span> (<span style="color: #D0372D;">0</span> == fork()) {
+    <span style="color: #0000FF;">if</span> ((ret = execlp(<span style="color: #008000;">"ps"</span>, <span style="color: #008000;">"ps"</span>, <span style="color: #008000;">"-ef"</span>, <span style="color: #D0372D;">NULL</span>)) &lt; <span style="color: #D0372D;">0</span>) {
+      printf(<span style="color: #008000;">"Execlp error\n"</span>);
+    }
+  }
+  printf(<span style="color: #008000;">"child process pid is %d, ret = %d\n"</span>, getpid(), ret);
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
+</pre>
+</div>
+<p>
+father process pid is 6438
+child process pid is 6438, ret = 0
+</p>
+
+<p>
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
+</p>
+
+<p>
+这里只是子进程被替换了，父进程没有影响，执行完了。但在子进程中 <code>printf("child process pid is %d, ret = %d\n", getpid(), ret);</code> 不会执行。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc5ff408" class="outline-4">
+<h4 id="orgc5ff408">例子 - 3</h4>
+<div class="outline-text-4" id="text-orgc5ff408">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[])
+{
+  <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">envp</span>[] = {
+    <span style="color: #008000;">"PATH=/tmp"</span>,
+    <span style="color: #008000;">"USER=execle"</span>,
+    <span style="color: #D0372D;">NULL</span>,
+  };
+  <span style="color: #0000FF;">if</span> (<span style="color: #D0372D;">0</span> == fork()) {
+    <span style="color: #0000FF;">if</span> (execle(<span style="color: #008000;">"/usr/bin/env"</span>, <span style="color: #008000;">"env"</span>, <span style="color: #D0372D;">NULL</span>, envp) &lt; <span style="color: #D0372D;">0</span>) {
+      printf(<span style="color: #008000;">"execle error\n"</span>);
+    }
+  }
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
+</pre>
+</div>
+<p>
+PATH=/tmp
+USER=execle
+</p>
+
+<p>
+可以看到子进程中的环境变量被修改成代码中的 envp 中的值。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://blog.csdn.net/Thanksgining/article/details/41943799">https://blog.csdn.net/Thanksgining/article/details/41943799</a>
+</p>
+
+<p class="footpara">
+fork() 为 UNIX 中派生新进程的唯一方法。fork() 在调用进程（成为父进程）中返回一次，返回值为新派生进程（子进程）的 PID ，在子进程中又返回一次，返回值为 0 。
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

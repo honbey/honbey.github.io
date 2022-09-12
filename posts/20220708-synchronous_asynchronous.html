@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 20:12 -->
+<!-- 2022-09-12 Mon 22:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
@@ -14,7 +14,11 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Synchronous/Asynchronous</h1>
-</header><p>
+</header>
+<div id="outline-container-ID-c31e51cf-dba3-46de-a06b-a2160fda517b" class="outline-2">
+<h2 id="ID-c31e51cf-dba3-46de-a06b-a2160fda517b">Synchronous/Asynchronous</h2>
+<div class="outline-text-2" id="text-ID-c31e51cf-dba3-46de-a06b-a2160fda517b">
+<p>
 同步/异步关注任务运行之后需不需要处理。
 </p>
 
@@ -47,9 +51,29 @@ Concurrency(Simultaneous) / Parallel
 </p>
 </blockquote>
 
-<div id="outline-container-org3e0192e" class="outline-2">
-<h2 id="org3e0192e">Python 异步编程</h2>
-<div class="outline-text-2" id="text-org3e0192e">
+<p>
+<a href="#ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">Python 异步编程</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfce0628" class="outline-2">
+<h2 id="orgfce0628">Linux 事件模型</h2>
+<div class="outline-text-2" id="text-orgfce0628">
+</div>
+<div id="outline-container-ID-c0498ec3-4006-482e-aefe-373f01d46b3e" class="outline-3">
+<h3 id="ID-c0498ec3-4006-482e-aefe-373f01d46b3e">epoll</h3>
+<div class="outline-text-3" id="text-ID-c0498ec3-4006-482e-aefe-373f01d46b3e">
+<p>
+当事件没准备好时，放到 epoll 里面，事件准备好了就去读写。当读写返回 EAGAIN 时，将它再次加入到 epoll 里面。这样，只要有事件准备好了就去处理它，只有当事件没准备好时，才在 epoll 里面等着。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c" class="outline-2">
+<h2 id="ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">Python 异步编程</h2>
+<div class="outline-text-2" id="text-ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">
 <p>
 使用 Python 3.4 起引入的 <code>asyncio</code> 标准库实现。
 </p>
@@ -65,7 +89,7 @@ Concurrency(Simultaneous) / Parallel
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="org8f06814">
+<figure id="orgbb68927">
 <img src="../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>

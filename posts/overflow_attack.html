@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 20:12 -->
+<!-- 2022-09-12 Mon 22:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>堆栈溢出攻击</title>
@@ -47,24 +47,24 @@
 </div>
 </div>
 
-<div id="outline-container-org62655fc" class="outline-4">
-<h4 id="org62655fc">二进制分析</h4>
-<div class="outline-text-4" id="text-org62655fc">
+<div id="outline-container-org9792965" class="outline-4">
+<h4 id="org9792965">二进制分析</h4>
+<div class="outline-text-4" id="text-org9792965">
 <p>
 正常运行结果：
 </p>
 
-<figure id="orgc496c74">
+<figure id="orgb2239ae">
 <img src="../images/overflow_attack_binary_analysis_1_1_1.png" alt="overflow_attack_binary_analysis_1_1_1.png">
 
 </figure>
 
-<figure id="org57f7125">
+<figure id="org1000abe">
 <img src="../images/overflow_attack_binary_analysis_1_1_2.png" alt="overflow_attack_binary_analysis_1_1_2.png">
 
 </figure>
 
-<figure id="orgb9eee47">
+<figure id="orgc349cfe">
 <img src="../images/overflow_attack_binary_analysis_1_1_3.png" alt="overflow_attack_binary_analysis_1_1_3.png">
 
 </figure>
@@ -73,12 +73,12 @@
 利用特意构建得字符串覆盖正常的内存区域，以跳过密码验证。此时原先正常的内存区域被溢出的字符串覆盖，原来的字符串被修改成“aaaaa”密码验证通过，下图为实际运行过程中的内存，很奇怪的是 0x12ff28 处不是 61000000，而是一个 RET 返回地址，感觉是这是系统一种异常处理机制或者是栈帧移动
 </p>
 
-<figure id="org0187cbf">
+<figure id="orgc17683b">
 <img src="../images/overflow_attack_binary_analysis_1_2_1.png" alt="overflow_attack_binary_analysis_1_2_1.png">
 
 </figure>
 
-<figure id="orgc577cae">
+<figure id="org2e0e2ae">
 <img src="../images/overflow_attack_binary_analysis_1_2_2.png" alt="overflow_attack_binary_analysis_1_2_2.png">
 
 </figure>
@@ -87,17 +87,17 @@
 输入 23 个字符的情况，导致这一块内存区域被置零，应该是触发了 Windows 或 VC 的一场处理。但是寄存器还是接受到了这些值，EIP 和 EBP 都指向了一个不存在的内存地址，导致程序异常而出现错误代码提示。
 </p>
 
-<figure id="org66d24d6">
+<figure id="orgf208456">
 <img src="../images/overflow_attack_binary_analysis_1_3_1.png" alt="overflow_attack_binary_analysis_1_3_1.png">
 
 </figure>
 
-<figure id="org0ad8a25">
+<figure id="orge23c9f4">
 <img src="../images/overflow_attack_binary_analysis_1_3_2.png" alt="overflow_attack_binary_analysis_1_3_2.png">
 
 </figure>
 
-<figure id="orga15b432">
+<figure id="org27ef05e">
 <img src="../images/overflow_attack_binary_analysis_1_3_3.png" alt="overflow_attack_binary_analysis_1_3_3.png">
 
 </figure>
@@ -138,9 +138,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1b0ae8e" class="outline-4">
-<h4 id="org1b0ae8e">二进制分析</h4>
-<div class="outline-text-4" id="text-org1b0ae8e">
+<div id="outline-container-org3cdfbf2" class="outline-4">
+<h4 id="org3cdfbf2">二进制分析</h4>
+<div class="outline-text-4" id="text-org3cdfbf2">
 <p>
 修改返回地址执行使得程序转而执行 Attack()。
 正常运行结果（左），攻击后运行结果（右）：
@@ -171,7 +171,7 @@ passwd.txt
 </p>
 
 
-<figure id="org7325957">
+<figure id="org86cad82">
 <img src="../images/overflow_attack_binary_analysis_2_2.png" alt="overflow_attack_binary_analysis_2_2.png">
 
 </figure>
@@ -249,14 +249,14 @@ passwd.txt
 </div>
 </div>
 
-<div id="outline-container-org7d87faa" class="outline-4">
-<h4 id="org7d87faa">二进制分析</h4>
-<div class="outline-text-4" id="text-org7d87faa">
+<div id="outline-container-org0a37e5b" class="outline-4">
+<h4 id="org0a37e5b">二进制分析</h4>
+<div class="outline-text-4" id="text-org0a37e5b">
 <p>
 使用 Depends 获取到 MessageBoxA 函数的入口地址
 </p>
 
-<figure id="org2b49604">
+<figure id="org4d066c3">
 <img src="../images/overflow_attack_binary_analysis_3_1.png" alt="overflow_attack_binary_analysis_3_1.png">
 
 </figure>
@@ -284,7 +284,7 @@ passwd.txt
 设计 passwd 文件
 </p>
 
-<figure id="orga2b9836">
+<figure id="orgeaf567d">
 <img src="../images/overflow_attack_binary_analysis_3_3.png" alt="overflow_attack_binary_analysis_3_3.png">
 
 </figure>
@@ -308,7 +308,7 @@ passwd.txt
 </tbody>
 </table>
 
-<figure id="org4599ecb">
+<figure id="org443bca8">
 <img src="../images/overflow_attack_binary_analysis_3_4_3.png" alt="overflow_attack_binary_analysis_3_4_3.png">
 
 </figure>
@@ -364,7 +364,7 @@ passwd.txt
 找到一个 JMP ESP 指令的地址
 </p>
 
-<figure id="org01afd00">
+<figure id="org167d8b6">
 <img src="../images/overflow_attack_binary_analysis_4_1.png" alt="overflow_attack_binary_analysis_4_1.png">
 
 </figure>
@@ -375,13 +375,13 @@ passwd.txt
 最主要的是要让函数的返回地址改成 JMP ESP 的地址，让程序跳转到 esp 之后往下执行，最后调用 exitThread 函数，使得函数正常退出，完成代码注入
 </p>
 
-<figure id="org9ab293f">
+<figure id="org26d0b76">
 <img src="../images/overflow_attack_binary_analysis_4_2.png" alt="overflow_attack_binary_analysis_4_2.png">
 
 </figure>
 
 
-<figure id="orga208644">
+<figure id="org321fe2b">
 <img src="../images/overflow_attack_binary_analysis_4_3.png" alt="overflow_attack_binary_analysis_4_3.png">
 
 </figure>
@@ -398,7 +398,7 @@ passwd.txt
 堆块示意图：
 </p>
 
-<figure id="orga7c9f45">
+<figure id="org1af9907">
 <img src="../images/overflow_attack_heap_overflow_1.png" alt="overflow_attack_heap_overflow_1.png">
 
 </figure>
@@ -517,9 +517,9 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 </p>
 </div>
 
-<div id="outline-container-org565ce23" class="outline-4">
-<h4 id="org565ce23">源代码</h4>
-<div class="outline-text-4" id="text-org565ce23">
+<div id="outline-container-orgbab5e83" class="outline-4">
+<h4 id="orgbab5e83">源代码</h4>
+<div class="outline-text-4" id="text-orgbab5e83">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;string.h&gt;</span>
@@ -554,19 +554,19 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 </div>
 </div>
 
-<div id="outline-container-org97369d0" class="outline-4">
-<h4 id="org97369d0">二进制分析</h4>
-<div class="outline-text-4" id="text-org97369d0">
+<div id="outline-container-org23d8771" class="outline-4">
+<h4 id="org23d8771">二进制分析</h4>
+<div class="outline-text-4" id="text-org23d8771">
 <p>
 开启 /GS 编译选项后，程序不能正常执行，在检测到栈溢出之后会引发异常，只能中断退出
 </p>
 
-<figure id="orgde36f54">
+<figure id="org76cab80">
 <img src="../images/overflow_attack_heap_overflow_2_1.png" alt="overflow_attack_heap_overflow_2_1.png">
 
 </figure>
 
-<figure id="orgcc6a5d8">
+<figure id="org308a689">
 <img src="../images/overflow_attack_heap_overflow_2_2.png" alt="overflow_attack_heap_overflow_2_2.png">
 
 </figure>
@@ -576,7 +576,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 在单步调试过程中，查看内存与寄存器，内存中 old ebp – 4 就是安全 cookie 的值，该值是随机生成的初始 cookie 与寄存器 EBP 异或得到的值
 </p>
 
-<figure id="orge6ae2b4">
+<figure id="org63c9b2e">
 <img src="../images/overflow_attack_heap_overflow_3.png" alt="overflow_attack_heap_overflow_3.png">
 
 </figure>
@@ -587,7 +587,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 </p>
 
 
-<figure id="orgfae81ca">
+<figure id="org7cbb7fc">
 <img src="../images/overflow_attack_heap_overflow_4.png" alt="overflow_attack_heap_overflow_4.png">
 
 </figure>
@@ -604,9 +604,9 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 </p>
 </div>
 
-<div id="outline-container-org5e26118" class="outline-4">
-<h4 id="org5e26118">源代码</h4>
-<div class="outline-text-4" id="text-org5e26118">
+<div id="outline-container-org7f6aaf0" class="outline-4">
+<h4 id="org7f6aaf0">源代码</h4>
+<div class="outline-text-4" id="text-org7f6aaf0">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
@@ -642,7 +642,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 系统 dll 以及系统函数的地址没有改变，全局变量和代码中编写的函数地址每次运行都会改变；
 </p>
 
-<figure id="orgb5b93d8">
+<figure id="org9371239">
 <img src="../images/overflow_attack_aslr_1.png" alt="overflow_attack_aslr_1.png">
 
 </figure>
@@ -651,7 +651,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 重启电脑后系统 dll 和系统函数改变，全局变量和代码中编写的函数地址每次运行都会改变。
 </p>
 
-<figure id="org5ed40a5">
+<figure id="org2a239ac">
 <img src="../images/overflow_attack_aslr_2.png" alt="overflow_attack_aslr_2.png">
 
 </figure>
@@ -665,7 +665,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 系统 dll 以及系统函数的地址没有改变，全局变量和代码中编写的函数地址每次运行均不会改变；
 </p>
 
-<figure id="orgaa78939">
+<figure id="orgffa4e7e">
 <img src="../images/overflow_attack_aslr_3.png" alt="overflow_attack_aslr_3.png">
 
 </figure>
@@ -674,7 +674,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 重启后只是系统 dll 即系统函数地址变了。
 </p>
 
-<figure id="org111d80f">
+<figure id="org374f780">
 <img src="../images/overflow_attack_aslr_4.png" alt="overflow_attack_aslr_4.png">
 
 </figure>
@@ -687,9 +687,9 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 <div class="outline-text-3" id="text-ID-39d4c0f8-0324-43de-8312-a69edad01e47">
 </div>
 
-<div id="outline-container-org9eb7188" class="outline-4">
-<h4 id="org9eb7188">源代码</h4>
-<div class="outline-text-4" id="text-org9eb7188">
+<div id="outline-container-orgc0fe5a7" class="outline-4">
+<h4 id="orgc0fe5a7">源代码</h4>
+<div class="outline-text-4" id="text-orgc0fe5a7">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000FF;">extern</span> <span style="color: #008000;">"C"</span> <span style="color: #0000FF;">__declspec</span>(dllimport) <span style="color: #006699;">jump</span>();
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
@@ -774,7 +774,7 @@ or named &rsquo;arbitrary DWORD rest&rsquo;
 特意构建的 dll 中包含 <code>pop,pop,retn</code> 三条汇编指令，为了跳转回 shellcode 而编写的。基地址是自己设置的 0x12340000，三条汇编指令的起始地址通过 ollydbg 查找得到的是 0x12341068
 </p>
 
-<figure id="orgfdaa9e0">
+<figure id="orgb7182b2">
 <img src="../images/overflow_attack_sc_binary_analysis_1.png" alt="overflow_attack_sc_binary_analysis_1.png">
 
 </figure>
@@ -811,7 +811,7 @@ Pointer to next SEH record 是指向下一个 SEH 异常处理函数，+4 处是
 在 ollydbg 中调试知，利用的 windows 内核一个函数的栈帧实施的跳转，这个函数是 windows 用于实现异常处理的，ESP + 8 处是我们覆盖的 next SEH record，我们覆盖的 SEH handler 在此内核函数中的被调用，于是系统在执行这个内核函数时，两次弹栈， 新 ESP = ESP + 8，retn 指令让 EIP 指向 ESP，于是程序跳转回 0x0012ff18，此处我们覆盖的是 0x909010EB，再往内存高位跳转 16 字节，程序跳转到 0x0012ff2a 执行，进入我们覆盖好的第二段 shellcode 执行，shellcode 见源代码，为了正常执行，程序引用了 user32.dll
 </p>
 
-<figure id="org8e79339">
+<figure id="org632f72f">
 <img src="../images/overflow_attack_sc_binary_analysis_3.png" alt="overflow_attack_sc_binary_analysis_3.png">
 
 </figure>
@@ -821,7 +821,7 @@ Pointer to next SEH record 是指向下一个 SEH 异常处理函数，+4 处是
 Ollydbg 中程序跳转回 shellcode 的情形
 </p>
 
-<figure id="orgc9d5d96">
+<figure id="org6629ba7">
 <img src="../images/overflow_attack_sc_binary_analysis_4.png" alt="overflow_attack_sc_binary_analysis_4.png">
 
 </figure>
@@ -831,7 +831,7 @@ Ollydbg 中程序跳转回 shellcode 的情形
 程序运行后成功弹出“failwest”弹窗。
 </p>
 
-<figure id="org7eec00e">
+<figure id="org72d1476">
 <img src="../images/overflow_attack_sc_binary_analysis_5.png" alt="overflow_attack_sc_binary_analysis_5.png">
 
 </figure>
@@ -840,7 +840,7 @@ Ollydbg 中程序跳转回 shellcode 的情形
 进一步分析，程序利用的 ntd.dll 中的系统函数实现的从异常处理函数跳转回 shellcode ，但从 ollydbg 中的调试情况看，0x3247、0x3282 等地址没有函数，应该是编译器直接使用的那一段地址中的函数的某些部分实现的异常处理，在我们利用的那个异常处理函数中，栈帧很简单， ESP+8 处的值是 next SEH record，给了我们跳转回来的机会，同时也知道了异常处理并不是直接执行 SEH handler 处的函数，而是经过了多次函数调用最后才跳转到 SEH handler 处执行的
 </p>
 
-<figure id="org46cbc18">
+<figure id="org694e742">
 <img src="../images/overflow_attack_sc_binary_analysis_6.png" alt="overflow_attack_sc_binary_analysis_6.png">
 
 </figure>
@@ -859,7 +859,7 @@ Ollydbg 中程序跳转回 shellcode 的情形
 第一次跳转
 </p>
 
-<figure id="org87a74e0">
+<figure id="org2156ac9">
 <img src="../images/overflow_attack_sc_binary_analysis_7.png" alt="overflow_attack_sc_binary_analysis_7.png">
 
 </figure>
@@ -869,13 +869,13 @@ Ollydbg 中程序跳转回 shellcode 的情形
 第二次跳转
 </p>
 
-<figure id="org4c0609a">
+<figure id="orgbb817db">
 <img src="../images/overflow_attack_sc_binary_analysis_8.png" alt="overflow_attack_sc_binary_analysis_8.png">
 
 </figure>
 
 
-<figure id="org875b4b7">
+<figure id="orgf4cfd12">
 <img src="../images/overflow_attack_sc_binary_analysis_9.png" alt="overflow_attack_sc_binary_analysis_9.png">
 
 </figure>
@@ -884,7 +884,7 @@ Ollydbg 中程序跳转回 shellcode 的情形
 程序运行后成功弹出“failwest”弹窗。
 </p>
 
-<figure id="org0246602">
+<figure id="org18ff227">
 <img src="../images/overflow_attack_sc_binary_analysis_10.png" alt="overflow_attack_sc_binary_analysis_10.png">
 
 </figure>

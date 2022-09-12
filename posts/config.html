@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 20:12 -->
+<!-- 2022-09-12 Mon 22:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -543,7 +543,7 @@ TODO: gpg
 <span style="color: #707183;">(</span><span style="color: #0000FF;">after!</span> org
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-preview-latex-default-process</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">dvisvgm</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-latex-create-formula-image-program</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">dvisvgm</span><span style="color: #7388D6;">)</span>
-
+  <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(setq org-latex-create-formula-image-program 'imagemagick)</span>
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-todo-keywords</span>
       <span style="color: #0000FF;">'</span><span style="color: #909183;">(</span><span style="color: #709870;">(</span>sequence <span style="color: #008000;">"</span><span style="color: #ffa500; font-weight: bold;">TODO</span><span style="color: #008000;">(t!/!)"</span> <span style="color: #008000;">"NEXT(n!/!)"</span> <span style="color: #008000;">"STRT(s!/!)"</span> <span style="color: #008000;">"|"</span> <span style="color: #008000;">"DONE(d!)"</span><span style="color: #709870;">)</span>
@@ -575,8 +575,8 @@ TODO: gpg
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-done</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">time</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-log-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-into-drawer</span> t<span style="color: #7388D6;">)</span>
-  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-clock-out-remove-zero-time-clocks</span> t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-into-drawer t<span style="color: #7388D6;">)</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> org-clock-out-remove-zero-time-clocks t<span style="color: #7388D6;">)</span>
 
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-agenda-files</span> <span style="color: #909183;">(</span><span style="color: #D0372D;">list</span> <span style="color: #008000;">"~/org"</span><span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
 
@@ -637,6 +637,15 @@ TODO: gpg
       <span style="color: #709870;">(</span>org . t<span style="color: #709870;">)</span>
   <span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>
   <span style="color: #7388D6;">(</span><span style="color: #0000FF;">setq</span> <span style="color: #BA36A5;">org-confirm-babel-evaluate</span> nil<span style="color: #7388D6;">)</span>
+
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">https://github.com/emacsmirror/org/blob/master/lisp/ob-latex.el</span>
+  <span style="color: #7388D6;">(</span><span style="color: #0000FF;">defcustom</span> <span style="color: #BA36A5;">org-babel-latex-preamble</span>
+    <span style="color: #909183;">(</span><span style="color: #0000FF;">lambda</span> <span style="color: #709870;">(</span>_<span style="color: #709870;">)</span>
+      <span style="color: #036A07;">"\\documentclass[preview]{standalone}"</span><span style="color: #909183;">)</span>
+    <span style="color: #036A07;">"Closure which evaluates at runtime to the LaTeX preamble.</span>
+<span style="color: #036A07;">It takes 1 argument which is the parameters of the source block."</span>
+    <span style="color: #006FE0;">:group</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">org-babel</span>
+    <span style="color: #006FE0;">:type</span> <span style="color: #0000FF;">'</span><span style="color: #D0372D;">function</span><span style="color: #7388D6;">)</span>
 <span style="color: #707183;">)</span>
 </pre>
 </div>

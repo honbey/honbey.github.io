@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-08 Thu 20:12 -->
+<!-- 2022-09-12 Mon 22:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Union Find</title>
@@ -114,9 +114,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org711b27a" class="outline-3">
-<h3 id="org711b27a">分析</h3>
-<div class="outline-text-3" id="text-org711b27a">
+<div id="outline-container-org88e6805" class="outline-3">
+<h3 id="org88e6805">分析</h3>
+<div class="outline-text-3" id="text-org88e6805">
 <p>
 对于每一对输入，~Union()~ 都需要扫描整个 <code>id_</code> 数组。
 </p>
@@ -159,9 +159,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org49a344d" class="outline-3">
-<h3 id="org49a344d">分析</h3>
-<div class="outline-text-3" id="text-org49a344d">
+<div id="outline-container-org7f70ea6" class="outline-3">
+<h3 id="org7f70ea6">分析</h3>
+<div class="outline-text-3" id="text-org7f70ea6">
 <p>
 <code>Find()</code> 方法访问数组的次数为 1 加上给定触点所对应的节点的深度的两倍。 <code>Union()</code> 和 <code>Connected()</code> 访问数组的次数为两次 <code>Find()</code> 操作（如果 <code>Union</code> 中给定的两个触点分别存在于不同的树中则还需要加 1）。
 </p>
@@ -246,9 +246,9 @@ main function:
 </div>
 </div>
 
-<div id="outline-container-org3789719" class="outline-3">
-<h3 id="org3789719">分析</h3>
-<div class="outline-text-3" id="text-org3789719">
+<div id="outline-container-org3c2154f" class="outline-3">
+<h3 id="org3c2154f">分析</h3>
+<div class="outline-text-3" id="text-org3c2154f">
 <p>
 对于 N 个触点，加权 quick union 算法构造的森林中的任意节点的深度最多为 \(\lg N\)。
 </p>
