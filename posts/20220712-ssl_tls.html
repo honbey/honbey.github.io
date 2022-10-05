@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSL/TLS</title>
@@ -189,9 +189,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </div>
 </div>
 
-<div id="outline-container-org5eda0df" class="outline-2">
-<h2 id="org5eda0df">离散对数 DH 算法</h2>
-<div class="outline-text-2" id="text-org5eda0df">
+<div id="outline-container-org5b793ac" class="outline-2">
+<h2 id="org5b793ac">离散对数 DH 算法</h2>
+<div class="outline-text-2" id="text-org5b793ac">
 <p>
 <a href="20220712-discrete_logarithm.html#ID-455a29f5-1968-4678-a091-f8383b31e817">Discrete Logarithm</a> - 离散对数
 </p>
@@ -234,9 +234,9 @@ Bob:   Calculate \(A^{b} \mod P\) 同样也是得到 K ，于是双方以 K 作�
 </p>
 </div>
 
-<div id="outline-container-orgc968478" class="outline-3">
-<h3 id="orgc968478">DHE 密钥交换</h3>
-<div class="outline-text-3" id="text-orgc968478">
+<div id="outline-container-orga8d3a32" class="outline-3">
+<h3 id="orga8d3a32">DHE 密钥交换</h3>
+<div class="outline-text-3" id="text-orga8d3a32">
 <blockquote>
 <p>
 Diffie Hellman
@@ -268,16 +268,16 @@ PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
 </div>
 </div>
 
-<div id="outline-container-org21c630c" class="outline-3">
-<h3 id="org21c630c">ECDHE</h3>
-<div class="outline-text-3" id="text-org21c630c">
+<div id="outline-container-org9423896" class="outline-3">
+<h3 id="org9423896">ECDHE</h3>
+<div class="outline-text-3" id="text-org9423896">
 <p>
 提高 DHE 的性能，使用 ECC 椭圆曲线的特性计算公钥及会话密钥。过程：
 </p>
 <ol class="org-ol">
 <li>Alice 和 Bob 事先确定好使用哪种椭圆曲线（曲线方程），以及曲线上的基点 G 点，公开传输</li>
 <li>Alice 和 Bob 各自随机生成一个随机数作为私钥 a, b，并与基点相乘得到公钥 A = aG, B = bG</li>
-<li>双方各自交换公钥 A, B ，Alice 计算点 (x_a, y_a) = aB ，Bob 计算点 (x_b, x_b) = bA
+<li>双方各自交换公钥 A, B ，Alice 计算点 (x_{a}, y_{a}) = aB ，Bob 计算点 (x_{b}, x_b) = bA
 由于椭圆曲线满足乘法交换律和结合律，所以 aB = abG = baG = bA ，所以双方计算得到的点是一样的，可作为会话密钥</li>
 </ol>
 
@@ -346,7 +346,7 @@ C -&gt; S:
 </ol>
 
 <p>
-在 ECDHE 过程中，双方的 <b>临时私钥</b> 在内存的存在时间非常短（毫秒），可近似认为满足 PFS 。
+在 ECDHE 过程中，双方的 <b>临时私钥</b> 在内存的存在时间非常短（毫秒），可近似认为满足 PFS(Profect Forward Security) 。
 </p>
 
 <p>
@@ -380,9 +380,9 @@ DHE 安全性论文：
 </p>
 </div>
 
-<div id="outline-container-orgacfec70" class="outline-3">
-<h3 id="orgacfec70">Session ID</h3>
-<div class="outline-text-3" id="text-orgacfec70">
+<div id="outline-container-org3e0017e" class="outline-3">
+<h3 id="org3e0017e">Session ID</h3>
+<div class="outline-text-3" id="text-org3e0017e">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，双方在内存中缓存会话密钥，并用唯一的 Session ID 来表示，即 Session ID 作为 key ，会话密钥作为 value 。
 当客户端再次连接时，在 HELLO 消息中带上 Session ID ，服务器收到后就会从内存找到该会话密钥，在 1 个 RTT 中建立 TLS 通信。
@@ -397,9 +397,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-orgd2dbf9c" class="outline-3">
-<h3 id="orgd2dbf9c">Session Ticket</h3>
-<div class="outline-text-3" id="text-orgd2dbf9c">
+<div id="outline-container-org726280a" class="outline-3">
+<h3 id="org726280a">Session Ticket</h3>
+<div class="outline-text-3" id="text-org726280a">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，服务器会将会话密钥加密后作为 Ticket 发送给客户端，由客户端缓存该 Ticket。
 当客户端再次连接时，会发送 Ticket ，服务器解密后就可以获取上一次的会话密钥，验证有效期后无问题就可以建立 TLS 通信。
@@ -407,9 +407,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-org3fa5834" class="outline-3">
-<h3 id="org3fa5834">Pre-shared Key</h3>
-<div class="outline-text-3" id="text-org3fa5834">
+<div id="outline-container-orgf829d7e" class="outline-3">
+<h3 id="orgf829d7e">Pre-shared Key</h3>
+<div class="outline-text-3" id="text-orgf829d7e">
 <p>
 类似 Session Ticket ，但可以直接在 HTTP 请求中带上 Pre-shared Key ，在 0 RTT 内恢复会话。
 </p>
@@ -417,13 +417,13 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-org5a35d79" class="outline-2">
-<h2 id="org5a35d79">TLS Extension</h2>
-<div class="outline-text-2" id="text-org5a35d79">
+<div id="outline-container-org7b76705" class="outline-2">
+<h2 id="org7b76705">TLS Extension</h2>
+<div class="outline-text-2" id="text-org7b76705">
 </div>
-<div id="outline-container-org7bece0b" class="outline-3">
-<h3 id="org7bece0b">ALPN</h3>
-<div class="outline-text-3" id="text-org7bece0b">
+<div id="outline-container-org865fd14" class="outline-3">
+<h3 id="org865fd14">ALPN</h3>
+<div class="outline-text-3" id="text-org865fd14">
 <p>
 ALPN(Application Layer Protocol Negotiation) 是 TLS 的扩展，允许在安全连接的基础上进行应用层协议的协商。ALPN 支持任意应用层协议的协商，目前应用最多是 HTTP2 的协商。在 2016 年， ALPN 已经完全替代 NPN 了。
 </p>
@@ -437,9 +437,9 @@ ALPN allows the application layer to negotiate which protocol to use over the se
 </div>
 </div>
 
-<div id="outline-container-org4b1cffa" class="outline-2">
-<h2 id="org4b1cffa">Reference</h2>
-<div class="outline-text-2" id="text-org4b1cffa">
+<div id="outline-container-org5befefd" class="outline-2">
+<h2 id="org5befefd">Reference</h2>
+<div class="outline-text-2" id="text-org5befefd">
 <ul class="org-ul">
 <li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>

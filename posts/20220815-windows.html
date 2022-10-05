@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
@@ -19,9 +19,9 @@
 <h2 id="ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</h2>
 <div class="outline-text-2" id="text-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">
 </div>
-<div id="outline-container-org0c80527" class="outline-3">
-<h3 id="org0c80527">Specific PowerShell as SSH terminal on Windows</h3>
-<div class="outline-text-3" id="text-org0c80527">
+<div id="outline-container-org533192d" class="outline-3">
+<h3 id="org533192d">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-org533192d">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -33,9 +33,9 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 </div>
 </div>
 
-<div id="outline-container-org0408618" class="outline-3">
-<h3 id="org0408618">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org0408618">
+<div id="outline-container-orgec19c21" class="outline-3">
+<h3 id="orgec19c21">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgec19c21">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
@@ -45,22 +45,22 @@ Remove-Item (Get-PSReadlineOption).HistorySavePath
 </div>
 </div>
 
-<div id="outline-container-org34ee39d" class="outline-2">
-<h2 id="org34ee39d">Registry</h2>
-<div class="outline-text-2" id="text-org34ee39d">
+<div id="outline-container-orgf26a67f" class="outline-2">
+<h2 id="orgf26a67f">Registry</h2>
+<div class="outline-text-2" id="text-orgf26a67f">
 </div>
-<div id="outline-container-orgb945e69" class="outline-3">
-<h3 id="orgb945e69">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orgb945e69">
+<div id="outline-container-org745e328" class="outline-3">
+<h3 id="org745e328">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org745e328">
 <div class="org-src-container">
 <pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org52a9e37" class="outline-4">
-<h4 id="org52a9e37">Clear login record</h4>
-<div class="outline-text-4" id="text-org52a9e37">
+<div id="outline-container-org3ca5d5f" class="outline-4">
+<h4 id="org3ca5d5f">Clear login record</h4>
+<div class="outline-text-4" id="text-org3ca5d5f">
 <div class="org-src-container">
 <pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
 reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
@@ -73,13 +73,13 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-org6ffe646" class="outline-2">
-<h2 id="org6ffe646">Hyper-V</h2>
-<div class="outline-text-2" id="text-org6ffe646">
+<div id="outline-container-org9ecaccd" class="outline-2">
+<h2 id="org9ecaccd">Hyper-V</h2>
+<div class="outline-text-2" id="text-org9ecaccd">
 </div>
-<div id="outline-container-orgc5b7dd7" class="outline-3">
-<h3 id="orgc5b7dd7">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
-<div class="outline-text-3" id="text-orgc5b7dd7">
+<div id="outline-container-orga3c4d39" class="outline-3">
+<h3 id="orga3c4d39">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-orga3c4d39">
 <ol class="org-ol">
 <li>Enter Debug mode</li>
 <li>Execute <code>mount -0 remount,re/mnt</code></li>
@@ -91,9 +91,9 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-org5807d4f" class="outline-2">
-<h2 id="org5807d4f">Useful info</h2>
-<div class="outline-text-2" id="text-org5807d4f">
+<div id="outline-container-orgf58e28e" class="outline-2">
+<h2 id="orgf58e28e">Useful info</h2>
+<div class="outline-text-2" id="text-orgf58e28e">
 <p>
 Software - UWP:
 </p>
@@ -139,6 +139,8 @@ Software - x86/x64 by scoop:
 <li>vcredist2022</li>
 <li>vlc</li>
 <li><a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">wireshark</a></li>
+
+<li>photodemon</li>
 </ul>
 
 <p>
@@ -247,9 +249,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </table>
 </div>
 
-<div id="outline-container-orgac4fc1a" class="outline-3">
-<h3 id="orgac4fc1a">Automatic shutdown</h3>
-<div class="outline-text-3" id="text-orgac4fc1a">
+<div id="outline-container-org561c28f" class="outline-3">
+<h3 id="org561c28f">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-org561c28f">
 <table>
 <caption class="t-above"><span class="table-number">Table 2:</span> usage of shutdown</caption>
 
@@ -284,9 +286,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </div>
 </div>
 
-<div id="outline-container-orgcbf8aee" class="outline-3">
-<h3 id="orgcbf8aee">Operate disk</h3>
-<div class="outline-text-3" id="text-orgcbf8aee">
+<div id="outline-container-orgd3f195f" class="outline-3">
+<h3 id="orgd3f195f">Operate disk</h3>
+<div class="outline-text-3" id="text-orgd3f195f">
 <p>
 <code>diskpart</code>
 </p>

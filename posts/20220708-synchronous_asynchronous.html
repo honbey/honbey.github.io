@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
@@ -57,9 +57,9 @@ Concurrency(Simultaneous) / Parallel
 </div>
 </div>
 
-<div id="outline-container-orgfce0628" class="outline-2">
-<h2 id="orgfce0628">Linux 事件模型</h2>
-<div class="outline-text-2" id="text-orgfce0628">
+<div id="outline-container-org79408c5" class="outline-2">
+<h2 id="org79408c5">Linux 事件模型</h2>
+<div class="outline-text-2" id="text-org79408c5">
 </div>
 <div id="outline-container-ID-c0498ec3-4006-482e-aefe-373f01d46b3e" class="outline-3">
 <h3 id="ID-c0498ec3-4006-482e-aefe-373f01d46b3e">epoll</h3>
@@ -79,8 +79,8 @@ Concurrency(Simultaneous) / Parallel
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> asyncio
-<span style="color: #0000FF;">async def</span> <span style="color: #006699;">say</span>(what, when):
-    <span style="color: #0000FF;">await</span> asyncio.sleep(when)
+<span style="color: #0000FF;">async</span> <span style="color: #0000FF;">def</span> <span style="color: #006699;">say</span>(<span style="color: #BA36A5;">what</span>, <span style="color: #BA36A5;">when</span>):
+    <span style="color: #0000FF;">await</span> asyncio.<span style="color: #006DAF; font-style: italic;">sleep</span>(when)
     <span style="color: #0000FF;">return</span> what
 </pre>
 </div>
@@ -89,16 +89,16 @@ Concurrency(Simultaneous) / Parallel
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="orgbb68927">
+<figure id="org65a375d">
 <img src="../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org069751b" class="outline-2">
-<h2 id="org069751b">Reference</h2>
-<div class="outline-text-2" id="text-org069751b">
+<div id="outline-container-org4c26678" class="outline-2">
+<h2 id="org4c26678">Reference</h2>
+<div class="outline-text-2" id="text-org4c26678">
 <ul class="org-ul">
 <li><a href="https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html">https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html</a></li>
 </ul>

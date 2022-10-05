@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-12 Mon 22:21 -->
+<!-- 2022-09-30 Fri 20:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Distributed System</title>
@@ -14,10 +14,9 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Distributed System</h1>
-</header>
-<div id="outline-container-org278de6c" class="outline-2">
-<h2 id="org278de6c">NPC</h2>
-<div class="outline-text-2" id="text-org278de6c">
+</header><div id="outline-container-orgd4bfab7" class="outline-2">
+<h2 id="orgd4bfab7">NPC</h2>
+<div class="outline-text-2" id="text-orgd4bfab7">
 <ul class="org-ul">
 <li>Network delay</li>
 <li>Process Pause</li>
@@ -26,9 +25,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgeea0202" class="outline-2">
-<h2 id="orgeea0202">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
-<div class="outline-text-2" id="text-orgeea0202">
+<div id="outline-container-orgac0178f" class="outline-2">
+<h2 id="orgac0178f">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-orgac0178f">
 <p>
 分布式架构的两个方向：
 </p>
@@ -132,9 +131,9 @@ BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追�
 </p>
 </div>
 </div>
-<div id="outline-container-org3d18ad5" class="outline-3">
-<h3 id="org3d18ad5">Paxos 共识算法</h3>
-<div class="outline-text-3" id="text-org3d18ad5">
+<div id="outline-container-org6df9fd6" class="outline-3">
+<h3 id="org6df9fd6">Paxos 共识算法</h3>
+<div class="outline-text-3" id="text-org6df9fd6">
 <p>
 Paxos 算法解决的问题是分布式共识性问题，即一个分布式系统中的各个进程如何就某个值（决议）通过共识达成一致
 </p>
@@ -390,9 +389,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </ul>
 </div>
 
-<div id="outline-container-org8985540" class="outline-4">
-<h4 id="org8985540">多主多从</h4>
-<div class="outline-text-4" id="text-org8985540">
+<div id="outline-container-orgf3cd345" class="outline-4">
+<h4 id="orgf3cd345">多主多从</h4>
+<div class="outline-text-4" id="text-orgf3cd345">
 <p>
 着重考虑主之间的数据一致性问题。
 </p>
@@ -427,9 +426,9 @@ ES 的索引分片。
 </p>
 </div>
 </div>
-<div id="outline-container-org2bfa3d0" class="outline-3">
-<h3 id="org2bfa3d0">一致性 Hash 算法</h3>
-<div class="outline-text-3" id="text-org2bfa3d0">
+<div id="outline-container-orgdaf158b" class="outline-3">
+<h3 id="orgdaf158b">一致性 Hash 算法</h3>
+<div class="outline-text-3" id="text-orgdaf158b">
 <p>
 通过对数据项的键进行哈希处理映射其在环上的位置，然后顺时针遍历环以查找位置大于该项位置的第一个节点，将每个由键标识的数据分配给 hash 环中的一个节点，节点添加删除，对整个集群而言，仅影响其直接邻居，其他节点不受影响。
 </p>
