@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:56 -->
+<!-- 2022-11-21 Mon 22:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Information Security</title>
@@ -14,15 +14,7 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Information Security</h1>
-</header><p>
-信息安全三要素：
-</p>
-<ul class="org-ul">
-<li>Confidentiality 机密性</li>
-<li>Integrity       完整性</li>
-<li>Availability    可用性</li>
-</ul>
-
+</header>
 <div id="outline-container-orgd1b6bf1" class="outline-2">
 <h2 id="orgd1b6bf1">信息收集/扫描探测</h2>
 <div class="outline-text-2" id="text-orgd1b6bf1">
@@ -61,6 +53,36 @@
 <li><a href="20220908-sql_injection.html#ID-165a516f-c616-40fe-8438-cb548d4337de">SQL 注入</a></li>
 <li><a href="20220730-redis.html#ID-de9900b8-2b65-487e-9da9-313c39232679">Redis 写文件落盘</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org6b7198e" class="outline-2">
+<h2 id="org6b7198e">Firewall</h2>
+<div class="outline-text-2" id="text-org6b7198e">
+</div>
+<div id="outline-container-orgf1ed754" class="outline-3">
+<h3 id="orgf1ed754">四层防火墙</h3>
+<div class="outline-text-3" id="text-orgf1ed754">
+<p>
+包过滤技术 (IP Filtering or packet filtering) 的原理在于利用路由器监视并过滤网络上流入流出的 IP 包，拒绝发送可疑的包。由于 Internet 与 Intranet 的连接多数都要使用路由器，所以 Router 成为内外通信的必经端口，Router 的厂商在 Router 上加入 IP 过滤功能，过滤路由器也可以称作包过滤路由器或筛选路由器（Packet FilterRouter）。防火墙常常就是这样一个具备包过滤功能的简单路由器，这种 Firewall 应该是足够安全的，但前提是配置合理。然而一个包过滤规则是否完全严密及必要是很难判定的，因而在安全要求较高的场合，通常还配合使用其它的技术来加强安全性。
+</p>
+
+<p>
+状态检测技术是防火墙近几年才应用的新技术。传统的包过滤防火墙只是通过检测 IP 包头的相关信息来决定数据流的通过还是拒绝，而状态检测技术采用的是一种基于连接的状态检测机制，将属于同一连接的所有包作为一个整体的数据流看待，构成连接状态表，通过规则表与状态表的共同配合，对表中的各个连接状态因素加以识别。这里动态连接状态表中的记录可以是以前的通信信息，也可以是其他相关应用程序的信息，因此，与传统包过滤防火墙的静态过滤规则表相比，它具有更好的灵活性和安全性。
+</p>
+
+<p>
+&gt; 应用代理 (Application Proxy) 技术是指在 Web 服务器上或某一台单独主机上运行代理服务器软件，对网络上的信息进行监听和检测，并对访问内网的数据进行过滤，从而起到隔断内网与外网的直接通信的作用，保护内网不受破坏。在代理方式下，内部网络的数据包不能直接进入外部网络，内网用户对外网的访问变成代理对外网的访问。同样，外部网络的数据也不能直接进入内网，而是要经过代理的处理之后才能到达内部网络。所有通信都必须经应用层代理软件转发，应用层的协议会话过程必须符合代理的安全策略要求，因此在代理上就可以实现访问控制、网络地址转换 (NAT) 等功能。
+</p>
+</div>
+</div>
+<div id="outline-container-orgab312c1" class="outline-3">
+<h3 id="orgab312c1">七层防火墙</h3>
+<div class="outline-text-3" id="text-orgab312c1">
+<p>
+<a href="category.html#ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</a>
+</p>
+</div>
 </div>
 </div>
 
@@ -164,7 +186,80 @@ Man in the Middle Attack
 </div>
 </div>
 </div>
+
+<div id="outline-container-org70da8d6" class="outline-2">
+<h2 id="org70da8d6">Product</h2>
+<div class="outline-text-2" id="text-org70da8d6">
 </div>
+<div id="outline-container-org50456df" class="outline-3">
+<h3 id="org50456df">安全产品产品经理<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-org50456df">
+<p>
+安全产品的好不好最本质就体现在一名安全产品经理的安全体系认知、业务需求理解的深度上。需要站在一个工程化、一个企业建设的思路上去考虑如何做安全。 把一次发生的痛点，让下一次来临的时候是有办法处理的，通过这些痛点闭环的解决方案形成工程化、经验堆积的安全产品。
+</p>
+
+<p>
+保持激情的能力更多是在过程中对情绪的处理，一名好的产品经理对自己的产品要有激情，同时要在疲惫、丧气过后，能够处理好自己的情绪，然后灌装激情再次起航。
+</p>
+
+<p>
+在产品规划时要立好标准，让产品复盘的时候是可以有指标考量的。立方向 -&gt; 立需求 -&gt; 立标准。
+</p>
+
+<p>
+换位思考。
+</p>
+
+<p>
+软件工程能力（产品技术）。
+产品经理是团队中最熟悉产品业务的人，对需求需要自信坚定，在定制化可能会被迫用户引导，但标品上尽量不退步，既然研究过，也最熟悉这个业务的，我的理解应当是最趋势于正确的，自信甚至执念强迫症（坚定自信）。
+一个好的产品经理一定是执行力要强的，发现问题、也有想法在这个人人都是产品经理的时代是不难的，难的就是最后这一公里怎么把想法能够落地下来。聚焦和落地执行能力（想法落地）。
+</p>
+
+<p>
+虽然一名好的产品经理追求定位的方向是要面面俱到的，不过在工作职责上是要更聚焦一些的，精力聚焦才能做小做精。
+</p>
+</div>
+</div>
+<div id="outline-container-org36d544e" class="outline-3">
+<h3 id="org36d544e">行业技术人员瓶颈<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org36d544e">
+<p>
+现在软件中间件和工具库太发达。一直满足用傻瓜工具和代码库，挣口饭吃。这种码农和那些工地搬砖的是差不多的人。35 岁之后必然被淘汰。
+</p>
+<ul class="org-ul">
+<li>第1层 理论知识</li>
+<li>第2层 基本技能</li>
+<li>第3层 解决问题的能力：工程能力，对问题难度极限的感受</li>
+<li>第4层 技术管理</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.coco413.com/archives/125/">https://www.coco413.com/archives/125/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zhuanlan.zhihu.com/p/498762187">https://zhuanlan.zhihu.com/p/498762187</a>
+</p>
+
+<p class="footpara">
+信息安全三要素：
+</p>
+<ul class="org-ul">
+<li>Confidentiality 机密性</li>
+<li>Integrity       完整性</li>
+<li>Availability    可用性</li>
+</ul></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

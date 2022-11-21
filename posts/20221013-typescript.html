@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-11-21 Mon 22:08 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TypeScript</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">TypeScript</h1>
+</header>
+<div id="outline-container-orge96b8e3" class="outline-2">
+<h2 id="orge96b8e3">TIPS</h2>
+<div class="outline-text-2" id="text-orge96b8e3">
+</div>
+<div id="outline-container-org1442681" class="outline-3">
+<h3 id="org1442681">await</h3>
+<div class="outline-text-3" id="text-org1442681">
+<p>
+await 会暂停 async 函数的执行，等到 js 运行时，取出恢复函数执行的微任务并执行，在这个过程中仅仅发生了一个 then 的时间。可以将 await 后面的代码可以看做在 then 里面执行的结果。
+</p>
+
+<p>
+async 函数在抛出返回值会根据返回值类型开启不同数目的 微任务
+</p>
+<ul class="org-ul">
+<li>return 非 thenable 接口：不落后</li>
+<li>return thenable 接口的非 promise，落后 1个 then 的时间</li>
+<li>return promise，落后 2个 then 的时间</li>
+</ul>
+
+<p>
+不同于“老式”的传入回调，在使用 Promise 时，会有以下约定：
+</p>
+<ul class="org-ul">
+<li>在本轮 事件循环 运行完成之前，回调函数是不会被调用的</li>
+<li>即使异步操作已经完成（成功或失败），在这之后通过 then() 添加的回调函数也会被调用</li>
+<li>通过多次调用 then() 可以添加多个回调函数，它们会按照插入顺序进行执行</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org01ac376" class="outline-3">
+<h3 id="org01ac376">never</h3>
+<div class="outline-text-3" id="text-org01ac376">
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #0000FF;">function</span> <span style="color: #006699;">exceptionHandle</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">msg</span>: <span style="color: #006FE0;">string</span><span style="color: #707183; background-color: #FFFFFF;">)</span>: <span style="color: #006FE0;">never</span><span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">throw</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>msg<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
+
+<span style="color: #8D8D84; font-style: italic;">// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026;never</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">errorHandle</span><span style="color: #707183; background-color: #FFFFFF;">(){</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">'This is error'</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
+
+<span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238;never&#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">stopLoop</span><span style="color: #707183; background-color: #FFFFFF;">()</span>: <span style="color: #006FE0;">never</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">true</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{}</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf3714fd" class="outline-3">
+<h3 id="orgf3714fd">type</h3>
+<div class="outline-text-3" id="text-orgf3714fd">
+<p>
+类型转换： <code>as</code> 关键字，但 jsx 中只支持 as
+</p>
+
+<p>
+交叉类型： <code>&amp;</code>  将多个类型合并为一个类型
+</p>
+
+<p>
+通用类型： <code>any</code> 这个类似于 Java 中的 Object 和 Go 中的 interface{} ，极大的方便了我们编写一些标准库。
+</p>
+
+<p>
+<code>?.</code> 表示：可选链操作符允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。操作符的功能类似于 <code>.</code> 链式操作符，不同之处在于，在引用为空(null 或者 undefined) 的情况下不会引起错误，该表达式短路
+</p>
+
+<p>
+<code>...</code> 三点： ES6 中出现的扩展运算符。作用是遍历当前使用的对象能够访问到的所有属性，并将属性放入当前对象中，当重名的时候将会选取后者。
+</p>
+</div>
+</div>
+<div id="outline-container-orge7ea34f" class="outline-3">
+<h3 id="orge7ea34f">Array</h3>
+<div class="outline-text-3" id="text-orge7ea34f">
+<p>
+<code>splice()</code> 方法改变原数组，向数组中添加项目或删除项目，并返回删除的项目。
+</p>
+
+<p>
+<code>slice()</code> 方法不会改变原始数组。提取数组中的某一部分，并以新的数组返回被提取的部分
+</p>
+</div>
+</div>
+<div id="outline-container-org61bb93d" class="outline-3">
+<h3 id="org61bb93d">infer</h3>
+<div class="outline-text-3" id="text-org61bb93d">
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #0000FF;">type</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">T</span> <span style="color: #0000FF;">extends</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">arg</span>: infer <span style="color: #6434A3;">P</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">any</span> ? <span style="color: #6434A3;">P</span> : <span style="color: #6434A3;">T</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+
+<span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">User</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">name</span>: <span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">age</span>: <span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
+
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Func</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">user</span>: <span style="color: #6434A3;">User</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">void</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Param</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// Param = User</span>
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">AA</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// string</span>
+</pre>
+</div>
+<p>
+在这个条件语句 <code>T extends (arg: infer P) =&gt; any ? P : T</code> 中， <code>infer P</code> 表示待推断的函数参数。
+</p>
+
+<p>
+整句表示为：如果 <code>T</code> 能赋值给 <code>(arg: infer P) =&gt; any</code> ，则结果是 <code>(arg: infer P) =&gt; any</code> 类型中的参数 <code>P</code> ，否则返回为 <code>T</code> 。
+</p>
+</div>
+
+<div id="outline-container-org4097680" class="outline-4">
+<h4 id="org4097680">interview</h4>
+<div class="outline-text-4" id="text-org4097680">
+<p>
+<a href="https://github.com/LeetCode-OpenSource/hire/blob/master/typescript_zh.md">LeetCode TypeScript 的面试题 - 1</a>
+</p>
+
+<p>
+思路：
+</p>
+<ol class="org-ol">
+<li>挑选出函数</li>
+<li>使用 <code>infer</code> 推断类型</li>
+</ol>
+
+<p>
+,#+begin_src typescript
+interface Action&lt;T&gt; {
+  payload?: T;
+  type: string;
+}
+</p>
+
+<p>
+class EffectModule {
+  count = 1;
+  message = &rsquo;hello!&rsquo;;
+</p>
+
+<p>
+delay(input: Promise&lt;number&gt;) {
+  return input.then((i) =&gt; ({
+    payload: `hello ${i}!`,
+    type: &rsquo;delay&rsquo;,
+  }));
+}
+</p>
+
+<p>
+  setMessage(action: Action&lt;Date&gt;) {
+    return {
+      payload: action.payload!.getMilliseconds(),
+      type: &rsquo;set-message&rsquo;,
+    };
+  }
+}
+</p>
+
+<p>
+// 修改 Connect 的类型，让 connected 的类型变成预期的类型
+type FuncName&lt;T&gt; = {
+  [P in keyof T]: T[P] extends Function ? P : never;
+}[keyof T];
+</p>
+
+<p>
+type Connect = (module: EffectModule) =&gt; {
+  [T in FuncName&lt;EffectModule&gt;]: EffectModule[T] extends (
+    a: Promise&lt;infer R&gt;
+  ) =&gt; Promise&lt;Action&lt;infer S&gt;&gt;
+    ? (a: R) =&gt; Action&lt;S&gt;
+</p>
+<pre class="example">
+EffectModule[T] extends (a: Action&lt;infer R&gt;) =&gt; Action&lt;infer S&gt;
+</pre>
+
+<p>
+? (a: R) =&gt; Action&lt;S&gt;
+</p>
+<pre class="example">
+never;
+</pre>
+
+<p>
+};
+</p>
+
+<p>
+const connect: Connect = (m) =&gt; ({
+  delay: (input: number) =&gt; ({
+    type: &rsquo;delay&rsquo;,
+    payload: `hello 2`,
+  }),
+  setMessage: (input: Date) =&gt; ({
+    type: &rsquo;set-message&rsquo;,
+    payload: input.getMilliseconds(),
+  }),
+});
+</p>
+
+<p>
+type Connected = {
+  delay(input: number): Action&lt;string&gt;;
+  setMessage(action: Date): Action&lt;number&gt;;
+};
+</p>
+
+<p>
+export const connected: Connected = connect(new EffectModule());
+#+end_src
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

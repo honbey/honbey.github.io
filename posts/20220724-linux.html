@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:56 -->
+<!-- 2022-11-21 Mon 22:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
@@ -95,6 +95,56 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 <span style="color: #006DAF;">extundelete</span> <span style="color: #D0372D;">--inode</span> <span style="color: #D0372D;">2</span> /dev/vda1
 <span style="color: #8D8D84; font-style: italic;"># recover</span>
 <span style="color: #006DAF;">extundelete</span> /dev/vda1 <span style="color: #D0372D;">--restore-all</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5ec11b4" class="outline-3">
+<h3 id="org5ec11b4">Safe rm</h3>
+<div class="outline-text-3" id="text-org5ec11b4">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
+<span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">""</span>
+
+<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">getopts</span> <span style="color: #008000;">':rRfiIdv'</span> OPTION<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
+    <span style="color: #0000FF;">case</span> <span style="color: #BA36A5;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">OPTION</span><span style="color: #BA36A5;">"</span> <span style="color: #0000FF;">in</span>
+        <span style="color: #D0372D;">r</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">R</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">\?</span>)
+            <span style="color: #0000FF;">;;</span>
+
+        <span style="color: #D0372D;">*</span>)
+            <span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">OPTION</span><span style="color: #008000;">"</span>
+            <span style="color: #0000FF;">;;</span>
+    <span style="color: #0000FF;">esac</span>
+<span style="color: #0000FF;">done</span>
+
+<span style="color: #006FE0;">shift</span> <span style="color: #008000;">"</span><span style="color: #FF1493;">$(</span><span style="color: #FF1493; background-color: #FFFFFF;">(</span><span style="color: #FF1493; background-color: #FFFFFF;">$</span><span style="color: #FF1493; background-color: #FFFFFF; font-style: italic;">OPTIND</span><span style="color: #FF1493; background-color: #FFFFFF;"> </span><span style="color: #FF1493; background-color: #FFFFFF;">-</span><span style="color: #FF1493; background-color: #FFFFFF;"> 1)</span><span style="color: #008000;">)</span><span style="color: #008000;">"</span>
+
+<span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span><span style="color: #7388D6;">[</span> -n <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #7388D6;">]</span><span style="color: #707183;">]</span><span style="color: #0000FF;">;</span> <span style="color: #0000FF;">then</span>
+    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"-</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
+<span style="color: #0000FF;">else</span>
+    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
+<span style="color: #0000FF;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgafdd30c" class="outline-3">
+<h3 id="orgafdd30c">Read file</h3>
+<div class="outline-text-3" id="text-orgafdd30c">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
+
+<span style="color: #8D8D84; font-style: italic;"># This is correct way to read file.</span>
+<span style="color: #BA36A5; font-style: italic;">FILE</span>=<span style="color: #008000;">"./tmp/use.py"</span>
+<span style="color: #BA36A5; font-style: italic;">k</span>=<span style="color: #D0372D;">1</span>
+
+<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">read</span> <span style="color: #D0372D;">-r</span> line<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
+    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">line</span><span style="color: #008000;">"</span>
+    <span style="color: #707183;">(</span><span style="color: #7388D6;">(</span>k++<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #0000FF;">done</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">FILE</span><span style="color: #008000;">"</span>
+
+<span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Total number of lines in file: </span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">k</span><span style="color: #008000;">"</span>
 </pre>
 </div>
 </div>

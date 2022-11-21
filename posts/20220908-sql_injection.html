@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:56 -->
+<!-- 2022-11-21 Mon 22:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL Injection</title>
@@ -51,7 +51,7 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </div>
 
 <p>
-模糊查询使用 <code>LIKEconcat(‘%’,#{_parameter}, ‘%’)</code> ，如果是 <code>LIKE '%{_parameter}%'</code> 会让攻击者可以闭合引号实现 SQL 注入。
+模糊查询使用 <code>LIKE concat(‘%’,#{_parameter}, ‘%’)</code> ，如果是 <code>LIKE '%{_parameter}%'</code> 会让攻击者可以闭合引号实现 SQL 注入。
 </p>
 </blockquote>
 </div>

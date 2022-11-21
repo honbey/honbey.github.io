@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:57 -->
+<!-- 2022-11-21 Mon 22:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Info Scan</title>
@@ -57,6 +57,59 @@ nmap --script=http-waf-fingerprint targetwebsite.com
 <div id="outline-container-ID-19412167-0847-4b0d-9235-bed2153e2961" class="outline-2">
 <h2 id="ID-19412167-0847-4b0d-9235-bed2153e2961">Nmap</h2>
 <div class="outline-text-2" id="text-ID-19412167-0847-4b0d-9235-bed2153e2961">
+</div>
+</div>
+
+<div id="outline-container-orgf7ef8e7" class="outline-2">
+<h2 id="orgf7ef8e7">Attack Surface</h2>
+<div class="outline-text-2" id="text-orgf7ef8e7">
+<p>
+攻击面：任何能使网络资产在未授权的情况下能被访问和利用的所有可能入口的总和。
+</p>
+
+<blockquote>
+<p>
+《2021 安全运营技术成熟度曲线》&#x2013; Gartner 中明确提到了攻击面的两个新兴技术：网络资产攻击面管理（Cyber Asset Attack Surface management）和外部攻击面管理（External Attack Surface Management），目标是为了让安全团队对暴露资产以及攻击面进行科学高效的管理，从攻击者视角审视企业网络资产可能存在的攻击面及脆弱性，建立对企业网络攻击面从检测发现、分析研判、情报预警、响应处置和持续监控的全流程闭环安全分析管理机制。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li>资产管理
+主要依靠主动上报和主动发现，主动发现可通过扫描、流量分析、日志分析或告警；
+主要难点为资产的归属方和资产的更新问题；资产可从以下大维度进行分类：
+<ul class="org-ul">
+<li>业务维度</li>
+<li>系统维度</li>
+<li>主机维度</li>
+<li>其他维度</li>
+</ul></li>
+<li>综合视图（可视化）</li>
+<li><p>
+风险评估
+风险评分：
+</p>
+<ul class="org-ul">
+<li>资产识别</li>
+<li>威胁识别</li>
+<li>脆弱性识别</li>
+<li>风险值计算</li>
+</ul>
+<p>
+风险管理：
+</p>
+<ul class="org-ul">
+<li>纵深防御</li>
+<li>主动扫描</li>
+<li>人工渗透</li>
+<li>基线合规</li>
+</ul></li>
+<li>风险修复流程
+形成闭环，主要是漏洞生命周期管理</li>
+</ol>
+
+<p>
+攻击面管理主要是要从攻击者的角度对企业的资产进行全面的检测、处置和监控。
+</p>
 </div>
 </div>
 </div>
