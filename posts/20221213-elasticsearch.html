@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-12-28 Wed 21:39 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>elasticsearch</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">elasticsearch</h1>
+</header><p>
+基于反向索引的文档型数据库，主要用于日志查询。
+</p>
+
+<div id="outline-container-org09edc2a" class="outline-2">
+<h2 id="org09edc2a">ELK Introduction</h2>
+<div class="outline-text-2" id="text-org09edc2a">
+<p>
+Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据进行可视化。
+</p>
+</div>
+</div>
+<div id="outline-container-orgc80a4b1" class="outline-2">
+<h2 id="orgc80a4b1">Query Example</h2>
+</div>
+
+<div id="outline-container-org0992670" class="outline-2">
+<h2 id="org0992670">Kibana</h2>
+<div class="outline-text-2" id="text-org0992670">
+</div>
+<div id="outline-container-org0ed1a0b" class="outline-3">
+<h3 id="org0ed1a0b">查询集群（cluster）情况</h3>
+<div class="outline-text-3" id="text-org0ed1a0b">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># &#26816;&#26597;&#32676;&#38598;&#36816;&#34892;&#29366;&#20917;</span>
+<span style="color: #006DAF;">GET</span> /_cat/health?v
+
+<span style="color: #8D8D84; font-style: italic;"># &#33719;&#24471;&#32676;&#38598;&#20013;&#30340;&#33410;&#28857;&#21015;&#34920;</span>
+<span style="color: #006DAF;">GET</span> /_cat/nodes?v
+
+<span style="color: #8D8D84; font-style: italic;"># &#21015;&#20986;&#25152;&#26377;&#32034;&#24341;</span>
+<span style="color: #006DAF;">GET</span> /_cat/indices?v
+
+<span style="color: #8D8D84; font-style: italic;"># &#21019;&#24314;&#32034;&#24341;&#24182;&#26597;&#30475;</span>
+<span style="color: #006DAF;">PUT</span> /customer?pretty
+<span style="color: #006DAF;">GET</span> /_cat/indices?v
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgffda3f1" class="outline-3">
+<h3 id="orgffda3f1">查询</h3>
+<div class="outline-text-3" id="text-orgffda3f1">
+<pre class="example">
+GET [index&lt;regex&gt;]/_search
+</pre>
+
+<p>
+部分返回参数：
+</p>
+<ul class="org-ul">
+<li>timeout  限制查询的返回超时时间</li>
+<li>size     默认 10 ，返回的文档数量</li>
+<li>from     默认 10 ，应该跳过的初始文档数量</li>
+</ul>
+
+<blockquote>
+<p>
+理解为什么深度分页是有问题的，我们可以假设在一个有 5 个主分片的索引中搜索。 当我们请求结果的第一页（结果从 1 到 10 ），每一个分片产生前 10 的结果，并且返回给 协调节点 ，协调节点对 50 个结果排序得到全部结果的前 10 个。
+</p>
+
+<p>
+现在假设我们请求第 1000 页&#x2013;结果从 10001 到 10010 。所有都以相同的方式工作除了每个分片不得不产生前10010个结果以外。 然后协调节点对全部 50050 个结果排序最后丢弃掉这些结果中的 50040 个结果。
+</p>
+
+<p>
+可以看到，在分布式系统中，对结果排序的成本随分页的深度成指数上升。这就是 web 搜索引擎对任何查询都不要返回超过 1000 个结果的原因。
+</p>
+</blockquote>
+
+<p>
+查询：一个评分的匹配，计算相似度。
+</p>
+
+<p>
+过滤：一个不评分的匹配，只有是或否。性能更好。
+</p>
+
+<p>
+下面的查询针对tweents类型，并使用以下的条件：
+</p>
+
+<pre class="example">
+name 字段中包含 mary 或者 john
+date 值大于 2014-09-10
+_all_ 字段包含 aggregations 或者 geo
+
++name:(mary john) +date:&gt;2014-09-10 +(aggregations geo)
+
+?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfe95234" class="outline-3">
+<h3 id="orgfe95234">DSL 查询</h3>
+<div class="outline-text-3" id="text-orgfe95234">
+<ul class="org-ul">
+<li>排序
+<ul class="org-ul">
+<li>asc 升序</li>
+<li>desc 降序</li>
+</ul></li>
+
+<li>类型
+<ul class="org-ul">
+<li>.text 会分词，然后进行索引
+<ul class="org-ul">
+<li>支持模糊、精确查询</li>
+<li>不支持聚合</li>
+</ul></li>
+<li>.keyword 不进行分词，直接索引
+<ul class="org-ul">
+<li>支持模糊、精确查询</li>
+<li>支持聚合</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org170d09b" class="outline-3">
+<h3 id="org170d09b">标准查询</h3>
+<div class="outline-text-3" id="text-org170d09b">
+<ul class="org-ul">
+<li>match          全文匹配或精确匹配</li>
+<li>match_all      匹配所有</li>
+<li>multi_match    在多个字段上执行相同的 match 查询</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge0e6449" class="outline-3">
+<h3 id="orge0e6449">单词查询与过滤</h3>
+<div class="outline-text-3" id="text-orge0e6449">
+<ul class="org-ul">
+<li>term  查询单值</li>
+<li>terms 查询多值</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3811e14" class="outline-3">
+<h3 id="org3811e14">组合条件查询与过滤</h3>
+<div class="outline-text-3" id="text-org3811e14">
+<ul class="org-ul">
+<li>bool
+<ul class="org-ul">
+<li>must     必须匹配</li>
+<li>should   满足任意语句，将增加相关性得分</li>
+<li>must_not 必须不匹配</li>
+<li>filter   必须匹配，以不评分的过滤模式来进行</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb673e83" class="outline-3">
+<h3 id="orgb673e83">范围查询与过滤</h3>
+<div class="outline-text-3" id="text-orgb673e83">
+<ul class="org-ul">
+<li>range
+<ul class="org-ul">
+<li>gt   &gt;</li>
+<li>gte  &gt;=</li>
+<li>lt   &lt;</li>
+<li>lte  &lt;=</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5eecc12" class="outline-3">
+<h3 id="org5eecc12">存在和损失过滤器</h3>
+<div class="outline-text-3" id="text-org5eecc12">
+<ul class="org-ul">
+<li>filter
+<ul class="org-ul">
+<li>exists</li>
+<li>missing</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1dd7dfb" class="outline-3">
+<h3 id="org1dd7dfb">前匹配查询</h3>
+<div class="outline-text-3" id="text-org1dd7dfb">
+<ul class="org-ul">
+<li>prefix</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc7d952a" class="outline-3">
+<h3 id="orgc7d952a">通配符查询</h3>
+<div class="outline-text-3" id="text-orgc7d952a">
+<ul class="org-ul">
+<li>wildcard
+<ul class="org-ul">
+<li><code>*</code></li>
+<li><code>?</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfe21e36" class="outline-3">
+<h3 id="orgfe21e36">最佳字段</h3>
+<div class="outline-text-3" id="text-orgfe21e36">
+<ul class="org-ul">
+<li><p>
+dis_max
+</p>
+<div class="org-src-container">
+<pre class="src src-json"><span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"dis_max"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"queries"</span>: <span style="color: #333333; background-color: #FFFFFF;">[</span>
+        <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span><span style="color: #0000FF;">"title"</span>: <span style="color: #008000;">"Brown fox"</span><span style="color: #333333; background-color: #FFFFFF;">}</span>,
+          <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span><span style="color: #0000FF;">"body"</span>: <span style="color: #008000;">"Brown fox"</span><span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">]</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div></li>
+</ul>
+
+<p>
+若文档的 title 有，而 body 中没有，该文档会得到更高的评分，不用 dis_max 则相反
+</p>
+
+<p>
+tie_breaker 提供了一种 dis_max 和 bool 之间的折中选择，评分方式如下：
+</p>
+<ol class="org-ol">
+<li>获取最佳匹配语句的评分 _score</li>
+<li>将其他匹配语句的评分与 tie_breaker 相乘</li>
+<li>对以上评分求和并规范化</li>
+</ol>
+
+<p>
+multi_match 有 best_fields, most_fields, cross_fields 最佳字段 (default)，多数字段，跨字段等模式
+</p>
+
+<p>
+常量评分：onstant_score 将一个不变的常量评分应用于所有匹配的文档，经常被用于只需要执行一个 filter 而没有其他查询的情况，可用来代替只有 filter 语句的 bool 查询。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf011c94" class="outline-3">
+<h3 id="orgf011c94">全文搜索</h3>
+<div class="outline-text-3" id="text-orgf011c94">
+<p>
+查询的两个重要方面：相关性和分析
+</p>
+
+<p>
+match 的步骤如下：
+</p>
+<ol class="org-ol">
+<li>分析字段类型</li>
+<li>分析查询字符串，得到单词</li>
+<li>用 term 查询，在倒排索引中查找（多次多次使用 term，合并结果）</li>
+<li>为文档评分</li>
+</ol>
+
+<p>
+参数：
+</p>
+<div class="org-src-container">
+<pre class="src src-json"><span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"title"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"query"</span>: <span style="color: #008000;">"abc def"</span>,
+        <span style="color: #0000FF;">"operator"</span>: <span style="color: #008000;">"and"</span>,
+        <span style="color: #0000FF;">"minimum_should_match"</span>: <span style="color: #008000;">"75%"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+minimum_should_match 还可以限定 必须 满足 should 的条件数，boost 参数可以提高 should 条件的重要性
+</p>
+</div>
+
+
+<div id="outline-container-org5f60cb6" class="outline-4">
+<h4 id="org5f60cb6">match</h4>
+<div class="outline-text-4" id="text-org5f60cb6">
+<div class="org-src-container">
+<pre class="src src-json">GET log/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"abc def"</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+不一定是完全匹配 <code>abc def</code> ，而是会根据相关性打分，单独的 <code>adc</code> 或 <code>def</code> 也有可能匹配上
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb82da14" class="outline-4">
+<h4 id="orgb82da14">match_phrase</h4>
+<div class="outline-text-4" id="text-orgb82da14">
+<p>
+结果会匹配完整的 <code>abc def</code> ，也包含 <code>xxx abc def xxx</code> 的情况
+</p>
+</div>
+
+<div id="outline-container-orgf4cb7c2" class="outline-5">
+<h5 id="orgf4cb7c2">match_phrase 和 regexp</h5>
+<div class="outline-text-5" id="text-orgf4cb7c2">
+<p>
+regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
+</p>
+
+<p>
+实际上 es 会对查询字符进行分析（切分），之后再进行匹配
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org31e0803" class="outline-4">
+<h4 id="org31e0803">highlight</h4>
+<div class="outline-text-4" id="text-org31e0803">
+<p>
+高亮某个字段 (key)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">GET log/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"abc def"</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+  <span style="color: #0000FF;">"highlight"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"field"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"key"</span>: <span style="color: #333333; background-color: #FFFFFF;">{}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org164b0bc" class="outline-3">
+<h3 id="org164b0bc">结构化搜索</h3>
+<div class="outline-text-3" id="text-org164b0bc">
+<p>
+term 精确值查询：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET log/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"constant_score"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"filter"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"term"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"value"</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+查看字段是否可以用精确值查询，通过 analyze API，通过结果的 token 等判断：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET log/_analyze
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"key"</span>,
+  <span style="color: #0000FF;">"text"</span>: <span style="color: #008000;">"value"</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcf21a60" class="outline-3">
+<h3 id="orgcf21a60">聚合</h3>
+<div class="outline-text-3" id="text-orgcf21a60">
+<p>
+桶   buckets 满足特定条件的集合
+</p>
+
+<p>
+指标 metrics 对桶内文档进行统计计算
+</p>
+
+<p>
+例如：
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">SELECT</span> <span style="color: #006FE0;">COUNT</span>(color)
+<span style="color: #0000FF;">FROM</span> <span style="color: #0000FF;">table</span>
+<span style="color: #0000FF;">GROUP</span> <span style="color: #0000FF;">BY</span> color
+</pre>
+</div>
+
+<p>
+COUNT(color)   -&gt; 指标
+GROUP BY color -&gt; 桶
+</p>
+</div>
+
+<div id="outline-container-orgf0d6dad" class="outline-4">
+<h4 id="orgf0d6dad">Example</h4>
+<div class="outline-text-4" id="text-orgf0d6dad">
+<p>
+查询特定兴趣爱好员工平均年龄：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET employee/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"all_interests"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"interests"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"average_age"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"age"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+统计每种颜色车辆价格的平均值：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET cars/transactions/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
+  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+统计每种颜色车辆的制造商分部：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET cars/transactions/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
+  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+        <span style="color: #0000FF;">"make"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"make"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+统计每种颜色车辆的制造商分布，以及各个制造商生产的汽车的最高价和最低价：
+</p>
+<div class="org-src-container">
+<pre class="src src-json">GET cars/transactions/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
+  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+        <span style="color: #0000FF;">"make"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+          <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"make"</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+          <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+            <span style="color: #0000FF;">"min_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+              <span style="color: #0000FF;">"min"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+                <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
+              <span style="color: #333333; background-color: #FFFFFF;">}</span>
+            <span style="color: #333333; background-color: #FFFFFF;">}</span>,
+            <span style="color: #0000FF;">"max_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+              <span style="color: #0000FF;">"max"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+                <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
+              <span style="color: #333333; background-color: #FFFFFF;">}</span>
+            <span style="color: #333333; background-color: #FFFFFF;">}</span>
+          <span style="color: #333333; background-color: #FFFFFF;">}</span>
+        <span style="color: #333333; background-color: #FFFFFF;">}</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<blockquote>
+<p>
+extended_stats 扩展度量，统计的基础上还增加了多种复杂的统计信息；stats 可以统计数量
+</p>
+
+<p>
+关键在于区分哪些是桶，哪些是指标，terms 这些字段会划分子桶，而 sum, avg 等是指标，不会产生新桶
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org2b3b29f" class="outline-4">
+<h4 id="org2b3b29f">Data Histogram 聚合</h4>
+<div class="outline-text-4" id="text-org2b3b29f">
+<div class="org-src-container">
+<pre class="src src-json">GET log/_search
+<span style="color: #333333; background-color: #FFFFFF;">{</span>
+  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
+  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">"name"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+      <span style="color: #0000FF;">"date_histogram"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
+        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"@timestamp"</span>,
+        <span style="color: #0000FF;">"fixed_interval"</span>: <span style="color: #008000;">"1h"</span>,
+        <span style="color: #0000FF;">"format"</span>: <span style="color: #008000;">"yyyy-MM-dd hh:mm:ss"</span>
+      <span style="color: #333333; background-color: #FFFFFF;">}</span>
+    <span style="color: #333333; background-color: #FFFFFF;">}</span>
+  <span style="color: #333333; background-color: #FFFFFF;">}</span>
+<span style="color: #333333; background-color: #FFFFFF;">}</span>
+</pre>
+</div>
+
+<p>
+interval: year, quarter, month, &#x2026;
+</p>
+
+<p>
+其他参数：
+</p>
+<ul class="org-ul">
+<li>time_zone</li>
+<li>offset</li>
+<li>missing</li>
+<li>min_doc_count</li>
+<li>extended_bounds</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

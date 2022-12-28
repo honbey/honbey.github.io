@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-12-28 Wed 21:39 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ssh &amp; rsync</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">ssh &amp; rsync</h1>
+</header>
+<div id="outline-container-org6537ba9" class="outline-2">
+<h2 id="org6537ba9">ssh</h2>
+<div class="outline-text-2" id="text-org6537ba9">
+<p>
+Secure Shell
+</p>
+
+<p>
+一种安全加密协议，提供了认证和授权的功能，用于远程登录与操作服务器。
+</p>
+
+<p>
+首次连接，会出现验证过程，验证远程服务器是否为陌生地址，实际上验证的是服务器公钥的哈希值。
+</p>
+
+<p>
+可使用命令 <code>ssh-kengen -l -f key.pub</code> 查看公钥的指纹。
+</p>
+
+<p>
+<code>ssh-keygen -R hostname</code> 可以删除某个远程地址的公钥指纹。
+</p>
+
+<p>
+<code>ssh username@hostname command</code> 或 <code>ssh -t username@hostname vim</code> 可执行命令。
+</p>
+
+<p>
+TLS 过程：
+</p>
+<pre class="example">
+Handshake protocol: ClientHello
+    Version: TLS 1.2
+    Random
+        Client time: May 22, 2030 02:43:46 GMT
+        Random bytes: b76b0e61829557eb4c611adfd2d36eb232dc1332fe29802e321ee871
+    Session ID: (empty)
+    Cipher Suites
+        Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256”
+        Suite: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+        Suite: TLS_RSA_WITH_AES_128_GCM_SHA256
+        Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+        Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+        Suite: TLS_RSA_WITH_AES_128_CBC_SHA
+        Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+        Suite: TLS_RSA_WITH_RC4_128_SHA
+    Compression methods
+        Method: null
+    Extensions
+        Extension: server_name
+            Hostname: www.feistyduck.com
+        Extension: renegotiation_info
+        Extension: elliptic_curves
+            Named curve: secp256r1
+            Named curve: secp384r1
+        Extension: signature_algorithms
+            Algorithm: sha1/rsa
+            Algorithm: sha256/rsa
+            Algorithm: sha1/ecdsa
+            Algorithm: sha256/ecdsa”
+
+Handshake protocol: ServerHello
+    Version: TLS 1.2
+    Random
+        Server time: Mar 10, 2059 02:35:57 GMT”
+        Random bytes: 8469b09b480c1978182ce1b59290487609f41132312ca22aacaf5012
+    Session ID: 4cae75c91cf5adf55f93c9fb5dd36d19903b1182029af3d527b7a42ef1c32c80
+    Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+    Compression method: null
+    Extensions
+        Extension: server_name
+        Extension: renegotiation_info
+</pre>
+
+<p>
+ssh 命令参数：
+</p>
+</div>
+
+<div id="outline-container-orgfe31961" class="outline-3">
+<h3 id="orgfe31961">端口转发</h3>
+<div class="outline-text-3" id="text-orgfe31961">
+<p>
+动态转发指的是，本机与 SSH 服务器之间创建了一个加密连接，然后本机内部针对某个端口的通信，都通过这个加密连接转发。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-D</span> local-port tunnel-host <span style="color: #D0372D;">-N</span>
+</pre>
+</div>
+
+<p>
+SOCKS5 协议 <code>curl -x socks5://localhost:local-port http://www.example.com</code>
+</p>
+
+<p>
+本地转发，SSH 服务器作为中介的跳板机，建立本地计算机与特定目标网站之间的加密连接。
+</p>
+
+<p>
+指定一个本地端口（local-port），所有发向那个端口的请求，都会转发到 SSH 跳板机（tunnel-host），然后 SSH 跳板机作为中介，将收到的请求发到目标服务器（target-host）的目标端口（target-port）：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-L</span> local-port:target-host:target-port tunnel-host
+</pre>
+</div>
+
+<p>
+这时，访问本机的 local-port 实际上相当于访问 target-host:target-port，转发协议为 HTTP。
+</p>
+
+<p>
+如果经常使用本地转发，可以将设置写入 SSH 客户端的用户个人配置文件：
+</p>
+<pre class="example">
+Host test.example.com
+LocalForward client-IP:client-port server-IP:server-port
+</pre>
+
+<p>
+远程转发，通过远程计算机访问本地计算机：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-R</span> remote-port:target-host:target-port <span style="color: #D0372D;">-N</span> remotehost
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8b73da6" class="outline-3">
+<h3 id="org8b73da6">scp</h3>
+<div class="outline-text-3" id="text-org8b73da6">
+<p>
+语法类似 cp 命令，但远程主机要加 <code>:</code> 不然会复制到本地的当前目录。
+</p>
+
+<p>
+参数：
+</p>
+<ul class="org-ul">
+<li>-c 指定传输的加密算法</li>
+<li>-C 传输时开启压缩</li>
+<li>-F 指定配置文件</li>
+<li>-i 指定密钥</li>
+<li>-l 限制速率，单位 Kbit/s</li>
+<li>-p 保留修改时间等原始文件信息</li>
+<li>-r 递归复制</li>
+<li>-v 详细输出</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge651bfd" class="outline-2">
+<h2 id="orge651bfd">rsync</h2>
+<div class="outline-text-2" id="text-orge651bfd">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">参数</th>
+<th scope="col" class="org-left">长参数</th>
+<th scope="col" class="org-left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">-a</td>
+<td class="org-left">&#x2013;archive</td>
+<td class="org-left">递归同步且同步元信息</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;append</td>
+<td class="org-left">继续传输</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;append-verify</td>
+<td class="org-left">继续传输，进行校验</td>
+</tr>
+
+<tr>
+<td class="org-left">-b</td>
+<td class="org-left">&#x2013;backup</td>
+<td class="org-left">在删除或更新已存在同名的文件时，采用更名该文件的备份方式</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;backup-dir</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;bwlimit</td>
+<td class="org-left">带宽限制</td>
+</tr>
+
+<tr>
+<td class="org-left">-c</td>
+<td class="org-left">&#x2013;checksum</td>
+<td class="org-left">校验方式</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;delete</td>
+<td class="org-left">强制删除文件或目录</td>
+</tr>
+
+<tr>
+<td class="org-left">-e</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">定制协议，默认 ssh</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;exclude</td>
+<td class="org-left">排除某些文件或目录</td>
+</tr>
+
+<tr>
+<td class="org-left">-h</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">友好输出</td>
+</tr>
+
+<tr>
+<td class="org-left">-i</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">显示差异详细情况</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;include</td>
+<td class="org-left">指定必须同步的文件或目录</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;link-dest</td>
+<td class="org-left">指定同步时的基准目录</td>
+</tr>
+
+<tr>
+<td class="org-left">-m</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">不同步空目录</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;max-size</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;min-size</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;partial</td>
+<td class="org-left">允许恢复中断的传输</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;partial-dir</td>
+<td class="org-left">将传输到未完成的文件保存到临时目录</td>
+</tr>
+
+<tr>
+<td class="org-left">-n</td>
+<td class="org-left">&#x2013;dry-run</td>
+<td class="org-left">模拟执行</td>
+</tr>
+
+<tr>
+<td class="org-left">-p</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">显示进度条</td>
+</tr>
+
+<tr>
+<td class="org-left">-r</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">递归</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;remove-source-files</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;size-only</td>
+<td class="org-left">只同步大小改变的文件，忽略时间差异</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;suffix</td>
+<td class="org-left">文件备份时的后缀</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-u</code></td>
+<td class="org-left">&#x2013;update</td>
+<td class="org-left">不同步有更新时间戳的文件</td>
+</tr>
+
+<tr>
+<td class="org-left">-v</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">详细输出， -vv -vvv</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#x2013;version</td>
+<td class="org-left">输出/打印版本信息</td>
+</tr>
+
+<tr>
+<td class="org-left">-z</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">同步时压缩</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org22d6d33" class="outline-3">
+<h3 id="org22d6d33">增量备份</h3>
+<div class="outline-text-3" id="text-org22d6d33">
+<p>
+默认复制有变动的文件：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">rsync</span> <span style="color: #D0372D;">-a</span> <span style="color: #D0372D;">--delete</span> <span style="color: #D0372D;">--link-dest</span> /compare/path /source/path /target/path
+</pre>
+</div>
+
+<p>
+&#x2013;link-dest 参数指定基准目录 /compare/path，然后源目录 /source/path 跟基准目录进行比较，找出变动的文件，将它们拷贝到目标目录 /target/path。那些没变动的文件则会生成硬链接。这个命令的第一次备份时是全量备份，后面就都是增量备份了。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

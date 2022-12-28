@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-11-22 Tue 06:55 -->
+<!-- 2022-12-28 Wed 21:39 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TypeScript</title>
@@ -15,6 +15,32 @@
 <header>
 <h1 class="title">TypeScript</h1>
 </header>
+<div id="outline-container-org7e95877" class="outline-2">
+<h2 id="org7e95877">TypeScript 的优势</h2>
+<div class="outline-text-2" id="text-org7e95877">
+<p>
+静态类型语言。
+</p>
+
+<p>
+静态类型检查有何意义？标准答案是“静态类型更有利于构建大型应用”。
+</p>
+
+<ul class="org-ul">
+<li>开源</li>
+<li>静态类型</li>
+<li>代码易于阅读和理解</li>
+<li>支持 ECMAScript 6</li>
+<li>类型系统，包括泛型</li>
+<li>JS 的超集，与 JS 兼容</li>
+</ul>
+
+<p>
+装饰器是一种特殊类型的声明，它能过被附加到类声明，方法，属性或者参数上，可以修改类的行为；通俗的来说就是一个方法，可以注入到类，方法，属性参数上来扩展类，属性，方法，参数的功能。
+</p>
+</div>
+</div>
+
 <div id="outline-container-orge96b8e3" class="outline-2">
 <h2 id="orge96b8e3">TIPS</h2>
 <div class="outline-text-2" id="text-orge96b8e3">
@@ -54,12 +80,12 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
     <span style="color: #0000FF;">throw</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>msg<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
 <span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #8D8D84; font-style: italic;">// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026;never</span>
+<span style="color: #8D8D84; font-style: italic;">// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026; never</span>
 <span style="color: #0000FF;">function</span> <span style="color: #006699;">errorHandle</span><span style="color: #707183; background-color: #FFFFFF;">(){</span>
     <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">'This is error'</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
 <span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238;never&#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;</span>
+<span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238; never &#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;</span>
 <span style="color: #0000FF;">function</span> <span style="color: #006699;">stopLoop</span><span style="color: #707183; background-color: #FFFFFF;">()</span>: <span style="color: #006FE0;">never</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
     <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">true</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{}</span>
 <span style="color: #707183; background-color: #FFFFFF;">}</span>
@@ -84,7 +110,7 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 </p>
 
 <p>
-<code>?.</code> 表示：可选链操作符允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。操作符的功能类似于 <code>.</code> 链式操作符，不同之处在于，在引用为空(null 或者 undefined) 的情况下不会引起错误，该表达式短路
+<code>?.</code> 表示：可选链操作符允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。操作符的功能类似于 <code>.</code> 链式操作符，不同之处在于，在引用为空(null 或者 undefined) 的情况下不会引起错误
 </p>
 
 <p>
@@ -208,7 +234,224 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 </div>
 </div>
 </div>
+
+<div id="outline-container-org5a30c2e" class="outline-2">
+<h2 id="org5a30c2e">&amp; JS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></h2>
+<div class="outline-text-2" id="text-org5a30c2e">
 </div>
+<div id="outline-container-orgcd1bd9f" class="outline-3">
+<h3 id="orgcd1bd9f">尾调用优化</h3>
+<div class="outline-text-3" id="text-orgcd1bd9f">
+<p>
+尾调用：某个函数的最后一步是调用另一个函数。
+</p>
+
+<p>
+函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。如果在函数 A 的内部调用函数 B ，那么在 A 的调用记录上方，还会形成一个 B 的调用记录。等到 B 运行结束，将结果返回到 A ， B 的调用记录才会消失。如果函数 B 内部还调用函数 C ，那就还有一个 C 的调用记录栈，以此类推。所有的调用记录，就形成一个“调用栈”（call stack）。
+尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用记录，因为调用位置、内部变量等信息都不会再用到了，只要直接用内层函数的调用记录，取代外层函数的调用记录就可以了。
+</p>
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #0000FF;">function</span> <span style="color: #006699;">f</span>() {
+    <span style="color: #0000FF;">let</span> <span style="color: #BA36A5;">m</span> = <span style="color: #D0372D;">1</span>;
+    <span style="color: #0000FF;">let</span> <span style="color: #BA36A5;">n</span> = <span style="color: #D0372D;">2</span>;
+    <span style="color: #0000FF;">return</span> g(m + n);
+}
+f();
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#31561;&#21516;&#20110;</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">f</span>() {
+    <span style="color: #0000FF;">return</span> g(<span style="color: #D0372D;">3</span>);
+}
+f();
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#31561;&#21516;&#20110;</span>
+g(<span style="color: #D0372D;">3</span>);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6db2471" class="outline-3">
+<h3 id="org6db2471">尾递归</h3>
+<div class="outline-text-3" id="text-org6db2471">
+<p>
+函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
+递归非常耗费内存，因为需要同时保存成千上百个调用记录，很容易发生“栈溢出”错误（stack overflow）。但对于尾递归来说，由于只存在一个调用记录，所以永远不会发生&ldquo;栈溢出&rdquo;错误。
+</p>
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #0000FF;">function</span> <span style="color: #006699;">factorial</span>(<span style="color: #BA36A5;">n</span>) {
+    <span style="color: #0000FF;">if</span> (n === <span style="color: #D0372D;">1</span>) <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span>;
+    <span style="color: #0000FF;">return</span> n * factorial(n - <span style="color: #D0372D;">1</span>);
+}
+factorial(<span style="color: #D0372D;">5</span>) <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">120</span>
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#20248;&#21270;</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">factorial</span>(<span style="color: #BA36A5;">n</span>, <span style="color: #BA36A5;">total</span>) {
+    <span style="color: #0000FF;">if</span> (n === <span style="color: #D0372D;">1</span>) <span style="color: #0000FF;">return</span> total;
+    <span style="color: #0000FF;">return</span> factorial(n - <span style="color: #D0372D;">1</span>, n * total);
+}
+factorial(<span style="color: #D0372D;">5</span>, <span style="color: #D0372D;">1</span>) <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">120</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3388645" class="outline-3">
+<h3 id="org3388645">&rsquo;use strict&rsquo;</h3>
+<div class="outline-text-3" id="text-org3388645">
+<p>
+use strict 是一种 ECMAscript5 添加的（严格）运行模式，这种模式使得 Javascript 在更严格的条件下运行。 设立“严格模式”的目的，主要有以下几个:
+</p>
+<ul class="org-ul">
+<li>消除 Javascript 语法的一些不合理、不严谨之处，减少一些怪异行为</li>
+<li>消除代码运行的一些不安全之处，保证代码运行的安全</li>
+<li>提高编译器效率，增加运行速度</li>
+<li>为未来新版本的 Javascript 做好铺垫</li>
+</ul>
+
+<p>
+区别:
+</p>
+<ul class="org-ul">
+<li>禁止使用 with 语句</li>
+<li>禁止 this 关键字指向全局对象</li>
+<li>对象不能有重名的属性</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgff7754c" class="outline-3">
+<h3 id="orgff7754c">tips</h3>
+<div class="outline-text-3" id="text-orgff7754c">
+</div>
+<div id="outline-container-orgd2847c1" class="outline-4">
+<h4 id="orgd2847c1">对象判空</h4>
+<div class="outline-text-4" id="text-orgd2847c1">
+<div class="org-src-container">
+<pre class="src src-js">Object.keys(obj).length === <span style="color: #D0372D;">0</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org83764c7" class="outline-4">
+<h4 id="org83764c7">[] == ![]</h4>
+<div class="outline-text-4" id="text-org83764c7">
+<pre class="example">
+== 中，左右两边都需要转换为数字然后进行比较。 [] 转换为数字为0。 ![] 首先是转换为布尔值，由于 [] 作为一个引用类型转换为布尔值为 true, 因此 ![] 为 false ，进而在转换成数字，变为 0 。 0 == 0 ， 结果为 true
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb16000a" class="outline-4">
+<h4 id="orgb16000a">instanceof</h4>
+<div class="outline-text-4" id="text-orgb16000a">
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #0000FF;">class</span> PrimitiveNumber {
+    <span style="color: #0000FF;">static</span> [Symbol.hasInstance](x) {
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">typeof</span> x === <span style="color: #008000;">'number'</span>
+    }
+}
+console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF;">instanceof</span> <span style="color: #6434A3;">PrimitiveNumber</span>) <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">true</span>
+</pre>
+</div>
+
+<p>
+其实就是自定义 instanceof 行为的一种方式，这里将原有的 instanceof 方法重定义，换成了 typeof ，因此能够判断基本数据类型。
+</p>
+</div>
+</div>
+<div id="outline-container-org3bbadbb" class="outline-4">
+<h4 id="org3bbadbb">0.1 + 0.2</h4>
+<div class="outline-text-4" id="text-org3bbadbb">
+<p>
+0.1 和 0.2 在转换成二进制后会无限循环，由于标准位数的限制后面多余的位数会被截掉，此时就已经出现了精度的损失，相加后因浮点数小数位的限制而截断的二进制数字在转换为十进制就会变成 0.30000000000000004 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c52e29" class="outline-4">
+<h4 id="org7c52e29">前端判断可视</h4>
+<div class="outline-text-4" id="text-org7c52e29">
+<ul class="org-ul">
+<li>offsetTop, scrollTop</li>
+<li>getBoundingClientRect</li>
+<li>Intersection Observer</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org83fbbae" class="outline-3">
+<h3 id="org83fbbae">节流和防抖</h3>
+<div class="outline-text-3" id="text-org83fbbae">
+<p>
+本质上是优化高频率执行代码的一种手段。
+</p>
+
+<p>
+如：浏览器的 resize, scroll, keypress, mousemove 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能
+为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用 throttle（节流）和 debounce（防抖）的方式来减少调用频率
+定义：
+</p>
+<ul class="org-ul">
+<li>节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效</li>
+<li>防抖: n 秒后再执行该事件，若在 n 秒内被重复触发，则重新计时</li>
+</ul>
+
+<p>
+一个经典的比喻：
+想象每天上班大厦底下的电梯。把电梯完成一次运送，类比为一次函数的执行和响应
+假设电梯有两种运行策略 debounce 和 throttle，超时设定为 15 秒，不考虑容量限制
+电梯第一个人进来后，15 秒后准时运送一次，这是节流
+电梯第一个人进来后，等待 15 秒。如果过程中又有人进来，15 秒等待重新计时，直到 15 秒后开始运送，这是防抖
+</p>
+</div>
+</div>
+<div id="outline-container-org559f6bc" class="outline-3">
+<h3 id="org559f6bc">数字精度</h3>
+<div class="outline-text-3" id="text-org559f6bc">
+<p>
+计算机存储双精度浮点数需要先把十进制数转换为二进制的科学记数法的形式，然后计算机以自己的规则 <code>{符号位+(指数位+指数偏移量的二进制)+小数部分}</code> 存储二进制的科学记数法
+因为存储时有位数限制（64 位），并且某些十进制的浮点数在转换为二进制数时会出现无限循环，会造成二进制的舍入操作（0 舍 1 入），当再转换为十进制时就造成了计算误差。
+</p>
+
+<p>
+解决方法：使用 toPrecision 凑整并 parseFloat 转成数字后再显示。
+</p>
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #0000FF;">function</span> <span style="color: #006699;">strip</span>(<span style="color: #BA36A5;">num</span>, <span style="color: #BA36A5;">precision</span> = <span style="color: #D0372D;">12</span>) {
+    <span style="color: #0000FF;">return</span> +parseFloat(num.toPrecision(precision));
+}
+</pre>
+</div>
+
+<p>
+对于运算类操作，如 +, -, *, / ，就不能使用 toPrecision 了。正确的做法是把小数转成整数后再运算。以加法为例：
+</p>
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #0000FF;">function</span> <span style="color: #006699;">add</span>(<span style="color: #BA36A5;">num1</span>, <span style="color: #BA36A5;">num2</span>) {
+    <span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">num1Digits</span> = (num1.toString().split(<span style="color: #008000;">'.'</span>)[<span style="color: #D0372D;">1</span>] || <span style="color: #008000;">''</span>).length;
+    <span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">num2Digits</span> = (num2.toString().split(<span style="color: #008000;">'.'</span>)[<span style="color: #D0372D;">1</span>] || <span style="color: #008000;">''</span>).length;
+    <span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">baseNum</span> = Math.pow(<span style="color: #D0372D;">10</span>, Math.max(num1Digits, num2Digits));
+    <span style="color: #0000FF;">return</span> (num1 * baseNum + num2 * baseNum) / baseNum;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://juejin.cn/post/7130161240181047309">https://juejin.cn/post/7130161240181047309</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

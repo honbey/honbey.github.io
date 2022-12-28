@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:56 -->
+<!-- 2022-12-28 Wed 21:39 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
@@ -39,6 +39,18 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4b9f51c" class="outline-3">
+<h3 id="org4b9f51c">Batch rename file</h3>
+<div class="outline-text-3" id="text-org4b9f51c">
+<div class="org-src-container">
+<pre class="src src-powershell">Get-ChildItem -Recurse -Path . -File | %{$i=0}{Rename-Item $_.FullName -NewName (‘{0}\{1}{2}’ -f $_.DirectoryName, ++$i, $_.Extension)}
+
+Get-ChildItem -Recurse -Path . -File | foreach {$i=0} {Rename-Item $_.FullName -NewName ($_.DirectoryName+(‘\{0}’ -f ++$i)+ $_.Extension)}
 </pre>
 </div>
 </div>
@@ -293,7 +305,7 @@ Shortcut Keyboard: <code>win + r</code>.
 <code>diskpart</code>
 </p>
 <table>
-<caption class="t-above"><span class="table-number">Table 3:</span> usage of diskpart</caption>
+<caption class="t-above"><span class="table-number">Table 1:</span> usage of diskpart</caption>
 
 <colgroup>
 <col  class="org-left">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:57 -->
+<!-- 2022-12-28 Wed 21:41 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Regex</title>
@@ -9,6 +9,27 @@
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -61,6 +82,50 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 <p>
 断言表达式 exp 不会计入匹配，但可以用括号扩起来计入分组。
 </p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">符号</th>
+<th scope="col" class="org-left">名字</th>
+<th scope="col" class="org-left">意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">reg(?=exp)</td>
+<td class="org-left">零宽度正先行断言</td>
+<td class="org-left">reg 匹配的内容后面内容满足 exp 规则</td>
+</tr>
+
+<tr>
+<td class="org-left">reg(?!exp)</td>
+<td class="org-left">零宽度负先行断言</td>
+<td class="org-left">reg 匹配的内容后面内容不满足 exp 规则</td>
+</tr>
+
+<tr>
+<td class="org-left">(?&lt;=exp)reg</td>
+<td class="org-left">零宽度正后发断言</td>
+<td class="org-left">reg 匹配的内容前面内容满足 exp 规则</td>
+</tr>
+
+<tr>
+<td class="org-left">(?&lt;!exp)reg</td>
+<td class="org-left">零宽度负后发断言</td>
+<td class="org-left">reg 匹配的内容前面内容不满足 exp 规则</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -93,6 +158,386 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+
+<div id="outline-container-org1d6e067" class="outline-2">
+<h2 id="org1d6e067">Shell</h2>
+<div class="outline-text-2" id="text-org1d6e067">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">字符类</th>
+<th scope="col" class="org-left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">[:alnum:]</td>
+<td class="org-left">匹配任意一个字母或数字</td>
+</tr>
+
+<tr>
+<td class="org-left">[:alpha:]</td>
+<td class="org-left">匹配任意一个字母，ASCII等价于：[A-Za-z]</td>
+</tr>
+
+<tr>
+<td class="org-left">[:digit:]</td>
+<td class="org-left">匹配任意一个数字</td>
+</tr>
+
+<tr>
+<td class="org-left">[:lower:]</td>
+<td class="org-left">匹配任意一个小写字母</td>
+</tr>
+
+<tr>
+<td class="org-left">[:upper]</td>
+<td class="org-left">匹配任意一个大写字母</td>
+</tr>
+
+<tr>
+<td class="org-left">[:word:]</td>
+<td class="org-left">与 [:alnum:] 相同, 但增加了下划线字符。</td>
+</tr>
+
+<tr>
+<td class="org-left">[:blank:]</td>
+<td class="org-left">包含空格和tab字符</td>
+</tr>
+
+<tr>
+<td class="org-left">[:cntrl:]</td>
+<td class="org-left">ASCII控制字符0到31和127</td>
+</tr>
+
+<tr>
+<td class="org-left">[:graph:]</td>
+<td class="org-left">ASCII可视字符33到126</td>
+</tr>
+
+<tr>
+<td class="org-left">[:punct:]</td>
+<td class="org-left">标点符号字符</td>
+</tr>
+
+<tr>
+<td class="org-left">[:print:]</td>
+<td class="org-left">可打印的字符。在[:graph:]中的所有字符，再加上空格字符</td>
+</tr>
+
+<tr>
+<td class="org-left">[:space:]</td>
+<td class="org-left">空白字符，包括空格，tab，回车，换行，vertical tab, 和 form feed。ASCII等价于：[\t\v\f]</td>
+</tr>
+
+<tr>
+<td class="org-left">[:xdigit:]</td>
+<td class="org-left">用来表示十六进制数字的字符。ASCII等价于：[0-9A-Fa-f]</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">字符</th>
+<th scope="col" class="org-left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\cx</td>
+<td class="org-left">匹配由x指明的控制字符，x∈[a-zA-Z]</td>
+</tr>
+
+<tr>
+<td class="org-left">\f</td>
+<td class="org-left">匹配一个换页符。等价于 \x0c 和 \cL</td>
+</tr>
+
+<tr>
+<td class="org-left">\d</td>
+<td class="org-left">匹配一个数字</td>
+</tr>
+
+<tr>
+<td class="org-left">\D</td>
+<td class="org-left">匹配一个非数字</td>
+</tr>
+
+<tr>
+<td class="org-left">\s</td>
+<td class="org-left">匹配一个任意空白字符，如空格、制表符、换页符</td>
+</tr>
+
+<tr>
+<td class="org-left">&sect;</td>
+<td class="org-left">匹配任何非空白字符，[^\f\t\v]</td>
+</tr>
+
+<tr>
+<td class="org-left">\w</td>
+<td class="org-left">字母数字以及下划线，[a-zA-Z0-9\_]</td>
+</tr>
+
+<tr>
+<td class="org-left">\W</td>
+<td class="org-left">[<sup>a</sup>-zA-Z0-9\_]</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<div id="outline-container-orgc43de9c" class="outline-3">
+<h3 id="orgc43de9c">operation</h3>
+<div class="outline-text-3" id="text-orgc43de9c">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">限定符</th>
+<th scope="col" class="org-left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>.</code></td>
+<td class="org-left">任何单个字符</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>*</code></td>
+<td class="org-left">匹配任意多个字符（包括零个或一个）</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>?</code></td>
+<td class="org-left">匹配任意一个字符（不包括零个）</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>+</code></td>
+<td class="org-left">匹配一个或零个字符</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>[]</code></td>
+<td class="org-left">匹配中括号内的字符集合</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>[^]</code></td>
+<td class="org-left">匹配非中括号内的字符集合</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>\vert</code></td>
+<td class="org-left">左右表达式任意一个</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{n}</code></td>
+<td class="org-left">匹配n次</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{n,m}</code></td>
+<td class="org-left">匹配(n,m)次</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{n,}</code></td>
+<td class="org-left">匹配n+次</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>{,m}</code></td>
+<td class="org-left">匹配m-次</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>[characters]</code></td>
+<td class="org-left">匹配任意一个属于字符集中的字符</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>[!characters]</code></td>
+<td class="org-left">匹配任意一个不是字符集中的字符</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>[[:class:]]</code></td>
+<td class="org-left">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>
+bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是这两种通配符能够被解析，若不能则当作普通字符。
+</p>
+</blockquote>
+
+<p>
+扩展的正则表达式，元字符：
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">元字符</th>
+<th scope="col" class="org-left">描述</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>$</code></td>
+<td class="org-left">匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 \ 。要匹配 $ 字符本身，请使用 \$</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">( )</td>
+<td class="org-left">标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">*</td>
+<td class="org-left">匹配前面的子表达式零次或多次</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">+</td>
+<td class="org-left">匹配前面的子表达式一次或多次</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">.</td>
+<td class="org-left">匹配除换行符 \n 之外的任何单字符</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">[</td>
+<td class="org-left">标记一个中括号表达式的开始</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">?</td>
+<td class="org-left">匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">\</td>
+<td class="org-left">将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， n 匹配字符 n。\n 匹配换行符。\\ 匹配 \\，而 \( 则匹配 (</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>^</code></td>
+<td class="org-left">匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">{</td>
+<td class="org-left">标记限定符表达式的开始</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&vert;</td>
+<td class="org-left">指明两项之间的一个选择</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>
+^ $ . [ ] { } - ? * + ( ) | \
+</p>
+
+<p>
+然后其它所有字符都被认为是原义字符，虽然在个别情况下，反斜杠会被用来创建元序列， 也允许元字符被转义为原义字符，而不是被解释为元字符。
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org5f48563" class="outline-4">
+<h4 id="org5f48563">BRE</h4>
+<div class="outline-text-4" id="text-org5f48563">
+<blockquote>
+<p>
+^ $ . [ ] *
+</p>
+
+<p>
+( ) { } 用反斜杠 \ 转义后，被看作是元字符
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org30a896b" class="outline-4">
+<h4 id="org30a896b">PRE</h4>
+<div class="outline-text-4" id="text-org30a896b">
+<blockquote>
+<p>
+( ) { } ? + |
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb170f43" class="outline-2">
+<h2 id="orgb170f43">Nginx</h2>
+<div class="outline-text-2" id="text-orgb170f43">
+<ul class="org-ul">
+<li>= 精确匹配路径，用于不含正则表达式的 uri 前，如果匹配成功，不再进行后续的查找；</li>
+<li>^~ 用于不含正则表达式的 uri 前，表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找；</li>
+<li>~ 表示用该符号后面的正则去匹配路径，区分大小写；</li>
+<li>~* 表示用该符号后面的正则去匹配路径，不区分大小写。跟 ~ 优先级都比较低，如有多个 location 的正则能匹配的话，则使用正则表达式最长的那个；</li>
+</ul>
 </div>
 </div>
 </div>

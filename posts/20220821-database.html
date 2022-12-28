@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:57 -->
+<!-- 2022-12-28 Wed 21:41 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Database</title>
@@ -35,6 +35,27 @@
 <div id="outline-container-ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c" class="outline-2">
 <h2 id="ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c">关系型数据库</h2>
 <div class="outline-text-2" id="text-ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c">
+<p>
+关系模式的组成
+</p>
+
+<p>
+一个关系模式应当是一个五元组 R(U, D, DOM, F)
+</p>
+
+<p>
+这里 R 是符号化的元组语义：
+</p>
+<ul class="org-ul">
+<li>U 为一组属性，属性名的集合</li>
+<li>D 为属性组 U 中的属性所来自的域</li>
+<li>DOM 为属性到域的映射</li>
+<li>F 为属性组 U 上一组数据依赖（是一组数据依赖的集合）</li>
+</ul>
+
+<p>
+由于 D, DOM 与模式涉及关系不大，一般把关系模式看作一个三元组：R &lt;U, F&gt; ，当且仅当 U 上一个关系 r 满足 F 时，r 称为关系模式 R&lt;U, F&gt; 的一个关系。
+</p>
 </div>
 <div id="outline-container-ID-59428a07-fcb2-475d-9512-3571be6aef0f" class="outline-3">
 <h3 id="ID-59428a07-fcb2-475d-9512-3571be6aef0f">SQL</h3>
@@ -106,8 +127,49 @@ show databases;
 </div>
 </div>
 
-<div id="outline-container-org49c40f9" class="outline-4">
-<h4 id="org49c40f9">select 语句</h4>
+<div id="outline-container-org8e81c34" class="outline-4">
+<h4 id="org8e81c34">select</h4>
+</div>
+<div id="outline-container-org8afa743" class="outline-4">
+<h4 id="org8afa743">alter</h4>
+<div class="outline-text-4" id="text-org8afa743">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">DROP</span> c;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">ADD</span> c <span style="color: #6434A3;">INT</span> [<span style="color: #0000FF;">FIRST</span> | <span style="color: #0000FF;">AFTER</span> &lt;<span style="color: #0000FF;">column_name</span>&gt;];
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">MODIFY</span> c <span style="color: #6434A3;">CHAR</span>(<span style="color: #D0372D;">10</span>);
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">MODIFY</span> c BIGINT <span style="color: #0000FF;">NOT</span> <span style="color: #0000FF;">NULL</span> <span style="color: #0000FF;">DEFAULT</span> <span style="color: #D0372D;">100</span>;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> CHANGE c d BIGINT;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">ALTER</span> c <span style="color: #0000FF;">DROP</span> <span style="color: #0000FF;">DEFAULT</span>;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> RENAME new_table;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> ENGINE = MYISAM;
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">DROP</span> <span style="color: #0000FF;">FOREIGN</span> <span style="color: #0000FF;">KEY</span> key_name;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org61ddc9e" class="outline-4">
+<h4 id="org61ddc9e">union</h4>
+<div class="outline-text-4" id="text-org61ddc9e">
+<p>
+连接两个或两个以上的 select 语句结果组合到一个结果集合中。
+</p>
+</div>
+</div>
+<div id="outline-container-org36c2b98" class="outline-4">
+<h4 id="org36c2b98">order by</h4>
+<div class="outline-text-4" id="text-org36c2b98">
+<p>
+排序，默认升序 AES ，降序 DESC
+</p>
+</div>
+</div>
+<div id="outline-container-orgd72df8a" class="outline-4">
+<h4 id="orgd72df8a">group by</h4>
+<div class="outline-text-4" id="text-orgd72df8a">
+<p>
+分组，常用函数： COUNT, SUM, AVG
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-ID-787cf0fd-8725-403d-b115-a26c87d7dfcc" class="outline-3">
@@ -135,6 +197,136 @@ Object-Relationship Mapping: 对象关系映射，将对关系型数据库的操
 </pre>
 </div>
 
+<div id="outline-container-org9425171" class="outline-4">
+<h4 id="org9425171">Installation</h4>
+<div class="outline-text-4" id="text-org9425171">
+<p>
+docker, 官方仓库安装均可
+</p>
+
+<p>
+连接 MySQL 数据库： <code>mysql -u &lt;user&gt; -p &lt;pwd&gt;</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe57d39" class="outline-4">
+<h4 id="orgbe57d39">Data Type</h4>
+<div class="outline-text-4" id="text-orgbe57d39">
+<ul class="org-ul">
+<li>整型
+<ul class="org-ul">
+<li>TINYINT</li>
+<li>SMALLINT</li>
+<li>NUMERIC</li>
+<li>MEDIUMINT</li>
+<li>INT/INTEGER</li>
+<li>BIGINT</li>
+</ul></li>
+
+<li>浮点型
+<ul class="org-ul">
+<li>FLOAT</li>
+<li>DOUBLE</li>
+<li>REAL</li>
+</ul></li>
+
+<li>日期/时间
+<ul class="org-ul">
+<li>DATE</li>
+<li>TIME</li>
+<li>YEAR</li>
+<li>DATETIME</li>
+<li>TIMESTAMP</li>
+</ul></li>
+
+<li>字符串
+<ul class="org-ul">
+<li>CHAR</li>
+<li>VARCHAR</li>
+<li>TINYTEXT</li>
+<li>BLOB (Binary Large Object)</li>
+<li>TEXT</li>
+<li>MEDIUMBLOB</li>
+<li>LONGBLOB</li>
+<li>LONGTEXT</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org62b9a1c" class="outline-4">
+<h4 id="org62b9a1c">MySQL SQL syntax</h4>
+<div class="outline-text-4" id="text-org62b9a1c">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#28155;&#21152;&#29992;&#25143;</span>
+<span style="color: #0000FF;">INSERT</span> <span style="color: #0000FF;">INTO</span> <span style="color: #006FE0;">user</span>
+(<span style="color: #0000FF;">host</span>, <span style="color: #006FE0;">user</span>, password, select_priv, insert_priv, update_priv)
+<span style="color: #0000FF;">VALUES</span> (<span style="color: #008000;">'localhost'</span>, <span style="color: #008000;">'testUser'</span>, PASSWORD(<span style="color: #008000;">'testPwd'</span>), <span style="color: #008000;">'Y'</span>, <span style="color: #008000;">'Y'</span>, <span style="color: #008000;">'Y'</span>);
+
+<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#37325;&#36733;&#25480;&#26435;&#34920;</span>
+FLUSH <span style="color: #0000FF;">PRIVILEGES</span>;
+</pre>
+</div>
+
+<p>
+用户权限：
+</p>
+<ul class="org-ul">
+<li>select<sub>priv</sub></li>
+<li>insert<sub>priv</sub></li>
+<li>update<sub>priv</sub></li>
+<li>delete<sub>priv</sub></li>
+<li>create<sub>priv</sub></li>
+<li>drop<sub>priv</sub></li>
+<li>reload<sub>priv</sub></li>
+<li>shutdonw<sub>priv</sub></li>
+<li>process<sub>priv</sub></li>
+<li>file<sub>priv</sub></li>
+<li>grant<sub>priv</sub></li>
+<li>references<sub>priv</sub></li>
+<li>index<sub>priv</sub></li>
+<li>alter<sub>pirv</sub></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#25480;&#20104;&#26435;&#38480; by grant</span>
+<span style="color: #0000FF;">GRANT</span>
+<span style="color: #0000FF;">SELECT</span>, <span style="color: #0000FF;">INSERT</span>, <span style="color: #0000FF;">UPDATE</span>, <span style="color: #0000FF;">DELETE</span>, <span style="color: #0000FF;">CREATE</span>, <span style="color: #0000FF;">DROP</span>
+<span style="color: #0000FF;">ON</span> TestDB.*
+<span style="color: #0000FF;">TO</span> <span style="color: #008000;">'testUser@localhost'</span>
+IDENTIFIED <span style="color: #0000FF;">BY</span> <span style="color: #008000;">'testPwd'</span>;
+</pre>
+</div>
+
+<p>
+管理：
+</p>
+<div class="org-src-container">
+<pre class="src src-sql">USE &lt;DB_name&gt;;
+SHOW DATABASES;
+SHOW TABLES;
+SHOW COLUMNS <span style="color: #0000FF;">FROM</span> &lt;<span style="color: #0000FF;">table_name</span>&gt;;
+SHOW INDEX <span style="color: #0000FF;">FROM</span> &lt;<span style="color: #0000FF;">table_name</span>&gt;;
+SHOW <span style="color: #0000FF;">TABLE</span> STATUS [<span style="color: #0000FF;">From</span> &lt;DB_name&gt;][<span style="color: #0000FF;">LIKE</span> &lt;<span style="color: #008000;">'pattern'</span>&gt;]\G; <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">\G &#26597;&#35810;&#32467;&#26524;&#25353;&#21015;&#25171;&#21360;</span>
+</pre>
+</div>
+
+<p>
+索引：
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#21019;&#24314;&#32034;&#24341;</span>
+<span style="color: #0000FF;">CREATE</span> INDEX &lt;index_name&gt; <span style="color: #0000FF;">ON</span> &lt;<span style="color: #0000FF;">table_name</span>&gt; &lt;(<span style="color: #0000FF;">column_name</span>)&gt;
+
+<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#28155;&#21152;&#32034;&#24341;</span>
+<span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> &lt;<span style="color: #0000FF;">table_name</span>&gt; <span style="color: #0000FF;">ADD</span> INDEX [index_name] &lt;(<span style="color: #0000FF;">column_name</span>)&gt;
+
+<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#21024;&#38500;&#32034;&#24341;</span>
+<span style="color: #0000FF;">DROP</span> INDEX &lt;index_name&gt; <span style="color: #0000FF;">ON</span> <span style="color: #0000FF;">table_name</span>;
+</pre>
+</div>
+</div>
+</div>
 <div id="outline-container-ID-15806e05-94cb-4600-9b95-bf122ea54066" class="outline-4">
 <h4 id="ID-15806e05-94cb-4600-9b95-bf122ea54066">MySQL information<sub>schema</sub></h4>
 <div class="outline-text-4" id="text-ID-15806e05-94cb-4600-9b95-bf122ea54066">
@@ -179,7 +371,352 @@ mysql 5.0 以上中有一个重要的系统数据库 information<sub>schema</sub
 <li>仅支持单行单列的结果，否则报错</li>
 <li>内部 sql 失败，benchmark 也失败</li>
 </ul></li>
+<li>datediff(dt1, dt2)    返回两个日期相差的天数</li>
+<li>concat(a, b, c)       返回 a, b, c 的拼接字符串</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-orgecd343d" class="outline-4">
+<h4 id="orgecd343d">inner join, left join, right join, full join<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-orgecd343d">
+<pre class="example">
+TableA:
+id  firstName                  lastName
+.......................................
+1   arun                        prasanth
+2   ann                         antony
+3   sruthy                      abc
+6   new                         abc
+
+TableB:
+id age place
+................
+1   24  kerala
+2   24  usa
+3   25  ekm
+5   24  chennai
+</pre>
+</div>
+
+<div id="outline-container-orgf97a16b" class="outline-5">
+<h5 id="orgf97a16b">inner join</h5>
+<div class="outline-text-5" id="text-orgf97a16b">
+<p>
+两张表使用内连接查询时，得到的结果是两张表中完全匹配的行集。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">SELECT</span> TableA.firstName, TableA.lastName, TableB.age, TableB.Place
+<span style="color: #0000FF;">FROM</span> TableA
+     <span style="color: #0000FF;">INNER</span> <span style="color: #0000FF;">JOIN</span> TableB
+     <span style="color: #0000FF;">ON</span> TableA.id = TableB.id
+</pre>
+</div>
+
+<p>
+结果为：
+</p>
+<pre class="example">
+firstName       lastName       age  place
+..............................................
+arun            prasanth        24  kerala
+ann             antony          24  usa
+sruthy          abc             25  ekm
+</pre>
+<p>
+只有两张表都有的 id 才内连接了 ( id=1,2,3 )
+</p>
+</div>
+</div>
+
+<div id="outline-container-org00ee0ed" class="outline-5">
+<h5 id="org00ee0ed">left join</h5>
+<div class="outline-text-5" id="text-org00ee0ed">
+<p>
+左连接查询会返回左表中所有行，无论这些行是不是有任何一行在右表中匹配。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">SELECT</span> TableA.firstName, TableA.lastName, TableB.age, TableB.Place
+<span style="color: #0000FF;">FROM</span> TableA
+     <span style="color: #0000FF;">LEFT</span> <span style="color: #0000FF;">JOIN</span> TableB
+     <span style="color: #0000FF;">ON</span> TableA.id = TableB.id
+</pre>
+</div>
+
+<p>
+结果为：
+</p>
+<pre class="example">
+firstName       lastName       age   place
+...............................................
+arun            prasanth        24   kerala
+ann             antony          24   usa
+sruthy          abc             25   ekm
+new             abc             NULL NULL
+</pre>
+<p>
+TableA ( id=1,2,3,6 ) 的行都存在于结果中，而 TableB 没有 id = 6 ，所以 age 和 place 为 NULL 空值。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcff6a96" class="outline-5">
+<h5 id="orgcff6a96">right join</h5>
+<div class="outline-text-5" id="text-orgcff6a96">
+<p>
+右连接查询会返回右表中所有行，无论这些行是不是有任何一行在左表中匹配。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">SELECT</span> TableA.firstName, TableA.lastName, TableB.age, TableB.Place
+<span style="color: #0000FF;">FROM</span> TableA
+     <span style="color: #0000FF;">RIGHT</span> <span style="color: #0000FF;">JOIN</span> TableB
+     <span style="color: #0000FF;">ON</span> TableA.id = TableB.id
+</pre>
+</div>
+
+<p>
+结果为：
+</p>
+<pre class="example">
+firstName       lastName       age   place
+...............................................
+arun            prasanth        24   kerala
+ann             antony          24   usa
+sruthy          abc             25   ekm
+NULL            NULL            24   chennai
+</pre>
+<p>
+TableB ( id=1,2,3,5 ) 的行都存在于结果中，而 TableA 没有 id = 5 ，所以 firstName 和 lastName 为 NULL 空值。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgecc1860" class="outline-5">
+<h5 id="orgecc1860">full join</h5>
+<div class="outline-text-5" id="text-orgecc1860">
+<p>
+全连接，返回左右表中的所有行。
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #0000FF;">SELECT</span> TableA.firstName, TableA.lastName, TableB.age, TableB.Place
+<span style="color: #0000FF;">FROM</span> TableA
+     <span style="color: #0000FF;">FULL</span> <span style="color: #0000FF;">JOIN</span> TableB
+     <span style="color: #0000FF;">ON</span> TableA.id = TableB.id
+</pre>
+</div>
+
+<p>
+结果为：
+</p>
+<pre class="example">
+firstName       lastName       age   place
+...............................................
+arun            prasanth        24   kerala
+ann             antony          24   usa
+sruthy          abc             25   ekm
+NULL            NULL            24   chennai
+new             abc             NULL NULL
+</pre>
+<p>
+相当于左连接与右连接的并集。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgabf5b46" class="outline-4">
+<h4 id="orgabf5b46">datetime &amp; timestamp <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-orgabf5b46">
+<p>
+datetime: 1000-01-01 00:00:00 ~ 9999-12-31 23:59:59
+</p>
+
+<p>
+timestamp: 1970-01-01 00:00:01 ~ 2038-01-09 03:14:07 (UTC)
+</p>
+
+<p>
+或者采用 BIGINT 存储自纪元以来的毫秒数。占用 8 字节。
+</p>
+
+<p>
+自 MySQL 5.6.4 开始， datetime 占用 5 字节 + 0 ~ 3 字节的 FSP 分秒精度。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfceb209" class="outline-4">
+<h4 id="orgfceb209">MyISAM &amp; InnoDB <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-orgfceb209">
+<p>
+MyISAM 和 InnoDB 之间的主要区别在于参照完整性和事务。还有其他区别，例如锁定、回滚和全文搜索。
+</p>
+</div>
+
+<div id="outline-container-org91d6c7c" class="outline-5">
+<h5 id="org91d6c7c">参照完整性</h5>
+<div class="outline-text-5" id="text-org91d6c7c">
+<p>
+参照完整性确保表之间的关系保持一致。更具体地说，当一个表（例如 Listings）有一个外键（例如 Product ID）指向另一个表（例如 Products）时，当指向的表发生更新或删除时，这些更改会级联到链接的表。在该示例中，如果重命名产品，则链接的表的外键也会更新；如果从Products表中删除产品，则指向已删除条目的 Listings 表中得到任何列表也将被删除。此外，任何 Listings 表中的新列表都必须具有指向有效的现有条目的外键。
+</p>
+
+<p>
+InnoDB 是一个关系型 DBMS (RDBMS)，因此具有参照完整性，而 MyISAM 则没有。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc2394cb" class="outline-5">
+<h5 id="orgc2394cb">事务和原子性</h5>
+<div class="outline-text-5" id="text-orgc2394cb">
+<p>
+事务：比如说，在人员管理系统中，你删除一个人员，你既需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！事务可以管理 insert, update, delete 此类的语句
+</p>
+
+<p>
+事务是必须满足4个条件（ACID）：
+</p>
+<ul class="org-ul">
+<li>原子性（Atomicity，不可分割性）</li>
+<li>一致性（Consistency）</li>
+<li>隔离性（Isolation，独立性）</li>
+<li>持久性（Durability）</li>
+</ul>
+
+<p>
+使用数据操作语言 (DML) 语句管理表中的数据，例如 SELECT、INSERT、UPDATE 和 DELETE。事务将两个或多个 DML 语句组合成一个工作单元，因此要么应用整个单元，要么不应用。
+</p>
+
+<p>
+MyISAM 不支持事务，而 InnoDB 支持。
+</p>
+
+<p>
+如果在使用 MyISAM 表时操作被中断，该操作将立即中止，并且受影响的行（甚至每行中的数据）仍然受到影响，即使该操作没有完成。
+</p>
+
+<p>
+如果一个操作在使用 InnoDB 表时被中断，因为它使用具有原子性的事务，任何没有完成的事务都不会生效，因为没有提交。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgceaf26a" class="outline-5">
+<h5 id="orgceaf26a">表锁定与行锁定</h5>
+<div class="outline-text-5" id="text-orgceaf26a">
+<p>
+当查询 MyISAM 表时，正在查询的整个表将被锁定。这意味着后续查询将仅在当前查询完成后才能执行。如果您正在读取一个大表，并且有频繁的读写操作，这可能意味着大量的查询积压。
+</p>
+
+<p>
+而当查询 InnoDB 表时，只有涉及的行被锁定，表的其余部分仍然可进行 CRUD 操作。这意味着查询可以在同一个表上同时运行，只要它们不使用同一行。
+</p>
+
+<p>
+InnoDB 中的此功能称为并发。尽管并发性很好，但在表的范围查询时有一个缺点，因为在内核线程之间切换存在开销，我们应该对内核线程设置限制以防止服务器停止。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge26a309" class="outline-5">
+<h5 id="orge26a309">事务和回滚</h5>
+<div class="outline-text-5" id="text-orge26a309">
+<p>
+当在 MyISAM 中执行一个操作时，更改会立刻生效；在 InnoDB 中，这些更改可以回滚。用于控制事务的最常用命令是 COMMIT、ROLLBACK 和 SAVEPOINT。
+</p>
+
+<ul class="org-ul">
+<li>COMMIT - 您可以编写多个 DML 操作，但只有在进行 COMMIT 时才会保存更改</li>
+<li>ROLLBACK - 您可以丢弃任何尚未提交的操作</li>
+<li>SAVEPOINT - 实现回滚到指定保存点</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2391c46" class="outline-5">
+<h5 id="org2391c46">可靠性</h5>
+<div class="outline-text-5" id="text-org2391c46">
+<p>
+MyISAM 不提供数据完整性——硬件故障、不正常的关机操作都可能导致数据损坏。这将需要修复或重建索引和表。
+</p>
+
+<p>
+而InnoDB 使用事务日志、双写缓冲区和自动校验和和验证来防止数据损坏。在 InnoDB 进行任何更改之前，它会将事务之前的数据记录到一个名为 ibdata1 的系统表空间文件中。如果发生崩溃，InnoDB 将通过这些日志来自动恢复。
+全文索引
+</p>
+
+<p>
+InnoDB 在 MySQL 5.6.4 版本之前不支持 FULLTEXT 索引。
+</p>
+
+<p>
+但是，这不是使用 MyISAM 的理由。最好使用最新版本的 MySQL 。并不是说使用 FULLTEXT 索引的 MyISAM 表不能转换为 InnoDB 表。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcbb8f5c" class="outline-5">
+<h5 id="orgcbb8f5c">结论</h5>
+<div class="outline-text-5" id="text-orgcbb8f5c">
+<p>
+总之，InnoDB 应该是我们默认的存储引擎。在有特定需求时可以选择 MyISAM 或其他数据类型。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org837563f" class="outline-4">
+<h4 id="org837563f">atomic DDL <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h4>
+<div class="outline-text-4" id="text-org837563f">
+<p>
+MySQL 8.0 推出的新特性，MySQL 5.7 的字典信息保存在非事务表中，并且存放在不同的文件中（.FRM，.PAR，.OPT，.TRN，.TRG 等)。所有 DDL 操作都不是 Crash Safe，而且对于组合 DDL（ALTER 多个表）会出现有的成功有的失败的情况，而不是总体失败。这样主从复制就出现了问题，也导致基于复制的高可用系统不再安全。
+</p>
+
+<p>
+DDL: Data Definition Language
+</p>
+
+<p>
+只有 InnoDB 才支持，支持数据库、表空间、表、索引的 CREATE、ALTER 以及 DROP 语句，以及 TRUNCATE TABLE 语句；支持存储过程、触发器、视图以及用户定义函数（UDF）的 CREATE 和 DROP 、ALTER 操作，用户和角色的 CREATE、ALTER、DROP 语句，以及适用的 RENAME 语句，以及 GRANT 和 REVOKE 语句。
+</p>
+
+<p>
+不支持的语句：
+</p>
+<ul class="org-ul">
+<li>INSTALL PLUGIN, UNINSTALL PLUGIN</li>
+<li>INSTALL COMPONENT, UNINSTALL COMPONENT</li>
+<li>REATE SERVER, ALTER SERVER, DROP SERVER</li>
+</ul>
+
+<p>
+首先，8.0 将字典信息存放到事务引擎的系统表（InnoDB 存储引擎）中。这样 DDL 操作转变成一组对系统表的 DML 操作，从而失败后可以依据事务引擎自身的事务回滚保证系统表的原子性。
+</p>
+
+<p>
+似乎 DDL 原子性就此就可以完成，但实际上并没有这么简单。首先字典信息不光是系统表，还有一组字典缓存，如：
+</p>
+<ul class="org-ul">
+<li>Table Share 缓存</li>
+<li>DD 缓存</li>
+<li>InnoDB 中的 dict</li>
+</ul>
+
+<p>
+此外，字典信息只是数据库对象的元数据，DDL 操作不光要修改字典信息，还要实实在在的操作对象，以及对象本身在内存中缓存。
+</p>
+<ul class="org-ul">
+<li>表空间</li>
+<li>Dynamic meta</li>
+<li>Btree</li>
+<li>ibd 文件</li>
+<li>buffer pool 中表空间的 page 页</li>
+</ul>
+
+<p>
+此外，binlog 也要考虑 DDL 失败的情况。
+</p>
+
+<p>
+因此，原子 DDL 在处理 DDL 失败的时候，不光是直接回滚系统表的数据，而且也要保证内存缓存，数据库对象也能回滚到一致状态。
+</p>
 </div>
 </div>
 </div>
@@ -195,16 +732,332 @@ mysql 5.0 以上中有一个重要的系统数据库 information<sub>schema</sub
 </p>
 
 <p>
+用法：
+</p>
+<div class="org-src-container">
+<pre class="src src-sqlite">.<span style="color: #0000FF;">open</span> filename  <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#25171;&#24320;&#25968;&#25454;&#24211;&#25991;&#20214;</span>
+.show           <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#26174;&#31034; SQLite&#21629;&#20196;&#25552;&#31034;&#31526;&#30340;&#40664;&#35748;&#35774;&#32622;</span>
+.q              <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#36864;&#20986;</span>
+.databases      <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#26174;&#31034;&#25968;&#25454;&#24211;</span>
+.help           <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#24110;&#21161;</span>
+.dump           <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#23548;&#20837;/&#23548;&#20986;&#25968;&#25454;&#24211;</span>
+.<span style="color: #0000FF;">table</span>          <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#26174;&#31034;&#34920;</span>
+.<span style="color: #0000FF;">schema</span>         <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#26597;&#30475;&#34920;&#30340;&#35814;&#32454;&#20449;&#24687;</span>
+</pre>
+</div>
+
+<p>
+可以使用 <code>sqlite &lt;db_name&gt; [command]</code> 打开数据库或直接执行命令。
+</p>
+
+<p>
 常用配置：
 </p>
+<div class="org-src-container">
+<pre class="src src-sql">.header <span style="color: #0000FF;">on</span>       <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#36755;&#20986;&#34920;&#22836;&#65288;&#21015;&#21517;&#65289;</span>
+.mode <span style="color: #0000FF;">column</span>     <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#21015;&#23545;&#40784;</span>
+.timer <span style="color: #0000FF;">on</span>        <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#24320;&#21551; CPU &#23450;&#26102;&#22120;</span>
+.width n1,n2...  <span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#35774;&#32622;&#36755;&#20986;&#21015;&#30340;&#23485;&#24230;</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc1e72bd" class="outline-4">
+<h4 id="orgc1e72bd">数据类型</h4>
+<div class="outline-text-4" id="text-orgc1e72bd">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">type</th>
+<th scope="col" class="org-left">caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">NULL</td>
+<td class="org-left">空值</td>
+</tr>
+
+<tr>
+<td class="org-left">int</td>
+<td class="org-left">整型</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+<td class="org-left">文本字符串</td>
+</tr>
+
+<tr>
+<td class="org-left">blob</td>
+<td class="org-left">Binary Large OBject</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+<td class="org-left">一个带符号的证书，根据的值的大小占用 1/2/3/4/6/8 字节</td>
+</tr>
+
+<tr>
+<td class="org-left">real</td>
+<td class="org-left">值是浮点数，占用 8 字节</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0d90548" class="outline-4">
+<h4 id="org0d90548">运算符</h4>
+<div class="outline-text-4" id="text-org0d90548">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">op</th>
+<th scope="col" class="org-left">caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>== =</code></td>
+<td class="org-left">判等</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>!= &lt;&gt;</code></td>
+<td class="org-left">不等于</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>!&lt;</code></td>
+<td class="org-left">是否不小于</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>!&gt;</code></td>
+<td class="org-left">是否不大于</td>
+</tr>
+
+<tr>
+<td class="org-left">AND</td>
+<td class="org-left">并</td>
+</tr>
+
+<tr>
+<td class="org-left">BETWEEN</td>
+<td class="org-left">给定范围</td>
+</tr>
+
+<tr>
+<td class="org-left">EXISTS</td>
+<td class="org-left">在满足一定条件的制定表中搜索行</td>
+</tr>
+
+<tr>
+<td class="org-left">IN</td>
+<td class="org-left">某个值与一系列值比较</td>
+</tr>
+
+<tr>
+<td class="org-left">NOT</td>
+<td class="org-left">否定</td>
+</tr>
+
+<tr>
+<td class="org-left">LIKE</td>
+<td class="org-left">模糊匹配</td>
+</tr>
+
+<tr>
+<td class="org-left">GLOB</td>
+<td class="org-left">模糊匹配，大小写敏感</td>
+</tr>
+
+<tr>
+<td class="org-left">IS NULL</td>
+<td class="org-left">是否为 NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">IS</td>
+<td class="org-left">与 <code>=</code> 类似</td>
+</tr>
+
+<tr>
+<td class="org-left">IS NOT</td>
+<td class="org-left">与 <code>!=</code> 类似</td>
+</tr>
+
+<tr>
+<td class="org-left">UNIQUE</td>
+<td class="org-left">搜索指定表中的每一行，确保唯一性</td>
+</tr>
+
+<tr>
+<td class="org-left">&vert;&vert;</td>
+<td class="org-left">连接两个字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org20d8d10" class="outline-2">
+<h2 id="org20d8d10">文档型数据库</h2>
+<div class="outline-text-2" id="text-org20d8d10">
+</div>
+<div id="outline-container-org62b4aae" class="outline-3">
+<h3 id="org62b4aae"><a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> / ELK(ES + Logstash + Kibana)</h3>
+</div>
+<div id="outline-container-orgba06349" class="outline-3">
+<h3 id="orgba06349">MongoDB</h3>
+<div class="outline-text-3" id="text-orgba06349">
+</div>
+<div id="outline-container-org7aa2875" class="outline-4">
+<h4 id="org7aa2875">installation</h4>
+<div class="outline-text-4" id="text-org7aa2875">
+<p>
+CentOS/RedHat Repositry:
+</p>
 <pre class="example">
-.header on
-.mode columb
+[mongodb-org-4.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">dnf</span> install <span style="color: #D0372D;">-y</span> mongodb-org
+<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/127.0.0.1/0.0.0.0/'</span> /etc/mongod.conf
+<span style="color: #006DAF;">service</span> mongod start
+<span style="color: #006DAF;">mongod</span> <span style="color: #D0372D;">--bind_ip</span> 0.0.0.0 <span style="color: #D0372D;">--port</span> <span style="color: #D0372D;">27017</span> <span style="color: #D0372D;">--dbpath</span> /var/mongo/data/test
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-js">db.createUser(
+  {
+    user: <span style="color: #008000;">"adminUser"</span>,
+    pwd: <span style="color: #008000;">"dRcHKje943ZJ"</span>,
+    roles: [ { role: <span style="color: #008000;">"userAdminAnyDatabase"</span>, db: <span style="color: #008000;">"admin"</span> } ]
+  }
+)
+
+use admin
+db.auth(<span style="color: #008000;">"adminUser"</span>, <span style="color: #008000;">"dRcHKje943ZJ"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c4c1de" class="outline-4">
+<h4 id="org7c4c1de">Usage</h4>
+<div class="outline-text-4" id="text-org7c4c1de">
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#21019;&#24314;&#29992;&#25143;</span>
+db.createUser({
+    user: <span style="color: #008000;">'testUser'</span>,
+    pwd: <span style="color: #008000;">'test'</span>,
+    roles: [
+        {
+            role: <span style="color: #008000;">'read'</span>,
+            db: <span style="color: #008000;">'admin'</span>
+        },
+        {
+            role: <span style="color: #008000;">'readWrite'</span>,
+            db: <span style="color: #008000;">'testDB'</span>
+        }
+    ],
+})
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#26597;&#30475;&#29992;&#25143;&#21015;&#34920;</span>
+db.system.users.find()
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#26597;&#30475;&#29992;&#25143;&#20449;&#24687;</span>
+db.runCommand({usersInfo:<span style="color: #008000;">'usename'</span>})
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#21024;&#38500;&#29992;&#25143;</span>
+db.system.users.remove({user: <span style="color: #008000;">'username'</span>});
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#26356;&#26032;&#29992;&#25143;</span>
+db.runCommand(
+  {
+    updateUser: <span style="color: #008000;">'name'</span>,
+    pwd: <span style="color: #008000;">'pwd'</span>,
+    customData: {title: <span style="color: #008000;">'xxx'</span>}
+  }
+)
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#20462;&#25913;&#29992;&#25143;&#23494;&#30721;</span>
+db.changeUserPassword(<span style="color: #008000;">'user'</span>, <span style="color: #008000;">'pwd'</span>);
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#21019;&#24314;&#38598;&#21512;</span>
+db.createCollection(<span style="color: #008000;">'name'</span>, option)
+
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">[option]</span>
+{
+    capped: <span style="color: #D0372D;">false</span>,
+    autoIndexID: <span style="color: #D0372D;">true</span>,
+    size: <span style="color: #D0372D;">1024</span>, <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#23383;&#33410;</span>
+    max: <span style="color: #D0372D;">100</span>    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#26368;&#22823;&#25991;&#26723;&#25968;</span>
+}
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#21024;&#38500;&#38598;&#21512;</span>
+db.getCollection(<span style="color: #008000;">'dbname'</span>).drop()
+
+<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#25991;&#26723;&#25805;&#20316;</span>
+- find()
+- insert()
+- remove()
+- update()
+
+<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">query</span>
+<span style="color: #8D8D84; font-style: italic;">`$set` &#35774;&#32622;&#23383;&#27573;&#30340;&#20540;</span>
+<span style="color: #8D8D84; font-style: italic;">`$rename` &#37325;&#21629;&#21517;&#23383;&#27573;</span>
+<span style="color: #8D8D84; font-style: italic;">`$push` &#23558;&#26465;&#30446;&#25512;&#36865;&#21040;&#25968;&#32452;</span>
+<span style="color: #8D8D84; font-style: italic;">`$inc` &#36882;&#22686;&#35813;&#23383;&#27573;&#30340;&#20540;</span>
+
+<span style="color: #8D8D84; font-style: italic;">ObjecetId() &#36825;&#20010;&#20989;&#25968;&#23558;&#23383;&#31526;&#20018;&#36716;&#20026; objectId &#25968;&#25454;&#31867;&#22411;</span><span style="color: #8D8D84;"> */</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://juejin.cn/post/7163088518418268197">https://juejin.cn/post/7163088518418268197</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://my.oschina.net/u/5136019/blog/5577201">https://my.oschina.net/u/5136019/blog/5577201</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>

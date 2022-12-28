@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-11-21 Mon 22:08 -->
+<!-- 2022-12-28 Wed 21:39 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python</title>
@@ -155,6 +155,32 @@ browser.<span style="color: #006DAF; font-style: italic;">get</span>(<span style
 之所以称为数据透视表，是因为可以动态地改变它们的版面布置，以便按照不同方式分析数据，也可以重新安排行号、列标和页字段。每一次改变版面布置时，数据透视表会立即按照新的布置重新计算数据。另外，如果原始数据发生更改，则可以更新数据透视表。
 </p>
 </blockquote>
+</div>
+</div>
+
+<div id="outline-container-org8af9d31" class="outline-4">
+<h4 id="org8af9d31">定位数据</h4>
+<div class="outline-text-4" id="text-org8af9d31">
+<p>
+<code>loc[]</code>  通过索引名/标签定位单行、单列、多行、多列，前闭后闭
+</p>
+
+<p>
+<code>iloc[]</code> 通过索引位置定位单行、单列、多行、多列，前闭后开
+</p>
+
+<p>
+<code>at[], iat[]</code> 定位单个的值
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7929ca8" class="outline-4">
+<h4 id="org7929ca8">多级索引</h4>
+<div class="outline-text-4" id="text-org7929ca8">
+<p>
+<code>pd.MultiIndex.from_product([[list1], [list2]])</code>
+</p>
 </div>
 </div>
 </div>
@@ -328,7 +354,7 @@ Example:
 <pre class="src src-python-jit">print('Hello world')
 </pre>
 </div>
-<div class="klipsify div" id="org1866c6b">
+<div class="klipsify div" id="org6b1ee4f">
 <script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
 <script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
