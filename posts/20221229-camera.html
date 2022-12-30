@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-12-31 Sat 00:22 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Camera</title>
+<meta name="author" content="Honbey Zhang" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Camera</h1>
+</header>
+<div id="outline-container-orgc888192" class="outline-2">
+<h2 id="orgc888192">相机</h2>
+<div class="outline-text-2" id="text-orgc888192">
+<p>
+初级摄像主要用到的三个参数：光圈、快门时间、ISO。 可以这么理解：阀门比作光圈，水流时间比作快门时间，滤网比作 ISO（值越小滤网越密集）。ISO 越大，噪点变多；ISO 越小，噪点越少，照片越干净。
+</p>
+
+<p>
+用流体来理解的话也就是说光圈越大，单位时间内的进光量越大；快门时间越长，进入的光越多。
+</p>
+
+<p>
+曝光正常的照片所需的进光量是一定的，光圈越大，快门时间就要小，反之同理。
+</p>
+
+<p>
+ISO 一般设置为 100 ~ 200 能保证照片的画质。若要拍摄景深效果，设置大光圈，景深就越浅（比如说拍人像，景深就是人的距离），背景虚化就越明显，根据照片明暗设置快门时间；若抓拍运动物体，设置高速快门，根据照片明暗设置光圈大小；若要拍摄风景照片，得到前后的细节，需要设置小光圈。
+</p>
+</div>
+
+<div id="outline-container-orgd04d5a2" class="outline-3">
+<h3 id="orgd04d5a2">像素</h3>
+<div class="outline-text-3" id="text-orgd04d5a2">
+<p>
+pixel: picture x element
+</p>
+
+<p>
+组成图片的最小单位。因为数字世界本质是不连续的，图像是经过采样量化之后存储的，存在最小单位就是像素，我们实际看到的电子图片是一个个点（像素）组成的，但这个点不同于数学中的点，它是有大小的，一张图片放大到一定程度就能看到模糊的景象，类似马赛克打码了，一个个小方块清晰可见，本质上这一个小方块这就是数字世界里像素，至于为什么表现出不同颜色，一般来说是 RGB 色彩，一个像素由 3 个 8 bit 的数字表示，每个数字表示不同的颜色通道，电子设备能解码这种表示方法，从而展示出色彩。
+</p>
+
+<p>
+一个相机的像素就是说能得到一张容纳多少像素的图片，比如说最普遍的 1200 万像素，可以得到 4000 x 3000 的总有 1200 万个像素的图片，即这个图片的长是 4000 像素，宽是 3000 像素。
+</p>
+
+<p>
+这样说的话 4K 视频 3840 x 2160 只需要 830 万像素即可，普遍 1200 万的摄像头就可以在 4032 x 3024 这样一个范围内利用算法进行裁剪实现软件层面的防抖。这也解释了如果手机从拍照模式切换到摄像模式，摄像会感觉物体离得更近一些，可以理解为原来一张 4032 x 3024 的照片从中扣除 3840 x 2160 到一个一样大的显示屏上，自然会显得大些。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org83e7335" class="outline-3">
+<h3 id="org83e7335">快门速度</h3>
+<div class="outline-text-3" id="text-org83e7335">
+<p>
+相机快门从开始到关闭的时间。快门速度数值越小，那快门打开的时间就越少，光线进入感光元件的数量就越少，照片自然就会越暗，反之同理。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge24ee65" class="outline-3">
+<h3 id="orge24ee65">光圈</h3>
+<div class="outline-text-3" id="text-orge24ee65">
+<p>
+控制光进入相机传感器的一个圈。光圈越大，进入相机传感器的光就越多，得到的照片就越亮。光圈每调低一个档位，进光量会增加一倍。
+</p>
+
+<p>
+注意：光圈的数值是反过来的，F2 的光圈是大光圈，而 F10 的光圈却是小光圈。F = 焦距 / 口径 。光圈系数 F = 焦距 / 有效进光孔直径 。
+</p>
+
+<p>
+手机的 f/1.8 和 相机的 f/1.8 ，这个 f/1.8 就是一个换算后的等效值。比如说一寸卡片机的 F1.8 相当于全画幅同等效焦段镜头 F4.9 的使用体验。
+</p>
+
+<p>
+假定手机镜头孔直径为 5mm ，那么由 F(1.8) = focal distance / light inlet(5mm) 得到焦距为 9 mm 。显然手机焦距不太可能这么长，所以镜头孔径会更小。
+对于相机 50mm 的焦距，那么 F1.8 得到进光孔直径为 27.8 mm。
+</p>
+
+<p>
+手机大光圈虚化的效果很是是通过软件算法得到的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbfe4dc8" class="outline-3">
+<h3 id="orgbfe4dc8">焦距</h3>
+<div class="outline-text-3" id="text-orgbfe4dc8">
+<p>
+是光学系统中衡量光的聚集或发散的度量方式，指平行光入射时从透镜光心到光聚集之焦点的距离 [1]  。具有短焦距的光学系统比长焦距的光学系统有更佳聚集光的能力。简单的说焦距是焦点到面镜的中心点之间的距离。照相机中 焦距 f &lt; 像距 &lt; 2f 才能成像<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+
+<pre class="example">
+                 +-+
+                /   \
+  ----&gt;---------+---+--
+                |   |  \
+  ----&gt;-----------------\   /
+                |   |    \ /
+  ----&gt;-----------+-------+----
+                |   |    / \
+  ----&gt;-----------------/   \
+                |   |  /
+  ----&gt;----------------
+                \   /
+                 +-+
+
+                 |&lt;-  f  -&gt;|
+</pre>
+
+<p>
+相机的镜头是一组透镜，当平行于主光轴的光线穿过透镜时，光会聚到一点上，这个点叫做焦点，焦点到透镜中心（即光心）的距离，就称为焦距。焦距固定的镜头，即定焦镜头；焦距可以调节变化的镜头，就是变焦镜头。（当一束与凸透镜的主轴平行的光穿过凸透镜时，在凸透镜的另一侧会被凸透镜汇聚成一点，这一点叫做焦点，焦点到凸透镜光心的距离就叫这个凸透镜的焦距。一个凸透镜的两侧各有一个焦点。）<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+</p>
+
+<p>
+焦距越小，取景范围越广，视野越宽，由此能拍的物体也就越多，也就是广角之类的镜头。
+</p>
+
+<p>
+焦距越大，取景范围越窄，视野越小，由此能拍的物体也就越少，也就 1x, 2x, 10x, &#x2026; 之类的长焦镜头。
+</p>
+
+<p>
+个人制定的焦距划分，包含手机的等效焦距：
+</p>
+<ul class="org-ul">
+<li>f &lt; 24mm: 广角</li>
+<li>f &lt; 16mm: 超级广角</li>
+<li>f = 35mm: 人头镜头， nubia 专属</li>
+<li>f = 50mm/85mm: 人文定焦镜头</li>
+<li>24mm &lt; f &lt; 120mm: 常见变焦镜头</li>
+<li>f &gt; 200mm: 长焦镜头</li>
+</ul>
+
+<p>
+换算一下小米 13 的主镜头：
+</p>
+
+<p>
+参数：54MP / 50MP（total / effective）传感器丨1/1.49 inch丨23mm 等效焦距丨f/1.8 。
+\* 照片拍摄实际生效区域为 1 / 1.56 inch
+</p>
+
+<p>
+取 1/1.5 inch 用来计算，如果对比全画幅 2.67 inch ，对角线长度是其 4 倍。那说明实际焦距也就 6mm 左右，镜头孔径 3.3 mm 左右。好小啊。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbd4a12e" class="outline-3">
+<h3 id="orgbd4a12e">ISO</h3>
+<div class="outline-text-3" id="text-orgbd4a12e">
+<p>
+相机感光元件对光线的敏感程度。感光度越高，对光线就越敏感，得到的照片也就会越亮，同时噪点也多，反之同理。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9296e92" class="outline-3">
+<h3 id="org9296e92">对焦</h3>
+<div class="outline-text-3" id="text-org9296e92">
+<p>
+对焦点：顾名思义。这个越多越好，一般手机不提供这个参数，相机才有。相机还会宣传自动对照人脸、眼睛这些。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4704f39" class="outline-3">
+<h3 id="org4704f39">防抖</h3>
+<div class="outline-text-3" id="text-org4704f39">
+<p>
+两个层面，软件和硬件。
+</p>
+
+<p>
+因为光线通过镜头进入传感器，传感器采集后实现成像，手持设备的很难没有抖动，就会导致传感器在同一位置接收到不同的光线，叠加在一起的话最终得到的图像就会模糊。如果快门时间长的话，这个效应就会被放大。
+</p>
+
+<p>
+软件的话就是得到最终图片时对从传感器得到原始图片进行裁剪，保证一定范围的画面是没有抖动的，这类型取决于算法和像素比例（最终图片/原始图片）。这大体是 EIS 电子防抖的原理，有些还会使用 AI 算法进行预测，实现更好的防抖效果。
+</p>
+
+<p>
+硬件的话像传感器“浮动”之类的技术，还有就是云台这种专业的硬件防抖设备。
+</p>
+
+<p>
+多轴防抖，越多轴越好，但技术要求更高，制造工艺更贵。
+</p>
+</div>
+
+<div id="outline-container-orgee47275" class="outline-4">
+<h4 id="orgee47275">光学防抖 OIS</h4>
+<div class="outline-text-4" id="text-orgee47275">
+<p>
+Optical Image Stabilizer，镜头设计成可移动，能够通过马达或者记忆金属结构推动镜头模组移动，补偿掉抖动带来的影响。轴：手机前倾（Pitch）、侧倾（YAW）、X 轴、Y 轴。实现方式有滚珠式、悬丝式、SMA 记忆合金，本质是不同的物理移动方式。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org539996f" class="outline-4">
+<h4 id="org539996f">传感器位移防抖</h4>
+<div class="outline-text-4" id="text-org539996f">
+<p>
+Apple 某些机型使用的方法，相比于移动大的镜头，移动传感器更容易、更灵活、更高效。每秒移动几千次都可以。
+</p>
+
+<p>
+悬浮防抖：OIS 光学防抖 加 传感器位移防抖。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3c0a91" class="outline-4">
+<h4 id="orgd3c0a91">云台防抖</h4>
+</div>
+</div>
+
+<div id="outline-container-orgb0b3c39" class="outline-3">
+<h3 id="orgb0b3c39">连拍速度</h3>
+<div class="outline-text-3" id="text-orgb0b3c39">
+<p>
+借用高速摄像机来理解，连拍速度越大，1s 内能得到更多照片，对于视频来说，帧率越高，但是人眼一般只能感知 24 FPS 的视频，所以高帧率视频可以降低帧率以此得到慢动作视频。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec32705" class="outline-3">
+<h3 id="orgec32705">传感器 - CMOS / CCD</h3>
+<div class="outline-text-3" id="text-orgec32705">
+<p>
+这个尺寸大肯定是有好处的，主流手机的传感器尺寸是 1/2.3 inch 或 1/1.7 inch ，也有主打拍照的手机达到了 1 inch ，大疆的消费无人机还有 4/3 inch 的。
+</p>
+
+<p>
+各类尺寸的对比（对角线长度，此处历史原因 1 inch = 16/18 mm）
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">size(inch)</th>
+<th scope="col" class="org-right">width(mm)</th>
+<th scope="col" class="org-right">height(mm)</th>
+<th scope="col" class="org-right">w x h(mm^{2})</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">1/3</td>
+<td class="org-right">4.88</td>
+<td class="org-right">3.66</td>
+<td class="org-right">17.8608</td>
+</tr>
+
+<tr>
+<td class="org-left">1/2.3</td>
+<td class="org-right">6.17</td>
+<td class="org-right">4.55</td>
+<td class="org-right">28.0735</td>
+</tr>
+
+<tr>
+<td class="org-left">1/1.7</td>
+<td class="org-right">7.49</td>
+<td class="org-right">5.52</td>
+<td class="org-right">41.3448</td>
+</tr>
+
+<tr>
+<td class="org-left">1</td>
+<td class="org-right">13.2</td>
+<td class="org-right">8.8</td>
+<td class="org-right">116.16</td>
+</tr>
+
+<tr>
+<td class="org-left">4/3</td>
+<td class="org-right">17.3</td>
+<td class="org-right">13.0</td>
+<td class="org-right">224.9</td>
+</tr>
+
+<tr>
+<td class="org-left">APS-C</td>
+<td class="org-right">23.6</td>
+<td class="org-right">15.6</td>
+<td class="org-right">368.16</td>
+</tr>
+
+<tr>
+<td class="org-left">APS-H</td>
+<td class="org-right">27.9</td>
+<td class="org-right">18.6</td>
+<td class="org-right">518.94</td>
+</tr>
+
+<tr>
+<td class="org-left">VS</td>
+<td class="org-right">36</td>
+<td class="org-right">24</td>
+<td class="org-right">864</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>
+CIS尺寸 “1 英寸”、“1/2 英寸”等尺寸名称也来源真空摄像管，由于技术的关系，当时的真空摄像管有着很厚的玻璃外壳，1 英寸是指整个管体的外径，而成像区域只有三分之二左右，大约为 16mm 。
+</p>
+</blockquote>
+
+<p>
+如果以 1/3 inch 为基准的话， 1/1.7 inch 是其的 2.3 倍，1 inch 是其的 6.4 倍，VS 是其的 48 倍。
+</p>
+
+<p>
+传统 CMOS，采用的 RGB（RGBG）结构，这个结构由拜耳（Bayer）发明，也叫做拜耳滤镜。这种结构会在每个像素上都加一个不同颜色的滤镜，根据人眼对绿色敏感的原理，绿色的像素是最多的，以此得到颜色，再根据软件算法去猜色，最后再得到图片。
+</p>
+</div>
+
+<div id="outline-container-org5ea873a" class="outline-4">
+<h4 id="org5ea873a">四像素合一传感器<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-org5ea873a">
+<p>
+HUAWEI P8 采用的 IMX278 ，采用的是 RGBW 传感器，去掉一个绿色的滤镜，该像素传感器上全部光线都可以通过，理论可以增加传感器的感光度。而四像素合一技术，其实也是类似地使用 RGB 拜耳的排列，但是在具体像素上却做了调整。它使用四个同色像素排列在一起，形成一个大的像素。
+</p>
+
+<p>
+对于某些使用 1/3.06 英寸的传感器，16MP，1.0um 的手机镜头。以目前 CMOS 的工艺来说，1.0um 在光线充足情况下还可以（勉强）使用，但是在暗光情况下就会受限于小尺寸而感光不足。因此在暗光时，通过四像素合一技术，每个同色的像素变成 2.0um 。
+但是当传感器以 2.0um 采样时，得到了一最终生成的照片却只有原来的 1/4 像素，即每个像素 2.0um，总像素 4MP 的照片。再通过后期算法，重新分隔大像素，使得2.0um 大像素重新恢复到 1.0um ，这样子整个画面以 1.0um 计算的话又恢复了 16MP ，可是整个画面却有 2.0um 大像素高光的效果。
+</p>
+
+<blockquote>
+<p>
+个人理解，这个 2.0um 代表在 CMOS 上的单个像素尺寸，也就说一个像素它的感光面积 是 2um x 2um = 4um^{2}，如果不是四合一的话，每个像素就是 1.0um，感光面积是 1um x 1um = 1um^{2}。
+</p>
+</blockquote>
+
+<p>
+大致工作流程：
+</p>
+<ol class="org-ol">
+<li>传感器采用四个同色像素排列顺序</li>
+<li>暗光时，四个同色像素同时采样，得到一张四倍感光的低像素照片</li>
+<li>通过算法重新排列像素，恢复原本小尺寸的单个像素，最终输出一张高像素的照片</li>
+</ol>
+
+<p>
+这个技术的优势：
+</p>
+<ol class="org-ol">
+<li>最明显的优势就是，在小尺寸高像素的传感器里面实现了高感光</li>
+<li>四像素排列的优势，可以通过控制不同曝光时间，最后合成一张更好的 HDR 照片</li>
+</ol>
+
+<p>
+劣势：
+</p>
+<ol class="org-ol">
+<li>依赖算法，(1) 非拜耳结构不如传统拜耳排列的成熟 (2) “恢复像素”过程</li>
+<li>单个像素感光不足</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://baike.baidu.com/item/%E7%84%A6%E8%B7%9D/1880759">https://baike.baidu.com/item/%E7%84%A6%E8%B7%9D/1880759</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+</div>
+</body>
+</html>

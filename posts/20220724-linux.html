@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-28 Wed 21:39 -->
+<!-- 2022-12-31 Sat 00:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
@@ -165,6 +165,38 @@ Rust-alternatives <code>[3/7]</code>:
 <li class="off"><code>[&#xa0;]</code> (count code) -&gt; tokei</li>
 <li class="off"><code>[&#xa0;]</code> du -&gt; dust</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-orgf60f30d" class="outline-3">
+<h3 id="orgf60f30d">Set timezone</h3>
+<div class="outline-text-3" id="text-orgf60f30d">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">timedatectl</span> list-timezones <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">grep</span> Shanghai
+<span style="color: #006DAF;">sudo</span> timedatectl set-timezone Asia/Shanghai
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdc50af" class="outline-3">
+<h3 id="orgbdc50af">git completely remove files</h3>
+<div class="outline-text-3" id="text-orgbdc50af">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">git</span> filter-branch <span style="color: #D0372D;">--force</span> <span style="color: #D0372D;">--index-filter</span> <span style="color: #008000;">'</span><span style="color: #008000;">git</span><span style="color: #008000;"> </span><span style="color: #008000;">rm</span><span style="color: #008000;"> -r --cached --ignore-unmatch &lt;files&gt;'</span> <span style="color: #D0372D;">--prune-empty</span> <span style="color: #D0372D;">--tag-name-filter</span> <span style="color: #6434A3;">cat</span> <span style="color: #D0372D;">--</span> <span style="color: #D0372D;">--all</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006DAF;">git</span> <span style="color: #6434A3;">rm</span> <span style="color: #D0372D;">--cached</span> <span style="color: #D0372D;">-r</span> .
+<span style="color: #006DAF;">git</span> gc <span style="color: #D0372D;">--prune</span>
+
+<span style="color: #8D8D84; font-style: italic;"># repack</span>
+<span style="color: #006DAF;">git</span> for-each-ref <span style="color: #808080;">--format=</span><span style="color: #808080;">'delete %(refname)'</span> refs/original <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">git</span> update-ref <span style="color: #D0372D;">--stdin</span>
+<span style="color: #006DAF;">git</span> reflog expire <span style="color: #808080;">--expire=now</span> <span style="color: #D0372D;">--all</span>
+<span style="color: #006DAF;">git</span> gc <span style="color: #808080;">--prune=now</span>
+</pre>
+</div>
 </div>
 </div>
 </div>

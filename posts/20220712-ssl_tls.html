@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-11-21 Mon 22:08 -->
+<!-- 2022-12-31 Sat 00:22 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSL/TLS</title>
@@ -38,6 +38,10 @@
 </header><div id="outline-container-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607" class="outline-2">
 <h2 id="ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS Protocol</h2>
 <div class="outline-text-2" id="text-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">
+<p>
+Secure Sockert Layer/Transport Layer Security
+</p>
+
 <p>
 两层协议
 </p>
@@ -437,6 +441,34 @@ ALPN allows the application layer to negotiate which protocol to use over the se
 </div>
 </div>
 
+<div id="outline-container-org98eab1d" class="outline-2">
+<h2 id="org98eab1d">Digital Certificate</h2>
+<div class="outline-text-2" id="text-org98eab1d">
+<p>
+key 通常指私钥。
+</p>
+
+<p>
+CSR, Certificate Signing Request ，即证书签名申请，这不是证书，这是要求 CA 给证书签名的一种正式申请，该申请包含申请证书的实体的公钥及该实体的某些信息。该数据将成为证书的一部分。CSR 始终使用它携带的公钥所对应的私钥进行签名。
+</p>
+
+<p>
+CRT, certificate ，即证书
+</p>
+
+<p>
+X.509，一种证书格式。对 X.509 证书来说，认证者总是 CA 或由 CA 指定的机构，一份 X.509 证书是一些标准字段的集合，这些字段包含有关用户或设备及其相应公钥的信息。
+</p>
+
+<p>
+X.509 的证书文件，一般以 .crt 结尾。
+</p>
+
+<p>
+PEM, Privacy Enhanced Mail，以 &ldquo;-----BEGIN...&rdquo; 开头， &ldquo;-----END...&rdquo; 结尾，内容是 BASE64 编码。
+</p>
+</div>
+</div>
 <div id="outline-container-org5befefd" class="outline-2">
 <h2 id="org5befefd">Reference</h2>
 <div class="outline-text-2" id="text-org5befefd">

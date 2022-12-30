@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-11-21 Mon 22:08 -->
+<!-- 2022-12-31 Sat 00:22 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Socket</title>
@@ -27,7 +27,7 @@
 <h2 id="org45822eb">Socket 编程</h2>
 <div class="outline-text-2" id="text-org45822eb">
 
-<figure id="org12ea379">
+<figure id="org81ae3cd">
 <img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
@@ -92,6 +92,13 @@ Linux 内核会维护两个队列：
 <div class="outline-text-3" id="text-ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f">
 <p>
 功能类似于在发送数据管道出口处插入一个“塞子”，使得发送数据全部被阻塞，直到取消 <code>TCP_CORK</code> 选项（即拔去塞子）或被阻塞数据长度已超过 <code>MSS</code> 才将其发送出去。
+</p>
+
+<p>
+用户层可通过 <code>setsockopt()</code> 系统调用设置 TCP 套接字的 <code>TCP_CORK</code> 选项。开启时，内核将阻塞不完整的报文，当关闭此选项时，发送阻塞的报文。
+</p>
+
+<p>
 <code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
 </p>
 <div class="org-src-container">

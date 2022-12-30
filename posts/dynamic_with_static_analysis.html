@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-09-30 Fri 20:57 -->
+<!-- 2022-12-31 Sat 00:22 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>动静结合分析</title>
@@ -68,13 +68,13 @@
 先找到 fun 函数入口点 0x00401080 ，之后分析 fun 函数（总流程的图太模糊了，不知道当初怎么截的图）
 </p>
 
-<figure id="org2659e85">
+<figure id="org7c6aeb8">
 <img src="../images/dynamic_with_static_analysis_1.png" alt="dynamic_with_static_analysis_1.png">
 
 </figure>
 
 
-<figure id="org570f9b0">
+<figure id="org773b925">
 <img src="../images/dynamic_with_static_analysis_2.png" alt="dynamic_with_static_analysis_2.png">
 
 </figure>
@@ -88,13 +88,13 @@
 仔细观察 fun 函数的流程，可以看到 fun 的 fopen() 分支，如果没有文件就直接 exit(0) ，程序结束。但在下面一个 if  分支，两种情况后又会继续向下执行，符合代码流程。静态分析还可以看到相应的汇编代码和虚拟地址，为动态分析提供流程指导
 </p>
 
-<figure id="org47be4b9">
+<figure id="orgc96f479">
 <img src="../images/dynamic_with_static_analysis_3.png" alt="dynamic_with_static_analysis_3.png">
 
 </figure>
 
 
-<figure id="orgd7ed9ec">
+<figure id="org4b71652">
 <img src="../images/dynamic_with_static_analysis_4.png" alt="dynamic_with_static_analysis_4.png">
 
 </figure>
@@ -134,13 +134,13 @@ fscanf 函数会在 passwd[6] 往低地址的方向选择内存，即 EBP-0x14(2
 str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。所以我们对 shellcode 构建，前 20 字节可以随便写，21~24 字节要是我们寻找到的 JMP ESP 指令
 </p>
 
-<figure id="org6c5c347">
+<figure id="org4279011">
 <img src="../images/dynamic_with_static_analysis_5.png" alt="dynamic_with_static_analysis_5.png">
 
 </figure>
 
 
-<figure id="org1a2ec90">
+<figure id="org2664cbd">
 <img src="../images/dynamic_with_static_analysis_6.png" alt="dynamic_with_static_analysis_6.png">
 
 </figure>
@@ -154,17 +154,17 @@ str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。
 进行缓冲区溢出攻击后，fun 函数栈帧及原 windows 内核函数的栈帧已被 shellcode 覆盖，fun 函数返回地址处的指令是 JMP ESP，而 fun 返回后 ESP 就是 0x0012ff34，是我们填充的 0x90 指令，此后程序按照我们的 shellcode 执行，直到执行完 shellcode 中 exitThread 函数后程序运行结束
 </p>
 
-<figure id="org0894657">
+<figure id="orgd5a2216">
 <img src="../images/dynamic_with_static_analysis_7.png" alt="dynamic_with_static_analysis_7.png">
 
 </figure>
 
-<figure id="org85ad15f">
+<figure id="org412c0b7">
 <img src="../images/dynamic_with_static_analysis_8.png" alt="dynamic_with_static_analysis_8.png">
 
 </figure>
 
-<figure id="orgb5c288c">
+<figure id="orga1db81e">
 <img src="../images/dynamic_with_static_analysis_9.png" alt="dynamic_with_static_analysis_9.png">
 
 </figure>
@@ -173,7 +173,7 @@ str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。
 程序运行结果
 </p>
 
-<figure id="org1f9faff">
+<figure id="org4beac7e">
 <img src="../images/dynamic_with_static_analysis_10.png" alt="dynamic_with_static_analysis_10.png">
 
 </figure>
