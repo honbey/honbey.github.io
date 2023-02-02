@@ -1,20 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HTTP</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">HTTP</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a></li>
+<li><a href="#ID-30e3644a-7961-4783-8ea7-44b4f97efa0e">HTTP 基本概念</a>
+<ul>
+<li><a href="#org06de944">状态码</a></li>
+<li><a href="#org3920685">常见字段</a></li>
+<li><a href="#org55f4766">请求方法</a></li>
+</ul>
+</li>
+<li><a href="#ID-9255342b-dd3b-4b36-aaaa-eb165c19e08a">HTTP/1.1</a>
+<ul>
+<li><a href="#ID-5b66b698-bebb-4418-968f-b1bd8fead016">keepalive</a></li>
+<li><a href="#ID-fb1bee78-8741-44fd-b8a5-139902b77df2">pipe</a></li>
+</ul>
+</li>
+<li><a href="#ID-7ace99c0-a466-4b3c-b4ac-a9d37180248d">HTTP/2</a>
+<ul>
+<li><a href="#ID-0e99c6c0-45f8-45ea-b13e-59c94fd21c11">HPack 算法</a></li>
+<li><a href="#orgb0a9382">二进制帧</a></li>
+<li><a href="#org18b90df">并发传输</a></li>
+<li><a href="#orgbbc0767">服务器主动推送</a></li>
+</ul>
+</li>
+<li><a href="#ID-6df458bf-b9c2-4002-9e13-32726d35d685">HTTP/3</a>
+<ul>
+<li><a href="#org436724c">QUIC（Quick UDP Internet Connection）协议</a></li>
+<li><a href="#org277798e">QPack</a></li>
+</ul>
+</li>
+<li><a href="#ID-78bcf7bf-7587-466d-b1ac-8d8f5d593295">HTTPS = HTTP + SSL/TLS</a></li>
+<li><a href="#ID-daefb16c-69d8-4732-b58f-e59fe0601ae6">Web</a>
+<ul>
+<li><a href="#orga744fa4">Web 访问过程</a></li>
+<li><a href="#org591ed92">Nginx</a></li>
+<li><a href="#orgbce3702">Crawler / Netspider</a></li>
+<li><a href="#org261e483">URI/URL</a></li>
+<li><a href="#orge346d84">Content-Type</a></li>
+<li><a href="#orgd683409">Cache-Control</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078" class="outline-2">
 <h2 id="ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
 <div class="outline-text-2" id="text-ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">
@@ -737,9 +805,9 @@ URN = Universal Resource Name 统一资源名称，通过特定命名空间中�
 </p>
 </div>
 </div>
-<div id="outline-container-org6b5483d" class="outline-3">
-<h3 id="org6b5483d">Header: Content-Type</h3>
-<div class="outline-text-3" id="text-org6b5483d">
+<div id="outline-container-orge346d84" class="outline-3">
+<h3 id="orge346d84">Content-Type</h3>
+<div class="outline-text-3" id="text-orge346d84">
 <p>
 常见 content-type ：
 </p>
@@ -755,9 +823,9 @@ key1=value1&amp;key2=value2
 </ul>
 </div>
 </div>
-<div id="outline-container-org886bae5" class="outline-3">
-<h3 id="org886bae5">Header: Cache-Control</h3>
-<div class="outline-text-3" id="text-org886bae5">
+<div id="outline-container-orgd683409" class="outline-3">
+<h3 id="orgd683409">Cache-Control</h3>
+<div class="outline-text-3" id="text-orgd683409">
 <ul class="org-ul">
 <li>max-age 是指定强缓存的时间</li>
 <li>no-cache 是会用本地的缓存但每次都会协商</li>
@@ -767,16 +835,6 @@ key1=value1&amp;key2=value2
 <p>
 一般是入口 html 文件设置 no-cache ，资源文件如 js, css 都带有 hash 值，更新 html 后请求的资源文件名不一样，也就相当于刷新了缓存。
 </p>
-</div>
-</div>
-
-<div id="outline-container-org3459431" class="outline-3">
-<h3 id="org3459431">Benchmark</h3>
-<div class="outline-text-3" id="text-org3459431">
-<ul class="org-ul">
-<li>wrk</li>
-<li>Apache Benchmark (ab)</li>
-</ul>
 </div>
 </div>
 </div>
@@ -796,7 +854,13 @@ key1=value1&amp;key2=value2
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

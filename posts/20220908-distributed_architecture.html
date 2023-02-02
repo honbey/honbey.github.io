@@ -1,20 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Distributed System</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Distributed System</h1>
-</header><div id="outline-container-orgd4bfab7" class="outline-2">
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd4bfab7">NPC</a></li>
+<li><a href="#orgac0178f">分布式系统的一些概念</a>
+<ul>
+<li><a href="#ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">CAP 定理</a></li>
+<li><a href="#ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">BASE 理论</a></li>
+<li><a href="#ID-c279b82f-1eca-437f-a951-48a9be96cec4">PACELEC 定理</a></li>
+<li><a href="#org6df9fd6">Paxos 共识算法</a></li>
+<li><a href="#ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</a></li>
+<li><a href="#ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">ZAB 协议</a></li>
+<li><a href="#ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">2PC 协议</a></li>
+<li><a href="#ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">3PC 协议</a></li>
+<li><a href="#ID-6eff229c-2a85-4619-b874-898ee209ff1e">Gossip 协议</a></li>
+<li><a href="#ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">Quorum NWR 算法</a></li>
+<li><a href="#ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">PBFT 拜占庭算法</a></li>
+<li><a href="#ID-290fd01a-474c-4934-90a6-a5cf33617838">PoW 算法</a></li>
+<li><a href="#ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">主备</a></li>
+<li><a href="#ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">主从</a>
+<ul>
+<li><a href="#orgf3cd345">多主多从</a></li>
+</ul>
+</li>
+<li><a href="#ID-4be9fb56-f87e-456f-b79d-175c03445d53">普通集群</a></li>
+<li><a href="#ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">数据分片</a></li>
+<li><a href="#orgdaf158b">一致性 Hash 算法</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-orgd4bfab7" class="outline-2">
 <h2 id="orgd4bfab7">NPC</h2>
 <div class="outline-text-2" id="text-orgd4bfab7">
 <ul class="org-ul">
@@ -491,7 +546,13 @@ ES 的索引分片。
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

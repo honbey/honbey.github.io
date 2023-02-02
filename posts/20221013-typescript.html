@@ -1,20 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TypeScript</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">TypeScript</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7e95877">TypeScript 的优势</a></li>
+<li><a href="#orge96b8e3">TIPS</a>
+<ul>
+<li><a href="#org1442681">await</a></li>
+<li><a href="#org01ac376">never</a></li>
+<li><a href="#orgf3714fd">type</a></li>
+<li><a href="#orge7ea34f">Array</a></li>
+<li><a href="#org61bb93d">infer</a>
+<ul>
+<li><a href="#org4097680">interview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5a30c2e">&amp; JS &#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></a>
+<ul>
+<li><a href="#orgcd1bd9f">尾调用优化</a></li>
+<li><a href="#org6db2471">尾递归</a></li>
+<li><a href="#org3388645">&rsquo;use strict&rsquo;</a></li>
+<li><a href="#orgff7754c">tips</a>
+<ul>
+<li><a href="#orgd2847c1">对象判空</a></li>
+<li><a href="#org83764c7">[] == ![]</a></li>
+<li><a href="#orgb16000a">instanceof</a></li>
+<li><a href="#org3bbadbb">0.1 + 0.2</a></li>
+<li><a href="#org7c52e29">前端判断可视</a></li>
+</ul>
+</li>
+<li><a href="#org83fbbae">节流和防抖</a></li>
+<li><a href="#org559f6bc">数字精度</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-org7e95877" class="outline-2">
 <h2 id="org7e95877">TypeScript 的优势</h2>
 <div class="outline-text-2" id="text-org7e95877">
@@ -76,19 +137,19 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 <h3 id="org01ac376">never</h3>
 <div class="outline-text-3" id="text-org01ac376">
 <div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #0000FF;">function</span> <span style="color: #006699;">exceptionHandle</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">msg</span>: <span style="color: #006FE0;">string</span><span style="color: #707183; background-color: #FFFFFF;">)</span>: <span style="color: #006FE0;">never</span><span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">throw</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>msg<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-typescript">function exceptionHandle(msg: string): never{
+    throw new Error(msg)
+}
 
-<span style="color: #8D8D84; font-style: italic;">// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026; never</span>
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">errorHandle</span><span style="color: #707183; background-color: #FFFFFF;">(){</span>
-    <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">'This is error'</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026; never
+function errorHandle(){
+    return Error('This is error')
+}
 
-<span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238; never &#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;</span>
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">stopLoop</span><span style="color: #707183; background-color: #FFFFFF;">()</span>: <span style="color: #006FE0;">never</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">true</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+// &#36820;&#22238; never &#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;
+function stopLoop(): never {
+    while (true) {}
+}
 </pre>
 </div>
 </div>
@@ -134,17 +195,17 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 <h3 id="org61bb93d">infer</h3>
 <div class="outline-text-3" id="text-org61bb93d">
 <div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #0000FF;">type</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">T</span> <span style="color: #0000FF;">extends</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">arg</span>: infer <span style="color: #6434A3;">P</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">any</span> ? <span style="color: #6434A3;">P</span> : <span style="color: #6434A3;">T</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-typescript">type ParamType&lt;T&gt; = T extends (arg: infer P) =&gt; any ? P : T;
 
-<span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">User</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #BA36A5;">name</span>: <span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">age</span>: <span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+interface User {
+    name: string;
+    age: number;
+}
 
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Func</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">user</span>: <span style="color: #6434A3;">User</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">void</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+type Func = (user: User) =&gt; void;
 
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Param</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// Param = User</span>
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">AA</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// string</span>
+type Param = ParamType; // Param = User
+type AA = ParamType; // string
 </pre>
 </div>
 <p>
@@ -172,62 +233,62 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-  <span style="color: #BA36A5;">payload</span>?: <span style="color: #6434A3;">T</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-  <span style="color: #BA36A5;">type</span>: <span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-typescript">interface Action&lt;T&gt; {
+  payload?: T;
+  type: string;
+}
 
-<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">EffectModule</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-  count <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-  message <span style="color: #0000FF;">=</span> <span style="color: #008000;">'hello!'</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+class EffectModule {
+  count = 1;
+  message = 'hello!';
 
-  <span style="color: #006699;">delay</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> input<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">then</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span><span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #707183; background-color: #FFFFFF;">{</span>
-      <span style="color: #BA36A5;">payload</span>: <span style="color: #008000;">`hello </span><span style="color: #0000FF;">${</span><span style="color: #333333; background-color: #FFFFFF;">i</span><span style="color: #0000FF; background-color: #FFFFFF;">}</span><span style="color: #008000;">!`</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-      <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'delay'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-    <span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+  delay(input: Promise&lt;number&gt;) {
+    return input.then((i) =&gt; ({
+      payload: `hello ${i}!`,
+      type: 'delay',
+    }));
+  }
 
-  <span style="color: #006699;">setMessage</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">action</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">Date</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-      <span style="color: #BA36A5;">payload</span>: action<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">payload</span><span style="color: #0000FF;">!</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">getMilliseconds</span><span style="color: #709870; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-      <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'set-message'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-    <span style="color: #909183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+  setMessage(action: Action&lt;Date&gt;) {
+    return {
+      payload: action.payload!.getMilliseconds(),
+      type: 'set-message',
+    };
+  }
+}
 
-<span style="color: #8D8D84; font-style: italic;">// &#20462;&#25913; Connect &#30340;&#31867;&#22411;&#65292;&#35753; connected &#30340;&#31867;&#22411;&#21464;&#25104;&#39044;&#26399;&#30340;&#31867;&#22411;</span>
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">FuncName</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-  <span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">P</span> <span style="color: #0000FF;">in</span> <span style="color: #0000FF;">keyof</span> <span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span>: <span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">P</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Function</span> ? <span style="color: #6434A3;">P</span> : <span style="color: #006FE0;">never</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}[</span><span style="color: #0000FF;">keyof</span> <span style="color: #6434A3;">T</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+// &#20462;&#25913; Connect &#30340;&#31867;&#22411;&#65292;&#35753; connected &#30340;&#31867;&#22411;&#21464;&#25104;&#39044;&#26399;&#30340;&#31867;&#22411;
+type FuncName&lt;T&gt; = {
+  [P in keyof T]: T[P] extends Function ? P : never;
+}[keyof T];
 
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Connect</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">module</span>: <span style="color: #6434A3;">EffectModule</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-  <span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span> <span style="color: #0000FF;">in</span> <span style="color: #6434A3;">FuncName</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">EffectModule</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span>: <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>
-    <span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">R</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-  <span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;&gt;</span>
-    ? <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">R</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-    : <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">R</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-    ? <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">R</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-    : <span style="color: #006FE0;">never</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+type Connect = (module: EffectModule) =&gt; {
+  [T in FuncName&lt;EffectModule&gt;]: EffectModule[T] extends (
+    a: Promise&lt;infer R&gt;
+  ) =&gt; Promise&lt;Action&lt;infer S&gt;&gt;
+    ? (a: R) =&gt; Action&lt;S&gt;
+    : EffectModule[T] extends (a: Action&lt;infer R&gt;) =&gt; Action&lt;infer S&gt;
+    ? (a: R) =&gt; Action&lt;S&gt;
+    : never;
+};
 
-<span style="color: #0000FF;">const</span> <span style="color: #006699;">connect</span>: <span style="color: #6434A3;">Connect</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">m</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-  <span style="color: #006699;">delay</span>: <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #006FE0;">number</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">{</span>
-    <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'delay'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-    <span style="color: #BA36A5;">payload</span>: <span style="color: #008000;">`hello 2`</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-  <span style="color: #709870; background-color: #FFFFFF;">}</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-  <span style="color: #006699;">setMessage</span>: <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #6434A3;">Date</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">{</span>
-    <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'set-message'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-    <span style="color: #BA36A5;">payload</span>: input<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">getMilliseconds</span><span style="color: #707183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-  <span style="color: #709870; background-color: #FFFFFF;">}</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-<span style="color: #7388D6; background-color: #FFFFFF;">}</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+const connect: Connect = (m) =&gt; ({
+  delay: (input: number) =&gt; ({
+    type: 'delay',
+    payload: `hello 2`,
+  }),
+  setMessage: (input: Date) =&gt; ({
+    type: 'set-message',
+    payload: input.getMilliseconds(),
+  }),
+});
 
-<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Connected</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-  <span style="color: #006699;">delay</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #006FE0;">number</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-  <span style="color: #006699;">setMessage</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">action</span>: <span style="color: #6434A3;">Date</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+type Connected = {
+  delay(input: number): Action&lt;string&gt;;
+  setMessage(action: Date): Action&lt;number&gt;;
+};
 
-<span style="color: #0000FF;">export</span> <span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">connected</span>: <span style="color: #6434A3;">Connected</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">connect</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">new</span> <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+export const connected: Connected = connect(new EffectModule());
 </pre>
 </div>
 </div>
@@ -453,7 +514,13 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

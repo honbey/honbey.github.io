@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">内存与寄存器</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8af0531">函数栈帧</a></li>
+<li><a href="#orgf639f90">常用寄存器</a></li>
+<li><a href="#orgcfb31e7">程序执行过程中内存和寄存器的变化</a>
+<ul>
+<li><a href="#org81fca4f">源代码</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-org8af0531" class="outline-2">
 <h2 id="org8af0531">函数栈帧</h2>
 <div class="outline-text-2" id="text-org8af0531">
 
-<figure id="org9ff7edd">
+<figure id="org36230ff">
 <img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
@@ -82,7 +118,7 @@
 给 a 赋值后
 </p>
 
-<figure id="org59c72d5">
+<figure id="org40a817d">
 <img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -92,7 +128,7 @@
 </p>
 
 
-<figure id="orgf70f44e">
+<figure id="org04f13db">
 <img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -101,7 +137,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org71bb053">
+<figure id="orgadb6b6f">
 <img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -110,7 +146,7 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="org3c45f54">
+<figure id="org42cec4a">
 <img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
@@ -120,7 +156,7 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="org72f8012">
+<figure id="org35ef92a">
 <img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
@@ -134,19 +170,19 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+<pre class="src src-c">#include &lt;stdio.h&gt;
 
-<span style="color: #006FE0;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_m</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_n</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i_local</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">i_local</span> <span style="color: #0000FF;">=</span> _m <span style="color: #0000FF;">+</span> _n<span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+void fun(int _m, int _n) {
+    int i_local;
+    i_local = _m + _n;
+}
 
-<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">a</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x1111</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">b</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x2222</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">fun</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>a<span style="color: #333333; background-color: #FFFFFF;">,</span> b<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+int main(int argc, char const *argv[]) {
+    int a = 0x1111;
+    int b = 0x2222;
+    fun(a, b);
+    return 0;
+}
 </pre>
 </div>
 </div>
@@ -154,7 +190,13 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

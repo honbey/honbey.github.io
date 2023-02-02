@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>图</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -35,7 +57,29 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">图</h1>
-</header><p>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb7a2866">图的表示法</a>
+<ul>
+<li><a href="#org8092a4f">邻接矩阵表示法</a></li>
+<li><a href="#org14f85e6">邻接表表示法</a></li>
+<li><a href="#org4ed52ec">邻接矩阵与邻接表相互转换</a></li>
+<li><a href="#orgcc084bc">其他表示法</a></li>
+</ul>
+</li>
+<li><a href="#orgd5e4b94">图的遍历方法</a>
+<ul>
+<li><a href="#ID-b57c3ec5-bb6e-4d6f-915a-47083b7e6ba4">深度优先遍历</a></li>
+<li><a href="#ID-cf710117-1489-43c3-b428-51bce5e2a25c">广度优先遍历</a></li>
+<li><a href="#ID-7827e4bf-f416-4549-b6b1-fdf83440f006">拓扑排序</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
 图片来源于图书馆借的《算法（第 4 版）》一书，为了加深印象，对照书的图用 visio 画了一遍。
 </p>
 
@@ -54,7 +98,7 @@
 对于一个有向图，顶点 i 所对应的 <b>行中的数字之和等于顶点 i 的出度</b> ，对应的 <b>列中的数字之和等于顶点 i 的入度</b> 。
 </p>
 
-<figure id="org7a40a70">
+<figure id="org4687fe0">
 <img src="../images/data_structure_graph_adjoin_matrix_1.png" alt="data_structure_graph_adjoin_matrix_1.png">
 
 </figure>
@@ -68,7 +112,7 @@
 对于有 n 个结点，e 条边的无向图，采用邻接表存储表示需要存储 <b>n 个头结点和 2e 个表结点</b> ，每个结点有两个域。同时，对于有 n 个结点，e 条边的无向图，可以在 \(O(n+e)\)  时间内确定无向图中边的总数。而对于有向图，通过对某个顶点的链表中的结点计数，可以得到该顶点的出度，但是对于该顶点的入度很难确定
 </p>
 
-<figure id="org23bb7ef">
+<figure id="orgb58d380">
 <img src="../images/data_structure_graph_adjoin_table_1.png" alt="data_structure_graph_adjoin_table_1.png">
 
 </figure>
@@ -79,51 +123,51 @@
 <h3 id="org4ed52ec">邻接矩阵与邻接表相互转换</h3>
 <div class="outline-text-3" id="text-org4ed52ec">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">void</span> <span style="color: #006699;">Trans_MtoL</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Mgraph</span> <span style="color: #BA36A5;">G</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">Lgraph</span> <span style="color: #BA36A5;">Gl</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">Vnode</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">q</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">e</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">i</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">j</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        Gl<span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">data</span> <span style="color: #0000FF;">=</span> i<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        Gl<span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">next</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">NULL</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">for</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">j</span> <span style="color: #0000FF;">=</span> i<span style="color: #0000FF;">+</span><span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>j <span style="color: #0000FF;">&lt;=</span> n <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">][</span>j<span style="color: #709870; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">j</span><span style="color: #0000FF;">++</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> <span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Vnode</span> <span style="color: #0000FF;">*</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #006DAF;">malloc</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">sizeof</span><span style="color: #707183; background-color: #FFFFFF;">(</span>Vnode<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            p<span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5; font-style: italic;">data</span> <span style="color: #0000FF;">=</span> i<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            p<span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5; font-style: italic;">next</span> <span style="color: #0000FF;">=</span> Gl<span style="color: #709870; background-color: #FFFFFF;">[</span>j<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            Gl<span style="color: #709870; background-color: #FFFFFF;">[</span>j<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">next</span> <span style="color: #0000FF;">=</span> p<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #BA36A5;">q</span> <span style="color: #0000FF;">=</span> <span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Vnode</span> <span style="color: #0000FF;">*</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #006DAF;">malloc</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">sizeof</span><span style="color: #707183; background-color: #FFFFFF;">(</span>Vnode<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            q<span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5; font-style: italic;">data</span> <span style="color: #0000FF;">=</span> j<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            q<span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5; font-style: italic;">next</span> <span style="color: #0000FF;">=</span> Gl<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            Gl<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">next</span> <span style="color: #0000FF;">=</span> q<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"&#37051;&#25509;&#30697;&#38453;&#34920;&#31034;&#22914;&#19979;&#65306;\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">Output_mg</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">G</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"\n &#37051;&#25509;&#34920;&#34920;&#31034;&#22914;&#19979; &#65306;"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">Output_L</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>Gl<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c">void Trans_MtoL(Mgraph G, Lgraph Gl) {
+    Vnode *p, *q;
+    int e, i, j;
+    for (i = 1; i &lt;= n; i++) {
+        Gl[i].data = i;
+        Gl[i].next = NULL;
+    }
+    for (i = 1; i &lt;= n; i++) {
+        for (j = i+1;j &lt;= n &amp;&amp; G[i][j] == 1; j++) {
+            p = (Vnode *)malloc(sizeof(Vnode));
+            p-&gt;data = i;
+            p-&gt;next = Gl[j].next;
+            Gl[j].next = p;
+            q = (Vnode *)malloc(sizeof(Vnode));
+            q-&gt;data = j;
+            q-&gt;next = Gl[i].next;
+            Gl[i].next = q;
+        }
+    }
+    printf("&#37051;&#25509;&#30697;&#38453;&#34920;&#31034;&#22914;&#19979;&#65306;\n");
+    Output_mg(G);
+    printf("\n &#37051;&#25509;&#34920;&#34920;&#31034;&#22914;&#19979; &#65306;");
+    Output_L(Gl);
+}
 
-<span style="color: #006FE0;">void</span> <span style="color: #006699;">Trans_LtoM</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Lgraph</span> <span style="color: #BA36A5;">Gl</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">Mgraph</span> <span style="color: #BA36A5;">G</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">Vnode</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">j</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-            <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">j</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span> j <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">j</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-                <span style="color: #D0372D;">G</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>i<span style="color: #7388D6; background-color: #FFFFFF;">][</span>j<span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">2</span><span style="color: #333333; background-color: #FFFFFF;">;</span>i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> Gl<span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #0000FF;">while</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>p <span style="color: #0000FF;">!=</span> <span style="color: #006FE0;">NULL</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #BA36A5;">j</span> <span style="color: #0000FF;">=</span> p<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">data</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">][</span>j<span style="color: #709870; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>j<span style="color: #709870; background-color: #FFFFFF;">][</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> p<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">" &#37051;&#25509;&#34920;&#34920;&#31034;&#22914;&#19979; &#65306;\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">Output_L</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>Gl<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"\n&#37051;&#25509;&#30697;&#38453;&#34920;&#31034;&#22914;&#19979;&#65306;"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">Output_mg</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">G</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+void Trans_LtoM(Lgraph Gl, Mgraph G) {
+    Vnode *p;
+    int i, j;
+    for (i = 1; i &lt;= n; i++)
+            for (j = 1; j &lt;= n; j++)
+                G[i][j] = 0;
+    for (i = 2;i &lt;= n; i++) {
+        p = Gl[i].next;
+        while (p != NULL) {
+            j = p-&gt;data;
+            G[i][j] = 1;
+            G[j][i] = 1;
+            p = p-&gt;next;
+        }
+    }
+    printf(" &#37051;&#25509;&#34920;&#34920;&#31034;&#22914;&#19979; &#65306;\n");
+    Output_L(Gl);
+    printf("\n&#37051;&#25509;&#30697;&#38453;&#34920;&#31034;&#22914;&#19979;&#65306;");
+    Output_mg(G);
+}
 </pre>
 </div>
 </div>
@@ -133,7 +177,7 @@
 <h3 id="orgcc084bc">其他表示法</h3>
 <div class="outline-text-3" id="text-orgcc084bc">
 
-<figure id="org6ede9cd">
+<figure id="org8e3777c">
 <img src="../images/data_structure_graph_mixed_expression_1.png" alt="data_structure_graph_mixed_expression_1.png">
 
 </figure>
@@ -158,7 +202,7 @@
 </p>
 
 
-<figure id="orgf67334b">
+<figure id="orgafbddf1">
 <img src="../images/data_structure_graph_depth_first_traversal_1.png" alt="data_structure_graph_depth_first_traversal_1.png">
 
 </figure>
@@ -168,16 +212,16 @@
 <li>参考代码</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">void</span> <span style="color: #006699;">Dfs</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Mgraph</span> <span style="color: #BA36A5;">G</span> <span style="color: #333333; background-color: #FFFFFF;">,</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">v</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d -&gt; "</span> <span style="color: #333333; background-color: #FFFFFF;">,</span>v<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">visited</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>v<span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span> <span style="color: #333333; background-color: #FFFFFF;">;</span>i <span style="color: #0000FF;">&lt;=</span> n <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #D0372D;">G</span><span style="color: #909183; background-color: #FFFFFF;">[</span>v<span style="color: #909183; background-color: #FFFFFF;">][</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">if</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>visited<span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-            <span style="color: #006DAF;">Dfs</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">G</span><span style="color: #333333; background-color: #FFFFFF;">,</span> i<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c">void Dfs(Mgraph G ,int v) {
+    int i;
+    printf("%d -&gt; " ,v);
+    visited[v] = 1;
+    for (i = 1 ;i &lt;= n &amp;&amp; G[v][i] == 0;i++)
+        ;
+    for (; i &lt;= n; i++)
+        if(visited[i] == 0)
+            Dfs(G, i);
+}
 </pre>
 </div>
 </div>
@@ -195,7 +239,7 @@
 从访问起始顶点 a 开始，并把 a 标记为已访问，然后，访问 a 的邻接表中的每一个顶点。在访问过 a 的邻接表中所有顶点后，访问与 a 的邻接表中的第一个顶点相邻，且未被访问过的所有顶点。这样就需要一个队列，把当前访问的顶点保存在这个队列中，在当前顶点的邻接表中的有顶点被访问过时，从队列中取出一个顶点，然后访问该顶点的邻接表中的所有顶点。在此搜索过程中，未被访问的顶点被访问，且存入队列，已经访问过的顶点不再被访问。当队列为空时，搜索就结束了。时间复杂度量级为 \(O(n^2)\)
 </p>
 
-<figure id="org69eb6f1">
+<figure id="orgdaa1a03">
 <img src="../images/data_structure_graph_breadth_first_traversal_1.png" alt="data_structure_graph_breadth_first_traversal_1.png">
 
 </figure>
@@ -205,24 +249,24 @@
 <li>参考代码</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">void</span> <span style="color: #006699;">Bfs</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Mgraph</span> <span style="color: #BA36A5;">G</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">v</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">Queue</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">Q</span> <span style="color: #0000FF;">=</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Queue</span> <span style="color: #0000FF;">*</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #006DAF;">malloc</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">sizeof</span><span style="color: #909183; background-color: #FFFFFF;">(</span>Queue<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">Initqueue</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">Q</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d -&gt;"</span> <span style="color: #333333; background-color: #FFFFFF;">,</span>v<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">visited</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>v<span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006DAF;">enqueue</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">Q</span><span style="color: #333333; background-color: #FFFFFF;">,</span> v<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #0000FF;">!</span><span style="color: #006DAF;">quempty</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">Q</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">v</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">dequeue</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">Q</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #0000FF;">for</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">if</span> <span style="color: #709870; background-color: #FFFFFF;">(</span>visited<span style="color: #707183; background-color: #FFFFFF;">[</span>i<span style="color: #707183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span> <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #D0372D;">G</span><span style="color: #707183; background-color: #FFFFFF;">[</span>v<span style="color: #707183; background-color: #FFFFFF;">][</span>i<span style="color: #707183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">1</span><span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #709870; background-color: #FFFFFF;">{</span>
-                <span style="color: #006DAF;">printf</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d -&gt;"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> i<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-                <span style="color: #BA36A5;">visited</span><span style="color: #707183; background-color: #FFFFFF;">[</span>i<span style="color: #707183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-                <span style="color: #006DAF;">enqueue</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">Q</span><span style="color: #333333; background-color: #FFFFFF;">,</span> i<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #709870; background-color: #FFFFFF;">}</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c">void Bfs(Mgraph G, int v) {
+    int i;
+    Queue *Q = (Queue *)malloc(sizeof(Queue));
+    Initqueue(Q);
+    printf("%d -&gt;" ,v);
+    visited[v] = 1;
+    enqueue(Q, v);
+    for (; !quempty(Q); ) {
+        v = dequeue(Q);
+        for (i = 1;i &lt;= n; i++) {
+            if (visited[i] == 0 &amp;&amp; G[v][i] == 1) {
+                printf("%d -&gt;", i);
+                visited[i] = 1;
+                enqueue(Q, i);
+            }
+        }
+    }
+}
 </pre>
 </div>
 </div>
@@ -232,41 +276,41 @@
 <h3 id="ID-7827e4bf-f416-4549-b6b1-fdf83440f006">拓扑排序</h3>
 <div class="outline-text-3" id="text-ID-7827e4bf-f416-4549-b6b1-fdf83440f006">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">GNode</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">Cnt</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// &#35745;&#25968;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">Tag</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// &#26631;&#31614;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">Vertex</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">GNode</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">Link</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span> <span style="color: #6434A3;">GNode</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct GNode {
+    int Cnt; // &#35745;&#25968;
+    int Tag; // &#26631;&#31614;
+    int Vertex;
+    struct GNode *Link;
+} GNode;
 
-<span style="color: #0000FF;">typedef</span> <span style="color: #6434A3;">GNode</span> <span style="color: #6434A3;">Graph</span><span style="color: #707183; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">MAX</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+typedef GNode Graph[MAX];
 
-<span style="color: #006FE0;">void</span> <span style="color: #006699;">Topsort</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">Graph</span> <span style="color: #BA36A5;">G</span> <span style="color: #333333; background-color: #FFFFFF;">,</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">n</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">GNode</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">j</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">k</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">top</span> <span style="color: #0000FF;">=-</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span> <span style="color: #333333; background-color: #FFFFFF;">;</span>i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">if</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Cnt</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Cnt</span> <span style="color: #0000FF;">==</span> top<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #BA36A5;">top</span> <span style="color: #0000FF;">=</span> i<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span> <span style="color: #333333; background-color: #FFFFFF;">;</span>i <span style="color: #0000FF;">&lt;=</span> n<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>top <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">-1</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #0000FF;">else</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #BA36A5;">j</span> <span style="color: #0000FF;">=</span> top<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #BA36A5;">top</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">G</span><span style="color: #709870; background-color: #FFFFFF;">[</span>top<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Cnt</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #006DAF;">printf</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d -&gt;"</span><span style="color: #333333; background-color: #FFFFFF;">,</span>j<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #0000FF;">for</span> <span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">G</span><span style="color: #707183; background-color: #FFFFFF;">[</span>j<span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Link</span><span style="color: #333333; background-color: #FFFFFF;">;</span> p<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> p<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">Link</span><span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #709870; background-color: #FFFFFF;">{</span>
-                <span style="color: #BA36A5;">k</span> <span style="color: #0000FF;">=</span> p<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">Vertex</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-                <span style="color: #D0372D;">G</span><span style="color: #707183; background-color: #FFFFFF;">[</span>k<span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Cnt</span><span style="color: #0000FF;">--</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-                <span style="color: #0000FF;">if</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">G</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>k<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">Cnt</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-                    <span style="color: #D0372D;">G</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>k<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">Cnt</span> <span style="color: #0000FF;">=</span> top<span style="color: #333333; background-color: #FFFFFF;">;</span>
-                    <span style="color: #BA36A5;">top</span> <span style="color: #0000FF;">=</span> k<span style="color: #333333; background-color: #FFFFFF;">;</span>
-                <span style="color: #707183; background-color: #FFFFFF;">}</span>
-            <span style="color: #709870; background-color: #FFFFFF;">}</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+void Topsort(Graph G ,int n) {
+    GNode *p;
+    int i, j, k, top =- 1;
+    for (i = 1 ;i &lt;= n; i++) {
+        if(G[i].Cnt == 0) {
+            G[i].Cnt == top;
+            top = i;
+        }
+    }
+    for (i = 1 ;i &lt;= n; i++) {
+        if (top == -1) ;
+        else {
+            j = top;
+            top = G[top].Cnt;
+            printf("%d -&gt;",j);
+            for (p = G[j].Link; p; p = p-&gt;Link) {
+                k = p-&gt;Vertex;
+                G[k].Cnt--;
+                if (G[k].Cnt == 0) {
+                    G[k].Cnt = top;
+                    top = k;
+                }
+            }
+        }
+    }
+}
 </pre>
 </div>
 </div>
@@ -274,7 +318,13 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

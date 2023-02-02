@@ -1,20 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lua 语言基础</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Lua 语言基础</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf87b003">Lua</a>
+<ul>
+<li><a href="#orgfe15724">交互式</a></li>
+<li><a href="#org321f74a">注释</a></li>
+<li><a href="#org5426cb6">标示符</a></li>
+<li><a href="#org5de1fe7">Lua 关键字</a></li>
+<li><a href="#org67975e7">Lua 运算符</a>
+<ul>
+<li><a href="#orga29fafb">运算符优先级</a></li>
+</ul>
+</li>
+<li><a href="#org9254920">Lua 变量</a></li>
+<li><a href="#org200a2af">Lua 语法结构</a>
+<ul>
+<li><a href="#org5a2cb9d">循环</a></li>
+<li><a href="#orgef63ac9">流程控制</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ID-9380063e-36ea-4175-80ec-8d143dc2c749">Lua 数据类型</a></li>
+<li><a href="#ID-2432f320-c6ae-44a4-a886-d801b8674f94">Lua 函数</a>
+<ul>
+<li><a href="#org46ef70c">可变参数</a></li>
+</ul>
+</li>
+<li><a href="#ID-09c26f8e-676d-4c1a-b392-0a4fe169411d">Lua 字符串</a>
+<ul>
+<li><a href="#org9c88848">字符串方法</a></li>
+<li><a href="#org0f3e492">匹配模式</a></li>
+</ul>
+</li>
+<li><a href="#ID-797f8520-7bfd-42d3-81e8-600c8f05a2df">Lua 数组</a>
+<ul>
+<li><a href="#orgf3daa75">一维数组</a></li>
+<li><a href="#org109bfff">多维数组</a></li>
+</ul>
+</li>
+<li><a href="#ID-36033706-44ec-40c9-9f1f-9e52517c7ca4">Lua 迭代器</a>
+<ul>
+<li><a href="#org986ab36">泛型 for 迭代器</a></li>
+<li><a href="#org5dda9c0">无状态的迭代器</a></li>
+<li><a href="#org266469e">多状态的迭代器</a></li>
+</ul>
+</li>
+<li><a href="#ID-66bd9f20-0480-4713-8800-fad492574a46">Lua 表 table</a>
+<ul>
+<li><a href="#org9523389">常用方法</a></li>
+</ul>
+</li>
+<li><a href="#ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3">Lua 模块与包</a>
+<ul>
+<li><a href="#org8cb2fb6">require 函数</a></li>
+<li><a href="#org9177b7f">加载机制</a></li>
+<li><a href="#org6105dce">C 包</a></li>
+</ul>
+</li>
+<li><a href="#ID-83e40e27-ad20-4167-9486-d244c010cfc4">Lua 元表 Metatable</a>
+<ul>
+<li><a href="#orgfe8b866"><code>__index</code> 元方法</a></li>
+<li><a href="#org99046a8"><code>__newindex</code> 元方法</a></li>
+<li><a href="#orgb10ab09"><code>__call</code> 元方法</a></li>
+<li><a href="#org2639cba"><code>__string</code> 元方法</a></li>
+<li><a href="#org4fddd86">其他元方法</a></li>
+</ul>
+</li>
+<li><a href="#ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e">Lua 协同程序 coroutine</a>
+<ul>
+<li><a href="#org6488042">线程和协同程序区别</a></li>
+<li><a href="#orgedc5aa4">基本方法</a></li>
+</ul>
+</li>
+<li><a href="#ID-9f98a4a7-80be-4291-82ea-f383031c724b">Lua I/O</a>
+<ul>
+<li><a href="#org7cfd633">简单模式</a></li>
+<li><a href="#org44f7a7c">完全模式</a></li>
+</ul>
+</li>
+<li><a href="#ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">Lua 错误处理</a>
+<ul>
+<li><a href="#org526fa33">assert()</a></li>
+<li><a href="#orgddac02b">error()</a></li>
+<li><a href="#orgffd9c1a">pcall, xpcall</a></li>
+<li><a href="#orgc356136">debug 库</a></li>
+</ul>
+</li>
+<li><a href="#ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c">Lua 垃圾回收</a></li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-orgf87b003" class="outline-2">
 <h2 id="orgf87b003">Lua</h2>
 <div class="outline-text-2" id="text-orgf87b003">
@@ -52,9 +168,9 @@ TOC:
 <h3 id="orgfe15724">交互式</h3>
 <div class="outline-text-3" id="text-orgfe15724">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">lua</span>
-<span style="color: #8D8D84; font-style: italic;"># or</span>
-<span style="color: #006DAF;">lua</span> <span style="color: #D0372D;">-i</span>
+<pre class="src src-bash">lua
+# or
+lua -i
 </pre>
 </div>
 </div>
@@ -910,8 +1026,8 @@ require 用于搜索 Lua 文件的路径是存放在全局变量 package.path �
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># LUA_PATH</span>
-<span style="color: #0000FF;">export</span> <span style="color: #BA36A5; font-style: italic;">LUA_PATH</span>=<span style="color: #008000;">"~/lua/?.lua;;"</span>
+<pre class="src src-bash"># LUA_PATH
+export LUA_PATH="~/lua/?.lua;;"
 </pre>
 </div>
 </div>
@@ -1476,7 +1592,13 @@ opt =
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

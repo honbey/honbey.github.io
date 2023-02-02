@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Linux</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">Architecture</a></li>
+<li><a href="#ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">I/O</a>
+<ul>
+<li><a href="#org504402e">零拷贝技术 - sendfile</a></li>
+</ul>
+</li>
+<li><a href="#orgfb0639e">Process</a></li>
+<li><a href="#orgda5259c">Useful Command</a>
+<ul>
+<li><a href="#org9bf3a75">Let non-root/normal user use port which less then 1024</a></li>
+<li><a href="#ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">Recover files on Linux</a></li>
+<li><a href="#org5ec11b4">Safe rm</a></li>
+<li><a href="#orgafdd30c">Read file</a></li>
+<li><a href="#orgd38cc16">utils tools</a></li>
+<li><a href="#orgf60f30d">Set timezone</a></li>
+<li><a href="#orgbdc50af">git completely remove files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3" class="outline-2">
 <h2 id="ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">Architecture</h2>
 <div class="outline-text-2" id="text-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">
@@ -47,8 +94,8 @@ sendfile（<a href="20220708-hardware.html#ID-3bc17eaf-8d5c-48d4-8efa-58f9429b27
 <h3 id="org504402e">零拷贝技术 - sendfile</h3>
 <div class="outline-text-3" id="text-org504402e">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/sendfile.h&gt;</span>
-<span style="color: #006FE0;">ssize_t</span> <span style="color: #006699;">snedfile</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">out_fd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">in_fd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">off_t</span><span style="color: #0000FF;">*</span> <span style="color: #BA36A5;">offset</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">size_t</span> <span style="color: #BA36A5;">count</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">#include &lt;sys/sendfile.h&gt;
+ssize_t snedfile(int out_fd, int in_fd, off_t* offset, size_t count);
 </pre>
 </div>
 
@@ -75,7 +122,7 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 <h3 id="org9bf3a75">Let non-root/normal user use port which less then 1024</h3>
 <div class="outline-text-3" id="text-org9bf3a75">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">setcap</span> cap_net_bind_service=+eip /path/executable_program
+<pre class="src src-bash">setcap cap_net_bind_service=+eip /path/executable_program
 </pre>
 </div>
 </div>
@@ -85,16 +132,16 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 <h3 id="ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">Recover files on Linux</h3>
 <div class="outline-text-3" id="text-ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># backup sector</span>
-<span style="color: #006DAF;">dd</span> if=/path/filename of=/dev/vda1
-<span style="color: #8D8D84; font-style: italic;"># unmount</span>
-<span style="color: #006DAF;">umount</span> /dev/vda1
-<span style="color: #8D8D84; font-style: italic;"># force unmount</span>
-<span style="color: #006DAF;">fuser</span> <span style="color: #D0372D;">-m</span> <span style="color: #D0372D;">-v</span> <span style="color: #D0372D;">-i</span> <span style="color: #D0372D;">-k</span> /dev/vda1
-<span style="color: #8D8D84; font-style: italic;"># scan</span>
-<span style="color: #006DAF;">extundelete</span> <span style="color: #D0372D;">--inode</span> <span style="color: #D0372D;">2</span> /dev/vda1
-<span style="color: #8D8D84; font-style: italic;"># recover</span>
-<span style="color: #006DAF;">extundelete</span> /dev/vda1 <span style="color: #D0372D;">--restore-all</span>
+<pre class="src src-bash"># backup sector
+dd if=/path/filename of=/dev/vda1
+# unmount
+umount /dev/vda1
+# force unmount
+fuser -m -v -i -k /dev/vda1
+# scan
+extundelete --inode 2 /dev/vda1
+# recover
+extundelete /dev/vda1 --restore-all
 </pre>
 </div>
 </div>
@@ -104,27 +151,27 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 <h3 id="org5ec11b4">Safe rm</h3>
 <div class="outline-text-3" id="text-org5ec11b4">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
-<span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">""</span>
+<pre class="src src-bash">#!/usr/bin/env bash
+args=""
 
-<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">getopts</span> <span style="color: #008000;">':rRfiIdv'</span> OPTION<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
-    <span style="color: #0000FF;">case</span> <span style="color: #BA36A5;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">OPTION</span><span style="color: #BA36A5;">"</span> <span style="color: #0000FF;">in</span>
-        <span style="color: #D0372D;">r</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">R</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">\?</span>)
-            <span style="color: #0000FF;">;;</span>
+while getopts ':rRfiIdv' OPTION; do
+    case "$OPTION" in
+        r|R|\?)
+            ;;
 
-        <span style="color: #D0372D;">*</span>)
-            <span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">OPTION</span><span style="color: #008000;">"</span>
-            <span style="color: #0000FF;">;;</span>
-    <span style="color: #0000FF;">esac</span>
-<span style="color: #0000FF;">done</span>
+        *)
+            args="$args$OPTION"
+            ;;
+    esac
+done
 
-<span style="color: #006FE0;">shift</span> <span style="color: #008000;">"</span><span style="color: #FF1493;">$(</span><span style="color: #FF1493; background-color: #FFFFFF;">(</span><span style="color: #FF1493; background-color: #FFFFFF;">$</span><span style="color: #FF1493; background-color: #FFFFFF; font-style: italic;">OPTIND</span><span style="color: #FF1493; background-color: #FFFFFF;"> </span><span style="color: #FF1493; background-color: #FFFFFF;">-</span><span style="color: #FF1493; background-color: #FFFFFF;"> 1)</span><span style="color: #008000;">)</span><span style="color: #008000;">"</span>
+shift "$(($OPTIND - 1))"
 
-<span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span><span style="color: #7388D6;">[</span> -n <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #7388D6;">]</span><span style="color: #707183;">]</span><span style="color: #0000FF;">;</span> <span style="color: #0000FF;">then</span>
-    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"-</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
-<span style="color: #0000FF;">else</span>
-    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
-<span style="color: #0000FF;">fi</span>
+if [[ -n "$args" ]]; then
+    mv "-$args" "$@" /opt/data/.trash
+else
+    mv "$@" /opt/data/.trash
+fi
 </pre>
 </div>
 </div>
@@ -133,18 +180,18 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 <h3 id="orgafdd30c">Read file</h3>
 <div class="outline-text-3" id="text-orgafdd30c">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
+<pre class="src src-bash">#!/usr/bin/env bash
 
-<span style="color: #8D8D84; font-style: italic;"># This is correct way to read file.</span>
-<span style="color: #BA36A5; font-style: italic;">FILE</span>=<span style="color: #008000;">"./tmp/use.py"</span>
-<span style="color: #BA36A5; font-style: italic;">k</span>=<span style="color: #D0372D;">1</span>
+# This is correct way to read file.
+FILE="./tmp/use.py"
+k=1
 
-<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">read</span> <span style="color: #D0372D;">-r</span> line<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
-    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">line</span><span style="color: #008000;">"</span>
-    <span style="color: #707183;">(</span><span style="color: #7388D6;">(</span>k++<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
-<span style="color: #0000FF;">done</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">FILE</span><span style="color: #008000;">"</span>
+while read -r line; do
+    echo "$line"
+    ((k++))
+done &lt; "$FILE"
 
-<span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Total number of lines in file: </span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">k</span><span style="color: #008000;">"</span>
+echo "Total number of lines in file: $k"
 </pre>
 </div>
 </div>
@@ -172,8 +219,8 @@ Rust-alternatives <code>[3/7]</code>:
 <h3 id="orgf60f30d">Set timezone</h3>
 <div class="outline-text-3" id="text-orgf60f30d">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">timedatectl</span> list-timezones <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">grep</span> Shanghai
-<span style="color: #006DAF;">sudo</span> timedatectl set-timezone Asia/Shanghai
+<pre class="src src-bash">timedatectl list-timezones | grep Shanghai
+sudo timedatectl set-timezone Asia/Shanghai
 </pre>
 </div>
 </div>
@@ -183,18 +230,18 @@ Rust-alternatives <code>[3/7]</code>:
 <h3 id="orgbdc50af">git completely remove files</h3>
 <div class="outline-text-3" id="text-orgbdc50af">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">git</span> filter-branch <span style="color: #D0372D;">--force</span> <span style="color: #D0372D;">--index-filter</span> <span style="color: #008000;">'</span><span style="color: #008000;">git</span><span style="color: #008000;"> </span><span style="color: #008000;">rm</span><span style="color: #008000;"> -r --cached --ignore-unmatch &lt;files&gt;'</span> <span style="color: #D0372D;">--prune-empty</span> <span style="color: #D0372D;">--tag-name-filter</span> <span style="color: #6434A3;">cat</span> <span style="color: #D0372D;">--</span> <span style="color: #D0372D;">--all</span>
+<pre class="src src-bash">git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch &lt;files&gt;' --prune-empty --tag-name-filter cat -- --all
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">git</span> <span style="color: #6434A3;">rm</span> <span style="color: #D0372D;">--cached</span> <span style="color: #D0372D;">-r</span> .
-<span style="color: #006DAF;">git</span> gc <span style="color: #D0372D;">--prune</span>
+<pre class="src src-bash">git rm --cached -r .
+git gc --prune
 
-<span style="color: #8D8D84; font-style: italic;"># repack</span>
-<span style="color: #006DAF;">git</span> for-each-ref <span style="color: #808080;">--format=</span><span style="color: #808080;">'delete %(refname)'</span> refs/original <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">git</span> update-ref <span style="color: #D0372D;">--stdin</span>
-<span style="color: #006DAF;">git</span> reflog expire <span style="color: #808080;">--expire=now</span> <span style="color: #D0372D;">--all</span>
-<span style="color: #006DAF;">git</span> gc <span style="color: #808080;">--prune=now</span>
+# repack
+git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+git reflog expire --expire=now --all
+git gc --prune=now
 </pre>
 </div>
 </div>
@@ -202,7 +249,13 @@ Rust-alternatives <code>[3/7]</code>:
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

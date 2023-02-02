@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
 <meta name="author" content="honbey" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -351,7 +373,7 @@ editorconfig
 <div class="outline-text-4" id="text-org4cde728">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp" id="orgb6de557"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">agda              ; types of types of types of types...</span>
-<span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">beancount         ; mind the GAAP</span>
+<span style="color: #707183;">(</span>beancount +lsp<span style="color: #707183;">)</span>         <span style="color: #8D8D84;">; </span><span style="color: #8D8D84; font-style: italic;">mind the GAAP</span>
 <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(cc +lsp)         ; C &gt; C++ == 1</span>
 <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">clojure           ; java with a lisp</span>
 <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">common-lisp       ; if you've seen one lisp, you've seen them all</span>
@@ -841,8 +863,8 @@ TODO: gpg
 <h2 id="org8f574d5">Commands</h2>
 <div class="outline-text-2" id="text-org8f574d5">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">''</span> <span style="color: #D0372D;">-r</span> <span style="color: #008000;">'/:CUSTOM_ID: ID-[a-z0-9-]+/d'</span> *
-<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">''</span> <span style="color: #D0372D;">-r</span> <span style="color: #008000;">'s/:ID:([ ]+)([a-z0-9-]+)/:ID:\1\2\n:CUSTOM_ID: ID-\2/'</span> *
+<pre class="src src-bash">sed -i '' -r '/:CUSTOM_ID: ID-[a-z0-9-]+/d' *
+sed -i '' -r 's/:ID:([ ]+)([a-z0-9-]+)/:ID:\1\2\n:CUSTOM_ID: ID-\2/' *
 </pre>
 </div>
 </div>
@@ -863,7 +885,13 @@ The origin dot file is <a href="https://raw.githubusercontent.com/abougouffa/dot
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

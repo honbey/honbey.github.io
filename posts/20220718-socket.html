@@ -1,20 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Socket</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Socket</h1>
-</header><ul class="org-ul">
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org45822eb">Socket 编程</a>
+<ul>
+<li><a href="#orga7971ff">backlog</a></li>
+<li><a href="#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></a></li>
+<li><a href="#ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></a></li>
+<li><a href="#ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9"><code>SO_LINGER</code></a></li>
+</ul>
+</li>
+<li><a href="#orgd8d35a5">Reference</a></li>
+</ul>
+</div>
+</nav>
+<ul class="org-ul">
 <li>Socket 编程
 <ul class="org-ul">
 <li>针对 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 应该如何 Socket 编程？</li>
@@ -27,7 +65,7 @@
 <h2 id="org45822eb">Socket 编程</h2>
 <div class="outline-text-2" id="text-org45822eb">
 
-<figure id="org81ae3cd">
+<figure id="org156c311">
 <img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
@@ -65,7 +103,7 @@ Linux 内核会维护两个队列：
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">int</span> <span style="color: #006699;">listen</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">socketfd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">backlog</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<pre class="src src-c">int listen(int socketfd, int backlog)
 </pre>
 </div>
 <p>
@@ -82,7 +120,7 @@ Linux 内核会维护两个队列：
 配置是否关闭 nagle 算法。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>sock_fd<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">IPPROTO_TCP</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">TCP_NODELAY</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">&amp;</span>value<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">setsockopt(sock_fd, IPPROTO_TCP, TCP_NODELAY, (char *)&amp;value, sizeof(int));
 </pre>
 </div>
 </div>
@@ -102,7 +140,7 @@ Linux 内核会维护两个队列：
 <code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>sock_fd<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">IPPROTO_TCP</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">TCP_CORK</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">&amp;</span>value<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">setsockopt(sock_fd, IPPROTO_TCP, TCP_CORK, (char *)&amp;value, sizeof(int));
 </pre>
 </div>
 </div>
@@ -111,10 +149,10 @@ Linux 内核会维护两个队列：
 <h3 id="ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9"><code>SO_LINGER</code></h3>
 <div class="outline-text-3" id="text-ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">l_onoff</span><span style="color: #333333; background-color: #FFFFFF;">;</span>  <span style="color: #8D8D84; font-style: italic;">/* Linger active */</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">l_linger</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">/* How long to linger for */</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">struct linger {
+    int l_onoff;  /* Linger active */
+    int l_linger; /* How long to linger for */
+};
 </pre>
 </div>
 <p>
@@ -160,7 +198,13 @@ Socket 选项系列之 SO_LINGER，链接：<a href="http://www.lenky.info/archi
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

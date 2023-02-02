@@ -1,20 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nginx</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Nginx</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a>
+<ul>
+<li><a href="#org12b552f">架构</a></li>
+<li><a href="#org780dc71">请求流程</a></li>
+<li><a href="#org5dafeeb">connection</a></li>
+<li><a href="#org7746587">request</a></li>
+<li><a href="#orgd4f17d0">pipe</a></li>
+<li><a href="#org5361aae">lingering_close</a></li>
+</ul>
+</li>
+<li><a href="#ID-98bab153-5649-4610-8080-055b845a72a2">Data Structure</a>
+<ul>
+<li><a href="#org7fb6df5">ngx_str_t</a></li>
+<li><a href="#org6a00cd2">ngx_pool_t</a></li>
+<li><a href="#org68e2b96">ngx_array_t</a></li>
+<li><a href="#org502970c">ngx_hash_t</a></li>
+<li><a href="#orgdb7b985">ngx_chain_t</a></li>
+<li><a href="#orgae158f8">ngx_buf_t</a></li>
+<li><a href="#org2f07851">ngx_list_t</a></li>
+<li><a href="#orgfa97cac">ngx_queue_t</a></li>
+</ul>
+</li>
+<li><a href="#ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Configuration &amp; Directives</a>
+<ul>
+<li><a href="#org1fa267d">sendfile</a></li>
+<li><a href="#org34d4452">tcp_nopush</a></li>
+<li><a href="#org104c682">tcp_nodelay</a></li>
+<li><a href="#org6aa7d24">worker_connections</a></li>
+<li><a href="#org87c7cd5">client_header_buffer_size</a></li>
+<li><a href="#org71b0cca">keepalive_timeout</a></li>
+<li><a href="#org2c0ee15">large_client_header_buffers</a></li>
+<li><a href="#orgaee87f8">lingering_close</a></li>
+<li><a href="#org834c627">lingering_timeout</a></li>
+<li><a href="#orgb19e33c">access_log</a></li>
+</ul>
+</li>
+<li><a href="#ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</a>
+<ul>
+<li><a href="#org3a78bcd">upstream_response_length</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-ID-be569bdd-a489-4bd8-b266-4b253d21e532" class="outline-2">
 <h2 id="ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</h2>
 <div class="outline-text-2" id="text-ID-be569bdd-a489-4bd8-b266-4b253d21e532">
@@ -67,31 +137,31 @@ ccf core config
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">while</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">true</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">for</span> t <span style="color: #6434A3;">in</span> run_tasks <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">handler</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #006DAF;">update_time</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">&amp;</span>now<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">timeout</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">ETERNITY</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> t <span style="color: #6434A3;">in</span> wait_tasks <span style="color: #7388D6; background-color: #FFFFFF;">{</span> <span style="color: #8D8D84; font-style: italic;">/* sorted already */</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">time</span> <span style="color: #0000FF;">&lt;=</span> now<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">timeout_handler</span><span style="color: #709870; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #BA36A5;">timeout</span> <span style="color: #0000FF;">=</span> t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">time</span> <span style="color: #0000FF;">-</span> now<span style="color: #333333; background-color: #FFFFFF;">;</span>
-            <span style="color: #0000FF;">break</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #BA36A5;">nevents</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">poll_function</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>events<span style="color: #333333; background-color: #FFFFFF;">,</span> timeout<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> i <span style="color: #6434A3;">in</span> nevents <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #6434A3;">task</span> <span style="color: #BA36A5;">t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>events<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">type</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">READ</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">handler</span> <span style="color: #0000FF;">=</span> read_handler<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #909183; background-color: #FFFFFF;">{</span> <span style="color: #8D8D84; font-style: italic;">/* events[i].type == WRITE */</span>
-            t<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">handler</span> <span style="color: #0000FF;">=</span> write_handler<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-        <span style="color: #006DAF;">run_tasks_add</span><span style="color: #909183; background-color: #FFFFFF;">(</span>t<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c">while (true) {
+    for t in run_tasks {
+        t.handler();
+    }
+    update_time(&amp;now);
+    timeout = ETERNITY;
+    for t in wait_tasks { /* sorted already */
+        if (t.time &lt;= now) {
+            t.timeout_handler();
+        } else {
+            timeout = t.time - now;
+            break;
+        }
+    }
+    nevents = poll_function(events, timeout);
+    for i in nevents {
+        task t;
+        if (events[i].type == READ) {
+            t.handler = read_handler;
+        } else { /* events[i].type == WRITE */
+            t.handler = write_handler;
+        }
+        run_tasks_add(t);
+    }
+}
 </pre>
 </div>
 </div>
@@ -197,28 +267,28 @@ nginx 的处理得先打开 accept_mutex 选项，此时，只有获得了 accep
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #BA36A5;">ngx_accept_disabled</span> <span style="color: #0000FF;">=</span> ngx_cycle<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">connection_n</span> <span style="color: #0000FF;">/</span> <span style="color: #D0372D;">8</span>
-    <span style="color: #0000FF;">-</span> ngx_cycle<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">free_connection_n</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">ngx_accept_disabled = ngx_cycle-&gt;connection_n / 8
+    - ngx_cycle-&gt;free_connection_n;
 
-<span style="color: #0000FF;">if</span> <span style="color: #707183; background-color: #FFFFFF;">(</span>ngx_accept_disabled <span style="color: #0000FF;">&gt;</span> <span style="color: #D0372D;">0</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #BA36A5;">ngx_accept_disabled</span><span style="color: #0000FF;">--</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+if (ngx_accept_disabled &gt; 0) {
+    ngx_accept_disabled--;
 
-<span style="color: #707183; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">ngx_trylock_accept_mutex</span><span style="color: #909183; background-color: #FFFFFF;">(</span>cycle<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">NGX_ERROR</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">return</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+} else {
+    if (ngx_trylock_accept_mutex(cycle) == NGX_ERROR) {
+        return;
+    }
 
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>ngx_accept_mutex_held<span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">flags</span> <span style="color: #0000FF;">|=</span> <span style="color: #D0372D;">NGX_POST_EVENTS</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    if (ngx_accept_mutex_held) {
+        flags |= NGX_POST_EVENTS;
 
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>timer <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">NGX_TIMER_INFINITE</span>
-                <span style="color: #0000FF;">||</span> timer <span style="color: #0000FF;">&gt;</span> ngx_accept_mutex_delay<span style="color: #909183; background-color: #FFFFFF;">)</span>
-        <span style="color: #909183; background-color: #FFFFFF;">{</span>
-            <span style="color: #BA36A5;">timer</span> <span style="color: #0000FF;">=</span> ngx_accept_mutex_delay<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #909183; background-color: #FFFFFF;">}</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+    } else {
+        if (timer == NGX_TIMER_INFINITE
+                || timer &gt; ngx_accept_mutex_delay)
+        {
+            timer = ngx_accept_mutex_delay;
+        }
+    }
+}
 </pre>
 </div>
 </div>
@@ -264,9 +334,9 @@ nginx 支持 pipeline 的，但对 pipeline 中的多个请求的处理却不是
 </p>
 </div>
 </div>
-<div id="outline-container-org50e0f2f" class="outline-3">
-<h3 id="org50e0f2f">lingering_close</h3>
-<div class="outline-text-3" id="text-org50e0f2f">
+<div id="outline-container-org5361aae" class="outline-3">
+<h3 id="org5361aae">lingering_close</h3>
+<div class="outline-text-3" id="text-org5361aae">
 <p>
 延迟关闭，当 nginx 要关闭连接时，并非立即关闭连接，而是先关闭 TCP 连接的写，再等待一段时间后再关掉连接的读。参考 <a href="20220718-socket.html#ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9">SO_LINGER</a> 。
 </p>
@@ -305,10 +375,10 @@ nginx-0.1.0
 <h3 id="org7fb6df5">ngx_str_t</h3>
 <div class="outline-text-3" id="text-org7fb6df5">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">size_t</span>    <span style="color: #BA36A5; font-style: italic;">len</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">u_char</span>   <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">data</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span> <span style="color: #6434A3;">ngx_str_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct {
+    size_t    len;
+    u_char   *data;
+} ngx_str_t;
 </pre>
 </div>
 <p>
@@ -327,28 +397,28 @@ nginx-0.1.0
 提供了一种机制，帮助管理一系列的资源（如内存，文件等），使得对这些资源的使用和释放统一进行。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_pool_s</span>        <span style="color: #6434A3;">ngx_pool_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_pool_s        ngx_pool_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_pool_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">char</span>              <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">last</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">char</span>              <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">end</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_pool_t</span>        <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_pool_large_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">large</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_log_t</span>         <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">log</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_pool_s {
+    char              *last;
+    char              *end;
+    ngx_pool_t        *next;
+    ngx_pool_large_t  *large;
+    ngx_log_t         *log;
+};
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_pool_cleanup_s</span>  <span style="color: #6434A3;">ngx_pool_cleanup_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #0000FF;">typedef</span> <span style="color: #006FE0;">void</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span><span style="color: #6434A3;">ngx_pool_cleanup_pt</span><span style="color: #707183; background-color: #FFFFFF;">)(</span><span style="color: #006FE0;">void</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">data</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #8D8D84; font-style: italic;">/* ngx_pool_cleanup_pt &#26159;&#25351;&#38024;&#65292;&#25351;&#21521; &#27809;&#26377;&#36820;&#22238;&#20540;&#30340; &#25509;&#21463;&#19968;&#20010;&#25351;&#38024;&#31867;&#22411; &#30340;&#21442;&#25968; &#30340;&#20989;&#25968; &#30340;&#21035;&#21517; */</span>
+<pre class="src src-c">typedef struct ngx_pool_cleanup_s  ngx_pool_cleanup_t;
+typedef void (*ngx_pool_cleanup_pt)(void *data);
+/* ngx_pool_cleanup_pt &#26159;&#25351;&#38024;&#65292;&#25351;&#21521; &#27809;&#26377;&#36820;&#22238;&#20540;&#30340; &#25509;&#21463;&#19968;&#20010;&#25351;&#38024;&#31867;&#22411; &#30340;&#21442;&#25968; &#30340;&#20989;&#25968; &#30340;&#21035;&#21517; */
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_pool_cleanup_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">ngx_pool_cleanup_pt</span>   <span style="color: #BA36A5; font-style: italic;">handler</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">void</span>                 <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">data</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_pool_cleanup_t</span>   <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_pool_cleanup_s {
+    ngx_pool_cleanup_pt   handler;
+    void                 *data;
+    ngx_pool_cleanup_t   *next;
+};
 </pre>
 </div>
 </div>
@@ -357,22 +427,22 @@ nginx-0.1.0
 <h3 id="org68e2b96">ngx_array_t</h3>
 <div class="outline-text-3" id="text-org68e2b96">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_array_s</span>       <span style="color: #6434A3;">ngx_array_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_array_s       ngx_array_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_array_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">void</span>        <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">elts</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_uint_t</span>   <span style="color: #BA36A5; font-style: italic;">nelts</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">size_t</span>       <span style="color: #BA36A5; font-style: italic;">size</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_uint_t</span>   <span style="color: #BA36A5; font-style: italic;">nalloc</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_pool_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">pool</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #8D8D84; font-style: italic;">/*</span>
-<span style="color: #8D8D84; font-style: italic;">elts:    &#25351;&#21521;&#23454;&#38469;&#30340;&#25968;&#25454;&#23384;&#20648;&#21306;&#22495;&#12290;</span>
-<span style="color: #8D8D84; font-style: italic;">nelts:   &#25968;&#32452;&#23454;&#38469;&#20803;&#32032;&#20010;&#25968;&#12290;</span>
-<span style="color: #8D8D84; font-style: italic;">size:    &#25968;&#32452;&#21333;&#20010;&#20803;&#32032;&#30340;&#22823;&#23567;&#65292;&#21333;&#20301;&#26159;&#23383;&#33410;&#12290;</span>
-<span style="color: #8D8D84; font-style: italic;">nalloc:  &#25968;&#32452;&#30340;&#23481;&#37327;&#12290;&#34920;&#31034;&#35813;&#25968;&#32452;&#22312;&#19981;&#24341;&#21457;&#25193;&#23481;&#30340;&#21069;&#25552;&#19979;&#65292;&#21487;&#20197;&#26368;&#22810;&#23384;&#20648;&#30340;&#20803;&#32032;&#30340;&#20010;&#25968;&#12290;&#24403; nelts &#22686;&#38271;&#21040;&#36798; nalloc  &#26102;&#65292;&#22914;&#26524;&#20877;&#24448;&#27492;&#25968;&#32452;&#20013;&#23384;&#20648;&#20803;&#32032;&#65292;&#21017;&#20250;&#24341;&#21457;&#25968;&#32452;&#30340;&#25193;&#23481;&#12290;&#25968;&#32452;&#30340;&#23481;&#37327;&#23558;&#20250;&#25193;&#23637;&#21040;&#21407;&#26377;&#23481;&#37327;&#30340; 2 &#20493;&#22823;&#23567;&#12290;&#23454;&#38469;&#19978;&#26159;&#20998;&#37197;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#65292;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#30340;&#22823;&#23567;&#26159;&#21407;&#26377;&#20869;&#23384;&#22823;&#23567;&#30340; 2 &#20493;&#12290;&#21407;&#26377;&#30340;&#25968;&#25454;&#20250;&#34987;&#25335;&#36125;&#21040;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#20013;&#12290;</span>
-<span style="color: #8D8D84; font-style: italic;">pool:    &#35813;&#25968;&#32452;&#29992;&#26469;&#20998;&#37197;&#20869;&#23384;&#30340;&#20869;&#23384;&#27744;&#12290;</span>
-<span style="color: #8D8D84; font-style: italic;">*/</span>
+struct ngx_array_s {
+    void        *elts;
+    ngx_uint_t   nelts;
+    size_t       size;
+    ngx_uint_t   nalloc;
+    ngx_pool_t  *pool;
+};
+/*
+elts:    &#25351;&#21521;&#23454;&#38469;&#30340;&#25968;&#25454;&#23384;&#20648;&#21306;&#22495;&#12290;
+nelts:   &#25968;&#32452;&#23454;&#38469;&#20803;&#32032;&#20010;&#25968;&#12290;
+size:    &#25968;&#32452;&#21333;&#20010;&#20803;&#32032;&#30340;&#22823;&#23567;&#65292;&#21333;&#20301;&#26159;&#23383;&#33410;&#12290;
+nalloc:  &#25968;&#32452;&#30340;&#23481;&#37327;&#12290;&#34920;&#31034;&#35813;&#25968;&#32452;&#22312;&#19981;&#24341;&#21457;&#25193;&#23481;&#30340;&#21069;&#25552;&#19979;&#65292;&#21487;&#20197;&#26368;&#22810;&#23384;&#20648;&#30340;&#20803;&#32032;&#30340;&#20010;&#25968;&#12290;&#24403; nelts &#22686;&#38271;&#21040;&#36798; nalloc  &#26102;&#65292;&#22914;&#26524;&#20877;&#24448;&#27492;&#25968;&#32452;&#20013;&#23384;&#20648;&#20803;&#32032;&#65292;&#21017;&#20250;&#24341;&#21457;&#25968;&#32452;&#30340;&#25193;&#23481;&#12290;&#25968;&#32452;&#30340;&#23481;&#37327;&#23558;&#20250;&#25193;&#23637;&#21040;&#21407;&#26377;&#23481;&#37327;&#30340; 2 &#20493;&#22823;&#23567;&#12290;&#23454;&#38469;&#19978;&#26159;&#20998;&#37197;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#65292;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#30340;&#22823;&#23567;&#26159;&#21407;&#26377;&#20869;&#23384;&#22823;&#23567;&#30340; 2 &#20493;&#12290;&#21407;&#26377;&#30340;&#25968;&#25454;&#20250;&#34987;&#25335;&#36125;&#21040;&#26032;&#30340;&#19968;&#22359;&#20869;&#23384;&#20013;&#12290;
+pool:    &#35813;&#25968;&#32452;&#29992;&#26469;&#20998;&#37197;&#20869;&#23384;&#30340;&#20869;&#23384;&#27744;&#12290;
+*/
 </pre>
 </div>
 <p>
@@ -403,12 +473,12 @@ nginx-0.1.0
 nginx 的 filter 模块在处理从别的 filter 模块或者是 handler 模块传递过来的数据（实际上就是需要发送给客户端的http response）。这个传递过来的数据是以一个链表的形式 ngx_chain_t 。而且数据可能被分多次传递过来。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_chain_s</span>       <span style="color: #6434A3;">ngx_chain_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_chain_s       ngx_chain_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_chain_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">ngx_buf_t</span>    <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">buf</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_chain_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_chain_s {
+    ngx_buf_t    *buf;
+    ngx_chain_t  *next;
+};
 </pre>
 </div>
 </div>
@@ -420,46 +490,46 @@ nginx 的 filter 模块在处理从别的 filter 模块或者是 handler 模块�
 ngx_buf_t 就是 ngx_chain_t 链表的每个节点的实际数据。该结构实际上是一种抽象的数据结构，它代表某种具体的数据。这个数据可能是指向内存中的某个缓冲区，也可能指向一个文件的某一部分，也可能是一些纯元数据（元数据的作用在于指示这个链表的读取者对读取的数据进行不同的处理）。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_buf_s</span>  <span style="color: #6434A3;">ngx_buf_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_buf_s  ngx_buf_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_buf_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">u_char</span>          <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">pos</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">u_char</span>          <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">last</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">off_t</span>            <span style="color: #BA36A5; font-style: italic;">file_pos</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">off_t</span>            <span style="color: #BA36A5; font-style: italic;">file_last</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_buf_s {
+    u_char          *pos;
+    u_char          *last;
+    off_t            file_pos;
+    off_t            file_last;
 
-    <span style="color: #006FE0;">int</span>              <span style="color: #BA36A5; font-style: italic;">type</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">u_char</span>          <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">start</span><span style="color: #333333; background-color: #FFFFFF;">;</span>         <span style="color: #8D8D84; font-style: italic;">/* start of buffer */</span>
-    <span style="color: #6434A3;">u_char</span>          <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">end</span><span style="color: #333333; background-color: #FFFFFF;">;</span>           <span style="color: #8D8D84; font-style: italic;">/* end of buffer */</span>
-    <span style="color: #6434A3;">ngx_buf_tag_t</span>    <span style="color: #BA36A5; font-style: italic;">tag</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_file_t</span>      <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">file</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_buf_t</span>       <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">shadow</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    int              type;
+    u_char          *start;         /* start of buffer */
+    u_char          *end;           /* end of buffer */
+    ngx_buf_tag_t    tag;
+    ngx_file_t      *file;
+    ngx_buf_t       *shadow;
 
 
-    <span style="color: #8D8D84; font-style: italic;">/* the buf's content could be changed */</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">temporary</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    /* the buf's content could be changed */
+    unsigned         temporary:1;
 
-    <span style="color: #8D8D84; font-style: italic;">/*</span>
-<span style="color: #8D8D84; font-style: italic;">     * the buf's content is in a memory cache or in a read only memory</span>
-<span style="color: #8D8D84; font-style: italic;">     * and must not be changed</span>
-<span style="color: #8D8D84; font-style: italic;">     */</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">memory</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    /*
+     * the buf's content is in a memory cache or in a read only memory
+     * and must not be changed
+     */
+    unsigned         memory:1;
 
-    <span style="color: #8D8D84; font-style: italic;">/* the buf's content is mmap()ed and must not be changed */</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">mmap</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    /* the buf's content is mmap()ed and must not be changed */
+    unsigned         mmap:1;
 
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">recycled</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">in_file</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">flush</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">last_buf</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    unsigned         recycled:1;
+    unsigned         in_file:1;
+    unsigned         flush:1;
+    unsigned         last_buf:1;
 
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">last_shadow</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">temp_file</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    unsigned         last_shadow:1;
+    unsigned         temp_file:1;
 
-    <span style="color: #006FE0;">unsigned</span>         <span style="color: #BA36A5; font-style: italic;">zerocopy_busy</span>:<span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    unsigned         zerocopy_busy:1;
 
-    <span style="color: #8D8D84; font-style: italic;">/* STUB */</span> <span style="color: #006FE0;">int</span>   <span style="color: #BA36A5; font-style: italic;">num</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    /* STUB */ int   num;
+};
 </pre>
 </div>
 </div>
@@ -471,21 +541,21 @@ ngx_buf_t 就是 ngx_chain_t 链表的每个节点的实际数据。该结构实
 ngx_list_t 的节点实际上是一个固定大小的数组，首节点需要初始化（自身），之后的节点为 ngx_list_part_t 结构。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_list_part_s</span>  <span style="color: #6434A3;">ngx_list_part_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_list_part_s  ngx_list_part_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_list_part_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">void</span>             <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">elts</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_uint_t</span>        <span style="color: #BA36A5; font-style: italic;">nelts</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_list_part_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_list_part_s {
+    void             *elts;
+    ngx_uint_t        nelts;
+    ngx_list_part_t  *next;
+};
 
-<span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">ngx_list_part_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">last</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_list_part_t</span>   <span style="color: #BA36A5; font-style: italic;">part</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">size_t</span>            <span style="color: #BA36A5; font-style: italic;">size</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_uint_t</span>        <span style="color: #BA36A5; font-style: italic;">nalloc</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_pool_t</span>       <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">pool</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span> <span style="color: #6434A3;">ngx_list_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+typedef struct {
+    ngx_list_part_t  *last;
+    ngx_list_part_t   part;
+    size_t            size;
+    ngx_uint_t        nalloc;
+    ngx_pool_t       *pool;
+} ngx_list_t;
 </pre>
 </div>
 </div>
@@ -501,12 +571,12 @@ ngx_list_t 的节点实际上是一个固定大小的数组，首节点需要初
 ngx_queue_t 是一种的双向链表。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_queue_s</span> <span style="color: #6434A3;">ngx_queue_t</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">typedef struct ngx_queue_s ngx_queue_t;
 
-<span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_queue_s</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">ngx_queue_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">prev</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #6434A3;">ngx_queue_t</span>  <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">next</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+struct ngx_queue_s {
+    ngx_queue_t  *prev;
+    ngx_queue_t  *next;
+};
 </pre>
 </div>
 
@@ -514,18 +584,18 @@ ngx_queue_t 是一种的双向链表。
 ngx_queue_t 只是声明了前向和后向指针。在使用的时候，我们首先需要定义一个哨兵节点（对于后续具体存放数据的节点，我们称之为数据节点），比如：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #6434A3;">ngx_queue_t</span> <span style="color: #BA36A5;">free</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">ngx_queue_t free;
 </pre>
 </div>
 <p>
 接下来初始化：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006DAF;">ngx_queue_init</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">&amp;</span>free<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c">ngx_queue_init(&amp;free);
 
-<span style="color: #808080;">#define</span> <span style="color: #006699;">ngx_queue_init</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">q</span><span style="color: #707183; background-color: #FFFFFF;">)</span>     \
-    <span style="color: #707183;">(</span>q<span style="color: #707183;">)</span>-&gt;prev = q;            \
-    <span style="color: #707183;">(</span>q<span style="color: #707183;">)</span>-&gt;next = q;
+#define ngx_queue_init(q)     \
+    (q)-&gt;prev = q;            \
+    (q)-&gt;next = q;
 </pre>
 </div>
 <p>
@@ -635,9 +705,9 @@ nginx 会将整个请求头都放在 buffer 里面，配置这个 buffer 的大�
 </p>
 </div>
 </div>
-<div id="outline-container-org5361aae" class="outline-3">
-<h3 id="org5361aae">lingering_close</h3>
-<div class="outline-text-3" id="text-org5361aae">
+<div id="outline-container-orgaee87f8" class="outline-3">
+<h3 id="orgaee87f8">lingering_close</h3>
+<div class="outline-text-3" id="text-orgaee87f8">
 <p>
 配置开启或关闭延迟关闭。
 </p>
@@ -750,7 +820,13 @@ keeps the length of the response obtained from the upstream server (0.7.27); the
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

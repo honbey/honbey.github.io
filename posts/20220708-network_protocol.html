@@ -1,20 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:21 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Network Protocol</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Network Protocol</h1>
-</header><p>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-1c9aef4e-3ee5-4313-8357-7ae59c86c732">Protocol</a>
+<ul>
+<li><a href="#orgeca7057">一些可能不常见但用到的协议</a>
+<ul>
+<li><a href="#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a></li>
+<li><a href="#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a></li>
+<li><a href="#org837ccbd">lapp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga54dd0c">Underlay/Overlay</a>
+<ul>
+<li><a href="#org2e21ba7">Underlay 网络</a></li>
+<li><a href="#org40d6db8">Overlay 网络</a></li>
+<li><a href="#org8de5d17">网络 Overlay</a></li>
+<li><a href="#org2cb84eb">主机 Overlay</a></li>
+<li><a href="#orgd0ee9c1">Overlay 网络构成</a></li>
+</ul>
+</li>
+<li><a href="#org799e1ff">Network Layer</a>
+<ul>
+<li><a href="#orge56bc8b">ICMP</a></li>
+</ul>
+</li>
+<li><a href="#orgc45be2a">Transport Layer</a></li>
+<li><a href="#org6b76cb7">网络工具</a>
+<ul>
+<li><a href="#org353a467"><code>ss</code></a></li>
+<li><a href="#orgc169a59"><code>netstat</code></a></li>
+<li><a href="#orgba548f6"><code>socat</code></a></li>
+</ul>
+</li>
+<li><a href="#orgaa59e55">NAT</a>
+<ul>
+<li><a href="#org08a6c05">NAT 网关闲谈</a></li>
+</ul>
+</li>
+<li><a href="#org2889eae">Reference</a></li>
+</ul>
+</div>
+</nav>
+<p>
 OSI(Open System Interconnection) Model: 7 Layers.
 Host layers: Applicatin, Presentation, Session, Transport, Media layers: Network, Data Link, Physical.
 应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。
@@ -143,7 +211,7 @@ dict 协议是一个在线网络字典协议，这个协议是用来架设一个
 通过 dict 获取 redis 配置信息：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #008000;">'dict://127.0.0.1:6379/info'</span>
+<pre class="src src-bash">curl -v 'dict://127.0.0.1:6379/info'
 </pre>
 </div>
 </div>
@@ -435,7 +503,13 @@ NAT 网关： VM &#x2013;&#x2014;&gt; NAT Gateway &#x2013;&#x2014;&gt; Internet
 </div>
 </div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

@@ -1,20 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-12-31 Sat 00:22 -->
+<!-- 2023-02-02 Thu 21:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
+
+                     <!--
+                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+                     -->
+                     <!--
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     -->
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <header>
 <h1 class="title">Python</h1>
-</header>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org04c0986">Some Useful Modules</a>
+<ul>
+<li><a href="#org5f18649">numpy - Scientific calculation</a></li>
+<li><a href="#org6a38aa4">re - Regexp</a></li>
+<li><a href="#orgbcfcc03">sqlalchemy - ORM</a></li>
+<li><a href="#ID-49846a46-321d-40b6-9ced-9791a2d43d5e">seleium - Headless browser</a></li>
+<li><a href="#org3576e7b">pandas</a>
+<ul>
+<li><a href="#orge6b6ed6">excel process</a></li>
+<li><a href="#org8af9d31">定位数据</a></li>
+<li><a href="#org7929ca8">多级索引</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgd6a6416">Dict</a>
+<ul>
+<li><a href="#ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">Merge dictionary in Python</a></li>
+</ul>
+</li>
+<li><a href="#org089e3f5">Information Security</a>
+<ul>
+<li><a href="#orgf15212f">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">Avoid SSRF</a></li>
+</ul>
+</li>
+<li><a href="#org3abae21">playground</a></li>
+</ul>
+</div>
+</nav>
+
 <div id="outline-container-org04c0986" class="outline-2">
 <h2 id="org04c0986">Some Useful Modules</h2>
 <div class="outline-text-2" id="text-org04c0986">
@@ -26,10 +82,10 @@
 Numpy remove scientific notation<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/env/bin python</span>
-<span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
-np.<span style="color: #006DAF; font-style: italic;">set_printoptions</span>(<span style="color: #808080;">suppress</span><span style="color: #0000FF;">=</span><span style="color: #006FE0;">True</span>, <span style="color: #808080;">formatter</span><span style="color: #0000FF;">=</span>{
-    <span style="color: #008000;">'float_kind'</span>: <span style="color: #008000;">'{:0.1f}'</span>.<span style="color: #D0372D; font-style: italic;">format</span>
+<pre class="src src-python">#!/usr/env/bin python
+import numpy as np
+np.set_printoptions(suppress=True, formatter={
+    'float_kind': '{:0.1f}'.format
 })
 </pre>
 </div>
@@ -82,20 +138,20 @@ np.<span style="color: #006DAF; font-style: italic;">set_printoptions</span>(<sp
 Selenium use specific browser:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">from</span> selenium <span style="color: #0000FF;">import</span> webdriver
+<pre class="src src-python">from selenium import webdriver
 
-<span style="color: #BA36A5;">driver_path</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"C:/Users/username/PycharmProjects/chromedriver.exe"</span>
-<span style="color: #BA36A5;">brave_path</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"</span>
+driver_path = "C:/Users/username/PycharmProjects/chromedriver.exe"
+brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
 
-<span style="color: #BA36A5;">option</span> <span style="color: #0000FF;">=</span> webdriver.<span style="color: #6434A3; font-style: italic;">ChromeOptions</span>()
-option.<span style="color: #BA36A5; font-style: italic;">binary_location</span> <span style="color: #0000FF;">=</span> brave_path
-<span style="color: #8D8D84; font-style: italic;"># option.add_argument("--incognito") OPTIONAL</span>
-<span style="color: #8D8D84; font-style: italic;"># option.add_argument("--headless") OPTIONAL</span>
+option = webdriver.ChromeOptions()
+option.binary_location = brave_path
+# option.add_argument("--incognito") OPTIONAL
+# option.add_argument("--headless") OPTIONAL
 
-<span style="color: #8D8D84; font-style: italic;"># Create new Instance of Chrome</span>
-<span style="color: #BA36A5;">browser</span> <span style="color: #0000FF;">=</span> webdriver.<span style="color: #6434A3; font-style: italic;">Chrome</span>(<span style="color: #808080;">executable_path</span><span style="color: #0000FF;">=</span>driver_path, <span style="color: #808080;">chrome_options</span><span style="color: #0000FF;">=</span>option)
+# Create new Instance of Chrome
+browser = webdriver.Chrome(executable_path=driver_path, chrome_options=option)
 
-browser.<span style="color: #006DAF; font-style: italic;">get</span>(<span style="color: #008000;">"https://www.baidu.com"</span>)
+browser.get("https://www.baidu.com")
 </pre>
 </div>
 </div>
@@ -194,7 +250,7 @@ browser.<span style="color: #006DAF; font-style: italic;">get</span>(<span style
 <h3 id="ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">Merge dictionary in Python</h3>
 <div class="outline-text-3" id="text-ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> <span style="color: #0000FF;">=</span> {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
+<pre class="src src-python">a, b = {'a': 1}, {'b': 2}
 </pre>
 </div>
 <ol class="org-ol">
@@ -203,9 +259,9 @@ update()
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">from</span> copy <span style="color: #0000FF;">import</span> deepcopy
-<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">deepcopy</span>(a)
-ab.<span style="color: #006DAF; font-style: italic;">update</span>(b)
+<pre class="src src-python">from copy import deepcopy
+ab = deepcopy(a)
+ab.update(b)
 </pre>
 </div></li>
 <li><p>
@@ -213,7 +269,7 @@ use <code>**</code> to destruct
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> {<span style="color: #0000FF;">**</span>a, <span style="color: #0000FF;">**</span>b}
+<pre class="src src-python">ab = {**a, **b}
 </pre>
 </div></li>
 <li><p>
@@ -221,8 +277,8 @@ itertools
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">import</span> itertools
-<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(itertools.<span style="color: #006DAF; font-style: italic;">chain</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>(), b.<span style="color: #006DAF; font-style: italic;">items</span>()))
+<pre class="src src-python">import itertools
+ab = dict(itertools.chain(a.items(), b.items()))
 </pre>
 </div></li>
 <li><p>
@@ -231,8 +287,8 @@ This method will not update the value of same key.
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">from</span> collections <span style="color: #0000FF;">import</span> <span style="color: #6434A3;">ChainMap</span>
-<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(<span style="color: #6434A3;">ChainMap</span>(a, b))
+<pre class="src src-python">from collections import ChainMap
+ab = dict(ChainMap(a, b))
 </pre>
 </div></li>
 <li><p>
@@ -240,9 +296,9 @@ dict.items()
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>() <span style="color: #0000FF;">|</span> b.<span style="color: #006DAF; font-style: italic;">items</span>())
-<span style="color: #8D8D84; font-style: italic;"># or</span>
-<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(<span style="color: #006FE0;">list</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>() <span style="color: #0000FF;">+</span> <span style="color: #006FE0;">list</span>(b.<span style="color: #006DAF; font-style: italic;">items</span>())))
+<pre class="src src-python">ab = dict(a.items() | b.items())
+# or
+ab = dict(list(a.items() + list(b.items())))
 </pre>
 </div></li>
 <li><p>
@@ -250,7 +306,7 @@ Pythonnic
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> {k:v <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">d</span> <span style="color: #0000FF;">in</span> [a, b] <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">k</span>, <span style="color: #BA36A5;">v</span> <span style="color: #0000FF;">in</span> d.<span style="color: #006DAF; font-style: italic;">items</span>()}
+<pre class="src src-python">ab = {k:v for d in [a, b] for k, v in d.items()}
 </pre>
 </div></li>
 <li><p>
@@ -258,7 +314,7 @@ Python 3.9
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> a <span style="color: #0000FF;">|</span> b
+<pre class="src src-python">ab = a | b
 </pre>
 </div></li>
 </ol>
@@ -273,19 +329,19 @@ Example:
 <h3 id="orgf15212f">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
 <div class="outline-text-3" id="text-orgf15212f">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/env/bin python</span>
-<span style="color: #0000FF;">import</span> os
+<pre class="src src-python">#!/usr/env/bin python
+import os
 
-<span style="color: #BA36A5;">app_root</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">'/data/app'</span>
-<span style="color: #BA36A5;">filename</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">'../../etc/passwd'</span>
+app_root = '/data/app'
+filename = '../../etc/passwd'
 
-<span style="color: #8D8D84; font-style: italic;"># abspath = os.path.join(app_root, filename)</span>
-<span style="color: #BA36A5;">abspath</span> <span style="color: #0000FF;">=</span> os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">realpath</span>(os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">join</span>(app_root, filename))
+# abspath = os.path.join(app_root, filename)
+abspath = os.path.realpath(os.path.join(app_root, filename))
 
-<span style="color: #0000FF;">if</span> os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">commonprefix</span>([app_root, abspath]) <span style="color: #0000FF;">!=</span> app_root:
-    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">'403 forbidden'</span>)
-<span style="color: #0000FF;">else</span>:
-    <span style="color: #006FE0;">print</span>(abspath)
+if os.path.commonprefix([app_root, abspath]) != app_root:
+    print('403 forbidden')
+else:
+    print(abspath)
 </pre>
 </div>
 </div>
@@ -294,54 +350,54 @@ Example:
 <h3 id="ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
 <div class="outline-text-3" id="text-ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">import</span> ipaddress
-<span style="color: #0000FF;">import</span> dns.resolver
-<span style="color: #8D8D84; font-style: italic;"># Configure the whitelist to check</span>
-<span style="color: #BA36A5;">DOMAINS_WHITELIST</span> <span style="color: #0000FF;">=</span> [<span style="color: #008000;">"baidu.com"</span>, <span style="color: #008000;">"labslinux"</span>]
-<span style="color: #BA36A5;">DNS_RESOLVER</span> <span style="color: #0000FF;">=</span> dns.<span style="color: #D0372D; font-style: italic;">resolver</span>.<span style="color: #6434A3; font-style: italic;">Resolver</span>()
-<span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #BA36A5; font-style: italic;">nameservers</span> <span style="color: #0000FF;">=</span> [<span style="color: #008000;">"1.1.1.1"</span>]
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">verify_dns_records</span>(<span style="color: #BA36A5;">domain</span>, <span style="color: #BA36A5;">records</span>, <span style="color: #BA36A5;">type</span>):
-    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">False</span>
-    <span style="color: #0000FF;">if</span> records <span style="color: #0000FF;">is</span> <span style="color: #0000FF;">not</span> <span style="color: #006FE0;">None</span>:
-        <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">record</span> <span style="color: #0000FF;">in</span> records:
-            <span style="color: #BA36A5;">value</span> <span style="color: #0000FF;">=</span> record.<span style="color: #006DAF; font-style: italic;">to_text</span>().<span style="color: #006DAF; font-style: italic;">strip</span>()
-            <span style="color: #0000FF;">try</span>:
-                <span style="color: #BA36A5;">ip</span> <span style="color: #0000FF;">=</span> ipaddress.<span style="color: #006DAF; font-style: italic;">ip_address</span>(value)
+<pre class="src src-python">import ipaddress
+import dns.resolver
+# Configure the whitelist to check
+DOMAINS_WHITELIST = ["baidu.com", "labslinux"]
+DNS_RESOLVER = dns.resolver.Resolver()
+DNS_RESOLVER.nameservers = ["1.1.1.1"]
+def verify_dns_records(domain, records, type):
+    error_detected = False
+    if records is not None:
+        for record in records:
+            value = record.to_text().strip()
+            try:
+                ip = ipaddress.ip_address(value)
 
-                <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> ip.<span style="color: #D0372D; font-style: italic;">is_global</span>:
-                    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"</span>[!] <span style="color: #D0372D;">DNS</span> record type <span style="color: #008000;">'%s'</span> <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">domain</span> name <span style="color: #008000;">'%s'</span> <span style="color: #BA36A5;">resolve</span> <span style="color: #BA36A5;">to</span>
-                    <span style="color: #BA36A5;">a</span> <span style="color: #BA36A5;">non</span> <span style="color: #BA36A5;">public</span> <span style="color: #BA36A5;">IP</span> <span style="color: #BA36A5;">address</span> <span style="color: #008000;">'%s'</span>!<span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (type, domain, value))
-                    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
-            <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">ValueError</span>:
-                <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
-                <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] '%s' is not valid IP address!"</span> <span style="color: #0000FF;">%</span> value)
-    <span style="color: #0000FF;">return</span> error_detected
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">check</span>():
-    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">False</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">domain</span> <span style="color: #0000FF;">in</span> <span style="color: #D0372D;">DOMAINS_WHITELIST</span>:
-        <span style="color: #8D8D84; font-style: italic;"># Get the IPs of the current domain</span>
-        <span style="color: #8D8D84; font-style: italic;"># See https://en.wikipedia.org/wiki/List_of_DNS_record_types</span>
-        <span style="color: #0000FF;">try</span>:
-            <span style="color: #8D8D84; font-style: italic;"># A = IPv4 address record</span>
-            <span style="color: #BA36A5;">ip_v4_records</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #006DAF; font-style: italic;">query</span>(domain, <span style="color: #008000;">"A"</span>)
-        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
-            <span style="color: #BA36A5;">ip_v4_records</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s</span><span style="color: #0000FF;">\n</span><span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (domain,e))
-        <span style="color: #0000FF;">try</span>:
-           <span style="color: #BA36A5;">ip_v6_records</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #006DAF; font-style: italic;">query</span>(domain, <span style="color: #008000;">"AAAA"</span>)
-        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
-            <span style="color: #BA36A5;">ip_v6_records</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s</span><span style="color: #0000FF;">\n</span><span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (domain,e))
-        <span style="color: #8D8D84; font-style: italic;"># Verify the IPs obtained</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #006DAF;">verify_dns_records</span>(domain, ip_v4_records, <span style="color: #008000;">"A"</span>)
-        <span style="color: #0000FF;">or</span> <span style="color: #006DAF;">verify_dns_records</span>(domain, ip_v6_records, <span style="color: #008000;">"AAAA"</span>):
-            <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
-    <span style="color: #0000FF;">return</span> error_detected
-<span style="color: #0000FF;">if</span> <span style="color: #006FE0;">__name__</span><span style="color: #0000FF;">==</span> <span style="color: #008000;">"__main__"</span>:
-    <span style="color: #0000FF;">if</span> <span style="color: #006DAF;">check</span>():
-        <span style="color: #006DAF;">exit</span>(<span style="color: #D0372D;">1</span>)
-    <span style="color: #0000FF;">else</span>:
-        <span style="color: #006DAF;">exit</span>(<span style="color: #D0372D;">0</span>)
+                if not ip.is_global:
+                    print("[!] DNS record type '%s' for domain name '%s' resolve to
+                    a non public IP address '%s'!" % (type, domain, value))
+                    error_detected = True
+            except ValueError:
+                error_detected = True
+                print("[!] '%s' is not valid IP address!" % value)
+    return error_detected
+def check():
+    error_detected = False
+    for domain in DOMAINS_WHITELIST:
+        # Get the IPs of the current domain
+        # See https://en.wikipedia.org/wiki/List_of_DNS_record_types
+        try:
+            # A = IPv4 address record
+            ip_v4_records = DNS_RESOLVER.query(domain, "A")
+        except Exception as e:
+            ip_v4_records = None
+            print("[i] Cannot get A record for domain '%s': %s\n" % (domain,e))
+        try:
+           ip_v6_records = DNS_RESOLVER.query(domain, "AAAA")
+        except Exception as e:
+            ip_v6_records = None
+            print("[i] Cannot get AAAA record for domain '%s': %s\n" % (domain,e))
+        # Verify the IPs obtained
+        if verify_dns_records(domain, ip_v4_records, "A")
+        or verify_dns_records(domain, ip_v6_records, "AAAA"):
+            error_detected = True
+    return error_detected
+if __name__== "__main__":
+    if check():
+        exit(1)
+    else:
+        exit(0)
 </pre>
 </div>
 </div>
@@ -354,7 +410,7 @@ Example:
 <pre class="src src-python-jit">print('Hello world')
 </pre>
 </div>
-<div class="klipsify div" id="orga8111d8">
+<div class="klipsify div" id="org0883bad">
 <script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
 <script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
@@ -382,7 +438,13 @@ Example:
 </div>
 </div></div>
 <div id="postamble" class="status">
-<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+
+                     Theme
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     by
+                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
+                     <br>
+                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>
