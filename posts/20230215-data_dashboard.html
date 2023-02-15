@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Skip List</title>
+<title>Data Dashboard</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
@@ -35,14 +35,69 @@
 <body>
 <div id="content" class="content">
 <header>
-<h1 class="title">Skip List</h1>
-</header><ol class="org-ol">
-<li>Skip List 包含多个层，每层称为一个 level ，从 0 开始递增</li>
-<li>Skip List 最底层（0 层）包含所有元素</li>
-<li>每一个 level / 层都是一个有序的列表</li>
-<li>level 小的层包含 level 大的层的元素，也就是说元素 A 在 X 层出现，那么 X &gt; Y &gt;= 0 的 level 层都应该包含元素 A</li>
-<li>每个节点元素由节点 key ，节点 value 和指向当前节点所在 level 的指针数组组成</li>
-</ol>
+<h1 class="title">Data Dashboard</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</a>
+<ul>
+<li><a href="#org5287acd">Alert</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa" class="outline-2">
+<h2 id="ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</h2>
+<div class="outline-text-2" id="text-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">
+<p>
+使用 <a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> , MySQL, Loki 等作为数据源。
+</p>
+</div>
+<div id="outline-container-org5287acd" class="outline-3">
+<h3 id="org5287acd">Alert</h3>
+<div class="outline-text-3" id="text-org5287acd">
+<p>
+Name <span class="underline">xxx</span> Evaluate every <span class="underline">1m</span> (10s * 6) For <span class="underline">2m</span>
+</p>
+
+<blockquote>
+<p>
+If an alert rule has a configured and the query violates the configured threshold, then it goes from OK to Pending. Grafana does not send any notifications for that change. Once the alert rule has been firing for more than For duration, then the alert changes to Alerting and sends alert notifications.
+</p>
+</blockquote>
+
+<p>
+Conditions
+</p>
+<ul class="org-ul">
+<li>Function
+<ul class="org-ul">
+<li>sum()</li>
+<li>min()</li>
+<li>avg()</li>
+</ul></li>
+<li>query(query_name, begin_time, end_time)</li>
+<li>IS ABOVE/ IS BELOW</li>
+</ul>
+
+<p>
+If no data or all values are null -&gt; No Data
+If no data or all values are null -&gt; Keep Last State
+</p>
+
+<p>
+Notifications
+</p>
+<ul class="org-ul">
+<li>webhook</li>
+<li>email</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 

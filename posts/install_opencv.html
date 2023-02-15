@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:04 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>安装 OpenCV</title>
@@ -79,13 +79,13 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">sudo apt update
-sudo apt upgrade
-sudo apt-get install build-essential cmake unzip pkg-config
-sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-sudo apt-get install libxvidcore-dev libx264-dev
-sudo apt-get install libgtk-3-dev libatlas-base-dev gfortran
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt update
+<span style="color: #006DAF;">sudo</span> apt upgrade
+<span style="color: #006DAF;">sudo</span> apt-get install build-essential cmake unzip pkg-config
+<span style="color: #006DAF;">sudo</span> apt-get install libjpeg-dev libpng-dev libtiff-dev
+<span style="color: #006DAF;">sudo</span> apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+<span style="color: #006DAF;">sudo</span> apt-get install libxvidcore-dev libx264-dev
+<span style="color: #006DAF;">sudo</span> apt-get install libgtk-3-dev libatlas-base-dev gfortran
 </pre>
 </div></li>
 
@@ -93,9 +93,9 @@ sudo apt-get install libgtk-3-dev libatlas-base-dev gfortran
 下载源码
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd ~
-wget https://github.com/opencv/opencv/archive/4.0.0.zip
-wget https://github.com/opencv/opencv_contrib/archive/4.0.0.zip
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">wget</span> https://github.com/opencv/opencv/archive/4.0.0.zip
+<span style="color: #006DAF;">wget</span> https://github.com/opencv/opencv_contrib/archive/4.0.0.zip
 </pre>
 </div></li>
 
@@ -109,10 +109,10 @@ wget https://github.com/opencv/opencv_contrib/archive/4.0.0.zip
 </blockquote>
 
 <div class="org-src-container">
-<pre class="src src-bash">unzip opencv.zip
-unzip opencv_contrib.zip
-mv opencv-4.0.0 opencv
-mv opencv_contrib-4.0.0 opencv_contrib
+<pre class="src src-bash"><span style="color: #006DAF;">unzip</span> opencv.zip
+<span style="color: #006DAF;">unzip</span> opencv_contrib.zip
+<span style="color: #006DAF;">mv</span> opencv-4.0.0 opencv
+<span style="color: #006DAF;">mv</span> opencv_contrib-4.0.0 opencv_contrib
 </pre>
 </div></li>
 
@@ -126,16 +126,16 @@ mv opencv_contrib-4.0.0 opencv_contrib
 </blockquote>
 
 <div class="org-src-container">
-<pre class="src src-bash">cd opencv
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D BUILD_EXAMPLES=ON \
-    -D INSTALL_C_EXAMPLES=OFF \
-    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
-make -j4
-sudo make install
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> opencv
+<span style="color: #006DAF;">mkdir</span> build
+<span style="color: #006FE0;">cd</span> build
+<span style="color: #006DAF;">cmake</span> <span style="color: #D0372D;">-D</span> CMAKE_BUILD_TYPE=RELEASE \
+    <span style="color: #D0372D;">-D</span> CMAKE_INSTALL_PREFIX=/usr/local \
+    <span style="color: #D0372D;">-D</span> BUILD_EXAMPLES=ON \
+    <span style="color: #D0372D;">-D</span> INSTALL_C_EXAMPLES=OFF \
+    <span style="color: #D0372D;">-D</span> OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
+<span style="color: #006DAF;">make</span> <span style="color: #D0372D;">-j4</span>
+<span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
 </pre>
 </div>
 <p>
@@ -146,7 +146,7 @@ sudo make install
 测试
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">opencv_version
+<pre class="src src-bash"><span style="color: #006DAF;">opencv_version</span>
 </pre>
 </div>
 <p>
@@ -157,23 +157,23 @@ sudo make install
 Source Code
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"> // filename: cvTest.cpp
- #include &lt;iostream&gt;
- #include &lt;opencv2/opencv.hpp&gt;
+<pre class="src src-cpp"> <span style="color: #8D8D84; font-style: italic;">// filename: cvTest.cpp</span>
+ <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;iostream&gt;</span>
+ <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;opencv2/opencv.hpp&gt;</span>
 
- int main(int argc, char const *argv[])
- {
-   if (argc != 1) { // the program only need one parameter
-     std::cout &lt;&lt; "error! usage: cvTest.out" &lt;&lt; std::endl;
-   }
+ <span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+ <span style="color: #707183; background-color: #FFFFFF;">{</span>
+   <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>argc <span style="color: #0000FF;">!=</span> <span style="color: #D0372D;">1</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span> <span style="color: #8D8D84; font-style: italic;">// the program only need one parameter</span>
+     <span style="color: #6434A3;">std</span>::cout <span style="color: #0000FF;">&lt;&lt;</span> <span style="color: #008000;">"error! usage: cvTest.out"</span> <span style="color: #0000FF;">&lt;&lt;</span> <span style="color: #6434A3;">std</span>::endl<span style="color: #333333; background-color: #FFFFFF;">;</span>
+   <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
 
-   cv::Mat img(200, 200, CV_8UC1); // create a image
-   cv::namedWindow("cvTest", cv::WINDOW_AUTOSIZE); // create a window
-   cv::imshow("cvTest", img); // show 'img' in the window
+   <span style="color: #6434A3;">cv</span>::<span style="color: #6434A3;">Mat</span> <span style="color: #BA36A5;">img</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">200</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">200</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">CV_8UC1</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// create a image</span>
+   <span style="color: #6434A3;">cv</span>::<span style="color: #006DAF;">namedWindow</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"cvTest"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">cv</span>::<span style="color: #D0372D;">WINDOW_AUTOSIZE</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// create a window</span>
+   <span style="color: #6434A3;">cv</span>::<span style="color: #006DAF;">imshow</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"cvTest"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> img<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// show 'img' in the window</span>
 
-   cv::waitKey(0); //press any key to close the window
-   return 0;
- }
+   <span style="color: #6434A3;">cv</span>::<span style="color: #006DAF;">waitKey</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">//press any key to close the window</span>
+   <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+ <span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 
@@ -181,8 +181,8 @@ Source Code
 Compile it(with [CMakeLists.txt](#CMakeLists-txt))
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"> cmake .
- make &amp;&amp; ./cvTest
+<pre class="src src-bash"> <span style="color: #006DAF;">cmake</span> .
+ <span style="color: #006DAF;">make</span> <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #006DAF;">./cvTest</span>
 </pre>
 </div>
 <p>
@@ -194,16 +194,16 @@ Compile it(with [CMakeLists.txt](#CMakeLists-txt))
 可以使用如下指令解决（参见 <a href="https://github.com/Microsoft/WSL/issues/3023">GitHub issue</a>）：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"> sudo strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5
+<pre class="src src-bash"> <span style="color: #006DAF;">sudo</span> strip <span style="color: #808080;">--remove-section=.note.ABI-tag</span> /usr/lib64/libQt5Core.so.5
 
- #!/bin/sh
+ <span style="color: #8D8D84; font-style: italic;">#!/bin/sh</span>
 
- if [ -x /usr/lib64/libQt5Core.so.5 ]; then
-     (set -x; strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5)
- fi
+ <span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span> -x /usr/lib64/libQt5Core.so.5 <span style="color: #707183;">]</span><span style="color: #0000FF;">;</span> <span style="color: #0000FF;">then</span>
+     <span style="color: #707183;">(</span><span style="color: #006FE0;">set</span> <span style="color: #D0372D;">-x</span><span style="color: #0000FF;">;</span> <span style="color: #006DAF;">strip</span> <span style="color: #808080;">--remove-section=.note.ABI-tag</span> /usr/lib64/libQt5Core.so.5<span style="color: #707183;">)</span>
+ <span style="color: #0000FF;">fi</span>
 
- # This "atomic bomb" workaround helps too:
- find /lib /usr/lib /usr/libexec -name '*.so' | xargs strip --remove-section=.note.ABI-tag
+ <span style="color: #8D8D84; font-style: italic;"># This "atomic bomb" workaround helps too:</span>
+ <span style="color: #006DAF;">find</span> /lib /usr/lib /usr/libexec <span style="color: #D0372D;">-name</span> <span style="color: #008000;">'*.so'</span> <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">xargs</span> strip <span style="color: #808080;">--remove-section=.note.ABI-tag</span>
 </pre>
 </div></li>
 </ol>
@@ -299,11 +299,11 @@ LIBS += -L/usr/local/lib64 \
 安装依赖
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo dnf install python-devel # Python&#25903;&#25345;
-sudo dnf install ncurses-devel nasm yasm # &#20026;&#32534;&#35793;FFmpeg
-sudo dnf install gtk+ gtk+-devel gtk2 gtk2-devel gtkglext-devel # OpenCV&#25152;&#20381;&#36182;&#30340;&#22270;&#24418;&#21270;&#30028;&#38754;
-sudo dnf install libavc1394 libavc1394-devel libdc1394 libdc1394-devel # DC1394&#35270;&#39057;&#25903;&#25345;
-sudo dnf install openjpeg-devel libjpeg-devel libpng-devel libtiff-devel
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> dnf install python-devel <span style="color: #8D8D84; font-style: italic;"># Python&#25903;&#25345;</span>
+<span style="color: #006DAF;">sudo</span> dnf install ncurses-devel nasm yasm <span style="color: #8D8D84; font-style: italic;"># &#20026;&#32534;&#35793;FFmpeg</span>
+<span style="color: #006DAF;">sudo</span> dnf install gtk+ gtk+-devel gtk2 gtk2-devel gtkglext-devel <span style="color: #8D8D84; font-style: italic;"># OpenCV&#25152;&#20381;&#36182;&#30340;&#22270;&#24418;&#21270;&#30028;&#38754;</span>
+<span style="color: #006DAF;">sudo</span> dnf install libavc1394 libavc1394-devel libdc1394 libdc1394-devel <span style="color: #8D8D84; font-style: italic;"># DC1394&#35270;&#39057;&#25903;&#25345;</span>
+<span style="color: #006DAF;">sudo</span> dnf install openjpeg-devel libjpeg-devel libpng-devel libtiff-devel
 </pre>
 </div></li>
 
@@ -315,11 +315,11 @@ FFmpeg 下载链接： <a href="https://ffmpeg.org/releases/ffmpeg-4.2.2.tar.bz2
 编译 FFmpeg
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd
-unzip FFmpeg-n4.2.2.zip
-cd FFmpeg-n4.2.2
-./configure --disable-static --enable-shared
-make &amp;&amp; sudo make install
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span>
+<span style="color: #006DAF;">unzip</span> FFmpeg-n4.2.2.zip
+<span style="color: #006FE0;">cd</span> FFmpeg-n4.2.2
+<span style="color: #006DAF;">./configure</span> <span style="color: #D0372D;">--disable-static</span> <span style="color: #D0372D;">--enable-shared</span>
+<span style="color: #006DAF;">make</span> <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
 </pre>
 </div>
 <p>
@@ -330,9 +330,9 @@ make &amp;&amp; sudo make install
 但执行 <code>ffmpeg</code> 出现了找不到链接库的错误，解决方法是在 <code>/etc/ld.conf.d/</code> 下新建一个文件 <code>ffmpeg.conf</code> ，添加内容： <code>/usr/local/lib</code> 到这个新建的文件中
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo vi /etc/ld.so.conf.d/ffmpeg.conf
-sudo ldconfig
-ffmpeg
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> vi /etc/ld.so.conf.d/ffmpeg.conf
+<span style="color: #006DAF;">sudo</span> ldconfig
+<span style="color: #006DAF;">ffmpeg</span>
 </pre>
 </div></li>
 
@@ -341,7 +341,7 @@ ffmpeg
 编译前先执行下列指令，不然会导致 <code>FFmpeg</code> 找不到
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:PKG_CONFIG_PATH
+<pre class="src src-bash"><span style="color: #0000FF;">export</span> <span style="color: #BA36A5; font-style: italic;">PKG_CONFIG_PATH</span>=/usr/local/lib/pkgconfig:PKG_CONFIG_PATH
 </pre>
 </div>
 
@@ -349,22 +349,22 @@ ffmpeg
 然后进入 OpenCV 目录进行编译
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd opencv # &#36827;&#20837; OpenCV &#28304;&#30721;&#25152;&#22312;&#30446;&#24405;
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREEIX=/usr/local \
-    -D BUILD_EXAMPLES=ON \
-    -D BUILD_OPENCV_PYTHON2=OFF \
-    -D BUILD_OPENCV_PYTHON3=ON \
-    -D INSTALL_C_EXAMPLES=OFF \
-    -D INSTALL_PYTHON_EXAMPLES=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-    -D WITH_CUDA=OFF \
-    -D WITH_FFMPEG=ON \
-    -D WITH_OPENGL=ON ..
-make -j4 # &#22810;&#32447;&#31243;&#32534;&#35793;&#65292;&#21152;&#24555;&#36895;&#24230;
-sudo make install
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> opencv <span style="color: #8D8D84; font-style: italic;"># &#36827;&#20837; OpenCV &#28304;&#30721;&#25152;&#22312;&#30446;&#24405;</span>
+<span style="color: #006DAF;">mkdir</span> build
+<span style="color: #006FE0;">cd</span> build
+<span style="color: #006DAF;">cmake</span> <span style="color: #D0372D;">-D</span> CMAKE_BUILD_TYPE=RELEASE \
+    <span style="color: #D0372D;">-D</span> CMAKE_INSTALL_PREEIX=/usr/local \
+    <span style="color: #D0372D;">-D</span> BUILD_EXAMPLES=ON \
+    <span style="color: #D0372D;">-D</span> BUILD_OPENCV_PYTHON2=OFF \
+    <span style="color: #D0372D;">-D</span> BUILD_OPENCV_PYTHON3=ON \
+    <span style="color: #D0372D;">-D</span> INSTALL_C_EXAMPLES=OFF \
+    <span style="color: #D0372D;">-D</span> INSTALL_PYTHON_EXAMPLES=ON \
+    <span style="color: #D0372D;">-D</span> OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    <span style="color: #D0372D;">-D</span> WITH_CUDA=OFF \
+    <span style="color: #D0372D;">-D</span> WITH_FFMPEG=ON \
+    <span style="color: #D0372D;">-D</span> WITH_OPENGL=ON ..
+<span style="color: #006DAF;">make</span> <span style="color: #D0372D;">-j4</span> <span style="color: #8D8D84; font-style: italic;"># &#22810;&#32447;&#31243;&#32534;&#35793;&#65292;&#21152;&#24555;&#36895;&#24230;</span>
+<span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
 </pre>
 </div></li>
 </ol>
@@ -387,7 +387,7 @@ sudo make install
 Fedora 是 Red Hat 的社区版本，软件版本都比较新，Fedora 31 现在最新的 OpenCV 版本是 3.4.6，可以通过下列命令直接安装。
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo dnf install opencv opencv-devel opencv-contrib
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> dnf install opencv opencv-devel opencv-contrib
 </pre>
 </div>
 <p>
@@ -403,7 +403,7 @@ CentOS 系统的话把 <code>dnf</code> 换成 <code>yum</code> 就行，CentOS 
 未安装 brew 先安装 brew 包管理器，安装 brew，如果有梯子的话使用
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">export ALL_PROXY=127.0.0.1:1086
+<pre class="src src-bash"><span style="color: #0000FF;">export</span> <span style="color: #BA36A5; font-style: italic;">ALL_PROXY</span>=127.0.0.1:1086
 </pre>
 </div>
 <p>
@@ -414,7 +414,7 @@ CentOS 系统的话把 <code>dnf</code> 换成 <code>yum</code> 就行，CentOS 
 安装完 brew 再执行
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">brew install opencv
+<pre class="src src-bash"><span style="color: #006DAF;">brew</span> install opencv
 </pre>
 </div>
 <p>

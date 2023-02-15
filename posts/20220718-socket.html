@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Socket</title>
@@ -65,7 +65,7 @@
 <h2 id="org45822eb">Socket 编程</h2>
 <div class="outline-text-2" id="text-org45822eb">
 
-<figure id="org156c311">
+<figure id="org00aea33">
 <img src="../images/20220718-socket_1.png" alt="20220718-socket_1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>socket flow</figcaption>
@@ -103,7 +103,7 @@ Linux 内核会维护两个队列：
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-c">int listen(int socketfd, int backlog)
+<pre class="src src-c"><span style="color: #006FE0;">int</span> <span style="color: #006699;">listen</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">socketfd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">backlog</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
 </pre>
 </div>
 <p>
@@ -120,7 +120,7 @@ Linux 内核会维护两个队列：
 配置是否关闭 nagle 算法。
 </p>
 <div class="org-src-container">
-<pre class="src src-c">setsockopt(sock_fd, IPPROTO_TCP, TCP_NODELAY, (char *)&amp;value, sizeof(int));
+<pre class="src src-c"><span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>sock_fd<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">IPPROTO_TCP</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">TCP_NODELAY</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">&amp;</span>value<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 </div>
@@ -140,7 +140,7 @@ Linux 内核会维护两个队列：
 <code>TCP_CORK</code> 强于 <code>TCP_NODELAY</code> ，在大部分的情况下，即使通过设置 <code>TCP_NODELAY</code> 而关闭 Nagle 算法，但是开启了 <code>TCP_CORK</code> ，数据也会被缓存而不是立即发送。
 </p>
 <div class="org-src-container">
-<pre class="src src-c">setsockopt(sock_fd, IPPROTO_TCP, TCP_CORK, (char *)&amp;value, sizeof(int));
+<pre class="src src-c"><span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>sock_fd<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">IPPROTO_TCP</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">TCP_CORK</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">&amp;</span>value<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 </div>
@@ -149,10 +149,10 @@ Linux 内核会维护两个队列：
 <h3 id="ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9"><code>SO_LINGER</code></h3>
 <div class="outline-text-3" id="text-ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9">
 <div class="org-src-container">
-<pre class="src src-c">struct linger {
-    int l_onoff;  /* Linger active */
-    int l_linger; /* How long to linger for */
-};
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">l_onoff</span><span style="color: #333333; background-color: #FFFFFF;">;</span>  <span style="color: #8D8D84; font-style: italic;">/* Linger active */</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5; font-style: italic;">l_linger</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">/* How long to linger for */</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 <p>

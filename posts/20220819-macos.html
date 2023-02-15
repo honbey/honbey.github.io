@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:04 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>macOS</title>
@@ -74,7 +74,7 @@
 <h3 id="org2dd71d9">Remove recent files</h3>
 <div class="outline-text-3" id="text-org2dd71d9">
 <div class="org-src-container">
-<pre class="src src-bash">xattr -c ./*
+<pre class="src src-bash"><span style="color: #006DAF;">xattr</span> <span style="color: #D0372D;">-c</span> ./*
 </pre>
 </div>
 <p>
@@ -86,7 +86,7 @@
 <h3 id="orgb0e9d75">The App package is broken</h3>
 <div class="outline-text-3" id="text-orgb0e9d75">
 <div class="org-src-container">
-<pre class="src src-bash">sudo xattr -rd com.app.quarantine
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> xattr <span style="color: #D0372D;">-rd</span> com.app.quarantine
 </pre>
 </div>
 </div>
@@ -139,15 +139,15 @@ Compile from source:
 Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">brew install wget mvn imagemagick boost qt@5 llvm@12
+<pre class="src src-bash"><span style="color: #006DAF;">brew</span> install wget mvn imagemagick boost qt@<span style="color: #D0372D;">5</span> llvm@<span style="color: #D0372D;">12</span>
 </pre>
 </div></li>
 <li><p>
 Download source code
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd ~
-git clone https://github.com/CoatiSoftware/Sourcetrail.git
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
 </pre>
 </div></li>
 <li><p>
@@ -179,18 +179,18 @@ if (BUILD_JAVA_LANGUAGE_PACKAGE)
 Compile
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">mkdir -p build/Release
-cd build/Release
+<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<span style="color: #006FE0;">cd</span> build/Release
 
-ln -s "$pwd/../../bin/app/data" data
+<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
 
-cmake -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_ENABLE_RTTI=ON \
-    -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
-    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON \
-    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
-    -DClang_DIR=/opt/homebrew/opt/llvm@12/lib/cmake/clang \
-    -DQt5_DIR=/opt/homebrew/opt/qt5/lib/cmake/Qt5 \
+<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
+    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
+    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DClang_DIR=/opt/homebrew/opt/llvm@12/lib/cmake/clang</span> \
+    <span style="color: #808080;">-DQt5_DIR=/opt/homebrew/opt/qt5/lib/cmake/Qt5</span> \
     ../..
 </pre>
 </div></li>
@@ -210,7 +210,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
 Install Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo apt install -y autoconf libtool make libmspack-dev libglib2.0-dev libpam0g-dev libssl-dev libxml2-dev libxmlsec1-dev libxinerama-dev libxrandr-dev libxtst-dev libgdk-pixbuf2.0-dev libgtk-3-dev libgtkmm-3.0-dev gcc g++
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install <span style="color: #D0372D;">-y</span> autoconf libtool <span style="color: #6434A3;">make</span> libmspack-dev libglib2.0-dev libpam0g-dev libssl-dev libxml2-dev libxmlsec1-dev libxinerama-dev libxrandr-dev libxtst-dev libgdk-pixbuf2.0-dev libgtk-3-dev libgtkmm-3.0-dev gcc g++
 </pre>
 </div></li>
 
@@ -218,14 +218,14 @@ Install Dependencies
 Download source code and compile
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd ~
-git clone https://github.com/vmware/open-vm-tools.git
-cd open-vm-tools
-autoconf -i
-./configure
-make
-sudo make install
-sudo ldconfig
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/vmware/open-vm-tools.git
+<span style="color: #006FE0;">cd</span> open-vm-tools
+<span style="color: #006DAF;">autoconf</span> <span style="color: #D0372D;">-i</span>
+<span style="color: #006DAF;">./configure</span>
+<span style="color: #006DAF;">make</span>
+<span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
+<span style="color: #006DAF;">sudo</span> ldconfig
 </pre>
 </div></li>
 
@@ -233,9 +233,9 @@ sudo ldconfig
 Main starter: touch <code>/etc/rc.local</code> and <code>sudo chmod a+x /etc/rc.local</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">#!/bin/bash
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/bin/bash</span>
 
-/usr/local/bin/vmtoolsd -b /var/run/open-vm-tools.pid
+<span style="color: #006DAF;">/usr/local/bin/vmtoolsd</span> <span style="color: #D0372D;">-b</span> /var/run/open-vm-tools.pid
 </pre>
 </div></li>
 
@@ -243,12 +243,12 @@ Main starter: touch <code>/etc/rc.local</code> and <code>sudo chmod a+x /etc/rc.
 User starter: <code>/etc/xdg/autostart/user-vmtoolsd.desktop</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">[Desktop Entry]
-Type=Application
-Name=vmtoolsd user launcher
-Exec=/usr/local/bin/vmtoolsd -n vmusr --blockFd 3
-Icon=system-run
-X-GNOME-Autostart-enabled=true
+<pre class="src src-bash"><span style="color: #707183;">[</span>Desktop Entry<span style="color: #707183;">]</span>
+<span style="color: #BA36A5; font-style: italic;">Type</span>=Application
+<span style="color: #BA36A5; font-style: italic;">Name</span>=vmtoolsd <span style="color: #006DAF;">user</span> launcher
+<span style="color: #BA36A5; font-style: italic;">Exec</span>=/usr/local/bin/vmtoolsd <span style="color: #006DAF;">-n</span> vmusr <span style="color: #D0372D;">--blockFd</span> <span style="color: #D0372D;">3</span>
+<span style="color: #BA36A5; font-style: italic;">Icon</span>=system-run
+<span style="color: #006DAF;">X-GNOME-Autostart-enabled=true</span>
 </pre>
 </div></li>
 </ol>
@@ -263,15 +263,15 @@ X-GNOME-Autostart-enabled=true
 Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo apt install qtbase5-dev libx11-xcb-dev libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-xcb-dev libxcb*-dev
+<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libx11-xcb-dev libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-xcb-dev libxcb*-dev
 
-sudo apt install libboost-dev libboost-system-dev libboost-program-options-del libboost-program-options-dev libboost-filesystem-dev libboost-date-time-dev
+<span style="color: #006DAF;">sudo</span> apt install libboost-dev libboost-system-dev libboost-program-options-del libboost-program-options-dev libboost-filesystem-dev libboost-date-time-dev
 
-sudo apt install qtbase5-dev libqt5svg5-dev
+<span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libqt5svg5-dev
 
-# TODO: install llvm 11
-# deb [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main
-# deb-src [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main
+<span style="color: #8D8D84; font-style: italic;"># </span><span style="color: #ffa500; font-weight: bold; font-style: italic;">TODO:</span><span style="color: #8D8D84; font-style: italic;"> install llvm 11</span>
+<span style="color: #8D8D84; font-style: italic;"># deb [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
+<span style="color: #8D8D84; font-style: italic;"># deb-src [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
 </pre>
 </div></li>
 
@@ -279,37 +279,37 @@ sudo apt install qtbase5-dev libqt5svg5-dev
 Download source and compile
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">cd ~
-git clone https://github.com/CoatiSoftware/Sourcetrail.git
-cd Sourcetrail
+<pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
+<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
+<span style="color: #006FE0;">cd</span> Sourcetrail
 </pre>
 </div>
 <p>
 Change CMakeLists.txt to use Qt 5.11:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sed -i 's/5.12.0/5.11.0/' CMakeLists.txt
-sed -i 's/0x051200/0x05110/' CMakeLists.txt
+<pre class="src src-bash"><span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/5.12.0/5.11.0/'</span> CMakeLists.txt
+<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/0x051200/0x05110/'</span> CMakeLists.txt
 </pre>
 </div>
 <p>
 Compile:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">mkdir -p build/Release
-cd build/Release
+<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<span style="color: #006FE0;">cd</span> build/Release
 
-ln -s "$pwd/../../bin/app/data" data
+<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
 
-cmake -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_ENABLE_RTTI=ON \
-    -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
-    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON \
-    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
-    -DClang_DIR=/usr/lib/llvm-11/lib/cmake/clang \
-    -DQt5_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt5 \
+<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
+    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
+    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
+    <span style="color: #808080;">-DClang_DIR=/usr/lib/llvm-11/lib/cmake/clang</span> \
+    <span style="color: #808080;">-DQt5_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt5</span> \
     ../..
-make ARCH=arm -j8 Sourcetrail
+<span style="color: #006DAF;">make</span> ARCH=arm <span style="color: #D0372D;">-j8</span> Sourcetrail
 </pre>
 </div></li>
 </ol>

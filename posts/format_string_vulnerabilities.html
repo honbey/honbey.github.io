@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>格式化字符漏洞</title>
@@ -58,7 +58,7 @@
 运行结果
 </p>
 
-<figure id="org60927df">
+<figure id="org5e898b3">
 <img src="../images/format_string_vulnerabilities_1.png" alt="format_string_vulnerabilities_1.png">
 
 </figure>
@@ -67,7 +67,7 @@
 Release
 </p>
 
-<figure id="org6a2731d">
+<figure id="orgf543813">
 <img src="../images/format_string_vulnerabilities_2.png" alt="format_string_vulnerabilities_2.png">
 
 </figure>
@@ -76,12 +76,12 @@ Release
 调试
 </p>
 
-<figure id="org2ebd225">
+<figure id="orgbfff0b5">
 <img src="../images/format_string_vulnerabilities_3.png" alt="format_string_vulnerabilities_3.png">
 
 </figure>
 
-<figure id="org98284b0">
+<figure id="orgb5d8b50">
 <img src="../images/format_string_vulnerabilities_4.png" alt="format_string_vulnerabilities_4.png">
 
 </figure>
@@ -91,7 +91,7 @@ Release
 </p>
 
 
-<figure id="org43bbf6f">
+<figure id="orgc7b891d">
 <img src="../images/format_string_vulnerabilities_5.png" alt="format_string_vulnerabilities_5.png">
 
 </figure>
@@ -102,7 +102,7 @@ Release
 <h2 id="org7abd40c">2</h2>
 <div class="outline-text-2" id="text-org7abd40c">
 
-<figure id="org7fc36e8">
+<figure id="org45cb25c">
 <img src="../images/format_string_vulnerabilities_6.png" alt="format_string_vulnerabilities_6.png">
 
 </figure>
@@ -120,17 +120,17 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 理论上我们编写的程序中要包含对这两个参数进行检查的代码，如
 </p>
 <div class="org-src-container">
-<pre class="src src-c">if(argc != 1) {
-    printf("error! usage: 3_5.exe");
-    return 0;
-}
+<pre class="src src-c"><span style="color: #0000FF;">if</span><span style="color: #707183; background-color: #FFFFFF;">(</span>argc <span style="color: #0000FF;">!=</span> <span style="color: #D0372D;">1</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"error! usage: 3_5.exe"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
 这种不需要额外参数的程序 argc 值为 1 ，增加一个 if 判断防止多输入的参数造成危害
 </p>
 
-<figure id="orgafa025f">
+<figure id="org3bb4812">
 <img src="../images/format_string_vulnerabilities_7.png" alt="format_string_vulnerabilities_7.png">
 
 </figure>
@@ -143,7 +143,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 <h2 id="orgf8d3cc0">3</h2>
 <div class="outline-text-2" id="text-orgf8d3cc0">
 
-<figure id="org842c0a3">
+<figure id="org25541f6">
 <img src="../images/format_string_vulnerabilities_8.png" alt="format_string_vulnerabilities_8.png">
 
 </figure>
@@ -169,7 +169,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </p>
 
 
-<figure id="org27009af">
+<figure id="orgd821107">
 <img src="../images/format_string_vulnerabilities_11.png" alt="format_string_vulnerabilities_11.png">
 
 </figure>
@@ -178,7 +178,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 另一版本
 </p>
 
-<figure id="orgccfe273">
+<figure id="orga579cd2">
 <img src="../images/format_string_vulnerabilities_12.png" alt="format_string_vulnerabilities_12.png">
 
 </figure>
@@ -215,14 +215,14 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 1
 </p>
 <div class="org-src-container">
-<pre class="src src-c">#include "stdio.h"
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-int main(int argc, char* argv[]) {
-    int i_a = 77, i_b = 44;
-    printf("a=%d, a=%d\n", i_a, i_b);
-    printf("a=%d, a=%d\n");
-    return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i_a</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">77</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">i_b</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">44</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> i_a<span style="color: #333333; background-color: #FFFFFF;">,</span> i_b<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"a=%d, a=%d\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 
@@ -231,12 +231,12 @@ int main(int argc, char* argv[]) {
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c">#include "stdio.h"
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-int main(int argc, char* argv[]) {
-    printf(argv[1]);
-    return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>argv<span style="color: #909183; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">1</span><span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 
@@ -244,15 +244,15 @@ int main(int argc, char* argv[]) {
 3
 </p>
 <div class="org-src-container">
-<pre class="src src-c">#include "stdio.h"
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">"stdio.h"</span>
 
-int main(int argc, char* argv[]) {
-    int num = 0x61616161;
-    printf("Before:num=%#x \n", num);
-    printf("%.20d%n\n", num, &amp;num);
-    printf("After:num=%#x \n", num);
-    return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span><span style="color: #0000FF;">*</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">num</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x61616161</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Before:num=%#x \n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%.20d%n\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">&amp;</span>num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"After:num=%#x \n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> num<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div></li>
 </ul>

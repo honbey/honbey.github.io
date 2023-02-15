@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyHomeKit</title>
@@ -42,6 +42,14 @@
 <ul>
 <li><a href="#org2b2f1cf">Network</a>
 <ul>
+<li><a href="#org382cf62">zhang.local</a>
+<ul>
+<li><a href="#orge907138">omen.zhang.local</a></li>
+<li><a href="#org97872c6">ct-ftth.zhang.local</a></li>
+<li><a href="#orgbb9a3a9">hw-ax3.zhang.local</a></li>
+<li><a href="#orgd2dcb0e">m5-1f/m5-2f.zhang.local</a></li>
+</ul>
+</li>
 <li><a href="#org4dc2256">Virtual Private Network with GNB</a></li>
 </ul>
 </li>
@@ -55,7 +63,7 @@
 <div class="outline-text-2" id="text-org2b2f1cf">
 <ul class="org-ul">
 <li><p>
-中国电信<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 300M 光纤宽带
+中国电信<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 200M 光纤宽带
 有公网 IP ，支持 IPv6 ，问了客服上下行速率表，省略了 50M 以下的
 </p>
 <table>
@@ -100,14 +108,14 @@
 </tbody>
 </table>
 <p>
-这也太不对等了，看到上行都没有升级 1000M 的欲望了。
+这也太不对等了，看到上行都没有升级 1000M 的欲望了。升级 300M 要到营业厅去办理。
 </p></li>
 <li><p>
 中国电信<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 30G/月 通用流量
 2020 年 10 月时在学校测的最高速度，测一次速下载加上传差不多 2G 流量。在深圳测的就没超过 300M。
 </p>
 
-<figure id="orgfa1fd25">
+<figure id="org7d79d85">
 <img src="../images/myhomekit_5g_speed_on_hainanu.jpg" alt="myhomekit_5g_speed_on_hainanu.jpg">
 
 </figure></li>
@@ -117,11 +125,94 @@
 用作管理，业务用其他的 IP 地址和带宽。</li>
 </ul>
 </div>
+<div id="outline-container-org382cf62" class="outline-3">
+<h3 id="org382cf62">zhang.local</h3>
+<div class="outline-text-3" id="text-org382cf62">
+<p>
+自建的网络域。互联网出口是电信 200M，但网速有惊喜，有公网 IP ，VPN 借助 GNB 穿透公网。
+</p>
+
+<p>
+算下来这些设备一天要一度电，0.588 一度，一个月电力成本 18 元左右，同配置下比云服务划算。
+</p>
+</div>
+
+<div id="outline-container-orge907138" class="outline-4">
+<h4 id="orge907138">omen.zhang.local</h4>
+<div class="outline-text-4" id="text-orge907138">
+<p>
+目前借助 HP Omen 作为服务器，Windows 11 系统，使用 vbox 跑了 3 个虚拟机（2 个 linux，1 个 Windows）。目前 512GB 970 Pro + 1T HDD 空间有点不够，打算换下 970 Pro 到国产的 2 TB 存储，机械硬盘也换大一点的，但不确定这个二手购入的 17 年的笔记本是否支持。
+</p>
+
+<p>
+HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏收费了，每周只免费 2 小时，薅不了想薅的羊毛，所以宿主机上有游戏，方便过年的时候玩玩。此外天翼网盘备份文件很方便，通常是 RDP 上加密文件然后上传。
+</p>
+
+<p>
+虚拟机：
+</p>
+<ul class="org-ul">
+<li>ubuntu.zhang.local   | Ubuntu 22.04 LTS | 用于跑 docker, nodejs, python 服务，主要给自己提供服务。</li>
+<li>kali.zhang.local     | Kali Linux 22.4  | 用于渗透测试，部分测试环境的搭建，安全从业人员必备。</li>
+<li>win-work.zhang.local | Windows 11 Work  | 搭建的专用的工作环境，不想弄乱自己的 Mac ，下班后用 RDP 工作。</li>
+</ul>
+
+<p>
+平时功耗 15W 左右，最高有 180W。后续想换个 Mac Mini M1/M2 ，减少功耗，就是存储扩展有点麻烦。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org97872c6" class="outline-4">
+<h4 id="org97872c6">ct-ftth.zhang.local</h4>
+<div class="outline-text-4" id="text-org97872c6">
+<p>
+电信定制的华为光猫，17 年的了，应该不是租用的，好像当时是说预存话费送的，还行，有千兆口，配套的机顶盒也有 4K 输出。
+宽带目前是桥接模式。iTV 没法改桥接，固件版本高，获取不了超级密码，问了电信的也不给。
+</p>
+
+<p>
+额定功耗 12W 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbb9a3a9" class="outline-4">
+<h4 id="orgbb9a3a9">hw-ax3.zhang.local</h4>
+<div class="outline-text-4" id="text-orgbb9a3a9">
+<p>
+华为 AX3 路由，使用一切正常，家里设备少，带宽需求大的设备都是有线连接。迁移到二楼后穿墙模式一二三楼的信号都不错，单层面积 120m<sup>2</sup> 左右。路由拨号，除 WAN 口外三个口分别是 HP Omen、监控、书房。
+</p>
+
+<p>
+额定功耗 12W 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd2dcb0e" class="outline-4">
+<h4 id="orgd2dcb0e">m5-1f/m5-2f.zhang.local</h4>
+<div class="outline-text-4" id="text-orgd2dcb0e">
+<p>
+两台水星 SG 105 Pro 5 口网管交换机，一楼一台，二楼一台。因为一楼到二楼只预留了一根六类网线，但光猫在一楼，决定将路由器迁到二楼后 IPTV/iTV 和监控不能用，买了带 VLAN 功能的交换机实现单线复用。Web 管理，使用 802.1q VLAN 加 PID 实现 VLAN 分割，记得关闭 IGMP 监听，不然 IPTV 的直播会是看几十秒就卡住报错无网络。
+</p>
+
+<p>
+额定功耗 3 W ，两台 6 W。
+</p>
+
+<p>
+说道这，有必要说下基层电信工作人员能力不行，那天去车站接人，让电信偷家了，直接把六类线拆成两根五类线在用，还推销了个 TP 路由器，收了两百多，我没问具体价钱，家里人让弄的，我太气人了，我都说我回家弄。我直接打电话让他回来退货和返工，不然投诉，后面我自己返工的，电话里还说什么必须要这样，一根线实现不了我的需求，我真的服了，都不懂就乱搞，强烈建议电信招工时至少要求考过中级网络工程师的证书吧！而且给的路由器淘宝 120 左右，况且我家有一个好好的华为 AX3 和两个百兆路由器，非要买他推销的弄上去？我大一就在学校网管中心兼职，大二开始参与管理校园网的部分交换机，非光纤连接的汇聚层到接入层，在交换机上配置 VLAN，我配过好多次，怎么就不能单线实现？真的无知，家里人拦着不让投诉，不然真的打 10000 投诉。太恶心了，改动我的网络规划我都不会这么生气，为什么要推销路由器？第一我有性能更好的路由器不用；第二多收差价。坑外行人的钱真有一套。
+</p>
+</div>
+</div>
+</div>
+
 <div id="outline-container-org4dc2256" class="outline-3">
 <h3 id="org4dc2256">Virtual Private Network with GNB<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
 <div class="outline-text-3" id="text-org4dc2256">
 <p>
-五个节点。
+五个节点。目前只有两个节点工作，公司环境穿透不太好用，基本都是靠 index 节点转发，可用于远程 SSH 访问公司 Mac 。
 </p>
 <pre class="example">
 1001|10.1.0.1|255.255.255.0
@@ -137,11 +228,15 @@
 <h2 id="org44d05bf">Device</h2>
 <div class="outline-text-2" id="text-org44d05bf">
 <ul class="org-ul">
-<li>📶Router
+<li>🌐Router
 <ul class="org-ul">
 <li>360 P2 2017.07</li>
 <li>Huawei WiFi AX3 2021.01</li>
 <li>Huawei 4G CPE 3 2022.04</li>
+</ul></li>
+<li>🔄Switch
+<ul class="org-ul">
+<li>Mercury SG 105 Pro x 2 2023.01</li>
 </ul></li>
 <li>💻Laptop
 <ul class="org-ul">
@@ -151,7 +246,7 @@
 </ul></li>
 <li>📱Phone
 <ul class="org-ul">
-<li>Honor X10 6G+128G 2020.07</li>
+<li>Honor X10 6G+64G+128G 2020.07</li>
 </ul></li>
 <li>🎧Headphone
 <ul class="org-ul">

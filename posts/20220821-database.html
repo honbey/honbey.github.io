@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Database</title>
@@ -96,7 +96,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#org20d8d10">文档型数据库</a>
+<li><a href="#ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">文档型数据库</a>
 <ul>
 <li><a href="#org62b4aae">ElasticSearch / ELK(ES + Logstash + Kibana)</a></li>
 <li><a href="#orgba06349">MongoDB</a>
@@ -1014,9 +1014,9 @@ DDL: Data Definition Language
 </div>
 </div>
 
-<div id="outline-container-org20d8d10" class="outline-2">
-<h2 id="org20d8d10">文档型数据库</h2>
-<div class="outline-text-2" id="text-org20d8d10">
+<div id="outline-container-ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171" class="outline-2">
+<h2 id="ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">文档型数据库</h2>
+<div class="outline-text-2" id="text-ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">
 </div>
 <div id="outline-container-org62b4aae" class="outline-3">
 <h3 id="org62b4aae"><a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> / ELK(ES + Logstash + Kibana)</h3>
@@ -1041,10 +1041,10 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-bash">dnf install -y mongodb-org
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
-service mongod start
-mongod --bind_ip 0.0.0.0 --port 27017 --dbpath /var/mongo/data/test
+<pre class="src src-bash"><span style="color: #006DAF;">dnf</span> install <span style="color: #D0372D;">-y</span> mongodb-org
+<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/127.0.0.1/0.0.0.0/'</span> /etc/mongod.conf
+<span style="color: #006DAF;">service</span> mongod start
+<span style="color: #006DAF;">mongod</span> <span style="color: #D0372D;">--bind_ip</span> 0.0.0.0 <span style="color: #D0372D;">--port</span> <span style="color: #D0372D;">27017</span> <span style="color: #D0372D;">--dbpath</span> /var/mongo/data/test
 </pre>
 </div>
 

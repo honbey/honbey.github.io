@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
@@ -115,10 +115,10 @@ Concurrency(Simultaneous) / Parallel
 使用 Python 3.4 起引入的 <code>asyncio</code> 标准库实现。
 </p>
 <div class="org-src-container">
-<pre class="src src-python">import asyncio
-async def say(what, when):
-    await asyncio.sleep(when)
-    return what
+<pre class="src src-python"><span style="color: #0000FF;">import</span> asyncio
+<span style="color: #0000FF;">async</span> <span style="color: #0000FF;">def</span> <span style="color: #006699;">say</span>(<span style="color: #BA36A5;">what</span>, <span style="color: #BA36A5;">when</span>):
+    <span style="color: #0000FF;">await</span> asyncio.<span style="color: #006DAF; font-style: italic;">sleep</span>(when)
+    <span style="color: #0000FF;">return</span> what
 </pre>
 </div>
 
@@ -126,7 +126,7 @@ async def say(what, when):
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="org6f7046c">
+<figure id="org84d4c8a">
 <img src="../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>

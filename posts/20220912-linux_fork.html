@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-02 Thu 21:55 -->
+<!-- 2023-02-15 Wed 22:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux ~fork()~</title>
@@ -88,17 +88,17 @@ fork() 函数用于从已存在的进程中创建一个新进程。新进程称�
 使用 <a href="20220913-c.html#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C</a> 语言：
 </p>
 <div class="org-src-container">
-<pre class="src src-c">#include &lt;sys/types.h&gt;
-#include &lt;unistd.h&gt;
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/types.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
 
-pid_t fork(void);
+<span style="color: #6434A3;">pid_t</span> <span style="color: #006699;">fork</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">void</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-/*
- * Return:
- * 0   child process
- * &gt; 0 the pid of child process
- * -1  error
-*/
+<span style="color: #8D8D84; font-style: italic;">/*</span>
+<span style="color: #8D8D84; font-style: italic;"> * Return:</span>
+<span style="color: #8D8D84; font-style: italic;"> * 0   child process</span>
+<span style="color: #8D8D84; font-style: italic;"> * &gt; 0 the pid of child process</span>
+<span style="color: #8D8D84; font-style: italic;"> * -1  error</span>
+<span style="color: #8D8D84; font-style: italic;">*/</span>
 </pre>
 </div>
 
@@ -126,26 +126,26 @@ pid_t fork(void);
 <h4 id="orge21b0c4">例子</h4>
 <div class="outline-text-4" id="text-orge21b0c4">
 <div class="org-src-container">
-<pre class="src src-c">#include &lt;sys/types.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;stdio.h&gt;
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/types.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 
-int main(int argc, char *const *args)
-{
-  pid_t result;
-  result = fork();
-  if (-1 == result) {
-    printf("Fork error\n");
-  } else if (0 == result) {
-    printf("The returned value is %d\n", result);
-    printf("In child process!\nMy PID is %d\n", getpid());
-  } else {
-    printf("The returned value is %d\n", result);
-    printf("In father process!\nMy PID is %d\n", getpid());
-  }
-  for (;;) ;
-  return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>args<span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #6434A3;">pid_t</span> <span style="color: #BA36A5;">result</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #BA36A5;">result</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">fork</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">-1</span> <span style="color: #0000FF;">==</span> result<span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Fork error\n"</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span> <span style="color: #0000FF;">==</span> result<span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"The returned value is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> result<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"In child process!\nMy PID is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #709870; background-color: #FFFFFF;">()</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"The returned value is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> result<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"In father process!\nMy PID is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #709870; background-color: #FFFFFF;">()</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+  <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #333333; background-color: #FFFFFF;">;;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
@@ -225,16 +225,16 @@ exec() 提供了一个在进程中启动另一个程序执行的方法，可以�
 <h3 id="org80892dd">使用 exec()</h3>
 <div class="outline-text-3" id="text-org80892dd">
 <div class="org-src-container">
-<pre class="src src-c">#include &lt;unistd.h&gt;
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
 
-int execl(const char *path, const char *arg, ...);
-int execv(const char *path, char *const argv[]);
-int execle(const char *path, const char *arg, ... , char *const envp[]);
-int execve(const char *path, char *const argv[], ... , char *const envp[]);
-int execlp(const char *file, const char *arg, ...);
-int execvp(const char *file, char *const argv[]);
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execl</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">path</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">arg</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">...</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execv</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">path</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execle</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">path</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">arg</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">...</span> <span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> envp<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execve</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">path</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">...</span> <span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> envp<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execlp</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">file</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">arg</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">...</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">execvp</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">file</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-/* Return -1: error */
+<span style="color: #8D8D84; font-style: italic;">/* Return -1: error */</span>
 </pre>
 </div>
 
@@ -262,20 +262,20 @@ int execvp(const char *file, char *const argv[]);
 <h4 id="org095b47c">例子 - 1</h4>
 <div class="outline-text-4" id="text-org095b47c">
 <div class="org-src-container">
-<pre class="src src-c">#include &lt;unistd.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
 
-int main(int argc, char *const argv[])
-{
-  printf("father process pid is %d\n", getpid());
-  int ret = 0;
-  if ((ret = execlp("ps", "ps", "-ef", NULL)) &lt; 0) {
-    printf("Execlp error\n");
-  }
-  printf("child process pid is %d, ret = %d\n", getpid(), ret);
-  return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"father process pid is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">ret</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">ret</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">execlp</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"ps"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"ps"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"-ef"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">NULL</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Execlp error\n"</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+  <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"child process pid is %d, ret = %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span> ret<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
@@ -293,22 +293,22 @@ root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
 <h4 id="org8957444">例子 - 2</h4>
 <div class="outline-text-4" id="text-org8957444">
 <div class="org-src-container">
-<pre class="src src-c">#include &lt;unistd.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
+<span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
 
-int main(int argc, char *const argv[])
-{
-  printf("father process pid is %d\n", getpid());
-  int ret = 0;
-  if (0 == fork()) {
-    if ((ret = execlp("ps", "ps", "-ef", NULL)) &lt; 0) {
-      printf("Execlp error\n");
-    }
-  }
-  printf("child process pid is %d, ret = %d\n", getpid(), ret);
-  return 0;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"father process pid is %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">ret</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span> <span style="color: #0000FF;">==</span> <span style="color: #006DAF;">fork</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">ret</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">execlp</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"ps"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"ps"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"-ef"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">NULL</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #D0372D;">0</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
+      <span style="color: #006DAF;">printf</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Execlp error\n"</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #909183; background-color: #FFFFFF;">}</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+  <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"child process pid is %d, ret = %d\n"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006DAF;">getpid</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span> ret<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
@@ -331,20 +331,20 @@ root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
 <h4 id="orga3add79">例子 - 3</h4>
 <div class="outline-text-4" id="text-orga3add79">
 <div class="org-src-container">
-<pre class="src src-c">int main(int argc, char *const argv[])
-{
-  char *envp[] = {
-    "PATH=/tmp",
-    "USER=execle",
-    NULL,
-  };
-  if (0 == fork()) {
-    if (execle("/usr/bin/env", "env", NULL, envp) &lt; 0) {
-      printf("execle error\n");
-    }
-  }
-  return 0;
-}
+<pre class="src src-c"><span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #0000FF;">const</span> argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span>envp<span style="color: #7388D6; background-color: #FFFFFF;">[]</span> <span style="color: #0000FF;">=</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #008000;">"PATH=/tmp"</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #008000;">"USER=execle"</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #006FE0;">NULL</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span> <span style="color: #0000FF;">==</span> <span style="color: #006DAF;">fork</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">execle</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"/usr/bin/env"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"env"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">NULL</span><span style="color: #333333; background-color: #FFFFFF;">,</span> envp<span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #D0372D;">0</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
+      <span style="color: #006DAF;">printf</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"execle error\n"</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #909183; background-color: #FFFFFF;">}</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+  <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 <p>
