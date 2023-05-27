@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Concurrency/Parallel</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,18 +23,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgadafa87">并行计算的内存架构</a>
+<li><a href="#org5495289">并行计算的内存架构</a>
 <ul>
-<li><a href="#org03fcb2a">SISD</a></li>
-<li><a href="#orge7f5c96">MISD</a></li>
-<li><a href="#org12f6c8d">SIMD</a></li>
-<li><a href="#org61d219c">MIMD</a></li>
-<li><a href="#orga752395">并行编程模型</a></li>
-<li><a href="#orge9815b7">设计并行程序</a></li>
-<li><a href="#orgf5a159a">评估并行性能</a></li>
+<li><a href="#org06a9133">SISD</a></li>
+<li><a href="#org709dad1">MISD</a></li>
+<li><a href="#org5fa6429">SIMD</a></li>
+<li><a href="#orge9cc362">MIMD</a></li>
+<li><a href="#org9252e39">并行编程模型</a></li>
+<li><a href="#org1ca0cee">设计并行程序</a></li>
+<li><a href="#org6c99860">评估并行性能</a></li>
 </ul>
 </li>
-<li><a href="#orge24aa72">Reference</a></li>
+<li><a href="#org0df3e09">Reference</a></li>
 </ul>
 </div>
 </nav>
@@ -83,9 +66,9 @@ I/O 密集型可以使用 <b>多线程</b> 提高效率，如 socket, crawler �
 计算密集型可以使用 <b>多进程</b> 充分利用多核资源，如数据分析。
 </p>
 
-<div id="outline-container-orgadafa87" class="outline-2">
-<h2 id="orgadafa87">并行计算的内存架构</h2>
-<div class="outline-text-2" id="text-orgadafa87">
+<div id="outline-container-org5495289" class="outline-2">
+<h2 id="org5495289">并行计算的内存架构</h2>
+<div class="outline-text-2" id="text-org5495289">
 <p>
 对于每一个“ CPU 时钟”， CPU 按照下面的顺序执行：
 </p>
@@ -96,42 +79,42 @@ I/O 密集型可以使用 <b>多线程</b> 提高效率，如 socket, crawler �
 </ol>
 </div>
 
-<div id="outline-container-org03fcb2a" class="outline-3">
-<h3 id="org03fcb2a">SISD</h3>
-<div class="outline-text-3" id="text-org03fcb2a">
+<div id="outline-container-org06a9133" class="outline-3">
+<h3 id="org06a9133">SISD</h3>
+<div class="outline-text-3" id="text-org06a9133">
 <p>
 1 个 CPU ，1 个数据流。所有运行在这上面的算法都是顺序执行的，不存在任何并行。
 </p>
 </div>
 </div>
-<div id="outline-container-orge7f5c96" class="outline-3">
-<h3 id="orge7f5c96">MISD</h3>
-<div class="outline-text-3" id="text-orge7f5c96">
+<div id="outline-container-org709dad1" class="outline-3">
+<h3 id="org709dad1">MISD</h3>
+<div class="outline-text-3" id="text-org709dad1">
 <p>
 n 个 CPU 每一个都有自己的控制单元（n 个指令流），共享同一个内存单元（1 个数据流）。例如数据加密。
 </p>
 </div>
 </div>
-<div id="outline-container-org12f6c8d" class="outline-3">
-<h3 id="org12f6c8d">SIMD</h3>
-<div class="outline-text-3" id="text-org12f6c8d">
+<div id="outline-container-org5fa6429" class="outline-3">
+<h3 id="org5fa6429">SIMD</h3>
+<div class="outline-text-3" id="text-org5fa6429">
 <p>
 n 个 CPU ，每一个都有自己的局部内存，可以用来存储数据。所有的处理器都在单一指令流下工作；具体说，就是有n个数据流，每个处理器处理一个。
 </p>
 </div>
 </div>
-<div id="outline-container-org61d219c" class="outline-3">
-<h3 id="org61d219c">MIMD</h3>
-<div class="outline-text-3" id="text-org61d219c">
+<div id="outline-container-orge9cc362" class="outline-3">
+<h3 id="orge9cc362">MIMD</h3>
+<div class="outline-text-3" id="text-orge9cc362">
 <p>
 n个处理器，n个指令流，n个数据流。在 MIMD 中，架构是通过线程或进程层面的并行来实现的，这也意味着处理器一般是异步工作的。这种类型的计算机通常用来解决那些没有统一结构、无法用 SIMD 来解决的问题。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga752395" class="outline-3">
-<h3 id="orga752395">并行编程模型</h3>
-<div class="outline-text-3" id="text-orga752395">
+<div id="outline-container-org9252e39" class="outline-3">
+<h3 id="org9252e39">并行编程模型</h3>
+<div class="outline-text-3" id="text-org9252e39">
 <ul class="org-ul">
 <li>共享内存模型</li>
 <li>多线程模型</li>
@@ -141,9 +124,9 @@ n个处理器，n个指令流，n个数据流。在 MIMD 中，架构是通过�
 </div>
 </div>
 
-<div id="outline-container-orge9815b7" class="outline-3">
-<h3 id="orge9815b7">设计并行程序</h3>
-<div class="outline-text-3" id="text-orge9815b7">
+<div id="outline-container-org1ca0cee" class="outline-3">
+<h3 id="org1ca0cee">设计并行程序</h3>
+<div class="outline-text-3" id="text-org1ca0cee">
 <ol class="org-ol">
 <li>Task decomposition
 <ul class="org-ul">
@@ -165,9 +148,9 @@ n个处理器，n个指令流，n个数据流。在 MIMD 中，架构是通过�
 </div>
 </div>
 
-<div id="outline-container-orgf5a159a" class="outline-3">
-<h3 id="orgf5a159a">评估并行性能</h3>
-<div class="outline-text-3" id="text-orgf5a159a">
+<div id="outline-container-org6c99860" class="outline-3">
+<h3 id="org6c99860">评估并行性能</h3>
+<div class="outline-text-3" id="text-org6c99860">
 <p>
 加速比：单个处理器解决问题需要的时间为 T<sub>S</sub> ，使用 P 个处理器解决这个问题的时间为 T<sub>P</sub> ，那么加速比 S = T<sub>S</sub>/T<sub>P</sub> 。
 当 T<sub>S</sub> 为最佳串行算法的执行时间，加速比是绝对的，而当 T<sub>S</sub> 为并行算法在单个处理器上的执行时间，则加速比是相对的。
@@ -204,9 +187,9 @@ E &lt;&lt; 1 有问题的低效并行算法
 </div>
 </div>
 </div>
-<div id="outline-container-orge24aa72" class="outline-2">
-<h2 id="orge24aa72">Reference</h2>
-<div class="outline-text-2" id="text-orge24aa72">
+<div id="outline-container-org0df3e09" class="outline-2">
+<h2 id="org0df3e09">Reference</h2>
+<div class="outline-text-2" id="text-org0df3e09">
 <ol class="org-ol">
 <li><a href="https://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/">Python Parallel Programming</a></li>
 </ol>

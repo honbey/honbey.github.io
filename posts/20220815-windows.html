@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -42,29 +25,29 @@
 <ul>
 <li><a href="#ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</a>
 <ul>
-<li><a href="#org533192d">Specific PowerShell as SSH terminal on Windows</a></li>
-<li><a href="#orgec19c21">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
-<li><a href="#org4b9f51c">Batch rename file</a></li>
+<li><a href="#orgd78a20d">Specific PowerShell as SSH terminal on Windows</a></li>
+<li><a href="#orge1400a1">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#orgcc86154">Batch rename file</a></li>
 </ul>
 </li>
-<li><a href="#orgf26a67f">Registry</a>
+<li><a href="#org4df01f6">Registry</a>
 <ul>
-<li><a href="#org745e328">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
+<li><a href="#org1f537c4">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
 <ul>
-<li><a href="#org3ca5d5f">Clear login record</a></li>
+<li><a href="#org5525d68">Clear login record</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org9ecaccd">Hyper-V</a>
+<li><a href="#orge136e03">Hyper-V</a>
 <ul>
-<li><a href="#orga3c4d39">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
+<li><a href="#orga7be71f">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
 </ul>
 </li>
-<li><a href="#orgf58e28e">Useful info</a>
+<li><a href="#org39905df">Useful info</a>
 <ul>
-<li><a href="#org561c28f">Automatic shutdown</a></li>
-<li><a href="#orgd3f195f">Operate disk</a></li>
+<li><a href="#org221c269">Automatic shutdown</a></li>
+<li><a href="#orgc0f6bdd">Operate disk</a></li>
 </ul>
 </li>
 </ul>
@@ -75,9 +58,9 @@
 <h2 id="ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</h2>
 <div class="outline-text-2" id="text-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">
 </div>
-<div id="outline-container-org533192d" class="outline-3">
-<h3 id="org533192d">Specific PowerShell as SSH terminal on Windows</h3>
-<div class="outline-text-3" id="text-org533192d">
+<div id="outline-container-orgd78a20d" class="outline-3">
+<h3 id="orgd78a20d">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-orgd78a20d">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -89,9 +72,9 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 </div>
 </div>
 
-<div id="outline-container-orgec19c21" class="outline-3">
-<h3 id="orgec19c21">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orgec19c21">
+<div id="outline-container-orge1400a1" class="outline-3">
+<h3 id="orge1400a1">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orge1400a1">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
@@ -100,9 +83,9 @@ Remove-Item (Get-PSReadlineOption).HistorySavePath
 </div>
 </div>
 
-<div id="outline-container-org4b9f51c" class="outline-3">
-<h3 id="org4b9f51c">Batch rename file</h3>
-<div class="outline-text-3" id="text-org4b9f51c">
+<div id="outline-container-orgcc86154" class="outline-3">
+<h3 id="orgcc86154">Batch rename file</h3>
+<div class="outline-text-3" id="text-orgcc86154">
 <div class="org-src-container">
 <pre class="src src-powershell">Get-ChildItem -Recurse -Path . -File | %{$i=0}{Rename-Item $_.FullName -NewName (‘{0}\{1}{2}’ -f $_.DirectoryName, ++$i, $_.Extension)}
 
@@ -113,22 +96,22 @@ Get-ChildItem -Recurse -Path . -File | foreach {$i=0} {Rename-Item $_.FullName -
 </div>
 </div>
 
-<div id="outline-container-orgf26a67f" class="outline-2">
-<h2 id="orgf26a67f">Registry</h2>
-<div class="outline-text-2" id="text-orgf26a67f">
+<div id="outline-container-org4df01f6" class="outline-2">
+<h2 id="org4df01f6">Registry</h2>
+<div class="outline-text-2" id="text-org4df01f6">
 </div>
-<div id="outline-container-org745e328" class="outline-3">
-<h3 id="org745e328">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org745e328">
+<div id="outline-container-org1f537c4" class="outline-3">
+<h3 id="org1f537c4">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org1f537c4">
 <div class="org-src-container">
 <pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org3ca5d5f" class="outline-4">
-<h4 id="org3ca5d5f">Clear login record</h4>
-<div class="outline-text-4" id="text-org3ca5d5f">
+<div id="outline-container-org5525d68" class="outline-4">
+<h4 id="org5525d68">Clear login record</h4>
+<div class="outline-text-4" id="text-org5525d68">
 <div class="org-src-container">
 <pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
 reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
@@ -141,13 +124,13 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-org9ecaccd" class="outline-2">
-<h2 id="org9ecaccd">Hyper-V</h2>
-<div class="outline-text-2" id="text-org9ecaccd">
+<div id="outline-container-orge136e03" class="outline-2">
+<h2 id="orge136e03">Hyper-V</h2>
+<div class="outline-text-2" id="text-orge136e03">
 </div>
-<div id="outline-container-orga3c4d39" class="outline-3">
-<h3 id="orga3c4d39">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
-<div class="outline-text-3" id="text-orga3c4d39">
+<div id="outline-container-orga7be71f" class="outline-3">
+<h3 id="orga7be71f">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-orga7be71f">
 <ol class="org-ol">
 <li>Enter Debug mode</li>
 <li>Execute <code>mount -0 remount,re/mnt</code></li>
@@ -159,9 +142,9 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 
-<div id="outline-container-orgf58e28e" class="outline-2">
-<h2 id="orgf58e28e">Useful info</h2>
-<div class="outline-text-2" id="text-orgf58e28e">
+<div id="outline-container-org39905df" class="outline-2">
+<h2 id="org39905df">Useful info</h2>
+<div class="outline-text-2" id="text-org39905df">
 <p>
 Software - UWP:
 </p>
@@ -200,8 +183,6 @@ Software - x86/x64 by scoop:
 <li>memreduct</li>
 <li>neovim</li>
 <li>obs-studio</li>
-<li><a href="20220803-python.html#ID-798fccc4-bc5f-4e5d-9272-f9ac8baaf74d">python</a></li>
-<li>screentogif</li>
 <li>spacesniffer (Disk Analyser)</li>
 <li>sublime-text</li>
 <li>vcredist2022</li>
@@ -317,9 +298,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </table>
 </div>
 
-<div id="outline-container-org561c28f" class="outline-3">
-<h3 id="org561c28f">Automatic shutdown</h3>
-<div class="outline-text-3" id="text-org561c28f">
+<div id="outline-container-org221c269" class="outline-3">
+<h3 id="org221c269">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-org221c269">
 <table>
 <caption class="t-above"><span class="table-number">Table 2:</span> usage of shutdown</caption>
 
@@ -354,14 +335,14 @@ Shortcut Keyboard: <code>win + r</code>.
 </div>
 </div>
 
-<div id="outline-container-orgd3f195f" class="outline-3">
-<h3 id="orgd3f195f">Operate disk</h3>
-<div class="outline-text-3" id="text-orgd3f195f">
+<div id="outline-container-orgc0f6bdd" class="outline-3">
+<h3 id="orgc0f6bdd">Operate disk</h3>
+<div class="outline-text-3" id="text-orgc0f6bdd">
 <p>
 <code>diskpart</code>
 </p>
 <table>
-<caption class="t-above"><span class="table-number">Table 1:</span> usage of diskpart</caption>
+<caption class="t-above"><span class="table-number">Table 3:</span> usage of diskpart</caption>
 
 <colgroup>
 <col  class="org-left">

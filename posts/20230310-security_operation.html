@@ -4,7 +4,7 @@
 <!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Data Dashboard</title>
+<title>Security Operation</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
@@ -18,67 +18,49 @@
 <body>
 <div id="content" class="content">
 <header>
-<h1 class="title">Data Dashboard</h1>
+<h1 class="title">Security Operation</h1>
 </header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</a>
-<ul>
-<li><a href="#org7db610e">Alert</a></li>
-</ul>
-</li>
+<li><a href="#orge765562">安全运营</a></li>
 </ul>
 </div>
 </nav>
+<p>
+Security Operation / 安全运营
+</p>
 
-<div id="outline-container-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa" class="outline-2">
-<h2 id="ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</h2>
-<div class="outline-text-2" id="text-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">
 <p>
-使用 <a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> , MySQL, Loki 等作为数据源。
+SOE:
 </p>
-</div>
-<div id="outline-container-org7db610e" class="outline-3">
-<h3 id="org7db610e">Alert</h3>
-<div class="outline-text-3" id="text-org7db610e">
-<p>
-Name <span class="underline">xxx</span> Evaluate every <span class="underline">1m</span> (10s * 6) For <span class="underline">2m</span>
-</p>
+<ul class="org-ul">
+<li>2021.03 - 2021.05 UCloud (Internship)</li>
+<li>2021.07 - 2023.02 UCloud</li>
+</ul>
 
 <blockquote>
 <p>
-If an alert rule has a configured and the query violates the configured threshold, then it goes from OK to Pending. Grafana does not send any notifications for that change. Once the alert rule has been firing for more than For duration, then the alert changes to Alerting and sends alert notifications.
+随着互联网的发展，企业信息化的高速发展，加上大批的互联网公司涌现，外部网络安全攻击形势日益严峻，从而出现的信息安全管理过程。
+</p>
+
+<p>
+安全运营具体是指利用安全产品或安全服务等提升企业信息安全能力一系列的管理过程，包括对安全产品或安全服务的需求、设计、运行、监控、改进等。将安全产品、安全服务等的能力发挥到极致，保障企业的互联网系统免遭网络攻击，构建企业信息安全防护体系，不断提升企业的信息安全防护能力。
 </p>
 </blockquote>
 
-<p>
-Conditions
-</p>
+<div id="outline-container-orge765562" class="outline-2">
+<h2 id="orge765562">安全运营</h2>
+<div class="outline-text-2" id="text-orge765562">
 <ul class="org-ul">
-<li>Function
-<ul class="org-ul">
-<li>sum()</li>
-<li>min()</li>
-<li>avg()</li>
-</ul></li>
-<li>query(query_name, begin_time, end_time)</li>
-<li>IS ABOVE/ IS BELOW</li>
+<li>主动性：主动管理安全问题、主动检测安全事件、主动响应及处理已知的风险。</li>
+<li>持续性：要建立定期排查工作方式，持续分析、监测、调整、优化防御策略，动态提升整体防御能力。</li>
+<li>对抗性：通过威胁情报、红蓝对抗等新型模式发现未知威胁，并保障快速响应的机制。</li>
 </ul>
 
 <p>
-If no data or all values are null -&gt; No Data
-If no data or all values are null -&gt; Keep Last State
+需要一定程度上的指标来衡量。 使用安全运营中心（SOC）建立标准化资产管理、监测处置、情报跟踪等流程。划分业务、运维、安全三方的责任，各种安全数据需要集中和共享。
 </p>
-
-<p>
-Notifications
-</p>
-<ul class="org-ul">
-<li>webhook</li>
-<li>email</li>
-</ul>
-</div>
 </div>
 </div>
 </div>

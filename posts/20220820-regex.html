@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Regex</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
                      <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '%MULTLINEWIDTH'
+      },
+      tags: '%TAGS',
+      tagSide: '%TAGSIDE',
+      tagIndent: '%TAGINDENT'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    output: {
+      font: '%FONT',
+      displayOverflow: '%OVERFLOW'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -61,20 +55,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3be929d">Group</a></li>
-<li><a href="#orge1f466a">Zero-width Assertions</a></li>
-<li><a href="#org9d8df95">Useful Regexp</a></li>
-<li><a href="#org1d6e067">Shell</a>
+<li><a href="#orgbcdc1b2">Group</a></li>
+<li><a href="#orgb401cfa">Zero-width Assertions</a></li>
+<li><a href="#org1ac9117">Useful Regexp</a></li>
+<li><a href="#org1bf8fec">Shell</a>
 <ul>
-<li><a href="#orgc43de9c">operation</a>
+<li><a href="#orge5cf9d3">operation</a>
 <ul>
-<li><a href="#org5f48563">BRE</a></li>
-<li><a href="#org30a896b">PRE</a></li>
+<li><a href="#orgda95d00">BRE</a></li>
+<li><a href="#orgab19ee4">PRE</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb170f43">Nginx</a></li>
+<li><a href="#org4b959e5">Nginx</a></li>
 </ul>
 </div>
 </nav>
@@ -82,9 +76,9 @@
 GROK
 </p>
 
-<div id="outline-container-org3be929d" class="outline-2">
-<h2 id="org3be929d">Group</h2>
-<div class="outline-text-2" id="text-org3be929d">
+<div id="outline-container-orgbcdc1b2" class="outline-2">
+<h2 id="orgbcdc1b2">Group</h2>
+<div class="outline-text-2" id="text-orgbcdc1b2">
 <p>
 <code>(ABC)</code> 匹配 ABC 且存为分组，分组从 1 开始，通过 <code>\n</code> 引用。
 </p>
@@ -103,9 +97,9 @@ GROK
 </div>
 </div>
 
-<div id="outline-container-orge1f466a" class="outline-2">
-<h2 id="orge1f466a">Zero-width Assertions</h2>
-<div class="outline-text-2" id="text-orge1f466a">
+<div id="outline-container-orgb401cfa" class="outline-2">
+<h2 id="orgb401cfa">Zero-width Assertions</h2>
+<div class="outline-text-2" id="text-orgb401cfa">
 <p>
 Positive lookahead  肯定性正向预查： <code>ABC(?=exp)</code>  ABC 断言自身出现的位置的 <b>后面</b>    能匹配表达式 exp
 </p>
@@ -172,9 +166,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </div>
 </div>
 
-<div id="outline-container-org9d8df95" class="outline-2">
-<h2 id="org9d8df95">Useful Regexp</h2>
-<div class="outline-text-2" id="text-org9d8df95">
+<div id="outline-container-org1ac9117" class="outline-2">
+<h2 id="org1ac9117">Useful Regexp</h2>
+<div class="outline-text-2" id="text-org1ac9117">
 <table>
 
 
@@ -204,9 +198,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </div>
 </div>
 
-<div id="outline-container-org1d6e067" class="outline-2">
-<h2 id="org1d6e067">Shell</h2>
-<div class="outline-text-2" id="text-org1d6e067">
+<div id="outline-container-org1bf8fec" class="outline-2">
+<h2 id="org1bf8fec">Shell</h2>
+<div class="outline-text-2" id="text-org1bf8fec">
 <table>
 
 
@@ -349,9 +343,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 
 
 
-<div id="outline-container-orgc43de9c" class="outline-3">
-<h3 id="orgc43de9c">operation</h3>
-<div class="outline-text-3" id="text-orgc43de9c">
+<div id="outline-container-orge5cf9d3" class="outline-3">
+<h3 id="orge5cf9d3">operation</h3>
+<div class="outline-text-3" id="text-orge5cf9d3">
 <table>
 
 
@@ -545,9 +539,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </blockquote>
 </div>
 
-<div id="outline-container-org5f48563" class="outline-4">
-<h4 id="org5f48563">BRE</h4>
-<div class="outline-text-4" id="text-org5f48563">
+<div id="outline-container-orgda95d00" class="outline-4">
+<h4 id="orgda95d00">BRE</h4>
+<div class="outline-text-4" id="text-orgda95d00">
 <blockquote>
 <p>
 ^ $ . [ ] *
@@ -559,9 +553,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org30a896b" class="outline-4">
-<h4 id="org30a896b">PRE</h4>
-<div class="outline-text-4" id="text-org30a896b">
+<div id="outline-container-orgab19ee4" class="outline-4">
+<h4 id="orgab19ee4">PRE</h4>
+<div class="outline-text-4" id="text-orgab19ee4">
 <blockquote>
 <p>
 ( ) { } ? + |
@@ -572,9 +566,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </div>
 </div>
 
-<div id="outline-container-orgb170f43" class="outline-2">
-<h2 id="orgb170f43">Nginx</h2>
-<div class="outline-text-2" id="text-orgb170f43">
+<div id="outline-container-org4b959e5" class="outline-2">
+<h2 id="org4b959e5">Nginx</h2>
+<div class="outline-text-2" id="text-org4b959e5">
 <ul class="org-ul">
 <li>= 精确匹配路径，用于不含正则表达式的 uri 前，如果匹配成功，不再进行后续的查找；</li>
 <li>^~ 用于不含正则表达式的 uri 前，表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找；</li>

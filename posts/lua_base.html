@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lua 语言基础</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,22 +23,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf87b003">Lua</a>
+<li><a href="#org7acbb11">Lua</a>
 <ul>
-<li><a href="#orgfe15724">交互式</a></li>
-<li><a href="#org321f74a">注释</a></li>
-<li><a href="#org5426cb6">标示符</a></li>
-<li><a href="#org5de1fe7">Lua 关键字</a></li>
-<li><a href="#org67975e7">Lua 运算符</a>
+<li><a href="#org7ebd624">交互式</a></li>
+<li><a href="#org8e947df">注释</a></li>
+<li><a href="#org9de6f4e">标示符</a></li>
+<li><a href="#orgab6c720">Lua 关键字</a></li>
+<li><a href="#org75d0235">Lua 运算符</a>
 <ul>
-<li><a href="#orga29fafb">运算符优先级</a></li>
+<li><a href="#orgacfe8e2">运算符优先级</a></li>
 </ul>
 </li>
-<li><a href="#org9254920">Lua 变量</a></li>
-<li><a href="#org200a2af">Lua 语法结构</a>
+<li><a href="#orgcdcbdb7">Lua 变量</a></li>
+<li><a href="#orga4d8a81">Lua 语法结构</a>
 <ul>
-<li><a href="#org5a2cb9d">循环</a></li>
-<li><a href="#orgef63ac9">流程控制</a></li>
+<li><a href="#orgb2623b7">循环</a></li>
+<li><a href="#org2b6235f">流程控制</a></li>
 </ul>
 </li>
 </ul>
@@ -63,67 +46,67 @@
 <li><a href="#ID-9380063e-36ea-4175-80ec-8d143dc2c749">Lua 数据类型</a></li>
 <li><a href="#ID-2432f320-c6ae-44a4-a886-d801b8674f94">Lua 函数</a>
 <ul>
-<li><a href="#org46ef70c">可变参数</a></li>
+<li><a href="#org42579b3">可变参数</a></li>
 </ul>
 </li>
 <li><a href="#ID-09c26f8e-676d-4c1a-b392-0a4fe169411d">Lua 字符串</a>
 <ul>
-<li><a href="#org9c88848">字符串方法</a></li>
-<li><a href="#org0f3e492">匹配模式</a></li>
+<li><a href="#org12b7d67">字符串方法</a></li>
+<li><a href="#orgf8bfb68">匹配模式</a></li>
 </ul>
 </li>
 <li><a href="#ID-797f8520-7bfd-42d3-81e8-600c8f05a2df">Lua 数组</a>
 <ul>
-<li><a href="#orgf3daa75">一维数组</a></li>
-<li><a href="#org109bfff">多维数组</a></li>
+<li><a href="#org0de4425">一维数组</a></li>
+<li><a href="#org8a3dca1">多维数组</a></li>
 </ul>
 </li>
 <li><a href="#ID-36033706-44ec-40c9-9f1f-9e52517c7ca4">Lua 迭代器</a>
 <ul>
-<li><a href="#org986ab36">泛型 for 迭代器</a></li>
-<li><a href="#org5dda9c0">无状态的迭代器</a></li>
-<li><a href="#org266469e">多状态的迭代器</a></li>
+<li><a href="#org243e0fe">泛型 for 迭代器</a></li>
+<li><a href="#orgcbea693">无状态的迭代器</a></li>
+<li><a href="#org255c6e1">多状态的迭代器</a></li>
 </ul>
 </li>
 <li><a href="#ID-66bd9f20-0480-4713-8800-fad492574a46">Lua 表 table</a>
 <ul>
-<li><a href="#org9523389">常用方法</a></li>
+<li><a href="#org870fc46">常用方法</a></li>
 </ul>
 </li>
 <li><a href="#ID-e0a477d7-479c-4aa4-9d00-f7f2b9407be3">Lua 模块与包</a>
 <ul>
-<li><a href="#org8cb2fb6">require 函数</a></li>
-<li><a href="#org9177b7f">加载机制</a></li>
-<li><a href="#org6105dce">C 包</a></li>
+<li><a href="#org26d07b8">require 函数</a></li>
+<li><a href="#org607a526">加载机制</a></li>
+<li><a href="#orgf17d201">C 包</a></li>
 </ul>
 </li>
 <li><a href="#ID-83e40e27-ad20-4167-9486-d244c010cfc4">Lua 元表 Metatable</a>
 <ul>
-<li><a href="#orgfe8b866"><code>__index</code> 元方法</a></li>
-<li><a href="#org99046a8"><code>__newindex</code> 元方法</a></li>
-<li><a href="#orgb10ab09"><code>__call</code> 元方法</a></li>
-<li><a href="#org2639cba"><code>__string</code> 元方法</a></li>
-<li><a href="#org4fddd86">其他元方法</a></li>
+<li><a href="#orga308ed4"><code>__index</code> 元方法</a></li>
+<li><a href="#orgc3b113f"><code>__newindex</code> 元方法</a></li>
+<li><a href="#orgf036efd"><code>__call</code> 元方法</a></li>
+<li><a href="#org6dc6627"><code>__string</code> 元方法</a></li>
+<li><a href="#org7503035">其他元方法</a></li>
 </ul>
 </li>
 <li><a href="#ID-1ef86fa1-bec0-428b-b1de-02a53a21fa8e">Lua 协同程序 coroutine</a>
 <ul>
-<li><a href="#org6488042">线程和协同程序区别</a></li>
-<li><a href="#orgedc5aa4">基本方法</a></li>
+<li><a href="#orgde932a7">线程和协同程序区别</a></li>
+<li><a href="#orgcacd7b8">基本方法</a></li>
 </ul>
 </li>
 <li><a href="#ID-9f98a4a7-80be-4291-82ea-f383031c724b">Lua I/O</a>
 <ul>
-<li><a href="#org7cfd633">简单模式</a></li>
-<li><a href="#org44f7a7c">完全模式</a></li>
+<li><a href="#org5dd1d9a">简单模式</a></li>
+<li><a href="#org427b495">完全模式</a></li>
 </ul>
 </li>
 <li><a href="#ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">Lua 错误处理</a>
 <ul>
-<li><a href="#org526fa33">assert()</a></li>
-<li><a href="#orgddac02b">error()</a></li>
-<li><a href="#orgffd9c1a">pcall, xpcall</a></li>
-<li><a href="#orgc356136">debug 库</a></li>
+<li><a href="#org021462a">assert()</a></li>
+<li><a href="#org23b7907">error()</a></li>
+<li><a href="#org651d371">pcall, xpcall</a></li>
+<li><a href="#org917dffc">debug 库</a></li>
 </ul>
 </li>
 <li><a href="#ID-edbcb6f6-313a-4e7a-845d-e70a8184c73c">Lua 垃圾回收</a></li>
@@ -131,9 +114,9 @@
 </div>
 </nav>
 
-<div id="outline-container-orgf87b003" class="outline-2">
-<h2 id="orgf87b003">Lua</h2>
-<div class="outline-text-2" id="text-orgf87b003">
+<div id="outline-container-org7acbb11" class="outline-2">
+<h2 id="org7acbb11">Lua</h2>
+<div class="outline-text-2" id="text-org7acbb11">
 <p>
 TOC:
 </p>
@@ -164,21 +147,21 @@ TOC:
 </p>
 </div>
 
-<div id="outline-container-orgfe15724" class="outline-3">
-<h3 id="orgfe15724">交互式</h3>
-<div class="outline-text-3" id="text-orgfe15724">
+<div id="outline-container-org7ebd624" class="outline-3">
+<h3 id="org7ebd624">交互式</h3>
+<div class="outline-text-3" id="text-org7ebd624">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">lua</span>
-<span style="color: #8D8D84; font-style: italic;"># or</span>
-<span style="color: #006DAF;">lua</span> <span style="color: #D0372D;">-i</span>
+<pre class="src src-bash">lua
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">or</span>
+lua -i
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org321f74a" class="outline-3">
-<h3 id="org321f74a">注释</h3>
-<div class="outline-text-3" id="text-org321f74a">
+<div id="outline-container-org8e947df" class="outline-3">
+<h3 id="org8e947df">注释</h3>
+<div class="outline-text-3" id="text-org8e947df">
 <p>
 特例：shebang <code>#~/usr/bin/env lua</code>
 </p>
@@ -187,7 +170,7 @@ TOC:
 单行注释：
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#27880;&#37322;</span>
+<pre class="src src-lua">-- 注释
 </pre>
 </div>
 
@@ -195,29 +178,29 @@ TOC:
 多行注释：
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">--</span><span style="color: #8D8D84; font-style: italic;">[[</span>
-<span style="color: #8D8D84; font-style: italic;">  &#27880;&#37322; [a]...</span>
-<span style="color: #8D8D84; font-style: italic;">  &#27880;&#37322;</span>
-<span style="color: #8D8D84; font-style: italic;">--]]</span>
+<pre class="src src-lua">--[[
+  注释 [a]...
+  注释
+--]]
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5426cb6" class="outline-3">
-<h3 id="org5426cb6">标示符</h3>
-<div class="outline-text-3" id="text-org5426cb6">
+<div id="outline-container-org9de6f4e" class="outline-3">
+<h3 id="org9de6f4e">标示符</h3>
+<div class="outline-text-3" id="text-org9de6f4e">
 <p>
 定义变量，以字母 <code>a-zA-Z</code> 或下划线 <code>_</code> 开头，后接数字、字母、下划线组成，不允许使用特殊字符如 <code>@, $, %</code> 来定义标示符，区分大小写
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5de1fe7" class="outline-3">
-<h3 id="org5de1fe7">Lua 关键字</h3>
-<div class="outline-text-3" id="text-org5de1fe7">
-<pre class="example">
-| and      | break | do    | else   |
+<div id="outline-container-orgab6c720" class="outline-3">
+<h3 id="orgab6c720">Lua 关键字</h3>
+<div class="outline-text-3" id="text-orgab6c720">
+<div class="org-src-container">
+<pre class="src src-nil">| and      | break | do    | else   |
 | elseif   | end   | false | for    |
 | function | if    | in    | local  |
 | nil      | not   | or    | repeat |
@@ -226,9 +209,10 @@ TOC:
 </pre>
 </div>
 </div>
-<div id="outline-container-org67975e7" class="outline-3">
-<h3 id="org67975e7">Lua 运算符</h3>
-<div class="outline-text-3" id="text-org67975e7">
+</div>
+<div id="outline-container-org75d0235" class="outline-3">
+<h3 id="org75d0235">Lua 运算符</h3>
+<div class="outline-text-3" id="text-org75d0235">
 <p>
 算术运算符：
 </p>
@@ -272,11 +256,11 @@ TOC:
 </ul>
 </div>
 
-<div id="outline-container-orga29fafb" class="outline-4">
-<h4 id="orga29fafb">运算符优先级</h4>
-<div class="outline-text-4" id="text-orga29fafb">
-<pre class="example">
-^
+<div id="outline-container-orgacfe8e2" class="outline-4">
+<h4 id="orgacfe8e2">运算符优先级</h4>
+<div class="outline-text-4" id="text-orgacfe8e2">
+<div class="org-src-container">
+<pre class="src src-nil">^
 not  - (unary)
 /    *         %
 +    -
@@ -285,6 +269,7 @@ not  - (unary)
 and
 or
 </pre>
+</div>
 
 <p>
 除了 <code>^</code> 和 <code>..</code> 外所有运算符都是左连接的
@@ -293,9 +278,9 @@ or
 </div>
 </div>
 
-<div id="outline-container-org9254920" class="outline-3">
-<h3 id="org9254920">Lua 变量</h3>
-<div class="outline-text-3" id="text-org9254920">
+<div id="outline-container-orgcdcbdb7" class="outline-3">
+<h3 id="orgcdcbdb7">Lua 变量</h3>
+<div class="outline-text-3" id="text-orgcdcbdb7">
 <p>
 lua 的变量默认都是全局变量，除非使用 local 进行声明
 </p>
@@ -314,13 +299,13 @@ lua 的变量默认都是全局变量，除非使用 local 进行声明
 </div>
 </div>
 
-<div id="outline-container-org200a2af" class="outline-3">
-<h3 id="org200a2af">Lua 语法结构</h3>
-<div class="outline-text-3" id="text-org200a2af">
+<div id="outline-container-orga4d8a81" class="outline-3">
+<h3 id="orga4d8a81">Lua 语法结构</h3>
+<div class="outline-text-3" id="text-orga4d8a81">
 </div>
-<div id="outline-container-org5a2cb9d" class="outline-4">
-<h4 id="org5a2cb9d">循环</h4>
-<div class="outline-text-4" id="text-org5a2cb9d">
+<div id="outline-container-orgb2623b7" class="outline-4">
+<h4 id="orgb2623b7">循环</h4>
+<div class="outline-text-4" id="text-orgb2623b7">
 <ul class="org-ul">
 <li>while</li>
 <li>for</li>
@@ -336,42 +321,42 @@ lua 的变量默认都是全局变量，除非使用 local 进行声明
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">while</span> (<span style="color: #D0372D;">true</span>)
-<span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"Hello"</span>)
-<span style="color: #0000FF;">end</span>
+<pre class="src src-lua">while (true)
+do
+  print("Hello")
+end
 
-<span style="color: #0000FF;">goto</span> <span style="color: #D0372D;">Label</span>
-<span style="color: #D0372D;">::Label::</span>
+goto Label
+::Label::
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">i</span>=<span style="color: #D0372D;">10</span>, <span style="color: #D0372D;">1</span>, -<span style="color: #D0372D;">1</span> <span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(i)
-<span style="color: #0000FF;">end</span>
+<pre class="src src-lua">for i=10, 1, -1 do
+  print(i)
+end
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgef63ac9" class="outline-4">
-<h4 id="orgef63ac9">流程控制</h4>
-<div class="outline-text-4" id="text-orgef63ac9">
+<div id="outline-container-org2b6235f" class="outline-4">
+<h4 id="org2b6235f">流程控制</h4>
+<div class="outline-text-4" id="text-org2b6235f">
 <ul class="org-ul">
 <li>if elseif else</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">if</span> (f == <span style="color: #D0372D;">1</span>)
-<span style="color: #0000FF;">then</span>
+<pre class="src src-lua">if (f == 1)
+then
   code
-<span style="color: #0000FF;">elseif</span>
-<span style="color: #0000FF;">then</span>
+elseif
+then
   code
-<span style="color: #0000FF;">else</span>
+else
   code
-<span style="color: #0000FF;">end</span>
+end
 </pre>
 </div>
 </div>
@@ -452,10 +437,10 @@ lua 的变量默认都是全局变量，除非使用 local 进行声明
 <h2 id="ID-2432f320-c6ae-44a4-a886-d801b8674f94">Lua 函数</h2>
 <div class="outline-text-2" id="text-ID-2432f320-c6ae-44a4-a886-d801b8674f94">
 <div class="org-src-container">
-<pre class="src src-lua">optional_function_scope <span style="color: #0000FF;">function</span> <span style="color: #006699;">function_name</span>( <span style="color: #BA36A5;">argument1</span>, <span style="color: #BA36A5;">argument2</span>, <span style="color: #BA36A5;">argument3</span>..., argumentn)
+<pre class="src src-lua">optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
   function_body
-  <span style="color: #0000FF;">return</span> result_params_comma_separated
-<span style="color: #0000FF;">end</span>
+  return result_params_comma_separated
+end
 </pre>
 </div>
 
@@ -464,9 +449,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </p>
 </div>
 
-<div id="outline-container-org46ef70c" class="outline-3">
-<h3 id="org46ef70c">可变参数</h3>
-<div class="outline-text-3" id="text-org46ef70c">
+<div id="outline-container-org42579b3" class="outline-3">
+<h3 id="org42579b3">可变参数</h3>
+<div class="outline-text-3" id="text-org42579b3">
 <p>
 在函数列表中使用三点 <code>...</code> 表示函数有可变的参数，在函数中使用 <code>{...}</code> 表示由所有变长参数构成的数组，也可使用 <code>select("#", ...)</code> 来获取可变参数的数量， <code>select(n, ...)</code> 返回从起点 n 开始到结束位置的所有参数列表，固定参数必须放在变长参数之前。
 </p>
@@ -492,9 +477,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </p>
 </div>
 
-<div id="outline-container-org9c88848" class="outline-3">
-<h3 id="org9c88848">字符串方法</h3>
-<div class="outline-text-3" id="text-org9c88848">
+<div id="outline-container-org12b7d67" class="outline-3">
+<h3 id="org12b7d67">字符串方法</h3>
+<div class="outline-text-3" id="text-org12b7d67">
 <table>
 
 
@@ -588,9 +573,9 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </div>
 </div>
 
-<div id="outline-container-org0f3e492" class="outline-3">
-<h3 id="org0f3e492">匹配模式</h3>
-<div class="outline-text-3" id="text-org0f3e492">
+<div id="outline-container-orgf8bfb68" class="outline-3">
+<h3 id="orgf8bfb68">匹配模式</h3>
+<div class="outline-text-3" id="text-orgf8bfb68">
 <p>
 单个字符与其自身匹配 (除 <code>^$()%*+-?</code> 外)
 </p>
@@ -752,15 +737,15 @@ optional<sub>function</sub><sub>scope</sub>: 指定全局还是局部，默认�
 </p>
 </div>
 
-<div id="outline-container-orgf3daa75" class="outline-3">
-<h3 id="orgf3daa75">一维数组</h3>
-<div class="outline-text-3" id="text-orgf3daa75">
+<div id="outline-container-org0de4425" class="outline-3">
+<h3 id="org0de4425">一维数组</h3>
+<div class="outline-text-3" id="text-org0de4425">
 <div class="org-src-container">
-<pre class="src src-lua">array = { <span style="color: #008000;">"Lua"</span>, <span style="color: #008000;">"Language"</span> }
+<pre class="src src-lua">array = { "Lua", "Language" }
 
-<span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>, <span style="color: #D0372D;">2</span> <span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(array[i])
-<span style="color: #0000FF;">end</span>
+for i = 0, 2 do
+  print(array[i])
+end
 </pre>
 </div>
 
@@ -769,9 +754,9 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </p>
 </div>
 </div>
-<div id="outline-container-org109bfff" class="outline-3">
-<h3 id="org109bfff">多维数组</h3>
-<div class="outline-text-3" id="text-org109bfff">
+<div id="outline-container-org8a3dca1" class="outline-3">
+<h3 id="org8a3dca1">多维数组</h3>
+<div class="outline-text-3" id="text-org8a3dca1">
 <p>
 多维数组即数组中包含数组或一维数组的索引键对应一个数组
 </p>
@@ -787,19 +772,19 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </p>
 </div>
 
-<div id="outline-container-org986ab36" class="outline-3">
-<h3 id="org986ab36">泛型 for 迭代器</h3>
-<div class="outline-text-3" id="text-org986ab36">
+<div id="outline-container-org243e0fe" class="outline-3">
+<h3 id="org243e0fe">泛型 for 迭代器</h3>
+<div class="outline-text-3" id="text-org243e0fe">
 <p>
 泛型 for 在内部保存迭代函数、状态常量、控制变量
 </p>
 <div class="org-src-container">
-<pre class="src src-lua">array = {<span style="color: #008000;">"a"</span>, <span style="color: #008000;">"b"</span>}
+<pre class="src src-lua">array = {"a", "b"}
 
-<span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">key</span>, <span style="color: #BA36A5;">value</span> <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">ipairs</span>(array)
-<span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(key, value)
-<span style="color: #0000FF;">end</span>
+for key, value in ipairs(array)
+do
+  print(key, value)
+end
 </pre>
 </div>
 
@@ -809,9 +794,9 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </div>
 </div>
 
-<div id="outline-container-org5dda9c0" class="outline-3">
-<h3 id="org5dda9c0">无状态的迭代器</h3>
-<div class="outline-text-3" id="text-org5dda9c0">
+<div id="outline-container-orgcbea693" class="outline-3">
+<h3 id="orgcbea693">无状态的迭代器</h3>
+<div class="outline-text-3" id="text-orgcbea693">
 <p>
 指不保留任何状态的迭代器
 </p>
@@ -825,18 +810,18 @@ Lua 索引从 1 开始，但可以指定 0 开始
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">function</span> <span style="color: #006699;">square</span>(<span style="color: #BA36A5;">iteratorMaxCount</span>, <span style="color: #BA36A5;">currentNumber</span>)
-  <span style="color: #0000FF;">if</span> currentNumber &lt; iteratorMaxCount
-  <span style="color: #0000FF;">then</span>
-    currentNumber = currentNumber + <span style="color: #D0372D;">1</span>
-  <span style="color: #0000FF;">return</span> currentNumber, currentNumber ^ <span style="color: #D0372D;">2</span>
-  <span style="color: #0000FF;">end</span>
-<span style="color: #0000FF;">end</span>
+<pre class="src src-lua">function square(iteratorMaxCount, currentNumber)
+  if currentNumber &lt; iteratorMaxCount
+  then
+    currentNumber = currentNumber + 1
+  return currentNumber, currentNumber ^ 2
+  end
+end
 
-<span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">i</span>, <span style="color: #BA36A5;">n</span> <span style="color: #0000FF;">in</span> square, <span style="color: #D0372D;">3</span>, <span style="color: #D0372D;">0</span>
-<span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(i, n)
-<span style="color: #0000FF;">end</span>
+for i, n in square, 3, 0
+do
+  print(i, n)
+end
 </pre>
 </div>
 
@@ -845,17 +830,17 @@ ipairs 实现：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">function</span> <span style="color: #006699;">iter</span>(<span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">i</span>)
-  i = i + <span style="color: #D0372D;">1</span>
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">v</span> = a[i]
-  <span style="color: #0000FF;">if</span> v <span style="color: #0000FF;">then</span>
-    <span style="color: #0000FF;">return</span> i, v
-  <span style="color: #0000FF;">end</span>
-<span style="color: #0000FF;">end</span>
+<pre class="src src-lua">function iter(a, i)
+  i = i + 1
+  local v = a[i]
+  if v then
+    return i, v
+  end
+end
 
-<span style="color: #0000FF;">function</span> <span style="color: #006FE0;">ipairs</span>(<span style="color: #BA36A5;">a</span>)
-  <span style="color: #0000FF;">return</span> iter, a, <span style="color: #D0372D;">0</span>
-<span style="color: #0000FF;">end</span>
+function ipairs(a)
+  return iter, a, 0
+end
 </pre>
 </div>
 
@@ -865,9 +850,9 @@ ipairs 实现：
 </div>
 </div>
 
-<div id="outline-container-org266469e" class="outline-3">
-<h3 id="org266469e">多状态的迭代器</h3>
-<div class="outline-text-3" id="text-org266469e">
+<div id="outline-container-org255c6e1" class="outline-3">
+<h3 id="org255c6e1">多状态的迭代器</h3>
+<div class="outline-text-3" id="text-org255c6e1">
 <p>
 保存多个状态信息的迭代器，最简单方式是闭包，或者将所有的状态信息封装到 表 table 内，将 table 作为迭代器的状态常量
 </p>
@@ -877,23 +862,23 @@ ipairs 实现：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua">array = {<span style="color: #008000;">"a"</span>, <span style="color: #008000;">"b"</span>}
+<pre class="src src-lua">array = {"a", "b"}
 
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">elementIterator</span>(<span style="color: #BA36A5;">collection</span>)
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">index</span> = <span style="color: #D0372D;">0</span>
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">count</span> = #collection
-  <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">function</span>()
-    <span style="color: #0000FF;">if</span> index &lt;= count
-    <span style="color: #0000FF;">then</span>
-      <span style="color: #0000FF;">return</span> collection[index]
-    <span style="color: #0000FF;">end</span>
-  <span style="color: #0000FF;">end</span>
-<span style="color: #0000FF;">end</span>
+function elementIterator(collection)
+  local index = 0
+  local count = #collection
+  return function()
+    if index &lt;= count
+    then
+      return collection[index]
+    end
+  end
+end
 
-<span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">element</span> <span style="color: #0000FF;">in</span> elementIterator(array)
-<span style="color: #0000FF;">do</span>
-  <span style="color: #006FE0;">print</span>(element)
-<span style="color: #0000FF;">end</span>
+for element in elementIterator(array)
+do
+  print(element)
+end
 </pre>
 </div>
 </div>
@@ -913,22 +898,22 @@ table 是关联型数组，可以使用任意类型的值（除 nil）作为数�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#21021;&#22987;&#21270;&#19968;&#20010; table</span>
+<pre class="src src-lua">-- 初始化一个 table
 mytable = {}
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#25351;&#23450;&#26576;&#20010;&#32034;&#24341;&#23545;&#24212;&#30340;&#20540;</span>
-mytable[<span style="color: #D0372D;">1</span>] = <span style="color: #008000;">"Lua"</span>
+-- 指定某个索引对应的值
+mytable[1] = "Lua"
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#31227;&#38500;&#24341;&#29992;</span>
-mytable = <span style="color: #D0372D;">nil</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">lua &#30340; gc &#20250;&#37322;&#25918;&#20869;&#23384;&#65292;&#24341;&#29992;&#35745;&#25968;</span>
+-- 移除引用
+mytable = nil
+-- lua 的 gc 会释放内存，引用计数
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org9523389" class="outline-3">
-<h3 id="org9523389">常用方法</h3>
-<div class="outline-text-3" id="text-org9523389">
+<div id="outline-container-org870fc46" class="outline-3">
+<h3 id="org870fc46">常用方法</h3>
+<div class="outline-text-3" id="text-org870fc46">
 <table>
 
 
@@ -972,26 +957,26 @@ mytable = <span style="color: #D0372D;">nil</span>
 </table>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">function</span> <span style="color: #006699;">table_maxn</span>(<span style="color: #BA36A5;">t</span>)
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">mn</span> = <span style="color: #D0372D;">nil</span>
-  <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">k</span>, <span style="color: #BA36A5;">v</span> <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">pairs</span>(t) <span style="color: #0000FF;">do</span>
-    <span style="color: #0000FF;">if</span> mn == <span style="color: #D0372D;">nil</span> <span style="color: #0000FF;">then</span>
+<pre class="src src-lua">function table_maxn(t)
+  local mn = nil
+  for k, v in pairs(t) do
+    if mn == nil then
       mn = v
-    <span style="color: #0000FF;">end</span>
-    <span style="color: #0000FF;">if</span> mn &lt; v <span style="color: #0000FF;">then</span>
+    end
+    if mn &lt; v then
       mn = v
-    <span style="color: #0000FF;">end</span>
-  <span style="color: #0000FF;">end</span>
-  <span style="color: #0000FF;">return</span> mn
-<span style="color: #0000FF;">end</span>
+    end
+  end
+  return mn
+end
 
-tbl = {[<span style="color: #D0372D;">1</span>] = <span style="color: #D0372D;">2</span>, [<span style="color: #D0372D;">2</span>] = <span style="color: #D0372D;">6</span>, [<span style="color: #D0372D;">3</span>] = <span style="color: #D0372D;">34</span>, [<span style="color: #D0372D;">26</span>] = <span style="color: #D0372D;">5</span>}
+tbl = {[1] = 2, [2] = 6, [3] = 34, [26] = 5}
 
-<span style="color: #006FE0;">print</span>(<span style="color: #008000;">"tbl &#26368;&#22823;&#20540; "</span>, table_maxn(tbl))
-<span style="color: #006FE0;">print</span>(<span style="color: #008000;">"tbl &#38271;&#24230;   "</span>, #tbl)
+print("tbl 最大值 ", table_maxn(tbl))
+print("tbl 长度   ", #tbl)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">tbl &#26368;&#22823;&#20540;  34</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">tbl &#38271;&#24230;    3</span>
+-- tbl 最大值  34
+-- tbl 长度    3
 </pre>
 </div>
 </div>
@@ -1006,36 +991,36 @@ Lua 的模块是由变量、函数等已知元素组成的 table
 </p>
 </div>
 
-<div id="outline-container-org8cb2fb6" class="outline-3">
-<h3 id="org8cb2fb6">require 函数</h3>
-<div class="outline-text-3" id="text-org8cb2fb6">
+<div id="outline-container-org26d07b8" class="outline-3">
+<h3 id="org26d07b8">require 函数</h3>
+<div class="outline-text-3" id="text-org26d07b8">
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #006FE0;">require</span>(<span style="color: #008000;">"module"</span>)
+<pre class="src src-lua">require("module")
 
-<span style="color: #006FE0;">require</span> <span style="color: #008000;">"module"</span>
+require "module"
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9177b7f" class="outline-3">
-<h3 id="org9177b7f">加载机制</h3>
-<div class="outline-text-3" id="text-org9177b7f">
+<div id="outline-container-org607a526" class="outline-3">
+<h3 id="org607a526">加载机制</h3>
+<div class="outline-text-3" id="text-org607a526">
 <p>
 require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA<sub>PATH</sub> 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># LUA_PATH</span>
-<span style="color: #0000FF;">export</span> <span style="color: #BA36A5; font-style: italic;">LUA_PATH</span>=<span style="color: #008000;">"~/lua/?.lua;;"</span>
+<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">LUA_PATH</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">LUA_PATH</span>=<span style="color: #008000;">"~/lua/?.lua;;"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6105dce" class="outline-3">
-<h3 id="org6105dce">C 包</h3>
-<div class="outline-text-3" id="text-org6105dce">
+<div id="outline-container-orgf17d201" class="outline-3">
+<h3 id="orgf17d201">C 包</h3>
+<div class="outline-text-3" id="text-orgf17d201">
 <p>
 C 包在使用以前必须首先加载并连接，在大多数系统中最容易的实现方式是通过动态连接库机制
 </p>
@@ -1045,8 +1030,8 @@ Lua 在一个叫 loadlib 的函数内提供了所有的动态连接的功能。�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">path</span> = <span style="color: #008000;">"/usr/local/lua/lib/libluasocket.so"</span>
-<span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">f</span> = loadlib(path, <span style="color: #008000;">"luaopen_socket"</span>)
+<pre class="src src-lua">local path = "/usr/local/lua/lib/libluasocket.so"
+local f = loadlib(path, "luaopen_socket")
 </pre>
 </div>
 
@@ -1055,8 +1040,8 @@ loadlib 函数加载指定的库并且连接到 Lua，然而它并不调用初�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">path</span> = <span style="color: #008000;">"/usr/local/lua/lib/libluasocket.so"</span>
-<span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">f</span> = <span style="color: #006FE0;">assert</span>(loadlib(path, <span style="color: #008000;">"luaopen_socket"</span>))
+<pre class="src src-lua">local path = "/usr/local/lua/lib/libluasocket.so"
+local f = assert(loadlib(path, "luaopen_socket"))
 f()
 </pre>
 </div>
@@ -1085,9 +1070,9 @@ f()
 </ul>
 </div>
 
-<div id="outline-container-orgfe8b866" class="outline-3">
-<h3 id="orgfe8b866"><code>__index</code> 元方法</h3>
-<div class="outline-text-3" id="text-orgfe8b866">
+<div id="outline-container-orga308ed4" class="outline-3">
+<h3 id="orga308ed4"><code>__index</code> 元方法</h3>
+<div class="outline-text-3" id="text-orga308ed4">
 <p>
 定义了表在索引失败的情况下该怎么办
 </p>
@@ -1108,44 +1093,44 @@ f()
 🌰
 </p>
 <div class="org-src-container">
-<pre class="src src-lua">mytable = <span style="color: #006FE0;">setmetatable</span>({key1 = <span style="color: #008000;">"value1"</span>}, {
-  <span style="color: #006699;">__index</span> = <span style="color: #0000FF;">function</span>(<span style="color: #BA36A5;">mytable</span>, <span style="color: #BA36A5;">key</span>)
-    <span style="color: #0000FF;">if</span> key == <span style="color: #008000;">"key2"</span> <span style="color: #0000FF;">then</span>
-      <span style="color: #0000FF;">return</span> <span style="color: #008000;">"metatablevalue"</span>
-    <span style="color: #0000FF;">else</span>
-      <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">nil</span>
-    <span style="color: #0000FF;">end</span>
-  <span style="color: #0000FF;">end</span>
+<pre class="src src-lua">mytable = setmetatable({key1 = "value1"}, {
+  __index = function(mytable, key)
+    if key == "key2" then
+      return "metatablevalue"
+    else
+      return nil
+    end
+  end
 })
 
-<span style="color: #006FE0;">print</span>(mytable.key1, mytable.key2)
+print(mytable.key1, mytable.key2)
 
-<span style="color: #8D8D84;">--</span><span style="color: #8D8D84; font-style: italic;">[[</span>
-<span style="color: #8D8D84; font-style: italic;">  mytable &#30340; key2 &#23454;&#38469;&#24182;&#19981;&#23384;&#22312;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#20294; mytable &#23384;&#22312;&#20803;&#34920;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#22914;&#26524;&#20803;&#34920;&#23450;&#20041;&#20102; __index</span>
-<span style="color: #8D8D84; font-style: italic;">  &#23601;&#20250;&#35843;&#29992;&#36825;&#20010; __index &#26041;&#27861;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#33509; __index &#20026; nil&#65292;&#21363;&#26410;&#23450;&#20041;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#36820;&#22238; nil</span>
-<span style="color: #8D8D84; font-style: italic;">  &#33509; __index &#26159;&#19968;&#20010; table</span>
-<span style="color: #8D8D84; font-style: italic;">  &#21017;&#22312;&#20803;&#34920;&#30340; table &#26597;&#25214;&#35813;&#32034;&#24341;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#33509; __index &#26159;&#19968;&#20010; &#20989;&#25968;</span>
-<span style="color: #8D8D84; font-style: italic;">  &#21017;&#35843;&#29992;&#35813;&#20989;&#25968;&#24182;&#36820;&#22238;&#20989;&#25968;&#32467;&#26524;</span>
+--[[
+  mytable 的 key2 实际并不存在
+  但 mytable 存在元表
+  如果元表定义了 __index
+  就会调用这个 __index 方法
+  若 __index 为 nil，即未定义
+  返回 nil
+  若 __index 是一个 table
+  则在元表的 table 查找该索引
+  若 __index 是一个 函数
+  则调用该函数并返回函数结果
 
-<span style="color: #8D8D84; font-style: italic;">  &#21487;&#20197;&#25226;&#20803;&#34920;&#29702;&#35299;&#19968;&#20010; table &#30340;&#25805;&#20316;&#25351;&#21335;</span>
-<span style="color: #8D8D84; font-style: italic;">]]</span>
+  可以把元表理解一个 table 的操作指南
+]]
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">value1 metatablevalue</span>
+-- value1 metatablevalue
 
-mytable = <span style="color: #006FE0;">setmetatable</span>({key = <span style="color: #008000;">"value1"</span>}, {__index = {key2 = <span style="color: #008000;">"metatablevalue"</span>}})
+mytable = setmetatable({key = "value1"}, {__index = {key2 = "metatablevalue"}})
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org99046a8" class="outline-3">
-<h3 id="org99046a8"><code>__newindex</code> 元方法</h3>
-<div class="outline-text-3" id="text-org99046a8">
+<div id="outline-container-orgc3b113f" class="outline-3">
+<h3 id="orgc3b113f"><code>__newindex</code> 元方法</h3>
+<div class="outline-text-3" id="text-orgc3b113f">
 <p>
 <code>__newindex</code> 用来对表更新，当给 table 一个缺少的索引赋值，解释器就会查找 <code>__newindex</code> 元方法：如果存在就调用这个函数而不进行赋值操作
 </p>
@@ -1155,19 +1140,19 @@ mytable = <span style="color: #006FE0;">setmetatable</span>({key = <span style="
 </p>
 <div class="org-src-container">
 <pre class="src src-lua">mymetatable = {}
-mytable = setmetable({key1 = <span style="color: #008000;">"value1"</span>}, {__newindex = mymetatable})
+mytable = setmetable({key1 = "value1"}, {__newindex = mymetatable})
 
-<span style="color: #006FE0;">print</span>(mytable.key1)
+print(mytable.key1)
 
-mytable.newkey = <span style="color: #008000;">"newvalue"</span>
-<span style="color: #006FE0;">print</span>(mytable.newkey, mymetable.newkey)
+mytable.newkey = "newvalue"
+print(mytable.newkey, mymetable.newkey)
 
-mytable.key1 = <span style="color: #008000;">"value11"</span>
-<span style="color: #006FE0;">print</span>(mytable.key1, mymetatable.key1)
+mytable.key1 = "value11"
+print(mytable.key1, mymetatable.key1)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">value</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">nil newvalue</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">value11 nil</span>
+-- value
+-- nil newvalue
+-- value11 nil
 </pre>
 </div>
 
@@ -1175,44 +1160,44 @@ mytable.key1 = <span style="color: #008000;">"value11"</span>
 🌰
 </p>
 <div class="org-src-container">
-<pre class="src src-lua">mytable = setmetable({key1 = <span style="color: #008000;">"value1"</span>}, {
-  <span style="color: #006699;">__newindex</span> = <span style="color: #0000FF;">function</span>(<span style="color: #BA36A5;">mytable</span>, <span style="color: #BA36A5;">key</span>, <span style="color: #BA36A5;">value</span>)
-    <span style="color: #006FE0;">rawset</span>(mytable, key, <span style="color: #008000;">"\""</span>..value..<span style="color: #008000;">"\""</span>)
-  <span style="color: #0000FF;">end</span>
+<pre class="src src-lua">mytable = setmetable({key1 = "value1"}, {
+  __newindex = function(mytable, key, value)
+    rawset(mytable, key, "\""..value.."\"")
+  end
 })
 
-mytable.key1 = <span style="color: #008000;">"newvalue"</span>
-mytable.key2 = <span style="color: #D0372D;">4</span>
+mytable.key1 = "newvalue"
+mytable.key2 = 4
 
-<span style="color: #006FE0;">print</span>(mytable.key1, mytable.key2)
+print(mytable.key1, mytable.key2)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">newvalue "4"</span>
+-- newvalue "4"
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb10ab09" class="outline-3">
-<h3 id="orgb10ab09"><code>__call</code> 元方法</h3>
-<div class="outline-text-3" id="text-orgb10ab09">
+<div id="outline-container-orgf036efd" class="outline-3">
+<h3 id="orgf036efd"><code>__call</code> 元方法</h3>
+<div class="outline-text-3" id="text-orgf036efd">
 <p>
 在 Lua 调用 table 的一个值时调用
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2639cba" class="outline-3">
-<h3 id="org2639cba"><code>__string</code> 元方法</h3>
-<div class="outline-text-3" id="text-org2639cba">
+<div id="outline-container-org6dc6627" class="outline-3">
+<h3 id="org6dc6627"><code>__string</code> 元方法</h3>
+<div class="outline-text-3" id="text-org6dc6627">
 <p>
 修改 table 的输出行为
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4fddd86" class="outline-3">
-<h3 id="org4fddd86">其他元方法</h3>
-<div class="outline-text-3" id="text-org4fddd86">
+<div id="outline-container-org7503035" class="outline-3">
+<h3 id="org7503035">其他元方法</h3>
+<div class="outline-text-3" id="text-org7503035">
 <div class="org-src-container">
 <pre class="src src-lua">__add    +
 __sub    -
@@ -1238,9 +1223,9 @@ Lua 协同程序 (coroutine) 与线程比较类似：拥有独立的堆栈，独
 </p>
 </div>
 
-<div id="outline-container-org6488042" class="outline-3">
-<h3 id="org6488042">线程和协同程序区别</h3>
-<div class="outline-text-3" id="text-org6488042">
+<div id="outline-container-orgde932a7" class="outline-3">
+<h3 id="orgde932a7">线程和协同程序区别</h3>
+<div class="outline-text-3" id="text-orgde932a7">
 <p>
 线程与协同程序的主要区别在于，一个具有多个线程的程序可以同时运行几个线程，而协同程序却需要彼此协作的运行；在任一指定时刻只有一个协同程序在运行，并且这个正在运行的协同程序只有在明确的被要求挂起的时候才会被挂起
 </p>
@@ -1251,9 +1236,9 @@ Lua 协同程序 (coroutine) 与线程比较类似：拥有独立的堆栈，独
 </div>
 </div>
 
-<div id="outline-container-orgedc5aa4" class="outline-3">
-<h3 id="orgedc5aa4">基本方法</h3>
-<div class="outline-text-3" id="text-orgedc5aa4">
+<div id="outline-container-orgcacd7b8" class="outline-3">
+<h3 id="orgcacd7b8">基本方法</h3>
+<div class="outline-text-3" id="text-orgcacd7b8">
 <table>
 
 
@@ -1309,33 +1294,33 @@ resume 和 create 配合使用时就唤醒函数调用
 🌰 - 生产者-消费者问题
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">newProductor</span>
+<pre class="src src-lua">local newProductor
 
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">productor</span>()
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>
-  <span style="color: #0000FF;">while</span> <span style="color: #D0372D;">true</span> <span style="color: #0000FF;">do</span>
-    i = i + <span style="color: #D0372D;">1</span>
+function productor()
+  local i = 0
+  while true do
+    i = i + 1
     send(i)
-  <span style="color: #0000FF;">end</span>
-<span style="color: #0000FF;">end</span>
+  end
+end
 
 fuction consumer()
-  <span style="color: #0000FF;">while</span> <span style="color: #D0372D;">true</span> <span style="color: #0000FF;">do</span>
-    <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">i</span> = receive()
-    <span style="color: #006FE0;">print</span>(i)
-  <span style="color: #0000FF;">end</span>
-<span style="color: #0000FF;">end</span>
+  while true do
+    local i = receive()
+    print(i)
+  end
+end
 
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">receive</span>()
-  <span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">status</span>, <span style="color: #BA36A5;">value</span> = <span style="color: #006FE0;">coroutine</span>.<span style="color: #006FE0;">resume</span>(newProductor)
-  <span style="color: #0000FF;">return</span> value
-<span style="color: #0000FF;">end</span>
+function receive()
+  local status, value = coroutine.resume(newProductor)
+  return value
+end
 
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">send</span>(<span style="color: #BA36A5;">x</span>)
-  <span style="color: #006FE0;">coroutine</span>.<span style="color: #006FE0;">yield</span>(x)
-<span style="color: #0000FF;">end</span>
+function send(x)
+  coroutine.yield(x)
+end
 
-newProductor = <span style="color: #006FE0;">coroutine</span>.<span style="color: #006FE0;">create</span>(productor)
+newProductor = coroutine.create(productor)
 consumer()
 </pre>
 </div>
@@ -1352,7 +1337,7 @@ consumer()
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua">file = <span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">open</span>(filename[, mode])
+<pre class="src src-lua">file = io.open(filename[, mode])
 </pre>
 </div>
 
@@ -1372,36 +1357,36 @@ mode:
 </div>
 
 
-<div id="outline-container-org7cfd633" class="outline-3">
-<h3 id="org7cfd633">简单模式</h3>
-<div class="outline-text-3" id="text-org7cfd633">
+<div id="outline-container-org5dd1d9a" class="outline-3">
+<h3 id="org5dd1d9a">简单模式</h3>
+<div class="outline-text-3" id="text-org5dd1d9a">
 <p>
 🌰
 </p>
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20197;&#21482;&#35835;&#26041;&#24335;&#25171;&#24320;&#25991;&#20214;</span>
-file = <span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">open</span>(<span style="color: #008000;">"test.lua"</span>, <span style="color: #008000;">"r"</span>)
+<pre class="src src-lua">-- 以只读方式打开文件
+file = io.open("test.lua", "r")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#35774;&#32622;&#40664;&#35748;&#36755;&#20837;&#25991;&#20214;&#20026; test.lua</span>
-<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">input</span>(file)
+-- 设置默认输入文件为 test.lua
+io.input(file)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#36755;&#20986;&#25991;&#20214;&#31532;&#19968;&#34892;</span>
-<span style="color: #006FE0;">print</span>(<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">read</span>())
+-- 输出文件第一行
+print(io.read())
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20851;&#38381;&#25171;&#24320;&#30340;&#25991;&#20214;</span>
-<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">close</span>(file)
+-- 关闭打开的文件
+io.close(file)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20197;&#38468;&#21152;&#30340;&#26041;&#24335;&#25171;&#24320;&#21482;&#20889;&#25991;&#20214;</span>
-file = <span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">open</span>(<span style="color: #008000;">"test.lua"</span>, <span style="color: #008000;">"a"</span>)
+-- 以附加的方式打开只写文件
+file = io.open("test.lua", "a")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#35774;&#32622;&#40664;&#35748;&#36755;&#20986;&#25991;&#20214;&#20026; test.lua</span>
-<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">output</span>(file)
+-- 设置默认输出文件为 test.lua
+io.output(file)
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#22312;&#25991;&#20214;&#26368;&#21518;&#19968;&#34892;&#28155;&#21152; Lua &#27880;&#37322;</span>
-<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">write</span>(<span style="color: #008000;">"--  test.lua &#25991;&#20214;&#26411;&#23614;&#27880;&#37322;"</span>)
+-- 在文件最后一行添加 Lua 注释
+io.write("--  test.lua 文件末尾注释")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20851;&#38381;&#25171;&#24320;&#30340;&#25991;&#20214;</span>
-<span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">close</span>(file)
+-- 关闭打开的文件
+io.close(file)
 </pre>
 </div>
 
@@ -1433,30 +1418,30 @@ io.lines(optional file name) 返回一个迭代函数，每次调用获取文件
 </div>
 </div>
 
-<div id="outline-container-org44f7a7c" class="outline-3">
-<h3 id="org44f7a7c">完全模式</h3>
-<div class="outline-text-3" id="text-org44f7a7c">
+<div id="outline-container-org427b495" class="outline-3">
+<h3 id="org427b495">完全模式</h3>
+<div class="outline-text-3" id="text-org427b495">
 <p>
 同一时间处理多个文件，使用 <a href="function_name">function_name</a> 来代替 io.function<sub>name</sub> 方法
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20197;&#21482;&#35835;&#26041;&#24335;&#25171;&#24320;&#25991;&#20214;</span>
-file = <span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">open</span>(<span style="color: #008000;">"test.lua"</span>, <span style="color: #008000;">"r"</span>)
+<pre class="src src-lua">-- 以只读方式打开文件
+file = io.open("test.lua", "r")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#36755;&#20986;&#25991;&#20214;&#31532;&#19968;&#34892;</span>
-<span style="color: #006FE0;">print</span>(file:read())
+-- 输出文件第一行
+print(file:read())
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20851;&#38381;&#25171;&#24320;&#30340;&#25991;&#20214;</span>
+-- 关闭打开的文件
 file:close()
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20197;&#38468;&#21152;&#30340;&#26041;&#24335;&#25171;&#24320;&#21482;&#20889;&#25991;&#20214;</span>
-file = <span style="color: #006FE0;">io</span>.<span style="color: #006FE0;">open</span>(<span style="color: #008000;">"test.lua"</span>, <span style="color: #008000;">"a"</span>)
+-- 以附加的方式打开只写文件
+file = io.open("test.lua", "a")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#22312;&#25991;&#20214;&#26368;&#21518;&#19968;&#34892;&#28155;&#21152; Lua &#27880;&#37322;</span>
-file:write(<span style="color: #008000;">"--test"</span>)
+-- 在文件最后一行添加 Lua 注释
+file:write("--test")
 
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#20851;&#38381;&#25171;&#24320;&#30340;&#25991;&#20214;</span>
+-- 关闭打开的文件
 file:close()
 </pre>
 </div>
@@ -1498,9 +1483,9 @@ offset 默认为 0
 <h2 id="ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">Lua 错误处理</h2>
 <div class="outline-text-2" id="text-ID-56dfdc61-5be3-40b1-8825-c2523bb2f006">
 </div>
-<div id="outline-container-org526fa33" class="outline-3">
-<h3 id="org526fa33">assert()</h3>
-<div class="outline-text-3" id="text-org526fa33">
+<div id="outline-container-org021462a" class="outline-3">
+<h3 id="org021462a">assert()</h3>
+<div class="outline-text-3" id="text-org021462a">
 <p>
 assert(argument, message)
 </p>
@@ -1511,9 +1496,9 @@ assert 首先检查第一个参数，若没问题，assert 不做任何事情；
 </div>
 </div>
 
-<div id="outline-container-orgddac02b" class="outline-3">
-<h3 id="orgddac02b">error()</h3>
-<div class="outline-text-3" id="text-orgddac02b">
+<div id="outline-container-org23b7907" class="outline-3">
+<h3 id="org23b7907">error()</h3>
+<div class="outline-text-3" id="text-org23b7907">
 <p>
 error(message[, level])
 </p>
@@ -1533,19 +1518,19 @@ level 参数指示获得错误的位置
 </div>
 </div>
 
-<div id="outline-container-orgffd9c1a" class="outline-3">
-<h3 id="orgffd9c1a">pcall, xpcall</h3>
-<div class="outline-text-3" id="text-orgffd9c1a">
+<div id="outline-container-org651d371" class="outline-3">
+<h3 id="org651d371">pcall, xpcall</h3>
+<div class="outline-text-3" id="text-org651d371">
 <p>
 pcall 接收一个函数和要传递给后者的参数，并执行，返回值 true / false, errorinfo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #0000FF;">if</span> <span style="color: #006FE0;">pcall</span>(function_name) <span style="color: #0000FF;">then</span>
+<pre class="src src-lua">if pcall(function_name) then
 
-<span style="color: #0000FF;">else</span>
+else
 
-<span style="color: #0000FF;">end</span>
+end
 </pre>
 </div>
 
@@ -1555,8 +1540,8 @@ xpcall 相比与 pcall 接收第二个参数：一个错误处理函数，当错
 </div>
 </div>
 
-<div id="outline-container-orgc356136" class="outline-3">
-<h3 id="orgc356136">debug 库</h3>
+<div id="outline-container-org917dffc" class="outline-3">
+<h3 id="org917dffc">debug 库</h3>
 </div>
 </div>
 

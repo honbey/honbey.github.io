@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyHomeKit</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,27 +23,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2b2f1cf">Network</a>
+<li><a href="#orgb56aee0">Network</a>
 <ul>
-<li><a href="#org382cf62">zhang.local</a>
+<li><a href="#org311f214">zhang.local</a>
 <ul>
-<li><a href="#orge907138">omen.zhang.local</a></li>
-<li><a href="#org97872c6">ct-ftth.zhang.local</a></li>
-<li><a href="#orgbb9a3a9">hw-ax3.zhang.local</a></li>
-<li><a href="#orgd2dcb0e">m5-1f/m5-2f.zhang.local</a></li>
+<li><a href="#org12b68a6">omen.zhang.local</a></li>
+<li><a href="#org2b86b55">ct-ftth.zhang.local</a></li>
+<li><a href="#org925a2c1">hw-ax3.zhang.local</a></li>
+<li><a href="#org2ae6263">m5-1f/m5-2f.zhang.local</a></li>
 </ul>
 </li>
-<li><a href="#org4dc2256">Virtual Private Network with GNB</a></li>
+<li><a href="#org431f0ca">zhang.mobile</a>
+<ul>
+<li><a href="#org655c32f">hw-4g-cpe.zhang.mobile</a></li>
 </ul>
 </li>
-<li><a href="#org44d05bf">Device</a></li>
+<li><a href="#org152e5fa">zhang.vpn</a></li>
+</ul>
+</li>
+<li><a href="#org0711e69">Device</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org2b2f1cf" class="outline-2">
-<h2 id="org2b2f1cf">Network</h2>
-<div class="outline-text-2" id="text-org2b2f1cf">
+<div id="outline-container-orgb56aee0" class="outline-2">
+<h2 id="orgb56aee0">Network</h2>
+<div class="outline-text-2" id="text-orgb56aee0">
 <ul class="org-ul">
 <li><p>
 中国电信<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 200M 光纤宽带
@@ -110,24 +98,24 @@
 <p>
 这也太不对等了，看到上行都没有升级 1000M 的欲望了。升级 300M 要到营业厅去办理。
 </p></li>
+<li>中国电信 200M 光纤宽带
+跨域宽带，使用广东电信 39 元档的畅享卡（15 GB + 100 分钟通话）办理的。</li>
 <li><p>
-中国电信<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 30G/月 通用流量
+中国电信 30G/月 通用流量
 2020 年 10 月时在学校测的最高速度，测一次速下载加上传差不多 2G 流量。在深圳测的就没超过 300M。
 </p>
 
-<figure id="org7d79d85">
+<figure id="orgafa862f">
 <img src="../images/myhomekit_5g_speed_on_hainanu.jpg" alt="myhomekit_5g_speed_on_hainanu.jpg">
 
 </figure></li>
-<li>中国联通天际通 Go<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> 2000G/月 4G 流量
-现在租的房子这速率最高 2MB/s，大部分时候 500K ，是真的卡，两个设备同时上网就会卡，太垃圾了。试了下在公司最高速率 5~6MB/s。</li>
-<li>华为云<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> ECS 1M BGP
+<li>华为云<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> ECS 1M BGP
 用作管理，业务用其他的 IP 地址和带宽。</li>
 </ul>
 </div>
-<div id="outline-container-org382cf62" class="outline-3">
-<h3 id="org382cf62">zhang.local</h3>
-<div class="outline-text-3" id="text-org382cf62">
+<div id="outline-container-org311f214" class="outline-3">
+<h3 id="org311f214">zhang.local</h3>
+<div class="outline-text-3" id="text-org311f214">
 <p>
 自建的网络域。互联网出口是电信 200M，但网速有惊喜，有公网 IP ，VPN 借助 GNB 穿透公网。
 </p>
@@ -137,9 +125,9 @@
 </p>
 </div>
 
-<div id="outline-container-orge907138" class="outline-4">
-<h4 id="orge907138">omen.zhang.local</h4>
-<div class="outline-text-4" id="text-orge907138">
+<div id="outline-container-org12b68a6" class="outline-4">
+<h4 id="org12b68a6">omen.zhang.local</h4>
+<div class="outline-text-4" id="text-org12b68a6">
 <p>
 目前借助 HP Omen 作为服务器，Windows 11 系统，使用 vbox 跑了 3 个虚拟机（2 个 linux，1 个 Windows）。目前 512GB 970 Pro + 1T HDD 空间有点不够，打算换下 970 Pro 到国产的 2 TB 存储，机械硬盘也换大一点的，但不确定这个二手购入的 17 年的笔记本是否支持。
 </p>
@@ -163,9 +151,9 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 
-<div id="outline-container-org97872c6" class="outline-4">
-<h4 id="org97872c6">ct-ftth.zhang.local</h4>
-<div class="outline-text-4" id="text-org97872c6">
+<div id="outline-container-org2b86b55" class="outline-4">
+<h4 id="org2b86b55">ct-ftth.zhang.local</h4>
+<div class="outline-text-4" id="text-org2b86b55">
 <p>
 电信定制的华为光猫，17 年的了，应该不是租用的，好像当时是说预存话费送的，还行，有千兆口，配套的机顶盒也有 4K 输出。
 宽带目前是桥接模式。iTV 没法改桥接，固件版本高，获取不了超级密码，问了电信的也不给。
@@ -177,9 +165,9 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 
-<div id="outline-container-orgbb9a3a9" class="outline-4">
-<h4 id="orgbb9a3a9">hw-ax3.zhang.local</h4>
-<div class="outline-text-4" id="text-orgbb9a3a9">
+<div id="outline-container-org925a2c1" class="outline-4">
+<h4 id="org925a2c1">hw-ax3.zhang.local</h4>
+<div class="outline-text-4" id="text-org925a2c1">
 <p>
 华为 AX3 路由，使用一切正常，家里设备少，带宽需求大的设备都是有线连接。迁移到二楼后穿墙模式一二三楼的信号都不错，单层面积 120m<sup>2</sup> 左右。路由拨号，除 WAN 口外三个口分别是 HP Omen、监控、书房。
 </p>
@@ -190,9 +178,9 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 
-<div id="outline-container-orgd2dcb0e" class="outline-4">
-<h4 id="orgd2dcb0e">m5-1f/m5-2f.zhang.local</h4>
-<div class="outline-text-4" id="text-orgd2dcb0e">
+<div id="outline-container-org2ae6263" class="outline-4">
+<h4 id="org2ae6263">m5-1f/m5-2f.zhang.local</h4>
+<div class="outline-text-4" id="text-org2ae6263">
 <p>
 两台水星 SG 105 Pro 5 口网管交换机，一楼一台，二楼一台。因为一楼到二楼只预留了一根六类网线，但光猫在一楼，决定将路由器迁到二楼后 IPTV/iTV 和监控不能用，买了带 VLAN 功能的交换机实现单线复用。Web 管理，使用 802.1q VLAN 加 PID 实现 VLAN 分割，记得关闭 IGMP 监听，不然 IPTV 的直播会是看几十秒就卡住报错无网络。
 </p>
@@ -207,15 +195,30 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 </div>
-
-<div id="outline-container-org4dc2256" class="outline-3">
-<h3 id="org4dc2256">Virtual Private Network with GNB<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
-<div class="outline-text-3" id="text-org4dc2256">
+<div id="outline-container-org431f0ca" class="outline-3">
+<h3 id="org431f0ca">zhang.mobile</h3>
+<div class="outline-text-3" id="text-org431f0ca">
+</div>
+<div id="outline-container-org655c32f" class="outline-4">
+<h4 id="org655c32f">hw-4g-cpe.zhang.mobile</h4>
+<div class="outline-text-4" id="text-org655c32f">
 <p>
-五个节点。目前只有两个节点工作，公司环境穿透不太好用，基本都是靠 index 节点转发，可用于远程 SSH 访问公司 Mac 。
+华为移动路由 3。
+本来使用华为天极通套餐的，但是华为和联通合作的这个网速真的不咋样，流量倒是挺多的，2000 GB 每月只用 5% ，于是到期后不续费了，换成电信的 200M 宽带，唯一的不足是虽是千兆但只支持 2.4GHz 频段的 WiFi。
 </p>
-<pre class="example">
-1001|10.1.0.1|255.255.255.0
+</div>
+</div>
+</div>
+
+<div id="outline-container-org152e5fa" class="outline-3">
+<h3 id="org152e5fa">zhang.vpn</h3>
+<div class="outline-text-3" id="text-org152e5fa">
+<p>
+Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
+五个节点。目前全部下线。
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>route.conf</label><pre class="src src-nil">1001|10.1.0.1|255.255.255.0
 1002|10.1.0.2|255.255.255.0
 1003|10.1.0.3|255.255.255.0
 1004|10.1.0.4|255.255.255.0
@@ -224,9 +227,10 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 </div>
-<div id="outline-container-org44d05bf" class="outline-2">
-<h2 id="org44d05bf">Device</h2>
-<div class="outline-text-2" id="text-org44d05bf">
+</div>
+<div id="outline-container-org0711e69" class="outline-2">
+<h2 id="org0711e69">Device</h2>
+<div class="outline-text-2" id="text-org0711e69">
 <ul class="org-ul">
 <li>🌐Router
 <ul class="org-ul">
@@ -251,6 +255,7 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 <li>🎧Headphone
 <ul class="org-ul">
 <li>Huawei Freebuds Pro 2020.10</li>
+<li>Bose QuietComfort 45 2023.02</li>
 </ul></li>
 <li>⌚Watch
 <ul class="org-ul">
@@ -268,14 +273,10 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-<a href="https://consumer.huawei.com/cn/support/content/zh-cn15822291/">https://consumer.huawei.com/cn/support/content/zh-cn15822291/</a>
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://www.huaweicloud.com/">https://www.huaweicloud.com/</a>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://github.com/gnbdev/gnb">https://github.com/gnbdev/gnb</a>
 </p></div></div>
 

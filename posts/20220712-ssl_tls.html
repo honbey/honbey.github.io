@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSL/TLS</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
                      <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '%MULTLINEWIDTH'
+      },
+      tags: '%TAGS',
+      tagSide: '%TAGSIDE',
+      tagIndent: '%TAGINDENT'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    output: {
+      font: '%FONT',
+      displayOverflow: '%OVERFLOW'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -68,26 +62,26 @@
 </ul>
 </li>
 <li><a href="#ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">SSL Cipher</a></li>
-<li><a href="#org5b793ac">离散对数 DH 算法</a>
+<li><a href="#org9647813">离散对数 DH 算法</a>
 <ul>
-<li><a href="#orga8d3a32">DHE 密钥交换</a></li>
-<li><a href="#org9423896">ECDHE</a></li>
+<li><a href="#org9ad8ae3">DHE 密钥交换</a></li>
+<li><a href="#org1292fda">ECDHE</a></li>
 </ul>
 </li>
 <li><a href="#ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</a>
 <ul>
-<li><a href="#org3e0017e">Session ID</a></li>
-<li><a href="#org726280a">Session Ticket</a></li>
-<li><a href="#orgf829d7e">Pre-shared Key</a></li>
+<li><a href="#org714ccb8">Session ID</a></li>
+<li><a href="#orgd329a41">Session Ticket</a></li>
+<li><a href="#org4fe6999">Pre-shared Key</a></li>
 </ul>
 </li>
-<li><a href="#org7b76705">TLS Extension</a>
+<li><a href="#orgc0a3d9f">TLS Extension</a>
 <ul>
-<li><a href="#org865fd14">ALPN</a></li>
+<li><a href="#orgc758caf">ALPN</a></li>
 </ul>
 </li>
-<li><a href="#org98eab1d">Digital Certificate</a></li>
-<li><a href="#org5befefd">Reference</a></li>
+<li><a href="#org99f6f27">Digital Certificate</a></li>
+<li><a href="#org3c61da9">Reference</a></li>
 </ul>
 </div>
 </nav>
@@ -101,19 +95,21 @@ Secure Sockert Layer/Transport Layer Security
 <p>
 两层协议
 </p>
-<pre class="example">
-握手协议 | 密码改变协议 | 告警协议
+<div class="org-src-container">
+<pre class="src src-nil">握手协议 | 密码改变协议 | 告警协议
            记录协议
 </pre>
+</div>
 
 <p>
 SSL 记录协议负责对上层的数据进行分块、压缩、计算并添加 HMAC 、加密（<a href="20220825-information_theory.html#ID-a7820960-a5b2-4562-bf64-cd207f5c9986">先压缩再加密</a>）
 </p>
-<pre class="example">
-内容类型 | 主版本号 | 子版本号 | 压缩长度
+<div class="org-src-container">
+<pre class="src src-nil">内容类型 | 主版本号 | 子版本号 | 压缩长度
            压缩数据
            消息认证码
 </pre>
+</div>
 </div>
 </div>
 
@@ -125,18 +121,19 @@ SSL 记录协议负责对上层的数据进行分块、压缩、计算并添加 
 TCP 三次握手
 SYN, ACK 的含义：<a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>
 </p>
-<pre class="example">
-Client                   Server
+<div class="org-src-container">
+<pre class="src src-nil">Client                   Server
    |     -----SYN----&gt;     |
    |     &lt;--SYN+ACK---     |
    |     -----ACK----&gt;     |
 Client                   Server
-</pre></li>
+</pre>
+</div></li>
 <li><p>
 SSL 握手（TLS 1.2 - <a href="https://datatracker.ietf.org/doc/html/rfc5246">RFC5246</a>）
 </p>
-<pre class="example">
-Client                                        Server
+<div class="org-src-container">
+<pre class="src src-nil">Client                                        Server
 
 ClientHello           ------&gt;
                                          ServerHello
@@ -152,6 +149,7 @@ Finished              ------&gt;
                                   [ChangeCipherSpec]
                       &lt;------               Finished
 </pre>
+</div>
 <p>
 4 messages as 2 RTT(Round-Trip Time).
 使用 Wireshark 抓包分析：<a href="wireshark.html#ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</a>
@@ -159,10 +157,11 @@ Finished              ------&gt;
 <li><p>
 承载应用层 HTTP 协议
 </p>
-<pre class="example">
-Client                                        Server
+<div class="org-src-container">
+<pre class="src src-nil">Client                                        Server
 Application Data      &lt;-----&gt;       Application Data
-</pre></li>
+</pre>
+</div></li>
 </ol>
 </div>
 
@@ -249,9 +248,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </div>
 </div>
 
-<div id="outline-container-org5b793ac" class="outline-2">
-<h2 id="org5b793ac">离散对数 DH 算法</h2>
-<div class="outline-text-2" id="text-org5b793ac">
+<div id="outline-container-org9647813" class="outline-2">
+<h2 id="org9647813">离散对数 DH 算法</h2>
+<div class="outline-text-2" id="text-org9647813">
 <p>
 <a href="20220712-discrete_logarithm.html#ID-455a29f5-1968-4678-a091-f8383b31e817">Discrete Logarithm</a> - 离散对数
 </p>
@@ -294,9 +293,9 @@ Bob:   Calculate \(A^{b} \mod P\) 同样也是得到 K ，于是双方以 K 作�
 </p>
 </div>
 
-<div id="outline-container-orga8d3a32" class="outline-3">
-<h3 id="orga8d3a32">DHE 密钥交换</h3>
-<div class="outline-text-3" id="text-orga8d3a32">
+<div id="outline-container-org9ad8ae3" class="outline-3">
+<h3 id="org9ad8ae3">DHE 密钥交换</h3>
+<div class="outline-text-3" id="text-org9ad8ae3">
 <blockquote>
 <p>
 Diffie Hellman
@@ -305,8 +304,8 @@ Diffie Hellman
 <p>
 工作流程（简略版，需要考虑<a href="20220708-information_security.html#ID-510ee87b-ee9d-4263-9344-b688c9f6f32f">中间人攻击</a>，在数字证书体系下，是可以防止中间人攻击的）：
 </p>
-<pre class="example">
-Client                              Server
+<div class="org-src-container">
+<pre class="src src-nil">Client                              Server
 
 Hello                 ------&gt;
                     (Generate PriKey_S and PubKey_S)
@@ -321,6 +320,7 @@ PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
 
                       &lt;------               Finished
 </pre>
+</div>
 
 <p>
 每一次通讯的 PriKey, PubKey 都是实时生成的， PriKey 存在于内存中，不会出现在 TLS 报文中，若不知道当时的私钥 PriKey 则无法破解当时的 TLS 加密报文。
@@ -328,9 +328,9 @@ PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
 </div>
 </div>
 
-<div id="outline-container-org9423896" class="outline-3">
-<h3 id="org9423896">ECDHE</h3>
-<div class="outline-text-3" id="text-org9423896">
+<div id="outline-container-org1292fda" class="outline-3">
+<h3 id="org1292fda">ECDHE</h3>
+<div class="outline-text-3" id="text-org1292fda">
 <p>
 提高 DHE 的性能，使用 ECC 椭圆曲线的特性计算公钥及会话密钥。过程：
 </p>
@@ -440,9 +440,9 @@ DHE 安全性论文：
 </p>
 </div>
 
-<div id="outline-container-org3e0017e" class="outline-3">
-<h3 id="org3e0017e">Session ID</h3>
-<div class="outline-text-3" id="text-org3e0017e">
+<div id="outline-container-org714ccb8" class="outline-3">
+<h3 id="org714ccb8">Session ID</h3>
+<div class="outline-text-3" id="text-org714ccb8">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，双方在内存中缓存会话密钥，并用唯一的 Session ID 来表示，即 Session ID 作为 key ，会话密钥作为 value 。
 当客户端再次连接时，在 HELLO 消息中带上 Session ID ，服务器收到后就会从内存找到该会话密钥，在 1 个 RTT 中建立 TLS 通信。
@@ -457,9 +457,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-org726280a" class="outline-3">
-<h3 id="org726280a">Session Ticket</h3>
-<div class="outline-text-3" id="text-org726280a">
+<div id="outline-container-orgd329a41" class="outline-3">
+<h3 id="orgd329a41">Session Ticket</h3>
+<div class="outline-text-3" id="text-orgd329a41">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，服务器会将会话密钥加密后作为 Ticket 发送给客户端，由客户端缓存该 Ticket。
 当客户端再次连接时，会发送 Ticket ，服务器解密后就可以获取上一次的会话密钥，验证有效期后无问题就可以建立 TLS 通信。
@@ -467,9 +467,9 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-orgf829d7e" class="outline-3">
-<h3 id="orgf829d7e">Pre-shared Key</h3>
-<div class="outline-text-3" id="text-orgf829d7e">
+<div id="outline-container-org4fe6999" class="outline-3">
+<h3 id="org4fe6999">Pre-shared Key</h3>
+<div class="outline-text-3" id="text-org4fe6999">
 <p>
 类似 Session Ticket ，但可以直接在 HTTP 请求中带上 Pre-shared Key ，在 0 RTT 内恢复会话。
 </p>
@@ -477,13 +477,13 @@ Session ID 定期失效。
 </div>
 </div>
 
-<div id="outline-container-org7b76705" class="outline-2">
-<h2 id="org7b76705">TLS Extension</h2>
-<div class="outline-text-2" id="text-org7b76705">
+<div id="outline-container-orgc0a3d9f" class="outline-2">
+<h2 id="orgc0a3d9f">TLS Extension</h2>
+<div class="outline-text-2" id="text-orgc0a3d9f">
 </div>
-<div id="outline-container-org865fd14" class="outline-3">
-<h3 id="org865fd14">ALPN</h3>
-<div class="outline-text-3" id="text-org865fd14">
+<div id="outline-container-orgc758caf" class="outline-3">
+<h3 id="orgc758caf">ALPN</h3>
+<div class="outline-text-3" id="text-orgc758caf">
 <p>
 ALPN(Application Layer Protocol Negotiation) 是 TLS 的扩展，允许在安全连接的基础上进行应用层协议的协商。ALPN 支持任意应用层协议的协商，目前应用最多是 HTTP2 的协商。在 2016 年， ALPN 已经完全替代 NPN 了。
 </p>
@@ -497,9 +497,9 @@ ALPN allows the application layer to negotiate which protocol to use over the se
 </div>
 </div>
 
-<div id="outline-container-org98eab1d" class="outline-2">
-<h2 id="org98eab1d">Digital Certificate</h2>
-<div class="outline-text-2" id="text-org98eab1d">
+<div id="outline-container-org99f6f27" class="outline-2">
+<h2 id="org99f6f27">Digital Certificate</h2>
+<div class="outline-text-2" id="text-org99f6f27">
 <p>
 key 通常指私钥。
 </p>
@@ -525,9 +525,9 @@ PEM, Privacy Enhanced Mail，以 &ldquo;-----BEGIN...&rdquo; 开头， &ldquo;--
 </p>
 </div>
 </div>
-<div id="outline-container-org5befefd" class="outline-2">
-<h2 id="org5befefd">Reference</h2>
-<div class="outline-text-2" id="text-org5befefd">
+<div id="outline-container-org3c61da9" class="outline-2">
+<h2 id="org3c61da9">Reference</h2>
+<div class="outline-text-2" id="text-org3c61da9">
 <ul class="org-ul">
 <li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>

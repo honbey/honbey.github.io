@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>elasticsearch</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,36 +23,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org09edc2a">ELK Introduction</a></li>
-<li><a href="#org0992670">Kibana</a>
+<li><a href="#orgfa6b16d">ELK Introduction</a></li>
+<li><a href="#org186f1b7">Kibana</a>
 <ul>
-<li><a href="#org0ed1a0b">查询集群（cluster）情况</a></li>
-<li><a href="#orgffda3f1">查询</a></li>
+<li><a href="#org2ef8423">查询集群（cluster）情况</a></li>
+<li><a href="#orgcb6bebe">查询</a></li>
 <li><a href="#ID-9042c157-06be-4891-8b8b-5802a2598d3e">DSL 查询</a></li>
-<li><a href="#org170d09b">标准查询</a></li>
-<li><a href="#orge0e6449">单词查询与过滤</a></li>
-<li><a href="#org3811e14">组合条件查询与过滤</a></li>
-<li><a href="#orgb673e83">范围查询与过滤</a></li>
-<li><a href="#org5eecc12">存在和损失过滤器</a></li>
-<li><a href="#org1dd7dfb">前匹配查询</a></li>
-<li><a href="#orgc7d952a">通配符查询</a></li>
-<li><a href="#orgfe21e36">最佳字段</a></li>
-<li><a href="#orgf011c94">全文搜索</a>
+<li><a href="#orgb270316">标准查询</a></li>
+<li><a href="#org4538dbb">单词查询与过滤</a></li>
+<li><a href="#org29975a1">组合条件查询与过滤</a></li>
+<li><a href="#org69894c8">范围查询与过滤</a></li>
+<li><a href="#orgce644c1">存在和损失过滤器</a></li>
+<li><a href="#orgfc0674a">前匹配查询</a></li>
+<li><a href="#org5d733b6">通配符查询</a></li>
+<li><a href="#orgd6bdcac">最佳字段</a></li>
+<li><a href="#org2e032e9">全文搜索</a>
 <ul>
-<li><a href="#org5f60cb6">match</a></li>
-<li><a href="#orgb82da14">match_phrase</a>
+<li><a href="#org3307ed0">match</a></li>
+<li><a href="#org72a386b">match_phrase</a>
 <ul>
-<li><a href="#orgf4cb7c2">match_phrase 和 regexp</a></li>
+<li><a href="#org0eef4b4">match_phrase 和 regexp</a></li>
 </ul>
 </li>
-<li><a href="#org31e0803">highlight</a></li>
+<li><a href="#org6ca9c1c">highlight</a></li>
 </ul>
 </li>
-<li><a href="#org164b0bc">结构化搜索</a></li>
-<li><a href="#orgcf21a60">聚合</a>
+<li><a href="#org3dabf6f">结构化搜索</a></li>
+<li><a href="#org9c7a02e">聚合</a>
 <ul>
-<li><a href="#orgf0d6dad">Example</a></li>
-<li><a href="#org2b3b29f">Data Histogram 聚合</a></li>
+<li><a href="#orgd1ac443">Example</a></li>
+<li><a href="#org7a143cf">Data Histogram 聚合</a></li>
 </ul>
 </li>
 </ul>
@@ -81,46 +64,47 @@
 基于反向索引的文档型数据库，主要用于日志查询。
 </p>
 
-<div id="outline-container-org09edc2a" class="outline-2">
-<h2 id="org09edc2a">ELK Introduction</h2>
-<div class="outline-text-2" id="text-org09edc2a">
+<div id="outline-container-orgfa6b16d" class="outline-2">
+<h2 id="orgfa6b16d">ELK Introduction</h2>
+<div class="outline-text-2" id="text-orgfa6b16d">
 <p>
 Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据进行可视化。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0992670" class="outline-2">
-<h2 id="org0992670">Kibana</h2>
-<div class="outline-text-2" id="text-org0992670">
+<div id="outline-container-org186f1b7" class="outline-2">
+<h2 id="org186f1b7">Kibana</h2>
+<div class="outline-text-2" id="text-org186f1b7">
 </div>
-<div id="outline-container-org0ed1a0b" class="outline-3">
-<h3 id="org0ed1a0b">查询集群（cluster）情况</h3>
-<div class="outline-text-3" id="text-org0ed1a0b">
+<div id="outline-container-org2ef8423" class="outline-3">
+<h3 id="org2ef8423">查询集群（cluster）情况</h3>
+<div class="outline-text-3" id="text-org2ef8423">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># &#26816;&#26597;&#32676;&#38598;&#36816;&#34892;&#29366;&#20917;</span>
-<span style="color: #006DAF;">GET</span> /_cat/health?v
+<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26816;&#26597;&#32676;&#38598;&#36816;&#34892;&#29366;&#20917;</span>
+GET /_cat/health?v
 
-<span style="color: #8D8D84; font-style: italic;"># &#33719;&#24471;&#32676;&#38598;&#20013;&#30340;&#33410;&#28857;&#21015;&#34920;</span>
-<span style="color: #006DAF;">GET</span> /_cat/nodes?v
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#33719;&#24471;&#32676;&#38598;&#20013;&#30340;&#33410;&#28857;&#21015;&#34920;</span>
+GET /_cat/nodes?v
 
-<span style="color: #8D8D84; font-style: italic;"># &#21015;&#20986;&#25152;&#26377;&#32034;&#24341;</span>
-<span style="color: #006DAF;">GET</span> /_cat/indices?v
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#21015;&#20986;&#25152;&#26377;&#32034;&#24341;</span>
+GET /_cat/indices?v
 
-<span style="color: #8D8D84; font-style: italic;"># &#21019;&#24314;&#32034;&#24341;&#24182;&#26597;&#30475;</span>
-<span style="color: #006DAF;">PUT</span> /customer?pretty
-<span style="color: #006DAF;">GET</span> /_cat/indices?v
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#21019;&#24314;&#32034;&#24341;&#24182;&#26597;&#30475;</span>
+PUT /customer?pretty
+GET /_cat/indices?v
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgffda3f1" class="outline-3">
-<h3 id="orgffda3f1">查询</h3>
-<div class="outline-text-3" id="text-orgffda3f1">
-<pre class="example">
-GET [index&lt;regex&gt;]/_search
+<div id="outline-container-orgcb6bebe" class="outline-3">
+<h3 id="orgcb6bebe">查询</h3>
+<div class="outline-text-3" id="text-orgcb6bebe">
+<div class="org-src-container">
+<pre class="src src-nil">GET [index&lt;regex&gt;]/_search
 </pre>
+</div>
 
 <p>
 部分返回参数：
@@ -157,8 +141,8 @@ GET [index&lt;regex&gt;]/_search
 下面的查询针对tweents类型，并使用以下的条件：
 </p>
 
-<pre class="example">
-name 字段中包含 mary 或者 john
+<div class="org-src-container">
+<pre class="src src-nil">name 字段中包含 mary 或者 john
 date 值大于 2014-09-10
 _all_ 字段包含 aggregations 或者 geo
 
@@ -166,6 +150,7 @@ _all_ 字段包含 aggregations 或者 geo
 
 ?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)
 </pre>
+</div>
 </div>
 </div>
 
@@ -195,9 +180,9 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-<div id="outline-container-org170d09b" class="outline-3">
-<h3 id="org170d09b">标准查询</h3>
-<div class="outline-text-3" id="text-org170d09b">
+<div id="outline-container-orgb270316" class="outline-3">
+<h3 id="orgb270316">标准查询</h3>
+<div class="outline-text-3" id="text-orgb270316">
 <ul class="org-ul">
 <li>match          全文匹配或精确匹配</li>
 <li>match_all      匹配所有</li>
@@ -206,9 +191,9 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 
-<div id="outline-container-orge0e6449" class="outline-3">
-<h3 id="orge0e6449">单词查询与过滤</h3>
-<div class="outline-text-3" id="text-orge0e6449">
+<div id="outline-container-org4538dbb" class="outline-3">
+<h3 id="org4538dbb">单词查询与过滤</h3>
+<div class="outline-text-3" id="text-org4538dbb">
 <ul class="org-ul">
 <li>term  查询单值</li>
 <li>terms 查询多值</li>
@@ -216,9 +201,9 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 
-<div id="outline-container-org3811e14" class="outline-3">
-<h3 id="org3811e14">组合条件查询与过滤</h3>
-<div class="outline-text-3" id="text-org3811e14">
+<div id="outline-container-org29975a1" class="outline-3">
+<h3 id="org29975a1">组合条件查询与过滤</h3>
+<div class="outline-text-3" id="text-org29975a1">
 <ul class="org-ul">
 <li>bool
 <ul class="org-ul">
@@ -231,9 +216,9 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 
-<div id="outline-container-orgb673e83" class="outline-3">
-<h3 id="orgb673e83">范围查询与过滤</h3>
-<div class="outline-text-3" id="text-orgb673e83">
+<div id="outline-container-org69894c8" class="outline-3">
+<h3 id="org69894c8">范围查询与过滤</h3>
+<div class="outline-text-3" id="text-org69894c8">
 <ul class="org-ul">
 <li>range
 <ul class="org-ul">
@@ -246,9 +231,9 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 
-<div id="outline-container-org5eecc12" class="outline-3">
-<h3 id="org5eecc12">存在和损失过滤器</h3>
-<div class="outline-text-3" id="text-org5eecc12">
+<div id="outline-container-orgce644c1" class="outline-3">
+<h3 id="orgce644c1">存在和损失过滤器</h3>
+<div class="outline-text-3" id="text-orgce644c1">
 <ul class="org-ul">
 <li>filter
 <ul class="org-ul">
@@ -259,18 +244,18 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 
-<div id="outline-container-org1dd7dfb" class="outline-3">
-<h3 id="org1dd7dfb">前匹配查询</h3>
-<div class="outline-text-3" id="text-org1dd7dfb">
+<div id="outline-container-orgfc0674a" class="outline-3">
+<h3 id="orgfc0674a">前匹配查询</h3>
+<div class="outline-text-3" id="text-orgfc0674a">
 <ul class="org-ul">
 <li>prefix</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc7d952a" class="outline-3">
-<h3 id="orgc7d952a">通配符查询</h3>
-<div class="outline-text-3" id="text-orgc7d952a">
+<div id="outline-container-org5d733b6" class="outline-3">
+<h3 id="org5d733b6">通配符查询</h3>
+<div class="outline-text-3" id="text-org5d733b6">
 <ul class="org-ul">
 <li>wildcard
 <ul class="org-ul">
@@ -280,9 +265,9 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfe21e36" class="outline-3">
-<h3 id="orgfe21e36">最佳字段</h3>
-<div class="outline-text-3" id="text-orgfe21e36">
+<div id="outline-container-orgd6bdcac" class="outline-3">
+<h3 id="orgd6bdcac">最佳字段</h3>
+<div class="outline-text-3" id="text-orgd6bdcac">
 <ul class="org-ul">
 <li><p>
 dis_max
@@ -327,9 +312,9 @@ multi_match 有 best_fields, most_fields, cross_fields 最佳字段 (default)，
 </div>
 </div>
 
-<div id="outline-container-orgf011c94" class="outline-3">
-<h3 id="orgf011c94">全文搜索</h3>
-<div class="outline-text-3" id="text-orgf011c94">
+<div id="outline-container-org2e032e9" class="outline-3">
+<h3 id="org2e032e9">全文搜索</h3>
+<div class="outline-text-3" id="text-org2e032e9">
 <p>
 查询的两个重要方面：相关性和分析
 </p>
@@ -368,9 +353,9 @@ minimum_should_match 还可以限定 必须 满足 should 的条件数，boost �
 </div>
 
 
-<div id="outline-container-org5f60cb6" class="outline-4">
-<h4 id="org5f60cb6">match</h4>
-<div class="outline-text-4" id="text-org5f60cb6">
+<div id="outline-container-org3307ed0" class="outline-4">
+<h4 id="org3307ed0">match</h4>
+<div class="outline-text-4" id="text-org3307ed0">
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
 <span style="color: #333333; background-color: #FFFFFF;">{</span>
@@ -389,17 +374,17 @@ minimum_should_match 还可以限定 必须 满足 should 的条件数，boost �
 </div>
 </div>
 
-<div id="outline-container-orgb82da14" class="outline-4">
-<h4 id="orgb82da14">match_phrase</h4>
-<div class="outline-text-4" id="text-orgb82da14">
+<div id="outline-container-org72a386b" class="outline-4">
+<h4 id="org72a386b">match_phrase</h4>
+<div class="outline-text-4" id="text-org72a386b">
 <p>
 结果会匹配完整的 <code>abc def</code> ，也包含 <code>xxx abc def xxx</code> 的情况
 </p>
 </div>
 
-<div id="outline-container-orgf4cb7c2" class="outline-5">
-<h5 id="orgf4cb7c2">match_phrase 和 regexp</h5>
-<div class="outline-text-5" id="text-orgf4cb7c2">
+<div id="outline-container-org0eef4b4" class="outline-5">
+<h5 id="org0eef4b4">match_phrase 和 regexp</h5>
+<div class="outline-text-5" id="text-org0eef4b4">
 <p>
 regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
 </p>
@@ -411,9 +396,9 @@ regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
 </div>
 </div>
 
-<div id="outline-container-org31e0803" class="outline-4">
-<h4 id="org31e0803">highlight</h4>
-<div class="outline-text-4" id="text-org31e0803">
+<div id="outline-container-org6ca9c1c" class="outline-4">
+<h4 id="org6ca9c1c">highlight</h4>
+<div class="outline-text-4" id="text-org6ca9c1c">
 <p>
 高亮某个字段 (key)
 </p>
@@ -438,9 +423,9 @@ regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
 </div>
 </div>
 
-<div id="outline-container-org164b0bc" class="outline-3">
-<h3 id="org164b0bc">结构化搜索</h3>
-<div class="outline-text-3" id="text-org164b0bc">
+<div id="outline-container-org3dabf6f" class="outline-3">
+<h3 id="org3dabf6f">结构化搜索</h3>
+<div class="outline-text-3" id="text-org3dabf6f">
 <p>
 term 精确值查询：
 </p>
@@ -474,9 +459,9 @@ term 精确值查询：
 </div>
 </div>
 
-<div id="outline-container-orgcf21a60" class="outline-3">
-<h3 id="orgcf21a60">聚合</h3>
-<div class="outline-text-3" id="text-orgcf21a60">
+<div id="outline-container-org9c7a02e" class="outline-3">
+<h3 id="org9c7a02e">聚合</h3>
+<div class="outline-text-3" id="text-org9c7a02e">
 <p>
 桶   buckets 满足特定条件的集合
 </p>
@@ -501,9 +486,9 @@ GROUP BY color -&gt; 桶
 </p>
 </div>
 
-<div id="outline-container-orgf0d6dad" class="outline-4">
-<h4 id="orgf0d6dad">Example</h4>
-<div class="outline-text-4" id="text-orgf0d6dad">
+<div id="outline-container-orgd1ac443" class="outline-4">
+<h4 id="orgd1ac443">Example</h4>
+<div class="outline-text-4" id="text-orgd1ac443">
 <p>
 查询特定兴趣爱好员工平均年龄：
 </p>
@@ -637,9 +622,9 @@ extended_stats 扩展度量，统计的基础上还增加了多种复杂的统�
 </div>
 </div>
 
-<div id="outline-container-org2b3b29f" class="outline-4">
-<h4 id="org2b3b29f">Data Histogram 聚合</h4>
-<div class="outline-text-4" id="text-org2b3b29f">
+<div id="outline-container-org7a143cf" class="outline-4">
+<h4 id="org7a143cf">Data Histogram 聚合</h4>
+<div class="outline-text-4" id="text-org7a143cf">
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
 <span style="color: #333333; background-color: #FFFFFF;">{</span>

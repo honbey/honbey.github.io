@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>安装使用 lua-resty-waf</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,18 +23,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga76beaf">安装 OpenResty</a></li>
-<li><a href="#org83e36ce">将 Nginx 迁移到 OpenResty</a></li>
-<li><a href="#org25f727d">安装 lua-resty-waf</a></li>
-<li><a href="#org81a270c">测试 lua-resty-waf</a>
+<li><a href="#orgb0fd79b">安装 OpenResty</a></li>
+<li><a href="#org0ac5062">将 Nginx 迁移到 OpenResty</a></li>
+<li><a href="#org3e31f97">安装 lua-resty-waf</a></li>
+<li><a href="#org14204fa">测试 lua-resty-waf</a>
 <ul>
-<li><a href="#orga27f8e1">附录</a>
+<li><a href="#org4d48cec">附录</a>
 <ul>
-<li><a href="#org5118696">nginx.conf</a></li>
-<li><a href="#org2903e80">www.conf</a></li>
+<li><a href="#orgd1d3c77">nginx.conf</a></li>
+<li><a href="#org1b5c788">www.conf</a></li>
 </ul>
 </li>
-<li><a href="#org35d3d2a">参考链接</a></li>
+<li><a href="#org149d2f0">参考链接</a></li>
 </ul>
 </li>
 </ul>
@@ -62,14 +45,14 @@
 域名：<a href="https://freewisdom.cn">https://freewisdom.cn</a>
 </p>
 
-<div id="outline-container-orga76beaf" class="outline-2">
-<h2 id="orga76beaf">安装 OpenResty</h2>
-<div class="outline-text-2" id="text-orga76beaf">
+<div id="outline-container-orgb0fd79b" class="outline-2">
+<h2 id="orgb0fd79b">安装 OpenResty</h2>
+<div class="outline-text-2" id="text-orgb0fd79b">
 <p>
 安装依赖
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">dnf</span> install pcre-devel openssl-devel gcc gcc-c++ <span style="color: #6434A3;">curl</span>
+<pre class="src src-bash">dnf install pcre-devel openssl-devel gcc gcc-c++ curl
 </pre>
 </div>
 
@@ -77,8 +60,8 @@
 参考官网文档先添加 OpenResty 仓库
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">wget</span> https://openresty.org/package/centos/openresty.repo
-<span style="color: #006DAF;">mv</span> openresty.repo /etc/yum.repos.d/
+<pre class="src src-bash">wget https://openresty.org/package/centos/openresty.repo
+mv openresty.repo /etc/yum.repos.d/
 </pre>
 </div>
 
@@ -86,7 +69,7 @@
 更新软件仓库
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">dnf</span> update
+<pre class="src src-bash">dnf update
 </pre>
 </div>
 
@@ -94,20 +77,20 @@
 安装 openresty, openresty-resty, openresty-opm
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">dnf</span> install openresty openresty-resty openresty-opm
+<pre class="src src-bash">dnf install openresty openresty-resty openresty-opm
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org83e36ce" class="outline-2">
-<h2 id="org83e36ce">将 Nginx 迁移到 OpenResty</h2>
-<div class="outline-text-2" id="text-org83e36ce">
+<div id="outline-container-org0ac5062" class="outline-2">
+<h2 id="org0ac5062">将 Nginx 迁移到 OpenResty</h2>
+<div class="outline-text-2" id="text-org0ac5062">
 <p>
 停止 nginx 服务
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">nginx</span> <span style="color: #D0372D;">-s</span> stop
+<pre class="src src-bash">nginx -s stop
 </pre>
 </div>
 
@@ -116,10 +99,10 @@
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">
-<span style="color: #006DAF;">find</span> / <span style="color: #D0372D;">-name</span> nginx.conf <span style="color: #D0372D;">-type</span> f
+find / -name nginx.conf -type f
 
-<span style="color: #8D8D84; font-style: italic;"># /etc/nginx/nginx.conf</span>
-<span style="color: #8D8D84; font-style: italic;"># /usr/local/openresty/nginx/conf/nginx.conf</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">/etc/nginx/nginx.conf</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">/usr/local/openresty/nginx/conf/nginx.conf</span>
 </pre>
 </div>
 
@@ -132,7 +115,7 @@ openresty 对应的 nginx 配置目录为 <code>/usr/local/openresty/nginx/conf/
 复制配置
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">cp</span> /etc/nginx/conf.d/* /usr/local/openresty/nginx/conf/
+<pre class="src src-bash">cp /etc/nginx/conf.d/* /usr/local/openresty/nginx/conf/
 </pre>
 </div>
 
@@ -147,34 +130,35 @@ openresty 对应的 nginx 配置目录为 <code>/usr/local/openresty/nginx/conf/
 </div>
 </div>
 
-<div id="outline-container-org25f727d" class="outline-2">
-<h2 id="org25f727d">安装 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org25f727d">
+<div id="outline-container-org3e31f97" class="outline-2">
+<h2 id="org3e31f97">安装 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-org3e31f97">
 <p>
 克隆代码
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">git</span> clone https://github.com/p0pr0ck5/lua-resty-waf.git
-<span style="color: #006DAF;">git</span> submodule init
-<span style="color: #006DAF;">git</span> submodule update
+<pre class="src src-bash">git clone https://github.com/p0pr0ck5/lua-resty-waf.git
+git submodule init
+git submodule update
 </pre>
 </div>
 
 <p>
 直接 <code>make</code> 找不到 ~lua.h~，安装 lua-devel
 </p>
-<pre class="example">
-dnf install lua luarocks
+<div class="org-src-container">
+<pre class="src src-nil">dnf install lua luarocks
 dnf install http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/lua-devel-5.3.4-11.el8.x86_64.rpm
 </pre>
+</div>
 <p>
 修改 lua 版本，这样会导致后面 rex<sub>pcre.so</sub> 启动不起来，还是需要强制安装 lua 5.1
 修改 <code>lua-aho-corasick/Makefile</code> 以及 <code>lua-resty-htmlentities/Makefile</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/LUA_VERSION = 5.1/LUA_VERSION = 5.3/'</span> \
-lua-aho-corasick/Makefile \
+<pre class="src src-bash">sed -i <span style="color: #008000;">'s/LUA_VERSION = 5.1/LUA_VERSION = 5.3/'</span> <span style="color: #008000;">\</span>
+lua-aho-corasick/Makefile <span style="color: #008000;">\</span>
 lua-resty-htmlentities/Makefile
 </pre>
 </div>
@@ -183,10 +167,10 @@ lua-resty-htmlentities/Makefile
 Centos 8 强制安装 lua-5.1, lua-devel-5.1, luarocks
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">wget</span> http://mirror.centos.org/centos/<span style="color: #D0372D;">7</span>/os/x86_64/Packages/lua-5.1.4-15.el7.x86_64.rpm
-<span style="color: #006DAF;">rpm</span> <span style="color: #D0372D;">-i</span> ./lua-5.1.4-15.el7.x86_64.rpm <span style="color: #D0372D;">--nodeps</span>
-<span style="color: #006DAF;">dnf</span> install http://mirror.centos.org/centos/<span style="color: #D0372D;">7</span>/os/x86_64/Packages/lua-devel-5.1.4-15.el7.x86_64.rpm
-<span style="color: #006DAF;">dnf</span> install https://download-ib01.fedoraproject.org/pub/epel/<span style="color: #D0372D;">7</span>/x86_64/Packages/l/luarocks-2.3.0-1.el7.x86_64.rpm
+<pre class="src src-bash">wget http://mirror.centos.org/centos/7/os/x86_64/Packages/lua-5.1.4-15.el7.x86_64.rpm
+rpm -i ./lua-5.1.4-15.el7.x86_64.rpm --nodeps
+dnf install http://mirror.centos.org/centos/7/os/x86_64/Packages/lua-devel-5.1.4-15.el7.x86_64.rpm
+dnf install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/luarocks-2.3.0-1.el7.x86_64.rpm
 </pre>
 </div>
 
@@ -194,11 +178,11 @@ Centos 8 强制安装 lua-5.1, lua-devel-5.1, luarocks
 要使得 lua 5.1 正常运行，需要链接一些资源文件
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># </span><span style="color: #8D8D84; font-style: italic;">find</span><span style="color: #8D8D84; font-style: italic;"> / -name libreadline.so</span>
+<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">find / -name libreadline.so</span>
 <span style="color: #006FE0;">cd</span> /usr/lib64
-<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> libreadline.so.7.0 libreadline.so.6
-<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> libncurses.so.6.1 libncurses.so.5
-<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> libtinfo.so.6.1 libtinfo.so.5
+ln -s libreadline.so.7.0 libreadline.so.6
+ln -s libncurses.so.6.1 libncurses.so.5
+ln -s libtinfo.so.6.1 libtinfo.so.5
 </pre>
 </div>
 
@@ -206,11 +190,11 @@ Centos 8 强制安装 lua-5.1, lua-devel-5.1, luarocks
 测试 lua 能否正常运行
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">lua</span> <span style="color: #D0372D;">-v</span>
-<span style="color: #8D8D84; font-style: italic;"># Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio</span>
-<span style="color: #006DAF;">lua</span>
-<span style="color: #8D8D84; font-style: italic;"># Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio</span>
-<span style="color: #8D8D84; font-style: italic;"># &gt;</span>
+<pre class="src src-bash">lua -v
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio</span>
+lua
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&gt;</span>
 </pre>
 </div>
 
@@ -218,10 +202,10 @@ Centos 8 强制安装 lua-5.1, lua-devel-5.1, luarocks
 Centos 8 默认没有 <code>python</code> 命令，可修改 .py 文件的 <code>python</code> 为 <code>python2</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006FE0;">set</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python2/'</span> \
-libinjection/src/fingerprints2sqli.py \
-libinjection/src/make_parens.py \
-libinjection/src/sqlparse2c.py \
+<pre class="src src-bash"><span style="color: #006FE0;">set</span> -i <span style="color: #008000;">'s/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python2/'</span> <span style="color: #008000;">\</span>
+libinjection/src/fingerprints2sqli.py <span style="color: #008000;">\</span>
+libinjection/src/make_parens.py <span style="color: #008000;">\</span>
+libinjection/src/sqlparse2c.py <span style="color: #008000;">\</span>
 libinjection/src/sqlparse_map.py
 </pre>
 </div>
@@ -234,9 +218,9 @@ libinjection/src/sqlparse_map.py
 编译完成后重启 openresty
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># openresty -s reload</span>
-<span style="color: #006DAF;">openresty</span> <span style="color: #D0372D;">-s</span> stop
-<span style="color: #006DAF;">openresty</span>
+<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">openresty -s reload</span>
+openresty -s stop
+openresty
 </pre>
 </div>
 </div>
@@ -244,16 +228,17 @@ libinjection/src/sqlparse_map.py
 
 
 
-<div id="outline-container-org81a270c" class="outline-2">
-<h2 id="org81a270c">测试 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org81a270c">
+<div id="outline-container-org14204fa" class="outline-2">
+<h2 id="org14204fa">测试 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-org14204fa">
 <p>
 测试网址：
 </p>
-<pre class="example">
-https://freewisdom.cn/
+<div class="org-src-container">
+<pre class="src src-nil">https://freewisdom.cn/
 https://xampp.freewisdom.cn/
 </pre>
+</div>
 
 <p>
 访问 <code>https://freewisdom.cn/?id=&lt;script&gt;alert(123)&lt;/script&gt;, https://freewisdom.cn/?id=1'or'1=1</code> 均返回 403，服务器日志如下：
@@ -317,13 +302,13 @@ https://xampp.freewisdom.cn/
 </div>
 
 
-<div id="outline-container-orga27f8e1" class="outline-3">
-<h3 id="orga27f8e1">附录</h3>
-<div class="outline-text-3" id="text-orga27f8e1">
+<div id="outline-container-org4d48cec" class="outline-3">
+<h3 id="org4d48cec">附录</h3>
+<div class="outline-text-3" id="text-org4d48cec">
 </div>
-<div id="outline-container-org5118696" class="outline-4">
-<h4 id="org5118696">nginx.conf</h4>
-<div class="outline-text-4" id="text-org5118696">
+<div id="outline-container-orgd1d3c77" class="outline-4">
+<h4 id="orgd1d3c77">nginx.conf</h4>
+<div class="outline-text-4" id="text-orgd1d3c77">
 <div class="org-src-container">
 <pre class="src src-nginx">#user  nobody;
 worker_processes  1;
@@ -403,99 +388,99 @@ http {
 </div>
 </div>
 
-<div id="outline-container-org2903e80" class="outline-4">
-<h4 id="org2903e80">www.conf</h4>
-<div class="outline-text-4" id="text-org2903e80">
+<div id="outline-container-org1b5c788" class="outline-4">
+<h4 id="org1b5c788">www.conf</h4>
+<div class="outline-text-4" id="text-org1b5c788">
 <div class="org-src-container">
-<pre class="src src-bash">    <span style="color: #006DAF;">server</span> <span style="color: #707183;">{</span>
-        <span style="color: #006DAF;">listen</span>       <span style="color: #D0372D;">443</span><span style="color: #0000FF;">;</span>
-        <span style="color: #006DAF;">server_name</span>  freewisdom.cn<span style="color: #0000FF;">;</span>
-        <span style="color: #006DAF;">root</span>         /var/web/public<span style="color: #0000FF;">;</span>
-        <span style="color: #006DAF;">index</span>        index.html index.htm<span style="color: #0000FF;">;</span>
-        <span style="color: #8D8D84; font-style: italic;">#error_log logs/www.error.log;</span>
+<pre class="src src-bash">    server {
+        listen       <span style="color: #D0372D;">443</span>;
+        server_name  freewisdom.cn;
+        root         /var/web/public;
+        index        index.html index.htm;
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">error_log logs/www.error.log;</span>
 
-        <span style="color: #006DAF;">location</span> / <span style="color: #7388D6;">{</span>
-            <span style="color: #8D8D84; font-style: italic;">#expires 7d;</span>
-            <span style="color: #006DAF;">access_by_lua_block</span> <span style="color: #909183;">{</span>
-                local <span style="color: #D0372D; font-style: italic;">lua_resty_waf</span> = <span style="color: #D0372D; font-style: italic;">require</span> <span style="color: #008000;">"resty.waf"</span>
+        location / {
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">expires 7d;</span>
+            access_by_lua_block {
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-                local <span style="color: #D0372D; font-style: italic;">waf</span> = lua_resty_waf:new<span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-                -- <span style="color: #D0372D; font-style: italic;">define</span> <span style="color: #D0372D; font-style: italic;">options</span> <span style="color: #D0372D; font-style: italic;">that</span> <span style="color: #D0372D; font-style: italic;">will</span> <span style="color: #D0372D; font-style: italic;">be</span> <span style="color: #D0372D; font-style: italic;">inherited</span> <span style="color: #D0372D; font-style: italic;">across</span> <span style="color: #D0372D; font-style: italic;">all</span> <span style="color: #D0372D; font-style: italic;">scopes</span>
-                waf:set_option<span style="color: #709870;">(</span>"debug<span style="color: #008000;">", true</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>mode<span style="color: #008000;">", "</span>ACTIVE<span style="color: #008000;">"</span><span style="color: #709870;">)</span>
+                -- define options that will be inherited across all scopes
+                waf:set_option(<span style="color: #008000;">"debug"</span>, true)
+                waf:set_option(<span style="color: #008000;">"mode"</span>, <span style="color: #008000;">"ACTIVE"</span>)
 
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_target<span style="color: #008000;">", "</span>file<span style="color: #008000;">"</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_target_path<span style="color: #008000;">", "</span>/tmp/event.log<span style="color: #008000;">"</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"event_log_target"</span>, <span style="color: #008000;">"file"</span>)
+                waf:set_option(<span style="color: #008000;">"event_log_target_path"</span>, <span style="color: #008000;">"/tmp/event.log"</span>)
 
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>debug_log_level<span style="color: #008000;">", ngx.DEBUG</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_altered_only<span style="color: #008000;">", false</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_request_arguments<span style="color: #008000;">", true</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_request_body<span style="color: #008000;">", true</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_verbosity<span style="color: #008000;">", 4</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"debug_log_level"</span>, ngx.DEBUG)
+                waf:set_option(<span style="color: #008000;">"event_log_altered_only"</span>, false)
+                waf:set_option(<span style="color: #008000;">"event_log_request_arguments"</span>, true)
+                waf:set_option(<span style="color: #008000;">"event_log_request_body"</span>, true)
+                waf:set_option(<span style="color: #008000;">"event_log_verbosity"</span>, <span style="color: #D0372D;">4</span>)
 
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_periodic_flush<span style="color: #008000;">", 30</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_buffer_size<span style="color: #008000;">", 128</span><span style="color: #709870;">)</span>
+                waf:set_option(<span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">30</span>)
+                waf:set_option(<span style="color: #008000;">"event_log_buffer_size"</span>, <span style="color: #D0372D;">128</span>)
 
-<span style="color: #008000;">                -- this may be desirable for low-traffic or testing sites</span>
-<span style="color: #008000;">                -- by default, event logs are not written until the buffer is full</span>
-<span style="color: #008000;">                -- for testing, flush the log buffer every 5 seconds</span>
-<span style="color: #008000;">                --</span>
-<span style="color: #008000;">                -- this is only necessary when configuring a remote TCP/UDP</span>
-<span style="color: #008000;">                -- socket server for event logs. otherwise, this is ignored</span>
-<span style="color: #008000;">                -- waf:set_option</span><span style="color: #709870;">(</span><span style="color: #008000;">"</span>event_log_periodic_flush<span style="color: #008000;">", 5</span><span style="color: #709870;">)</span>
+                -- this may be desirable for low-traffic or testing sites
+                -- by default, event logs are not written until the buffer is full
+                -- for testing, flush the log buffer every <span style="color: #D0372D;">5</span> seconds
+                --
+                -- this is only necessary when configuring a remote TCP/UDP
+                -- socket server for event logs. otherwise, this is ignored
+                -- waf:set_option(<span style="color: #008000;">"event_log_periodic_flush"</span>, <span style="color: #D0372D;">5</span>)
 
-<span style="color: #008000;">                -- run the firewall</span>
-<span style="color: #008000;">                waf:exec</span><span style="color: #709870;">()</span>
-<span style="color: #008000;">            </span><span style="color: #909183;">}</span>
+                -- run the firewall
+                waf:exec()
+            }
 
-<span style="color: #008000;">            header_filter_by_lua_block </span><span style="color: #909183;">{</span>
-<span style="color: #008000;">                local lua_resty_waf = require "</span>resty.waf<span style="color: #008000;">"</span>
+            header_filter_by_lua_block {
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-<span style="color: #008000;">                -- note that options set in previous handlers </span><span style="color: #709870;">(</span><span style="color: #008000;">in the same scope</span><span style="color: #709870;">)</span>
-<span style="color: #008000;">                -- do not need to be set again</span>
-<span style="color: #008000;">                local waf = lua_resty_waf:new</span><span style="color: #709870;">()</span>
+                -- note that options set<span style="color: #0000FF;"> in</span> previous handlers (<span style="color: #0000FF;">in</span> the same scope)
+                -- do not need to be set again
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-<span style="color: #008000;">                waf:exec</span><span style="color: #709870;">()</span>
-<span style="color: #008000;">            </span><span style="color: #909183;">}</span>
+                waf:exec()
+            }
 
-<span style="color: #008000;">            body_filter_by_lua_block </span><span style="color: #909183;">{</span>
-<span style="color: #008000;">                local lua_resty_waf = require "</span>resty.waf<span style="color: #008000;">"</span>
+            body_filter_by_lua_block {
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-<span style="color: #008000;">                local waf = lua_resty_waf:new</span><span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-<span style="color: #008000;">                waf:exec</span><span style="color: #709870;">()</span>
-<span style="color: #008000;">            </span><span style="color: #909183;">}</span>
+                waf:exec()
+            }
 
-<span style="color: #008000;">            log_by_lua_block </span><span style="color: #909183;">{</span>
-<span style="color: #008000;">                local lua_resty_waf = require "</span>resty.waf<span style="color: #008000;">"</span>
+            log_by_lua_block {
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">lua_resty_waf</span> = require <span style="color: #008000;">"resty.waf"</span>
 
-<span style="color: #008000;">                local waf = lua_resty_waf:new</span><span style="color: #709870;">()</span>
+                <span style="color: #006FE0;">local</span> <span style="color: #BA36A5;">waf</span> = lua_resty_waf:new()
 
-<span style="color: #008000;">                -- waf:exec</span><span style="color: #709870;">()</span>
-<span style="color: #008000;">                waf:write_log_events</span><span style="color: #709870;">()</span>
-<span style="color: #008000;">            </span><span style="color: #909183;">}</span>
-<span style="color: #008000;">        </span><span style="color: #7388D6;">}</span>
+                -- waf:exec()
+                waf:write_log_events()
+            }
+        }
 
-<span style="color: #008000;">        location ~ .*\.</span><span style="color: #7388D6;">(</span><span style="color: #008000;">php?|cgi|pl|py</span><span style="color: #7388D6;">)</span><span style="color: #008000;">$ </span><span style="color: #7388D6;">{</span>
-<span style="color: #008000;">            deny all;</span>
-<span style="color: #008000;">        </span><span style="color: #7388D6;">}</span>
+        location ~ .*<span style="color: #008000;">\.</span>(php?|cgi|pl|py)$ {
+            deny all;
+        }
 
-<span style="color: #008000;">        location ~ /\.ht </span><span style="color: #7388D6;">{</span>
-<span style="color: #008000;">            deny all;</span>
-<span style="color: #008000;">        </span><span style="color: #7388D6;">}</span>
+        location ~ /<span style="color: #008000;">\.</span>ht {
+            deny all;
+        }
 
-<span style="color: #008000;">        location ~ /.+\.</span><span style="color: #7388D6;">(</span><span style="color: #008000;">inc|conf|cnf</span><span style="color: #7388D6;">)</span><span style="color: #008000;"> </span><span style="color: #7388D6;">{</span>
-<span style="color: #008000;">            deny all;</span>
-<span style="color: #008000;">        </span><span style="color: #7388D6;">}</span>
+        location ~ /.+<span style="color: #008000;">\.</span>(inc|conf|cnf) {
+            deny all;
+        }
 
-<span style="color: #008000;">        #fastcgi_intercept_errors on;</span>
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">fastcgi_intercept_errors on;</span>
 
-<span style="color: #008000;">        error_page 404 /404.html;</span>
-<span style="color: #008000;">            location = /404.html </span><span style="color: #7388D6;">{</span>
-<span style="color: #008000;">            root /var/web/public;</span>
-<span style="color: #008000;">        </span><span style="color: #7388D6;">}</span>
-<span style="color: #008000;">    </span><span style="color: #707183;">}</span>
+        error_page <span style="color: #D0372D;">404</span> /404.html;
+            <span style="color: #BA36A5;">location</span> = /404.html {
+            root /var/web/public;
+        }
+    }
 </pre>
 </div>
 </div>
@@ -504,9 +489,9 @@ http {
 
 
 
-<div id="outline-container-org35d3d2a" class="outline-3">
-<h3 id="org35d3d2a">参考链接</h3>
-<div class="outline-text-3" id="text-org35d3d2a">
+<div id="outline-container-org149d2f0" class="outline-3">
+<h3 id="org149d2f0">参考链接</h3>
+<div class="outline-text-3" id="text-org149d2f0">
 <ol class="org-ol">
 <li><a href="http://openresty.org/cn/">OpenResty 中文文档</a></li>
 <li><a href="https://github.com/p0pr0ck5/lua-resty-waf">p0pr0ck5/lua-resty-waf</a></li>

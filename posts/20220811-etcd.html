@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ETCD</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,19 +23,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org416fe44"><code>etcdctl</code></a></li>
+<li><a href="#orge74ca70"><code>etcdctl</code></a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org416fe44" class="outline-2">
-<h2 id="org416fe44"><code>etcdctl</code></h2>
-<div class="outline-text-2" id="text-org416fe44">
+<div id="outline-container-orge74ca70" class="outline-2">
+<h2 id="orge74ca70"><code>etcdctl</code></h2>
+<div class="outline-text-2" id="text-orge74ca70">
 <p>
 使用 V3 版本的 API
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #0000FF;">export</span> <span style="color: #BA36A5; font-style: italic;">ETCDCTL_API</span>=<span style="color: #D0372D;">3</span>
+<pre class="src src-bash"><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">ETCDCTL_API</span>=<span style="color: #D0372D;">3</span>
 </pre>
 </div>
 
@@ -60,9 +43,9 @@
 查
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">etcdctl</span> get /key...
-<span style="color: #8D8D84; font-style: italic;"># --prefix    &#33719;&#21462;&#25351;&#23450;&#21069;&#32512;&#30340;&#25152;&#26377;&#38190;</span>
-<span style="color: #8D8D84; font-style: italic;"># --keys-only &#21482;&#33719;&#21462;&#38190;</span>
+<pre class="src src-bash">etcdctl get /key...
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">--prefix    &#33719;&#21462;&#25351;&#23450;&#21069;&#32512;&#30340;&#25152;&#26377;&#38190;</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">--keys-only &#21482;&#33719;&#21462;&#38190;</span>
 </pre>
 </div>
 
@@ -70,7 +53,7 @@
 增/改
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">etcdctl</span> put /key... value
+<pre class="src src-bash">etcdctl put /key... value
 </pre>
 </div>
 
@@ -78,7 +61,7 @@
 删
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">etcdctl</span> del /key...
+<pre class="src src-bash">etcdctl del /key...
 </pre>
 </div>
 </div>

@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>macOS</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,41 +23,41 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org531c053">Finder</a>
+<li><a href="#org0632a91">Finder</a>
 <ul>
-<li><a href="#org2dd71d9">Remove recent files</a></li>
-<li><a href="#orgb0e9d75">The App package is broken</a></li>
+<li><a href="#org5411a6a">Remove recent files</a></li>
+<li><a href="#orgab52dfe">The App package is broken</a></li>
 </ul>
 </li>
-<li><a href="#orgd0b9bb5">Shortcuts</a>
+<li><a href="#org2c72038">Shortcuts</a>
 <ul>
-<li><a href="#orgc3ca72e">Request API and run JavaScript on macOS(JS is not support on iOS yet)</a></li>
+<li><a href="#org5730e5b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</a></li>
 </ul>
 </li>
-<li><a href="#org5166655">Software</a>
+<li><a href="#org9f73ec6">Software</a>
 <ul>
-<li><a href="#org316885c">Sourcetrail</a></li>
+<li><a href="#orgd284235">Sourcetrail</a></li>
 </ul>
 </li>
-<li><a href="#org5ebbae5">Virtual Machine</a>
+<li><a href="#orge8f0cd0">Virtual Machine</a>
 <ul>
-<li><a href="#org1662f0f">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
-<li><a href="#orgfebba52">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
+<li><a href="#org7312eda">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
+<li><a href="#org8a1fc92">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org531c053" class="outline-2">
-<h2 id="org531c053">Finder</h2>
-<div class="outline-text-2" id="text-org531c053">
+<div id="outline-container-org0632a91" class="outline-2">
+<h2 id="org0632a91">Finder</h2>
+<div class="outline-text-2" id="text-org0632a91">
 </div>
-<div id="outline-container-org2dd71d9" class="outline-3">
-<h3 id="org2dd71d9">Remove recent files</h3>
-<div class="outline-text-3" id="text-org2dd71d9">
+<div id="outline-container-org5411a6a" class="outline-3">
+<h3 id="org5411a6a">Remove recent files</h3>
+<div class="outline-text-3" id="text-org5411a6a">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">xattr</span> <span style="color: #D0372D;">-c</span> ./*
+<pre class="src src-bash">xattr -c ./*
 </pre>
 </div>
 <p>
@@ -82,24 +65,24 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgb0e9d75" class="outline-3">
-<h3 id="orgb0e9d75">The App package is broken</h3>
-<div class="outline-text-3" id="text-orgb0e9d75">
+<div id="outline-container-orgab52dfe" class="outline-3">
+<h3 id="orgab52dfe">The App package is broken</h3>
+<div class="outline-text-3" id="text-orgab52dfe">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> xattr <span style="color: #D0372D;">-rd</span> com.app.quarantine
+<pre class="src src-bash">sudo xattr -rd com.app.quarantine
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd0b9bb5" class="outline-2">
-<h2 id="orgd0b9bb5">Shortcuts</h2>
-<div class="outline-text-2" id="text-orgd0b9bb5">
+<div id="outline-container-org2c72038" class="outline-2">
+<h2 id="org2c72038">Shortcuts</h2>
+<div class="outline-text-2" id="text-org2c72038">
 </div>
-<div id="outline-container-orgc3ca72e" class="outline-3">
-<h3 id="orgc3ca72e">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
-<div class="outline-text-3" id="text-orgc3ca72e">
+<div id="outline-container-org5730e5b" class="outline-3">
+<h3 id="org5730e5b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
+<div class="outline-text-3" id="text-org5730e5b">
 <p>
 Documents<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> &amp; Resources<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
 </p>
@@ -124,13 +107,13 @@ Get API response, the input&rsquo;s type need set to &rsquo;Text&rsquo;, you can
 </div>
 </div>
 
-<div id="outline-container-org5166655" class="outline-2">
-<h2 id="org5166655">Software</h2>
-<div class="outline-text-2" id="text-org5166655">
+<div id="outline-container-org9f73ec6" class="outline-2">
+<h2 id="org9f73ec6">Software</h2>
+<div class="outline-text-2" id="text-org9f73ec6">
 </div>
-<div id="outline-container-org316885c" class="outline-3">
-<h3 id="org316885c">Sourcetrail</h3>
-<div class="outline-text-3" id="text-org316885c">
+<div id="outline-container-orgd284235" class="outline-3">
+<h3 id="orgd284235">Sourcetrail</h3>
+<div class="outline-text-3" id="text-orgd284235">
 <p>
 Compile from source:
 </p>
@@ -139,7 +122,7 @@ Compile from source:
 Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">brew</span> install wget mvn imagemagick boost qt@<span style="color: #D0372D;">5</span> llvm@<span style="color: #D0372D;">12</span>
+<pre class="src src-bash">brew install wget mvn imagemagick boost qt@<span style="color: #D0372D;">5</span> llvm@<span style="color: #D0372D;">12</span>
 </pre>
 </div></li>
 <li><p>
@@ -147,7 +130,7 @@ Download source code
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
-<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
+git clone https://github.com/CoatiSoftware/Sourcetrail.git
 </pre>
 </div></li>
 <li><p>
@@ -179,18 +162,18 @@ if (BUILD_JAVA_LANGUAGE_PACKAGE)
 Compile
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<pre class="src src-bash">mkdir -p build/Release
 <span style="color: #006FE0;">cd</span> build/Release
 
-<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
+ln -s <span style="color: #008000;">"$pwd/../../bin/app/data"</span> data
 
-<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
-    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
-    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DClang_DIR=/opt/homebrew/opt/llvm@12/lib/cmake/clang</span> \
-    <span style="color: #808080;">-DQt5_DIR=/opt/homebrew/opt/qt5/lib/cmake/Qt5</span> \
+cmake -DCMAKE_BUILD_TYPE=Release <span style="color: #008000;">\</span>
+    -DLLVM_ENABLE_RTTI=ON <span style="color: #008000;">\</span>
+    -DBUILD_CXX_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DClang_DIR=/opt/homebrew/opt/llvm@12/lib/cmake/clang <span style="color: #008000;">\</span>
+    -DQt5_DIR=/opt/homebrew/opt/qt5/lib/cmake/Qt5 <span style="color: #008000;">\</span>
     ../..
 </pre>
 </div></li>
@@ -198,19 +181,19 @@ Compile
 </div>
 </div>
 </div>
-<div id="outline-container-org5ebbae5" class="outline-2">
-<h2 id="org5ebbae5">Virtual Machine</h2>
-<div class="outline-text-2" id="text-org5ebbae5">
+<div id="outline-container-orge8f0cd0" class="outline-2">
+<h2 id="orge8f0cd0">Virtual Machine</h2>
+<div class="outline-text-2" id="text-orge8f0cd0">
 </div>
-<div id="outline-container-org1662f0f" class="outline-3">
-<h3 id="org1662f0f">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
-<div class="outline-text-3" id="text-org1662f0f">
+<div id="outline-container-org7312eda" class="outline-3">
+<h3 id="org7312eda">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-org7312eda">
 <ol class="org-ol">
 <li><p>
 Install Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install <span style="color: #D0372D;">-y</span> autoconf libtool <span style="color: #6434A3;">make</span> libmspack-dev libglib2.0-dev libpam0g-dev libssl-dev libxml2-dev libxmlsec1-dev libxinerama-dev libxrandr-dev libxtst-dev libgdk-pixbuf2.0-dev libgtk-3-dev libgtkmm-3.0-dev gcc g++
+<pre class="src src-bash">sudo apt install -y autoconf libtool make libmspack-dev libglib2.0-dev libpam0g-dev libssl-dev libxml2-dev libxmlsec1-dev libxinerama-dev libxrandr-dev libxtst-dev libgdk-pixbuf2.0-dev libgtk-3-dev libgtkmm-3.0-dev gcc g++
 </pre>
 </div></li>
 
@@ -219,13 +202,13 @@ Download source code and compile
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
-<span style="color: #006DAF;">git</span> clone https://github.com/vmware/open-vm-tools.git
+git clone https://github.com/vmware/open-vm-tools.git
 <span style="color: #006FE0;">cd</span> open-vm-tools
-<span style="color: #006DAF;">autoconf</span> <span style="color: #D0372D;">-i</span>
-<span style="color: #006DAF;">./configure</span>
-<span style="color: #006DAF;">make</span>
-<span style="color: #006DAF;">sudo</span> <span style="color: #6434A3;">make</span> install
-<span style="color: #006DAF;">sudo</span> ldconfig
+autoconf -i
+./configure
+make
+sudo make install
+sudo ldconfig
 </pre>
 </div></li>
 
@@ -233,9 +216,9 @@ Download source code and compile
 Main starter: touch <code>/etc/rc.local</code> and <code>sudo chmod a+x /etc/rc.local</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/bin/bash</span>
+<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
 
-<span style="color: #006DAF;">/usr/local/bin/vmtoolsd</span> <span style="color: #D0372D;">-b</span> /var/run/open-vm-tools.pid
+/usr/local/bin/vmtoolsd -b /var/run/open-vm-tools.pid
 </pre>
 </div></li>
 
@@ -243,35 +226,35 @@ Main starter: touch <code>/etc/rc.local</code> and <code>sudo chmod a+x /etc/rc.
 User starter: <code>/etc/xdg/autostart/user-vmtoolsd.desktop</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #707183;">[</span>Desktop Entry<span style="color: #707183;">]</span>
-<span style="color: #BA36A5; font-style: italic;">Type</span>=Application
-<span style="color: #BA36A5; font-style: italic;">Name</span>=vmtoolsd <span style="color: #006DAF;">user</span> launcher
-<span style="color: #BA36A5; font-style: italic;">Exec</span>=/usr/local/bin/vmtoolsd <span style="color: #006DAF;">-n</span> vmusr <span style="color: #D0372D;">--blockFd</span> <span style="color: #D0372D;">3</span>
-<span style="color: #BA36A5; font-style: italic;">Icon</span>=system-run
-<span style="color: #006DAF;">X-GNOME-Autostart-enabled=true</span>
+<pre class="src src-bash">[Desktop Entry]
+<span style="color: #BA36A5;">Type</span>=Application
+<span style="color: #BA36A5;">Name</span>=vmtoolsd user launcher
+<span style="color: #BA36A5;">Exec</span>=/usr/local/bin/vmtoolsd -n vmusr --blockFd <span style="color: #D0372D;">3</span>
+<span style="color: #BA36A5;">Icon</span>=system-run
+X-GNOME-Autostart-enabled=true
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgfebba52" class="outline-3">
-<h3 id="orgfebba52">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-orgfebba52">
+<div id="outline-container-org8a1fc92" class="outline-3">
+<h3 id="org8a1fc92">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org8a1fc92">
 <ol class="org-ol">
 <li><p>
 Dependencies
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libx11-xcb-dev libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-xcb-dev libxcb*-dev
+<pre class="src src-bash">sudo apt install qtbase5-dev libx11-xcb-dev libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev libxcb-xinerama0 gdbserver libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-xcb-dev libxcb*-dev
 
-<span style="color: #006DAF;">sudo</span> apt install libboost-dev libboost-system-dev libboost-program-options-del libboost-program-options-dev libboost-filesystem-dev libboost-date-time-dev
+sudo apt install libboost-dev libboost-system-dev libboost-program-options-del libboost-program-options-dev libboost-filesystem-dev libboost-date-time-dev
 
-<span style="color: #006DAF;">sudo</span> apt install qtbase5-dev libqt5svg5-dev
+sudo apt install qtbase5-dev libqt5svg5-dev
 
-<span style="color: #8D8D84; font-style: italic;"># </span><span style="color: #ffa500; font-weight: bold; font-style: italic;">TODO:</span><span style="color: #8D8D84; font-style: italic;"> install llvm 11</span>
-<span style="color: #8D8D84; font-style: italic;"># deb [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
-<span style="color: #8D8D84; font-style: italic;"># deb-src [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
+<span style="color: #8D8D84;"># </span><span style="color: #ffa500; font-weight: bold; font-style: italic;">TODO:</span><span style="color: #8D8D84; font-style: italic;"> install llvm 11</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">deb [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">deb-src [arch=arm64] http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main</span>
 </pre>
 </div></li>
 
@@ -280,7 +263,7 @@ Download source and compile
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #006FE0;">cd</span> ~
-<span style="color: #006DAF;">git</span> clone https://github.com/CoatiSoftware/Sourcetrail.git
+git clone https://github.com/CoatiSoftware/Sourcetrail.git
 <span style="color: #006FE0;">cd</span> Sourcetrail
 </pre>
 </div>
@@ -288,28 +271,28 @@ Download source and compile
 Change CMakeLists.txt to use Qt 5.11:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/5.12.0/5.11.0/'</span> CMakeLists.txt
-<span style="color: #006DAF;">sed</span> <span style="color: #D0372D;">-i</span> <span style="color: #008000;">'s/0x051200/0x05110/'</span> CMakeLists.txt
+<pre class="src src-bash">sed -i <span style="color: #008000;">'s/5.12.0/5.11.0/'</span> CMakeLists.txt
+sed -i <span style="color: #008000;">'s/0x051200/0x05110/'</span> CMakeLists.txt
 </pre>
 </div>
 <p>
 Compile:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">mkdir</span> <span style="color: #D0372D;">-p</span> build/Release
+<pre class="src src-bash">mkdir -p build/Release
 <span style="color: #006FE0;">cd</span> build/Release
 
-<span style="color: #006DAF;">ln</span> <span style="color: #D0372D;">-s</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">pwd</span><span style="color: #008000;">/../../bin/app/data"</span> data
+ln -s <span style="color: #008000;">"$pwd/../../bin/app/data"</span> data
 
-<span style="color: #006DAF;">cmake</span> <span style="color: #808080;">-DCMAKE_BUILD_TYPE=Release</span> \
-    <span style="color: #808080;">-DLLVM_ENABLE_RTTI=ON</span> \
-    <span style="color: #808080;">-DBUILD_CXX_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DBUILD_JAVA_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DBUILD_PYTHON_LANGUAGE_PACKAGE=ON</span> \
-    <span style="color: #808080;">-DClang_DIR=/usr/lib/llvm-11/lib/cmake/clang</span> \
-    <span style="color: #808080;">-DQt5_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt5</span> \
+cmake -DCMAKE_BUILD_TYPE=Release <span style="color: #008000;">\</span>
+    -DLLVM_ENABLE_RTTI=ON <span style="color: #008000;">\</span>
+    -DBUILD_CXX_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON <span style="color: #008000;">\</span>
+    -DClang_DIR=/usr/lib/llvm-11/lib/cmake/clang <span style="color: #008000;">\</span>
+    -DQt5_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt5 <span style="color: #008000;">\</span>
     ../..
-<span style="color: #006DAF;">make</span> ARCH=arm <span style="color: #D0372D;">-j8</span> Sourcetrail
+make <span style="color: #BA36A5;">ARCH</span>=arm -j8 Sourcetrail
 </pre>
 </div></li>
 </ol>

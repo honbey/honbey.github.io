@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Distributed System</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,13 +23,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd4bfab7">NPC</a></li>
-<li><a href="#orgac0178f">分布式系统的一些概念</a>
+<li><a href="#orgfdcaaf9">NPC</a></li>
+<li><a href="#orgf88f50f">分布式系统的一些概念</a>
 <ul>
 <li><a href="#ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">CAP 定理</a></li>
 <li><a href="#ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">BASE 理论</a></li>
 <li><a href="#ID-c279b82f-1eca-437f-a951-48a9be96cec4">PACELEC 定理</a></li>
-<li><a href="#org6df9fd6">Paxos 共识算法</a></li>
+<li><a href="#org8082c3e">Paxos 共识算法</a></li>
 <li><a href="#ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</a></li>
 <li><a href="#ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">ZAB 协议</a></li>
 <li><a href="#ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">2PC 协议</a></li>
@@ -58,20 +41,20 @@
 <li><a href="#ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">主备</a></li>
 <li><a href="#ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">主从</a>
 <ul>
-<li><a href="#orgf3cd345">多主多从</a></li>
+<li><a href="#org8fe8457">多主多从</a></li>
 </ul>
 </li>
 <li><a href="#ID-4be9fb56-f87e-456f-b79d-175c03445d53">普通集群</a></li>
 <li><a href="#ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">数据分片</a></li>
-<li><a href="#orgdaf158b">一致性 Hash 算法</a></li>
+<li><a href="#org02f3f9c">一致性 Hash 算法</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgd4bfab7" class="outline-2">
-<h2 id="orgd4bfab7">NPC</h2>
-<div class="outline-text-2" id="text-orgd4bfab7">
+<div id="outline-container-orgfdcaaf9" class="outline-2">
+<h2 id="orgfdcaaf9">NPC</h2>
+<div class="outline-text-2" id="text-orgfdcaaf9">
 <ul class="org-ul">
 <li>Network delay</li>
 <li>Process Pause</li>
@@ -80,9 +63,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgac0178f" class="outline-2">
-<h2 id="orgac0178f">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
-<div class="outline-text-2" id="text-orgac0178f">
+<div id="outline-container-orgf88f50f" class="outline-2">
+<h2 id="orgf88f50f">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-orgf88f50f">
 <p>
 分布式架构的两个方向：
 </p>
@@ -186,9 +169,9 @@ BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追�
 </p>
 </div>
 </div>
-<div id="outline-container-org6df9fd6" class="outline-3">
-<h3 id="org6df9fd6">Paxos 共识算法</h3>
-<div class="outline-text-3" id="text-org6df9fd6">
+<div id="outline-container-org8082c3e" class="outline-3">
+<h3 id="org8082c3e">Paxos 共识算法</h3>
+<div class="outline-text-3" id="text-org8082c3e">
 <p>
 Paxos 算法解决的问题是分布式共识性问题，即一个分布式系统中的各个进程如何就某个值（决议）通过共识达成一致
 </p>
@@ -444,9 +427,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </ul>
 </div>
 
-<div id="outline-container-orgf3cd345" class="outline-4">
-<h4 id="orgf3cd345">多主多从</h4>
-<div class="outline-text-4" id="text-orgf3cd345">
+<div id="outline-container-org8fe8457" class="outline-4">
+<h4 id="org8fe8457">多主多从</h4>
+<div class="outline-text-4" id="text-org8fe8457">
 <p>
 着重考虑主之间的数据一致性问题。
 </p>
@@ -481,9 +464,9 @@ ES 的索引分片。
 </p>
 </div>
 </div>
-<div id="outline-container-orgdaf158b" class="outline-3">
-<h3 id="orgdaf158b">一致性 Hash 算法</h3>
-<div class="outline-text-3" id="text-orgdaf158b">
+<div id="outline-container-org02f3f9c" class="outline-3">
+<h3 id="org02f3f9c">一致性 Hash 算法</h3>
+<div class="outline-text-3" id="text-org02f3f9c">
 <p>
 通过对数据项的键进行哈希处理映射其在环上的位置，然后顺时针遍历环以查找位置大于该项位置的第一个节点，将每个由键标识的数据分配给 hash 环中的一个节点，节点添加删除，对整个集群而言，仅影响其直接邻居，其他节点不受影响。
 </p>

@@ -4,7 +4,7 @@
 <!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Data Dashboard</title>
+<title>Software Engineering</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
@@ -18,68 +18,89 @@
 <body>
 <div id="content" class="content">
 <header>
-<h1 class="title">Data Dashboard</h1>
+<h1 class="title">Software Engineering</h1>
 </header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</a>
-<ul>
-<li><a href="#org7db610e">Alert</a></li>
-</ul>
-</li>
+<li><a href="#org1c7624f">PRD(Product Requirement Document)</a></li>
+<li><a href="#org235fd05">Project Exprience</a></li>
+<li><a href="#orgbf69488">SE</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa" class="outline-2">
-<h2 id="ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">Grafana</h2>
-<div class="outline-text-2" id="text-ID-44dcb170-32a7-4950-b11c-36b392f0e1fa">
+<div id="outline-container-org1c7624f" class="outline-2">
+<h2 id="org1c7624f">PRD(Product Requirement Document)</h2>
+<div class="outline-text-2" id="text-org1c7624f">
 <p>
-使用 <a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> , MySQL, Loki 等作为数据源。
+产品需求文档。
+</p>
+
+<p>
+项目概述：
+</p>
+<ul class="org-ul">
+<li>背景介绍</li>
+<li>产品目标</li>
+<li>名词解释</li>
+</ul>
+
+<p>
+功能描述：
+</p>
+<ul class="org-ul">
+<li>功能清单</li>
+<li>业务流程图</li>
+<li>产品结构图</li>
+<li>功能说明
+<ul class="org-ul">
+<li>界面</li>
+<li>规则</li>
+</ul></li>
+</ul>
+
+<p>
+非功能说明：
+</p>
+<ul class="org-ul">
+<li>安全</li>
+<li>性能</li>
+<li>兼容</li>
+</ul>
+
+<p>
+利用 Axure 等原型设计工具绘制原型，再用 word 等格式进行需求说明或解释原型内容。
 </p>
 </div>
-<div id="outline-container-org7db610e" class="outline-3">
-<h3 id="org7db610e">Alert</h3>
-<div class="outline-text-3" id="text-org7db610e">
+</div>
+
+<div id="outline-container-org235fd05" class="outline-2">
+<h2 id="org235fd05">Project Exprience</h2>
+<div class="outline-text-2" id="text-org235fd05">
 <p>
-Name <span class="underline">xxx</span> Evaluate every <span class="underline">1m</span> (10s * 6) For <span class="underline">2m</span>
+Portfolio &amp; Projects
 </p>
 
 <blockquote>
 <p>
-If an alert rule has a configured and the query violates the configured threshold, then it goes from OK to Pending. Grafana does not send any notifications for that change. Once the alert rule has been firing for more than For duration, then the alert changes to Alerting and sends alert notifications.
+产品很主观。
+三要素：产品价值，产品宣传，用户体验(功能)。
+流程：
+团队遇到异常流怎么去协调和组织。
+产品开发周期：立项，评审，需求梳理，项目排期，开发跟进，测试跟进（测试用例设计、评审），验收测试，灰度测试，正式上线，维护。
+文档：原型、脑图、需求清单、主线流程图。
+</p>
+
+<p>
+自经历的例子：私有化 WAF：为啥困难？友商的战略，销售不给力，合规/安全顾虑。
 </p>
 </blockquote>
-
-<p>
-Conditions
-</p>
-<ul class="org-ul">
-<li>Function
-<ul class="org-ul">
-<li>sum()</li>
-<li>min()</li>
-<li>avg()</li>
-</ul></li>
-<li>query(query_name, begin_time, end_time)</li>
-<li>IS ABOVE/ IS BELOW</li>
-</ul>
-
-<p>
-If no data or all values are null -&gt; No Data
-If no data or all values are null -&gt; Keep Last State
-</p>
-
-<p>
-Notifications
-</p>
-<ul class="org-ul">
-<li>webhook</li>
-<li>email</li>
-</ul>
 </div>
 </div>
+
+<div id="outline-container-orgbf69488" class="outline-2">
+<h2 id="orgbf69488">SE</h2>
 </div>
 </div>
 <div id="postamble" class="status">

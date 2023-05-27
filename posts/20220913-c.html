@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C &amp; C++</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -42,19 +25,19 @@
 <ul>
 <li><a href="#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C</a>
 <ul>
-<li><a href="#org5fda8c7">Clockwise/Spiral Rule</a></li>
-<li><a href="#org9819f30">Pointer</a></li>
-<li><a href="#orgb785b2b">library function</a>
+<li><a href="#org6081c25">Clockwise/Spiral Rule</a></li>
+<li><a href="#org0bc738a">Pointer</a></li>
+<li><a href="#org7c2c96a">library function</a>
 <ul>
-<li><a href="#orgc03fd72">printf() - stdio.h</a></li>
-<li><a href="#orgab70811">memchr() - mem.h</a></li>
-<li><a href="#orgaf85bcd">offsetof - stddef.h</a></li>
+<li><a href="#orgc631788">printf() - stdio.h</a></li>
+<li><a href="#org275234d">memchr() - mem.h</a></li>
+<li><a href="#orge580b80">offsetof - stddef.h</a></li>
 </ul>
 </li>
-<li><a href="#org471a43d">typedef</a></li>
-<li><a href="#org406b6a2">struct</a></li>
-<li><a href="#orge26fa01">array</a></li>
-<li><a href="#orgad0c974">memory</a></li>
+<li><a href="#org6dbe806">typedef</a></li>
+<li><a href="#orgd5433d7">struct</a></li>
+<li><a href="#orge79737f">array</a></li>
+<li><a href="#org1acfae3">memory</a></li>
 </ul>
 </li>
 </ul>
@@ -75,23 +58,23 @@ a.out(assembler output) 最初是一种格式，已废弃，但名称保留下�
 </blockquote>
 </div>
 
-<div id="outline-container-org5fda8c7" class="outline-3">
-<h3 id="org5fda8c7">Clockwise/Spiral Rule<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org5fda8c7">
+<div id="outline-container-org6081c25" class="outline-3">
+<h3 id="org6081c25">Clockwise/Spiral Rule<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org6081c25">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">void</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span><span style="color: #006699;">signal</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">void</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span>fp<span style="color: #909183; background-color: #FFFFFF;">)(</span><span style="color: #006FE0;">int</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)(</span><span style="color: #006FE0;">int</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #6434A3;">void</span> (*<span style="color: #006699;">signal</span>(<span style="color: #6434A3;">int</span>, <span style="color: #6434A3;">void</span> (*<span style="color: #006699;">fp</span>)(<span style="color: #6434A3;">int</span>)))(<span style="color: #6434A3;">int</span>);
 </pre>
 </div>
 
-<figure id="org61d79c5">
+<figure id="org8312b5e">
 <img src="../images/c_cpp_clockwise_spiral_rule_1.png" alt="c_cpp_clockwise_spiral_rule_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org9819f30" class="outline-3">
-<h3 id="org9819f30">Pointer</h3>
-<div class="outline-text-3" id="text-org9819f30">
+<div id="outline-container-org0bc738a" class="outline-3">
+<h3 id="org0bc738a">Pointer</h3>
+<div class="outline-text-3" id="text-org0bc738a">
 <p>
 指针与指针的相减操作，表示两个指针指向的内存位置之间相隔多少个元素(注意是元素，并不是字节数)。
 </p>
@@ -115,28 +98,28 @@ a.out(assembler output) 最初是一种格式，已废弃，但名称保留下�
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">void</span> <span style="color: #006699;">Func</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">x</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span> <span style="color: #8D8D84; font-style: italic;">/* &#22768;&#26126;&#19968;&#20010;&#20989;&#25968;*/</span>
-  <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d"</span><span style="color: #333333; background-color: #FFFFFF;">,</span>x<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-c"><span style="color: #6434A3;">void</span> <span style="color: #006699;">Func</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>) { <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">&#22768;&#26126;&#19968;&#20010;&#20989;&#25968;</span><span style="color: #8D8D84;">*/</span>
+  printf(<span style="color: #008000;">"%d"</span>,x);
+}
 
-<span style="color: #006FE0;">void</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span>p<span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>  <span style="color: #8D8D84; font-style: italic;">/* &#23450;&#20041;&#19968;&#20010;&#20989;&#25968;&#25351;&#38024;*/</span>
-<span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> Func<span style="color: #333333; background-color: #FFFFFF;">;</span>         <span style="color: #8D8D84; font-style: italic;">/* &#23558; Func &#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#36171;&#32473;&#25351;&#38024;&#21464;&#37327; p */</span>
+<span style="color: #6434A3;">void</span> (*<span style="color: #006699;">p</span>) (<span style="color: #6434A3;">int</span>);  <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">&#23450;&#20041;&#19968;&#20010;&#20989;&#25968;&#25351;&#38024;</span><span style="color: #8D8D84;">*/</span>
+p = Func;         <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">&#23558; Func &#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#36171;&#32473;&#25351;&#38024;&#21464;&#37327; p</span><span style="color: #8D8D84;"> */</span>
 
-<span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span>p<span style="color: #707183; background-color: #FFFFFF;">)(</span>a<span style="color: #333333; background-color: #FFFFFF;">,</span> b<span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>       <span style="color: #8D8D84; font-style: italic;">/*&#36890;&#36807;&#20989;&#25968;&#25351;&#38024;&#35843;&#29992; Func &#20989;&#25968; */</span>
+(*p)(a, b);       <span style="color: #8D8D84;">/*</span><span style="color: #8D8D84; font-style: italic;">&#36890;&#36807;&#20989;&#25968;&#25351;&#38024;&#35843;&#29992; Func &#20989;&#25968;</span><span style="color: #8D8D84;"> */</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb785b2b" class="outline-3">
-<h3 id="orgb785b2b">library function</h3>
-<div class="outline-text-3" id="text-orgb785b2b">
+<div id="outline-container-org7c2c96a" class="outline-3">
+<h3 id="org7c2c96a">library function</h3>
+<div class="outline-text-3" id="text-org7c2c96a">
 </div>
-<div id="outline-container-orgc03fd72" class="outline-4">
-<h4 id="orgc03fd72">printf() - stdio.h</h4>
-<div class="outline-text-4" id="text-orgc03fd72">
-<pre class="example">
-%5d 5位宽 整型
+<div id="outline-container-orgc631788" class="outline-4">
+<h4 id="orgc631788">printf() - stdio.h</h4>
+<div class="outline-text-4" id="text-orgc631788">
+<div class="org-src-container">
+<pre class="src src-nil">%5d 5位宽 整型
 
 %+5d 带正负号的5位宽 整型
 
@@ -150,40 +133,42 @@ a.out(assembler output) 最初是一种格式，已废弃，但名称保留下�
 </pre>
 </div>
 </div>
-<div id="outline-container-orgab70811" class="outline-4">
-<h4 id="orgab70811">memchr() - mem.h</h4>
-<div class="outline-text-4" id="text-orgab70811">
+</div>
+<div id="outline-container-org275234d" class="outline-4">
+<h4 id="org275234d">memchr() - mem.h</h4>
+<div class="outline-text-4" id="text-org275234d">
 <p>
 在参数 str 所指向的字符串的前 n 个字节中搜索第一次出现字符 c（一个无符号字符）的位置。
 </p>
-<pre class="example">
-void *memchr(const void *str, int c, size_t n)
+<div class="org-src-container">
+<pre class="src src-nil">void *memchr(const void *str, int c, size_t n)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgaf85bcd" class="outline-4">
-<h4 id="orgaf85bcd">offsetof - stddef.h</h4>
-<div class="outline-text-4" id="text-orgaf85bcd">
+</div>
+<div id="outline-container-orge580b80" class="outline-4">
+<h4 id="orge580b80">offsetof - stddef.h</h4>
+<div class="outline-text-4" id="text-orge580b80">
 <p>
 linux 宏定义函数 offsetof 是算出 MEMBER 在 TYPE 中的偏移：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #8D8D84; font-style: italic;">/* Offset of member MEMBER in a struct of type TYPE. */</span>
-<span style="color: #808080;">#define</span> <span style="color: #006699;">offsetof</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">TYPE</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">MEMBER</span><span style="color: #707183; background-color: #FFFFFF;">)</span> __builtin_offsetof <span style="color: #707183;">(</span><span style="color: #D0372D;">TYPE</span>, <span style="color: #D0372D;">MEMBER</span><span style="color: #707183;">)</span>
+<pre class="src src-c"><span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">Offset of member MEMBER in a struct of type TYPE.</span><span style="color: #8D8D84;"> */</span>
+<span style="color: #808080;">#define</span> <span style="color: #006699;">offsetof</span>(<span style="color: #BA36A5;">TYPE</span>, <span style="color: #BA36A5;">MEMBER</span>) __builtin_offsetof (TYPE, MEMBER)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org471a43d" class="outline-3">
-<h3 id="org471a43d">typedef</h3>
-<div class="outline-text-3" id="text-org471a43d">
+<div id="outline-container-org6dbe806" class="outline-3">
+<h3 id="org6dbe806">typedef</h3>
+<div class="outline-text-3" id="text-org6dbe806">
 <p>
 typedef 关键字用于定义别名。
 一般用法：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span>    <span style="color: #6434A3;">T</span>    <span style="color: #6434A3;">Alias</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #0000FF;">typedef</span>    <span style="color: #6434A3;">T</span>    <span style="color: #6434A3;">Alias</span>;
 </pre>
 </div>
 
@@ -193,42 +178,43 @@ typedef 关键字用于定义别名。
 定义上述函数指针的别名：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">*</span><span style="color: #6434A3;">FP</span><span style="color: #707183; background-color: #FFFFFF;">)(</span><span style="color: #006FE0;">int</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">unsigned</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">float</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">const</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">*</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #6434A3;">char</span> *(*<span style="color: #6434A3;">FP</span>)(<span style="color: #6434A3;">int</span>, <span style="color: #6434A3;">unsigned</span>, <span style="color: #6434A3;">float</span>, <span style="color: #0000FF;">const</span> <span style="color: #6434A3;">char</span> *);
 
-<span style="color: #6434A3;">FP</span> <span style="color: #BA36A5;">fp</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">f</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">/* define and assign fp point to function f */</span>
+<span style="color: #6434A3;">FP</span> <span style="color: #BA36A5;">fp</span> = f; <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">define and assign fp point to function f</span><span style="color: #8D8D84;"> */</span>
 </pre>
 </div>
 
 <p>
 类型是 void (*)(int) ，即参数一个int，什么也不返回的函数指针，定义的别名是 fp_t ：
 </p>
-<pre class="example">
-typedef char (*fp_t)(int);
+<div class="org-src-container">
+<pre class="src src-nil">typedef char (*fp_t)(int);
 </pre>
+</div>
 
 <p>
 把 a 声明为具有 10 个 int 元素的数组的类型别名：
 </p>
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #006FE0;">int</span> <span style="color: #6434A3;">a</span><span style="color: #707183; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">10</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #6434A3;">int</span> <span style="color: #6434A3;">a</span>[<span style="color: #D0372D;">10</span>];
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org406b6a2" class="outline-3">
-<h3 id="org406b6a2">struct</h3>
-<div class="outline-text-3" id="text-org406b6a2">
+<div id="outline-container-orgd5433d7" class="outline-3">
+<h3 id="orgd5433d7">struct</h3>
+<div class="outline-text-3" id="text-orgd5433d7">
 <p>
 结构体的 {, } 格式只能用于赋值时初始化，即声明并初始化，而不能直接赋值给一个已经声明的结构体变量。或按照 c99 标准先强制类型转换。
 </p>
 </div>
 </div>
-<div id="outline-container-orge26fa01" class="outline-3">
-<h3 id="orge26fa01">array</h3>
-<div class="outline-text-3" id="text-orge26fa01">
+<div id="outline-container-orge79737f" class="outline-3">
+<h3 id="orge79737f">array</h3>
+<div class="outline-text-3" id="text-orge79737f">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #006FE0;">int</span> a<span style="color: #707183; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">3</span><span style="color: #707183; background-color: #FFFFFF;">][</span><span style="color: #D0372D;">2</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span>[<span style="color: #D0372D;">3</span>][<span style="color: #D0372D;">2</span>];
 </pre>
 </div>
 <p>
@@ -240,9 +226,9 @@ typedef char (*fp_t)(int);
 </ul>
 </div>
 </div>
-<div id="outline-container-orgad0c974" class="outline-3">
-<h3 id="orgad0c974">memory</h3>
-<div class="outline-text-3" id="text-orgad0c974">
+<div id="outline-container-org1acfae3" class="outline-3">
+<h3 id="org1acfae3">memory</h3>
+<div class="outline-text-3" id="text-org1acfae3">
 <p>
 使用内存池分配内存有几点好处：
 </p>

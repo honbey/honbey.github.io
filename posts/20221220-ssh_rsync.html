@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ssh &amp; rsync</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -42,13 +25,13 @@
 <ul>
 <li><a href="#ID-32607c27-e117-4b1d-a8f3-32123113e067">ssh</a>
 <ul>
-<li><a href="#orgfe31961">端口转发</a></li>
-<li><a href="#org8b73da6">scp</a></li>
+<li><a href="#orga4eac20">端口转发</a></li>
+<li><a href="#org88bdd82">scp</a></li>
 </ul>
 </li>
 <li><a href="#ID-38097b63-339b-4788-a256-dce9ea28b6c7">rsync</a>
 <ul>
-<li><a href="#org22d6d33">增量备份</a></li>
+<li><a href="#org3a4024f">增量备份</a></li>
 </ul>
 </li>
 </ul>
@@ -85,8 +68,8 @@ Secure Shell
 <p>
 TLS 过程：
 </p>
-<pre class="example">
-Handshake protocol: ClientHello
+<div class="org-src-container">
+<pre class="src src-nil">Handshake protocol: ClientHello
     Version: TLS 1.2
     Random
         Client time: May 22, 2030 02:43:46 GMT
@@ -128,21 +111,22 @@ Handshake protocol: ServerHello
         Extension: server_name
         Extension: renegotiation_info
 </pre>
+</div>
 
 <p>
 ssh 命令参数：
 </p>
 </div>
 
-<div id="outline-container-orgfe31961" class="outline-3">
-<h3 id="orgfe31961">端口转发</h3>
-<div class="outline-text-3" id="text-orgfe31961">
+<div id="outline-container-orga4eac20" class="outline-3">
+<h3 id="orga4eac20">端口转发</h3>
+<div class="outline-text-3" id="text-orga4eac20">
 <p>
 动态转发指的是，本机与 SSH 服务器之间创建了一个加密连接，然后本机内部针对某个端口的通信，都通过这个加密连接转发。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-D</span> local-port tunnel-host <span style="color: #D0372D;">-N</span>
+<pre class="src src-bash">ssh -D local-port tunnel-host -N
 </pre>
 </div>
 
@@ -158,7 +142,7 @@ SOCKS5 协议 <code>curl -x socks5://localhost:local-port http://www.example.com
 指定一个本地端口（local-port），所有发向那个端口的请求，都会转发到 SSH 跳板机（tunnel-host），然后 SSH 跳板机作为中介，将收到的请求发到目标服务器（target-host）的目标端口（target-port）：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-L</span> local-port:target-host:target-port tunnel-host
+<pre class="src src-bash">ssh -L local-port:target-host:target-port tunnel-host
 </pre>
 </div>
 
@@ -169,24 +153,25 @@ SOCKS5 协议 <code>curl -x socks5://localhost:local-port http://www.example.com
 <p>
 如果经常使用本地转发，可以将设置写入 SSH 客户端的用户个人配置文件：
 </p>
-<pre class="example">
-Host test.example.com
+<div class="org-src-container">
+<pre class="src src-nil">Host test.example.com
 LocalForward client-IP:client-port server-IP:server-port
 </pre>
+</div>
 
 <p>
 远程转发，通过远程计算机访问本地计算机：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-R</span> remote-port:target-host:target-port <span style="color: #D0372D;">-N</span> remotehost
+<pre class="src src-bash">ssh -R remote-port:target-host:target-port -N remotehost
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8b73da6" class="outline-3">
-<h3 id="org8b73da6">scp</h3>
-<div class="outline-text-3" id="text-org8b73da6">
+<div id="outline-container-org88bdd82" class="outline-3">
+<h3 id="org88bdd82">scp</h3>
+<div class="outline-text-3" id="text-org88bdd82">
 <p>
 语法类似 cp 命令，但远程主机要加 <code>:</code> 不然会复制到本地的当前目录。
 </p>
@@ -405,14 +390,14 @@ LocalForward client-IP:client-port server-IP:server-port
 </table>
 </div>
 
-<div id="outline-container-org22d6d33" class="outline-3">
-<h3 id="org22d6d33">增量备份</h3>
-<div class="outline-text-3" id="text-org22d6d33">
+<div id="outline-container-org3a4024f" class="outline-3">
+<h3 id="org3a4024f">增量备份</h3>
+<div class="outline-text-3" id="text-org3a4024f">
 <p>
 默认复制有变动的文件：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">rsync</span> <span style="color: #D0372D;">-a</span> <span style="color: #D0372D;">--delete</span> <span style="color: #D0372D;">--link-dest</span> /compare/path /source/path /target/path
+<pre class="src src-bash">rsync -a --delete --link-dest /compare/path /source/path /target/path
 </pre>
 </div>
 

@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PE 文件格式</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,12 +23,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb61509b">Release 版本</a></li>
-<li><a href="#org6497565">Debug 版本</a>
+<li><a href="#org61b928a">Release 版本</a></li>
+<li><a href="#org80f31f6">Debug 版本</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orga81994a">参考链接</a></li>
+<li><a href="#org3e878d8">参考链接</a></li>
 </ul>
 </li>
 </ul>
@@ -57,14 +40,14 @@
 分析所使用的 exe 程序的源代码见：<a href="overflow_attack.html#ID-0c6a4a3b-bcc6-461c-a5db-118fdf4cdfa2">寻找栈溢出</a>。
 </p>
 
-<div id="outline-container-orgb61509b" class="outline-2">
-<h2 id="orgb61509b">Release 版本</h2>
-<div class="outline-text-2" id="text-orgb61509b">
+<div id="outline-container-org61b928a" class="outline-2">
+<h2 id="org61b928a">Release 版本</h2>
+<div class="outline-text-2" id="text-org61b928a">
 <p>
 Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本的程序进行了各种优化，比如精简掉无关的函数调用等，使得程序在文件大小和运行速度上都比较优秀
 </p>
 
-<figure id="org6e5a984">
+<figure id="orgcb552b9">
 <img src="../images/pe_file_format_1.png" alt="pe_file_format_1.png">
 
 </figure>
@@ -72,9 +55,9 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 </div>
 
 
-<div id="outline-container-org6497565" class="outline-2">
-<h2 id="org6497565">Debug 版本</h2>
-<div class="outline-text-2" id="text-org6497565">
+<div id="outline-container-org80f31f6" class="outline-2">
+<h2 id="org80f31f6">Debug 版本</h2>
+<div class="outline-text-2" id="text-org80f31f6">
 <p>
 前面部分中的 DOS MZ 文件头以及 DOS 插桩程序和 Release 版本一样，这一部分是 PE 文件格式通用格式。MS-DOS Stub Program 之后的近百个字节的作用不知用处。
 </p>
@@ -83,7 +66,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 地址 0x3C 处的 D0 标识了 PE 文件真正的开始位置，从 0xD0 开始，PE 头前面的文件头标识，也就是 signature 都是相同的，之后就是 PE 文件头信息
 </p>
 
-<figure id="orgb4668fa">
+<figure id="orgb702233">
 <img src="../images/pe_file_format_2.png" alt="pe_file_format_2.png">
 
 </figure>
@@ -93,7 +76,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 文件头标识了运行环境 i386 ，节的数量 5，这个文件的符号表指针和符号数量均为 0 ，可选头信心的大小 00E0 ，文件特征值 010E ，二进制 0000 0001 0000 1110 的含义： 0002（exe 文件）+ 0004（不存在行信息）+ 0008（不存在符号信息）+ 0100（32 位机器），以二进制位取值来对 PE 文件进行说明
 </p>
 
-<figure id="orged05062">
+<figure id="org42dc633">
 <img src="../images/pe_file_format_3.png" alt="pe_file_format_3.png">
 
 </figure>
@@ -102,7 +85,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 可选头大小 224 字节，标识了代码区、数据区、栈区、堆区的大小，还有程序入口点地址 Address of Entry Point 位于文件 0xF8 处，值为 00001650 。还包含了某些节表的地址和大小信息
 </p>
 
-<figure id="org986c531">
+<figure id="org12e44a6">
 <img src="../images/pe_file_format_4.png" alt="pe_file_format_4.png">
 
 </figure>
@@ -126,7 +109,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 </ul>
 
 
-<figure id="orgf67c5d4">
+<figure id="org745d756">
 <img src="../images/pe_file_format_5.png" alt="pe_file_format_5.png">
 
 </figure>
@@ -141,7 +124,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指向对应外部函数的内存相对虚拟地址， DLL 间用双字 0 分隔
 </p>
 
-<figure id="org817ad99">
+<figure id="orgc528108">
 <img src="../images/pe_file_format_6.png" alt="pe_file_format_6.png">
 
 </figure>
@@ -151,15 +134,15 @@ IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指
 IDT 表记录 PE 文件要导入的库文件及函数的信息，实验所用的这个文件只导入了 kernel32.dll 这一个 dll 文件。表项先指出 IAT 的 RVA，和 PE 头中的完全对应。之后两个不清楚，在之后是 dll 文件名这个字符串的 RVA，命名表的 RVA。表项 2 全为 0
 </p>
 
-<figure id="org3107cb2">
+<figure id="orgd68cb16">
 <img src="../images/pe_file_format_7.png" alt="pe_file_format_7.png">
 
 </figure>
 </div>
 
-<div id="outline-container-orga81994a" class="outline-4">
-<h4 id="orga81994a">参考链接</h4>
-<div class="outline-text-4" id="text-orga81994a">
+<div id="outline-container-org3e878d8" class="outline-4">
+<h4 id="org3e878d8">参考链接</h4>
+<div class="outline-text-4" id="text-org3e878d8">
 <p>
 <a href="https://www.cnblogs.com/findumars/p/5037657.html">PE 文件格式 - 博客园</a>
 </p>

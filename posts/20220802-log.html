@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:04 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>log</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
@@ -40,21 +23,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb07d415">日志分析发展</a>
+<li><a href="#orga329505">日志分析发展</a>
 <ul>
-<li><a href="#org75cce74">例- Nginx</a></li>
-<li><a href="#org7042f53">定量分析</a></li>
+<li><a href="#org64f4a43">例- Nginx</a></li>
+<li><a href="#org4f4aad3">定量分析</a></li>
 </ul>
 </li>
-<li><a href="#orgc085509">日志解析</a></li>
-<li><a href="#orgda1143b">Reference</a></li>
+<li><a href="#org75e1a01">日志解析</a></li>
+<li><a href="#orgc83fb6d">Reference</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgb07d415" class="outline-2">
-<h2 id="orgb07d415">日志分析发展<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
-<div class="outline-text-2" id="text-orgb07d415">
+<div id="outline-container-orga329505" class="outline-2">
+<h2 id="orga329505">日志分析发展<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-orga329505">
 <ol class="org-ol">
 <li>Local Storage + Pssh Scan 跳板机上各种脚本，使用 shell 封装脚本查询；</li>
 <li>Central Storage + Inverted Index 典型代表 ElasticSearch ； Lucene + Restful API + ELK(Logstash + Kibana) + Distribution；
@@ -80,9 +63,9 @@ TP &amp; AP
 </ul>
 </div>
 
-<div id="outline-container-org75cce74" class="outline-3">
-<h3 id="org75cce74">例<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> - <a href="20220724-nginx.html#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a></h3>
-<div class="outline-text-3" id="text-org75cce74">
+<div id="outline-container-org64f4a43" class="outline-3">
+<h3 id="org64f4a43">例<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> - <a href="20220724-nginx.html#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a></h3>
+<div class="outline-text-3" id="text-org64f4a43">
 <ol class="org-ol">
 <li>第一阶段（数据产生 1 分钟内）：程序要看到实时业务，运营客服人员需要查看轨迹定位问题。这种场景一般都在小时内， 查询频率比较高；
 在出问题后查询频率较高，需要对全部日志进行快速查询。</li>
@@ -93,9 +76,9 @@ TP &amp; AP
 </ol>
 </div>
 </div>
-<div id="outline-container-org7042f53" class="outline-3">
-<h3 id="org7042f53">定量分析<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
-<div class="outline-text-3" id="text-org7042f53">
+<div id="outline-container-org4f4aad3" class="outline-3">
+<h3 id="org4f4aad3">定量分析<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-org4f4aad3">
 <p>
 原始数据量为 X，倒排索引的数据量为原始数据的 a 倍，列存储空间为原始数据的 b 倍，需要预留的空间（例如 redo log, reserved space ） 为 c 倍，每 GB 介质成本是 e，为了保证可靠性，需要的副本是 d。
 </p>
@@ -110,9 +93,9 @@ TP &amp; AP
 </div>
 </div>
 </div>
-<div id="outline-container-orgc085509" class="outline-2">
-<h2 id="orgc085509">日志解析<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h2>
-<div class="outline-text-2" id="text-orgc085509">
+<div id="outline-container-org75e1a01" class="outline-2">
+<h2 id="org75e1a01">日志解析<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h2>
+<div class="outline-text-2" id="text-org75e1a01">
 <p>
 日志是一种半结构化数据，由特定的代码生成的。（也可以是结构化数据，如 JSON）。
 </p>
@@ -128,9 +111,9 @@ TP &amp; AP
 </p>
 </div>
 </div>
-<div id="outline-container-orgda1143b" class="outline-2">
-<h2 id="orgda1143b">Reference</h2>
-<div class="outline-text-2" id="text-orgda1143b">
+<div id="outline-container-orgc83fb6d" class="outline-2">
+<h2 id="orgc83fb6d">Reference</h2>
+<div class="outline-text-2" id="text-orgc83fb6d">
 </div>
 </div>
 <div id="footnotes">

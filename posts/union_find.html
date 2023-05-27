@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-02-15 Wed 22:05 -->
+<!-- 2023-05-28 Sun 00:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Union Find</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <!--
-                     <link rel="stylesheet" href="../resources/orgmode.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/style.css" type="text/css"/>
-                     -->
-                     <!--
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.zclip.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     -->
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
                      <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
                      <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '%MULTLINEWIDTH'
+      },
+      tags: '%TAGS',
+      tagSide: '%TAGSIDE',
+      tagIndent: '%TAGINDENT'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '2em'
+    },
+    output: {
+      font: '%FONT',
+      displayOverflow: '%OVERFLOW'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -63,17 +57,17 @@
 <ul>
 <li><a href="#ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4">Quick Find</a>
 <ul>
-<li><a href="#org9f8b04d">分析</a></li>
+<li><a href="#org446b24f">分析</a></li>
 </ul>
 </li>
 <li><a href="#ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f">Quick Union</a>
 <ul>
-<li><a href="#orgdff3362">分析</a></li>
+<li><a href="#org5d3ceb5">分析</a></li>
 </ul>
 </li>
 <li><a href="#ID-437552bc-25e7-425c-8090-854a9c6f7e67">Weighted Union Find</a>
 <ul>
-<li><a href="#org68c81f2">分析</a></li>
+<li><a href="#org20152aa">分析</a></li>
 </ul>
 </li>
 </ul>
@@ -92,21 +86,21 @@
 class UF:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+<pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> {
 <span style="color: #0000FF;">private</span>:
-    <span style="color: #006FE0;">int</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">id_</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5; font-style: italic;">count_</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5; font-style: italic;">length_</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// &#20998;&#37327;id&#65292;&#20998;&#37327;&#25968;&#37327;&#65292;&#35302;&#28857;&#20010;&#25968;</span>
+    <span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">id_</span>, <span style="color: #BA36A5;">count_</span>, <span style="color: #BA36A5;">length_</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#20998;&#37327;id&#65292;&#20998;&#37327;&#25968;&#37327;&#65292;&#35302;&#28857;&#20010;&#25968;</span>
 
 <span style="color: #0000FF;">public</span>:
-    <span style="color: #006699;">UF</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">N</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">void</span> <span style="color: #006699; font-style: italic;">Union</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #006699; font-style: italic;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">bool</span> <span style="color: #006699; font-style: italic;">Connected</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006699;">UF</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">N</span>);
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">Union</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>);
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">Find</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>);
+    <span style="color: #6434A3;">bool</span> <span style="color: #006699;">Connected</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>);
 
-    <span style="color: #006FE0;">int</span> <span style="color: #006699; font-style: italic;">count</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #006699; font-style: italic;">length</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">count</span>();
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">length</span>();
 
-    <span style="color: #0000FF;">~</span><span style="color: #D0372D;">UF</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    ~<span style="color: #006699;">UF</span>();
+};
 </pre>
 </div>
 
@@ -115,18 +109,18 @@ main function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">()</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #8D8D84; font-style: italic;">// ...</span>
-    <span style="color: #6434A3;">UF</span> <span style="color: #BA36A5;">uf</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">UF</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">N</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;</span> p<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">size</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #0000FF;">++</span><span style="color: #BA36A5;">i</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>uf<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">Connected</span><span style="color: #709870; background-color: #FFFFFF;">(</span>p<span style="color: #707183; background-color: #FFFFFF;">[</span>i<span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">,</span> q<span style="color: #707183; background-color: #FFFFFF;">[</span>i<span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span>
-            <span style="color: #0000FF;">continue</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        uf<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">Union</span><span style="color: #909183; background-color: #FFFFFF;">(</span>p<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">,</span> q<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #006DAF;">printf</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d %d"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> p<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">,</span> q<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"%d components"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> uf<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">count</span><span style="color: #909183; background-color: #FFFFFF;">()</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-cpp"><span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>() {
+    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">...</span>
+    <span style="color: #6434A3;">UF</span> <span style="color: #BA36A5;">uf</span> = UF(N);
+    <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>; i &lt; p.size(); ++i) {
+        <span style="color: #0000FF;">if</span> (uf.Connected(p[i], q[i]))
+            <span style="color: #0000FF;">continue</span>;
+        uf.Union(p[i], q[i]);
+        printf(<span style="color: #008000;">"%d %d"</span>, p[i], q[i]);
+    }
+    printf(<span style="color: #008000;">"%d components"</span>, uf.count());
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
+}
 </pre>
 </div>
 
@@ -138,29 +132,29 @@ main function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #006FE0;">void</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Union</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p_id</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>p<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// 1</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q_id</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>q<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// 1</span>
+<pre class="src src-cpp"><span style="color: #6434A3;">void</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Union</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>) {
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p_id</span> = Find(p); <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">1</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q_id</span> = Find(q); <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">1</span>
 
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>p_id <span style="color: #0000FF;">==</span> q_id<span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">return</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">if</span> (p_id == q_id) <span style="color: #0000FF;">return</span>;
 
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;</span> length_<span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #0000FF;">++</span><span style="color: #BA36A5;">i</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">if</span> <span style="color: #909183; background-color: #FFFFFF;">(</span>id_<span style="color: #709870; background-color: #FFFFFF;">[</span>i<span style="color: #709870; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">==</span> p_id<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #8D8D84; font-style: italic;">// N</span>
-            <span style="color: #BA36A5;">id_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> q_id<span style="color: #333333; background-color: #FFFFFF;">;</span>  <span style="color: #8D8D84; font-style: italic;">// 1 ~ (N - 1)</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #0000FF;">--</span><span style="color: #BA36A5;">count_</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+    <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>; i &lt; length_; ++i) {
+        <span style="color: #0000FF;">if</span> (id_[i] == p_id) <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">N</span>
+            id_[i] = q_id;  <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">1 ~ (N - 1)</span>
+    }
+    --count_;
+}
 
-<span style="color: #006FE0;">int</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Find</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> id_<span style="color: #7388D6; background-color: #FFFFFF;">[</span>p<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">int</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Find</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>) {
+    <span style="color: #0000FF;">return</span> id_[p];
+}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org9f8b04d" class="outline-3">
-<h3 id="org9f8b04d">分析</h3>
-<div class="outline-text-3" id="text-org9f8b04d">
+<div id="outline-container-org446b24f" class="outline-3">
+<h3 id="org446b24f">分析</h3>
+<div class="outline-text-3" id="text-org446b24f">
 <p>
 对于每一对输入，~Union()~ 都需要扫描整个 <code>id_</code> 数组。
 </p>
@@ -185,27 +179,27 @@ main function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #006FE0;">void</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Union</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p_root</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>p<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q_root</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>q<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>p_root <span style="color: #0000FF;">==</span> q_root<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">return</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">id_</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>p_root<span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> q_root<span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">--</span><span style="color: #BA36A5;">count_</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<pre class="src src-cpp"><span style="color: #6434A3;">void</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Union</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>) {
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p_root</span> = Find(p);
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q_root</span> = Find(q);
+    <span style="color: #0000FF;">if</span> (p_root == q_root)
+        <span style="color: #0000FF;">return</span>;
+    id_[p_root] = q_root;
+    --count_;
+}
 
-<span style="color: #006FE0;">int</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Find</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>p <span style="color: #0000FF;">!=</span> id_<span style="color: #909183; background-color: #FFFFFF;">[</span>p<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> id_<span style="color: #7388D6; background-color: #FFFFFF;">[</span>p<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">return</span> p<span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">int</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Find</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>) {
+    <span style="color: #0000FF;">while</span> (p != id_[p])
+        p = id_[p];
+    <span style="color: #0000FF;">return</span> p;
+}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgdff3362" class="outline-3">
-<h3 id="orgdff3362">分析</h3>
-<div class="outline-text-3" id="text-orgdff3362">
+<div id="outline-container-org5d3ceb5" class="outline-3">
+<h3 id="org5d3ceb5">分析</h3>
+<div class="outline-text-3" id="text-org5d3ceb5">
 <p>
 <code>Find()</code> 方法访问数组的次数为 1 加上给定触点所对应的节点的深度的两倍。 <code>Union()</code> 和 <code>Connected()</code> 访问数组的次数为两次 <code>Find()</code> 操作（如果 <code>Union</code> 中给定的两个触点分别存在于不同的树中则还需要加 1）。
 </p>
@@ -226,73 +220,73 @@ main function:
 <h2 id="ID-437552bc-25e7-425c-8090-854a9c6f7e67">Weighted Union Find</h2>
 <div class="outline-text-2" id="text-ID-437552bc-25e7-425c-8090-854a9c6f7e67">
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+<pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> {
 <span style="color: #0000FF;">private</span>:
-    <span style="color: #006FE0;">int</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">id_</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5; font-style: italic;">sz_</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5; font-style: italic;">count_</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// &#29238;&#33410;&#28857;&#25968;&#32452;&#65292;&#21508;&#20010;&#26681;&#33410;&#28857;&#25152;&#23545;&#24212;&#30340;&#20998;&#37327;&#30340;&#22823;&#23567;&#65292;&#20998;&#37327;&#25968;&#37327;</span>
+    <span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">id_</span>, *<span style="color: #BA36A5;">sz_</span>, <span style="color: #BA36A5;">count_</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#29238;&#33410;&#28857;&#25968;&#32452;&#65292;&#21508;&#20010;&#26681;&#33410;&#28857;&#25152;&#23545;&#24212;&#30340;&#20998;&#37327;&#30340;&#22823;&#23567;&#65292;&#20998;&#37327;&#25968;&#37327;</span>
 
 <span style="color: #0000FF;">public</span>:
-    <span style="color: #006699;">UF</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">N</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">void</span> <span style="color: #006699; font-style: italic;">Union</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #006699; font-style: italic;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">bool</span> <span style="color: #006699; font-style: italic;">Connected</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006699;">UF</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">N</span>);
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">Union</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>);
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">Find</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>);
+    <span style="color: #6434A3;">bool</span> <span style="color: #006699;">Connected</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>);
 
-    <span style="color: #006FE0;">int</span> <span style="color: #006699; font-style: italic;">count</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">count</span>();
 
-    <span style="color: #0000FF;">~</span><span style="color: #D0372D;">UF</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    ~<span style="color: #006699;">UF</span>();
+};
 
-<span style="color: #6434A3;">UF</span>::<span style="color: #006699;">UF</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">N</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #BA36A5;">count_</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">N</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #BA36A5;">id_</span> <span style="color: #0000FF;">=</span> <span style="color: #0000FF;">new</span> <span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">N</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;</span> <span style="color: #D0372D;">N</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #0000FF;">++</span><span style="color: #BA36A5;">i</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">id_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> i<span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #BA36A5;">sz_</span> <span style="color: #0000FF;">=</span> <span style="color: #0000FF;">new</span> <span style="color: #006FE0;">int</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">N</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">for</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span> i <span style="color: #0000FF;">&lt;</span> <span style="color: #D0372D;">N</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #0000FF;">++</span><span style="color: #BA36A5;">i</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">sz_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>i<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #D0372D;">UF</span>::<span style="color: #006699;">UF</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">N</span>) {
+    count_ = N;
+    id_ = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">int</span>[N];
+    <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>; i &lt; N; ++i) {
+        id_[i] = i;
+    }
+    sz_ = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">int</span>[N];
+    <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">0</span>; i &lt; N; ++i) {
+        sz_[i] = <span style="color: #D0372D;">1</span>;
+    }
+}
 
-<span style="color: #006FE0;">int</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">count</span><span style="color: #707183; background-color: #FFFFFF;">()</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> count_<span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">int</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">count</span>() {
+    <span style="color: #0000FF;">return</span> count_;
+}
 
-<span style="color: #006FE0;">bool</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Connected</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">return</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>p<span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">==</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>q<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">bool</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Connected</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>) {
+    <span style="color: #0000FF;">return</span> Find(p) == Find(q);
+}
 
-<span style="color: #6434A3;">UF</span>::<span style="color: #006699;">~</span><span style="color: #006699;">UF</span><span style="color: #707183; background-color: #FFFFFF;">()</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">delete</span><span style="color: #7388D6; background-color: #FFFFFF;">[]</span> id_<span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">delete</span><span style="color: #7388D6; background-color: #FFFFFF;">[]</span> sz_<span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #D0372D;">UF</span>::~<span style="color: #006699;">UF</span>() {
+    <span style="color: #0000FF;">delete</span>[] id_;
+    <span style="color: #0000FF;">delete</span>[] sz_;
+}
 
-<span style="color: #006FE0;">void</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Union</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p_root</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>p<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">q_root</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">Find</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>q<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>p_root <span style="color: #0000FF;">==</span> q_root<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #0000FF;">return</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">if</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>sz_<span style="color: #909183; background-color: #FFFFFF;">[</span>p_root<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">&lt;</span> sz_<span style="color: #909183; background-color: #FFFFFF;">[</span>q_root<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">id_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>p_root<span style="color: #909183; background-color: #FFFFFF;">]</span>  <span style="color: #0000FF;">=</span> q_root<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #BA36A5;">sz_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>q_root<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">+=</span> sz_<span style="color: #909183; background-color: #FFFFFF;">[</span>p_root<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span> <span style="color: #0000FF;">else</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
-        <span style="color: #BA36A5;">id_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>q_root<span style="color: #909183; background-color: #FFFFFF;">]</span>  <span style="color: #0000FF;">=</span> p_root<span style="color: #333333; background-color: #FFFFFF;">;</span>
-        <span style="color: #BA36A5;">sz_</span><span style="color: #909183; background-color: #FFFFFF;">[</span>p_root<span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">+=</span> sz_<span style="color: #909183; background-color: #FFFFFF;">[</span>q_root<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
-    <span style="color: #0000FF;">--</span><span style="color: #BA36A5;">count_</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">void</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Union</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span>) {
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p_root</span> = Find(p);
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q_root</span> = Find(q);
+    <span style="color: #0000FF;">if</span> (p_root == q_root)
+        <span style="color: #0000FF;">return</span>;
+    <span style="color: #0000FF;">if</span> (sz_[p_root] &lt; sz_[q_root]) {
+        id_[p_root]  = q_root;
+        sz_[q_root] += sz_[p_root];
+    } <span style="color: #0000FF;">else</span> {
+        id_[q_root]  = p_root;
+        sz_[p_root] += sz_[q_root];
+    }
+    --count_;
+}
 
-<span style="color: #006FE0;">int</span> <span style="color: #6434A3;">UF</span>::<span style="color: #006699;">Find</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">p</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>p <span style="color: #0000FF;">!=</span> id_<span style="color: #909183; background-color: #FFFFFF;">[</span>p<span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
-        <span style="color: #BA36A5;">p</span> <span style="color: #0000FF;">=</span> id_<span style="color: #7388D6; background-color: #FFFFFF;">[</span>p<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
-    <span style="color: #0000FF;">return</span> p<span style="color: #333333; background-color: #FFFFFF;">;</span>
-<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #6434A3;">int</span> <span style="color: #D0372D;">UF</span>::<span style="color: #006699;">Find</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">p</span>) {
+    <span style="color: #0000FF;">while</span> (p != id_[p])
+        p = id_[p];
+    <span style="color: #0000FF;">return</span> p;
+}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org68c81f2" class="outline-3">
-<h3 id="org68c81f2">分析</h3>
-<div class="outline-text-3" id="text-org68c81f2">
+<div id="outline-container-org20152aa" class="outline-3">
+<h3 id="org20152aa">分析</h3>
+<div class="outline-text-3" id="text-org20152aa">
 <p>
 对于 N 个触点，加权 quick union 算法构造的森林中的任意节点的深度最多为 \(\lg N\)。
 </p>
