@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:56 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyHomeKit</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,32 +27,41 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb56aee0">Network</a>
+<li><a href="#org3f7c1bd">Network</a>
 <ul>
-<li><a href="#org311f214">zhang.local</a>
+<li><a href="#orgf3a1572">zhang.local</a>
 <ul>
-<li><a href="#org12b68a6">omen.zhang.local</a></li>
-<li><a href="#org2b86b55">ct-ftth.zhang.local</a></li>
-<li><a href="#org925a2c1">hw-ax3.zhang.local</a></li>
-<li><a href="#org2ae6263">m5-1f/m5-2f.zhang.local</a></li>
+<li><a href="#orgb7600b4">omen.zhang.local</a></li>
+<li><a href="#orgb07b9a9">ubuntu.zhang.local</a></li>
+<li><a href="#org01b8038">ct-ftth.zhang.local</a></li>
+<li><a href="#org9d3009e">hw-ax3.zhang.local</a></li>
+<li><a href="#org33c0460">m5-1f/m5-2f.zhang.local</a></li>
 </ul>
 </li>
-<li><a href="#org431f0ca">zhang.mobile</a>
+<li><a href="#org8f802a0">zhang.mobile</a>
 <ul>
-<li><a href="#org655c32f">hw-4g-cpe.zhang.mobile</a></li>
+<li><a href="#org3a843b2">hw-4g-cpe.zhang.mobile</a></li>
 </ul>
 </li>
-<li><a href="#org152e5fa">zhang.vpn</a></li>
+<li><a href="#org1d5c60c">zhang.tenant</a>
+<ul>
+<li><a href="#org7dd829d">ct-ftth.zhang.tenant</a></li>
 </ul>
 </li>
-<li><a href="#org0711e69">Device</a></li>
+<li><a href="#orgdd0d565">zhang.vpn</a></li>
+</ul>
+</li>
+<li><a href="#orga32a858">Device</a>
+<ul>
+<li><a href="#org861ac77">Honor X10</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgb56aee0" class="outline-2">
-<h2 id="orgb56aee0">Network</h2>
-<div class="outline-text-2" id="text-orgb56aee0">
+<div id="outline-container-org3f7c1bd" class="outline-2">
+<h2 id="org3f7c1bd">Network</h2>
+<div class="outline-text-2" id="text-org3f7c1bd">
 <ul class="org-ul">
 <li><p>
 中国电信<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 200M 光纤宽带
@@ -105,17 +118,17 @@
 2020 年 10 月时在学校测的最高速度，测一次速下载加上传差不多 2G 流量。在深圳测的就没超过 300M。
 </p>
 
-<figure id="orgafa862f">
-<img src="../images/myhomekit_5g_speed_on_hainanu.jpg" alt="myhomekit_5g_speed_on_hainanu.jpg">
+<figure id="org002dd31">
+<img src="./../images/myhomekit_5g_speed_on_hainanu.jpg" alt="myhomekit_5g_speed_on_hainanu.jpg">
 
 </figure></li>
 <li>华为云<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> ECS 1M BGP
 用作管理，业务用其他的 IP 地址和带宽。</li>
 </ul>
 </div>
-<div id="outline-container-org311f214" class="outline-3">
-<h3 id="org311f214">zhang.local</h3>
-<div class="outline-text-3" id="text-org311f214">
+<div id="outline-container-orgf3a1572" class="outline-3">
+<h3 id="orgf3a1572">zhang.local</h3>
+<div class="outline-text-3" id="text-orgf3a1572">
 <p>
 自建的网络域。互联网出口是电信 200M，但网速有惊喜，有公网 IP ，VPN 借助 GNB 穿透公网。
 </p>
@@ -124,10 +137,9 @@
 算下来这些设备一天要一度电，0.588 一度，一个月电力成本 18 元左右，同配置下比云服务划算。
 </p>
 </div>
-
-<div id="outline-container-org12b68a6" class="outline-4">
-<h4 id="org12b68a6">omen.zhang.local</h4>
-<div class="outline-text-4" id="text-org12b68a6">
+<div id="outline-container-orgb7600b4" class="outline-4">
+<h4 id="orgb7600b4">omen.zhang.local</h4>
+<div class="outline-text-4" id="text-orgb7600b4">
 <p>
 目前借助 HP Omen 作为服务器，Windows 11 系统，使用 vbox 跑了 3 个虚拟机（2 个 linux，1 个 Windows）。目前 512GB 970 Pro + 1T HDD 空间有点不够，打算换下 970 Pro 到国产的 2 TB 存储，机械硬盘也换大一点的，但不确定这个二手购入的 17 年的笔记本是否支持。
 </p>
@@ -140,20 +152,118 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 虚拟机：
 </p>
 <ul class="org-ul">
-<li>ubuntu.zhang.local   | Ubuntu 22.04 LTS | 用于跑 docker, nodejs, python 服务，主要给自己提供服务。</li>
+<li><a href="#orgb07b9a9">ubuntu.zhang.local</a> | Ubuntu 22.04 LTS | 用于跑 docker, nodejs, python 服务，主要给自己提供服务。</li>
 <li>kali.zhang.local     | Kali Linux 22.4  | 用于渗透测试，部分测试环境的搭建，安全从业人员必备。</li>
 <li>win-work.zhang.local | Windows 11 Work  | 搭建的专用的工作环境，不想弄乱自己的 Mac ，下班后用 RDP 工作。</li>
 </ul>
 
 <p>
-平时功耗 15W 左右，最高有 180W。后续想换个 Mac Mini M1/M2 ，减少功耗，就是存储扩展有点麻烦。
+平时功耗 15W 左右，最高有 180W，实测跑半年下来电费花了 45 元左右，每月 7.5 元的样子。
 </p>
 </div>
 </div>
+<div id="outline-container-orgb07b9a9" class="outline-4">
+<h4 id="orgb07b9a9">ubuntu.zhang.local</h4>
+<div class="outline-text-4" id="text-orgb07b9a9">
+<p>
+docker 其实用的是 podman。
+</p>
 
-<div id="outline-container-org2b86b55" class="outline-4">
-<h4 id="org2b86b55">ct-ftth.zhang.local</h4>
-<div class="outline-text-4" id="text-org2b86b55">
+<p>
+localhost 端口分配
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 2:</span> 1000 ~ 1099</caption>
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">port</th>
+<th scope="col" class="org-left">service/application</th>
+<th scope="col" class="org-left">caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1050</td>
+<td class="org-left">Anki(python, 27701)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1060</td>
+<td class="org-left">Fava(python, 5000)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1080</td>
+<td class="org-left">Clash(go, 7890)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1081</td>
+<td class="org-left">Clash API(go, 9090)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption class="t-above"><span class="table-number">Table 3:</span> 1100 ~ 1199 for container</caption>
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">port</th>
+<th scope="col" class="org-left">service/application</th>
+<th scope="col" class="org-left">caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1120</td>
+<td class="org-left">Vaultwarden HTTP(80)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1121</td>
+<td class="org-left">Vaultwarden Websocket(3120)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1130</td>
+<td class="org-left">Memos HTTP(5230)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1140</td>
+<td class="org-left">Snapdrop HTTP(80)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org01b8038" class="outline-4">
+<h4 id="org01b8038">ct-ftth.zhang.local</h4>
+<div class="outline-text-4" id="text-org01b8038">
 <p>
 电信定制的华为光猫，17 年的了，应该不是租用的，好像当时是说预存话费送的，还行，有千兆口，配套的机顶盒也有 4K 输出。
 宽带目前是桥接模式。iTV 没法改桥接，固件版本高，获取不了超级密码，问了电信的也不给。
@@ -164,10 +274,9 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </p>
 </div>
 </div>
-
-<div id="outline-container-org925a2c1" class="outline-4">
-<h4 id="org925a2c1">hw-ax3.zhang.local</h4>
-<div class="outline-text-4" id="text-org925a2c1">
+<div id="outline-container-org9d3009e" class="outline-4">
+<h4 id="org9d3009e">hw-ax3.zhang.local</h4>
+<div class="outline-text-4" id="text-org9d3009e">
 <p>
 华为 AX3 路由，使用一切正常，家里设备少，带宽需求大的设备都是有线连接。迁移到二楼后穿墙模式一二三楼的信号都不错，单层面积 120m<sup>2</sup> 左右。路由拨号，除 WAN 口外三个口分别是 HP Omen、监控、书房。
 </p>
@@ -177,31 +286,27 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </p>
 </div>
 </div>
-
-<div id="outline-container-org2ae6263" class="outline-4">
-<h4 id="org2ae6263">m5-1f/m5-2f.zhang.local</h4>
-<div class="outline-text-4" id="text-org2ae6263">
+<div id="outline-container-org33c0460" class="outline-4">
+<h4 id="org33c0460">m5-1f/m5-2f.zhang.local</h4>
+<div class="outline-text-4" id="text-org33c0460">
 <p>
 两台水星 SG 105 Pro 5 口网管交换机，一楼一台，二楼一台。因为一楼到二楼只预留了一根六类网线，但光猫在一楼，决定将路由器迁到二楼后 IPTV/iTV 和监控不能用，买了带 VLAN 功能的交换机实现单线复用。Web 管理，使用 802.1q VLAN 加 PID 实现 VLAN 分割，记得关闭 IGMP 监听，不然 IPTV 的直播会是看几十秒就卡住报错无网络。
 </p>
 
 <p>
 额定功耗 3 W ，两台 6 W。
-</p>
-
-<p>
-说道这，有必要说下基层电信工作人员能力不行，那天去车站接人，让电信偷家了，直接把六类线拆成两根五类线在用，还推销了个 TP 路由器，收了两百多，我没问具体价钱，家里人让弄的，我太气人了，我都说我回家弄。我直接打电话让他回来退货和返工，不然投诉，后面我自己返工的，电话里还说什么必须要这样，一根线实现不了我的需求，我真的服了，都不懂就乱搞，强烈建议电信招工时至少要求考过中级网络工程师的证书吧！而且给的路由器淘宝 120 左右，况且我家有一个好好的华为 AX3 和两个百兆路由器，非要买他推销的弄上去？我大一就在学校网管中心兼职，大二开始参与管理校园网的部分交换机，非光纤连接的汇聚层到接入层，在交换机上配置 VLAN，我配过好多次，怎么就不能单线实现？真的无知，家里人拦着不让投诉，不然真的打 10000 投诉。太恶心了，改动我的网络规划我都不会这么生气，为什么要推销路由器？第一我有性能更好的路由器不用；第二多收差价。坑外行人的钱真有一套。
+说道这，有必要说下基层电信工作人员能力不行，那天去车站接人，让电信偷家了，直接把六类线拆成两根五类线在用，还推销了个 TP 路由器，收了两百多，我没问具体价钱，家里人让弄的，我太气人了，我都说我回家弄。我直接打电话让他回来退货和返工，不然投诉，后面我自己返工的，电话里还说什么必须要这样，一根线实现不了我的需求，我真的服了，都不懂就乱搞，强烈建议电信招工时至少要求考过中级网络工程师的证书吧！而且给的路由器淘宝 120 左右，卖 200，况且我家有一个好好的华为 AX3 和两个百兆路由器，非要买他推销的弄上去？我大一就在学校网管中心兼职，大二开始参与管理校园网的部分交换机，非光纤连接的汇聚层到接入层，在交换机上配置 VLAN，我配过好多次，怎么就不能单线实现？真的无知，家里人拦着不让投诉，不然真的打 10000 投诉。太恶心了，改动我的网络规划我都不会这么生气，为什么要推销路由器？第一我有性能更好的路由器不用；第二多收差价。坑外行人的钱真有一套。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org431f0ca" class="outline-3">
-<h3 id="org431f0ca">zhang.mobile</h3>
-<div class="outline-text-3" id="text-org431f0ca">
+<div id="outline-container-org8f802a0" class="outline-3">
+<h3 id="org8f802a0">zhang.mobile</h3>
+<div class="outline-text-3" id="text-org8f802a0">
 </div>
-<div id="outline-container-org655c32f" class="outline-4">
-<h4 id="org655c32f">hw-4g-cpe.zhang.mobile</h4>
-<div class="outline-text-4" id="text-org655c32f">
+<div id="outline-container-org3a843b2" class="outline-4">
+<h4 id="org3a843b2">hw-4g-cpe.zhang.mobile</h4>
+<div class="outline-text-4" id="text-org3a843b2">
 <p>
 华为移动路由 3。
 本来使用华为天极通套餐的，但是华为和联通合作的这个网速真的不咋样，流量倒是挺多的，2000 GB 每月只用 5% ，于是到期后不续费了，换成电信的 200M 宽带，唯一的不足是虽是千兆但只支持 2.4GHz 频段的 WiFi。
@@ -209,13 +314,33 @@ HP Omen 装 Windows ，因为还有一点游戏需求，因为 Start 云游戏�
 </div>
 </div>
 </div>
+<div id="outline-container-org1d5c60c" class="outline-3">
+<h3 id="org1d5c60c">zhang.tenant</h3>
+<div class="outline-text-3" id="text-org1d5c60c">
+</div>
+<div id="outline-container-org7dd829d" class="outline-4">
+<h4 id="org7dd829d">ct-ftth.zhang.tenant</h4>
+<div class="outline-text-4" id="text-org7dd829d">
+<p>
+电信租用代管的中兴光猫，电信的异地 200M 带宽，支持 WiFi 6，性能够用就没有接路由器了。虽然获取了临时的超级密码，但没有太大的用处，不知道什么会被改。
+</p>
 
-<div id="outline-container-org152e5fa" class="outline-3">
-<h3 id="org152e5fa">zhang.vpn</h3>
-<div class="outline-text-3" id="text-org152e5fa">
+<p>
+借助公网 v4 地址可以转发到 v6 地址实现远程访问。
+</p>
+
+<p>
+额定功耗 12W 。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdd0d565" class="outline-3">
+<h3 id="orgdd0d565">zhang.vpn</h3>
+<div class="outline-text-3" id="text-orgdd0d565">
 <p>
 Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
-五个节点。目前全部下线。
+五个节点。
 </p>
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>route.conf</label><pre class="src src-nil">1001|10.1.0.1|255.255.255.0
@@ -228,9 +353,9 @@ Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" 
 </div>
 </div>
 </div>
-<div id="outline-container-org0711e69" class="outline-2">
-<h2 id="org0711e69">Device</h2>
-<div class="outline-text-2" id="text-org0711e69">
+<div id="outline-container-orga32a858" class="outline-2">
+<h2 id="orga32a858">Device</h2>
+<div class="outline-text-2" id="text-orga32a858">
 <ul class="org-ul">
 <li>🌐Router
 <ul class="org-ul">
@@ -250,7 +375,7 @@ Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" 
 </ul></li>
 <li>📱Phone
 <ul class="org-ul">
-<li>Honor X10 6G+64G+128G 2020.07</li>
+<li><a href="#org861ac77">Honor X10</a> 6G+64G+128G 2020.07</li>
 </ul></li>
 <li>🎧Headphone
 <ul class="org-ul">
@@ -262,6 +387,24 @@ Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" 
 <li>Huawei Watch GT 2022PE 2022.01</li>
 </ul></li>
 </ul>
+</div>
+<div id="outline-container-org861ac77" class="outline-3">
+<h3 id="org861ac77">Honor X10</h3>
+<div class="outline-text-3" id="text-org861ac77">
+<p>
+虽然升级了 Harmony 3.0，感觉就是 2.0 换个版本号，一些系统应用可以通过 adb 删除，删除自带的音乐、视频播放器、浏览器以及智慧能力相关的软件。智慧助手感觉没有太大的用处，场景自动执行功能还是太少了，而且冷不丁的震动真吓人，为减少点空间占用和电量消耗就卸载了。
+</p>
+
+<p>
+部分低版本应用：
+</p>
+<ul class="org-ul">
+<li>天翼云盘 v7.1.0 from APKPure；
+没有开屏广告及其它乱七八糟的没用功能，但有更新提示的弹窗。占用空间不到 50M，可以扫码登录，最新版只能登录当前数据网络下的手机而不是登录 APP 的那个帐号。</li>
+<li>高德地图 v10.25.0.1305 from APKPure；
+安装包和国内下载的相比少 10M。没有开屏广告、更新提示、打车、车辆管理等，导航及路况均正常，可以与车机互联，占用空间 300 M 左右。</li>
+</ul>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -286,7 +429,7 @@ Virtual Private Network with GNB<sup><a id="fnr.3" class="footref" href="#fn.3" 
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

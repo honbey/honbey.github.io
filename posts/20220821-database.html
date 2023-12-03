@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Database</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,69 +27,69 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-557eccab-2519-4dab-9bc1-9df54a593b65">Database - 数据库</a></li>
-<li><a href="#ID-d0fbd46e-6bb2-4834-a115-524acfb9e717">键值数据库</a>
+<li><a href="#org73436e9">Database - 数据库</a></li>
+<li><a href="#org7d0a215">键值数据库</a>
 <ul>
-<li><a href="#orga31d9b9">基于 Raft 算法的分布式数据库 - ETCD</a></li>
-<li><a href="#org2e7737b">使用内存的高性能缓存数据库 - Redis</a></li>
+<li><a href="#org77b7748">基于 Raft 算法的分布式数据库 - ETCD</a></li>
+<li><a href="#org9f06020">使用内存的高性能缓存数据库 - Redis</a></li>
 </ul>
 </li>
-<li><a href="#ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c">关系型数据库</a>
+<li><a href="#orgb398747">关系型数据库</a>
 <ul>
-<li><a href="#ID-59428a07-fcb2-475d-9512-3571be6aef0f">SQL</a>
+<li><a href="#orgfc165ee">SQL</a>
 <ul>
-<li><a href="#org5bd8d7a">select</a></li>
-<li><a href="#orgb5b6ef2">alter</a></li>
-<li><a href="#orga837284">union</a></li>
-<li><a href="#org378fe0d">order by</a></li>
-<li><a href="#org8d2a867">group by</a></li>
+<li><a href="#orgebfc18c">select</a></li>
+<li><a href="#org3388206">alter</a></li>
+<li><a href="#org8b55ec3">union</a></li>
+<li><a href="#orgb49f12c">order by</a></li>
+<li><a href="#orgb128477">group by</a></li>
 </ul>
 </li>
-<li><a href="#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></li>
-<li><a href="#ID-6df84a61-43bc-421e-8f78-435567f0ed2b">MySQL</a>
+<li><a href="#orgd164136">ORM</a></li>
+<li><a href="#orge1e4797">MySQL</a>
 <ul>
-<li><a href="#org60bae87">Installation</a></li>
-<li><a href="#orgf7d9625">Data Type</a></li>
-<li><a href="#org56e9f21">MySQL SQL syntax</a></li>
-<li><a href="#ID-15806e05-94cb-4600-9b95-bf122ea54066">MySQL information<sub>schema</sub></a></li>
-<li><a href="#ID-a7624498-19b7-4749-9780-cc0ee3c74467">MySQL builtin function</a></li>
-<li><a href="#orgd72f230">inner join, left join, right join, full join</a>
+<li><a href="#org361f841">Installation</a></li>
+<li><a href="#org4623012">Data Type</a></li>
+<li><a href="#org1ca36e3">MySQL SQL syntax</a></li>
+<li><a href="#org6050055">MySQL information<sub>schema</sub></a></li>
+<li><a href="#org0784f61">MySQL builtin function</a></li>
+<li><a href="#org88435d9">inner join, left join, right join, full join</a>
 <ul>
-<li><a href="#org8dcf4fb">inner join</a></li>
-<li><a href="#org39d80f4">left join</a></li>
-<li><a href="#org247124d">right join</a></li>
-<li><a href="#orgdfbd521">full join</a></li>
+<li><a href="#org649a5ce">inner join</a></li>
+<li><a href="#org1fac79b">left join</a></li>
+<li><a href="#orga76819d">right join</a></li>
+<li><a href="#org5dc00bf">full join</a></li>
 </ul>
 </li>
-<li><a href="#org68fff1e">datetime &amp; timestamp </a></li>
-<li><a href="#orgb8609a2">MyISAM &amp; InnoDB </a>
+<li><a href="#orgc81a86d">datetime &amp; timestamp </a></li>
+<li><a href="#orgac03de3">MyISAM &amp; InnoDB </a>
 <ul>
-<li><a href="#org0ee886d">参照完整性</a></li>
-<li><a href="#orgdc3e78f">事务和原子性</a></li>
-<li><a href="#orgcf0dd88">表锁定与行锁定</a></li>
-<li><a href="#org8ef235d">事务和回滚</a></li>
-<li><a href="#org0ed21ef">可靠性</a></li>
-<li><a href="#org41c6a8b">结论</a></li>
+<li><a href="#orgc979296">参照完整性</a></li>
+<li><a href="#org55f59e4">事务和原子性</a></li>
+<li><a href="#org16b1deb">表锁定与行锁定</a></li>
+<li><a href="#orgb969b16">事务和回滚</a></li>
+<li><a href="#org6a1db28">可靠性</a></li>
+<li><a href="#orgb4d5f28">结论</a></li>
 </ul>
 </li>
-<li><a href="#org705ad6f">atomic DDL </a></li>
+<li><a href="#org5da8958">atomic DDL </a></li>
 </ul>
 </li>
-<li><a href="#org08814e3">SQLite</a>
+<li><a href="#org1e8d99a">SQLite</a>
 <ul>
-<li><a href="#orgfc3a876">数据类型</a></li>
-<li><a href="#orge81ac2d">运算符</a></li>
+<li><a href="#org4c29507">数据类型</a></li>
+<li><a href="#org7e45085">运算符</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">文档型数据库</a>
+<li><a href="#org28466e4">文档型数据库</a>
 <ul>
-<li><a href="#orgb8e1bf0">ElasticSearch / ELK(ES + Logstash + Kibana)</a></li>
-<li><a href="#orga81d8c7">MongoDB</a>
+<li><a href="#org83a2d3d">ElasticSearch / ELK(ES + Logstash + Kibana)</a></li>
+<li><a href="#org4dd5750">MongoDB</a>
 <ul>
-<li><a href="#org7760aa0">installation</a></li>
-<li><a href="#org2442830">Usage</a></li>
+<li><a href="#org3ecaeb3">installation</a></li>
+<li><a href="#orgc41e2f3">Usage</a></li>
 </ul>
 </li>
 </ul>
@@ -93,27 +97,25 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-557eccab-2519-4dab-9bc1-9df54a593b65" class="outline-2">
-<h2 id="ID-557eccab-2519-4dab-9bc1-9df54a593b65">Database - 数据库</h2>
-<div class="outline-text-2" id="text-ID-557eccab-2519-4dab-9bc1-9df54a593b65">
+<div id="outline-container-org73436e9" class="outline-2">
+<h2 id="org73436e9">Database - 数据库</h2>
+<div class="outline-text-2" id="text-org73436e9">
 </div>
 </div>
-
-<div id="outline-container-ID-d0fbd46e-6bb2-4834-a115-524acfb9e717" class="outline-2">
-<h2 id="ID-d0fbd46e-6bb2-4834-a115-524acfb9e717">键值数据库</h2>
-<div class="outline-text-2" id="text-ID-d0fbd46e-6bb2-4834-a115-524acfb9e717">
+<div id="outline-container-org7d0a215" class="outline-2">
+<h2 id="org7d0a215">键值数据库</h2>
+<div class="outline-text-2" id="text-org7d0a215">
 </div>
-<div id="outline-container-orga31d9b9" class="outline-3">
-<h3 id="orga31d9b9">基于 <a href="20220908-distributed_architecture.html#ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</a>的分布式数据库 - <a href="20220811-etcd.html#ID-f92dece7-4ba1-4e14-bdd4-545a0f6a67e1">ETCD</a></h3>
+<div id="outline-container-org77b7748" class="outline-3">
+<h3 id="org77b7748">基于 <a href="20220908-distributed_architecture.html#ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</a>的分布式数据库 - <a href="20220811-etcd.html#ID-f92dece7-4ba1-4e14-bdd4-545a0f6a67e1">ETCD</a></h3>
 </div>
-<div id="outline-container-org2e7737b" class="outline-3">
-<h3 id="org2e7737b">使用内存的高性能缓存数据库 - <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a></h3>
+<div id="outline-container-org9f06020" class="outline-3">
+<h3 id="org9f06020">使用内存的高性能缓存数据库 - <a href="20220730-redis.html#ID-0f357c15-ef76-4958-857d-fc30339c5f9c">Redis</a></h3>
 </div>
 </div>
-<div id="outline-container-ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c" class="outline-2">
-<h2 id="ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c">关系型数据库</h2>
-<div class="outline-text-2" id="text-ID-11febd3d-29e6-4273-9d72-f7d1cbb1ac9c">
+<div id="outline-container-orgb398747" class="outline-2">
+<h2 id="orgb398747">关系型数据库</h2>
+<div class="outline-text-2" id="text-orgb398747">
 <p>
 关系模式的组成
 </p>
@@ -136,9 +138,9 @@
 由于 D, DOM 与模式涉及关系不大，一般把关系模式看作一个三元组：R &lt;U, F&gt; ，当且仅当 U 上一个关系 r 满足 F 时，r 称为关系模式 R&lt;U, F&gt; 的一个关系。
 </p>
 </div>
-<div id="outline-container-ID-59428a07-fcb2-475d-9512-3571be6aef0f" class="outline-3">
-<h3 id="ID-59428a07-fcb2-475d-9512-3571be6aef0f">SQL</h3>
-<div class="outline-text-3" id="text-ID-59428a07-fcb2-475d-9512-3571be6aef0f">
+<div id="outline-container-orgfc165ee" class="outline-3">
+<h3 id="orgfc165ee">SQL</h3>
+<div class="outline-text-3" id="text-orgfc165ee">
 <p>
 一些特殊字符：
 </p>
@@ -206,13 +208,12 @@ show databases;
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org5bd8d7a" class="outline-4">
-<h4 id="org5bd8d7a">select</h4>
+<div id="outline-container-orgebfc18c" class="outline-4">
+<h4 id="orgebfc18c">select</h4>
 </div>
-<div id="outline-container-orgb5b6ef2" class="outline-4">
-<h4 id="orgb5b6ef2">alter</h4>
-<div class="outline-text-4" id="text-orgb5b6ef2">
+<div id="outline-container-org3388206" class="outline-4">
+<h4 id="org3388206">alter</h4>
+<div class="outline-text-4" id="text-org3388206">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">DROP</span> c;
 <span style="color: #0000FF;">ALTER</span> <span style="color: #0000FF;">TABLE</span> <span style="color: #0000FF;">table_name</span> <span style="color: #0000FF;">ADD</span> c <span style="color: #6434A3;">INT</span> [<span style="color: #0000FF;">FIRST</span> | <span style="color: #0000FF;">AFTER</span> &lt;<span style="color: #0000FF;">column_name</span>&gt;];
@@ -227,42 +228,42 @@ show databases;
 </div>
 </div>
 </div>
-<div id="outline-container-orga837284" class="outline-4">
-<h4 id="orga837284">union</h4>
-<div class="outline-text-4" id="text-orga837284">
+<div id="outline-container-org8b55ec3" class="outline-4">
+<h4 id="org8b55ec3">union</h4>
+<div class="outline-text-4" id="text-org8b55ec3">
 <p>
 连接两个或两个以上的 select 语句结果组合到一个结果集合中。
 </p>
 </div>
 </div>
-<div id="outline-container-org378fe0d" class="outline-4">
-<h4 id="org378fe0d">order by</h4>
-<div class="outline-text-4" id="text-org378fe0d">
+<div id="outline-container-orgb49f12c" class="outline-4">
+<h4 id="orgb49f12c">order by</h4>
+<div class="outline-text-4" id="text-orgb49f12c">
 <p>
 排序，默认升序 AES ，降序 DESC
 </p>
 </div>
 </div>
-<div id="outline-container-org8d2a867" class="outline-4">
-<h4 id="org8d2a867">group by</h4>
-<div class="outline-text-4" id="text-org8d2a867">
+<div id="outline-container-orgb128477" class="outline-4">
+<h4 id="orgb128477">group by</h4>
+<div class="outline-text-4" id="text-orgb128477">
 <p>
 分组，常用函数： COUNT, SUM, AVG
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-ID-787cf0fd-8725-403d-b115-a26c87d7dfcc" class="outline-3">
-<h3 id="ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</h3>
-<div class="outline-text-3" id="text-ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">
+<div id="outline-container-orgd164136" class="outline-3">
+<h3 id="orgd164136">ORM</h3>
+<div class="outline-text-3" id="text-orgd164136">
 <p>
 Object-Relationship Mapping: 对象关系映射，将对关系型数据库的操作规范化，防止注入。ORM 的作用是在关系型数据库和业务实体对象之间作一个映射，在具体的操作业务对象的时候，就不需要再直接编写复杂的 SQL 语句，只需操作对象的属性和方法。
 </p>
 </div>
 </div>
-<div id="outline-container-ID-6df84a61-43bc-421e-8f78-435567f0ed2b" class="outline-3">
-<h3 id="ID-6df84a61-43bc-421e-8f78-435567f0ed2b">My<a href="#ID-59428a07-fcb2-475d-9512-3571be6aef0f">SQL</a></h3>
-<div class="outline-text-3" id="text-ID-6df84a61-43bc-421e-8f78-435567f0ed2b">
+<div id="outline-container-orge1e4797" class="outline-3">
+<h3 id="orge1e4797">My<a href="#orgfc165ee">SQL</a></h3>
+<div class="outline-text-3" id="text-orge1e4797">
 <p>
 瑞典 MySQL AB 公司开发，后被收购，现属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一。有开源免费的社区版，也有商业收费版本。
 </p>
@@ -277,10 +278,9 @@ Object-Relationship Mapping: 对象关系映射，将对关系型数据库的操
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org60bae87" class="outline-4">
-<h4 id="org60bae87">Installation</h4>
-<div class="outline-text-4" id="text-org60bae87">
+<div id="outline-container-org361f841" class="outline-4">
+<h4 id="org361f841">Installation</h4>
+<div class="outline-text-4" id="text-org361f841">
 <p>
 docker, 官方仓库安装均可
 </p>
@@ -290,10 +290,9 @@ docker, 官方仓库安装均可
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgf7d9625" class="outline-4">
-<h4 id="orgf7d9625">Data Type</h4>
-<div class="outline-text-4" id="text-orgf7d9625">
+<div id="outline-container-org4623012" class="outline-4">
+<h4 id="org4623012">Data Type</h4>
+<div class="outline-text-4" id="text-org4623012">
 <ul class="org-ul">
 <li>整型
 <ul class="org-ul">
@@ -335,9 +334,9 @@ docker, 官方仓库安装均可
 </ul>
 </div>
 </div>
-<div id="outline-container-org56e9f21" class="outline-4">
-<h4 id="org56e9f21">MySQL SQL syntax</h4>
-<div class="outline-text-4" id="text-org56e9f21">
+<div id="outline-container-org1ca36e3" class="outline-4">
+<h4 id="org1ca36e3">MySQL SQL syntax</h4>
+<div class="outline-text-4" id="text-org1ca36e3">
 <div class="org-src-container">
 <pre class="src src-sql"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">&#28155;&#21152;&#29992;&#25143;</span>
 <span style="color: #0000FF;">INSERT</span> <span style="color: #0000FF;">INTO</span> <span style="color: #006FE0;">user</span>
@@ -408,9 +407,9 @@ SHOW <span style="color: #0000FF;">TABLE</span> STATUS [<span style="color: #000
 </div>
 </div>
 </div>
-<div id="outline-container-ID-15806e05-94cb-4600-9b95-bf122ea54066" class="outline-4">
-<h4 id="ID-15806e05-94cb-4600-9b95-bf122ea54066">MySQL information<sub>schema</sub></h4>
-<div class="outline-text-4" id="text-ID-15806e05-94cb-4600-9b95-bf122ea54066">
+<div id="outline-container-org6050055" class="outline-4">
+<h4 id="org6050055">MySQL information<sub>schema</sub></h4>
+<div class="outline-text-4" id="text-org6050055">
 <p>
 mysql 5.0 以上中有一个重要的系统数据库 information<sub>schema</sub>，通过此数据库可访问 mysql 中存在的数据库名、表名、字段名等元数据。
 有三个表可用于 sqli :
@@ -434,10 +433,9 @@ mysql 5.0 以上中有一个重要的系统数据库 information<sub>schema</sub
 </ol>
 </div>
 </div>
-
-<div id="outline-container-ID-a7624498-19b7-4749-9780-cc0ee3c74467" class="outline-4">
-<h4 id="ID-a7624498-19b7-4749-9780-cc0ee3c74467">MySQL builtin function</h4>
-<div class="outline-text-4" id="text-ID-a7624498-19b7-4749-9780-cc0ee3c74467">
+<div id="outline-container-org0784f61" class="outline-4">
+<h4 id="org0784f61">MySQL builtin function</h4>
+<div class="outline-text-4" id="text-org0784f61">
 <ul class="org-ul">
 <li>length(str)           返回字符串的长度</li>
 <li>substr(str, pos, len) 从 pos 位置截取 len 长度的子字符串，索引从 1 开始</li>
@@ -457,9 +455,9 @@ mysql 5.0 以上中有一个重要的系统数据库 information<sub>schema</sub
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd72f230" class="outline-4">
-<h4 id="orgd72f230">inner join, left join, right join, full join<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
-<div class="outline-text-4" id="text-orgd72f230">
+<div id="outline-container-org88435d9" class="outline-4">
+<h4 id="org88435d9">inner join, left join, right join, full join<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-org88435d9">
 <div class="org-src-container">
 <pre class="src src-nil">TableA:
 id  firstName                  lastName
@@ -479,10 +477,9 @@ id age place
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org8dcf4fb" class="outline-5">
-<h5 id="org8dcf4fb">inner join</h5>
-<div class="outline-text-5" id="text-org8dcf4fb">
+<div id="outline-container-org649a5ce" class="outline-5">
+<h5 id="org649a5ce">inner join</h5>
+<div class="outline-text-5" id="text-org649a5ce">
 <p>
 两张表使用内连接查询时，得到的结果是两张表中完全匹配的行集。
 </p>
@@ -510,10 +507,9 @@ sruthy          abc             25  ekm
 </p>
 </div>
 </div>
-
-<div id="outline-container-org39d80f4" class="outline-5">
-<h5 id="org39d80f4">left join</h5>
-<div class="outline-text-5" id="text-org39d80f4">
+<div id="outline-container-org1fac79b" class="outline-5">
+<h5 id="org1fac79b">left join</h5>
+<div class="outline-text-5" id="text-org1fac79b">
 <p>
 左连接查询会返回左表中所有行，无论这些行是不是有任何一行在右表中匹配。
 </p>
@@ -542,10 +538,9 @@ TableA ( id=1,2,3,6 ) 的行都存在于结果中，而 TableB 没有 id = 6 ，
 </p>
 </div>
 </div>
-
-<div id="outline-container-org247124d" class="outline-5">
-<h5 id="org247124d">right join</h5>
-<div class="outline-text-5" id="text-org247124d">
+<div id="outline-container-orga76819d" class="outline-5">
+<h5 id="orga76819d">right join</h5>
+<div class="outline-text-5" id="text-orga76819d">
 <p>
 右连接查询会返回右表中所有行，无论这些行是不是有任何一行在左表中匹配。
 </p>
@@ -574,10 +569,9 @@ TableB ( id=1,2,3,5 ) 的行都存在于结果中，而 TableA 没有 id = 5 ，
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgdfbd521" class="outline-5">
-<h5 id="orgdfbd521">full join</h5>
-<div class="outline-text-5" id="text-orgdfbd521">
+<div id="outline-container-org5dc00bf" class="outline-5">
+<h5 id="org5dc00bf">full join</h5>
+<div class="outline-text-5" id="text-org5dc00bf">
 <p>
 全连接，返回左右表中的所有行。
 </p>
@@ -608,9 +602,9 @@ new             abc             NULL NULL
 </div>
 </div>
 </div>
-<div id="outline-container-org68fff1e" class="outline-4">
-<h4 id="org68fff1e">datetime &amp; timestamp <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
-<div class="outline-text-4" id="text-org68fff1e">
+<div id="outline-container-orgc81a86d" class="outline-4">
+<h4 id="orgc81a86d">datetime &amp; timestamp <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-orgc81a86d">
 <p>
 datetime: 1000-01-01 00:00:00 ~ 9999-12-31 23:59:59
 </p>
@@ -628,18 +622,16 @@ timestamp: 1970-01-01 00:00:01 ~ 2038-01-09 03:14:07 (UTC)
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb8609a2" class="outline-4">
-<h4 id="orgb8609a2">MyISAM &amp; InnoDB <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
-<div class="outline-text-4" id="text-orgb8609a2">
+<div id="outline-container-orgac03de3" class="outline-4">
+<h4 id="orgac03de3">MyISAM &amp; InnoDB <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h4>
+<div class="outline-text-4" id="text-orgac03de3">
 <p>
 MyISAM 和 InnoDB 之间的主要区别在于参照完整性和事务。还有其他区别，例如锁定、回滚和全文搜索。
 </p>
 </div>
-
-<div id="outline-container-org0ee886d" class="outline-5">
-<h5 id="org0ee886d">参照完整性</h5>
-<div class="outline-text-5" id="text-org0ee886d">
+<div id="outline-container-orgc979296" class="outline-5">
+<h5 id="orgc979296">参照完整性</h5>
+<div class="outline-text-5" id="text-orgc979296">
 <p>
 参照完整性确保表之间的关系保持一致。更具体地说，当一个表（例如 Listings）有一个外键（例如 Product ID）指向另一个表（例如 Products）时，当指向的表发生更新或删除时，这些更改会级联到链接的表。在该示例中，如果重命名产品，则链接的表的外键也会更新；如果从Products表中删除产品，则指向已删除条目的 Listings 表中得到任何列表也将被删除。此外，任何 Listings 表中的新列表都必须具有指向有效的现有条目的外键。
 </p>
@@ -649,10 +641,9 @@ InnoDB 是一个关系型 DBMS (RDBMS)，因此具有参照完整性，而 MyISA
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgdc3e78f" class="outline-5">
-<h5 id="orgdc3e78f">事务和原子性</h5>
-<div class="outline-text-5" id="text-orgdc3e78f">
+<div id="outline-container-org55f59e4" class="outline-5">
+<h5 id="org55f59e4">事务和原子性</h5>
+<div class="outline-text-5" id="text-org55f59e4">
 <p>
 事务：比如说，在人员管理系统中，你删除一个人员，你既需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！事务可以管理 insert, update, delete 此类的语句
 </p>
@@ -684,10 +675,9 @@ MyISAM 不支持事务，而 InnoDB 支持。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgcf0dd88" class="outline-5">
-<h5 id="orgcf0dd88">表锁定与行锁定</h5>
-<div class="outline-text-5" id="text-orgcf0dd88">
+<div id="outline-container-org16b1deb" class="outline-5">
+<h5 id="org16b1deb">表锁定与行锁定</h5>
+<div class="outline-text-5" id="text-org16b1deb">
 <p>
 当查询 MyISAM 表时，正在查询的整个表将被锁定。这意味着后续查询将仅在当前查询完成后才能执行。如果您正在读取一个大表，并且有频繁的读写操作，这可能意味着大量的查询积压。
 </p>
@@ -701,10 +691,9 @@ InnoDB 中的此功能称为并发。尽管并发性很好，但在表的范围�
 </p>
 </div>
 </div>
-
-<div id="outline-container-org8ef235d" class="outline-5">
-<h5 id="org8ef235d">事务和回滚</h5>
-<div class="outline-text-5" id="text-org8ef235d">
+<div id="outline-container-orgb969b16" class="outline-5">
+<h5 id="orgb969b16">事务和回滚</h5>
+<div class="outline-text-5" id="text-orgb969b16">
 <p>
 当在 MyISAM 中执行一个操作时，更改会立刻生效；在 InnoDB 中，这些更改可以回滚。用于控制事务的最常用命令是 COMMIT、ROLLBACK 和 SAVEPOINT。
 </p>
@@ -716,10 +705,9 @@ InnoDB 中的此功能称为并发。尽管并发性很好，但在表的范围�
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org0ed21ef" class="outline-5">
-<h5 id="org0ed21ef">可靠性</h5>
-<div class="outline-text-5" id="text-org0ed21ef">
+<div id="outline-container-org6a1db28" class="outline-5">
+<h5 id="org6a1db28">可靠性</h5>
+<div class="outline-text-5" id="text-org6a1db28">
 <p>
 MyISAM 不提供数据完整性——硬件故障、不正常的关机操作都可能导致数据损坏。这将需要修复或重建索引和表。
 </p>
@@ -738,19 +726,18 @@ InnoDB 在 MySQL 5.6.4 版本之前不支持 FULLTEXT 索引。
 </p>
 </div>
 </div>
-
-<div id="outline-container-org41c6a8b" class="outline-5">
-<h5 id="org41c6a8b">结论</h5>
-<div class="outline-text-5" id="text-org41c6a8b">
+<div id="outline-container-orgb4d5f28" class="outline-5">
+<h5 id="orgb4d5f28">结论</h5>
+<div class="outline-text-5" id="text-orgb4d5f28">
 <p>
 总之，InnoDB 应该是我们默认的存储引擎。在有特定需求时可以选择 MyISAM 或其他数据类型。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org705ad6f" class="outline-4">
-<h4 id="org705ad6f">atomic DDL <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h4>
-<div class="outline-text-4" id="text-org705ad6f">
+<div id="outline-container-org5da8958" class="outline-4">
+<h4 id="org5da8958">atomic DDL <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h4>
+<div class="outline-text-4" id="text-org5da8958">
 <p>
 MySQL 8.0 推出的新特性，MySQL 5.7 的字典信息保存在非事务表中，并且存放在不同的文件中（.FRM，.PAR，.OPT，.TRN，.TRG 等)。所有 DDL 操作都不是 Crash Safe，而且对于组合 DDL（ALTER 多个表）会出现有的成功有的失败的情况，而不是总体失败。这样主从复制就出现了问题，也导致基于复制的高可用系统不再安全。
 </p>
@@ -806,9 +793,9 @@ DDL: Data Definition Language
 </div>
 </div>
 </div>
-<div id="outline-container-org08814e3" class="outline-3">
-<h3 id="org08814e3">SQLite</h3>
-<div class="outline-text-3" id="text-org08814e3">
+<div id="outline-container-org1e8d99a" class="outline-3">
+<h3 id="org1e8d99a">SQLite</h3>
+<div class="outline-text-3" id="text-org1e8d99a">
 <p>
 轻量级的关系数据库。
 </p>
@@ -847,10 +834,9 @@ DDL: Data Definition Language
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orgfc3a876" class="outline-4">
-<h4 id="orgfc3a876">数据类型</h4>
-<div class="outline-text-4" id="text-orgfc3a876">
+<div id="outline-container-org4c29507" class="outline-4">
+<h4 id="org4c29507">数据类型</h4>
+<div class="outline-text-4" id="text-org4c29507">
 <table>
 
 
@@ -899,10 +885,9 @@ DDL: Data Definition Language
 </table>
 </div>
 </div>
-
-<div id="outline-container-orge81ac2d" class="outline-4">
-<h4 id="orge81ac2d">运算符</h4>
-<div class="outline-text-4" id="text-orge81ac2d">
+<div id="outline-container-org7e45085" class="outline-4">
+<h4 id="org7e45085">运算符</h4>
+<div class="outline-text-4" id="text-org7e45085">
 <table>
 
 
@@ -1003,21 +988,20 @@ DDL: Data Definition Language
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171" class="outline-2">
-<h2 id="ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">文档型数据库</h2>
-<div class="outline-text-2" id="text-ID-eaf4ad96-e0a6-4cca-b71f-e1e70a2d6171">
+<div id="outline-container-org28466e4" class="outline-2">
+<h2 id="org28466e4">文档型数据库</h2>
+<div class="outline-text-2" id="text-org28466e4">
 </div>
-<div id="outline-container-orgb8e1bf0" class="outline-3">
-<h3 id="orgb8e1bf0"><a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> / ELK(ES + Logstash + Kibana)</h3>
+<div id="outline-container-org83a2d3d" class="outline-3">
+<h3 id="org83a2d3d"><a href="20221213-elasticsearch.html#ID-d85fa69d-9531-4957-b3ca-d4e5a134f96d">ElasticSearch</a> / ELK(ES + Logstash + Kibana)</h3>
 </div>
-<div id="outline-container-orga81d8c7" class="outline-3">
-<h3 id="orga81d8c7">MongoDB</h3>
-<div class="outline-text-3" id="text-orga81d8c7">
+<div id="outline-container-org4dd5750" class="outline-3">
+<h3 id="org4dd5750">MongoDB</h3>
+<div class="outline-text-3" id="text-org4dd5750">
 </div>
-<div id="outline-container-org7760aa0" class="outline-4">
-<h4 id="org7760aa0">installation</h4>
-<div class="outline-text-4" id="text-org7760aa0">
+<div id="outline-container-org3ecaeb3" class="outline-4">
+<h4 id="org3ecaeb3">installation</h4>
+<div class="outline-text-4" id="text-org3ecaeb3">
 <p>
 CentOS/RedHat Repositry:
 </p>
@@ -1054,10 +1038,9 @@ db.auth(<span style="color: #008000;">"adminUser"</span>, <span style="color: #0
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2442830" class="outline-4">
-<h4 id="org2442830">Usage</h4>
-<div class="outline-text-4" id="text-org2442830">
+<div id="outline-container-orgc41e2f3" class="outline-4">
+<h4 id="orgc41e2f3">Usage</h4>
+<div class="outline-text-4" id="text-orgc41e2f3">
 <div class="org-src-container">
 <pre class="src src-js"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">&#21019;&#24314;&#29992;&#25143;</span>
 db.createUser({
@@ -1148,7 +1131,7 @@ db.getCollection(<span style="color: #008000;">'dbname'</span>).drop()
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

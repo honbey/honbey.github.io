@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-11882</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,19 +27,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc49e291">Introduction</a>
+<li><a href="#org394f95d">Introduction</a>
 <ul>
-<li><a href="#org1646bd2">步骤</a></li>
-<li><a href="#org31dd580">参考链接</a></li>
+<li><a href="#orgd200d77">步骤</a></li>
+<li><a href="#orgf8ceaa0">参考链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgc49e291" class="outline-2">
-<h2 id="orgc49e291">Introduction</h2>
-<div class="outline-text-2" id="text-orgc49e291">
+<div id="outline-container-org394f95d" class="outline-2">
+<h2 id="org394f95d">Introduction</h2>
+<div class="outline-text-2" id="text-org394f95d">
 <p>
 CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上的所有 office 版本及 Windows 操作系统。该漏洞的成因是 EQNEDT32.EXE 进程在读入包含 MathType 的 ole 数据时，在拷贝公式字体名称时没有对名称长度进行校验，从而造成栈缓冲区溢出，是一个非常经典的栈溢出漏洞。上次出现这么典型的 office 栈溢出漏洞是著名的 CVE-2012-0158。
 </p>
@@ -46,10 +49,9 @@ CVE-2017-1188 是微软公布的一个远程执行漏洞，通杀目前市面上
 <li>Target Software: Microsoft Office 2010 Professional Plus</li>
 </ul>
 </div>
-
-<div id="outline-container-org1646bd2" class="outline-3">
-<h3 id="org1646bd2">步骤</h3>
-<div class="outline-text-3" id="text-org1646bd2">
+<div id="outline-container-orgd200d77" class="outline-3">
+<h3 id="orgd200d77">步骤</h3>
+<div class="outline-text-3" id="text-orgd200d77">
 <ol class="org-ol">
 <li><p>
 Bash
@@ -83,10 +85,9 @@ run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-sty
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org31dd580" class="outline-3">
-<h3 id="org31dd580">参考链接</h3>
-<div class="outline-text-3" id="text-org31dd580">
+<div id="outline-container-orgf8ceaa0" class="outline-3">
+<h3 id="orgf8ceaa0">参考链接</h3>
+<div class="outline-text-3" id="text-orgf8ceaa0">
 <p>
 <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11882">cve.mitre.org</a>
 <a href="https://www.freebuf.com/vuls/154462.html">www.freebuf.com</a>
@@ -99,7 +100,7 @@ run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-sty
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

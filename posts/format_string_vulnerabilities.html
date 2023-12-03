@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>格式化字符漏洞</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,26 +27,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga69c1d3">1</a></li>
-<li><a href="#orga873c8e">2</a></li>
-<li><a href="#org0c32167">3</a>
+<li><a href="#orgca5899e">1</a></li>
+<li><a href="#orgdfc84c8">2</a></li>
+<li><a href="#org567447d">3</a>
 <ul>
-<li><a href="#orgb71bc02">源代码</a></li>
+<li><a href="#org1abb7e6">源代码</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orga69c1d3" class="outline-2">
-<h2 id="orga69c1d3">1</h2>
-<div class="outline-text-2" id="text-orga69c1d3">
+<div id="outline-container-orgca5899e" class="outline-2">
+<h2 id="orgca5899e">1</h2>
+<div class="outline-text-2" id="text-orgca5899e">
 <p>
 运行结果
 </p>
 
-<figure id="org19f4837">
-<img src="../images/format_string_vulnerabilities_1.png" alt="format_string_vulnerabilities_1.png">
+<figure id="orgb122678">
+<img src="./../images/format_string_vulnerabilities_1.png" alt="format_string_vulnerabilities_1.png">
 
 </figure>
 
@@ -50,8 +53,8 @@
 Release
 </p>
 
-<figure id="orgf690223">
-<img src="../images/format_string_vulnerabilities_2.png" alt="format_string_vulnerabilities_2.png">
+<figure id="org8f9c8c0">
+<img src="./../images/format_string_vulnerabilities_2.png" alt="format_string_vulnerabilities_2.png">
 
 </figure>
 
@@ -59,13 +62,13 @@ Release
 调试
 </p>
 
-<figure id="org5725969">
-<img src="../images/format_string_vulnerabilities_3.png" alt="format_string_vulnerabilities_3.png">
+<figure id="org8dc89d9">
+<img src="./../images/format_string_vulnerabilities_3.png" alt="format_string_vulnerabilities_3.png">
 
 </figure>
 
-<figure id="org3aaf6b1">
-<img src="../images/format_string_vulnerabilities_4.png" alt="format_string_vulnerabilities_4.png">
+<figure id="org192c453">
+<img src="./../images/format_string_vulnerabilities_4.png" alt="format_string_vulnerabilities_4.png">
 
 </figure>
 
@@ -74,19 +77,18 @@ Release
 </p>
 
 
-<figure id="org37d03e9">
-<img src="../images/format_string_vulnerabilities_5.png" alt="format_string_vulnerabilities_5.png">
+<figure id="org4f632d4">
+<img src="./../images/format_string_vulnerabilities_5.png" alt="format_string_vulnerabilities_5.png">
 
 </figure>
 </div>
 </div>
+<div id="outline-container-orgdfc84c8" class="outline-2">
+<h2 id="orgdfc84c8">2</h2>
+<div class="outline-text-2" id="text-orgdfc84c8">
 
-<div id="outline-container-orga873c8e" class="outline-2">
-<h2 id="orga873c8e">2</h2>
-<div class="outline-text-2" id="text-orga873c8e">
-
-<figure id="orgdf6e20d">
-<img src="../images/format_string_vulnerabilities_6.png" alt="format_string_vulnerabilities_6.png">
+<figure id="orgdfed344">
+<img src="./../images/format_string_vulnerabilities_6.png" alt="format_string_vulnerabilities_6.png">
 
 </figure>
 
@@ -113,21 +115,19 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 这种不需要额外参数的程序 argc 值为 1 ，增加一个 if 判断防止多输入的参数造成危害
 </p>
 
-<figure id="org77ba14e">
-<img src="../images/format_string_vulnerabilities_7.png" alt="format_string_vulnerabilities_7.png">
+<figure id="org391b14b">
+<img src="./../images/format_string_vulnerabilities_7.png" alt="format_string_vulnerabilities_7.png">
 
 </figure>
 </blockquote>
 </div>
 </div>
+<div id="outline-container-org567447d" class="outline-2">
+<h2 id="org567447d">3</h2>
+<div class="outline-text-2" id="text-org567447d">
 
-
-<div id="outline-container-org0c32167" class="outline-2">
-<h2 id="org0c32167">3</h2>
-<div class="outline-text-2" id="text-org0c32167">
-
-<figure id="orgbe778f2">
-<img src="../images/format_string_vulnerabilities_8.png" alt="format_string_vulnerabilities_8.png">
+<figure id="org6d34e8b">
+<img src="./../images/format_string_vulnerabilities_8.png" alt="format_string_vulnerabilities_8.png">
 
 </figure>
 
@@ -141,8 +141,8 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left"><img src="../images/format_string_vulnerabilities_9.png" alt="format_string_vulnerabilities_9.png"></td>
-<td class="org-left"><img src="../images/format_string_vulnerabilities_10.png" alt="format_string_vulnerabilities_10.png"></td>
+<td class="org-left"><img src="./../images/format_string_vulnerabilities_9.png" alt="format_string_vulnerabilities_9.png"></td>
+<td class="org-left"><img src="./../images/format_string_vulnerabilities_10.png" alt="format_string_vulnerabilities_10.png"></td>
 </tr>
 </tbody>
 </table>
@@ -152,8 +152,8 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </p>
 
 
-<figure id="orgbe466be">
-<img src="../images/format_string_vulnerabilities_11.png" alt="format_string_vulnerabilities_11.png">
+<figure id="orge7ac7bd">
+<img src="./../images/format_string_vulnerabilities_11.png" alt="format_string_vulnerabilities_11.png">
 
 </figure>
 
@@ -161,8 +161,8 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 另一版本
 </p>
 
-<figure id="orge341c33">
-<img src="../images/format_string_vulnerabilities_12.png" alt="format_string_vulnerabilities_12.png">
+<figure id="orgd0d10e2">
+<img src="./../images/format_string_vulnerabilities_12.png" alt="format_string_vulnerabilities_12.png">
 
 </figure>
 
@@ -179,8 +179,8 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left"><img src="../images/format_string_vulnerabilities_13.png" alt="format_string_vulnerabilities_13.png"></td>
-<td class="org-left"><img src="../images/format_string_vulnerabilities_14.png" alt="format_string_vulnerabilities_14.png"></td>
+<td class="org-left"><img src="./../images/format_string_vulnerabilities_13.png" alt="format_string_vulnerabilities_13.png"></td>
+<td class="org-left"><img src="./../images/format_string_vulnerabilities_14.png" alt="format_string_vulnerabilities_14.png"></td>
 </tr>
 </tbody>
 </table>
@@ -189,10 +189,9 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 格式化字符串漏洞的产生原理和漏洞利用，对于 2 我以前在 Linux 下的 c 语言都会对 argc 进行检查，但没有想到，利用命令行参数可以这么轻易的读取内存中的数据。3 的内存写入让我有认识到了一种新的攻击方法，利用格式化字符串漏洞加上指针可以向特定内存地址写入自己构建的值。
 </p>
 </div>
-
-<div id="outline-container-orgb71bc02" class="outline-3">
-<h3 id="orgb71bc02">源代码</h3>
-<div class="outline-text-3" id="text-orgb71bc02">
+<div id="outline-container-org1abb7e6" class="outline-3">
+<h3 id="org1abb7e6">源代码</h3>
+<div class="outline-text-3" id="text-org1abb7e6">
 <ul class="org-ul">
 <li><p>
 1
@@ -246,7 +245,7 @@ main 函数一般有两个参数 argc, argv[]， argc 代表参数的个数，ar
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:56 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Webshell</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,22 +27,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcc5cad3">PHP Webshell</a></li>
-<li><a href="#org618ea80">JSP Webshell</a></li>
-<li><a href="#org80357cb">ASP Webshell</a>
+<li><a href="#org5f171ac">PHP Webshell</a></li>
+<li><a href="#org57f6d01">JSP Webshell</a></li>
+<li><a href="#orgf8bccd7">ASP Webshell</a>
 <ul>
-<li><a href="#org1ffc152">Find Vulnerabilities / Code Audit</a></li>
-<li><a href="#org6a43ef1">Global.asax</a></li>
-<li><a href="#ID-fa531bd4-b08a-4d29-9382-d02870aafede">ILSpy</a></li>
+<li><a href="#org396e9e2">Find Vulnerabilities / Code Audit</a></li>
+<li><a href="#org0b3c979">Global.asax</a></li>
+<li><a href="#orgcf23041">ILSpy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgcc5cad3" class="outline-2">
-<h2 id="orgcc5cad3">PHP Webshell</h2>
-<div class="outline-text-2" id="text-orgcc5cad3">
+<div id="outline-container-org5f171ac" class="outline-2">
+<h2 id="org5f171ac">PHP Webshell</h2>
+<div class="outline-text-2" id="text-org5f171ac">
 <p>
 一句话木马：
 </p>
@@ -96,10 +99,9 @@ function iJG($BHM) {
 </div>
 </div>
 </div>
-
-<div id="outline-container-org618ea80" class="outline-2">
-<h2 id="org618ea80">JSP Webshell</h2>
-<div class="outline-text-2" id="text-org618ea80">
+<div id="outline-container-org57f6d01" class="outline-2">
+<h2 id="org57f6d01">JSP Webshell</h2>
+<div class="outline-text-2" id="text-org57f6d01">
 <p>
 一句话木马：
 </p>
@@ -126,10 +128,9 @@ function iJG($BHM) {
 </div>
 </div>
 </div>
-
-<div id="outline-container-org80357cb" class="outline-2">
-<h2 id="org80357cb">ASP Webshell</h2>
-<div class="outline-text-2" id="text-org80357cb">
+<div id="outline-container-orgf8bccd7" class="outline-2">
+<h2 id="orgf8bccd7">ASP Webshell</h2>
+<div class="outline-text-2" id="text-orgf8bccd7">
 <p>
 .NET 优先加载 bin 目录下的程序，例如 index.aspx -&gt; /bin/index.dll ，这时任意目录均能处理 index.aspx ，如果存在任意文件上传漏洞的话，就可以将编译好的 webshell 上传到 bin 目录。
 </p>
@@ -142,10 +143,9 @@ function iJG($BHM) {
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org1ffc152" class="outline-3">
-<h3 id="org1ffc152">Find Vulnerabilities / Code Audit</h3>
-<div class="outline-text-3" id="text-org1ffc152">
+<div id="outline-container-org396e9e2" class="outline-3">
+<h3 id="org396e9e2">Find Vulnerabilities / Code Audit</h3>
+<div class="outline-text-3" id="text-org396e9e2">
 <ol class="org-ol">
 <li>在得到安装包的情况下，用 ILSpy 反编译</li>
 <li>查找 Upload, File, Download 等关键词</li>
@@ -153,18 +153,17 @@ function iJG($BHM) {
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org6a43ef1" class="outline-3">
-<h3 id="org6a43ef1">Global.asax</h3>
-<div class="outline-text-3" id="text-org6a43ef1">
+<div id="outline-container-org0b3c979" class="outline-3">
+<h3 id="org0b3c979">Global.asax</h3>
+<div class="outline-text-3" id="text-org0b3c979">
 <p>
 文件说明<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
 </div>
 </div>
-<div id="outline-container-ID-fa531bd4-b08a-4d29-9382-d02870aafede" class="outline-3">
-<h3 id="ID-fa531bd4-b08a-4d29-9382-d02870aafede">ILSpy</h3>
-<div class="outline-text-3" id="text-ID-fa531bd4-b08a-4d29-9382-d02870aafede">
+<div id="outline-container-orgcf23041" class="outline-3">
+<h3 id="orgcf23041">ILSpy</h3>
+<div class="outline-text-3" id="text-orgcf23041">
 <p>
 .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&amp;more) - cross-platform!<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
 </p>
@@ -220,7 +219,7 @@ Webshell 处置流程：
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

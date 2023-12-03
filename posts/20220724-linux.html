@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,31 +27,31 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">Architecture</a></li>
-<li><a href="#ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">I/O</a>
+<li><a href="#org2ff8811">Architecture</a></li>
+<li><a href="#org8b74b9f">I/O</a>
 <ul>
-<li><a href="#orgcae955d">零拷贝技术 - sendfile</a></li>
+<li><a href="#org85440ce">零拷贝技术 - sendfile</a></li>
 </ul>
 </li>
-<li><a href="#org6cb5e7f">Process</a></li>
-<li><a href="#org93270fd">Useful Command</a>
+<li><a href="#org16e733e">Process</a></li>
+<li><a href="#org5d4add5">Useful Command</a>
 <ul>
-<li><a href="#orgeb048bc">Let non-root/normal user use port which less then 1024</a></li>
-<li><a href="#ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">Recover files on Linux</a></li>
-<li><a href="#orgce298ac">Safe rm</a></li>
-<li><a href="#org6d234ac">Read file</a></li>
-<li><a href="#org8f1b92c">utils tools</a></li>
-<li><a href="#orgf76c760">Set timezone</a></li>
-<li><a href="#orgfec26f2">git completely remove files</a></li>
+<li><a href="#org047eb26">Let non-root/normal user use port which less then 1024</a></li>
+<li><a href="#orgd5f52a1">Recover files on Linux</a></li>
+<li><a href="#orgd346818">Safe rm</a></li>
+<li><a href="#org81a2d46">Read file</a></li>
+<li><a href="#org56f977e">utils tools</a></li>
+<li><a href="#org1190c30">Set timezone</a></li>
+<li><a href="#org7ddcab9">git completely remove files</a></li>
+<li><a href="#org2d23b6e">xargs</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3" class="outline-2">
-<h2 id="ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">Architecture</h2>
-<div class="outline-text-2" id="text-ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">
+<div id="outline-container-org2ff8811" class="outline-2">
+<h2 id="org2ff8811">Architecture</h2>
+<div class="outline-text-2" id="text-org2ff8811">
 <div class="org-src-container">
 <pre class="src src-nil">   Application
 Shell | Lib Function
@@ -57,10 +61,9 @@ Shell | Lib Function
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407" class="outline-2">
-<h2 id="ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">I/O</h2>
-<div class="outline-text-2" id="text-ID-3cedef2b-ff4a-492e-a8e0-7a1a4779a407">
+<div id="outline-container-org8b74b9f" class="outline-2">
+<h2 id="org8b74b9f">I/O</h2>
+<div class="outline-text-2" id="text-org8b74b9f">
 <p>
 传统 I/O （缓存 I/O）：硬盘 -&gt; 内核缓冲区 -&gt; 用户缓冲区 -&gt; 内核 socket 缓冲区 -&gt; 协议引擎
 </p>
@@ -73,10 +76,9 @@ sendfile: 硬盘 -&gt; 内核缓冲区 -&gt; 内核 socket 缓冲区 -&gt; 协�
 sendfile（<a href="20220708-hardware.html#ID-3bc17eaf-8d5c-48d4-8efa-58f9429b2794">DMA</a> 收集拷贝）：硬盘 -&gt; 内核缓冲区 -&gt; 协议引擎
 </p>
 </div>
-
-<div id="outline-container-orgcae955d" class="outline-3">
-<h3 id="orgcae955d">零拷贝技术 - sendfile</h3>
-<div class="outline-text-3" id="text-orgcae955d">
+<div id="outline-container-org85440ce" class="outline-3">
+<h3 id="org85440ce">零拷贝技术 - sendfile</h3>
+<div class="outline-text-3" id="text-org85440ce">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/sendfile.h&gt;</span>
 <span style="color: #6434A3;">ssize_t</span> <span style="color: #006699;">snedfile</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">out_fd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">in_fd</span>, <span style="color: #6434A3;">off_t</span>* <span style="color: #BA36A5;">offset</span>, <span style="color: #6434A3;">size_t</span> <span style="color: #BA36A5;">count</span>);
@@ -89,32 +91,30 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 </div>
 </div>
 </div>
-<div id="outline-container-org6cb5e7f" class="outline-2">
-<h2 id="org6cb5e7f">Process</h2>
-<div class="outline-text-2" id="text-org6cb5e7f">
+<div id="outline-container-org16e733e" class="outline-2">
+<h2 id="org16e733e">Process</h2>
+<div class="outline-text-2" id="text-org16e733e">
 <ul class="org-ul">
 <li><a href="20220912-linux_fork.html#ID-fe4f5bde-dd07-4119-a55e-d994e263146b">Linux <code>fork()</code></a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org93270fd" class="outline-2">
-<h2 id="org93270fd">Useful Command</h2>
-<div class="outline-text-2" id="text-org93270fd">
+<div id="outline-container-org5d4add5" class="outline-2">
+<h2 id="org5d4add5">Useful Command</h2>
+<div class="outline-text-2" id="text-org5d4add5">
 </div>
-<div id="outline-container-orgeb048bc" class="outline-3">
-<h3 id="orgeb048bc">Let non-root/normal user use port which less then 1024</h3>
-<div class="outline-text-3" id="text-orgeb048bc">
+<div id="outline-container-org047eb26" class="outline-3">
+<h3 id="org047eb26">Let non-root/normal user use port which less then 1024</h3>
+<div class="outline-text-3" id="text-org047eb26">
 <div class="org-src-container">
 <pre class="src src-bash">setcap <span style="color: #BA36A5;">cap_net_bind_service</span>=+eip /path/executable_program
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c" class="outline-3">
-<h3 id="ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">Recover files on Linux</h3>
-<div class="outline-text-3" id="text-ID-30464b22-0321-4bd8-846f-7d2ee1b1af4c">
+<div id="outline-container-orgd5f52a1" class="outline-3">
+<h3 id="orgd5f52a1">Recover files on Linux</h3>
+<div class="outline-text-3" id="text-orgd5f52a1">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">backup sector</span>
 dd <span style="color: #BA36A5;">if</span>=/path/filename <span style="color: #BA36A5;">of</span>=/dev/vda1
@@ -130,10 +130,9 @@ extundelete /dev/vda1 --restore-all
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgce298ac" class="outline-3">
-<h3 id="orgce298ac">Safe rm</h3>
-<div class="outline-text-3" id="text-orgce298ac">
+<div id="outline-container-orgd346818" class="outline-3">
+<h3 id="orgd346818">Safe rm</h3>
+<div class="outline-text-3" id="text-orgd346818">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/</span><span style="color: #0000FF;">env</span><span style="color: #8D8D84; font-style: italic;"> bash</span>
 <span style="color: #BA36A5;">args</span>=<span style="color: #008000;">""</span>
@@ -160,9 +159,9 @@ extundelete /dev/vda1 --restore-all
 </div>
 </div>
 </div>
-<div id="outline-container-org6d234ac" class="outline-3">
-<h3 id="org6d234ac">Read file</h3>
-<div class="outline-text-3" id="text-org6d234ac">
+<div id="outline-container-org81a2d46" class="outline-3">
+<h3 id="org81a2d46">Read file</h3>
+<div class="outline-text-3" id="text-org81a2d46">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/</span><span style="color: #0000FF;">env</span><span style="color: #8D8D84; font-style: italic;"> bash</span>
 
@@ -180,10 +179,9 @@ extundelete /dev/vda1 --restore-all
 </div>
 </div>
 </div>
-
-<div id="outline-container-org8f1b92c" class="outline-3">
-<h3 id="org8f1b92c">utils tools</h3>
-<div class="outline-text-3" id="text-org8f1b92c">
+<div id="outline-container-org56f977e" class="outline-3">
+<h3 id="org56f977e">utils tools</h3>
+<div class="outline-text-3" id="text-org56f977e">
 <p>
 Rust-alternatives <code>[3/7]</code>:
 </p>
@@ -198,10 +196,9 @@ Rust-alternatives <code>[3/7]</code>:
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgf76c760" class="outline-3">
-<h3 id="orgf76c760">Set timezone</h3>
-<div class="outline-text-3" id="text-orgf76c760">
+<div id="outline-container-org1190c30" class="outline-3">
+<h3 id="org1190c30">Set timezone</h3>
+<div class="outline-text-3" id="text-org1190c30">
 <div class="org-src-container">
 <pre class="src src-bash">timedatectl list-timezones | grep Shanghai
 sudo timedatectl set-timezone Asia/Shanghai
@@ -209,10 +206,9 @@ sudo timedatectl set-timezone Asia/Shanghai
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgfec26f2" class="outline-3">
-<h3 id="orgfec26f2">git completely remove files</h3>
-<div class="outline-text-3" id="text-orgfec26f2">
+<div id="outline-container-org7ddcab9" class="outline-3">
+<h3 id="org7ddcab9">git completely remove files</h3>
+<div class="outline-text-3" id="text-org7ddcab9">
 <div class="org-src-container">
 <pre class="src src-bash">git filter-branch --force --index-filter <span style="color: #008000;">'git rm -r --cached --ignore-unmatch &lt;files&gt;'</span> --prune-empty --tag-name-filter cat -- --all
 </pre>
@@ -230,12 +226,54 @@ git gc --prune=now
 </div>
 </div>
 </div>
+<div id="outline-container-org2d23b6e" class="outline-3">
+<h3 id="org2d23b6e">xargs</h3>
+<div class="outline-text-3" id="text-org2d23b6e">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">short parameter</th>
+<th scope="col" class="org-left">long parameter</th>
+<th scope="col" class="org-left">caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>-d</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">指定分隔符，默认是回车</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-I</code> / <code>-i</code></td>
+<td class="org-left"><code>--replace</code></td>
+<td class="org-left">将传给 xargs 的参数，赋值给一个指定的值，默认为 {}</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>-0</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">指定 <code>\0</code> 为分隔符，可配合 <code>find</code> 的 <code>-print0</code> 使用</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

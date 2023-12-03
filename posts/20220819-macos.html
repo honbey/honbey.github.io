@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>macOS</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,39 +27,38 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0632a91">Finder</a>
+<li><a href="#org38ec219">Finder</a>
 <ul>
-<li><a href="#org5411a6a">Remove recent files</a></li>
-<li><a href="#orgab52dfe">The App package is broken</a></li>
+<li><a href="#orge32c749">Remove recent files</a></li>
+<li><a href="#org0b0a661">The App package is broken</a></li>
 </ul>
 </li>
-<li><a href="#org2c72038">Shortcuts</a>
+<li><a href="#org18d692f">Shortcuts</a>
 <ul>
-<li><a href="#org5730e5b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</a></li>
+<li><a href="#org54a393b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</a></li>
 </ul>
 </li>
-<li><a href="#org9f73ec6">Software</a>
+<li><a href="#org2bc3957">Software</a>
 <ul>
-<li><a href="#orgd284235">Sourcetrail</a></li>
+<li><a href="#org72e73ed">Sourcetrail</a></li>
 </ul>
 </li>
-<li><a href="#orge8f0cd0">Virtual Machine</a>
+<li><a href="#org373e287">Virtual Machine</a>
 <ul>
-<li><a href="#org7312eda">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
-<li><a href="#org8a1fc92">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
+<li><a href="#orgba7c222">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
+<li><a href="#org9dcd53d">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org0632a91" class="outline-2">
-<h2 id="org0632a91">Finder</h2>
-<div class="outline-text-2" id="text-org0632a91">
+<div id="outline-container-org38ec219" class="outline-2">
+<h2 id="org38ec219">Finder</h2>
+<div class="outline-text-2" id="text-org38ec219">
 </div>
-<div id="outline-container-org5411a6a" class="outline-3">
-<h3 id="org5411a6a">Remove recent files</h3>
-<div class="outline-text-3" id="text-org5411a6a">
+<div id="outline-container-orge32c749" class="outline-3">
+<h3 id="orge32c749">Remove recent files</h3>
+<div class="outline-text-3" id="text-orge32c749">
 <div class="org-src-container">
 <pre class="src src-bash">xattr -c ./*
 </pre>
@@ -65,9 +68,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgab52dfe" class="outline-3">
-<h3 id="orgab52dfe">The App package is broken</h3>
-<div class="outline-text-3" id="text-orgab52dfe">
+<div id="outline-container-org0b0a661" class="outline-3">
+<h3 id="org0b0a661">The App package is broken</h3>
+<div class="outline-text-3" id="text-org0b0a661">
 <div class="org-src-container">
 <pre class="src src-bash">sudo xattr -rd com.app.quarantine
 </pre>
@@ -75,14 +78,13 @@
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2c72038" class="outline-2">
-<h2 id="org2c72038">Shortcuts</h2>
-<div class="outline-text-2" id="text-org2c72038">
+<div id="outline-container-org18d692f" class="outline-2">
+<h2 id="org18d692f">Shortcuts</h2>
+<div class="outline-text-2" id="text-org18d692f">
 </div>
-<div id="outline-container-org5730e5b" class="outline-3">
-<h3 id="org5730e5b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
-<div class="outline-text-3" id="text-org5730e5b">
+<div id="outline-container-org54a393b" class="outline-3">
+<h3 id="org54a393b">Request API and run JavaScript on macOS(JS is not support on iOS yet)</h3>
+<div class="outline-text-3" id="text-org54a393b">
 <p>
 Documents<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> &amp; Resources<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
 </p>
@@ -106,14 +108,13 @@ Get API response, the input&rsquo;s type need set to &rsquo;Text&rsquo;, you can
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9f73ec6" class="outline-2">
-<h2 id="org9f73ec6">Software</h2>
-<div class="outline-text-2" id="text-org9f73ec6">
+<div id="outline-container-org2bc3957" class="outline-2">
+<h2 id="org2bc3957">Software</h2>
+<div class="outline-text-2" id="text-org2bc3957">
 </div>
-<div id="outline-container-orgd284235" class="outline-3">
-<h3 id="orgd284235">Sourcetrail</h3>
-<div class="outline-text-3" id="text-orgd284235">
+<div id="outline-container-org72e73ed" class="outline-3">
+<h3 id="org72e73ed">Sourcetrail</h3>
+<div class="outline-text-3" id="text-org72e73ed">
 <p>
 Compile from source:
 </p>
@@ -181,13 +182,13 @@ cmake -DCMAKE_BUILD_TYPE=Release <span style="color: #008000;">\</span>
 </div>
 </div>
 </div>
-<div id="outline-container-orge8f0cd0" class="outline-2">
-<h2 id="orge8f0cd0">Virtual Machine</h2>
-<div class="outline-text-2" id="text-orge8f0cd0">
+<div id="outline-container-org373e287" class="outline-2">
+<h2 id="org373e287">Virtual Machine</h2>
+<div class="outline-text-2" id="text-org373e287">
 </div>
-<div id="outline-container-org7312eda" class="outline-3">
-<h3 id="org7312eda">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
-<div class="outline-text-3" id="text-org7312eda">
+<div id="outline-container-orgba7c222" class="outline-3">
+<h3 id="orgba7c222">Compile open-vm-tools in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-orgba7c222">
 <ol class="org-ol">
 <li><p>
 Install Dependencies
@@ -237,10 +238,9 @@ X-GNOME-Autostart-enabled=true
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org8a1fc92" class="outline-3">
-<h3 id="org8a1fc92">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org8a1fc92">
+<div id="outline-container-org9dcd53d" class="outline-3">
+<h3 id="org9dcd53d">Compile Sourcetrail in Debian 10.4 Arm on VMWare Fusion Tech<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org9dcd53d">
 <ol class="org-ol">
 <li><p>
 Dependencies
@@ -317,7 +317,7 @@ make <span style="color: #BA36A5;">ARCH</span>=arm -j8 Sourcetrail
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

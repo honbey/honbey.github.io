@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>安装 OpenCV</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,39 +27,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org04b89b9">编译安装 OpenCV on Linux</a>
+<li><a href="#org847d6c8">编译安装 OpenCV on Linux</a>
 <ul>
-<li><a href="#ID-a9599827-5c7e-49c6-8056-ce206ce04268">Ubuntu 编译安装 OpenCV</a>
+<li><a href="#org5b9b068">Ubuntu 编译安装 OpenCV</a>
 <ul>
-<li><a href="#org37c8776">QT + OpenCV</a></li>
-<li><a href="#org1755f10">CMakeLists.txt</a></li>
+<li><a href="#org4aa7811">QT + OpenCV</a></li>
+<li><a href="#org4c24435">CMakeLists.txt</a></li>
 </ul>
 </li>
-<li><a href="#ID-104dae41-fe65-4945-8f12-7007b2debfad">FedoraRemix WSL 编译 OpenCV</a></li>
+<li><a href="#orgd1dc4f4">FedoraRemix WSL 编译 OpenCV</a></li>
 </ul>
 </li>
-<li><a href="#org68d95a0">直接安装 OpenCV</a>
+<li><a href="#org94faf1d">直接安装 OpenCV</a>
 <ul>
-<li><a href="#org39a7711">Fedora</a></li>
-<li><a href="#orgebb56a1">macOS</a></li>
-<li><a href="#org3dc722e">Windows</a></li>
+<li><a href="#org23bf37e">Fedora</a></li>
+<li><a href="#orga681650">macOS</a></li>
+<li><a href="#orgfd89d3c">Windows</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org04b89b9" class="outline-2">
-<h2 id="org04b89b9">编译安装 OpenCV on <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a></h2>
-<div class="outline-text-2" id="text-org04b89b9">
+<div id="outline-container-org847d6c8" class="outline-2">
+<h2 id="org847d6c8">编译安装 OpenCV on <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a></h2>
+<div class="outline-text-2" id="text-org847d6c8">
 <p>
 以 Ubuntu 和 OpenCV 4.0.0 为例
 </p>
 </div>
-
-<div id="outline-container-ID-a9599827-5c7e-49c6-8056-ce206ce04268" class="outline-3">
-<h3 id="ID-a9599827-5c7e-49c6-8056-ce206ce04268">Ubuntu 编译安装 OpenCV</h3>
-<div class="outline-text-3" id="text-ID-a9599827-5c7e-49c6-8056-ce206ce04268">
+<div id="outline-container-org5b9b068" class="outline-3">
+<h3 id="org5b9b068">Ubuntu 编译安装 OpenCV</h3>
+<div class="outline-text-3" id="text-org5b9b068">
 <ol class="org-ol">
 <li><p>
 安装依赖
@@ -191,10 +193,9 @@ Compile it(with [CMakeLists.txt](#CMakeLists-txt))
 </div></li>
 </ol>
 </div>
-
-<div id="outline-container-org37c8776" class="outline-4">
-<h4 id="org37c8776">QT + OpenCV</h4>
-<div class="outline-text-4" id="text-org37c8776">
+<div id="outline-container-org4aa7811" class="outline-4">
+<h4 id="org4aa7811">QT + OpenCV</h4>
+<div class="outline-text-4" id="text-org4aa7811">
 <p>
 在 .pro 文件添加以下内容：
 </p>
@@ -255,10 +256,9 @@ LIBS += -L/usr/local/lib64 \
 </div>
 </div>
 </div>
-
-<div id="outline-container-org1755f10" class="outline-4">
-<h4 id="org1755f10">CMakeLists.txt</h4>
-<div class="outline-text-4" id="text-org1755f10">
+<div id="outline-container-org4c24435" class="outline-4">
+<h4 id="org4c24435">CMakeLists.txt</h4>
+<div class="outline-text-4" id="text-org4c24435">
 <div class="org-src-container">
 <pre class="src src-cmake">cmake_minimum_required(VERSION 2.8)
 project( cvTest )
@@ -271,10 +271,9 @@ target_link_libraries( cvTest ${OpenCV_LIBS} )
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-104dae41-fe65-4945-8f12-7007b2debfad" class="outline-3">
-<h3 id="ID-104dae41-fe65-4945-8f12-7007b2debfad">FedoraRemix WSL 编译 OpenCV</h3>
-<div class="outline-text-3" id="text-ID-104dae41-fe65-4945-8f12-7007b2debfad">
+<div id="outline-container-orgd1dc4f4" class="outline-3">
+<h3 id="orgd1dc4f4">FedoraRemix WSL 编译 OpenCV</h3>
+<div class="outline-text-3" id="text-orgd1dc4f4">
 <p>
 最新版的 FedoraRemix WSL 也就是 Fedora 31 ，直接从官方仓库安装的 OpenCV 无法读取视频，发现是 FFmpeg 没有安装，官方仓库没有 FFmpeg，可以添加其他仓库安装 FFmpeg，我选择是编译安装，顺便把官方仓库安装的 OpenCV 卸载了，改用编译安装的 OpenCV。
 </p>
@@ -292,7 +291,7 @@ sudo dnf install openjpeg-devel libjpeg-devel libpng-devel libtiff-devel
 </div></li>
 
 <li>下载源码
-参考前文：<a href="#ID-a9599827-5c7e-49c6-8056-ce206ce04268">Ubuntu 编译安装 OpenCV</a>
+参考前文：<a href="#org5b9b068">Ubuntu 编译安装 OpenCV</a>
 FFmpeg 下载链接： <a href="https://ffmpeg.org/releases/ffmpeg-4.2.2.tar.bz2">FFmpeg</a></li>
 
 <li><p>
@@ -355,18 +354,16 @@ sudo make install
 </div>
 </div>
 </div>
-
-<div id="outline-container-org68d95a0" class="outline-2">
-<h2 id="org68d95a0">直接安装 OpenCV</h2>
-<div class="outline-text-2" id="text-org68d95a0">
+<div id="outline-container-org94faf1d" class="outline-2">
+<h2 id="org94faf1d">直接安装 OpenCV</h2>
+<div class="outline-text-2" id="text-org94faf1d">
 <p>
 从官方仓库安装的版本一般都不是最新版，如果要安装最新版的话最好老老实实的编译安装。
 </p>
 </div>
-
-<div id="outline-container-org39a7711" class="outline-3">
-<h3 id="org39a7711">Fedora</h3>
-<div class="outline-text-3" id="text-org39a7711">
+<div id="outline-container-org23bf37e" class="outline-3">
+<h3 id="org23bf37e">Fedora</h3>
+<div class="outline-text-3" id="text-org23bf37e">
 <p>
 Fedora 是 Red Hat 的社区版本，软件版本都比较新，Fedora 31 现在最新的 OpenCV 版本是 3.4.6，可以通过下列命令直接安装。
 </p>
@@ -379,10 +376,9 @@ CentOS 系统的话把 <code>dnf</code> 换成 <code>yum</code> 就行，CentOS 
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgebb56a1" class="outline-3">
-<h3 id="orgebb56a1"><a href="20220819-macos.html#ID-cfd1e009-299d-4838-88af-ceadd998a30f">macOS</a></h3>
-<div class="outline-text-3" id="text-orgebb56a1">
+<div id="outline-container-orga681650" class="outline-3">
+<h3 id="orga681650"><a href="20220819-macos.html#ID-cfd1e009-299d-4838-88af-ceadd998a30f">macOS</a></h3>
+<div class="outline-text-3" id="text-orga681650">
 <p>
 未安装 brew 先安装 brew 包管理器，安装 brew，如果有梯子的话使用
 </p>
@@ -406,10 +402,9 @@ brew 会安装很多依赖，全部完成后就安装了 OpenCV，通过 brew �
 </p>
 </div>
 </div>
-
-<div id="outline-container-org3dc722e" class="outline-3">
-<h3 id="org3dc722e"><a href="20220815-windows.html#ID-d007eb95-2979-41c9-97de-af76c61ed952">Windows</a></h3>
-<div class="outline-text-3" id="text-org3dc722e">
+<div id="outline-container-orgfd89d3c" class="outline-3">
+<h3 id="orgfd89d3c"><a href="20220815-windows.html#ID-d007eb95-2979-41c9-97de-af76c61ed952">Windows</a></h3>
+<div class="outline-text-3" id="text-orgfd89d3c">
 <p>
 Windows 系统可以从官方下载编译后的压缩包，压缩包一般都有对应的 vc 版本。之后 Visual Studio 若要使用 OpenCV 的话还需要配置工程属性。
 </p>
@@ -455,7 +450,7 @@ Windows 系统可以从官方下载编译后的压缩包，压缩包一般都有
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

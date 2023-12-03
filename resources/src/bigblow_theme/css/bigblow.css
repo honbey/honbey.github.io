@@ -327,6 +327,7 @@ img {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    width: 100%;
 }
 
 .figure {
@@ -620,6 +621,7 @@ span.todo .selected {
     padding: 4px;
     position: fixed;
     width: auto;
+    white-space: pre;
 }
 
 #minitoc a {

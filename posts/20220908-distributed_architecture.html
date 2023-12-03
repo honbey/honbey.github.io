@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Distributed System</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,38 +27,38 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfdcaaf9">NPC</a></li>
-<li><a href="#orgf88f50f">分布式系统的一些概念</a>
+<li><a href="#org38ac907">NPC</a></li>
+<li><a href="#orgacae20f">分布式系统的一些概念</a>
 <ul>
-<li><a href="#ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">CAP 定理</a></li>
-<li><a href="#ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">BASE 理论</a></li>
-<li><a href="#ID-c279b82f-1eca-437f-a951-48a9be96cec4">PACELEC 定理</a></li>
-<li><a href="#org8082c3e">Paxos 共识算法</a></li>
-<li><a href="#ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</a></li>
-<li><a href="#ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">ZAB 协议</a></li>
-<li><a href="#ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">2PC 协议</a></li>
-<li><a href="#ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">3PC 协议</a></li>
-<li><a href="#ID-6eff229c-2a85-4619-b874-898ee209ff1e">Gossip 协议</a></li>
-<li><a href="#ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">Quorum NWR 算法</a></li>
-<li><a href="#ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">PBFT 拜占庭算法</a></li>
-<li><a href="#ID-290fd01a-474c-4934-90a6-a5cf33617838">PoW 算法</a></li>
-<li><a href="#ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">主备</a></li>
-<li><a href="#ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">主从</a>
+<li><a href="#orgd8267eb">CAP 定理</a></li>
+<li><a href="#orgc0546dd">BASE 理论</a></li>
+<li><a href="#org5067bf5">PACELEC 定理</a></li>
+<li><a href="#org828d7b9">Paxos 共识算法</a></li>
+<li><a href="#orgec73400">Raft 算法</a></li>
+<li><a href="#orgf415dae">ZAB 协议</a></li>
+<li><a href="#org4112f86">2PC 协议</a></li>
+<li><a href="#org83e4130">3PC 协议</a></li>
+<li><a href="#org3f3c0fe">Gossip 协议</a></li>
+<li><a href="#orgf0647e1">Quorum NWR 算法</a></li>
+<li><a href="#org7bd109d">PBFT 拜占庭算法</a></li>
+<li><a href="#org1fe80fc">PoW 算法</a></li>
+<li><a href="#org3aa9bdc">主备</a></li>
+<li><a href="#orge4803d1">主从</a>
 <ul>
-<li><a href="#org8fe8457">多主多从</a></li>
+<li><a href="#orgcdbc83b">多主多从</a></li>
 </ul>
 </li>
-<li><a href="#ID-4be9fb56-f87e-456f-b79d-175c03445d53">普通集群</a></li>
-<li><a href="#ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">数据分片</a></li>
-<li><a href="#org02f3f9c">一致性 Hash 算法</a></li>
+<li><a href="#org0480a31">普通集群</a></li>
+<li><a href="#org4033f81">数据分片</a></li>
+<li><a href="#orgf4401c3">一致性 Hash 算法</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgfdcaaf9" class="outline-2">
-<h2 id="orgfdcaaf9">NPC</h2>
-<div class="outline-text-2" id="text-orgfdcaaf9">
+<div id="outline-container-org38ac907" class="outline-2">
+<h2 id="org38ac907">NPC</h2>
+<div class="outline-text-2" id="text-org38ac907">
 <ul class="org-ul">
 <li>Network delay</li>
 <li>Process Pause</li>
@@ -62,10 +66,9 @@
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgf88f50f" class="outline-2">
-<h2 id="orgf88f50f">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
-<div class="outline-text-2" id="text-orgf88f50f">
+<div id="outline-container-orgacae20f" class="outline-2">
+<h2 id="orgacae20f">分布式系统的一些概念<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-orgacae20f">
 <p>
 分布式架构的两个方向：
 </p>
@@ -130,10 +133,9 @@ Checksum ，校验。
 Bloom Filter ，布隆过滤器：隆过滤器由一个长度为 m 比特的位数组（bit array）与 k 个哈希函数（hash function）组成的数据结构。原理是当一个元素被加入集合时，通过 K 个散列函数将这个元素映射成一个位数组中的 K 个点，把它们置为 1。检索时，我们只要看看这些点是不是都是 1 就大约知道集合中有没有它了，也就是说，如果这些点有任何一个 0 ，则被检元素 <b>一定</b> 不在；如果都是 1 ，则被检元素很 <b><b>可能</b></b> 在。
 </p>
 </div>
-
-<div id="outline-container-ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e" class="outline-3">
-<h3 id="ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">CAP 定理</h3>
-<div class="outline-text-3" id="text-ID-4805bd6b-4fc6-4ec7-b998-8800b6b6ce7e">
+<div id="outline-container-orgd8267eb" class="outline-3">
+<h3 id="orgd8267eb">CAP 定理</h3>
+<div class="outline-text-3" id="text-orgd8267eb">
 <p>
 CAP 定理指出，分布式系统 不可能 同时提供下面三个要求：
 </p>
@@ -144,9 +146,9 @@ CAP 定理指出，分布式系统 不可能 同时提供下面三个要求：
 </ul>
 </div>
 </div>
-<div id="outline-container-ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe" class="outline-3">
-<h3 id="ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">BASE 理论</h3>
-<div class="outline-text-3" id="text-ID-4ec147f7-0882-47b4-8277-c05d4d5b85fe">
+<div id="outline-container-orgc0546dd" class="outline-3">
+<h3 id="orgc0546dd">BASE 理论</h3>
+<div class="outline-text-3" id="text-orgc0546dd">
 <p>
 BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追求最终一致性
 </p>
@@ -157,9 +159,9 @@ BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追�
 </ul>
 </div>
 </div>
-<div id="outline-container-ID-c279b82f-1eca-437f-a951-48a9be96cec4" class="outline-3">
-<h3 id="ID-c279b82f-1eca-437f-a951-48a9be96cec4">PACELEC 定理<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-ID-c279b82f-1eca-437f-a951-48a9be96cec4">
+<div id="outline-container-org5067bf5" class="outline-3">
+<h3 id="org5067bf5">PACELEC 定理<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org5067bf5">
 <p>
 如果有一个分区（&rsquo;P&rsquo;），分布式系统可以在可用性和一致性（即 &rsquo;A&rsquo; 和 &rsquo;C&rsquo;）之间进行权衡；
 </p>
@@ -169,9 +171,9 @@ BASE 理论作为 CAP 的延伸，其核心特点在于放弃强一致性，追�
 </p>
 </div>
 </div>
-<div id="outline-container-org8082c3e" class="outline-3">
-<h3 id="org8082c3e">Paxos 共识算法</h3>
-<div class="outline-text-3" id="text-org8082c3e">
+<div id="outline-container-org828d7b9" class="outline-3">
+<h3 id="org828d7b9">Paxos 共识算法</h3>
+<div class="outline-text-3" id="text-org828d7b9">
 <p>
 Paxos 算法解决的问题是分布式共识性问题，即一个分布式系统中的各个进程如何就某个值（决议）通过共识达成一致
 </p>
@@ -195,9 +197,9 @@ Paxos 算法解决的问题是分布式共识性问题，即一个分布式系�
 </ol>
 </div>
 </div>
-<div id="outline-container-ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60" class="outline-3">
-<h3 id="ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">Raft 算法</h3>
-<div class="outline-text-3" id="text-ID-d9245f65-7046-42d9-b6b7-ca5bcc5cfb60">
+<div id="outline-container-orgec73400" class="outline-3">
+<h3 id="orgec73400">Raft 算法</h3>
+<div class="outline-text-3" id="text-orgec73400">
 <p>
 共识算法的一种。
 </p>
@@ -220,9 +222,9 @@ Paxos 算法解决的问题是分布式共识性问题，即一个分布式系�
 </ol>
 </div>
 </div>
-<div id="outline-container-ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f" class="outline-3">
-<h3 id="ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">ZAB 协议</h3>
-<div class="outline-text-3" id="text-ID-c3d9bf23-80d6-4df9-8c8a-c6fd982b0e0f">
+<div id="outline-container-orgf415dae" class="outline-3">
+<h3 id="orgf415dae">ZAB 协议</h3>
+<div class="outline-text-3" id="text-orgf415dae">
 <p>
 ZAB (Zookeeper Atomic Broadcast) 协议是为分布式协调服务 ZooKeeper 专门设计的一种支持崩溃恢复的一致性协议，基于该协议，ZooKeeper 实现了一种 主从模式的系统架构来保持集群中各个副本之间的数据一致性<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>。其核心思想是 Leader 再接受到事务请求之后，通过给 Follower，当半数以上的 Follower 返回 ACK 之后，Leader 提交提案，并向 Follower 发送 commit 信息。
 </p>
@@ -251,9 +253,9 @@ ZAB (Zookeeper Atomic Broadcast) 协议是为分布式协调服务 ZooKeeper 专
 </ul>
 </div>
 </div>
-<div id="outline-container-ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02" class="outline-3">
-<h3 id="ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">2PC 协议</h3>
-<div class="outline-text-3" id="text-ID-3bb5b0f5-45d7-4b20-bd3b-c2354d4c7e02">
+<div id="outline-container-org4112f86" class="outline-3">
+<h3 id="org4112f86">2PC 协议</h3>
+<div class="outline-text-3" id="text-org4112f86">
 <p>
 Two-Phase Commit Protocol，两阶段提交协议，主要是为了解决强一致性，中心化的强一致性协议。
 </p>
@@ -280,9 +282,9 @@ Two-Phase Commit Protocol，两阶段提交协议，主要是为了解决强一�
 </p>
 </div>
 </div>
-<div id="outline-container-ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8" class="outline-3">
-<h3 id="ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">3PC 协议</h3>
-<div class="outline-text-3" id="text-ID-5a6d2b67-61b7-4be3-baf2-65d4f17557d8">
+<div id="outline-container-org83e4130" class="outline-3">
+<h3 id="org83e4130">3PC 协议</h3>
+<div class="outline-text-3" id="text-org83e4130">
 <p>
 在两阶段的基础上进行扩展，将第一阶段划分两部，cancommit + precommit，第三阶段则为 docommit<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup> 。
 </p>
@@ -299,10 +301,9 @@ Two-Phase Commit Protocol，两阶段提交协议，主要是为了解决强一�
 </p>
 </div>
 </div>
-
-<div id="outline-container-ID-6eff229c-2a85-4619-b874-898ee209ff1e" class="outline-3">
-<h3 id="ID-6eff229c-2a85-4619-b874-898ee209ff1e">Gossip 协议</h3>
-<div class="outline-text-3" id="text-ID-6eff229c-2a85-4619-b874-898ee209ff1e">
+<div id="outline-container-org3f3c0fe" class="outline-3">
+<h3 id="org3f3c0fe">Gossip 协议</h3>
+<div class="outline-text-3" id="text-org3f3c0fe">
 <p>
 消息同步协议。
 Gossip 协议，顾名思义，就像流言蜚语一样，利用一种随机、带有传染性的方式，将信息传播到整个网络中，并在一定时间内，使得系统内的所有节点数据一致。Gossip 协议通过上面的特性，可以保证系统能在极端情况下（比如集群中只有一个节点在运行）也能运行。<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>
@@ -319,10 +320,9 @@ Gossip 协议，顾名思义，就像流言蜚语一样，利用一种随机、�
 </ol>
 </div>
 </div>
-
-<div id="outline-container-ID-adf2a647-ac1f-492f-ada6-f2e89e98029f" class="outline-3">
-<h3 id="ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">Quorum NWR 算法</h3>
-<div class="outline-text-3" id="text-ID-adf2a647-ac1f-492f-ada6-f2e89e98029f">
+<div id="outline-container-orgf0647e1" class="outline-3">
+<h3 id="orgf0647e1">Quorum NWR 算法</h3>
+<div class="outline-text-3" id="text-orgf0647e1">
 <p>
 用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup>
 </p>
@@ -342,9 +342,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </p>
 </div>
 </div>
-<div id="outline-container-ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2" class="outline-3">
-<h3 id="ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">PBFT 拜占庭算法</h3>
-<div class="outline-text-3" id="text-ID-8ba44e2f-9bfe-4746-8b98-511d7b722ad2">
+<div id="outline-container-org7bd109d" class="outline-3">
+<h3 id="org7bd109d">PBFT 拜占庭算法</h3>
+<div class="outline-text-3" id="text-org7bd109d">
 <p>
 拜占庭算法主要针对的是分布式场景下无响应，或者响应不可信的情况下的容错问题。
 </p>
@@ -364,9 +364,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </p>
 </div>
 </div>
-<div id="outline-container-ID-290fd01a-474c-4934-90a6-a5cf33617838" class="outline-3">
-<h3 id="ID-290fd01a-474c-4934-90a6-a5cf33617838">PoW 算法</h3>
-<div class="outline-text-3" id="text-ID-290fd01a-474c-4934-90a6-a5cf33617838">
+<div id="outline-container-org1fe80fc" class="outline-3">
+<h3 id="org1fe80fc">PoW 算法</h3>
+<div class="outline-text-3" id="text-org1fe80fc">
 <p>
 工作量证明 (Proof Of Work，简称 PoW)，同样应用于分布式下的一致性场景，区别于前面的 Raft, PBFT, Paxos 采用投票机制达成共识方案，PoW 采用工作量证明。客户端需要做一定难度的工作才能得出一个结果，验证方却很容易通过结果来检查出客户端是不是做了相应的工作，通过消耗一定工作量，增加消息伪造的成本。
 </p>
@@ -376,9 +376,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </p>
 </div>
 </div>
-<div id="outline-container-ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3" class="outline-3">
-<h3 id="ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">主备</h3>
-<div class="outline-text-3" id="text-ID-6e9681c9-87f4-4d69-8a03-016ada0e60f3">
+<div id="outline-container-org3aa9bdc" class="outline-3">
+<h3 id="org3aa9bdc">主备</h3>
+<div class="outline-text-3" id="text-org3aa9bdc">
 <p>
 功能一致，平常由 主 提供服务，主 宕机或进程等挂掉后，备 由待机状态快速转为服务状态。
 </p>
@@ -392,10 +392,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </ul>
 </div>
 </div>
-
-<div id="outline-container-ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c" class="outline-3">
-<h3 id="ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">主从</h3>
-<div class="outline-text-3" id="text-ID-a384dc7a-3510-4720-8e8b-b0b5abbaf94c">
+<div id="outline-container-orge4803d1" class="outline-3">
+<h3 id="orge4803d1">主从</h3>
+<div class="outline-text-3" id="text-orge4803d1">
 <p>
 主从一般又叫做读写分离，主提供读写能力，而从则只提供读能力。
 </p>
@@ -426,19 +425,18 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 <li>主挂之后如何选主</li>
 </ul>
 </div>
-
-<div id="outline-container-org8fe8457" class="outline-4">
-<h4 id="org8fe8457">多主多从</h4>
-<div class="outline-text-4" id="text-org8fe8457">
+<div id="outline-container-orgcdbc83b" class="outline-4">
+<h4 id="orgcdbc83b">多主多从</h4>
+<div class="outline-text-4" id="text-orgcdbc83b">
 <p>
 着重考虑主之间的数据一致性问题。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-ID-4be9fb56-f87e-456f-b79d-175c03445d53" class="outline-3">
-<h3 id="ID-4be9fb56-f87e-456f-b79d-175c03445d53">普通集群</h3>
-<div class="outline-text-3" id="text-ID-4be9fb56-f87e-456f-b79d-175c03445d53">
+<div id="outline-container-org0480a31" class="outline-3">
+<h3 id="org0480a31">普通集群</h3>
+<div class="outline-text-3" id="text-org0480a31">
 <p>
 无主节点，集群中所有的应用职能对等，没有主次之分，一个请求可以被集群中任意一个服务响应。
 </p>
@@ -452,9 +450,9 @@ Quorum NWR 算法要求每个数据拷贝对象 都可以投 1 票，而每一�
 </ul>
 </div>
 </div>
-<div id="outline-container-ID-567df9e8-cd39-48a7-95cc-d7744a3234b7" class="outline-3">
-<h3 id="ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">数据分片</h3>
-<div class="outline-text-3" id="text-ID-567df9e8-cd39-48a7-95cc-d7744a3234b7">
+<div id="outline-container-org4033f81" class="outline-3">
+<h3 id="org4033f81">数据分片</h3>
+<div class="outline-text-3" id="text-org4033f81">
 <p>
 按照数据拆分的思路来处理，将全量的数据，通过一定规则拆分到多个系统中，每个系统包含部分的数据，减小单个节点的压力，主要用于解决数据量大的场景。
 </p>
@@ -464,9 +462,9 @@ ES 的索引分片。
 </p>
 </div>
 </div>
-<div id="outline-container-org02f3f9c" class="outline-3">
-<h3 id="org02f3f9c">一致性 Hash 算法</h3>
-<div class="outline-text-3" id="text-org02f3f9c">
+<div id="outline-container-orgf4401c3" class="outline-3">
+<h3 id="orgf4401c3">一致性 Hash 算法</h3>
+<div class="outline-text-3" id="text-orgf4401c3">
 <p>
 通过对数据项的键进行哈希处理映射其在环上的位置，然后顺时针遍历环以查找位置大于该项位置的第一个节点，将每个由键标识的数据分配给 hash 环中的一个节点，节点添加删除，对整个集群而言，仅影响其直接邻居，其他节点不受影响。
 </p>
@@ -531,7 +529,7 @@ ES 的索引分片。
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

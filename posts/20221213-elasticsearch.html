@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>elasticsearch</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,36 +27,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfa6b16d">ELK Introduction</a></li>
-<li><a href="#org186f1b7">Kibana</a>
+<li><a href="#org9c27d49">ELK Introduction</a></li>
+<li><a href="#org4a02cd0">Kibana</a>
 <ul>
-<li><a href="#org2ef8423">查询集群（cluster）情况</a></li>
-<li><a href="#orgcb6bebe">查询</a></li>
-<li><a href="#ID-9042c157-06be-4891-8b8b-5802a2598d3e">DSL 查询</a></li>
-<li><a href="#orgb270316">标准查询</a></li>
-<li><a href="#org4538dbb">单词查询与过滤</a></li>
-<li><a href="#org29975a1">组合条件查询与过滤</a></li>
-<li><a href="#org69894c8">范围查询与过滤</a></li>
-<li><a href="#orgce644c1">存在和损失过滤器</a></li>
-<li><a href="#orgfc0674a">前匹配查询</a></li>
-<li><a href="#org5d733b6">通配符查询</a></li>
-<li><a href="#orgd6bdcac">最佳字段</a></li>
-<li><a href="#org2e032e9">全文搜索</a>
+<li><a href="#org42e7144">查询集群（cluster）情况</a></li>
+<li><a href="#org2f36b5c">查询</a></li>
+<li><a href="#org531b16b">DSL 查询</a></li>
+<li><a href="#org9105938">标准查询</a></li>
+<li><a href="#org243ed36">单词查询与过滤</a></li>
+<li><a href="#org27c8358">组合条件查询与过滤</a></li>
+<li><a href="#orgb6c1c32">范围查询与过滤</a></li>
+<li><a href="#orge0541db">存在和损失过滤器</a></li>
+<li><a href="#org3f9f289">前匹配查询</a></li>
+<li><a href="#org13e30a3">通配符查询</a></li>
+<li><a href="#org6cb3fe8">最佳字段</a></li>
+<li><a href="#orgd0d623d">全文搜索</a>
 <ul>
-<li><a href="#org3307ed0">match</a></li>
-<li><a href="#org72a386b">match_phrase</a>
+<li><a href="#orgec975ca">match</a></li>
+<li><a href="#orgb1fbc9c">match_phrase</a>
 <ul>
-<li><a href="#org0eef4b4">match_phrase 和 regexp</a></li>
+<li><a href="#orge2d7e41">match_phrase 和 regexp</a></li>
 </ul>
 </li>
-<li><a href="#org6ca9c1c">highlight</a></li>
+<li><a href="#orgd9e343a">highlight</a></li>
 </ul>
 </li>
-<li><a href="#org3dabf6f">结构化搜索</a></li>
-<li><a href="#org9c7a02e">聚合</a>
+<li><a href="#orgfa07d98">结构化搜索</a></li>
+<li><a href="#org49d938e">聚合</a>
 <ul>
-<li><a href="#orgd1ac443">Example</a></li>
-<li><a href="#org7a143cf">Data Histogram 聚合</a></li>
+<li><a href="#orge4238a8">Example</a></li>
+<li><a href="#org8523858">Data Histogram 聚合</a></li>
 </ul>
 </li>
 </ul>
@@ -63,23 +67,21 @@
 <p>
 基于反向索引的文档型数据库，主要用于日志查询。
 </p>
-
-<div id="outline-container-orgfa6b16d" class="outline-2">
-<h2 id="orgfa6b16d">ELK Introduction</h2>
-<div class="outline-text-2" id="text-orgfa6b16d">
+<div id="outline-container-org9c27d49" class="outline-2">
+<h2 id="org9c27d49">ELK Introduction</h2>
+<div class="outline-text-2" id="text-org9c27d49">
 <p>
 Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据进行可视化。
 </p>
 </div>
 </div>
-
-<div id="outline-container-org186f1b7" class="outline-2">
-<h2 id="org186f1b7">Kibana</h2>
-<div class="outline-text-2" id="text-org186f1b7">
+<div id="outline-container-org4a02cd0" class="outline-2">
+<h2 id="org4a02cd0">Kibana</h2>
+<div class="outline-text-2" id="text-org4a02cd0">
 </div>
-<div id="outline-container-org2ef8423" class="outline-3">
-<h3 id="org2ef8423">查询集群（cluster）情况</h3>
-<div class="outline-text-3" id="text-org2ef8423">
+<div id="outline-container-org42e7144" class="outline-3">
+<h3 id="org42e7144">查询集群（cluster）情况</h3>
+<div class="outline-text-3" id="text-org42e7144">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">&#26816;&#26597;&#32676;&#38598;&#36816;&#34892;&#29366;&#20917;</span>
 GET /_cat/health?v
@@ -97,10 +99,9 @@ GET /_cat/indices?v
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgcb6bebe" class="outline-3">
-<h3 id="orgcb6bebe">查询</h3>
-<div class="outline-text-3" id="text-orgcb6bebe">
+<div id="outline-container-org2f36b5c" class="outline-3">
+<h3 id="org2f36b5c">查询</h3>
+<div class="outline-text-3" id="text-org2f36b5c">
 <div class="org-src-container">
 <pre class="src src-nil">GET [index&lt;regex&gt;]/_search
 </pre>
@@ -153,10 +154,9 @@ _all_ 字段包含 aggregations 或者 geo
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-9042c157-06be-4891-8b8b-5802a2598d3e" class="outline-3">
-<h3 id="ID-9042c157-06be-4891-8b8b-5802a2598d3e">DSL 查询</h3>
-<div class="outline-text-3" id="text-ID-9042c157-06be-4891-8b8b-5802a2598d3e">
+<div id="outline-container-org531b16b" class="outline-3">
+<h3 id="org531b16b">DSL 查询</h3>
+<div class="outline-text-3" id="text-org531b16b">
 <ul class="org-ul">
 <li>排序
 <ul class="org-ul">
@@ -180,9 +180,9 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb270316" class="outline-3">
-<h3 id="orgb270316">标准查询</h3>
-<div class="outline-text-3" id="text-orgb270316">
+<div id="outline-container-org9105938" class="outline-3">
+<h3 id="org9105938">标准查询</h3>
+<div class="outline-text-3" id="text-org9105938">
 <ul class="org-ul">
 <li>match          全文匹配或精确匹配</li>
 <li>match_all      匹配所有</li>
@@ -190,20 +190,18 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org4538dbb" class="outline-3">
-<h3 id="org4538dbb">单词查询与过滤</h3>
-<div class="outline-text-3" id="text-org4538dbb">
+<div id="outline-container-org243ed36" class="outline-3">
+<h3 id="org243ed36">单词查询与过滤</h3>
+<div class="outline-text-3" id="text-org243ed36">
 <ul class="org-ul">
 <li>term  查询单值</li>
 <li>terms 查询多值</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org29975a1" class="outline-3">
-<h3 id="org29975a1">组合条件查询与过滤</h3>
-<div class="outline-text-3" id="text-org29975a1">
+<div id="outline-container-org27c8358" class="outline-3">
+<h3 id="org27c8358">组合条件查询与过滤</h3>
+<div class="outline-text-3" id="text-org27c8358">
 <ul class="org-ul">
 <li>bool
 <ul class="org-ul">
@@ -215,10 +213,9 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org69894c8" class="outline-3">
-<h3 id="org69894c8">范围查询与过滤</h3>
-<div class="outline-text-3" id="text-org69894c8">
+<div id="outline-container-orgb6c1c32" class="outline-3">
+<h3 id="orgb6c1c32">范围查询与过滤</h3>
+<div class="outline-text-3" id="text-orgb6c1c32">
 <ul class="org-ul">
 <li>range
 <ul class="org-ul">
@@ -230,10 +227,9 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgce644c1" class="outline-3">
-<h3 id="orgce644c1">存在和损失过滤器</h3>
-<div class="outline-text-3" id="text-orgce644c1">
+<div id="outline-container-orge0541db" class="outline-3">
+<h3 id="orge0541db">存在和损失过滤器</h3>
+<div class="outline-text-3" id="text-orge0541db">
 <ul class="org-ul">
 <li>filter
 <ul class="org-ul">
@@ -243,19 +239,17 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgfc0674a" class="outline-3">
-<h3 id="orgfc0674a">前匹配查询</h3>
-<div class="outline-text-3" id="text-orgfc0674a">
+<div id="outline-container-org3f9f289" class="outline-3">
+<h3 id="org3f9f289">前匹配查询</h3>
+<div class="outline-text-3" id="text-org3f9f289">
 <ul class="org-ul">
 <li>prefix</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org5d733b6" class="outline-3">
-<h3 id="org5d733b6">通配符查询</h3>
-<div class="outline-text-3" id="text-org5d733b6">
+<div id="outline-container-org13e30a3" class="outline-3">
+<h3 id="org13e30a3">通配符查询</h3>
+<div class="outline-text-3" id="text-org13e30a3">
 <ul class="org-ul">
 <li>wildcard
 <ul class="org-ul">
@@ -265,26 +259,26 @@ _all_ 字段包含 aggregations 或者 geo
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd6bdcac" class="outline-3">
-<h3 id="orgd6bdcac">最佳字段</h3>
-<div class="outline-text-3" id="text-orgd6bdcac">
+<div id="outline-container-org6cb3fe8" class="outline-3">
+<h3 id="org6cb3fe8">最佳字段</h3>
+<div class="outline-text-3" id="text-org6cb3fe8">
 <ul class="org-ul">
 <li><p>
 dis_max
 </p>
 <div class="org-src-container">
-<pre class="src src-json"><span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"dis_max"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"queries"</span>: <span style="color: #333333; background-color: #FFFFFF;">[</span>
-        <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span><span style="color: #0000FF;">"title"</span>: <span style="color: #008000;">"Brown fox"</span><span style="color: #333333; background-color: #FFFFFF;">}</span>,
-          <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span><span style="color: #0000FF;">"body"</span>: <span style="color: #008000;">"Brown fox"</span><span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">]</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+<pre class="src src-json">{
+  "query": {
+    "dis_max": {
+      "queries": [
+        {
+          "match": {"title": "Brown fox"},
+          "match": {"body": "Brown fox"}
+        }
+      ]
+    }
+  }
+}
 </pre>
 </div></li>
 </ul>
@@ -311,10 +305,9 @@ multi_match 有 best_fields, most_fields, cross_fields 最佳字段 (default)，
 </p>
 </div>
 </div>
-
-<div id="outline-container-org2e032e9" class="outline-3">
-<h3 id="org2e032e9">全文搜索</h3>
-<div class="outline-text-3" id="text-org2e032e9">
+<div id="outline-container-orgd0d623d" class="outline-3">
+<h3 id="orgd0d623d">全文搜索</h3>
+<div class="outline-text-3" id="text-orgd0d623d">
 <p>
 查询的两个重要方面：相关性和分析
 </p>
@@ -333,17 +326,17 @@ match 的步骤如下：
 参数：
 </p>
 <div class="org-src-container">
-<pre class="src src-json"><span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"title"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"query"</span>: <span style="color: #008000;">"abc def"</span>,
-        <span style="color: #0000FF;">"operator"</span>: <span style="color: #008000;">"and"</span>,
-        <span style="color: #0000FF;">"minimum_should_match"</span>: <span style="color: #008000;">"75%"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+<pre class="src src-json">{
+  "query": {
+    "match": {
+      "title": {
+        "query": "abc def",
+        "operator": "and",
+        "minimum_should_match": "75%"
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -351,20 +344,18 @@ match 的步骤如下：
 minimum_should_match 还可以限定 必须 满足 should 的条件数，boost 参数可以提高 should 条件的重要性
 </p>
 </div>
-
-
-<div id="outline-container-org3307ed0" class="outline-4">
-<h4 id="org3307ed0">match</h4>
-<div class="outline-text-4" id="text-org3307ed0">
+<div id="outline-container-orgec975ca" class="outline-4">
+<h4 id="orgec975ca">match</h4>
+<div class="outline-text-4" id="text-orgec975ca">
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"abc def"</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "query": {
+    "match": {
+      "key": "abc def"
+    }
+  }
+}
 </pre>
 </div>
 
@@ -373,18 +364,16 @@ minimum_should_match 还可以限定 必须 满足 should 的条件数，boost �
 </p>
 </div>
 </div>
-
-<div id="outline-container-org72a386b" class="outline-4">
-<h4 id="org72a386b">match_phrase</h4>
-<div class="outline-text-4" id="text-org72a386b">
+<div id="outline-container-orgb1fbc9c" class="outline-4">
+<h4 id="orgb1fbc9c">match_phrase</h4>
+<div class="outline-text-4" id="text-orgb1fbc9c">
 <p>
 结果会匹配完整的 <code>abc def</code> ，也包含 <code>xxx abc def xxx</code> 的情况
 </p>
 </div>
-
-<div id="outline-container-org0eef4b4" class="outline-5">
-<h5 id="org0eef4b4">match_phrase 和 regexp</h5>
-<div class="outline-text-5" id="text-org0eef4b4">
+<div id="outline-container-orge2d7e41" class="outline-5">
+<h5 id="orge2d7e41">match_phrase 和 regexp</h5>
+<div class="outline-text-5" id="text-orge2d7e41">
 <p>
 regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
 </p>
@@ -395,53 +384,51 @@ regexp 针对的是单个词项；match_phrase 针对多个词项的相对位置
 </div>
 </div>
 </div>
-
-<div id="outline-container-org6ca9c1c" class="outline-4">
-<h4 id="org6ca9c1c">highlight</h4>
-<div class="outline-text-4" id="text-org6ca9c1c">
+<div id="outline-container-orgd9e343a" class="outline-4">
+<h4 id="orgd9e343a">highlight</h4>
+<div class="outline-text-4" id="text-orgd9e343a">
 <p>
 高亮某个字段 (key)
 </p>
 
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"match"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"abc def"</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-  <span style="color: #0000FF;">"highlight"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"field"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"key"</span>: <span style="color: #333333; background-color: #FFFFFF;">{}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "query": {
+    "match": {
+      "key": "abc def"
+    }
+  },
+  "highlight": {
+    "field": {
+      "key": {}
+    }
+  }
+}
 </pre>
 </div>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org3dabf6f" class="outline-3">
-<h3 id="org3dabf6f">结构化搜索</h3>
-<div class="outline-text-3" id="text-org3dabf6f">
+<div id="outline-container-orgfa07d98" class="outline-3">
+<h3 id="orgfa07d98">结构化搜索</h3>
+<div class="outline-text-3" id="text-orgfa07d98">
 <p>
 term 精确值查询：
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"query"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"constant_score"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"filter"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"term"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"key"</span>: <span style="color: #008000;">"value"</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "term": {
+          "key": "value"
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -450,18 +437,17 @@ term 精确值查询：
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET log/_analyze
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"key"</span>,
-  <span style="color: #0000FF;">"text"</span>: <span style="color: #008000;">"value"</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "field": "key",
+  "text": "value"
+}
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9c7a02e" class="outline-3">
-<h3 id="org9c7a02e">聚合</h3>
-<div class="outline-text-3" id="text-org9c7a02e">
+<div id="outline-container-org49d938e" class="outline-3">
+<h3 id="org49d938e">聚合</h3>
+<div class="outline-text-3" id="text-org49d938e">
 <p>
 桶   buckets 满足特定条件的集合
 </p>
@@ -485,31 +471,30 @@ COUNT(color)   -&gt; 指标
 GROUP BY color -&gt; 桶
 </p>
 </div>
-
-<div id="outline-container-orgd1ac443" class="outline-4">
-<h4 id="orgd1ac443">Example</h4>
-<div class="outline-text-4" id="text-orgd1ac443">
+<div id="outline-container-orge4238a8" class="outline-4">
+<h4 id="orge4238a8">Example</h4>
+<div class="outline-text-4" id="text-orge4238a8">
 <p>
 查询特定兴趣爱好员工平均年龄：
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET employee/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"all_interests"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"interests"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"average_age"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"age"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "aggs": {
+    "all_interests": {
+      "terms": {
+        "field": "interests"
+      },
+      "aggs": {
+        "average_age": {
+          "avg": {
+            "field": "age"
+          }
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -518,23 +503,23 @@ GROUP BY color -&gt; 桶
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET cars/transactions/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
-  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "size": 0,
+  "aggs": {
+    "colors": {
+      "terms": {
+        "field": "color"
+      },
+      "aggs": {
+        "average_price": {
+          "avg": {
+            "field": "price"
+          }
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -543,28 +528,28 @@ GROUP BY color -&gt; 桶
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET cars/transactions/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
-  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-        <span style="color: #0000FF;">"make"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"make"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "size": 0,
+  "aggs": {
+    "colors": {
+      "terms": {
+        "field": "color"
+      },
+      "aggs": {
+        "average_price": {
+          "avg": {
+            "field": "price"
+          }
+        },
+        "make": {
+          "terms": {
+            "field": "make"
+          }
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -573,40 +558,40 @@ GROUP BY color -&gt; 桶
 </p>
 <div class="org-src-container">
 <pre class="src src-json">GET cars/transactions/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
-  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"colors"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"color"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-      <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"average_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"avg"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-        <span style="color: #0000FF;">"make"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-          <span style="color: #0000FF;">"terms"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"make"</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-          <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-            <span style="color: #0000FF;">"min_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-              <span style="color: #0000FF;">"min"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-                <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
-              <span style="color: #333333; background-color: #FFFFFF;">}</span>
-            <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-            <span style="color: #0000FF;">"max_price"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-              <span style="color: #0000FF;">"max"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-                <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"price"</span>
-              <span style="color: #333333; background-color: #FFFFFF;">}</span>
-            <span style="color: #333333; background-color: #FFFFFF;">}</span>
-          <span style="color: #333333; background-color: #FFFFFF;">}</span>
-        <span style="color: #333333; background-color: #FFFFFF;">}</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "size": 0,
+  "aggs": {
+    "colors": {
+      "terms": {
+        "field": "color"
+      },
+      "aggs": {
+        "average_price": {
+          "avg": {
+            "field": "price"
+          }
+        },
+        "make": {
+          "terms": {
+            "field": "make"
+          },
+          "aggs": {
+            "min_price": {
+              "min": {
+                "field": "price"
+              }
+            },
+            "max_price": {
+              "max": {
+                "field": "price"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -621,24 +606,23 @@ extended_stats 扩展度量，统计的基础上还增加了多种复杂的统�
 </blockquote>
 </div>
 </div>
-
-<div id="outline-container-org7a143cf" class="outline-4">
-<h4 id="org7a143cf">Data Histogram 聚合</h4>
-<div class="outline-text-4" id="text-org7a143cf">
+<div id="outline-container-org8523858" class="outline-4">
+<h4 id="org8523858">Data Histogram 聚合</h4>
+<div class="outline-text-4" id="text-org8523858">
 <div class="org-src-container">
 <pre class="src src-json">GET log/_search
-<span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"size"</span>: <span style="color: #D0372D;">0</span>,
-  <span style="color: #0000FF;">"aggs"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"name"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"date_histogram"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-        <span style="color: #0000FF;">"field"</span>: <span style="color: #008000;">"@timestamp"</span>,
-        <span style="color: #0000FF;">"fixed_interval"</span>: <span style="color: #008000;">"1h"</span>,
-        <span style="color: #0000FF;">"format"</span>: <span style="color: #008000;">"yyyy-MM-dd hh:mm:ss"</span>
-      <span style="color: #333333; background-color: #FFFFFF;">}</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+{
+  "size": 0,
+  "aggs": {
+    "name": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "fixed_interval": "1h",
+        "format": "yyyy-MM-dd hh:mm:ss"
+      }
+    }
+  }
+}
 </pre>
 </div>
 
@@ -664,7 +648,7 @@ interval: year, quarter, month, &#x2026;
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

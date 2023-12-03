@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Union Find</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -55,19 +59,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4">Quick Find</a>
+<li><a href="#org773cd44">Quick Find</a>
 <ul>
-<li><a href="#org446b24f">分析</a></li>
+<li><a href="#orge63ecc0">分析</a></li>
 </ul>
 </li>
-<li><a href="#ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f">Quick Union</a>
+<li><a href="#orgb12e82c">Quick Union</a>
 <ul>
-<li><a href="#org5d3ceb5">分析</a></li>
+<li><a href="#org2bd3577">分析</a></li>
 </ul>
 </li>
-<li><a href="#ID-437552bc-25e7-425c-8090-854a9c6f7e67">Weighted Union Find</a>
+<li><a href="#orgecc3d18">Weighted Union Find</a>
 <ul>
-<li><a href="#org20152aa">分析</a></li>
+<li><a href="#org9eba8fe">分析</a></li>
 </ul>
 </li>
 </ul>
@@ -123,10 +127,9 @@ main function:
 }
 </pre>
 </div>
-
-<div id="outline-container-ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4" class="outline-2">
-<h2 id="ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4">Quick Find</h2>
-<div class="outline-text-2" id="text-ID-e46914e5-f0cb-47a1-a613-3b394bdeb0f4">
+<div id="outline-container-org773cd44" class="outline-2">
+<h2 id="org773cd44">Quick Find</h2>
+<div class="outline-text-2" id="text-org773cd44">
 <p>
 利用传递性，若 4 与 3 相连，3 又与 8 相连，那么 4 一定与 8 相连。
 </p>
@@ -151,10 +154,9 @@ main function:
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org446b24f" class="outline-3">
-<h3 id="org446b24f">分析</h3>
-<div class="outline-text-3" id="text-org446b24f">
+<div id="outline-container-orge63ecc0" class="outline-3">
+<h3 id="orge63ecc0">分析</h3>
+<div class="outline-text-3" id="text-orge63ecc0">
 <p>
 对于每一对输入，~Union()~ 都需要扫描整个 <code>id_</code> 数组。
 </p>
@@ -170,10 +172,9 @@ main function:
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f" class="outline-2">
-<h2 id="ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f">Quick Union</h2>
-<div class="outline-text-2" id="text-ID-7bc8d9f3-2dbe-4f3d-9e88-ae11f0f3429f">
+<div id="outline-container-orgb12e82c" class="outline-2">
+<h2 id="orgb12e82c">Quick Union</h2>
+<div class="outline-text-2" id="text-orgb12e82c">
 <p>
 利用树来表示触点间的关系。
 </p>
@@ -196,10 +197,9 @@ main function:
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org5d3ceb5" class="outline-3">
-<h3 id="org5d3ceb5">分析</h3>
-<div class="outline-text-3" id="text-org5d3ceb5">
+<div id="outline-container-org2bd3577" class="outline-3">
+<h3 id="org2bd3577">分析</h3>
+<div class="outline-text-3" id="text-org2bd3577">
 <p>
 <code>Find()</code> 方法访问数组的次数为 1 加上给定触点所对应的节点的深度的两倍。 <code>Union()</code> 和 <code>Connected()</code> 访问数组的次数为两次 <code>Find()</code> 操作（如果 <code>Union</code> 中给定的两个触点分别存在于不同的树中则还需要加 1）。
 </p>
@@ -215,10 +215,9 @@ main function:
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-437552bc-25e7-425c-8090-854a9c6f7e67" class="outline-2">
-<h2 id="ID-437552bc-25e7-425c-8090-854a9c6f7e67">Weighted Union Find</h2>
-<div class="outline-text-2" id="text-ID-437552bc-25e7-425c-8090-854a9c6f7e67">
+<div id="outline-container-orgecc3d18" class="outline-2">
+<h2 id="orgecc3d18">Weighted Union Find</h2>
+<div class="outline-text-2" id="text-orgecc3d18">
 <div class="org-src-container">
 <pre class="src src-cpp"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">UF</span> {
 <span style="color: #0000FF;">private</span>:
@@ -283,10 +282,9 @@ main function:
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org20152aa" class="outline-3">
-<h3 id="org20152aa">分析</h3>
-<div class="outline-text-3" id="text-org20152aa">
+<div id="outline-container-org9eba8fe" class="outline-3">
+<h3 id="org9eba8fe">分析</h3>
+<div class="outline-text-3" id="text-org9eba8fe">
 <p>
 对于 N 个触点，加权 quick union 算法构造的森林中的任意节点的深度最多为 \(\lg N\)。
 </p>
@@ -319,7 +317,7 @@ cell-probe 模型：
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nginx</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,62 +27,61 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</a>
+<li><a href="#orgd4216cb">Nginx</a>
 <ul>
-<li><a href="#orge613964">架构</a></li>
-<li><a href="#orgb8e3798">请求流程</a></li>
-<li><a href="#org375f47d">connection</a></li>
-<li><a href="#org01f1401">request</a></li>
-<li><a href="#orgded31cb">pipe</a></li>
-<li><a href="#org7c75eaa">lingering_close</a></li>
+<li><a href="#org62c720b">架构</a></li>
+<li><a href="#org1c60791">请求流程</a></li>
+<li><a href="#orgd7adc4c">connection</a></li>
+<li><a href="#org6b0f3a3">request</a></li>
+<li><a href="#orga4100cc">pipe</a></li>
+<li><a href="#orga394a36">lingering_close</a></li>
 </ul>
 </li>
-<li><a href="#ID-98bab153-5649-4610-8080-055b845a72a2">Data Structure</a>
+<li><a href="#orgf9d6277">Data Structure</a>
 <ul>
-<li><a href="#org12868bb">ngx_str_t</a></li>
-<li><a href="#org5af8471">ngx_pool_t</a></li>
-<li><a href="#org13ca70c">ngx_array_t</a></li>
-<li><a href="#orgc3e818e">ngx_hash_t</a></li>
-<li><a href="#org5b01b8d">ngx_chain_t</a></li>
-<li><a href="#org5d3ba05">ngx_buf_t</a></li>
-<li><a href="#orgd24ca52">ngx_list_t</a></li>
-<li><a href="#orgc029208">ngx_queue_t</a></li>
+<li><a href="#org36e5f54">ngx_str_t</a></li>
+<li><a href="#orgfe168e3">ngx_pool_t</a></li>
+<li><a href="#org826b748">ngx_array_t</a></li>
+<li><a href="#org4d99d6a">ngx_hash_t</a></li>
+<li><a href="#orgc34769d">ngx_chain_t</a></li>
+<li><a href="#org78fceaa">ngx_buf_t</a></li>
+<li><a href="#orgeb1bfce">ngx_list_t</a></li>
+<li><a href="#org347426d">ngx_queue_t</a></li>
 </ul>
 </li>
-<li><a href="#ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Configuration &amp; Directives</a>
+<li><a href="#orgb7bd568">Configuration &amp; Directives</a>
 <ul>
-<li><a href="#org0c498be">sendfile</a></li>
-<li><a href="#orgcdd30fc">tcp_nopush</a></li>
-<li><a href="#org65459e1">tcp_nodelay</a></li>
-<li><a href="#orgeda7252">worker_connections</a></li>
-<li><a href="#org33a3fa4">client_header_buffer_size</a></li>
-<li><a href="#org98c5de0">keepalive_timeout</a></li>
-<li><a href="#orgdce4774">large_client_header_buffers</a></li>
-<li><a href="#orga8e4d76">lingering_close</a></li>
-<li><a href="#orgfc2dced">lingering_timeout</a></li>
-<li><a href="#org3cfd907">access_log</a></li>
+<li><a href="#orgdc0f353">sendfile</a></li>
+<li><a href="#orgfc97983">tcp_nopush</a></li>
+<li><a href="#org262567c">tcp_nodelay</a></li>
+<li><a href="#orgd7ddb43">worker_connections</a></li>
+<li><a href="#orgc3feac7">client_header_buffer_size</a></li>
+<li><a href="#org8d623ee">keepalive_timeout</a></li>
+<li><a href="#orgf3b7c40">large_client_header_buffers</a></li>
+<li><a href="#org99251c6">lingering_close</a></li>
+<li><a href="#orgae7a995">lingering_timeout</a></li>
+<li><a href="#orge8818de">access_log</a></li>
 </ul>
 </li>
-<li><a href="#ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</a>
+<li><a href="#org8821947">Variables</a>
 <ul>
-<li><a href="#orgdd04f8a">upstream_response_length</a></li>
+<li><a href="#orgf8538f7">upstream_response_length</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-be569bdd-a489-4bd8-b266-4b253d21e532" class="outline-2">
-<h2 id="ID-be569bdd-a489-4bd8-b266-4b253d21e532">Nginx</h2>
-<div class="outline-text-2" id="text-ID-be569bdd-a489-4bd8-b266-4b253d21e532">
+<div id="outline-container-orgd4216cb" class="outline-2">
+<h2 id="orgd4216cb">Nginx</h2>
+<div class="outline-text-2" id="text-orgd4216cb">
 <p>
 Nginx<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 </p>
 
 <ul class="org-ul">
-<li><a href="#ID-98bab153-5649-4610-8080-055b845a72a2">Data Structure</a></li>
-<li><a href="#ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Directives</a></li>
-<li><a href="#ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</a></li>
+<li><a href="#orgf9d6277">Data Structure</a></li>
+<li><a href="#orgb7bd568">Directives</a></li>
+<li><a href="#org8821947">Variables</a></li>
 </ul>
 
 <blockquote>
@@ -88,10 +91,9 @@ ccf core config
 </p>
 </blockquote>
 </div>
-
-<div id="outline-container-orge613964" class="outline-3">
-<h3 id="orge613964">架构<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-orge613964">
+<div id="outline-container-org62c720b" class="outline-3">
+<h3 id="org62c720b">架构<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org62c720b">
 <p>
 生产环境下，一个 master 进程，用于加载配置文件和管理 worker 进程， worker 进程间同等竞争，处理请求。
 </p>
@@ -149,10 +151,9 @@ ccf core config
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb8e3798" class="outline-3">
-<h3 id="orgb8e3798">请求流程</h3>
-<div class="outline-text-3" id="text-orgb8e3798">
+<div id="outline-container-org1c60791" class="outline-3">
+<h3 id="org1c60791">请求流程</h3>
+<div class="outline-text-3" id="text-org1c60791">
 <p>
 worker 进程的 ngx_worker_process_cycle() 函数是无限循环的处理函数，简单处理流程：
 </p>
@@ -229,9 +230,9 @@ nginx 将各功能模块组织成一条链，当有请求到达的时候，请�
 </p>
 </div>
 </div>
-<div id="outline-container-org375f47d" class="outline-3">
-<h3 id="org375f47d">connection<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org375f47d">
+<div id="outline-container-orgd7adc4c" class="outline-3">
+<h3 id="orgd7adc4c">connection<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-orgd7adc4c">
 <p>
 nginx 中 connection 就是对 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 连接的封装，其中包括连接的 <a href="20220718-socket.html#ID-8f85e772-fcef-4d79-9314-c30b08caa0b1">Socket </a>，读事件，写事件。利用 nginx 封装的 connection 可以很方便的使用 nginx 来处理与连接相关的事情，如 Web 服务、邮件、端口转发等。
 </p>
@@ -276,10 +277,9 @@ nginx 的处理得先打开 accept_mutex 选项，此时，只有获得了 accep
 </div>
 </div>
 </div>
-
-<div id="outline-container-org01f1401" class="outline-3">
-<h3 id="org01f1401">request</h3>
-<div class="outline-text-3" id="text-org01f1401">
+<div id="outline-container-org6b0f3a3" class="outline-3">
+<h3 id="org6b0f3a3">request</h3>
+<div class="outline-text-3" id="text-org6b0f3a3">
 <p>
 指 http 请求， <code>ngx_http_request_t</code> ，包括 请求行、请求头、请求体、响应行、响应头、响应体。
 </p>
@@ -306,9 +306,9 @@ nginx 的处理得先打开 accept_mutex 选项，此时，只有获得了 accep
 </div>
 </div>
 </div>
-<div id="outline-container-orgded31cb" class="outline-3">
-<h3 id="orgded31cb"><a href="20220714-http.html#ID-fb1bee78-8741-44fd-b8a5-139902b77df2">pipe</a></h3>
-<div class="outline-text-3" id="text-orgded31cb">
+<div id="outline-container-orga4100cc" class="outline-3">
+<h3 id="orga4100cc"><a href="20220714-http.html#ID-fb1bee78-8741-44fd-b8a5-139902b77df2">pipe</a></h3>
+<div class="outline-text-3" id="text-orga4100cc">
 <p>
 nginx 支持 pipeline 的，但对 pipeline 中的多个请求的处理却不是并行的，依然是一个请求接一个请求的处理，只是在处理第一个请求的时候，客户端就可以发起第二个请求。这样，nginx 利用 pipeline 减少了处理完一个请求后，等待第二个请求的请求头数据的时间。
 </p>
@@ -318,9 +318,9 @@ nginx 支持 pipeline 的，但对 pipeline 中的多个请求的处理却不是
 </p>
 </div>
 </div>
-<div id="outline-container-org7c75eaa" class="outline-3">
-<h3 id="org7c75eaa">lingering_close</h3>
-<div class="outline-text-3" id="text-org7c75eaa">
+<div id="outline-container-orga394a36" class="outline-3">
+<h3 id="orga394a36">lingering_close</h3>
+<div class="outline-text-3" id="text-orga394a36">
 <p>
 延迟关闭，当 nginx 要关闭连接时，并非立即关闭连接，而是先关闭 TCP 连接的写，再等待一段时间后再关掉连接的读。参考 <a href="20220718-socket.html#ID-245cbc05-7d62-4d4b-a64e-cda6ecbb12e9">SO_LINGER</a> 。
 </p>
@@ -348,16 +348,16 @@ nginx 在接收客户端的请求时，可能由于客户端或服务端出错�
 </div>
 </div>
 </div>
-<div id="outline-container-ID-98bab153-5649-4610-8080-055b845a72a2" class="outline-2">
-<h2 id="ID-98bab153-5649-4610-8080-055b845a72a2">Data Structure</h2>
-<div class="outline-text-2" id="text-ID-98bab153-5649-4610-8080-055b845a72a2">
+<div id="outline-container-orgf9d6277" class="outline-2">
+<h2 id="orgf9d6277">Data Structure</h2>
+<div class="outline-text-2" id="text-orgf9d6277">
 <p>
 nginx-0.1.0
 </p>
 </div>
-<div id="outline-container-org12868bb" class="outline-3">
-<h3 id="org12868bb">ngx_str_t</h3>
-<div class="outline-text-3" id="text-org12868bb">
+<div id="outline-container-org36e5f54" class="outline-3">
+<h3 id="org36e5f54">ngx_str_t</h3>
+<div class="outline-text-3" id="text-org36e5f54">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> {
     <span style="color: #6434A3;">size_t</span>    <span style="color: #BA36A5;">len</span>;
@@ -374,9 +374,9 @@ nginx-0.1.0
 </p>
 </div>
 </div>
-<div id="outline-container-org5af8471" class="outline-3">
-<h3 id="org5af8471">ngx_pool_t</h3>
-<div class="outline-text-3" id="text-org5af8471">
+<div id="outline-container-orgfe168e3" class="outline-3">
+<h3 id="orgfe168e3">ngx_pool_t</h3>
+<div class="outline-text-3" id="text-orgfe168e3">
 <p>
 提供了一种机制，帮助管理一系列的资源（如内存，文件等），使得对这些资源的使用和释放统一进行。
 </p>
@@ -407,9 +407,9 @@ nginx-0.1.0
 </div>
 </div>
 </div>
-<div id="outline-container-org13ca70c" class="outline-3">
-<h3 id="org13ca70c">ngx_array_t</h3>
-<div class="outline-text-3" id="text-org13ca70c">
+<div id="outline-container-org826b748" class="outline-3">
+<h3 id="org826b748">ngx_array_t</h3>
+<div class="outline-text-3" id="text-org826b748">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000FF;">typedef</span> <span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">ngx_array_s</span>       <span style="color: #6434A3;">ngx_array_t</span>;
 
@@ -434,9 +434,9 @@ nginx-0.1.0
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3e818e" class="outline-3">
-<h3 id="orgc3e818e">ngx_hash_t</h3>
-<div class="outline-text-3" id="text-orgc3e818e">
+<div id="outline-container-org4d99d6a" class="outline-3">
+<h3 id="org4d99d6a">ngx_hash_t</h3>
+<div class="outline-text-3" id="text-org4d99d6a">
 <p>
 0.1.0 未实现。
 </p>
@@ -450,9 +450,9 @@ nginx-0.1.0
 </ol>
 </div>
 </div>
-<div id="outline-container-org5b01b8d" class="outline-3">
-<h3 id="org5b01b8d">ngx_chain_t</h3>
-<div class="outline-text-3" id="text-org5b01b8d">
+<div id="outline-container-orgc34769d" class="outline-3">
+<h3 id="orgc34769d">ngx_chain_t</h3>
+<div class="outline-text-3" id="text-orgc34769d">
 <p>
 nginx 的 filter 模块在处理从别的 filter 模块或者是 handler 模块传递过来的数据（实际上就是需要发送给客户端的http response）。这个传递过来的数据是以一个链表的形式 ngx_chain_t 。而且数据可能被分多次传递过来。
 </p>
@@ -467,9 +467,9 @@ nginx 的 filter 模块在处理从别的 filter 模块或者是 handler 模块�
 </div>
 </div>
 </div>
-<div id="outline-container-org5d3ba05" class="outline-3">
-<h3 id="org5d3ba05">ngx_buf_t</h3>
-<div class="outline-text-3" id="text-org5d3ba05">
+<div id="outline-container-org78fceaa" class="outline-3">
+<h3 id="org78fceaa">ngx_buf_t</h3>
+<div class="outline-text-3" id="text-org78fceaa">
 <p>
 ngx_buf_t 就是 ngx_chain_t 链表的每个节点的实际数据。该结构实际上是一种抽象的数据结构，它代表某种具体的数据。这个数据可能是指向内存中的某个缓冲区，也可能指向一个文件的某一部分，也可能是一些纯元数据（元数据的作用在于指示这个链表的读取者对读取的数据进行不同的处理）。
 </p>
@@ -518,9 +518,9 @@ ngx_buf_t 就是 ngx_chain_t 链表的每个节点的实际数据。该结构实
 </div>
 </div>
 </div>
-<div id="outline-container-orgd24ca52" class="outline-3">
-<h3 id="orgd24ca52">ngx_list_t</h3>
-<div class="outline-text-3" id="text-orgd24ca52">
+<div id="outline-container-orgeb1bfce" class="outline-3">
+<h3 id="orgeb1bfce">ngx_list_t</h3>
+<div class="outline-text-3" id="text-orgeb1bfce">
 <p>
 ngx_list_t 的节点实际上是一个固定大小的数组，首节点需要初始化（自身），之后的节点为 ngx_list_part_t 结构。
 </p>
@@ -544,9 +544,9 @@ ngx_list_t 的节点实际上是一个固定大小的数组，首节点需要初
 </div>
 </div>
 </div>
-<div id="outline-container-orgc029208" class="outline-3">
-<h3 id="orgc029208">ngx_queue_t</h3>
-<div class="outline-text-3" id="text-orgc029208">
+<div id="outline-container-org347426d" class="outline-3">
+<h3 id="org347426d">ngx_queue_t</h3>
+<div class="outline-text-3" id="text-org347426d">
 <p>
 0.1.0 未实现。
 </p>
@@ -592,10 +592,9 @@ q-&gt;next 头节点； q-&gt;prev 尾节点。
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4" class="outline-2">
-<h2 id="ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">Configuration &amp; Directives</h2>
-<div class="outline-text-2" id="text-ID-1d7a9bee-742a-4da7-9782-3f7806fc9df4">
+<div id="outline-container-orgb7bd568" class="outline-2">
+<h2 id="orgb7bd568">Configuration &amp; Directives</h2>
+<div class="outline-text-2" id="text-orgb7bd568">
 <p>
 在 nginx.conf 中，包含若干配置项。每个配置项由配置指令和指令参数 2 个部分构成。指令参数也就是配置指令对应的配置值。
 </p>
@@ -623,34 +622,33 @@ q-&gt;next 头节点； q-&gt;prev 尾节点。
 <li>load-balancer</li>
 </ul>
 </div>
-
-<div id="outline-container-org0c498be" class="outline-3">
-<h3 id="org0c498be">sendfile</h3>
-<div class="outline-text-3" id="text-org0c498be">
+<div id="outline-container-orgdc0f353" class="outline-3">
+<h3 id="orgdc0f353">sendfile</h3>
+<div class="outline-text-3" id="text-orgdc0f353">
 <p>
 默认 off ，配置是否由 Linux 内核直接读取文件（ <a href="20220724-linux.html#ID-a22d50a1-2a30-499c-b6f7-25d65e2016e3">System Call</a> ），而不是通过 read, write 来操作。
 </p>
 </div>
 </div>
-<div id="outline-container-orgcdd30fc" class="outline-3">
-<h3 id="orgcdd30fc">tcp_nopush</h3>
-<div class="outline-text-3" id="text-orgcdd30fc">
+<div id="outline-container-orgfc97983" class="outline-3">
+<h3 id="orgfc97983">tcp_nopush</h3>
+<div class="outline-text-3" id="text-orgfc97983">
 <p>
 默认 off ，配置是否开启 socket 的 <a href="20220718-socket.html#ID-8d1430e6-40a0-4ec5-92bf-53c3c8d5864f"><code>TCP_CORK</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-org65459e1" class="outline-3">
-<h3 id="org65459e1">tcp_nodelay</h3>
-<div class="outline-text-3" id="text-org65459e1">
+<div id="outline-container-org262567c" class="outline-3">
+<h3 id="org262567c">tcp_nodelay</h3>
+<div class="outline-text-3" id="text-org262567c">
 <p>
 默认 on ，配置是否关闭 nagle 算法，即 <a href="20220718-socket.html#ID-8f561f8b-dcb8-412d-89fe-bb5d51641fc9"><code>TCP_NODELAY</code></a> 选项。
 </p>
 </div>
 </div>
-<div id="outline-container-orgeda7252" class="outline-3">
-<h3 id="orgeda7252">worker_connections</h3>
-<div class="outline-text-3" id="text-orgeda7252">
+<div id="outline-container-orgd7ddb43" class="outline-3">
+<h3 id="orgd7ddb43">worker_connections</h3>
+<div class="outline-text-3" id="text-orgd7ddb43">
 <p>
 默认 1024 ，代表每个 worker 进程的一个 worker_connections 大小的一个 ngx_connection_t 结构的数组。并且，nginx 会通过一个链表 free_connections 来保存所有的空闲 ngx_connection_t ，每次获取一个连接时，就从空闲连接链表中获取一个，用完后，再放回空闲连接链表里面。
 </p>
@@ -661,25 +659,25 @@ q-&gt;next 头节点； q-&gt;prev 尾节点。
 </p>
 </div>
 </div>
-<div id="outline-container-org33a3fa4" class="outline-3">
-<h3 id="org33a3fa4">client_header_buffer_size</h3>
-<div class="outline-text-3" id="text-org33a3fa4">
+<div id="outline-container-orgc3feac7" class="outline-3">
+<h3 id="orgc3feac7">client_header_buffer_size</h3>
+<div class="outline-text-3" id="text-orgc3feac7">
 <p>
 nginx 会将整个请求头都放在 buffer 里面，配置这个 buffer 的大小。
 </p>
 </div>
 </div>
-<div id="outline-container-org98c5de0" class="outline-3">
-<h3 id="org98c5de0">keepalive_timeout</h3>
-<div class="outline-text-3" id="text-org98c5de0">
+<div id="outline-container-org8d623ee" class="outline-3">
+<h3 id="org8d623ee">keepalive_timeout</h3>
+<div class="outline-text-3" id="text-org8d623ee">
 <p>
 默认 60 ，配置长连接的超时时间。
 </p>
 </div>
 </div>
-<div id="outline-container-orgdce4774" class="outline-3">
-<h3 id="orgdce4774">large_client_header_buffers</h3>
-<div class="outline-text-3" id="text-orgdce4774">
+<div id="outline-container-orgf3b7c40" class="outline-3">
+<h3 id="orgf3b7c40">large_client_header_buffers</h3>
+<div class="outline-text-3" id="text-orgf3b7c40">
 <p>
 默认 4 8k ，表示 4 个 8k 的 buffer ，在 client_header_buffer_size 装不下， nginx 重新分配一个更大的 buffer 情况下，这个 buffer 的数量和大小。
 </p>
@@ -689,25 +687,25 @@ nginx 会将整个请求头都放在 buffer 里面，配置这个 buffer 的大�
 </p>
 </div>
 </div>
-<div id="outline-container-orga8e4d76" class="outline-3">
-<h3 id="orga8e4d76">lingering_close</h3>
-<div class="outline-text-3" id="text-orga8e4d76">
+<div id="outline-container-org99251c6" class="outline-3">
+<h3 id="org99251c6">lingering_close</h3>
+<div class="outline-text-3" id="text-org99251c6">
 <p>
 配置开启或关闭延迟关闭。
 </p>
 </div>
 </div>
-<div id="outline-container-orgfc2dced" class="outline-3">
-<h3 id="orgfc2dced">lingering_timeout</h3>
-<div class="outline-text-3" id="text-orgfc2dced">
+<div id="outline-container-orgae7a995" class="outline-3">
+<h3 id="orgae7a995">lingering_timeout</h3>
+<div class="outline-text-3" id="text-orgae7a995">
 <p>
 配置延迟关闭超时时间。
 </p>
 </div>
 </div>
-<div id="outline-container-org3cfd907" class="outline-3">
-<h3 id="org3cfd907">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
-<div class="outline-text-3" id="text-org3cfd907">
+<div id="outline-container-orge8818de" class="outline-3">
+<h3 id="orge8818de">access_<a href="20220802-log.html#ID-b69b104b-4d85-475e-a73c-1726bf511048">log</a></h3>
+<div class="outline-text-3" id="text-orge8818de">
 <div class="org-src-container">
 <pre class="src src-nginx">log_format combined '$remote_addr - $remote_user [$time_local] "$request" '
                     '$status $body_bytes_sent "$http_referer" '
@@ -764,14 +762,13 @@ access_log     /var/data/log/nginx/json_access.log json_analytics buffer=4k flus
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-57aa149c-9e95-499b-855d-d49bcbbe5400" class="outline-2">
-<h2 id="ID-57aa149c-9e95-499b-855d-d49bcbbe5400">Variables</h2>
-<div class="outline-text-2" id="text-ID-57aa149c-9e95-499b-855d-d49bcbbe5400">
+<div id="outline-container-org8821947" class="outline-2">
+<h2 id="org8821947">Variables</h2>
+<div class="outline-text-2" id="text-org8821947">
 </div>
-<div id="outline-container-orgdd04f8a" class="outline-3">
-<h3 id="orgdd04f8a">upstream_response_length</h3>
-<div class="outline-text-3" id="text-orgdd04f8a">
+<div id="outline-container-orgf8538f7" class="outline-3">
+<h3 id="orgf8538f7">upstream_response_length</h3>
+<div class="outline-text-3" id="text-orgf8538f7">
 <blockquote>
 <p>
 $upstream_response_length
@@ -806,7 +803,7 @@ keeps the length of the response obtained from the upstream server (0.7.27); the
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

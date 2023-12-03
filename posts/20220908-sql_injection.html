@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SQL Injection</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,23 +27,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-165a516f-c616-40fe-8438-cb548d4337de">SQL 注入</a>
+<li><a href="#org1d6670f">SQL 注入</a>
 <ul>
-<li><a href="#ID-331b6934-6219-4735-9865-639defd013e4">整型注入</a></li>
-<li><a href="#ID-c6d74b72-f72e-4320-be57-8ef072295920">字符型注入</a></li>
-<li><a href="#org5c939c4">盲注</a></li>
-<li><a href="#orgddc1c17">显注</a></li>
+<li><a href="#org10033bf">整型注入</a></li>
+<li><a href="#org46c91aa">字符型注入</a></li>
+<li><a href="#org15ac410">盲注</a></li>
+<li><a href="#orgae8e2b1">显注</a></li>
 </ul>
 </li>
-<li><a href="#ID-3155f192-cff7-4a54-83e3-3681e2752358">SqlMap</a></li>
-<li><a href="#ID-92c1bfcf-acc7-4136-96ed-0ac810203706">Libinjection</a></li>
+<li><a href="#org97c5f28">SqlMap</a></li>
+<li><a href="#org86225c5">Libinjection</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-165a516f-c616-40fe-8438-cb548d4337de" class="outline-2">
-<h2 id="ID-165a516f-c616-40fe-8438-cb548d4337de">SQL 注入</h2>
-<div class="outline-text-2" id="text-ID-165a516f-c616-40fe-8438-cb548d4337de">
+<div id="outline-container-org1d6670f" class="outline-2">
+<h2 id="org1d6670f">SQL 注入</h2>
+<div class="outline-text-2" id="text-org1d6670f">
 <p>
 本质原因：允许用户拼接 <a href="20220821-database.html#ID-59428a07-fcb2-475d-9512-3571be6aef0f">SQL</a> 语句并执行。
 </p>
@@ -77,18 +80,17 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </p>
 </blockquote>
 </div>
-
-<div id="outline-container-ID-331b6934-6219-4735-9865-639defd013e4" class="outline-3">
-<h3 id="ID-331b6934-6219-4735-9865-639defd013e4">整型注入</h3>
-<div class="outline-text-3" id="text-ID-331b6934-6219-4735-9865-639defd013e4">
+<div id="outline-container-org10033bf" class="outline-3">
+<h3 id="org10033bf">整型注入</h3>
+<div class="outline-text-3" id="text-org10033bf">
 <p>
 <code>?id=1 or 1=1 #</code>
 </p>
 </div>
 </div>
-<div id="outline-container-ID-c6d74b72-f72e-4320-be57-8ef072295920" class="outline-3">
-<h3 id="ID-c6d74b72-f72e-4320-be57-8ef072295920">字符型注入</h3>
-<div class="outline-text-3" id="text-ID-c6d74b72-f72e-4320-be57-8ef072295920">
+<div id="outline-container-org46c91aa" class="outline-3">
+<h3 id="org46c91aa">字符型注入</h3>
+<div class="outline-text-3" id="text-org46c91aa">
 <p>
 <code>?id=1' or '1'='1 -- x</code>
 </p>
@@ -98,10 +100,9 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </p>
 </div>
 </div>
-
-<div id="outline-container-org5c939c4" class="outline-3">
-<h3 id="org5c939c4">盲注</h3>
-<div class="outline-text-3" id="text-org5c939c4">
+<div id="outline-container-org15ac410" class="outline-3">
+<h3 id="org15ac410">盲注</h3>
+<div class="outline-text-3" id="text-org15ac410">
 <p>
 通过一些间接线索判断执行结果，如时间。
 </p>
@@ -119,25 +120,23 @@ mybits 尽量使用 #，若使用 $ 可导致 SQL 注入<sup><a id="fnr.2" class
 </p>
 </div>
 </div>
-<div id="outline-container-orgddc1c17" class="outline-3">
-<h3 id="orgddc1c17">显注</h3>
-<div class="outline-text-3" id="text-orgddc1c17">
+<div id="outline-container-orgae8e2b1" class="outline-3">
+<h3 id="orgae8e2b1">显注</h3>
+<div class="outline-text-3" id="text-orgae8e2b1">
 <p>
 执行 SQL 语句后会显示相应的结果或错误信息。可以是带内方式，通过 错误信息 或 <code>union</code> 子句获取结果；也可以是带外通过控制数据库与外部服务器的连接来获取数据。
 </p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-3155f192-cff7-4a54-83e3-3681e2752358" class="outline-2">
-<h2 id="ID-3155f192-cff7-4a54-83e3-3681e2752358">SqlMap</h2>
-<div class="outline-text-2" id="text-ID-3155f192-cff7-4a54-83e3-3681e2752358">
+<div id="outline-container-org97c5f28" class="outline-2">
+<h2 id="org97c5f28">SqlMap</h2>
+<div class="outline-text-2" id="text-org97c5f28">
 </div>
 </div>
-
-<div id="outline-container-ID-92c1bfcf-acc7-4136-96ed-0ac810203706" class="outline-2">
-<h2 id="ID-92c1bfcf-acc7-4136-96ed-0ac810203706">Libinjection<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h2>
-<div class="outline-text-2" id="text-ID-92c1bfcf-acc7-4136-96ed-0ac810203706">
+<div id="outline-container-org86225c5" class="outline-2">
+<h2 id="org86225c5">Libinjection<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h2>
+<div class="outline-text-2" id="text-org86225c5">
 <p>
 语义分析判别 SQL 注入。
 </p>
@@ -193,7 +192,7 @@ Libinjection: <a href="https://github.com/client9/libinjection">https://github.c
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux ~fork()~</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,23 +27,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6f10f36"><code>fork()</code></a>
+<li><a href="#org23aa64e"><code>fork()</code></a>
 <ul>
-<li><a href="#org50f3610">使用 fork()</a>
+<li><a href="#orge05a463">使用 fork()</a>
 <ul>
-<li><a href="#org0a14f41">例子</a></li>
+<li><a href="#org9f8e921">例子</a></li>
 </ul>
 </li>
-<li><a href="#org651a05b">vfork()</a></li>
+<li><a href="#orgbdfa0fe">vfork()</a></li>
 </ul>
 </li>
-<li><a href="#orgd3cf3a9"><code>exec()</code></a>
+<li><a href="#org88f7393"><code>exec()</code></a>
 <ul>
-<li><a href="#org421f9f2">使用 exec()</a>
+<li><a href="#orga8f631e">使用 exec()</a>
 <ul>
-<li><a href="#org8d47037">例子 - 1</a></li>
-<li><a href="#org67eb555">例子 - 2</a></li>
-<li><a href="#org401bbfa">例子 - 3</a></li>
+<li><a href="#orgb1c7506">例子 - 1</a></li>
+<li><a href="#org58a410b">例子 - 2</a></li>
+<li><a href="#org9428575">例子 - 3</a></li>
 </ul>
 </li>
 </ul>
@@ -47,10 +51,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org6f10f36" class="outline-2">
-<h2 id="org6f10f36"><code>fork()</code></h2>
-<div class="outline-text-2" id="text-org6f10f36">
+<div id="outline-container-org23aa64e" class="outline-2">
+<h2 id="org23aa64e"><code>fork()</code></h2>
+<div class="outline-text-2" id="text-org23aa64e">
 <p>
 在 Linux 中创建一个新进程的唯一方法是使用 fork() 函数。fork() 函数是 Linux 中一个非常重要的函数，和以往遇到的函数有一些区别，因为 fork() 函数看起来执行一次却返回两个值<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
@@ -63,10 +66,9 @@ fork() 函数用于从已存在的进程中创建一个新进程。新进程称�
 在父进程中执行 fork() 函数时，父进程会复制一个子进程，而且父子进程的代码从 fork() 函数的返回开始分别在两个地址空间中同时运行，从而使两个进程分别获得所属 fork() 函数的返回值，其中在父进程中的返回值是子进程的 pid ，而在子进程中返回 0 。因此，可以通过 <b>返回值</b> 来判断该进程的父进程还是子进程。
 </p>
 </div>
-
-<div id="outline-container-org50f3610" class="outline-3">
-<h3 id="org50f3610">使用 fork()</h3>
-<div class="outline-text-3" id="text-org50f3610">
+<div id="outline-container-orge05a463" class="outline-3">
+<h3 id="orge05a463">使用 fork()</h3>
+<div class="outline-text-3" id="text-orge05a463">
 <p>
 使用 <a href="20220913-c.html#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C</a> 语言：
 </p>
@@ -104,10 +106,9 @@ fork() 函数用于从已存在的进程中创建一个新进程。新进程称�
 <li>注意这里会返回两次，因为父进程创建子进程的时候复制了父进程的地址空间，那么父子进程地址空间的语句执行都在等待 fork() 返回的那句话里，所以返回两次是父进程返回一个，返回的是子进程的 PID，子进程返回一次，返回的是 0 。</li>
 </ol>
 </div>
-
-<div id="outline-container-org0a14f41" class="outline-4">
-<h4 id="org0a14f41">例子</h4>
-<div class="outline-text-4" id="text-org0a14f41">
+<div id="outline-container-org9f8e921" class="outline-4">
+<h4 id="org9f8e921">例子</h4>
+<div class="outline-text-4" id="text-org9f8e921">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/types.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
@@ -179,19 +180,18 @@ My PID is 5786
 </div>
 </div>
 </div>
-<div id="outline-container-org651a05b" class="outline-3">
-<h3 id="org651a05b">vfork()</h3>
-<div class="outline-text-3" id="text-org651a05b">
+<div id="outline-container-orgbdfa0fe" class="outline-3">
+<h3 id="orgbdfa0fe">vfork()</h3>
+<div class="outline-text-3" id="text-orgbdfa0fe">
 <p>
 为了加快 fork() 执行速度，vfork() 不产生父进程的副本，而是允许父子进程可访问相同的物理内存，伪装了对进程空间的真实复制，当子进程需要改变内存中的数据时才复制父进程。也被称为 “写操作时复制 (copy-on-write) ”技术。
 </p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd3cf3a9" class="outline-2">
-<h2 id="orgd3cf3a9"><code>exec()</code></h2>
-<div class="outline-text-2" id="text-orgd3cf3a9">
+<div id="outline-container-org88f7393" class="outline-2">
+<h2 id="org88f7393"><code>exec()</code></h2>
+<div class="outline-text-2" id="text-org88f7393">
 <p>
 exec() 提供了一个在进程中启动另一个程序执行的方法，可以根据指定的文件名或目录名找到可执行文件（也可以是脚本文件），并用其 <b>取代原调用进程的数据段、代码段和堆栈段</b> ，执行完之后，原调用进程的内容除了进程以外，其他全部被新的进程替换了。
 </p>
@@ -204,10 +204,9 @@ exec() 提供了一个在进程中启动另一个程序执行的方法，可以�
 <li>如果一个进程想执行另一个程序，可以用 fork() 函数新建一个进程，然后调用 exec() 函数族的任意一个函数，这样看起来就像通过执行应用程序而产生了一个新进程</li>
 </ol>
 </div>
-
-<div id="outline-container-org421f9f2" class="outline-3">
-<h3 id="org421f9f2">使用 exec()</h3>
-<div class="outline-text-3" id="text-org421f9f2">
+<div id="outline-container-orga8f631e" class="outline-3">
+<h3 id="orga8f631e">使用 exec()</h3>
+<div class="outline-text-3" id="text-orga8f631e">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
 
@@ -241,10 +240,9 @@ exec() 提供了一个在进程中启动另一个程序执行的方法，可以�
 <li>没用对应可执行文件的运行权限， errno 为 EACCES</li>
 </ol>
 </div>
-
-<div id="outline-container-org8d47037" class="outline-4">
-<h4 id="org8d47037">例子 - 1</h4>
-<div class="outline-text-4" id="text-org8d47037">
+<div id="outline-container-orgb1c7506" class="outline-4">
+<h4 id="orgb1c7506">例子 - 1</h4>
+<div class="outline-text-4" id="text-orgb1c7506">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
@@ -273,9 +271,9 @@ root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
 </p>
 </div>
 </div>
-<div id="outline-container-org67eb555" class="outline-4">
-<h4 id="org67eb555">例子 - 2</h4>
-<div class="outline-text-4" id="text-org67eb555">
+<div id="outline-container-org58a410b" class="outline-4">
+<h4 id="org58a410b">例子 - 2</h4>
+<div class="outline-text-4" id="text-org58a410b">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;unistd.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
@@ -310,10 +308,9 @@ root           1       0  0 06:56 ?        00:00:01 /sbin/init splash
 </p>
 </div>
 </div>
-
-<div id="outline-container-org401bbfa" class="outline-4">
-<h4 id="org401bbfa">例子 - 3</h4>
-<div class="outline-text-4" id="text-org401bbfa">
+<div id="outline-container-org9428575" class="outline-4">
+<h4 id="org9428575">例子 - 3</h4>
+<div class="outline-text-4" id="text-org9428575">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> *<span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">argv</span>[])
 {
@@ -361,7 +358,7 @@ fork() 为 UNIX 中派生新进程的唯一方法。fork() 在调用进程（成
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:56 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Regex</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -55,30 +59,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbcdc1b2">Group</a></li>
-<li><a href="#orgb401cfa">Zero-width Assertions</a></li>
-<li><a href="#org1ac9117">Useful Regexp</a></li>
-<li><a href="#org1bf8fec">Shell</a>
+<li><a href="#org0762990">Group</a></li>
+<li><a href="#org2018bac">Zero-width Assertions</a></li>
+<li><a href="#orgc30d066">Useful Regexp</a></li>
+<li><a href="#org05954ba">Shell</a>
 <ul>
-<li><a href="#orge5cf9d3">operation</a>
+<li><a href="#org4bffa2f">operation</a>
 <ul>
-<li><a href="#orgda95d00">BRE</a></li>
-<li><a href="#orgab19ee4">PRE</a></li>
+<li><a href="#orgbf2e2fc">BRE</a></li>
+<li><a href="#orgc24767f">PRE</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org4b959e5">Nginx</a></li>
+<li><a href="#orge06981a">Nginx</a></li>
 </ul>
 </div>
 </nav>
 <p>
 GROK
 </p>
-
-<div id="outline-container-orgbcdc1b2" class="outline-2">
-<h2 id="orgbcdc1b2">Group</h2>
-<div class="outline-text-2" id="text-orgbcdc1b2">
+<div id="outline-container-org0762990" class="outline-2">
+<h2 id="org0762990">Group</h2>
+<div class="outline-text-2" id="text-org0762990">
 <p>
 <code>(ABC)</code> 匹配 ABC 且存为分组，分组从 1 开始，通过 <code>\n</code> 引用。
 </p>
@@ -96,10 +99,9 @@ GROK
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb401cfa" class="outline-2">
-<h2 id="orgb401cfa">Zero-width Assertions</h2>
-<div class="outline-text-2" id="text-orgb401cfa">
+<div id="outline-container-org2018bac" class="outline-2">
+<h2 id="org2018bac">Zero-width Assertions</h2>
+<div class="outline-text-2" id="text-org2018bac">
 <p>
 Positive lookahead  肯定性正向预查： <code>ABC(?=exp)</code>  ABC 断言自身出现的位置的 <b>后面</b>    能匹配表达式 exp
 </p>
@@ -165,10 +167,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </table>
 </div>
 </div>
-
-<div id="outline-container-org1ac9117" class="outline-2">
-<h2 id="org1ac9117">Useful Regexp</h2>
-<div class="outline-text-2" id="text-org1ac9117">
+<div id="outline-container-orgc30d066" class="outline-2">
+<h2 id="orgc30d066">Useful Regexp</h2>
+<div class="outline-text-2" id="text-orgc30d066">
 <table>
 
 
@@ -197,10 +198,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </table>
 </div>
 </div>
-
-<div id="outline-container-org1bf8fec" class="outline-2">
-<h2 id="org1bf8fec">Shell</h2>
-<div class="outline-text-2" id="text-org1bf8fec">
+<div id="outline-container-org05954ba" class="outline-2">
+<h2 id="org05954ba">Shell</h2>
+<div class="outline-text-2" id="text-org05954ba">
 <table>
 
 
@@ -340,12 +340,9 @@ Negative lookbehind 否定性反向预查： <code>(?&lt;!exp)ABC</code> ABC 断
 </tbody>
 </table>
 </div>
-
-
-
-<div id="outline-container-orge5cf9d3" class="outline-3">
-<h3 id="orge5cf9d3">operation</h3>
-<div class="outline-text-3" id="text-orge5cf9d3">
+<div id="outline-container-org4bffa2f" class="outline-3">
+<h3 id="org4bffa2f">operation</h3>
+<div class="outline-text-3" id="text-org4bffa2f">
 <table>
 
 
@@ -538,10 +535,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </p>
 </blockquote>
 </div>
-
-<div id="outline-container-orgda95d00" class="outline-4">
-<h4 id="orgda95d00">BRE</h4>
-<div class="outline-text-4" id="text-orgda95d00">
+<div id="outline-container-orgbf2e2fc" class="outline-4">
+<h4 id="orgbf2e2fc">BRE</h4>
+<div class="outline-text-4" id="text-orgbf2e2fc">
 <blockquote>
 <p>
 ^ $ . [ ] *
@@ -553,9 +549,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgab19ee4" class="outline-4">
-<h4 id="orgab19ee4">PRE</h4>
-<div class="outline-text-4" id="text-orgab19ee4">
+<div id="outline-container-orgc24767f" class="outline-4">
+<h4 id="orgc24767f">PRE</h4>
+<div class="outline-text-4" id="text-orgc24767f">
 <blockquote>
 <p>
 ( ) { } ? + |
@@ -565,10 +561,9 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 </div>
 </div>
 </div>
-
-<div id="outline-container-org4b959e5" class="outline-2">
-<h2 id="org4b959e5">Nginx</h2>
-<div class="outline-text-2" id="text-org4b959e5">
+<div id="outline-container-orge06981a" class="outline-2">
+<h2 id="orge06981a">Nginx</h2>
+<div class="outline-text-2" id="text-orge06981a">
 <ul class="org-ul">
 <li>= 精确匹配路径，用于不含正则表达式的 uri 前，如果匹配成功，不再进行后续的查找；</li>
 <li>^~ 用于不含正则表达式的 uri 前，表示如果该符号后面的字符是最佳匹配，采用该规则，不再进行后续的查找；</li>
@@ -581,7 +576,7 @@ bash 中 [] 只能用于匹配文件名，{} 可用于任意场景，前提是�
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

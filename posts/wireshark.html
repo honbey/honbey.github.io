@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wireshark and tcpdump</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,63 +27,62 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</a></li>
-<li><a href="#orge22cd79">显示过滤器</a>
+<li><a href="#orgcdec310">Wireshark</a></li>
+<li><a href="#orga222e2b">显示过滤器</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org09b0e45">过滤项</a></li>
-<li><a href="#org8e3daaa">常用字段</a></li>
+<li><a href="#orgbc840ef">过滤项</a></li>
+<li><a href="#org435d6df">常用字段</a></li>
 </ul>
 </li>
-<li><a href="#org18944a6">过滤关系</a>
+<li><a href="#orgfd6e617">过滤关系</a>
 <ul>
-<li><a href="#orgd616317">复合表达式</a></li>
-<li><a href="#org3a9c60d">过滤值</a></li>
+<li><a href="#org560888e">复合表达式</a></li>
+<li><a href="#org3d10806">过滤值</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</a>
-<ul>
-<li>
-<ul>
-<li><a href="#orgfa44feb">捕获项</a></li>
-<li><a href="#org6d31153">捕获参数</a></li>
-<li><a href="#org250d6d1">捕获值</a></li>
-</ul>
-</li>
-<li><a href="#org5f074c2">数据包解析</a></li>
-<li><a href="#org8dc7fc6">捕获远程主机数据包</a></li>
-</ul>
-</li>
-<li><a href="#ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</a></li>
-<li><a href="#ID-fc764106-fe91-4d27-9655-b3daa38fa2e3">图片取证</a></li>
-<li><a href="#ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3">AIM 取证</a>
+<li><a href="#orgb56d486">捕获过滤器</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org7483a23">前置问题</a></li>
-<li><a href="#orgcf29695">1</a></li>
-<li><a href="#org87a95cd">2</a></li>
-<li><a href="#orgd45c71f">3</a></li>
-<li><a href="#org7a405ef">4</a></li>
-<li><a href="#orgd937c66">5</a></li>
-<li><a href="#orgb9a4795">6</a></li>
+<li><a href="#org2c9b1de">捕获项</a></li>
+<li><a href="#org794888c">捕获参数</a></li>
+<li><a href="#org21a3c6f">捕获值</a></li>
+</ul>
+</li>
+<li><a href="#org1d36982">数据包解析</a></li>
+<li><a href="#org9b51d38">捕获远程主机数据包</a></li>
+</ul>
+</li>
+<li><a href="#org7d503ed">HTTPS 取证</a></li>
+<li><a href="#org42d652c">图片取证</a></li>
+<li><a href="#org91eaf47">AIM 取证</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org52ebb05">前置问题</a></li>
+<li><a href="#org01229b5">1</a></li>
+<li><a href="#orgc4f39d9">2</a></li>
+<li><a href="#org16e38ee">3</a></li>
+<li><a href="#orgaafe81c">4</a></li>
+<li><a href="#orgfe10896">5</a></li>
+<li><a href="#org2b2a6d9">6</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#ID-d92036a4-851d-42e7-aec9-5c698f5aa94d">邮件取证</a></li>
-<li><a href="#orgecab478">附件</a></li>
-<li><a href="#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</a></li>
+<li><a href="#orgcfc7970">邮件取证</a></li>
+<li><a href="#org7e2f9b1">附件</a></li>
+<li><a href="#org0a17ef6">tcpdump</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-0cab26c8-3627-4e10-a7f9-535945a56511" class="outline-2">
-<h2 id="ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</h2>
-<div class="outline-text-2" id="text-ID-0cab26c8-3627-4e10-a7f9-535945a56511">
+<div id="outline-container-orgcdec310" class="outline-2">
+<h2 id="orgcdec310">Wireshark</h2>
+<div class="outline-text-2" id="text-orgcdec310">
 <p>
 封包？数据帧？报文？
 </p>
@@ -98,10 +101,9 @@
 </p>
 </div>
 </div>
-
-<div id="outline-container-orge22cd79" class="outline-2">
-<h2 id="orge22cd79">显示过滤器</h2>
-<div class="outline-text-2" id="text-orge22cd79">
+<div id="outline-container-orga222e2b" class="outline-2">
+<h2 id="orga222e2b">显示过滤器</h2>
+<div class="outline-text-2" id="text-orga222e2b">
 <p>
 针对已经捕获的报文进行过滤。 <b>一条基本的表达式由过滤项、过滤关系、过滤值组成</b> ，例如：
 </p>
@@ -113,19 +115,18 @@ ip.src == 192.168.1.1
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org09b0e45" class="outline-4">
-<h4 id="org09b0e45">过滤项</h4>
-<div class="outline-text-4" id="text-org09b0e45">
+<div id="outline-container-orgbc840ef" class="outline-4">
+<h4 id="orgbc840ef">过滤项</h4>
+<div class="outline-text-4" id="text-orgbc840ef">
 <ul class="org-ul">
 <li>协议</li>
 <li>协议字段</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8e3daaa" class="outline-4">
-<h4 id="org8e3daaa">常用字段</h4>
-<div class="outline-text-4" id="text-org8e3daaa">
+<div id="outline-container-org435d6df" class="outline-4">
+<h4 id="org435d6df">常用字段</h4>
+<div class="outline-text-4" id="text-org435d6df">
 <ul class="org-ul">
 <li>address
 <ul class="org-ul">
@@ -148,11 +149,9 @@ ip.src == 192.168.1.1
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org18944a6" class="outline-3">
-<h3 id="org18944a6">过滤关系</h3>
-<div class="outline-text-3" id="text-org18944a6">
+<div id="outline-container-orgfd6e617" class="outline-3">
+<h3 id="orgfd6e617">过滤关系</h3>
+<div class="outline-text-3" id="text-orgfd6e617">
 <ul class="org-ul">
 <li>大于
 <ul class="org-ul">
@@ -186,10 +185,9 @@ ip.src == 192.168.1.1
 </ul></li>
 </ul>
 </div>
-
-<div id="outline-container-orgd616317" class="outline-4">
-<h4 id="orgd616317">复合表达式</h4>
-<div class="outline-text-4" id="text-orgd616317">
+<div id="outline-container-org560888e" class="outline-4">
+<h4 id="org560888e">复合表达式</h4>
+<div class="outline-text-4" id="text-org560888e">
 <ul class="org-ul">
 <li>与
 <ul class="org-ul">
@@ -218,10 +216,9 @@ ip.src == 192.168.1.1
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org3a9c60d" class="outline-4">
-<h4 id="org3a9c60d">过滤值</h4>
-<div class="outline-text-4" id="text-org3a9c60d">
+<div id="outline-container-org3d10806" class="outline-4">
+<h4 id="org3d10806">过滤值</h4>
+<div class="outline-text-4" id="text-org3d10806">
 <ul class="org-ul">
 <li>应满足过滤项的格式</li>
 </ul>
@@ -256,10 +253,9 @@ ip.src == 192.168.1.1 &amp;&amp; tcp[13]&amp;2
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-ef271e3d-eb0b-445e-b142-87ce48b892bd" class="outline-2">
-<h2 id="ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</h2>
-<div class="outline-text-2" id="text-ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">
+<div id="outline-container-orgb56d486" class="outline-2">
+<h2 id="orgb56d486">捕获过滤器</h2>
+<div class="outline-text-2" id="text-orgb56d486">
 <p>
 提前设置好规则，只捕获符合过滤规则的报文。伯克利包捕获表达式： <b>一条基本的表达式由捕获项、捕获参数、捕获值组成</b> ，例如：
 </p>
@@ -271,10 +267,9 @@ ip  src host 192.168.1.1
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orgfa44feb" class="outline-4">
-<h4 id="orgfa44feb">捕获项</h4>
-<div class="outline-text-4" id="text-orgfa44feb">
+<div id="outline-container-org2c9b1de" class="outline-4">
+<h4 id="org2c9b1de">捕获项</h4>
+<div class="outline-text-4" id="text-org2c9b1de">
 <ul class="org-ul">
 <li>协议</li>
 <li>数据流向</li>
@@ -285,10 +280,9 @@ ip  src host 192.168.1.1
 </p>
 </div>
 </div>
-
-<div id="outline-container-org6d31153" class="outline-4">
-<h4 id="org6d31153">捕获参数</h4>
-<div class="outline-text-4" id="text-org6d31153">
+<div id="outline-container-org794888c" class="outline-4">
+<h4 id="org794888c">捕获参数</h4>
+<div class="outline-text-4" id="text-org794888c">
 <ul class="org-ul">
 <li>host (default)</li>
 <li>net</li>
@@ -297,10 +291,9 @@ ip  src host 192.168.1.1
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org250d6d1" class="outline-4">
-<h4 id="org250d6d1">捕获值</h4>
-<div class="outline-text-4" id="text-org250d6d1">
+<div id="outline-container-org21a3c6f" class="outline-4">
+<h4 id="org21a3c6f">捕获值</h4>
+<div class="outline-text-4" id="text-org21a3c6f">
 <p>
 应满足捕获项的格式
 </p>
@@ -321,10 +314,9 @@ port 25 and portrange 110-143
 </div>
 </div>
 </div>
-
-<div id="outline-container-org5f074c2" class="outline-3">
-<h3 id="org5f074c2">数据包解析</h3>
-<div class="outline-text-3" id="text-org5f074c2">
+<div id="outline-container-org1d36982" class="outline-3">
+<h3 id="org1d36982">数据包解析</h3>
+<div class="outline-text-3" id="text-org1d36982">
 <ul class="org-ul">
 <li>Protocol in frame</li>
 </ul>
@@ -367,10 +359,9 @@ port 25 and portrange 110-143
 </p>
 </div>
 </div>
-
-<div id="outline-container-org8dc7fc6" class="outline-3">
-<h3 id="org8dc7fc6">捕获远程主机数据包</h3>
-<div class="outline-text-3" id="text-org8dc7fc6">
+<div id="outline-container-org9b51d38" class="outline-3">
+<h3 id="org9b51d38">捕获远程主机数据包</h3>
+<div class="outline-text-3" id="text-org9b51d38">
 <ul class="org-ul">
 <li>需要在被远程捕获的设备上安装 WinPcap，并且该程序运行此应用程序</li>
 <li>网络可达，默认 2002 端口</li>
@@ -386,10 +377,9 @@ port 25 and portrange 110-143
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-f74ee637-220d-44c1-8049-32559ba21103" class="outline-2">
-<h2 id="ID-f74ee637-220d-44c1-8049-32559ba21103">HTTPS 取证</h2>
-<div class="outline-text-2" id="text-ID-f74ee637-220d-44c1-8049-32559ba21103">
+<div id="outline-container-org7d503ed" class="outline-2">
+<h2 id="org7d503ed">HTTPS 取证</h2>
+<div class="outline-text-2" id="text-org7d503ed">
 <ol class="org-ol">
 <li>用服务端的私钥
 编辑-&gt;首选项-&gt;Protocol-&gt;TLS-&gt;RSA keys list</li>
@@ -402,10 +392,9 @@ port 25 and portrange 110-143
 </p>
 </div>
 </div>
-
-<div id="outline-container-ID-fc764106-fe91-4d27-9655-b3daa38fa2e3" class="outline-2">
-<h2 id="ID-fc764106-fe91-4d27-9655-b3daa38fa2e3">图片取证</h2>
-<div class="outline-text-2" id="text-ID-fc764106-fe91-4d27-9655-b3daa38fa2e3">
+<div id="outline-container-org42d652c" class="outline-2">
+<h2 id="org42d652c">图片取证</h2>
+<div class="outline-text-2" id="text-org42d652c">
 <ol class="org-ol">
 <li>利用 <code>http contains xxx</code> 定位到请求图片的包</li>
 <li>追踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a>/<a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a> 流</li>
@@ -415,21 +404,20 @@ port 25 and portrange 110-143
 </ol>
 
 
-<figure id="orgcb383b7">
-<img src="../images/wireshark_jepg_obtain_evidence_1.png" alt="wireshark_jepg_obtain_evidence_1.png">
+<figure id="orgec9d311">
+<img src="./../images/wireshark_jepg_obtain_evidence_1.png" alt="wireshark_jepg_obtain_evidence_1.png">
 
 </figure>
 
-<figure id="orgb0faf44">
-<img src="../images/wireshark_jepg_obtain_evidence_2.png" alt="wireshark_jepg_obtain_evidence_2.png">
+<figure id="orgc561dd8">
+<img src="./../images/wireshark_jepg_obtain_evidence_2.png" alt="wireshark_jepg_obtain_evidence_2.png">
 
 </figure>
 </div>
 </div>
-
-<div id="outline-container-ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3" class="outline-2">
-<h2 id="ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3">AIM 取证</h2>
-<div class="outline-text-2" id="text-ID-11bcbe39-ddf3-4d2f-a460-fee217bb36d3">
+<div id="outline-container-org91eaf47" class="outline-2">
+<h2 id="org91eaf47">AIM 取证</h2>
+<div class="outline-text-2" id="text-org91eaf47">
 <p>
 类比于聊天软件的取证分析。
 </p>
@@ -439,16 +427,14 @@ Wireshark 支持 AIM 解密，右键 -&gt; decode as -&gt; <a href="20220715-tcp
 </p>
 
 
-<figure id="orge00f8ee">
-<img src="../images/wireshark_aim_obtain_evidence_1.png" alt="wireshark_aim_obtain_evidence_1.png">
+<figure id="org77fcd5d">
+<img src="./../images/wireshark_aim_obtain_evidence_1.png" alt="wireshark_aim_obtain_evidence_1.png">
 
 </figure>
 </div>
-
-
-<div id="outline-container-org7483a23" class="outline-4">
-<h4 id="org7483a23">前置问题</h4>
-<div class="outline-text-4" id="text-org7483a23">
+<div id="outline-container-org52ebb05" class="outline-4">
+<h4 id="org52ebb05">前置问题</h4>
+<div class="outline-text-4" id="text-org52ebb05">
 <ul class="org-ul">
 <li>What is the name of Ann&rsquo;s IM buddy?</li>
 <li>What was the first comment in the captured IM conversation?</li>
@@ -459,16 +445,15 @@ Wireshark 支持 AIM 解密，右键 -&gt; decode as -&gt; <a href="20220715-tcp
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgcf29695" class="outline-4">
-<h4 id="orgcf29695">1</h4>
-<div class="outline-text-4" id="text-orgcf29695">
+<div id="outline-container-org01229b5" class="outline-4">
+<h4 id="org01229b5">1</h4>
+<div class="outline-text-4" id="text-org01229b5">
 <p>
 解密 AIM 数据包后，找到协议为 AIM Message 的数据包
 </p>
 
-<figure id="org8d99fe2">
-<img src="../images/wireshark_aim_obtain_evidence_2.png" alt="wireshark_aim_obtain_evidence_2.png">
+<figure id="orgfd06f9a">
+<img src="./../images/wireshark_aim_obtain_evidence_2.png" alt="wireshark_aim_obtain_evidence_2.png">
 
 </figure>
 
@@ -477,10 +462,9 @@ Buddy 为 Sec558user1
 </p>
 </div>
 </div>
-
-<div id="outline-container-org87a95cd" class="outline-4">
-<h4 id="org87a95cd">2</h4>
-<div class="outline-text-4" id="text-org87a95cd">
+<div id="outline-container-orgc4f39d9" class="outline-4">
+<h4 id="orgc4f39d9">2</h4>
+<div class="outline-text-4" id="text-orgc4f39d9">
 <p>
 从 1 中的包中的 Message Block 中可以得到第一条消息的内容，即
 </p>
@@ -490,16 +474,15 @@ Buddy 为 Sec558user1
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd45c71f" class="outline-4">
-<h4 id="orgd45c71f">3</h4>
-<div class="outline-text-4" id="text-orgd45c71f">
+<div id="outline-container-org16e38ee" class="outline-4">
+<h4 id="org16e38ee">3</h4>
+<div class="outline-text-4" id="text-org16e38ee">
 <p>
 输入 data 进行筛选，跟踪 <a href="20220715-tcp.html#ID-ab245058-bb20-4a0e-b171-fde19a26b2ff">TCP</a> 流，找到文件名
 </p>
 
-<figure id="org926e78f">
-<img src="../images/wireshark_aim_obtain_evidence_3.png" alt="wireshark_aim_obtain_evidence_3.png">
+<figure id="org90ebad5">
+<img src="./../images/wireshark_aim_obtain_evidence_3.png" alt="wireshark_aim_obtain_evidence_3.png">
 
 </figure>
 
@@ -508,21 +491,20 @@ Buddy 为 Sec558user1
 </p>
 </div>
 </div>
-
-<div id="outline-container-org7a405ef" class="outline-4">
-<h4 id="org7a405ef">4</h4>
-<div class="outline-text-4" id="text-org7a405ef">
+<div id="outline-container-orgaafe81c" class="outline-4">
+<h4 id="orgaafe81c">4</h4>
+<div class="outline-text-4" id="text-orgaafe81c">
 <p>
 选择 Ann 发送的数据，以原始数据 save as -&gt; recipe.bin
 </p>
 
-<figure id="orgcc88dc0">
-<img src="../images/wireshark_aim_obtain_evidence_4.png" alt="wireshark_aim_obtain_evidence_4.png">
+<figure id="org1e084c7">
+<img src="./../images/wireshark_aim_obtain_evidence_4.png" alt="wireshark_aim_obtain_evidence_4.png">
 
 </figure>
 
-<figure id="orgc52f8a9">
-<img src="../images/wireshark_aim_obtain_evidence_5.png" alt="wireshark_aim_obtain_evidence_5.png">
+<figure id="org2f6dc44">
+<img src="./../images/wireshark_aim_obtain_evidence_5.png" alt="wireshark_aim_obtain_evidence_5.png">
 
 </figure>
 
@@ -531,35 +513,31 @@ magic number 为 50 4B 03 04
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgd937c66" class="outline-4">
-<h4 id="orgd937c66">5</h4>
-<div class="outline-text-4" id="text-orgd937c66">
+<div id="outline-container-orgfe10896" class="outline-4">
+<h4 id="orgfe10896">5</h4>
+<div class="outline-text-4" id="text-orgfe10896">
 <p>
 计算文件 MD5。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb9a4795" class="outline-4">
-<h4 id="orgb9a4795">6</h4>
-<div class="outline-text-4" id="text-orgb9a4795">
+<div id="outline-container-org2b2a6d9" class="outline-4">
+<h4 id="org2b2a6d9">6</h4>
+<div class="outline-text-4" id="text-org2b2a6d9">
 <p>
 删除 magic number 之前的数据，另存为 docx 文件即可
 </p>
 
-<figure id="org7ba91a2">
-<img src="../images/wireshark_aim_obtain_evidence_6.png" alt="wireshark_aim_obtain_evidence_6.png">
+<figure id="orge687add">
+<img src="./../images/wireshark_aim_obtain_evidence_6.png" alt="wireshark_aim_obtain_evidence_6.png">
 
 </figure>
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-ID-d92036a4-851d-42e7-aec9-5c698f5aa94d" class="outline-2">
-<h2 id="ID-d92036a4-851d-42e7-aec9-5c698f5aa94d">邮件取证</h2>
-<div class="outline-text-2" id="text-ID-d92036a4-851d-42e7-aec9-5c698f5aa94d">
+<div id="outline-container-orgcfc7970" class="outline-2">
+<h2 id="orgcfc7970">邮件取证</h2>
+<div class="outline-text-2" id="text-orgcfc7970">
 <p>
 以 SMTP 为例子，若要解决用户认证，如果没加密的话可根据 334 状态码可以找到用户名和密码， base64 解码后就可得到用户名和密码
 </p>
@@ -579,8 +557,8 @@ admin
 </div>
 
 
-<figure id="org40e8a4d">
-<img src="../images/wireshark_email_obtain_evidence_1.png" alt="wireshark_email_obtain_evidence_1.png">
+<figure id="orgf9b95cb">
+<img src="./../images/wireshark_email_obtain_evidence_1.png" alt="wireshark_email_obtain_evidence_1.png">
 
 </figure>
 
@@ -588,8 +566,8 @@ admin
 邮件基本信息、正文
 </p>
 
-<figure id="org7472095">
-<img src="../images/wireshark_email_obtain_evidence_2.png" alt="wireshark_email_obtain_evidence_2.png">
+<figure id="orgc8fedd7">
+<img src="./../images/wireshark_email_obtain_evidence_2.png" alt="wireshark_email_obtain_evidence_2.png">
 
 </figure>
 
@@ -597,27 +575,25 @@ admin
 邮件附件
 </p>
 
-<figure id="org15c6a7d">
-<img src="../images/wireshark_email_obtain_evidence_3.png" alt="wireshark_email_obtain_evidence_3.png">
+<figure id="org229b238">
+<img src="./../images/wireshark_email_obtain_evidence_3.png" alt="wireshark_email_obtain_evidence_3.png">
 
 </figure>
 </div>
 </div>
-
-<div id="outline-container-orgecab478" class="outline-2">
-<h2 id="orgecab478">附件</h2>
-<div class="outline-text-2" id="text-orgecab478">
+<div id="outline-container-org7e2f9b1" class="outline-2">
+<h2 id="org7e2f9b1">附件</h2>
+<div class="outline-text-2" id="text-org7e2f9b1">
 <p>
-<a href="../resources/wireshark_http_with_jepgs.cap">../resources/wireshark_http_with_jepgs.cap</a>
-<a href="../resources/wireshark_evidence01.pcap">../resources/wireshark_evidence01.pcap</a>
-<a href="../resources/wireshark_email.pcap">../resources/wireshark_email.pcap</a>
+<a href="./../resources/wireshark_http_with_jepgs.cap">./../resources/wireshark_http_with_jepgs.cap</a>
+<a href="./../resources/wireshark_evidence01.pcap">./../resources/wireshark_evidence01.pcap</a>
+<a href="./../resources/wireshark_email.pcap">./../resources/wireshark_email.pcap</a>
 </p>
 </div>
 </div>
-
-<div id="outline-container-ID-6e2b5695-8c56-43db-bc20-6a18802ea836" class="outline-2">
-<h2 id="ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</h2>
-<div class="outline-text-2" id="text-ID-6e2b5695-8c56-43db-bc20-6a18802ea836">
+<div id="outline-container-org0a17ef6" class="outline-2">
+<h2 id="org0a17ef6">tcpdump</h2>
+<div class="outline-text-2" id="text-org0a17ef6">
 <p>
 Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -&gt; iptables -&gt; application -&gt; iptables -&gt; tcpdump -&gt; packet</code> 。
 </p>
@@ -783,7 +759,7 @@ Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -
 </table>
 
 <p>
-<a href="#ID-ef271e3d-eb0b-445e-b142-87ce48b892bd">捕获过滤器</a>可以抓取符合条件的数据包。
+<a href="#orgb56d486">捕获过滤器</a>可以抓取符合条件的数据包。
 </p>
 
 <p>
@@ -804,7 +780,7 @@ Linux 系统下的抓包程序，数据包流程： <code>packet -&gt; tcpdump -
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

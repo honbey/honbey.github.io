@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-0144</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,20 +27,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1a29f3b">Introduction - Eternal Blue</a>
+<li><a href="#org7971cc0">Introduction - Eternal Blue</a>
 <ul>
-<li><a href="#orgc6ee3ae">步骤</a></li>
-<li><a href="#org45fc91a">Tips</a></li>
-<li><a href="#org4eb6404">参考链接</a></li>
+<li><a href="#org2e639cf">步骤</a></li>
+<li><a href="#org4b6108d">Tips</a></li>
+<li><a href="#org30915ac">参考链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org1a29f3b" class="outline-2">
-<h2 id="org1a29f3b">Introduction - Eternal Blue</h2>
-<div class="outline-text-2" id="text-org1a29f3b">
+<div id="outline-container-org7971cc0" class="outline-2">
+<h2 id="org7971cc0">Introduction - Eternal Blue</h2>
+<div class="outline-text-2" id="text-org7971cc0">
 <p>
 利用 Metasploit 中针对 ms17-101 漏洞的攻击载荷进行攻击获取主机控制权限。“永恒之蓝”的原理主要是扫描所有开放 445 文件共享端口的 Windows 机器。445 端口可以在局域网中轻松访问各种共享文件夹或共享打印机。
 </p>
@@ -46,10 +49,9 @@
 <li>Target Machine: Windows 7 Ultimate x64</li>
 </ul>
 </div>
-
-<div id="outline-container-orgc6ee3ae" class="outline-3">
-<h3 id="orgc6ee3ae">步骤</h3>
-<div class="outline-text-3" id="text-orgc6ee3ae">
+<div id="outline-container-org2e639cf" class="outline-3">
+<h3 id="org2e639cf">步骤</h3>
+<div class="outline-text-3" id="text-org2e639cf">
 <ol class="org-ol">
 <li><p>
 Bash
@@ -104,10 +106,9 @@ Bash
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org45fc91a" class="outline-3">
-<h3 id="org45fc91a">Tips</h3>
-<div class="outline-text-3" id="text-org45fc91a">
+<div id="outline-container-org4b6108d" class="outline-3">
+<h3 id="org4b6108d">Tips</h3>
+<div class="outline-text-3" id="text-org4b6108d">
 <p>
 The Below OS version may cause Blue Screen and cannot use successfully:
 </p>
@@ -122,10 +123,9 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 </p>
 </div>
 </div>
-
-<div id="outline-container-org4eb6404" class="outline-3">
-<h3 id="org4eb6404">参考链接</h3>
-<div class="outline-text-3" id="text-org4eb6404">
+<div id="outline-container-org30915ac" class="outline-3">
+<h3 id="org30915ac">参考链接</h3>
+<div class="outline-text-3" id="text-org30915ac">
 <ol class="org-ol">
 <li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0144">cve.mitre.org</a></li>
 </ol>
@@ -136,7 +136,7 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

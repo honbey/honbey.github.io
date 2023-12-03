@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,21 +27,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-c31e51cf-dba3-46de-a06b-a2160fda517b">Synchronous/Asynchronous</a></li>
-<li><a href="#org533a68c">Linux 事件模型</a>
+<li><a href="#org43874ea">Synchronous/Asynchronous</a></li>
+<li><a href="#org111fa35">Linux 事件模型</a>
 <ul>
-<li><a href="#ID-c0498ec3-4006-482e-aefe-373f01d46b3e">epoll</a></li>
+<li><a href="#org136ab4c">epoll</a></li>
 </ul>
 </li>
-<li><a href="#ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">Python 异步编程</a></li>
-<li><a href="#org83b90c7">Reference</a></li>
+<li><a href="#orgf26db68">Python 异步编程</a></li>
+<li><a href="#org2509733">Reference</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-c31e51cf-dba3-46de-a06b-a2160fda517b" class="outline-2">
-<h2 id="ID-c31e51cf-dba3-46de-a06b-a2160fda517b">Synchronous/Asynchronous</h2>
-<div class="outline-text-2" id="text-ID-c31e51cf-dba3-46de-a06b-a2160fda517b">
+<div id="outline-container-org43874ea" class="outline-2">
+<h2 id="org43874ea">Synchronous/Asynchronous</h2>
+<div class="outline-text-2" id="text-org43874ea">
 <p>
 同步/异步关注任务运行之后需不需要处理。
 </p>
@@ -72,28 +75,26 @@ Concurrency(Simultaneous) / Parallel
 </blockquote>
 
 <p>
-<a href="#ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">Python 异步编程</a>
+<a href="#orgf26db68">Python 异步编程</a>
 </p>
 </div>
 </div>
-
-<div id="outline-container-org533a68c" class="outline-2">
-<h2 id="org533a68c">Linux 事件模型</h2>
-<div class="outline-text-2" id="text-org533a68c">
+<div id="outline-container-org111fa35" class="outline-2">
+<h2 id="org111fa35">Linux 事件模型</h2>
+<div class="outline-text-2" id="text-org111fa35">
 </div>
-<div id="outline-container-ID-c0498ec3-4006-482e-aefe-373f01d46b3e" class="outline-3">
-<h3 id="ID-c0498ec3-4006-482e-aefe-373f01d46b3e">epoll</h3>
-<div class="outline-text-3" id="text-ID-c0498ec3-4006-482e-aefe-373f01d46b3e">
+<div id="outline-container-org136ab4c" class="outline-3">
+<h3 id="org136ab4c">epoll</h3>
+<div class="outline-text-3" id="text-org136ab4c">
 <p>
 当事件没准备好时，放到 epoll 里面，事件准备好了就去读写。当读写返回 EAGAIN 时，将它再次加入到 epoll 里面。这样，只要有事件准备好了就去处理它，只有当事件没准备好时，才在 epoll 里面等着。
 </p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c" class="outline-2">
-<h2 id="ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">Python 异步编程</h2>
-<div class="outline-text-2" id="text-ID-24b8d897-0d6f-4fdf-8574-9bd6ce775a5c">
+<div id="outline-container-orgf26db68" class="outline-2">
+<h2 id="orgf26db68">Python 异步编程</h2>
+<div class="outline-text-2" id="text-orgf26db68">
 <p>
 使用 Python 3.4 起引入的 <code>asyncio</code> 标准库实现。
 </p>
@@ -109,16 +110,15 @@ Concurrency(Simultaneous) / Parallel
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="org6a411c6">
-<img src="../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
+<figure id="orgc54107a">
+<img src="./../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>
 </div>
 </div>
-
-<div id="outline-container-org83b90c7" class="outline-2">
-<h2 id="org83b90c7">Reference</h2>
-<div class="outline-text-2" id="text-org83b90c7">
+<div id="outline-container-org2509733" class="outline-2">
+<h2 id="org2509733">Reference</h2>
+<div class="outline-text-2" id="text-org2509733">
 <ul class="org-ul">
 <li><a href="https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html">https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html</a></li>
 </ul>
@@ -128,7 +128,7 @@ asyncio 模块在单线程上启动一个事件循环（event loop），时刻�
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

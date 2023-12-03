@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Info Scan</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,48 +27,46 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbe3e829">Layer 2</a></li>
-<li><a href="#orgd0c6895">Layer 3</a></li>
-<li><a href="#org4b8b99b">Layer 4</a></li>
-<li><a href="#org0dff648">Layer 7</a>
+<li><a href="#org586f82f">Layer 2</a></li>
+<li><a href="#org386c2b4">Layer 3</a></li>
+<li><a href="#org20849ab">Layer 4</a></li>
+<li><a href="#org72c03ed">Layer 7</a>
 <ul>
-<li><a href="#ID-40c8758d-0aca-416a-9bd1-45d15719f156">Detect which WAF is protecting a website</a></li>
+<li><a href="#org4624b95">Detect which WAF is protecting a website</a></li>
 </ul>
 </li>
-<li><a href="#ID-19412167-0847-4b0d-9235-bed2153e2961">Nmap</a></li>
-<li><a href="#ID-a30939c0-6d6b-4068-9add-88aae510244d">Attack Surface</a></li>
+<li><a href="#orgf9ff008">Nmap</a></li>
+<li><a href="#org189dee6">Attack Surface</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgbe3e829" class="outline-2">
-<h2 id="orgbe3e829">Layer 2</h2>
-<div class="outline-text-2" id="text-orgbe3e829">
+<div id="outline-container-org586f82f" class="outline-2">
+<h2 id="org586f82f">Layer 2</h2>
+<div class="outline-text-2" id="text-org586f82f">
 <div class="org-src-container">
 <pre class="src src-nil">arping
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd0c6895" class="outline-2">
-<h2 id="orgd0c6895">Layer 3</h2>
+<div id="outline-container-org386c2b4" class="outline-2">
+<h2 id="org386c2b4">Layer 3</h2>
 </div>
 
-<div id="outline-container-org4b8b99b" class="outline-2">
-<h2 id="org4b8b99b">Layer 4</h2>
+<div id="outline-container-org20849ab" class="outline-2">
+<h2 id="org20849ab">Layer 4</h2>
 </div>
 
-<div id="outline-container-org0dff648" class="outline-2">
-<h2 id="org0dff648">Layer 7</h2>
-<div class="outline-text-2" id="text-org0dff648">
+<div id="outline-container-org72c03ed" class="outline-2">
+<h2 id="org72c03ed">Layer 7</h2>
+<div class="outline-text-2" id="text-org72c03ed">
 </div>
-<div id="outline-container-ID-40c8758d-0aca-416a-9bd1-45d15719f156" class="outline-3">
-<h3 id="ID-40c8758d-0aca-416a-9bd1-45d15719f156">Detect which WAF is protecting a website</h3>
-<div class="outline-text-3" id="text-ID-40c8758d-0aca-416a-9bd1-45d15719f156">
+<div id="outline-container-org4624b95" class="outline-3">
+<h3 id="org4624b95">Detect which WAF is protecting a website</h3>
+<div class="outline-text-3" id="text-org4624b95">
 <ul class="org-ul">
 <li><p>
-<a href="#ID-19412167-0847-4b0d-9235-bed2153e2961">nmap</a>
+<a href="#orgf9ff008">nmap</a>
 </p>
 <div class="org-src-container">
 <pre class="src src-nil">nmap --script=http-waf-fingerprint targetwebsite.com
@@ -78,15 +80,14 @@
 </div>
 </div>
 </div>
-<div id="outline-container-ID-19412167-0847-4b0d-9235-bed2153e2961" class="outline-2">
-<h2 id="ID-19412167-0847-4b0d-9235-bed2153e2961">Nmap</h2>
-<div class="outline-text-2" id="text-ID-19412167-0847-4b0d-9235-bed2153e2961">
+<div id="outline-container-orgf9ff008" class="outline-2">
+<h2 id="orgf9ff008">Nmap</h2>
+<div class="outline-text-2" id="text-orgf9ff008">
 </div>
 </div>
-
-<div id="outline-container-ID-a30939c0-6d6b-4068-9add-88aae510244d" class="outline-2">
-<h2 id="ID-a30939c0-6d6b-4068-9add-88aae510244d">Attack Surface</h2>
-<div class="outline-text-2" id="text-ID-a30939c0-6d6b-4068-9add-88aae510244d">
+<div id="outline-container-org189dee6" class="outline-2">
+<h2 id="org189dee6">Attack Surface</h2>
+<div class="outline-text-2" id="text-org189dee6">
 <p>
 攻击面：任何能使网络资产在未授权的情况下能被访问和利用的所有可能入口的总和。
 </p>
@@ -140,7 +141,7 @@
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

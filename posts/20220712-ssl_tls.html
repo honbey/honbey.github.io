@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSL/TLS</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -55,39 +59,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS Protocol</a></li>
-<li><a href="#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS 通信过程</a>
+<li><a href="#orgc0d561f">SSL/TLS Protocol</a></li>
+<li><a href="#org6855e1f">HTTPS 通信过程</a>
 <ul>
-<li><a href="#ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">SSL Handshake 阶段交换的信息</a></li>
+<li><a href="#org3760e8f">SSL Handshake 阶段交换的信息</a></li>
 </ul>
 </li>
-<li><a href="#ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">SSL Cipher</a></li>
-<li><a href="#org9647813">离散对数 DH 算法</a>
+<li><a href="#org117a1b3">SSL Cipher</a></li>
+<li><a href="#org1aaed09">离散对数 DH 算法</a>
 <ul>
-<li><a href="#org9ad8ae3">DHE 密钥交换</a></li>
-<li><a href="#org1292fda">ECDHE</a></li>
+<li><a href="#org23b579f">DHE 密钥交换</a></li>
+<li><a href="#org8f9804e">ECDHE</a></li>
 </ul>
 </li>
-<li><a href="#ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</a>
+<li><a href="#org2492cd6">TLS session resumption</a>
 <ul>
-<li><a href="#org714ccb8">Session ID</a></li>
-<li><a href="#orgd329a41">Session Ticket</a></li>
-<li><a href="#org4fe6999">Pre-shared Key</a></li>
+<li><a href="#orgd4ce1c1">Session ID</a></li>
+<li><a href="#orgf0dd84a">Session Ticket</a></li>
+<li><a href="#org5118ddf">Pre-shared Key</a></li>
 </ul>
 </li>
-<li><a href="#orgc0a3d9f">TLS Extension</a>
+<li><a href="#orgf91c482">TLS Extension</a>
 <ul>
-<li><a href="#orgc758caf">ALPN</a></li>
+<li><a href="#org05091c4">ALPN</a></li>
 </ul>
 </li>
-<li><a href="#org99f6f27">Digital Certificate</a></li>
-<li><a href="#org3c61da9">Reference</a></li>
+<li><a href="#org5d853c7">Digital Certificate</a></li>
+<li><a href="#orgda6c28a">Reference</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607" class="outline-2">
-<h2 id="ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">SSL/TLS Protocol</h2>
-<div class="outline-text-2" id="text-ID-44e0bf69-f6f2-4a2c-99e6-03fd81a5b607">
+<div id="outline-container-orgc0d561f" class="outline-2">
+<h2 id="orgc0d561f">SSL/TLS Protocol</h2>
+<div class="outline-text-2" id="text-orgc0d561f">
 <p>
 Secure Sockert Layer/Transport Layer Security
 </p>
@@ -112,10 +116,9 @@ SSL 记录协议负责对上层的数据进行分块、压缩、计算并添加 
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-6e2417e2-47b1-4a17-bedc-665791718239" class="outline-2">
-<h2 id="ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS 通信过程</h2>
-<div class="outline-text-2" id="text-ID-6e2417e2-47b1-4a17-bedc-665791718239">
+<div id="outline-container-org6855e1f" class="outline-2">
+<h2 id="org6855e1f">HTTPS 通信过程</h2>
+<div class="outline-text-2" id="text-org6855e1f">
 <ol class="org-ol">
 <li><p>
 TCP 三次握手
@@ -164,10 +167,9 @@ Application Data      &lt;-----&gt;       Application Data
 </div></li>
 </ol>
 </div>
-
-<div id="outline-container-ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad" class="outline-3">
-<h3 id="ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">SSL Handshake 阶段交换的信息</h3>
-<div class="outline-text-3" id="text-ID-c7c9c364-6e46-4a35-a54f-09158c3a12ad">
+<div id="outline-container-org3760e8f" class="outline-3">
+<h3 id="org3760e8f">SSL Handshake 阶段交换的信息</h3>
+<div class="outline-text-3" id="text-org3760e8f">
 <p>
 ClientHello:
 </p>
@@ -175,7 +177,7 @@ ClientHello:
 <li>TLS Version</li>
 <li>Client Random</li>
 <li>(Sessio ID)</li>
-<li><a href="#ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">Cipher</a> Suites</li>
+<li><a href="#org117a1b3">Cipher</a> Suites</li>
 </ul>
 
 <p>
@@ -224,10 +226,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438" class="outline-2">
-<h2 id="ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">SSL Cipher</h2>
-<div class="outline-text-2" id="text-ID-c9b75cc3-fbd0-4fcd-9047-ea26e9c34438">
+<div id="outline-container-org117a1b3" class="outline-2">
+<h2 id="org117a1b3">SSL Cipher</h2>
+<div class="outline-text-2" id="text-org117a1b3">
 <p>
 例如： <code>TLS_RSA_WITH_AES_128_GCM_SHA256</code>
 是由 密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法 组成。
@@ -247,10 +248,9 @@ pre master 的存在在于 ssl 协议不信任每个主机都能产生完全随�
 </p>
 </div>
 </div>
-
-<div id="outline-container-org9647813" class="outline-2">
-<h2 id="org9647813">离散对数 DH 算法</h2>
-<div class="outline-text-2" id="text-org9647813">
+<div id="outline-container-org1aaed09" class="outline-2">
+<h2 id="org1aaed09">离散对数 DH 算法</h2>
+<div class="outline-text-2" id="text-org1aaed09">
 <p>
 <a href="20220712-discrete_logarithm.html#ID-455a29f5-1968-4678-a091-f8383b31e817">Discrete Logarithm</a> - 离散对数
 </p>
@@ -292,10 +292,9 @@ Bob:   Calculate \(A^{b} \mod P\) 同样也是得到 K ，于是双方以 K 作�
 此算法在服务器固定 DH 公私钥时被称为 static DH ，现在已经基本不用了，转而使用 DHE(Diffie Hellman Ephemeral) 算法，即双方每次通信时都随机生成一对公私钥。
 </p>
 </div>
-
-<div id="outline-container-org9ad8ae3" class="outline-3">
-<h3 id="org9ad8ae3">DHE 密钥交换</h3>
-<div class="outline-text-3" id="text-org9ad8ae3">
+<div id="outline-container-org23b579f" class="outline-3">
+<h3 id="org23b579f">DHE 密钥交换</h3>
+<div class="outline-text-3" id="text-org23b579f">
 <blockquote>
 <p>
 Diffie Hellman
@@ -327,10 +326,9 @@ PubKey_S + PriKey_C -&gt; master &lt;- PubKey_C + PriKey_S
 </p>
 </div>
 </div>
-
-<div id="outline-container-org1292fda" class="outline-3">
-<h3 id="org1292fda">ECDHE</h3>
-<div class="outline-text-3" id="text-org1292fda">
+<div id="outline-container-org8f9804e" class="outline-3">
+<h3 id="org8f9804e">ECDHE</h3>
+<div class="outline-text-3" id="text-org8f9804e">
 <p>
 提高 DHE 的性能，使用 ECC 椭圆曲线的特性计算公钥及会话密钥。过程：
 </p>
@@ -431,18 +429,16 @@ DHE 安全性论文：
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-334fbed6-d0b8-4818-876c-61f6b7cc4335" class="outline-2">
-<h2 id="ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">TLS session resumption</h2>
-<div class="outline-text-2" id="text-ID-334fbed6-d0b8-4818-876c-61f6b7cc4335">
+<div id="outline-container-org2492cd6" class="outline-2">
+<h2 id="org2492cd6">TLS session resumption</h2>
+<div class="outline-text-2" id="text-org2492cd6">
 <p>
 <b>Session ID 和 Session Ticket 都不满足<a href="20220708-information_security.html#ID-7454fb68-68de-4c17-b738-476cb79ed1fb">前向安全</a>，一旦加密会话密钥的密钥被破解或泄漏，前面被截获的报文都会被破解。以下三种会话复用技术都且无法抵御重放攻击。</b>
 </p>
 </div>
-
-<div id="outline-container-org714ccb8" class="outline-3">
-<h3 id="org714ccb8">Session ID</h3>
-<div class="outline-text-3" id="text-org714ccb8">
+<div id="outline-container-orgd4ce1c1" class="outline-3">
+<h3 id="orgd4ce1c1">Session ID</h3>
+<div class="outline-text-3" id="text-orgd4ce1c1">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，双方在内存中缓存会话密钥，并用唯一的 Session ID 来表示，即 Session ID 作为 key ，会话密钥作为 value 。
 当客户端再次连接时，在 HELLO 消息中带上 Session ID ，服务器收到后就会从内存找到该会话密钥，在 1 个 RTT 中建立 TLS 通信。
@@ -456,34 +452,31 @@ Session ID 定期失效。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgd329a41" class="outline-3">
-<h3 id="orgd329a41">Session Ticket</h3>
-<div class="outline-text-3" id="text-orgd329a41">
+<div id="outline-container-orgf0dd84a" class="outline-3">
+<h3 id="orgf0dd84a">Session Ticket</h3>
+<div class="outline-text-3" id="text-orgf0dd84a">
 <p>
 客户端和服务器首次 TLS 握手建立连接后，服务器会将会话密钥加密后作为 Ticket 发送给客户端，由客户端缓存该 Ticket。
 当客户端再次连接时，会发送 Ticket ，服务器解密后就可以获取上一次的会话密钥，验证有效期后无问题就可以建立 TLS 通信。
 </p>
 </div>
 </div>
-
-<div id="outline-container-org4fe6999" class="outline-3">
-<h3 id="org4fe6999">Pre-shared Key</h3>
-<div class="outline-text-3" id="text-org4fe6999">
+<div id="outline-container-org5118ddf" class="outline-3">
+<h3 id="org5118ddf">Pre-shared Key</h3>
+<div class="outline-text-3" id="text-org5118ddf">
 <p>
 类似 Session Ticket ，但可以直接在 HTTP 请求中带上 Pre-shared Key ，在 0 RTT 内恢复会话。
 </p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgc0a3d9f" class="outline-2">
-<h2 id="orgc0a3d9f">TLS Extension</h2>
-<div class="outline-text-2" id="text-orgc0a3d9f">
+<div id="outline-container-orgf91c482" class="outline-2">
+<h2 id="orgf91c482">TLS Extension</h2>
+<div class="outline-text-2" id="text-orgf91c482">
 </div>
-<div id="outline-container-orgc758caf" class="outline-3">
-<h3 id="orgc758caf">ALPN</h3>
-<div class="outline-text-3" id="text-orgc758caf">
+<div id="outline-container-org05091c4" class="outline-3">
+<h3 id="org05091c4">ALPN</h3>
+<div class="outline-text-3" id="text-org05091c4">
 <p>
 ALPN(Application Layer Protocol Negotiation) 是 TLS 的扩展，允许在安全连接的基础上进行应用层协议的协商。ALPN 支持任意应用层协议的协商，目前应用最多是 HTTP2 的协商。在 2016 年， ALPN 已经完全替代 NPN 了。
 </p>
@@ -496,10 +489,9 @@ ALPN allows the application layer to negotiate which protocol to use over the se
 </div>
 </div>
 </div>
-
-<div id="outline-container-org99f6f27" class="outline-2">
-<h2 id="org99f6f27">Digital Certificate</h2>
-<div class="outline-text-2" id="text-org99f6f27">
+<div id="outline-container-org5d853c7" class="outline-2">
+<h2 id="org5d853c7">Digital Certificate</h2>
+<div class="outline-text-2" id="text-org5d853c7">
 <p>
 key 通常指私钥。
 </p>
@@ -525,9 +517,9 @@ PEM, Privacy Enhanced Mail，以 &ldquo;-----BEGIN...&rdquo; 开头， &ldquo;--
 </p>
 </div>
 </div>
-<div id="outline-container-org3c61da9" class="outline-2">
-<h2 id="org3c61da9">Reference</h2>
-<div class="outline-text-2" id="text-org3c61da9">
+<div id="outline-container-orgda6c28a" class="outline-2">
+<h2 id="orgda6c28a">Reference</h2>
+<div class="outline-text-2" id="text-orgda6c28a">
 <ul class="org-ul">
 <li>图解网络-小林 coding-v3.0.pdf</li>
 </ul>
@@ -537,7 +529,7 @@ PEM, Privacy Enhanced Mail，以 &ldquo;-----BEGIN...&rdquo; 开头， &ldquo;--
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

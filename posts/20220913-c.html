@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C &amp; C++</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,30 +27,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C</a>
+<li><a href="#org22ab044">C</a>
 <ul>
-<li><a href="#org6081c25">Clockwise/Spiral Rule</a></li>
-<li><a href="#org0bc738a">Pointer</a></li>
-<li><a href="#org7c2c96a">library function</a>
+<li><a href="#org7ecd3a8">Clockwise/Spiral Rule</a></li>
+<li><a href="#orgc274e27">Pointer</a></li>
+<li><a href="#org4623268">library function</a>
 <ul>
-<li><a href="#orgc631788">printf() - stdio.h</a></li>
-<li><a href="#org275234d">memchr() - mem.h</a></li>
-<li><a href="#orge580b80">offsetof - stddef.h</a></li>
+<li><a href="#orgad15a9e">printf() - stdio.h</a></li>
+<li><a href="#orgfac2dbe">memchr() - mem.h</a></li>
+<li><a href="#org63e9d05">offsetof - stddef.h</a></li>
 </ul>
 </li>
-<li><a href="#org6dbe806">typedef</a></li>
-<li><a href="#orgd5433d7">struct</a></li>
-<li><a href="#orge79737f">array</a></li>
-<li><a href="#org1acfae3">memory</a></li>
+<li><a href="#org71c8522">typedef</a></li>
+<li><a href="#org21f967f">struct</a></li>
+<li><a href="#org00570f3">array</a></li>
+<li><a href="#org8ece7b3">memory</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-42ed9c4f-6798-4356-8e33-b4128375ece3" class="outline-2">
-<h2 id="ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C</h2>
-<div class="outline-text-2" id="text-ID-42ed9c4f-6798-4356-8e33-b4128375ece3">
+<div id="outline-container-org22ab044" class="outline-2">
+<h2 id="org22ab044">C</h2>
+<div class="outline-text-2" id="text-org22ab044">
 <ul class="org-ul">
 <li><a href="20220912-linux_fork.html#ID-fe4f5bde-dd07-4119-a55e-d994e263146b">Linux fork()</a></li>
 </ul>
@@ -57,24 +60,23 @@ a.out(assembler output) 最初是一种格式，已废弃，但名称保留下�
 </p>
 </blockquote>
 </div>
-
-<div id="outline-container-org6081c25" class="outline-3">
-<h3 id="org6081c25">Clockwise/Spiral Rule<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org6081c25">
+<div id="outline-container-org7ecd3a8" class="outline-3">
+<h3 id="org7ecd3a8">Clockwise/Spiral Rule<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org7ecd3a8">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #6434A3;">void</span> (*<span style="color: #006699;">signal</span>(<span style="color: #6434A3;">int</span>, <span style="color: #6434A3;">void</span> (*<span style="color: #006699;">fp</span>)(<span style="color: #6434A3;">int</span>)))(<span style="color: #6434A3;">int</span>);
 </pre>
 </div>
 
-<figure id="org8312b5e">
-<img src="../images/c_cpp_clockwise_spiral_rule_1.png" alt="c_cpp_clockwise_spiral_rule_1.png">
+<figure id="org4b5e652">
+<img src="./../images/c_cpp_clockwise_spiral_rule_1.png" alt="c_cpp_clockwise_spiral_rule_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org0bc738a" class="outline-3">
-<h3 id="org0bc738a">Pointer</h3>
-<div class="outline-text-3" id="text-org0bc738a">
+<div id="outline-container-orgc274e27" class="outline-3">
+<h3 id="orgc274e27">Pointer</h3>
+<div class="outline-text-3" id="text-orgc274e27">
 <p>
 指针与指针的相减操作，表示两个指针指向的内存位置之间相隔多少个元素(注意是元素，并不是字节数)。
 </p>
@@ -110,14 +112,13 @@ p = Func;         <span style="color: #8D8D84;">/* </span><span style="color: #8
 </div>
 </div>
 </div>
-
-<div id="outline-container-org7c2c96a" class="outline-3">
-<h3 id="org7c2c96a">library function</h3>
-<div class="outline-text-3" id="text-org7c2c96a">
+<div id="outline-container-org4623268" class="outline-3">
+<h3 id="org4623268">library function</h3>
+<div class="outline-text-3" id="text-org4623268">
 </div>
-<div id="outline-container-orgc631788" class="outline-4">
-<h4 id="orgc631788">printf() - stdio.h</h4>
-<div class="outline-text-4" id="text-orgc631788">
+<div id="outline-container-orgad15a9e" class="outline-4">
+<h4 id="orgad15a9e">printf() - stdio.h</h4>
+<div class="outline-text-4" id="text-orgad15a9e">
 <div class="org-src-container">
 <pre class="src src-nil">%5d 5位宽 整型
 
@@ -134,9 +135,9 @@ p = Func;         <span style="color: #8D8D84;">/* </span><span style="color: #8
 </div>
 </div>
 </div>
-<div id="outline-container-org275234d" class="outline-4">
-<h4 id="org275234d">memchr() - mem.h</h4>
-<div class="outline-text-4" id="text-org275234d">
+<div id="outline-container-orgfac2dbe" class="outline-4">
+<h4 id="orgfac2dbe">memchr() - mem.h</h4>
+<div class="outline-text-4" id="text-orgfac2dbe">
 <p>
 在参数 str 所指向的字符串的前 n 个字节中搜索第一次出现字符 c（一个无符号字符）的位置。
 </p>
@@ -146,9 +147,9 @@ p = Func;         <span style="color: #8D8D84;">/* </span><span style="color: #8
 </div>
 </div>
 </div>
-<div id="outline-container-orge580b80" class="outline-4">
-<h4 id="orge580b80">offsetof - stddef.h</h4>
-<div class="outline-text-4" id="text-orge580b80">
+<div id="outline-container-org63e9d05" class="outline-4">
+<h4 id="org63e9d05">offsetof - stddef.h</h4>
+<div class="outline-text-4" id="text-org63e9d05">
 <p>
 linux 宏定义函数 offsetof 是算出 MEMBER 在 TYPE 中的偏移：
 </p>
@@ -160,9 +161,9 @@ linux 宏定义函数 offsetof 是算出 MEMBER 在 TYPE 中的偏移：
 </div>
 </div>
 </div>
-<div id="outline-container-org6dbe806" class="outline-3">
-<h3 id="org6dbe806">typedef</h3>
-<div class="outline-text-3" id="text-org6dbe806">
+<div id="outline-container-org71c8522" class="outline-3">
+<h3 id="org71c8522">typedef</h3>
+<div class="outline-text-3" id="text-org71c8522">
 <p>
 typedef 关键字用于定义别名。
 一般用法：
@@ -201,18 +202,17 @@ typedef 关键字用于定义别名。
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd5433d7" class="outline-3">
-<h3 id="orgd5433d7">struct</h3>
-<div class="outline-text-3" id="text-orgd5433d7">
+<div id="outline-container-org21f967f" class="outline-3">
+<h3 id="org21f967f">struct</h3>
+<div class="outline-text-3" id="text-org21f967f">
 <p>
 结构体的 {, } 格式只能用于赋值时初始化，即声明并初始化，而不能直接赋值给一个已经声明的结构体变量。或按照 c99 标准先强制类型转换。
 </p>
 </div>
 </div>
-<div id="outline-container-orge79737f" class="outline-3">
-<h3 id="orge79737f">array</h3>
-<div class="outline-text-3" id="text-orge79737f">
+<div id="outline-container-org00570f3" class="outline-3">
+<h3 id="org00570f3">array</h3>
+<div class="outline-text-3" id="text-org00570f3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span>[<span style="color: #D0372D;">3</span>][<span style="color: #D0372D;">2</span>];
 </pre>
@@ -226,9 +226,9 @@ typedef 关键字用于定义别名。
 </ul>
 </div>
 </div>
-<div id="outline-container-org1acfae3" class="outline-3">
-<h3 id="org1acfae3">memory</h3>
-<div class="outline-text-3" id="text-org1acfae3">
+<div id="outline-container-org8ece7b3" class="outline-3">
+<h3 id="org8ece7b3">memory</h3>
+<div class="outline-text-3" id="text-org8ece7b3">
 <p>
 使用内存池分配内存有几点好处：
 </p>
@@ -257,7 +257,7 @@ typedef 关键字用于定义别名。
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

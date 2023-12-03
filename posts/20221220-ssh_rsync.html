@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ssh &amp; rsync</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,24 +27,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-32607c27-e117-4b1d-a8f3-32123113e067">ssh</a>
+<li><a href="#org0794226">ssh</a>
 <ul>
-<li><a href="#orga4eac20">端口转发</a></li>
-<li><a href="#org88bdd82">scp</a></li>
+<li><a href="#org2a70a62">端口转发</a></li>
+<li><a href="#org5cf068d">scp</a></li>
 </ul>
 </li>
-<li><a href="#ID-38097b63-339b-4788-a256-dce9ea28b6c7">rsync</a>
+<li><a href="#org10cefe5">rsync</a>
 <ul>
-<li><a href="#org3a4024f">增量备份</a></li>
+<li><a href="#org3c5836f">增量备份</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-32607c27-e117-4b1d-a8f3-32123113e067" class="outline-2">
-<h2 id="ID-32607c27-e117-4b1d-a8f3-32123113e067">ssh</h2>
-<div class="outline-text-2" id="text-ID-32607c27-e117-4b1d-a8f3-32123113e067">
+<div id="outline-container-org0794226" class="outline-2">
+<h2 id="org0794226">ssh</h2>
+<div class="outline-text-2" id="text-org0794226">
 <p>
 Secure Shell
 </p>
@@ -117,10 +120,9 @@ Handshake protocol: ServerHello
 ssh 命令参数：
 </p>
 </div>
-
-<div id="outline-container-orga4eac20" class="outline-3">
-<h3 id="orga4eac20">端口转发</h3>
-<div class="outline-text-3" id="text-orga4eac20">
+<div id="outline-container-org2a70a62" class="outline-3">
+<h3 id="org2a70a62">端口转发</h3>
+<div class="outline-text-3" id="text-org2a70a62">
 <p>
 动态转发指的是，本机与 SSH 服务器之间创建了一个加密连接，然后本机内部针对某个端口的通信，都通过这个加密连接转发。
 </p>
@@ -168,10 +170,9 @@ LocalForward client-IP:client-port server-IP:server-port
 </div>
 </div>
 </div>
-
-<div id="outline-container-org88bdd82" class="outline-3">
-<h3 id="org88bdd82">scp</h3>
-<div class="outline-text-3" id="text-org88bdd82">
+<div id="outline-container-org5cf068d" class="outline-3">
+<h3 id="org5cf068d">scp</h3>
+<div class="outline-text-3" id="text-org5cf068d">
 <p>
 语法类似 cp 命令，但远程主机要加 <code>:</code> 不然会复制到本地的当前目录。
 </p>
@@ -192,9 +193,9 @@ LocalForward client-IP:client-port server-IP:server-port
 </div>
 </div>
 </div>
-<div id="outline-container-ID-38097b63-339b-4788-a256-dce9ea28b6c7" class="outline-2">
-<h2 id="ID-38097b63-339b-4788-a256-dce9ea28b6c7">rsync</h2>
-<div class="outline-text-2" id="text-ID-38097b63-339b-4788-a256-dce9ea28b6c7">
+<div id="outline-container-org10cefe5" class="outline-2">
+<h2 id="org10cefe5">rsync</h2>
+<div class="outline-text-2" id="text-org10cefe5">
 <table>
 
 
@@ -389,10 +390,9 @@ LocalForward client-IP:client-port server-IP:server-port
 </tbody>
 </table>
 </div>
-
-<div id="outline-container-org3a4024f" class="outline-3">
-<h3 id="org3a4024f">增量备份</h3>
-<div class="outline-text-3" id="text-org3a4024f">
+<div id="outline-container-org3c5836f" class="outline-3">
+<h3 id="org3c5836f">增量备份</h3>
+<div class="outline-text-3" id="text-org3c5836f">
 <p>
 默认复制有变动的文件：
 </p>
@@ -411,7 +411,7 @@ LocalForward client-IP:client-port server-IP:server-port
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

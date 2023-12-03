@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,44 +27,46 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</a>
+<li><a href="#orgf9bcc5b">PowerShell</a>
 <ul>
-<li><a href="#orgd78a20d">Specific PowerShell as SSH terminal on Windows</a></li>
-<li><a href="#orge1400a1">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
-<li><a href="#orgcc86154">Batch rename file</a></li>
+<li><a href="#org5839e4e">Specific PowerShell as SSH terminal on Windows</a></li>
+<li><a href="#org64efbd2">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#orga5116a3">Batch rename file</a></li>
 </ul>
 </li>
-<li><a href="#org4df01f6">Registry</a>
+<li><a href="#orgde7e5f2">Registry</a>
 <ul>
-<li><a href="#org1f537c4">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
+<li><a href="#orgc855be2">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
 <ul>
-<li><a href="#org5525d68">Clear login record</a></li>
+<li><a href="#orgbd44e85">Clear login record</a></li>
 </ul>
 </li>
+<li><a href="#org505beae">Turn off search suggestions</a></li>
+<li><a href="#orgb9a67df">Turn off Windows update</a></li>
 </ul>
 </li>
-<li><a href="#orge136e03">Hyper-V</a>
+<li><a href="#org6c3ff92">Hyper-V</a>
 <ul>
-<li><a href="#orga7be71f">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
+<li><a href="#org95aab6c">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org39905df">Useful info</a>
+<li><a href="#orga92519a">Useful info</a>
 <ul>
-<li><a href="#org221c269">Automatic shutdown</a></li>
-<li><a href="#orgc0f6bdd">Operate disk</a></li>
+<li><a href="#orgf646c84">Automatic shutdown</a></li>
+<li><a href="#org2cd45a0">Operate disk</a></li>
+<li><a href="#org74c2f1a">Network Shell</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf" class="outline-2">
-<h2 id="ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</h2>
-<div class="outline-text-2" id="text-ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">
+<div id="outline-container-orgf9bcc5b" class="outline-2">
+<h2 id="orgf9bcc5b">PowerShell</h2>
+<div class="outline-text-2" id="text-orgf9bcc5b">
 </div>
-<div id="outline-container-orgd78a20d" class="outline-3">
-<h3 id="orgd78a20d">Specific PowerShell as SSH terminal on Windows</h3>
-<div class="outline-text-3" id="text-orgd78a20d">
+<div id="outline-container-org5839e4e" class="outline-3">
+<h3 id="org5839e4e">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-org5839e4e">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -71,10 +77,9 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Pr
 </div>
 </div>
 </div>
-
-<div id="outline-container-orge1400a1" class="outline-3">
-<h3 id="orge1400a1">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orge1400a1">
+<div id="outline-container-org64efbd2" class="outline-3">
+<h3 id="org64efbd2">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org64efbd2">
 <div class="org-src-container">
 <pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
 Remove-Item (Get-PSReadlineOption).HistorySavePath
@@ -82,10 +87,9 @@ Remove-Item (Get-PSReadlineOption).HistorySavePath
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgcc86154" class="outline-3">
-<h3 id="orgcc86154">Batch rename file</h3>
-<div class="outline-text-3" id="text-orgcc86154">
+<div id="outline-container-orga5116a3" class="outline-3">
+<h3 id="orga5116a3">Batch rename file</h3>
+<div class="outline-text-3" id="text-orga5116a3">
 <div class="org-src-container">
 <pre class="src src-powershell">Get-ChildItem -Recurse -Path . -File | %{$i=0}{Rename-Item $_.FullName -NewName (‘{0}\{1}{2}’ -f $_.DirectoryName, ++$i, $_.Extension)}
 
@@ -95,23 +99,21 @@ Get-ChildItem -Recurse -Path . -File | foreach {$i=0} {Rename-Item $_.FullName -
 </div>
 </div>
 </div>
-
-<div id="outline-container-org4df01f6" class="outline-2">
-<h2 id="org4df01f6">Registry</h2>
-<div class="outline-text-2" id="text-org4df01f6">
+<div id="outline-container-orgde7e5f2" class="outline-2">
+<h2 id="orgde7e5f2">Registry</h2>
+<div class="outline-text-2" id="text-orgde7e5f2">
 </div>
-<div id="outline-container-org1f537c4" class="outline-3">
-<h3 id="org1f537c4">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org1f537c4">
+<div id="outline-container-orgc855be2" class="outline-3">
+<h3 id="orgc855be2">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgc855be2">
 <div class="org-src-container">
 <pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org5525d68" class="outline-4">
-<h4 id="org5525d68">Clear login record</h4>
-<div class="outline-text-4" id="text-org5525d68">
+<div id="outline-container-orgbd44e85" class="outline-4">
+<h4 id="orgbd44e85">Clear login record</h4>
+<div class="outline-text-4" id="text-orgbd44e85">
 <div class="org-src-container">
 <pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
 reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
@@ -122,15 +124,32 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 </div>
+<div id="outline-container-org505beae" class="outline-3">
+<h3 id="org505beae">Turn off search suggestions</h3>
+<div class="outline-text-3" id="text-org505beae">
+<div class="org-src-container">
+<pre class="src src-bat">reg add <span style="color: #008000;">"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\explorer"</span> /<span style="color: #6434A3;">v</span> DisableSearchBoxSuggestions /<span style="color: #6434A3;">t</span> reg_dword /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">1</span> /<span style="color: #6434A3;">f</span>
+</pre>
 </div>
-
-<div id="outline-container-orge136e03" class="outline-2">
-<h2 id="orge136e03">Hyper-V</h2>
-<div class="outline-text-2" id="text-orge136e03">
 </div>
-<div id="outline-container-orga7be71f" class="outline-3">
-<h3 id="orga7be71f">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
-<div class="outline-text-3" id="text-orga7be71f">
+</div>
+<div id="outline-container-orgb9a67df" class="outline-3">
+<h3 id="orgb9a67df">Turn off Windows update</h3>
+<div class="outline-text-3" id="text-orgb9a67df">
+<div class="org-src-container">
+<pre class="src src-bat">reg add <span style="color: #008000;">"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings"</span> /<span style="color: #6434A3;">v</span> FlightSettingsMaxPauseDays /<span style="color: #6434A3;">t</span> reg_dword /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">3000</span> /<span style="color: #6434A3;">f</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6c3ff92" class="outline-2">
+<h2 id="org6c3ff92">Hyper-V</h2>
+<div class="outline-text-2" id="text-org6c3ff92">
+</div>
+<div id="outline-container-org95aab6c" class="outline-3">
+<h3 id="org95aab6c">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-org95aab6c">
 <ol class="org-ol">
 <li>Enter Debug mode</li>
 <li>Execute <code>mount -0 remount,re/mnt</code></li>
@@ -141,18 +160,16 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 </div>
-
-<div id="outline-container-org39905df" class="outline-2">
-<h2 id="org39905df">Useful info</h2>
-<div class="outline-text-2" id="text-org39905df">
+<div id="outline-container-orga92519a" class="outline-2">
+<h2 id="orga92519a">Useful info</h2>
+<div class="outline-text-2" id="text-orga92519a">
 <p>
 Software - UWP:
 </p>
 <ul class="org-ul">
 <li>WSL (Windows Subsystem of <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a>, not WSL2)</li>
 <li>Minecraft (<a href="minecraft.html#ID-d5529dd0-e6d0-4bcc-9afe-ca830e085acc">Bedrock Edition</a>)</li>
-<li>Windows Terminal</li>
-<li><a href="#ID-f5ce4f21-32d5-4101-a441-5128ad900ebf">PowerShell</a></li>
+<li><a href="#orgf9bcc5b">PowerShell</a></li>
 <li>QuickLook</li>
 <li>Translucent TB</li>
 <li>X410</li>
@@ -162,34 +179,57 @@ Software - UWP:
 Software - x86/x64:
 </p>
 <ul class="org-ul">
-<li>7zip</li>
 <li>Draw.io</li>
 <li>Huorong</li>
-<li>(×) SpeedPan X -&gt; LiuLiangPan</li>
+<li>LiuLiangPan</li>
 </ul>
 
 <p>
-Software - x86/x64 by scoop:
+Software - x86/x64 by scoop(<a href="https://github.com/ScoopInstaller/Install">https://github.com/ScoopInstaller/Install</a>):
 </p>
 <ul class="org-ul">
+<li>7zip</li>
+<li>aria2</li>
+<li><p>
+brave
+</p>
+<div class="org-src-container">
+<pre class="src src-bat">%% default <span style="color: #0000FF;">start</span> brave with profile
+mklink /<span style="color: #6434A3;">j</span> <span style="color: #008000;">"C:\Users\zhang\AppData\Local\BraveSoftware\Brave-Browser\"</span> <span style="color: #008000;">"C:\Users\zhang\scoop\persist\brave\"</span>
+</pre>
+</div></li>
 <li>captura</li>
+<li>caesium-image-compressor</li>
+<li>darktable</li>
 <li>dismplusplus</li>
 <li>ffmpeg</li>
+<li>everything</li>
+<li>gimp</li>
 <li>git</li>
+<li>git-crypt</li>
 <li><a href="20220802-webshell.html#ID-fa531bd4-b08a-4d29-9382-d02870aafede">ilspy</a> (.NET Decompiler)</li>
 <li>llvm</li>
 <li>lua</li>
+<li>lua-language-server</li>
 <li>make</li>
 <li>memreduct</li>
+<li>mpc-be</li>
+<li>musicplayer2</li>
 <li>neovim</li>
+<li>nodejs-lts</li>
 <li>obs-studio</li>
+<li>shotcut</li>
 <li>spacesniffer (Disk Analyser)</li>
 <li>sublime-text</li>
+<li>tree-sitter</li>
 <li>vcredist2022</li>
-<li>vlc</li>
+<li>wezterm</li>
+<li>winspy</li>
 <li><a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">wireshark</a></li>
 
+<li>clash</li>
 <li>photodemon</li>
+<li>tageditor</li>
 </ul>
 
 <p>
@@ -286,7 +326,7 @@ Shortcut Keyboard: <code>win + r</code>.
 </tr>
 
 <tr>
-<td class="org-left">service.msc</td>
+<td class="org-left">services.msc</td>
 <td class="org-left">Show and Manage Services</td>
 </tr>
 
@@ -294,13 +334,20 @@ Shortcut Keyboard: <code>win + r</code>.
 <td class="org-left">compmgmt.msc</td>
 <td class="org-left">Computer Management</td>
 </tr>
+
+<tr>
+<td class="org-left">netsh</td>
+<td class="org-left">Network Shell</td>
+</tr>
 </tbody>
 </table>
 </div>
-
-<div id="outline-container-org221c269" class="outline-3">
-<h3 id="org221c269">Automatic shutdown</h3>
-<div class="outline-text-3" id="text-org221c269">
+<div id="outline-container-orgf646c84" class="outline-3">
+<h3 id="orgf646c84">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-orgf646c84">
+<p>
+shutdown
+</p>
 <table>
 <caption class="t-above"><span class="table-number">Table 2:</span> usage of shutdown</caption>
 
@@ -334,10 +381,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </table>
 </div>
 </div>
-
-<div id="outline-container-orgc0f6bdd" class="outline-3">
-<h3 id="orgc0f6bdd">Operate disk</h3>
-<div class="outline-text-3" id="text-orgc0f6bdd">
+<div id="outline-container-org2cd45a0" class="outline-3">
+<h3 id="org2cd45a0">Operate disk</h3>
+<div class="outline-text-3" id="text-org2cd45a0">
 <p>
 <code>diskpart</code>
 </p>
@@ -374,6 +420,57 @@ Shortcut Keyboard: <code>win + r</code>.
 </table>
 </div>
 </div>
+<div id="outline-container-org74c2f1a" class="outline-3">
+<h3 id="org74c2f1a">Network Shell</h3>
+<div class="outline-text-3" id="text-org74c2f1a">
+<p>
+netsh
+</p>
+<table>
+<caption class="t-above"><span class="table-number">Table 4:</span> usage of netsh</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Caption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">netsh interface portproxy add v4tov6 &#x2026;</td>
+<td class="org-left">Add a port proxy which type is IPv4 to IPv6</td>
+</tr>
+
+<tr>
+<td class="org-left">netsh interface portproxy show v4tov6</td>
+<td class="org-left">Show all port proxy which type is IPv4 to IPv6</td>
+</tr>
+
+<tr>
+<td class="org-left">netsh interface portproxy reset</td>
+<td class="org-left">Delete all port proxy</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Example(<code>IP Helper</code> service must be open):
+</p>
+<div class="org-src-container">
+<pre class="src src-bat">netsh interface portproxy add v6tov4 listenaddress=:: listenport=<span style="color: #D0372D;">22</span> connectaddress=<span style="color: #D0372D;">10.0</span>.<span style="color: #D0372D;">0.10</span> connectport=<span style="color: #D0372D;">22</span>
+</pre>
+</div>
+
+<p>
+Or use VPN(<a href="20220826-myhomekit.html#ID-947eb6db-ec97-479b-82a4-a6b806666158">zhang.vpn</a>).
+</p>
+</div>
+</div>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -389,7 +486,7 @@ Some configurations of Windows and Microsoft&rsquo;s products: <a href="https://
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

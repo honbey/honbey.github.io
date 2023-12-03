@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:56 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,32 +27,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb6604c5">函数栈帧</a></li>
-<li><a href="#org54652df">常用寄存器</a></li>
-<li><a href="#org30b719c">程序执行过程中内存和寄存器的变化</a>
+<li><a href="#org6461eae">函数栈帧</a></li>
+<li><a href="#org7853ea1">常用寄存器</a></li>
+<li><a href="#org9fd0c28">程序执行过程中内存和寄存器的变化</a>
 <ul>
-<li><a href="#org71e6d1b">源代码</a></li>
+<li><a href="#orgad10c8f">源代码</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
+<div id="outline-container-org6461eae" class="outline-2">
+<h2 id="org6461eae">函数栈帧</h2>
+<div class="outline-text-2" id="text-org6461eae">
 
-<div id="outline-container-orgb6604c5" class="outline-2">
-<h2 id="orgb6604c5">函数栈帧</h2>
-<div class="outline-text-2" id="text-orgb6604c5">
-
-<figure id="org6116c44">
-<img src="../images/memory_and_register_1.png" alt="memory_and_register_1.png">
+<figure id="org68a4347">
+<img src="./../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
 </div>
 </div>
-
-
-<div id="outline-container-org54652df" class="outline-2">
-<h2 id="org54652df">常用寄存器</h2>
-<div class="outline-text-2" id="text-org54652df">
+<div id="outline-container-org7853ea1" class="outline-2">
+<h2 id="org7853ea1">常用寄存器</h2>
+<div class="outline-text-2" id="text-org7853ea1">
 <table>
 
 
@@ -92,17 +93,15 @@
 </table>
 </div>
 </div>
-
-
-<div id="outline-container-org30b719c" class="outline-2">
-<h2 id="org30b719c">程序执行过程中内存和寄存器的变化</h2>
-<div class="outline-text-2" id="text-org30b719c">
+<div id="outline-container-org9fd0c28" class="outline-2">
+<h2 id="org9fd0c28">程序执行过程中内存和寄存器的变化</h2>
+<div class="outline-text-2" id="text-org9fd0c28">
 <p>
 给 a 赋值后
 </p>
 
-<figure id="orgd52b7eb">
-<img src="../images/memory_and_register_3.png" alt="memory_and_register_3.png">
+<figure id="org69b6ab3">
+<img src="./../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
 
@@ -111,8 +110,8 @@
 </p>
 
 
-<figure id="orgc49ae87">
-<img src="../images/memory_and_register_4.png" alt="memory_and_register_4.png">
+<figure id="org7259f63">
+<img src="./../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
 
@@ -120,8 +119,8 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org785e27f">
-<img src="../images/memory_and_register_5.png" alt="memory_and_register_5.png">
+<figure id="org32f96d4">
+<img src="./../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
 
@@ -129,8 +128,8 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="org735368c">
-<img src="../images/memory_and_register_6.png" alt="memory_and_register_6.png">
+<figure id="orgefc25a3">
+<img src="./../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
 
@@ -139,15 +138,14 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="org3fb24a2">
-<img src="../images/memory_and_register_7.png" alt="memory_and_register_7.png">
+<figure id="orgf8da231">
+<img src="./../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
 </div>
-
-<div id="outline-container-org71e6d1b" class="outline-3">
-<h3 id="org71e6d1b">源代码</h3>
-<div class="outline-text-3" id="text-org71e6d1b">
+<div id="outline-container-orgad10c8f" class="outline-3">
+<h3 id="orgad10c8f">源代码</h3>
+<div class="outline-text-3" id="text-orgad10c8f">
 <p>
 一个简单的加法函数和主函数，主函数中调用 fun() 实现两个变量的加法运算
 </p>
@@ -175,7 +173,7 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

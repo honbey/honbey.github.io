@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Category</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,23 +27,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5">软件安全/逆向工程</a>
+<li><a href="#org554a824">软件安全/逆向工程</a>
 <ul>
-<li><a href="#orgbea6b4a">攻防博弈</a></li>
+<li><a href="#orgc86d938">攻防博弈</a></li>
 </ul>
 </li>
-<li><a href="#ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45">CVE</a></li>
-<li><a href="#ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</a></li>
-<li><a href="#ID-224e401a-a72f-404b-95dc-c7e02567da2d">取证</a></li>
-<li><a href="#org6321229">URI</a></li>
-<li><a href="#org71156f6">other</a></li>
+<li><a href="#orgdcc3c51">CVE</a></li>
+<li><a href="#orgaa988ce">WAF</a></li>
+<li><a href="#org0dae941">取证</a></li>
+<li><a href="#orgdb46518">URI</a></li>
+<li><a href="#orgf8a5c9b">other</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5" class="outline-2">
-<h2 id="ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5">软件安全/逆向工程</h2>
-<div class="outline-text-2" id="text-ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5">
+<div id="outline-container-org554a824" class="outline-2">
+<h2 id="org554a824">软件安全/逆向工程</h2>
+<div class="outline-text-2" id="text-org554a824">
 <ul class="org-ul">
 <li><a href="memory_and_register.html#ID-2fee860b-01d1-48e5-a19c-8df0d5ffa346">内存与寄存器</a></li>
 <li><a href="overflow_attack.html#ID-8d3557f4-c24c-4ced-a2a8-2b6276a37127">堆栈溢出攻击</a></li>
@@ -48,10 +51,9 @@
 <li><a href="format_string_vulnerabilities.html#ID-ef1a4955-1236-4866-ab5f-6de8c7611166">格式化字符漏洞</a></li>
 </ul>
 </div>
-
-<div id="outline-container-orgbea6b4a" class="outline-3">
-<h3 id="orgbea6b4a"><a href="overflow_attack.html#ID-1f728dee-b2af-4987-a257-3593bd11f899">攻防博弈</a></h3>
-<div class="outline-text-3" id="text-orgbea6b4a">
+<div id="outline-container-orgc86d938" class="outline-3">
+<h3 id="orgc86d938"><a href="overflow_attack.html#ID-1f728dee-b2af-4987-a257-3593bd11f899">攻防博弈</a></h3>
+<div class="outline-text-3" id="text-orgc86d938">
 <ul class="org-ul">
 <li><a href="overflow_attack.html#ID-e6ca3800-473a-4be5-b327-388616ac9ab6">GS cookie</a></li>
 <li><a href="overflow_attack.html#ID-6930f1d2-54e1-4e4c-a945-7211a23cd624">动态基址 ASLR</a></li>
@@ -60,10 +62,9 @@
 </div>
 </div>
 </div>
-
-<div id="outline-container-ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45" class="outline-2">
-<h2 id="ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45">CVE</h2>
-<div class="outline-text-2" id="text-ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45">
+<div id="outline-container-orgdcc3c51" class="outline-2">
+<h2 id="orgdcc3c51">CVE</h2>
+<div class="outline-text-2" id="text-orgdcc3c51">
 <ul class="org-ul">
 <li><a href="cve_2008_4250.html#ID-a630d891-ac31-48eb-9ddf-34a47999dbfb">CVE-2008-4250</a></li>
 <li><a href="cve_2009_1979.html#ID-2c6646aa-293f-436d-b012-8aceab7adc60">CVE-2009-1979</a></li>
@@ -72,19 +73,17 @@
 </ul>
 </div>
 </div>
-
-<div id="outline-container-ID-8a984493-e0e7-4458-a068-d362cc1391bd" class="outline-2">
-<h2 id="ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</h2>
-<div class="outline-text-2" id="text-ID-8a984493-e0e7-4458-a068-d362cc1391bd">
+<div id="outline-container-orgaa988ce" class="outline-2">
+<h2 id="orgaa988ce">WAF</h2>
+<div class="outline-text-2" id="text-orgaa988ce">
 <ul class="org-ul">
 <li><a href="install_lua_resty_waf.html#ID-f30d98cd-d9d7-480b-987b-451979c1adb1">安装使用 lua-resty-waf</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-ID-224e401a-a72f-404b-95dc-c7e02567da2d" class="outline-2">
-<h2 id="ID-224e401a-a72f-404b-95dc-c7e02567da2d">取证</h2>
-<div class="outline-text-2" id="text-ID-224e401a-a72f-404b-95dc-c7e02567da2d">
+<div id="outline-container-org0dae941" class="outline-2">
+<h2 id="org0dae941">取证</h2>
+<div class="outline-text-2" id="text-org0dae941">
 <p>
 Using <a href="wireshark.html#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</a> to capture packets, analyzing with <a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</a>.
 </p>
@@ -96,10 +95,9 @@ Using <a href="wireshark.html#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org6321229" class="outline-2">
-<h2 id="org6321229">URI</h2>
-<div class="outline-text-2" id="text-org6321229">
+<div id="outline-container-orgdb46518" class="outline-2">
+<h2 id="orgdb46518">URI</h2>
+<div class="outline-text-2" id="text-orgdb46518">
 <p>
 URI(Uniform Resource Identifier): 统一资源标识符
 URL(Uniform Resource Locator)   : 统一资源定位符
@@ -111,17 +109,16 @@ URI 包含 URL 以及 URN 。
 </p>
 </div>
 </div>
-
-<div id="outline-container-org71156f6" class="outline-2">
-<h2 id="org71156f6">other</h2>
-<div class="outline-text-2" id="text-org71156f6">
+<div id="outline-container-orgf8a5c9b" class="outline-2">
+<h2 id="orgf8a5c9b">other</h2>
+<div class="outline-text-2" id="text-orgf8a5c9b">
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

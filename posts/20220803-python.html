@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,44 +27,49 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org160c52e">Some Useful Modules</a>
+<li><a href="#org7591722">Some Useful Modules</a>
 <ul>
-<li><a href="#orgd049739">numpy - Scientific calculation</a></li>
-<li><a href="#orgc0bf022">re - Regexp</a></li>
-<li><a href="#orged279f7">sqlalchemy - ORM</a></li>
-<li><a href="#ID-49846a46-321d-40b6-9ced-9791a2d43d5e">seleium - Headless browser</a></li>
-<li><a href="#org7e54055">pandas</a>
+<li><a href="#org5ed3d15">numpy - Scientific calculation</a></li>
+<li><a href="#org301d7bb">re - Regexp</a></li>
+<li><a href="#orgb83209b">sqlalchemy - ORM</a></li>
+<li><a href="#org81e863f">seleium - Headless browser</a></li>
+<li><a href="#orgfb49a24">pandas</a>
 <ul>
-<li><a href="#org80c4a04">excel process</a></li>
-<li><a href="#org09a8b93">定位数据</a></li>
-<li><a href="#orga96cc77">多级索引</a></li>
+<li><a href="#orgcbc5204">excel process</a></li>
+<li><a href="#org66bbbb1">定位数据</a></li>
+<li><a href="#org2ceb3a4">多级索引</a></li>
+</ul>
+</li>
+<li><a href="#org83efdef">tensorflow</a>
+<ul>
+<li><a href="#orgd0a62f4">tensorflow-gpu 2.4.0 with conda on Windows 10</a></li>
+<li><a href="#orgc6f8ed1">tensorflow on macOS</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org361e668">Dict</a>
+<li><a href="#org644ac77">Dict</a>
 <ul>
-<li><a href="#ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">Merge dictionary in Python</a></li>
+<li><a href="#org18720b6">Merge dictionary in Python</a></li>
 </ul>
 </li>
-<li><a href="#orga8fbe5b">Information Security</a>
+<li><a href="#org14d9831">Information Security</a>
 <ul>
-<li><a href="#org26a68be">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
-<li><a href="#ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">Avoid SSRF</a></li>
+<li><a href="#org8e8b0ef">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#org5094659">Avoid SSRF</a></li>
 </ul>
 </li>
-<li><a href="#org6537a3b">playground</a></li>
+<li><a href="#orgc823056">playground</a></li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org160c52e" class="outline-2">
-<h2 id="org160c52e">Some Useful Modules</h2>
-<div class="outline-text-2" id="text-org160c52e">
+<div id="outline-container-org7591722" class="outline-2">
+<h2 id="org7591722">Some Useful Modules</h2>
+<div class="outline-text-2" id="text-org7591722">
 </div>
-<div id="outline-container-orgd049739" class="outline-3">
-<h3 id="orgd049739">numpy - Scientific calculation</h3>
-<div class="outline-text-3" id="text-orgd049739">
+<div id="outline-container-org5ed3d15" class="outline-3">
+<h3 id="org5ed3d15">numpy - Scientific calculation</h3>
+<div class="outline-text-3" id="text-org5ed3d15">
 <p>
 Numpy remove scientific notation<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
@@ -74,12 +83,12 @@ np.set_printoptions(suppress=<span style="color: #D0372D;">True</span>, formatte
 </div>
 </div>
 </div>
-<div id="outline-container-orgc0bf022" class="outline-3">
-<h3 id="orgc0bf022">re - <a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regex</a>p</h3>
+<div id="outline-container-org301d7bb" class="outline-3">
+<h3 id="org301d7bb">re - <a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regex</a>p</h3>
 </div>
-<div id="outline-container-orged279f7" class="outline-3">
-<h3 id="orged279f7">sqlalchemy - <a href="20220821-database.html#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></h3>
-<div class="outline-text-3" id="text-orged279f7">
+<div id="outline-container-orgb83209b" class="outline-3">
+<h3 id="orgb83209b">sqlalchemy - <a href="20220821-database.html#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></h3>
+<div class="outline-text-3" id="text-orgb83209b">
 <table>
 
 
@@ -113,10 +122,9 @@ np.set_printoptions(suppress=<span style="color: #D0372D;">True</span>, formatte
 </table>
 </div>
 </div>
-
-<div id="outline-container-ID-49846a46-321d-40b6-9ced-9791a2d43d5e" class="outline-3">
-<h3 id="ID-49846a46-321d-40b6-9ced-9791a2d43d5e">seleium - Headless browser</h3>
-<div class="outline-text-3" id="text-ID-49846a46-321d-40b6-9ced-9791a2d43d5e">
+<div id="outline-container-org81e863f" class="outline-3">
+<h3 id="org81e863f">seleium - Headless browser</h3>
+<div class="outline-text-3" id="text-org81e863f">
 <p>
 Selenium use specific browser:
 </p>
@@ -139,13 +147,13 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </div>
 </div>
 </div>
-<div id="outline-container-org7e54055" class="outline-3">
-<h3 id="org7e54055">pandas</h3>
-<div class="outline-text-3" id="text-org7e54055">
+<div id="outline-container-orgfb49a24" class="outline-3">
+<h3 id="orgfb49a24">pandas</h3>
+<div class="outline-text-3" id="text-orgfb49a24">
 </div>
-<div id="outline-container-org80c4a04" class="outline-4">
-<h4 id="org80c4a04">excel process</h4>
-<div class="outline-text-4" id="text-org80c4a04">
+<div id="outline-container-orgcbc5204" class="outline-4">
+<h4 id="orgcbc5204">excel process</h4>
+<div class="outline-text-4" id="text-orgcbc5204">
 <table>
 
 
@@ -196,10 +204,9 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </blockquote>
 </div>
 </div>
-
-<div id="outline-container-org09a8b93" class="outline-4">
-<h4 id="org09a8b93">定位数据</h4>
-<div class="outline-text-4" id="text-org09a8b93">
+<div id="outline-container-org66bbbb1" class="outline-4">
+<h4 id="org66bbbb1">定位数据</h4>
+<div class="outline-text-4" id="text-org66bbbb1">
 <p>
 <code>loc[]</code>  通过索引名/标签定位单行、单列、多行、多列，前闭后闭
 </p>
@@ -213,25 +220,65 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </p>
 </div>
 </div>
-
-<div id="outline-container-orga96cc77" class="outline-4">
-<h4 id="orga96cc77">多级索引</h4>
-<div class="outline-text-4" id="text-orga96cc77">
+<div id="outline-container-org2ceb3a4" class="outline-4">
+<h4 id="org2ceb3a4">多级索引</h4>
+<div class="outline-text-4" id="text-org2ceb3a4">
 <p>
 <code>pd.MultiIndex.from_product([[list1], [list2]])</code>
 </p>
 </div>
 </div>
 </div>
+<div id="outline-container-org83efdef" class="outline-3">
+<h3 id="org83efdef">tensorflow</h3>
+<div class="outline-text-3" id="text-org83efdef">
+<p>
+tensorflow 与 cuda, cudnn 对应关系：<a href="https://tensorflow.google.cn/install/source?hl=tr#gpu">https://tensorflow.google.cn/install/source?hl=tr#gpu</a>
+</p>
 </div>
+<div id="outline-container-orgd0a62f4" class="outline-4">
+<h4 id="orgd0a62f4">tensorflow-gpu 2.4.0 with conda on Windows 10</h4>
+<div class="outline-text-4" id="text-orgd0a62f4">
+<p>
+requirements.txt:
+</p>
+<div class="org-src-container">
+<pre class="src src-txt">python==3.8
+tensorflow-gpu==2.4.0
+cudatoolkit==11.0.3
+cudnn==8.0.5.39 #(from conda-forge)
+# conda search cudnn -c conda-forge
+# conda install cudnn==8.0.5.39 -c conda-forge
 
-<div id="outline-container-org361e668" class="outline-2">
-<h2 id="org361e668">Dict</h2>
-<div class="outline-text-2" id="text-org361e668">
+scipy==1.4.1
+numpy==1.19.2
+matplotlib==3.2.1
+opencv-python==4.2.0.34
+tqdm==4.46.1
+Pillow==8.2.0
+h5py==2.10.0
+</pre>
 </div>
-<div id="outline-container-ID-66cc9aaa-af3c-40e9-b380-c51b42eab498" class="outline-3">
-<h3 id="ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">Merge dictionary in Python</h3>
-<div class="outline-text-3" id="text-ID-66cc9aaa-af3c-40e9-b380-c51b42eab498">
+</div>
+</div>
+<div id="outline-container-orgc6f8ed1" class="outline-4">
+<h4 id="orgc6f8ed1">tensorflow on macOS</h4>
+<div class="outline-text-4" id="text-orgc6f8ed1">
+<div class="org-src-container">
+<pre class="src src-sh">pip install tensorflow-macos tensorflow-metal
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org644ac77" class="outline-2">
+<h2 id="org644ac77">Dict</h2>
+<div class="outline-text-2" id="text-org644ac77">
+</div>
+<div id="outline-container-org18720b6" class="outline-3">
+<h3 id="org18720b6">Merge dictionary in Python</h3>
+<div class="outline-text-3" id="text-org18720b6">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> = {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
 </pre>
@@ -304,13 +351,13 @@ Example:
 </div>
 </div>
 </div>
-<div id="outline-container-orga8fbe5b" class="outline-2">
-<h2 id="orga8fbe5b"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
-<div class="outline-text-2" id="text-orga8fbe5b">
+<div id="outline-container-org14d9831" class="outline-2">
+<h2 id="org14d9831"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
+<div class="outline-text-2" id="text-org14d9831">
 </div>
-<div id="outline-container-org26a68be" class="outline-3">
-<h3 id="org26a68be">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org26a68be">
+<div id="outline-container-org8e8b0ef" class="outline-3">
+<h3 id="org8e8b0ef">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-org8e8b0ef">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
 <span style="color: #0000FF;">import</span> os
@@ -329,9 +376,9 @@ Example:
 </div>
 </div>
 </div>
-<div id="outline-container-ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f" class="outline-3">
-<h3 id="ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
-<div class="outline-text-3" id="text-ID-1c595ae5-2f2f-4b87-8434-f0cf681e424f">
+<div id="outline-container-org5094659" class="outline-3">
+<h3 id="org5094659">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
+<div class="outline-text-3" id="text-org5094659">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> ipaddress
 <span style="color: #0000FF;">import</span> dns.resolver
@@ -343,16 +390,16 @@ DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="co
     <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">False</span>
     <span style="color: #0000FF;">if</span> records <span style="color: #0000FF;">is</span> <span style="color: #0000FF;">not</span> <span style="color: #D0372D;">None</span>:
         <span style="color: #0000FF;">for</span> record <span style="color: #0000FF;">in</span> records:
-            value = record.to_text().strip()
+            <span style="color: #BA36A5;">value</span> = record.to_text().strip()
             <span style="color: #0000FF;">try</span>:
-                ip = ipaddress.ip_address(value)
+                <span style="color: #BA36A5;">ip</span> = ipaddress.ip_address(value)
 
                 <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> ip.is_global:
                     <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] DNS record type '%s' for domain name '%s' resolve to</span>
 <span style="color: #008000;">                    a non public IP address '%s'!"</span> % (<span style="color: #006FE0;">type</span>, domain, value))
                     <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
             <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">ValueError</span>:
-                error_detected = <span style="color: #D0372D;">True</span>
+                <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
                 <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] '%s' is not valid IP address!"</span> % value)
     <span style="color: #0000FF;">return</span> error_detected
 <span style="color: #0000FF;">def</span> <span style="color: #006699;">check</span>():
@@ -363,14 +410,14 @@ DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="co
         <span style="color: #0000FF;">try</span>:
             <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A = IPv4 address record</span>
             <span style="color: #BA36A5;">ip_v4_records</span> = DNS_RESOLVER.query(domain, <span style="color: #008000;">"A"</span>)
-        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> <span style="color: #BA36A5;">e</span>:
-            ip_v4_records = <span style="color: #D0372D;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s\n"</span> % (domain,e))
+        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
+            <span style="color: #BA36A5;">ip_v4_records</span> = <span style="color: #D0372D;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">"</span> % (domain,e))
         <span style="color: #0000FF;">try</span>:
-           ip_v6_records = DNS_RESOLVER.query(domain, <span style="color: #008000;">"AAAA"</span>)
-        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> <span style="color: #BA36A5;">e</span>:
-            ip_v6_records = <span style="color: #D0372D;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s\n"</span> % (domain,e))
+           <span style="color: #BA36A5;">ip_v6_records</span> = DNS_RESOLVER.query(domain, <span style="color: #008000;">"AAAA"</span>)
+        <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
+            <span style="color: #BA36A5;">ip_v6_records</span> = <span style="color: #D0372D;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">"</span> % (domain,e))
         <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Verify the IPs obtained</span>
         <span style="color: #0000FF;">if</span> verify_dns_records(domain, ip_v4_records, <span style="color: #008000;">"A"</span>)
         <span style="color: #0000FF;">or</span> verify_dns_records(domain, ip_v6_records, <span style="color: #008000;">"AAAA"</span>):
@@ -386,14 +433,14 @@ DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="co
 </div>
 </div>
 </div>
-<div id="outline-container-org6537a3b" class="outline-2">
-<h2 id="org6537a3b">playground</h2>
-<div class="outline-text-2" id="text-org6537a3b">
+<div id="outline-container-orgc823056" class="outline-2">
+<h2 id="orgc823056">playground</h2>
+<div class="outline-text-2" id="text-orgc823056">
 <div class="org-src-container">
 <pre class="src src-python-jit">print('Hello world')
 </pre>
 </div>
-<div class="klipsify div" id="orgc585707">
+<div class="klipsify div" id="org151e085">
 <script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
 <script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
@@ -423,7 +470,7 @@ DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="co
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

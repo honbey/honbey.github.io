@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:49 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Programming</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -55,52 +59,51 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org063a6ca">相关知识</a>
+<li><a href="#orgd173db4">相关知识</a>
 <ul>
-<li><a href="#ID-89f5c9f3-226a-462c-b2ac-46b3ee0c06f6">ASCII</a></li>
+<li><a href="#orgd765fb9">ASCII</a></li>
 </ul>
 </li>
-<li><a href="#org2ad36c0">编程语言</a>
+<li><a href="#org08c42f5">编程语言</a>
 <ul>
-<li><a href="#org5dbd85f">C &amp; C++</a></li>
-<li><a href="#org3555342">Lua</a></li>
-<li><a href="#orga7fb488">Python</a></li>
-<li><a href="#org245c6bc">PHP</a></li>
+<li><a href="#org9a04445">C &amp; C++</a></li>
+<li><a href="#orga53913a">Lua</a></li>
+<li><a href="#orgfc39228">Python</a></li>
+<li><a href="#org1b852d1">PHP</a></li>
 </ul>
 </li>
-<li><a href="#org45a0077">算法与数据结构</a>
+<li><a href="#orgc4d0586">算法与数据结构</a>
 <ul>
-<li><a href="#org85064d2">机器学习</a></li>
-<li><a href="#ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f">倍率定理</a></li>
-<li><a href="#ID-2a54deda-a548-4546-b289-b6c2c4a59bdb">常见近似函数</a></li>
-<li><a href="#ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3">Algorithm - AQ</a>
+<li><a href="#org96f197b">机器学习</a></li>
+<li><a href="#org4d72b38">倍率定理</a></li>
+<li><a href="#org8eece24">常见近似函数</a></li>
+<li><a href="#org512f9b5">Algorithm - AQ</a>
 <ul>
-<li><a href="#org4d0974c">18问</a></li>
+<li><a href="#orgf5f83f0">18问</a></li>
 </ul>
 </li>
-<li><a href="#orgb4ab2eb">堆和栈</a>
+<li><a href="#org1cc3d97">堆和栈</a>
 <ul>
-<li><a href="#org6cbd04f">内存管理</a></li>
-<li><a href="#org4acfaf1">数据结构</a></li>
+<li><a href="#orgd22ad08">内存管理</a></li>
+<li><a href="#orga1fc205">数据结构</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc1ca694">Operating System</a></li>
-<li><a href="#org810268f">Open Source License</a></li>
-<li><a href="#org0944c87">Editor</a>
+<li><a href="#org0be9d76">Operating System</a></li>
+<li><a href="#orge96f82a">Open Source License</a></li>
+<li><a href="#org8c1d72d">Editor</a>
 <ul>
-<li><a href="#org448fd3d">EMACS</a></li>
-<li><a href="#org8c59b53">VIM</a></li>
+<li><a href="#org2d247ba">EMACS</a></li>
+<li><a href="#org8339871">VIM</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org063a6ca" class="outline-2">
-<h2 id="org063a6ca">相关知识</h2>
-<div class="outline-text-2" id="text-org063a6ca">
+<div id="outline-container-orgd173db4" class="outline-2">
+<h2 id="orgd173db4">相关知识</h2>
+<div class="outline-text-2" id="text-orgd173db4">
 <ul class="org-ul">
 <li><a href="20220708-concurrency_parallel.html#ID-af9f4833-5713-468e-9c11-ad8b1c23222c">Concurrency/Parallel</a> 并发/并行</li>
 <li><a href="20220708-synchronous_asynchronous.html#ID-c31e51cf-dba3-46de-a06b-a2160fda517b">Synchronous/Asynchronous</a> 同步/异步 &amp; 阻塞/非阻塞</li>
@@ -112,10 +115,9 @@
 <li><a href="20220908-distributed_architecture.html#ID-4c33cc6e-bb00-4a15-ac7b-a14dd57c1d60">Distributed System</a> 分布式系统</li>
 </ul>
 </div>
-
-<div id="outline-container-ID-89f5c9f3-226a-462c-b2ac-46b3ee0c06f6" class="outline-3">
-<h3 id="ID-89f5c9f3-226a-462c-b2ac-46b3ee0c06f6">ASCII</h3>
-<div class="outline-text-3" id="text-ID-89f5c9f3-226a-462c-b2ac-46b3ee0c06f6">
+<div id="outline-container-orgd765fb9" class="outline-3">
+<h3 id="orgd765fb9">ASCII</h3>
+<div class="outline-text-3" id="text-orgd765fb9">
 <div class="org-src-container">
 <pre class="src src-nil">0  NUT
 48 10
@@ -126,38 +128,36 @@
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2ad36c0" class="outline-2">
-<h2 id="org2ad36c0">编程语言</h2>
-<div class="outline-text-2" id="text-org2ad36c0">
+<div id="outline-container-org08c42f5" class="outline-2">
+<h2 id="org08c42f5">编程语言</h2>
+<div class="outline-text-2" id="text-org08c42f5">
 </div>
-<div id="outline-container-org5dbd85f" class="outline-3">
-<h3 id="org5dbd85f"><a href="20220913-c.html#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C &amp; C++</a></h3>
-<div class="outline-text-3" id="text-org5dbd85f">
+<div id="outline-container-org9a04445" class="outline-3">
+<h3 id="org9a04445"><a href="20220913-c.html#ID-42ed9c4f-6798-4356-8e33-b4128375ece3">C &amp; C++</a></h3>
+<div class="outline-text-3" id="text-org9a04445">
 <ul class="org-ul">
 <li><a href="install_opencv.html#ID-f927f9e9-fc25-4855-ad0c-3dcb2bcd96be">安装 OpenCV</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3555342" class="outline-3">
-<h3 id="org3555342"><a href="lua_base.html#ID-ddc79726-17a1-415f-b1b3-e7446fc13f77">Lua</a></h3>
+<div id="outline-container-orga53913a" class="outline-3">
+<h3 id="orga53913a"><a href="lua_base.html#ID-ddc79726-17a1-415f-b1b3-e7446fc13f77">Lua</a></h3>
 </div>
-<div id="outline-container-orga7fb488" class="outline-3">
-<h3 id="orga7fb488"><a href="20220803-python.html#ID-798fccc4-bc5f-4e5d-9272-f9ac8baaf74d">Python</a></h3>
+<div id="outline-container-orgfc39228" class="outline-3">
+<h3 id="orgfc39228"><a href="20220803-python.html#ID-798fccc4-bc5f-4e5d-9272-f9ac8baaf74d">Python</a></h3>
 </div>
-<div id="outline-container-org245c6bc" class="outline-3">
-<h3 id="org245c6bc">PHP</h3>
-<div class="outline-text-3" id="text-org245c6bc">
+<div id="outline-container-org1b852d1" class="outline-3">
+<h3 id="org1b852d1">PHP</h3>
+<div class="outline-text-3" id="text-org1b852d1">
 <ul class="org-ul">
 <li><a href="20220907-ssrf.html#ID-ee36975c-00cc-43e0-b777-93ce7df935e2">存在 SSRF 隐患的 PHP 函数</a></li>
 </ul>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org45a0077" class="outline-2">
-<h2 id="org45a0077">算法与数据结构</h2>
-<div class="outline-text-2" id="text-org45a0077">
+<div id="outline-container-orgc4d0586" class="outline-2">
+<h2 id="orgc4d0586">算法与数据结构</h2>
+<div class="outline-text-2" id="text-orgc4d0586">
 <ul class="org-ul">
 <li><a href="data_structure_graph.html#ID-2c814e9c-c0bd-4155-8ab3-44e98a136151">图</a>
 <ul class="org-ul">
@@ -174,14 +174,13 @@
 <li><a href="20220730-skip_list.html#ID-5b550aea-f832-4b51-a7e1-205e6c7d8288">Skip List</a></li>
 </ul>
 </div>
-
-<div id="outline-container-org85064d2" class="outline-3">
-<h3 id="org85064d2"><a href="_machine_learning.html#ID-19ef770d-3cfd-4006-877e-51270f459663">机器学习</a></h3>
+<div id="outline-container-org96f197b" class="outline-3">
+<h3 id="org96f197b"><a href="_machine_learning.html#ID-19ef770d-3cfd-4006-877e-51270f459663">机器学习</a></h3>
 </div>
 
-<div id="outline-container-ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f" class="outline-3">
-<h3 id="ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f">倍率定理</h3>
-<div class="outline-text-3" id="text-ID-96b8ae9a-600d-4397-b7f5-4506842f3c7f">
+<div id="outline-container-org4d72b38" class="outline-3">
+<h3 id="org4d72b38">倍率定理</h3>
+<div class="outline-text-3" id="text-org4d72b38">
 <p>
 如果 \[T(N)\sim aN^b\lg N\]，那么
 \[\frac{T(2N)}{N} \sim 2^b\]
@@ -195,10 +194,9 @@
 </p>
 </div>
 </div>
-
-<div id="outline-container-ID-2a54deda-a548-4546-b289-b6c2c4a59bdb" class="outline-3">
-<h3 id="ID-2a54deda-a548-4546-b289-b6c2c4a59bdb">常见近似函数</h3>
-<div class="outline-text-3" id="text-ID-2a54deda-a548-4546-b289-b6c2c4a59bdb">
+<div id="outline-container-org8eece24" class="outline-3">
+<h3 id="org8eece24">常见近似函数</h3>
+<div class="outline-text-3" id="text-org8eece24">
 <table>
 
 
@@ -262,15 +260,13 @@
 </table>
 </div>
 </div>
-
-
-<div id="outline-container-ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3" class="outline-3">
-<h3 id="ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3">Algorithm - AQ</h3>
-<div class="outline-text-3" id="text-ID-e3020e23-9eec-4ff0-a3f4-e90a5cac36b3">
+<div id="outline-container-org512f9b5" class="outline-3">
+<h3 id="org512f9b5">Algorithm - AQ</h3>
+<div class="outline-text-3" id="text-org512f9b5">
 </div>
-<div id="outline-container-org4d0974c" class="outline-4">
-<h4 id="org4d0974c">18问</h4>
-<div class="outline-text-4" id="text-org4d0974c">
+<div id="outline-container-orgf5f83f0" class="outline-4">
+<h4 id="orgf5f83f0">18问</h4>
+<div class="outline-text-4" id="text-orgf5f83f0">
 <ol class="org-ol">
 <li>请简单解释算法是什么？
 算法是一个定义良好的计算过程，它将一些值作为输入并产生相应的输出值。简单来说，它是将输入转换为输出的一系列计算步骤。</li>
@@ -351,19 +347,17 @@ LOKI</li>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb4ab2eb" class="outline-3">
-<h3 id="orgb4ab2eb">堆和栈</h3>
-<div class="outline-text-3" id="text-orgb4ab2eb">
+<div id="outline-container-org1cc3d97" class="outline-3">
+<h3 id="org1cc3d97">堆和栈</h3>
+<div class="outline-text-3" id="text-org1cc3d97">
 <ul class="org-ul">
 <li>程序内存布局场景下，堆与栈表示两种内存管理方式</li>
 <li>数据结构场景下，堆与栈表示两种常用的数据结构</li>
 </ul>
 </div>
-
-<div id="outline-container-org6cbd04f" class="outline-4">
-<h4 id="org6cbd04f">内存管理</h4>
-<div class="outline-text-4" id="text-org6cbd04f">
+<div id="outline-container-orgd22ad08" class="outline-4">
+<h4 id="orgd22ad08">内存管理</h4>
+<div class="outline-text-4" id="text-orgd22ad08">
 <p>
 栈由操作系统自动分配释放 ，用于存放函数的参数值、局部变量等，其操作方式类似于数据结构中的栈。
 其中函数中定义的局部变量按照先后定义的顺序依次压入栈中，也就是说相邻变量的地址之间不会存在其它变量。栈的内存地址生长方向与堆相反，由高到底，所以后定义的变量地址低于先定义的变量，栈中存储的数据的生命周期随着函数的执行完成而结束。
@@ -392,10 +386,9 @@ LOKI</li>
 </p>
 </div>
 </div>
-
-<div id="outline-container-org4acfaf1" class="outline-4">
-<h4 id="org4acfaf1">数据结构</h4>
-<div class="outline-text-4" id="text-org4acfaf1">
+<div id="outline-container-orga1fc205" class="outline-4">
+<h4 id="orga1fc205">数据结构</h4>
+<div class="outline-text-4" id="text-orga1fc205">
 <p>
 栈是一种运算受限的线性表，其限制是指只仅允许在表的一端进行插入和删除操作，这一端被称为栈顶（Top），相对地，把另一端称为栈底（Bottom）。把新元素放到栈顶元素的上面，使之成为新的栈顶元素称作进栈、入栈或压栈（Push）；把栈顶元素删除，使其相邻的元素成为新的栈顶元素称作出栈或退栈（Pop）。这种受限的运算使栈拥有“先进后出”的特性（First In Last Out），简称 FILO。
 栈分顺序栈和链式栈两种。栈是一种线性结构，所以可以使用数组或链表（单向链表、双向链表或循环链表）作为底层数据结构。使用数组实现的栈叫做顺序栈，使用链表实现的栈叫做链式栈，二者的区别是顺序栈中的元素地址连续，链式栈中的元素地址不连续。
@@ -410,11 +403,9 @@ LOKI</li>
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgc1ca694" class="outline-2">
-<h2 id="orgc1ca694">Operating System</h2>
-<div class="outline-text-2" id="text-orgc1ca694">
+<div id="outline-container-org0be9d76" class="outline-2">
+<h2 id="org0be9d76">Operating System</h2>
+<div class="outline-text-2" id="text-org0be9d76">
 <ul class="org-ul">
 <li><a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a></li>
 <li><a href="20220819-macos.html#ID-cfd1e009-299d-4838-88af-ceadd998a30f">macOS</a></li>
@@ -422,10 +413,9 @@ LOKI</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org810268f" class="outline-2">
-<h2 id="org810268f">Open Source License</h2>
-<div class="outline-text-2" id="text-org810268f">
+<div id="outline-container-orge96f82a" class="outline-2">
+<h2 id="orge96f82a">Open Source License</h2>
+<div class="outline-text-2" id="text-orge96f82a">
 <p>
 常见开源许可证及其差异<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>：
 </p>
@@ -454,23 +444,22 @@ GPL 如果是动态或静态链接，也许要开源。但 LGPL 在动态链接�
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org0944c87" class="outline-2">
-<h2 id="org0944c87">Editor</h2>
-<div class="outline-text-2" id="text-org0944c87">
+<div id="outline-container-org8c1d72d" class="outline-2">
+<h2 id="org8c1d72d">Editor</h2>
+<div class="outline-text-2" id="text-org8c1d72d">
 </div>
-<div id="outline-container-org448fd3d" class="outline-3">
-<h3 id="org448fd3d">EMACS</h3>
+<div id="outline-container-org2d247ba" class="outline-3">
+<h3 id="org2d247ba">EMACS</h3>
 </div>
-<div id="outline-container-org8c59b53" class="outline-3">
-<h3 id="org8c59b53">VIM</h3>
-<div class="outline-text-3" id="text-org8c59b53">
+<div id="outline-container-org8339871" class="outline-3">
+<h3 id="org8339871">VIM</h3>
+<div class="outline-text-3" id="text-org8339871">
 <p>
 Thanks the author of this nice picture.
 </p>
 
-<figure id="orgf130f9b">
-<img src="../images/programming_vim_key_shortcut_1.png" alt="programming_vim_key_shortcut_1.png">
+<figure id="orgbe57493">
+<img src="./../images/programming_vim_key_shortcut_1.png" alt="programming_vim_key_shortcut_1.png">
 
 </figure>
 </div>
@@ -494,7 +483,7 @@ Thanks the author of this nice picture.
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

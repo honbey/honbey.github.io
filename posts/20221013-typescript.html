@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:55 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TypeScript</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,43 +27,43 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaee8b7b">TypeScript 的优势</a></li>
-<li><a href="#org872e3a5">TIPS</a>
+<li><a href="#org112bdb8">TypeScript 的优势</a></li>
+<li><a href="#org596e038">TIPS</a>
 <ul>
-<li><a href="#orgc1ec9d0">await</a></li>
-<li><a href="#org620a724">never</a></li>
-<li><a href="#orge80858e">type</a></li>
-<li><a href="#orgd36c45f">Array</a></li>
-<li><a href="#ID-70c07887-ea7d-469e-8772-7b1a471a7786">infer</a>
+<li><a href="#org3cda957">await</a></li>
+<li><a href="#org96fa7fc">never</a></li>
+<li><a href="#org956ef60">type</a></li>
+<li><a href="#orgc360106">Array</a></li>
+<li><a href="#org7766060">infer</a>
 <ul>
-<li><a href="#org16fecea">interview</a></li>
+<li><a href="#org477b397">interview</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6586042">&amp; JS &#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></a>
+<li><a href="#orgb5e7f7d">&amp; JS &#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></a>
 <ul>
-<li><a href="#orgad8312c">尾调用优化</a></li>
-<li><a href="#org2c88e77">尾递归</a></li>
-<li><a href="#orgb8c9732">&rsquo;use strict&rsquo;</a></li>
-<li><a href="#orgf92057c">tips</a>
+<li><a href="#orgf49766d">尾调用优化</a></li>
+<li><a href="#org0290a49">尾递归</a></li>
+<li><a href="#org9d9dfea">&rsquo;use strict&rsquo;</a></li>
+<li><a href="#org3818a89">tips</a>
 <ul>
-<li><a href="#org38789c4">对象判空</a></li>
-<li><a href="#org5ceb48c">[] == ![]</a></li>
-<li><a href="#orgba4fb74">instanceof</a></li>
-<li><a href="#org0d200d2">0.1 + 0.2</a></li>
-<li><a href="#orgdec6054">前端判断可视</a></li>
+<li><a href="#orgb1c758b">对象判空</a></li>
+<li><a href="#org38a1c91">[] == ![]</a></li>
+<li><a href="#orgc205a0a">instanceof</a></li>
+<li><a href="#orgbbda376">0.1 + 0.2</a></li>
+<li><a href="#org07c0d63">前端判断可视</a></li>
 </ul>
 </li>
-<li><a href="#orgb81bb72">节流和防抖</a></li>
-<li><a href="#orgc39ad71">数字精度</a></li>
-<li><a href="#orgf7beab9">跨域问题</a>
+<li><a href="#orgac0f908">节流和防抖</a></li>
+<li><a href="#org394ac61">数字精度</a></li>
+<li><a href="#orgb1de5ed">跨域问题</a>
 <ul>
-<li><a href="#orge06f69d">JSONP</a></li>
-<li><a href="#org665346c">CORS</a></li>
-<li><a href="#org9603721">postMessage</a></li>
-<li><a href="#org801d026">websocket</a></li>
-<li><a href="#org93edbaf">NodeJS 中间代理 / Nginx 反向代理</a></li>
+<li><a href="#org4bc973a">JSONP</a></li>
+<li><a href="#org2160f2c">CORS</a></li>
+<li><a href="#orgcd5eaa9">postMessage</a></li>
+<li><a href="#org7415013">websocket</a></li>
+<li><a href="#org9b8d337">NodeJS 中间代理 / Nginx 反向代理</a></li>
 </ul>
 </li>
 </ul>
@@ -67,10 +71,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-orgaee8b7b" class="outline-2">
-<h2 id="orgaee8b7b">TypeScript 的优势</h2>
-<div class="outline-text-2" id="text-orgaee8b7b">
+<div id="outline-container-org112bdb8" class="outline-2">
+<h2 id="org112bdb8">TypeScript 的优势</h2>
+<div class="outline-text-2" id="text-org112bdb8">
 <p>
 静态类型语言。
 </p>
@@ -93,14 +96,13 @@
 </p>
 </div>
 </div>
-
-<div id="outline-container-org872e3a5" class="outline-2">
-<h2 id="org872e3a5">TIPS</h2>
-<div class="outline-text-2" id="text-org872e3a5">
+<div id="outline-container-org596e038" class="outline-2">
+<h2 id="org596e038">TIPS</h2>
+<div class="outline-text-2" id="text-org596e038">
 </div>
-<div id="outline-container-orgc1ec9d0" class="outline-3">
-<h3 id="orgc1ec9d0">await</h3>
-<div class="outline-text-3" id="text-orgc1ec9d0">
+<div id="outline-container-org3cda957" class="outline-3">
+<h3 id="org3cda957">await</h3>
+<div class="outline-text-3" id="text-org3cda957">
 <p>
 await 会暂停 async 函数的执行，等到 js 运行时，取出恢复函数执行的微任务并执行，在这个过程中仅仅发生了一个 then 的时间。可以将 await 后面的代码可以看做在 then 里面执行的结果。
 </p>
@@ -124,10 +126,9 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org620a724" class="outline-3">
-<h3 id="org620a724">never</h3>
-<div class="outline-text-3" id="text-org620a724">
+<div id="outline-container-org96fa7fc" class="outline-3">
+<h3 id="org96fa7fc">never</h3>
+<div class="outline-text-3" id="text-org96fa7fc">
 <div class="org-src-container">
 <pre class="src src-typescript">function exceptionHandle(msg: string): never{
     throw new Error(msg)
@@ -146,10 +147,9 @@ function stopLoop(): never {
 </div>
 </div>
 </div>
-
-<div id="outline-container-orge80858e" class="outline-3">
-<h3 id="orge80858e">type</h3>
-<div class="outline-text-3" id="text-orge80858e">
+<div id="outline-container-org956ef60" class="outline-3">
+<h3 id="org956ef60">type</h3>
+<div class="outline-text-3" id="text-org956ef60">
 <p>
 类型转换： <code>as</code> 关键字，但 jsx 中只支持 as
 </p>
@@ -171,9 +171,9 @@ function stopLoop(): never {
 </p>
 </div>
 </div>
-<div id="outline-container-orgd36c45f" class="outline-3">
-<h3 id="orgd36c45f">Array</h3>
-<div class="outline-text-3" id="text-orgd36c45f">
+<div id="outline-container-orgc360106" class="outline-3">
+<h3 id="orgc360106">Array</h3>
+<div class="outline-text-3" id="text-orgc360106">
 <p>
 <code>splice()</code> 方法改变原数组，向数组中添加项目或删除项目，并返回删除的项目。
 </p>
@@ -183,9 +183,9 @@ function stopLoop(): never {
 </p>
 </div>
 </div>
-<div id="outline-container-ID-70c07887-ea7d-469e-8772-7b1a471a7786" class="outline-3">
-<h3 id="ID-70c07887-ea7d-469e-8772-7b1a471a7786">infer</h3>
-<div class="outline-text-3" id="text-ID-70c07887-ea7d-469e-8772-7b1a471a7786">
+<div id="outline-container-org7766060" class="outline-3">
+<h3 id="org7766060">infer</h3>
+<div class="outline-text-3" id="text-org7766060">
 <div class="org-src-container">
 <pre class="src src-typescript">type ParamType&lt;T&gt; = T extends (arg: infer P) =&gt; any ? P : T;
 
@@ -208,10 +208,9 @@ type AA = ParamType; // string
 整句表示为：如果 <code>T</code> 能赋值给 <code>(arg: infer P) =&gt; any</code> ，则结果是 <code>(arg: infer P) =&gt; any</code> 类型中的参数 <code>P</code> ，否则返回为 <code>T</code> 。
 </p>
 </div>
-
-<div id="outline-container-org16fecea" class="outline-4">
-<h4 id="org16fecea">interview</h4>
-<div class="outline-text-4" id="text-org16fecea">
+<div id="outline-container-org477b397" class="outline-4">
+<h4 id="org477b397">interview</h4>
+<div class="outline-text-4" id="text-org477b397">
 <p>
 <a href="https://github.com/LeetCode-OpenSource/hire/blob/master/typescript_zh.md">LeetCode TypeScript 的面试题 - 1</a>
 </p>
@@ -287,14 +286,13 @@ export const connected: Connected = connect(new EffectModule());
 </div>
 </div>
 </div>
-
-<div id="outline-container-org6586042" class="outline-2">
-<h2 id="org6586042">&amp; JS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></h2>
-<div class="outline-text-2" id="text-org6586042">
+<div id="outline-container-orgb5e7f7d" class="outline-2">
+<h2 id="orgb5e7f7d">&amp; JS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></h2>
+<div class="outline-text-2" id="text-orgb5e7f7d">
 </div>
-<div id="outline-container-orgad8312c" class="outline-3">
-<h3 id="orgad8312c">尾调用优化</h3>
-<div class="outline-text-3" id="text-orgad8312c">
+<div id="outline-container-orgf49766d" class="outline-3">
+<h3 id="orgf49766d">尾调用优化</h3>
+<div class="outline-text-3" id="text-orgf49766d">
 <p>
 尾调用：某个函数的最后一步是调用另一个函数。
 </p>
@@ -323,10 +321,9 @@ g(<span style="color: #D0372D;">3</span>);
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2c88e77" class="outline-3">
-<h3 id="org2c88e77">尾递归</h3>
-<div class="outline-text-3" id="text-org2c88e77">
+<div id="outline-container-org0290a49" class="outline-3">
+<h3 id="org0290a49">尾递归</h3>
+<div class="outline-text-3" id="text-org0290a49">
 <p>
 函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
 递归非常耗费内存，因为需要同时保存成千上百个调用记录，很容易发生“栈溢出”错误（stack overflow）。但对于尾递归来说，由于只存在一个调用记录，所以永远不会发生&ldquo;栈溢出&rdquo;错误。
@@ -348,10 +345,9 @@ factorial(<span style="color: #D0372D;">5</span>, <span style="color: #D0372D;">
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb8c9732" class="outline-3">
-<h3 id="orgb8c9732">&rsquo;use strict&rsquo;</h3>
-<div class="outline-text-3" id="text-orgb8c9732">
+<div id="outline-container-org9d9dfea" class="outline-3">
+<h3 id="org9d9dfea">&rsquo;use strict&rsquo;</h3>
+<div class="outline-text-3" id="text-org9d9dfea">
 <p>
 use strict 是一种 ECMAscript5 添加的（严格）运行模式，这种模式使得 Javascript 在更严格的条件下运行。 设立“严格模式”的目的，主要有以下几个:
 </p>
@@ -372,34 +368,31 @@ use strict 是一种 ECMAscript5 添加的（严格）运行模式，这种模�
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgf92057c" class="outline-3">
-<h3 id="orgf92057c">tips</h3>
-<div class="outline-text-3" id="text-orgf92057c">
+<div id="outline-container-org3818a89" class="outline-3">
+<h3 id="org3818a89">tips</h3>
+<div class="outline-text-3" id="text-org3818a89">
 </div>
-<div id="outline-container-org38789c4" class="outline-4">
-<h4 id="org38789c4">对象判空</h4>
-<div class="outline-text-4" id="text-org38789c4">
+<div id="outline-container-orgb1c758b" class="outline-4">
+<h4 id="orgb1c758b">对象判空</h4>
+<div class="outline-text-4" id="text-orgb1c758b">
 <div class="org-src-container">
 <pre class="src src-js">Object.keys(obj).length === <span style="color: #D0372D;">0</span>
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org5ceb48c" class="outline-4">
-<h4 id="org5ceb48c">[] == ![]</h4>
-<div class="outline-text-4" id="text-org5ceb48c">
+<div id="outline-container-org38a1c91" class="outline-4">
+<h4 id="org38a1c91">[] == ![]</h4>
+<div class="outline-text-4" id="text-org38a1c91">
 <div class="org-src-container">
 <pre class="src src-nil">== 中，左右两边都需要转换为数字然后进行比较。 [] 转换为数字为0。 ![] 首先是转换为布尔值，由于 [] 作为一个引用类型转换为布尔值为 true, 因此 ![] 为 false ，进而在转换成数字，变为 0 。 0 == 0 ， 结果为 true
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgba4fb74" class="outline-4">
-<h4 id="orgba4fb74">instanceof</h4>
-<div class="outline-text-4" id="text-orgba4fb74">
+<div id="outline-container-orgc205a0a" class="outline-4">
+<h4 id="orgc205a0a">instanceof</h4>
+<div class="outline-text-4" id="text-orgc205a0a">
 <div class="org-src-container">
 <pre class="src src-js"><span style="color: #0000FF;">class</span> PrimitiveNumber {
     <span style="color: #0000FF;">static</span> [Symbol.hasInstance](x) {
@@ -415,18 +408,17 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </p>
 </div>
 </div>
-<div id="outline-container-org0d200d2" class="outline-4">
-<h4 id="org0d200d2">0.1 + 0.2</h4>
-<div class="outline-text-4" id="text-org0d200d2">
+<div id="outline-container-orgbbda376" class="outline-4">
+<h4 id="orgbbda376">0.1 + 0.2</h4>
+<div class="outline-text-4" id="text-orgbbda376">
 <p>
 0.1 和 0.2 在转换成二进制后会无限循环，由于标准位数的限制后面多余的位数会被截掉，此时就已经出现了精度的损失，相加后因浮点数小数位的限制而截断的二进制数字在转换为十进制就会变成 0.30000000000000004 。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgdec6054" class="outline-4">
-<h4 id="orgdec6054">前端判断可视</h4>
-<div class="outline-text-4" id="text-orgdec6054">
+<div id="outline-container-org07c0d63" class="outline-4">
+<h4 id="org07c0d63">前端判断可视</h4>
+<div class="outline-text-4" id="text-org07c0d63">
 <ul class="org-ul">
 <li>offsetTop, scrollTop</li>
 <li>getBoundingClientRect</li>
@@ -435,10 +427,9 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb81bb72" class="outline-3">
-<h3 id="orgb81bb72">节流和防抖</h3>
-<div class="outline-text-3" id="text-orgb81bb72">
+<div id="outline-container-orgac0f908" class="outline-3">
+<h3 id="orgac0f908">节流和防抖</h3>
+<div class="outline-text-3" id="text-orgac0f908">
 <p>
 本质上是优化高频率执行代码的一种手段。
 </p>
@@ -462,9 +453,9 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </p>
 </div>
 </div>
-<div id="outline-container-orgc39ad71" class="outline-3">
-<h3 id="orgc39ad71">数字精度</h3>
-<div class="outline-text-3" id="text-orgc39ad71">
+<div id="outline-container-org394ac61" class="outline-3">
+<h3 id="org394ac61">数字精度</h3>
+<div class="outline-text-3" id="text-org394ac61">
 <p>
 计算机存储双精度浮点数需要先把十进制数转换为二进制的科学记数法的形式，然后计算机以自己的规则 <code>{符号位+(指数位+指数偏移量的二进制)+小数部分}</code> 存储二进制的科学记数法
 因为存储时有位数限制（64 位），并且某些十进制的浮点数在转换为二进制数时会出现无限循环，会造成二进制的舍入操作（0 舍 1 入），当再转换为十进制时就造成了计算误差。
@@ -494,26 +485,25 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgf7beab9" class="outline-3">
-<h3 id="orgf7beab9">跨域问题</h3>
-<div class="outline-text-3" id="text-orgf7beab9">
+<div id="outline-container-orgb1de5ed" class="outline-3">
+<h3 id="orgb1de5ed">跨域问题</h3>
+<div class="outline-text-3" id="text-orgb1de5ed">
 <p>
 跨域产生的原因是同源策略，同源是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到 XSS、CSRF 等攻击。所谓同源是指 &ldquo;协议 + 域名 + 端口&rdquo; 三者完全相同。
 常见解决方案：
 </p>
 </div>
-<div id="outline-container-orge06f69d" class="outline-4">
-<h4 id="orge06f69d">JSONP</h4>
-<div class="outline-text-4" id="text-orge06f69d">
+<div id="outline-container-org4bc973a" class="outline-4">
+<h4 id="org4bc973a">JSONP</h4>
+<div class="outline-text-4" id="text-org4bc973a">
 <p>
 利用 <code>&lt;script&gt;</code> 可以跨域的特性，可以在 src 属性中请求其他域名，利用 URL 参数传递信息以便服务器进行处理最后通过 HTTP 响应获取数据。
 </p>
 </div>
 </div>
-<div id="outline-container-org665346c" class="outline-4">
-<h4 id="org665346c">CORS</h4>
-<div class="outline-text-4" id="text-org665346c">
+<div id="outline-container-org2160f2c" class="outline-4">
+<h4 id="org2160f2c">CORS</h4>
+<div class="outline-text-4" id="text-org2160f2c">
 <p>
 利用服务器（后端）制定的 <code>Access-Control-Allow-Origin</code> 以便浏览器判定是否能把响应资源给前端。
 这种方式实际上请求已经发送了，服务器也接受到了，如果不是被允许的跨域，响应会被浏览器拦截。
@@ -546,14 +536,14 @@ Content-Type:
 </p>
 </div>
 </div>
-<div id="outline-container-org9603721" class="outline-4">
-<h4 id="org9603721">postMessage</h4>
+<div id="outline-container-orgcd5eaa9" class="outline-4">
+<h4 id="orgcd5eaa9">postMessage</h4>
 </div>
-<div id="outline-container-org801d026" class="outline-4">
-<h4 id="org801d026">websocket</h4>
+<div id="outline-container-org7415013" class="outline-4">
+<h4 id="org7415013">websocket</h4>
 </div>
-<div id="outline-container-org93edbaf" class="outline-4">
-<h4 id="org93edbaf">NodeJS 中间代理 / Nginx 反向代理</h4>
+<div id="outline-container-org9b8d337" class="outline-4">
+<h4 id="org9b8d337">NodeJS 中间代理 / Nginx 反向代理</h4>
 </div>
 </div>
 </div>
@@ -571,7 +561,7 @@ Content-Type:
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>

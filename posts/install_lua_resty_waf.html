@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-05-28 Sun 00:56 -->
+<!-- 2023-12-03 Sun 16:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>安装使用 lua-resty-waf</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
 
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/readtheorg_theme/css/readtheorg.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/bootstrap.min.js"></script>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
+                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
+                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
                      <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/readtheorg_theme/js/readtheorg.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -23,18 +27,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb0fd79b">安装 OpenResty</a></li>
-<li><a href="#org0ac5062">将 Nginx 迁移到 OpenResty</a></li>
-<li><a href="#org3e31f97">安装 lua-resty-waf</a></li>
-<li><a href="#org14204fa">测试 lua-resty-waf</a>
+<li><a href="#orgfb72010">安装 OpenResty</a></li>
+<li><a href="#orgbc1be12">将 Nginx 迁移到 OpenResty</a></li>
+<li><a href="#org0c54dc7">安装 lua-resty-waf</a></li>
+<li><a href="#orge70f92e">测试 lua-resty-waf</a>
 <ul>
-<li><a href="#org4d48cec">附录</a>
+<li><a href="#orgc8d5105">附录</a>
 <ul>
-<li><a href="#orgd1d3c77">nginx.conf</a></li>
-<li><a href="#org1b5c788">www.conf</a></li>
+<li><a href="#org2bfcfe2">nginx.conf</a></li>
+<li><a href="#orgd0a6ea9">www.conf</a></li>
 </ul>
 </li>
-<li><a href="#org149d2f0">参考链接</a></li>
+<li><a href="#org9b7dc34">参考链接</a></li>
 </ul>
 </li>
 </ul>
@@ -44,10 +48,9 @@
 系统：CentOS 8.0
 域名：<a href="https://freewisdom.cn">https://freewisdom.cn</a>
 </p>
-
-<div id="outline-container-orgb0fd79b" class="outline-2">
-<h2 id="orgb0fd79b">安装 OpenResty</h2>
-<div class="outline-text-2" id="text-orgb0fd79b">
+<div id="outline-container-orgfb72010" class="outline-2">
+<h2 id="orgfb72010">安装 OpenResty</h2>
+<div class="outline-text-2" id="text-orgfb72010">
 <p>
 安装依赖
 </p>
@@ -82,10 +85,9 @@ mv openresty.repo /etc/yum.repos.d/
 </div>
 </div>
 </div>
-
-<div id="outline-container-org0ac5062" class="outline-2">
-<h2 id="org0ac5062">将 Nginx 迁移到 OpenResty</h2>
-<div class="outline-text-2" id="text-org0ac5062">
+<div id="outline-container-orgbc1be12" class="outline-2">
+<h2 id="orgbc1be12">将 Nginx 迁移到 OpenResty</h2>
+<div class="outline-text-2" id="text-orgbc1be12">
 <p>
 停止 nginx 服务
 </p>
@@ -129,10 +131,9 @@ openresty 对应的 nginx 配置目录为 <code>/usr/local/openresty/nginx/conf/
 </p>
 </div>
 </div>
-
-<div id="outline-container-org3e31f97" class="outline-2">
-<h2 id="org3e31f97">安装 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org3e31f97">
+<div id="outline-container-org0c54dc7" class="outline-2">
+<h2 id="org0c54dc7">安装 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-org0c54dc7">
 <p>
 克隆代码
 </p>
@@ -225,12 +226,9 @@ openresty
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-org14204fa" class="outline-2">
-<h2 id="org14204fa">测试 lua-resty-waf</h2>
-<div class="outline-text-2" id="text-org14204fa">
+<div id="outline-container-orge70f92e" class="outline-2">
+<h2 id="orge70f92e">测试 lua-resty-waf</h2>
+<div class="outline-text-2" id="text-orge70f92e">
 <p>
 测试网址：
 </p>
@@ -244,71 +242,69 @@ https://xampp.freewisdom.cn/
 访问 <code>https://freewisdom.cn/?id=&lt;script&gt;alert(123)&lt;/script&gt;, https://freewisdom.cn/?id=1'or'1=1</code> 均返回 403，服务器日志如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-json"><span style="color: #333333; background-color: #FFFFFF;">{</span>
-  <span style="color: #0000FF;">"timestamp"</span>: <span style="color: #D0372D;">1614936394</span>,
-  <span style="color: #0000FF;">"client"</span>: <span style="color: #008000;">"107.150.120.83"</span>,
-  <span style="color: #0000FF;">"method"</span>: <span style="color: #008000;">"GET"</span>,
-  <span style="color: #0000FF;">"uri"</span>: <span style="color: #008000;">"/"</span>,
-  <span style="color: #0000FF;">"id"</span>: <span style="color: #008000;">"e62f6b10a7f0a593de01"</span>,
-  <span style="color: #0000FF;">"alerts"</span>: <span style="color: #333333; background-color: #FFFFFF;">[</span>
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"SQL Tautologies"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">41005</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">2</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"SQL Injection character anomaly - ARGS"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">41015</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting)"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42043</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">9</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting)"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42059</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - HTML Tag Handler"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42069</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - JS Fragments"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42076</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">9</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"XSS (Cross-Site Scripting) - IE Filter"</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">42083</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">1</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>,
-    <span style="color: #333333; background-color: #FFFFFF;">{</span>
-      <span style="color: #0000FF;">"msg"</span>: <span style="color: #008000;">"Request score greater than score threshold"</span>,
-      <span style="color: #0000FF;">"logdata"</span>: <span style="color: #D0372D;">28</span>,
-      <span style="color: #0000FF;">"id"</span>: <span style="color: #D0372D;">99001</span>,
-      <span style="color: #0000FF;">"match"</span>: <span style="color: #D0372D;">28</span>
-    <span style="color: #333333; background-color: #FFFFFF;">}</span>
-  <span style="color: #333333; background-color: #FFFFFF;">]</span>,
-  <span style="color: #0000FF;">"uri_args"</span>: <span style="color: #333333; background-color: #FFFFFF;">{</span>
-    <span style="color: #0000FF;">"id"</span>: <span style="color: #008000;">"&lt;script&gt;alert(123)&lt;/script&gt;"</span>
-  <span style="color: #333333; background-color: #FFFFFF;">}</span>
-<span style="color: #333333; background-color: #FFFFFF;">}</span>
+<pre class="src src-json">{
+  "timestamp": 1614936394,
+  "client": "107.150.120.83",
+  "method": "GET",
+  "uri": "/",
+  "id": "e62f6b10a7f0a593de01",
+  "alerts": [
+    {
+      "msg": "SQL Tautologies",
+      "id": 41005,
+      "match": 2
+    },
+    {
+      "msg": "SQL Injection character anomaly - ARGS",
+      "id": 41015,
+      "match": 1
+    },
+    {
+      "msg": "XSS (Cross-Site Scripting)",
+      "id": 42043,
+      "match": 9
+    },
+    {
+      "msg": "XSS (Cross-Site Scripting)",
+      "id": 42059,
+      "match": 1
+    },
+    {
+      "msg": "XSS (Cross-Site Scripting) - HTML Tag Handler",
+      "id": 42069,
+      "match": 1
+    },
+    {
+      "msg": "XSS (Cross-Site Scripting) - JS Fragments",
+      "id": 42076,
+      "match": 9
+    },
+    {
+      "msg": "XSS (Cross-Site Scripting) - IE Filter",
+      "id": 42083,
+      "match": 1
+    },
+    {
+      "msg": "Request score greater than score threshold",
+      "logdata": 28,
+      "id": 99001,
+      "match": 28
+    }
+  ],
+  "uri_args": {
+    "id": "&lt;script&gt;alert(123)&lt;/script&gt;"
+  }
+}
 </pre>
 </div>
 </div>
-
-
-<div id="outline-container-org4d48cec" class="outline-3">
-<h3 id="org4d48cec">附录</h3>
-<div class="outline-text-3" id="text-org4d48cec">
+<div id="outline-container-orgc8d5105" class="outline-3">
+<h3 id="orgc8d5105">附录</h3>
+<div class="outline-text-3" id="text-orgc8d5105">
 </div>
-<div id="outline-container-orgd1d3c77" class="outline-4">
-<h4 id="orgd1d3c77">nginx.conf</h4>
-<div class="outline-text-4" id="text-orgd1d3c77">
+<div id="outline-container-org2bfcfe2" class="outline-4">
+<h4 id="org2bfcfe2">nginx.conf</h4>
+<div class="outline-text-4" id="text-org2bfcfe2">
 <div class="org-src-container">
 <pre class="src src-nginx">#user  nobody;
 worker_processes  1;
@@ -387,10 +383,9 @@ http {
 </div>
 </div>
 </div>
-
-<div id="outline-container-org1b5c788" class="outline-4">
-<h4 id="org1b5c788">www.conf</h4>
-<div class="outline-text-4" id="text-org1b5c788">
+<div id="outline-container-orgd0a6ea9" class="outline-4">
+<h4 id="orgd0a6ea9">www.conf</h4>
+<div class="outline-text-4" id="text-orgd0a6ea9">
 <div class="org-src-container">
 <pre class="src src-bash">    server {
         listen       <span style="color: #D0372D;">443</span>;
@@ -486,12 +481,9 @@ http {
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-org149d2f0" class="outline-3">
-<h3 id="org149d2f0">参考链接</h3>
-<div class="outline-text-3" id="text-org149d2f0">
+<div id="outline-container-org9b7dc34" class="outline-3">
+<h3 id="org9b7dc34">参考链接</h3>
+<div class="outline-text-3" id="text-org9b7dc34">
 <ol class="org-ol">
 <li><a href="http://openresty.org/cn/">OpenResty 中文文档</a></li>
 <li><a href="https://github.com/p0pr0ck5/lua-resty-waf">p0pr0ck5/lua-resty-waf</a></li>
@@ -504,7 +496,7 @@ http {
 <div id="postamble" class="status">
 
                      Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow/readtheorg</a>
+                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
                      by
                      <a href="https://github.com/fniessen" target="_blank">fniessen</a>
                      <br>
