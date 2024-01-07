@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Windows</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,93 +16,103 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf9bcc5b">PowerShell</a>
+<li><a href="#org388eae4">Windows ISO</a></li>
+<li><a href="#org6efbb71">PowerShell</a>
 <ul>
-<li><a href="#org5839e4e">Specific PowerShell as SSH terminal on Windows</a></li>
-<li><a href="#org64efbd2">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
-<li><a href="#orga5116a3">Batch rename file</a></li>
+<li><a href="#orgbfb9862">Specific PowerShell as SSH terminal on Windows</a></li>
+<li><a href="#orgd70a348">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#org74a7023">Batch rename file</a></li>
 </ul>
 </li>
-<li><a href="#orgde7e5f2">Registry</a>
+<li><a href="#org02122ad">Registry</a>
 <ul>
-<li><a href="#orgc855be2">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
+<li><a href="#orgf1d801e">Turn on Windows RDP service(open port 3389)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a>
 <ul>
-<li><a href="#orgbd44e85">Clear login record</a></li>
+<li><a href="#orgc6cdb65">Clear login record</a></li>
 </ul>
 </li>
-<li><a href="#org505beae">Turn off search suggestions</a></li>
-<li><a href="#orgb9a67df">Turn off Windows update</a></li>
+<li><a href="#org63ae601">Turn off search suggestions</a></li>
+<li><a href="#orgdd22e49">Turn off Windows update</a></li>
 </ul>
 </li>
-<li><a href="#org6c3ff92">Hyper-V</a>
+<li><a href="#org08d2af9">Hyper-V</a>
 <ul>
-<li><a href="#org95aab6c">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
+<li><a href="#orgabba2dc">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></a></li>
 </ul>
 </li>
-<li><a href="#orga92519a">Useful info</a>
+<li><a href="#orgb9f925b">Useful info</a>
 <ul>
-<li><a href="#orgf646c84">Automatic shutdown</a></li>
-<li><a href="#org2cd45a0">Operate disk</a></li>
-<li><a href="#org74c2f1a">Network Shell</a></li>
+<li><a href="#orgc902c5b">Automatic shutdown</a></li>
+<li><a href="#org699d151">Operate disk</a></li>
+<li><a href="#orgd883c8d">Network Shell</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgf9bcc5b" class="outline-2">
-<h2 id="orgf9bcc5b">PowerShell</h2>
-<div class="outline-text-2" id="text-orgf9bcc5b">
+<div id="outline-container-org388eae4" class="outline-2">
+<h2 id="org388eae4">Windows ISO</h2>
+<div class="outline-text-2" id="text-org388eae4">
+<ul class="org-ul">
+<li>Windows 10 LTSC: <a href="https://www.microsoft.com/zh-cn/evalcenter/download-windows-10-enterprise/">https://www.microsoft.com/zh-cn/evalcenter/download-windows-10-enterprise/</a></li>
+<li>Bootable USB: Ventoy<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
+</ul>
 </div>
-<div id="outline-container-org5839e4e" class="outline-3">
-<h3 id="org5839e4e">Specific PowerShell as SSH terminal on Windows</h3>
-<div class="outline-text-3" id="text-org5839e4e">
+</div>
+<div id="outline-container-org6efbb71" class="outline-2">
+<h2 id="org6efbb71">PowerShell</h2>
+<div class="outline-text-2" id="text-org6efbb71">
+</div>
+<div id="outline-container-orgbfb9862" class="outline-3">
+<h3 id="orgbfb9862">Specific PowerShell as SSH terminal on Windows</h3>
+<div class="outline-text-3" id="text-orgbfb9862">
 <div class="org-src-container">
-<pre class="src src-powershell"># https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
-New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+<pre class="src src-powershell"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration</span>
+<span style="color: #006699;">New-ItemProperty</span> <span style="color: #D0372D;">-Path</span> <span style="color: #008000;">"HKLM:\SOFTWARE\OpenSSH"</span> <span style="color: #D0372D;">-Name</span> DefaultShell <span style="color: #D0372D;">-Value</span> <span style="color: #008000;">"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</span> <span style="color: #D0372D;">-PropertyType</span> String <span style="color: #D0372D;">-Force</span>
 
-# or
-New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Program Files\PowerShell\7\pwsh.exe" -PropertyType String -Force
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">or</span>
+<span style="color: #006699;">New-ItemProperty</span> <span style="color: #D0372D;">-Path</span> <span style="color: #008000;">"HKLM:\SOFTWARE\OpenSSH"</span> <span style="color: #D0372D;">-Name</span> DefaultShell <span style="color: #D0372D;">-Value</span> <span style="color: #008000;">"C:\Program Files\PowerShell\7\pwsh.exe"</span> <span style="color: #D0372D;">-PropertyType</span> String <span style="color: #D0372D;">-Force</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org64efbd2" class="outline-3">
-<h3 id="org64efbd2">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org64efbd2">
+<div id="outline-container-orgd70a348" class="outline-3">
+<h3 id="orgd70a348">Remove command history of PowerShell&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgd70a348">
 <div class="org-src-container">
-<pre class="src src-powershell"># https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2
-Remove-Item (Get-PSReadlineOption).HistorySavePath
+<pre class="src src-powershell"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.2</span>
+<span style="color: #006699;">Remove-Item</span> (<span style="color: #006699;">Get-PSReadlineOption</span>).HistorySavePath
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orga5116a3" class="outline-3">
-<h3 id="orga5116a3">Batch rename file</h3>
-<div class="outline-text-3" id="text-orga5116a3">
+<div id="outline-container-org74a7023" class="outline-3">
+<h3 id="org74a7023">Batch rename file</h3>
+<div class="outline-text-3" id="text-org74a7023">
 <div class="org-src-container">
-<pre class="src src-powershell">Get-ChildItem -Recurse -Path . -File | %{$i=0}{Rename-Item $_.FullName -NewName (‘{0}\{1}{2}’ -f $_.DirectoryName, ++$i, $_.Extension)}
+<pre class="src src-powershell"><span style="color: #006699;">Get-ChildItem</span> <span style="color: #D0372D;">-Recurse</span> <span style="color: #D0372D;">-Path</span> . <span style="color: #D0372D;">-File</span> | %{<span style="color: #BA36A5;">$i</span>=<span style="color: #D0372D;">0</span>}{<span style="color: #006699;">Rename-Item</span> <span style="color: #006FE0;">$_</span>.FullName <span style="color: #D0372D;">-NewName</span> (&#8216;{<span style="color: #D0372D;">0</span>}\{<span style="color: #D0372D;">1</span>}{<span style="color: #D0372D;">2</span>}&#8217; <span style="color: #006FE0;">-f</span> <span style="color: #006FE0;">$_</span>.DirectoryName, ++<span style="color: #BA36A5;">$i</span>, <span style="color: #006FE0;">$_</span>.Extension)}
 
-Get-ChildItem -Recurse -Path . -File | foreach {$i=0} {Rename-Item $_.FullName -NewName ($_.DirectoryName+(‘\{0}’ -f ++$i)+ $_.Extension)}
+<span style="color: #006699;">Get-ChildItem</span> <span style="color: #D0372D;">-Recurse</span> <span style="color: #D0372D;">-Path</span> . <span style="color: #D0372D;">-File</span> | <span style="color: #0000FF;">foreach</span> {<span style="color: #BA36A5;">$i</span>=<span style="color: #D0372D;">0</span>} {<span style="color: #006699;">Rename-Item</span> <span style="color: #006FE0;">$_</span>.FullName <span style="color: #D0372D;">-NewName</span> (<span style="color: #006FE0;">$_</span>.DirectoryName+(&#8216;\{<span style="color: #D0372D;">0</span>}&#8217; <span style="color: #006FE0;">-f</span> ++<span style="color: #BA36A5;">$i</span>)+ <span style="color: #006FE0;">$_</span>.Extension)}
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgde7e5f2" class="outline-2">
-<h2 id="orgde7e5f2">Registry</h2>
-<div class="outline-text-2" id="text-orgde7e5f2">
+<div id="outline-container-org02122ad" class="outline-2">
+<h2 id="org02122ad">Registry</h2>
+<div class="outline-text-2" id="text-org02122ad">
 </div>
-<div id="outline-container-orgc855be2" class="outline-3">
-<h3 id="orgc855be2">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-orgc855be2">
+<div id="outline-container-orgf1d801e" class="outline-3">
+<h3 id="orgf1d801e">Turn on Windows RDP service(open port 3389)<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orgf1d801e">
 <div class="org-src-container">
 <pre class="src src-bat">@reg add HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span style="color: #008000;">" "</span>Server /<span style="color: #6434A3;">v</span> fDenyTSConnections /<span style="color: #6434A3;">t</span> REG_DWORD /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">0</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbd44e85" class="outline-4">
-<h4 id="orgbd44e85">Clear login record</h4>
-<div class="outline-text-4" id="text-orgbd44e85">
+<div id="outline-container-orgc6cdb65" class="outline-4">
+<h4 id="orgc6cdb65">Clear login record</h4>
+<div class="outline-text-4" id="text-orgc6cdb65">
 <div class="org-src-container">
 <pre class="src src-bat">@<span style="color: #006FE0;">echo</span> off
 reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"</span> /<span style="color: #6434A3;">va</span> /<span style="color: #6434A3;">f</span>
@@ -124,18 +123,18 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 </div>
-<div id="outline-container-org505beae" class="outline-3">
-<h3 id="org505beae">Turn off search suggestions</h3>
-<div class="outline-text-3" id="text-org505beae">
+<div id="outline-container-org63ae601" class="outline-3">
+<h3 id="org63ae601">Turn off search suggestions</h3>
+<div class="outline-text-3" id="text-org63ae601">
 <div class="org-src-container">
 <pre class="src src-bat">reg add <span style="color: #008000;">"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\explorer"</span> /<span style="color: #6434A3;">v</span> DisableSearchBoxSuggestions /<span style="color: #6434A3;">t</span> reg_dword /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">1</span> /<span style="color: #6434A3;">f</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9a67df" class="outline-3">
-<h3 id="orgb9a67df">Turn off Windows update</h3>
-<div class="outline-text-3" id="text-orgb9a67df">
+<div id="outline-container-orgdd22e49" class="outline-3">
+<h3 id="orgdd22e49">Turn off Windows update</h3>
+<div class="outline-text-3" id="text-orgdd22e49">
 <div class="org-src-container">
 <pre class="src src-bat">reg add <span style="color: #008000;">"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings"</span> /<span style="color: #6434A3;">v</span> FlightSettingsMaxPauseDays /<span style="color: #6434A3;">t</span> reg_dword /<span style="color: #6434A3;">d</span> <span style="color: #D0372D;">3000</span> /<span style="color: #6434A3;">f</span>
 </pre>
@@ -143,13 +142,13 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 </div>
-<div id="outline-container-org6c3ff92" class="outline-2">
-<h2 id="org6c3ff92">Hyper-V</h2>
-<div class="outline-text-2" id="text-org6c3ff92">
+<div id="outline-container-org08d2af9" class="outline-2">
+<h2 id="org08d2af9">Hyper-V</h2>
+<div class="outline-text-2" id="text-org08d2af9">
 </div>
-<div id="outline-container-org95aab6c" class="outline-3">
-<h3 id="org95aab6c">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
-<div class="outline-text-3" id="text-org95aab6c">
+<div id="outline-container-orgabba2dc" class="outline-3">
+<h3 id="orgabba2dc">Android VM have no GUI&#xa0;&#xa0;&#xa0;<span class="tag"><span class="android">android</span>&#xa0;<span class="virtual_machine">virtual_machine</span></span></h3>
+<div class="outline-text-3" id="text-orgabba2dc">
 <ol class="org-ol">
 <li>Enter Debug mode</li>
 <li>Execute <code>mount -0 remount,re/mnt</code></li>
@@ -160,16 +159,16 @@ reg delete <span style="color: #008000;">"HKEY_CURRENT_USER\Software\Microsoft\T
 </div>
 </div>
 </div>
-<div id="outline-container-orga92519a" class="outline-2">
-<h2 id="orga92519a">Useful info</h2>
-<div class="outline-text-2" id="text-orga92519a">
+<div id="outline-container-orgb9f925b" class="outline-2">
+<h2 id="orgb9f925b">Useful info</h2>
+<div class="outline-text-2" id="text-orgb9f925b">
 <p>
 Software - UWP:
 </p>
 <ul class="org-ul">
 <li>WSL (Windows Subsystem of <a href="20220724-linux.html#ID-7d647b59-8048-44b7-a51d-ce51b2512b94">Linux</a>, not WSL2)</li>
 <li>Minecraft (<a href="minecraft.html#ID-d5529dd0-e6d0-4bcc-9afe-ca830e085acc">Bedrock Edition</a>)</li>
-<li><a href="#orgf9bcc5b">PowerShell</a></li>
+<li><a href="#org6efbb71">PowerShell</a></li>
 <li>QuickLook</li>
 <li>Translucent TB</li>
 <li>X410</li>
@@ -342,9 +341,9 @@ Shortcut Keyboard: <code>win + r</code>.
 </tbody>
 </table>
 </div>
-<div id="outline-container-orgf646c84" class="outline-3">
-<h3 id="orgf646c84">Automatic shutdown</h3>
-<div class="outline-text-3" id="text-orgf646c84">
+<div id="outline-container-orgc902c5b" class="outline-3">
+<h3 id="orgc902c5b">Automatic shutdown</h3>
+<div class="outline-text-3" id="text-orgc902c5b">
 <p>
 shutdown
 </p>
@@ -381,9 +380,9 @@ shutdown
 </table>
 </div>
 </div>
-<div id="outline-container-org2cd45a0" class="outline-3">
-<h3 id="org2cd45a0">Operate disk</h3>
-<div class="outline-text-3" id="text-org2cd45a0">
+<div id="outline-container-org699d151" class="outline-3">
+<h3 id="org699d151">Operate disk</h3>
+<div class="outline-text-3" id="text-org699d151">
 <p>
 <code>diskpart</code>
 </p>
@@ -420,9 +419,9 @@ shutdown
 </table>
 </div>
 </div>
-<div id="outline-container-org74c2f1a" class="outline-3">
-<h3 id="org74c2f1a">Network Shell</h3>
-<div class="outline-text-3" id="text-org74c2f1a">
+<div id="outline-container-orgd883c8d" class="outline-3">
+<h3 id="orgd883c8d">Network Shell</h3>
+<div class="outline-text-3" id="text-orgd883c8d">
 <p>
 netsh
 </p>
@@ -477,6 +476,10 @@ Or use VPN(<a href="20220826-myhomekit.html#ID-947eb6db-ec97-479b-82a4-a6b806666
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+A New Bootable USB Solution: <a href="https://www.ventoy.net/en/index.html">https://www.ventoy.net/en/index.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 Some configurations of Windows and Microsoft&rsquo;s products: <a href="https://gitee.com/honbey/config">https://gitee.com/honbey/config</a>
 </p></div></div>
 
@@ -484,13 +487,7 @@ Some configurations of Windows and Microsoft&rsquo;s products: <a href="https://
 </div>
 </div></div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

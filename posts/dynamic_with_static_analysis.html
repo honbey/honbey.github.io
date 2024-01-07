@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>动静结合分析</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,20 +16,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaded093">源代码</a></li>
-<li><a href="#orgc92d182">分析过程</a>
+<li><a href="#orged0abfd">源代码</a></li>
+<li><a href="#org491af24">分析过程</a>
 <ul>
-<li><a href="#org82ec42e">静态分析</a>
+<li><a href="#org4c71db1">静态分析</a>
 <ul>
-<li><a href="#org6d2073d">fun() 函数运行流程</a></li>
-<li><a href="#org4b6c141">子函数运行流程</a></li>
+<li><a href="#org041289b">fun() 函数运行流程</a></li>
+<li><a href="#orgce58b57">子函数运行流程</a></li>
 </ul>
 </li>
-<li><a href="#org4890e77">动态分析</a>
+<li><a href="#org2e5a04f">动态分析</a>
 <ul>
-<li><a href="#orgc514c91">fun() 函数初始化</a></li>
-<li><a href="#org8ffd410">shellcode 构建</a></li>
-<li><a href="#orgaa8d2f2">shellcode 执行</a></li>
+<li><a href="#orgffa4dae">fun() 函数初始化</a></li>
+<li><a href="#orgcb86454">shellcode 构建</a></li>
+<li><a href="#orga7a26f7">shellcode 执行</a></li>
 </ul>
 </li>
 </ul>
@@ -48,97 +37,97 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgaded093" class="outline-2">
-<h2 id="orgaded093">源代码</h2>
-<div class="outline-text-2" id="text-orgaded093">
+<div id="outline-container-orged0abfd" class="outline-2">
+<h2 id="orged0abfd">源代码</h2>
+<div class="outline-text-2" id="text-orged0abfd">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;string.h&gt;</span>
 <span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdlib.h&gt;</span>
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">Attack</span>() {
-    printf(<span style="color: #008000;">"Hello!:-)\n"</span>);
-    exit(<span style="color: #D0372D;">0</span>);
-}
+<span style="color: #006FE0;">void</span> <span style="color: #006699;">Attack</span><span style="color: #707183; background-color: #FFFFFF;">()</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"Hello!:-)\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">exit</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span>() {
-    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">s_passwd</span>[<span style="color: #D0372D;">6</span>] = <span style="color: #008000;">"ABCDE"</span>;
-    <span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">str</span>[<span style="color: #D0372D;">6</span>];
-    <span style="color: #6434A3;">FILE</span> *<span style="color: #BA36A5;">f_o</span>;
-    <span style="color: #0000FF;">if</span>(!(f_o = fopen(<span style="color: #008000;">"C:\\Program Files\\Microsoft Visual Studio\\MyProjects\\reverseProject\\Debug\\passwd.txt"</span>, <span style="color: #008000;">"r"</span>))) exit(<span style="color: #D0372D;">0</span>);
-    fscanf(f_o, <span style="color: #008000;">"%s"</span>, str);
+<span style="color: #006FE0;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183; background-color: #FFFFFF;">()</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">char</span> <span style="color: #BA36A5;">s_passwd</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"ABCDE"</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006FE0;">char</span> <span style="color: #BA36A5;">str</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">6</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #6434A3;">FILE</span> <span style="color: #0000FF;">*</span><span style="color: #BA36A5;">f_o</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">f_o</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">fopen</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #008000;">"C:\\Program Files\\Microsoft Visual Studio\\MyProjects\\reverseProject\\Debug\\passwd.txt"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"r"</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #006DAF;">exit</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">fscanf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>f_o<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #008000;">"%s"</span><span style="color: #333333; background-color: #FFFFFF;">,</span> str<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-    str[<span style="color: #D0372D;">5</span>] = <span style="color: #D0372D;">0</span>;
-    <span style="color: #0000FF;">if</span>(strcmp(str, s_passwd) == <span style="color: #D0372D;">0</span>) printf(<span style="color: #008000;">"OK\n"</span>);
-    <span style="color: #0000FF;">else</span> printf(<span style="color: #008000;">"NO\n"</span>);
-}
+    <span style="color: #BA36A5;">str</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">5</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">if</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006DAF;">strcmp</span><span style="color: #909183; background-color: #FFFFFF;">(</span>str<span style="color: #333333; background-color: #FFFFFF;">,</span> s_passwd<span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">==</span> <span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"OK\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">else</span> <span style="color: #006DAF;">printf</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">"NO\n"</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span>[]) {
-    fun();
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006DAF;">fun</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">passwd.txt(Hex)</span>
+<span style="color: #8D8D84; font-style: italic;">// passwd.txt(Hex)</span>
 <span style="color: #D0372D;">6161</span> <span style="color: #D0372D;">6161</span> <span style="color: #D0372D;">6262</span> <span style="color: #D0372D;">6262</span> <span style="color: #D0372D;">6363</span> <span style="color: #D0372D;">6363</span> <span style="color: #D0372D;">6464</span> <span style="color: #D0372D;">6464</span>
 <span style="color: #D0372D;">6565</span> <span style="color: #D0372D;">6565</span> <span style="color: #D0372D;">3010</span> <span style="color: #D0372D;">40</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc92d182" class="outline-2">
-<h2 id="orgc92d182">分析过程</h2>
-<div class="outline-text-2" id="text-orgc92d182">
+<div id="outline-container-org491af24" class="outline-2">
+<h2 id="org491af24">分析过程</h2>
+<div class="outline-text-2" id="text-org491af24">
 </div>
-<div id="outline-container-org82ec42e" class="outline-3">
-<h3 id="org82ec42e">静态分析</h3>
-<div class="outline-text-3" id="text-org82ec42e">
+<div id="outline-container-org4c71db1" class="outline-3">
+<h3 id="org4c71db1">静态分析</h3>
+<div class="outline-text-3" id="text-org4c71db1">
 </div>
-<div id="outline-container-org6d2073d" class="outline-4">
-<h4 id="org6d2073d">fun() 函数运行流程</h4>
-<div class="outline-text-4" id="text-org6d2073d">
+<div id="outline-container-org041289b" class="outline-4">
+<h4 id="org041289b">fun() 函数运行流程</h4>
+<div class="outline-text-4" id="text-org041289b">
 <p>
 先找到 fun 函数入口点 0x00401080 ，之后分析 fun 函数（总流程的图太模糊了，不知道当初怎么截的图）
 </p>
 
-<figure id="org5eae310">
+<figure id="org0d1ec53">
 <img src="./../images/dynamic_with_static_analysis_1.png" alt="dynamic_with_static_analysis_1.png">
 
 </figure>
 
 
-<figure id="orge86e333">
+<figure id="org3fcc069">
 <img src="./../images/dynamic_with_static_analysis_2.png" alt="dynamic_with_static_analysis_2.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org4b6c141" class="outline-4">
-<h4 id="org4b6c141">子函数运行流程</h4>
-<div class="outline-text-4" id="text-org4b6c141">
+<div id="outline-container-orgce58b57" class="outline-4">
+<h4 id="orgce58b57">子函数运行流程</h4>
+<div class="outline-text-4" id="text-orgce58b57">
 <p>
 仔细观察 fun 函数的流程，可以看到 fun 的 fopen() 分支，如果没有文件就直接 exit(0) ，程序结束。但在下面一个 if  分支，两种情况后又会继续向下执行，符合代码流程。静态分析还可以看到相应的汇编代码和虚拟地址，为动态分析提供流程指导
 </p>
 
-<figure id="org65e29d6">
+<figure id="org8cd7989">
 <img src="./../images/dynamic_with_static_analysis_3.png" alt="dynamic_with_static_analysis_3.png">
 
 </figure>
 
 
-<figure id="orgc212a0d">
+<figure id="org40d7109">
 <img src="./../images/dynamic_with_static_analysis_4.png" alt="dynamic_with_static_analysis_4.png">
 
 </figure>
 </div>
 </div>
 </div>
-<div id="outline-container-org4890e77" class="outline-3">
-<h3 id="org4890e77">动态分析</h3>
-<div class="outline-text-3" id="text-org4890e77">
+<div id="outline-container-org2e5a04f" class="outline-3">
+<h3 id="org2e5a04f">动态分析</h3>
+<div class="outline-text-3" id="text-org2e5a04f">
 </div>
-<div id="outline-container-orgc514c91" class="outline-4">
-<h4 id="orgc514c91">fun() 函数初始化</h4>
-<div class="outline-text-4" id="text-orgc514c91">
+<div id="outline-container-orgffa4dae" class="outline-4">
+<h4 id="orgffa4dae">fun() 函数初始化</h4>
+<div class="outline-text-4" id="text-orgffa4dae">
 <p>
 利用 ollydbg 进行动态调试，程序运行到 0x00401096 处会把 0x0012fed8~0x0012ff28 ，51 个单位内存都置零，为 fun 函数栈帧初始化内存，fun 栈帧大小有 54 个内存单位。
 </p>
@@ -148,9 +137,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org8ffd410" class="outline-4">
-<h4 id="org8ffd410">shellcode 构建</h4>
-<div class="outline-text-4" id="text-org8ffd410">
+<div id="outline-container-orgcb86454" class="outline-4">
+<h4 id="orgcb86454">shellcode 构建</h4>
+<div class="outline-text-4" id="text-orgcb86454">
 <p>
 初始化内存后，会在 EBP-0x8 处为 fun 函数中的变量 passwd[6] 在内存中开辟空间并置为相应的值（赋值“ABCDE” 内存中即 44434241 cccc0045）。
 </p>
@@ -163,36 +152,36 @@ fscanf 函数会在 passwd[6] 往低地址的方向选择内存，即 EBP-0x14(2
 str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。所以我们对 shellcode 构建，前 20 字节可以随便写，21~24 字节要是我们寻找到的 JMP ESP 指令
 </p>
 
-<figure id="orgd6a12ab">
+<figure id="org8cf4d6a">
 <img src="./../images/dynamic_with_static_analysis_5.png" alt="dynamic_with_static_analysis_5.png">
 
 </figure>
 
 
-<figure id="org20005e8">
+<figure id="org821daf7">
 <img src="./../images/dynamic_with_static_analysis_6.png" alt="dynamic_with_static_analysis_6.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-orgaa8d2f2" class="outline-4">
-<h4 id="orgaa8d2f2">shellcode 执行</h4>
-<div class="outline-text-4" id="text-orgaa8d2f2">
+<div id="outline-container-orga7a26f7" class="outline-4">
+<h4 id="orga7a26f7">shellcode 执行</h4>
+<div class="outline-text-4" id="text-orga7a26f7">
 <p>
 进行缓冲区溢出攻击后，fun 函数栈帧及原 windows 内核函数的栈帧已被 shellcode 覆盖，fun 函数返回地址处的指令是 JMP ESP，而 fun 返回后 ESP 就是 0x0012ff34，是我们填充的 0x90 指令，此后程序按照我们的 shellcode 执行，直到执行完 shellcode 中 exitThread 函数后程序运行结束
 </p>
 
-<figure id="orgac56311">
+<figure id="orgb6c26a4">
 <img src="./../images/dynamic_with_static_analysis_7.png" alt="dynamic_with_static_analysis_7.png">
 
 </figure>
 
-<figure id="orgac5c218">
+<figure id="orga852b76">
 <img src="./../images/dynamic_with_static_analysis_8.png" alt="dynamic_with_static_analysis_8.png">
 
 </figure>
 
-<figure id="org395ded9">
+<figure id="org92d5f7d">
 <img src="./../images/dynamic_with_static_analysis_9.png" alt="dynamic_with_static_analysis_9.png">
 
 </figure>
@@ -201,7 +190,7 @@ str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。
 程序运行结果
 </p>
 
-<figure id="org7cd84fe">
+<figure id="org6c2ad37">
 <img src="./../images/dynamic_with_static_analysis_10.png" alt="dynamic_with_static_analysis_10.png">
 
 </figure>
@@ -211,13 +200,7 @@ str 会从 0x12ff1c 开始写入，这就是我们要利用的缓冲区漏洞。
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

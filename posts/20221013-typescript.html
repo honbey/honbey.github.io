@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TypeScript</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,43 +16,43 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org112bdb8">TypeScript 的优势</a></li>
-<li><a href="#org596e038">TIPS</a>
+<li><a href="#orgdd117c4">TypeScript 的优势</a></li>
+<li><a href="#org6815542">TIPS</a>
 <ul>
-<li><a href="#org3cda957">await</a></li>
-<li><a href="#org96fa7fc">never</a></li>
-<li><a href="#org956ef60">type</a></li>
-<li><a href="#orgc360106">Array</a></li>
-<li><a href="#org7766060">infer</a>
+<li><a href="#org763e115">await</a></li>
+<li><a href="#org457a537">never</a></li>
+<li><a href="#org681a468">type</a></li>
+<li><a href="#org0a00610">Array</a></li>
+<li><a href="#org7a1ffdb">infer</a>
 <ul>
-<li><a href="#org477b397">interview</a></li>
+<li><a href="#org3989ccc">interview</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb5e7f7d">&amp; JS &#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></a>
+<li><a href="#orgeec5858">&amp; JS &#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></a>
 <ul>
-<li><a href="#orgf49766d">尾调用优化</a></li>
-<li><a href="#org0290a49">尾递归</a></li>
-<li><a href="#org9d9dfea">&rsquo;use strict&rsquo;</a></li>
-<li><a href="#org3818a89">tips</a>
+<li><a href="#orgfaf34b0">尾调用优化</a></li>
+<li><a href="#orgda9aa6a">尾递归</a></li>
+<li><a href="#orgcbe4fe5">&rsquo;use strict&rsquo;</a></li>
+<li><a href="#org54fca51">tips</a>
 <ul>
-<li><a href="#orgb1c758b">对象判空</a></li>
-<li><a href="#org38a1c91">[] == ![]</a></li>
-<li><a href="#orgc205a0a">instanceof</a></li>
-<li><a href="#orgbbda376">0.1 + 0.2</a></li>
-<li><a href="#org07c0d63">前端判断可视</a></li>
+<li><a href="#orge7f0b5a">对象判空</a></li>
+<li><a href="#org22ec755">[] == ![]</a></li>
+<li><a href="#org4836b7c">instanceof</a></li>
+<li><a href="#org6f60048">0.1 + 0.2</a></li>
+<li><a href="#org4a6e108">前端判断可视</a></li>
 </ul>
 </li>
-<li><a href="#orgac0f908">节流和防抖</a></li>
-<li><a href="#org394ac61">数字精度</a></li>
-<li><a href="#orgb1de5ed">跨域问题</a>
+<li><a href="#org5eb4daf">节流和防抖</a></li>
+<li><a href="#org0be2872">数字精度</a></li>
+<li><a href="#org51074ff">跨域问题</a>
 <ul>
-<li><a href="#org4bc973a">JSONP</a></li>
-<li><a href="#org2160f2c">CORS</a></li>
-<li><a href="#orgcd5eaa9">postMessage</a></li>
-<li><a href="#org7415013">websocket</a></li>
-<li><a href="#org9b8d337">NodeJS 中间代理 / Nginx 反向代理</a></li>
+<li><a href="#org484c9d5">JSONP</a></li>
+<li><a href="#org0da0f6a">CORS</a></li>
+<li><a href="#orgcd41cfd">postMessage</a></li>
+<li><a href="#orgf4f4b18">websocket</a></li>
+<li><a href="#org140b93e">NodeJS 中间代理 / Nginx 反向代理</a></li>
 </ul>
 </li>
 </ul>
@@ -71,9 +60,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-org112bdb8" class="outline-2">
-<h2 id="org112bdb8">TypeScript 的优势</h2>
-<div class="outline-text-2" id="text-org112bdb8">
+<div id="outline-container-orgdd117c4" class="outline-2">
+<h2 id="orgdd117c4">TypeScript 的优势</h2>
+<div class="outline-text-2" id="text-orgdd117c4">
 <p>
 静态类型语言。
 </p>
@@ -96,13 +85,13 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org596e038" class="outline-2">
-<h2 id="org596e038">TIPS</h2>
-<div class="outline-text-2" id="text-org596e038">
+<div id="outline-container-org6815542" class="outline-2">
+<h2 id="org6815542">TIPS</h2>
+<div class="outline-text-2" id="text-org6815542">
 </div>
-<div id="outline-container-org3cda957" class="outline-3">
-<h3 id="org3cda957">await</h3>
-<div class="outline-text-3" id="text-org3cda957">
+<div id="outline-container-org763e115" class="outline-3">
+<h3 id="org763e115">await</h3>
+<div class="outline-text-3" id="text-org763e115">
 <p>
 await 会暂停 async 函数的执行，等到 js 运行时，取出恢复函数执行的微任务并执行，在这个过程中仅仅发生了一个 then 的时间。可以将 await 后面的代码可以看做在 then 里面执行的结果。
 </p>
@@ -126,30 +115,30 @@ async 函数在抛出返回值会根据返回值类型开启不同数目的 微�
 </ul>
 </div>
 </div>
-<div id="outline-container-org96fa7fc" class="outline-3">
-<h3 id="org96fa7fc">never</h3>
-<div class="outline-text-3" id="text-org96fa7fc">
+<div id="outline-container-org457a537" class="outline-3">
+<h3 id="org457a537">never</h3>
+<div class="outline-text-3" id="text-org457a537">
 <div class="org-src-container">
-<pre class="src src-typescript">function exceptionHandle(msg: string): never{
-    throw new Error(msg)
-}
+<pre class="src src-typescript"><span style="color: #0000FF;">function</span> <span style="color: #006699;">exceptionHandle</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">msg</span>: <span style="color: #006FE0;">string</span><span style="color: #707183; background-color: #FFFFFF;">)</span>: <span style="color: #006FE0;">never</span><span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">throw</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>msg<span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-// 推断的返回值类型为 never
-function errorHandle(){
-    return Error('This is error')
-}
+<span style="color: #8D8D84; font-style: italic;">// &#25512;&#26029;&#30340;&#36820;&#22238;&#20540;&#31867;&#22411;&#20026; never</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">errorHandle</span><span style="color: #707183; background-color: #FFFFFF;">(){</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #6434A3;">Error</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">'This is error'</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-// 返回 never 的函数必须存在无法达到的终点
-function stopLoop(): never {
-    while (true) {}
-}
+<span style="color: #8D8D84; font-style: italic;">// &#36820;&#22238; never &#30340;&#20989;&#25968;&#24517;&#39035;&#23384;&#22312;&#26080;&#27861;&#36798;&#21040;&#30340;&#32456;&#28857;</span>
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">stopLoop</span><span style="color: #707183; background-color: #FFFFFF;">()</span>: <span style="color: #006FE0;">never</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">while</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">true</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{}</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org956ef60" class="outline-3">
-<h3 id="org956ef60">type</h3>
-<div class="outline-text-3" id="text-org956ef60">
+<div id="outline-container-org681a468" class="outline-3">
+<h3 id="org681a468">type</h3>
+<div class="outline-text-3" id="text-org681a468">
 <p>
 类型转换： <code>as</code> 关键字，但 jsx 中只支持 as
 </p>
@@ -171,9 +160,9 @@ function stopLoop(): never {
 </p>
 </div>
 </div>
-<div id="outline-container-orgc360106" class="outline-3">
-<h3 id="orgc360106">Array</h3>
-<div class="outline-text-3" id="text-orgc360106">
+<div id="outline-container-org0a00610" class="outline-3">
+<h3 id="org0a00610">Array</h3>
+<div class="outline-text-3" id="text-org0a00610">
 <p>
 <code>splice()</code> 方法改变原数组，向数组中添加项目或删除项目，并返回删除的项目。
 </p>
@@ -183,21 +172,21 @@ function stopLoop(): never {
 </p>
 </div>
 </div>
-<div id="outline-container-org7766060" class="outline-3">
-<h3 id="org7766060">infer</h3>
-<div class="outline-text-3" id="text-org7766060">
+<div id="outline-container-org7a1ffdb" class="outline-3">
+<h3 id="org7a1ffdb">infer</h3>
+<div class="outline-text-3" id="text-org7a1ffdb">
 <div class="org-src-container">
-<pre class="src src-typescript">type ParamType&lt;T&gt; = T extends (arg: infer P) =&gt; any ? P : T;
+<pre class="src src-typescript"><span style="color: #0000FF;">type</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">T</span> <span style="color: #0000FF;">extends</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">arg</span>: infer <span style="color: #6434A3;">P</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">any</span> ? <span style="color: #6434A3;">P</span> : <span style="color: #6434A3;">T</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-interface User {
-    name: string;
-    age: number;
-}
+<span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">User</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">name</span>: <span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">age</span>: <span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-type Func = (user: User) =&gt; void;
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Func</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">user</span>: <span style="color: #6434A3;">User</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #006FE0;">void</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-type Param = ParamType; // Param = User
-type AA = ParamType; // string
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Param</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// Param = User</span>
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">AA</span> <span style="color: #0000FF;">=</span> <span style="color: #6434A3;">ParamType</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #8D8D84; font-style: italic;">// string</span>
 </pre>
 </div>
 <p>
@@ -208,9 +197,9 @@ type AA = ParamType; // string
 整句表示为：如果 <code>T</code> 能赋值给 <code>(arg: infer P) =&gt; any</code> ，则结果是 <code>(arg: infer P) =&gt; any</code> 类型中的参数 <code>P</code> ，否则返回为 <code>T</code> 。
 </p>
 </div>
-<div id="outline-container-org477b397" class="outline-4">
-<h4 id="org477b397">interview</h4>
-<div class="outline-text-4" id="text-org477b397">
+<div id="outline-container-org3989ccc" class="outline-4">
+<h4 id="org3989ccc">interview</h4>
+<div class="outline-text-4" id="text-org3989ccc">
 <p>
 <a href="https://github.com/LeetCode-OpenSource/hire/blob/master/typescript_zh.md">LeetCode TypeScript 的面试题 - 1</a>
 </p>
@@ -224,75 +213,75 @@ type AA = ParamType; // string
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-typescript">interface Action&lt;T&gt; {
-  payload?: T;
-  type: string;
-}
+<pre class="src src-typescript"><span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #BA36A5;">payload</span>?: <span style="color: #6434A3;">T</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #BA36A5;">type</span>: <span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-class EffectModule {
-  count = 1;
-  message = 'hello!';
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">EffectModule</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  count <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">1</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  message <span style="color: #0000FF;">=</span> <span style="color: #008000;">'hello!'</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-  delay(input: Promise&lt;number&gt;) {
-    return input.then((i) =&gt; ({
-      payload: `hello ${i}!`,
-      type: 'delay',
-    }));
-  }
+  <span style="color: #006699;">delay</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">return</span> input<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">then</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">i</span><span style="color: #709870; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #707183; background-color: #FFFFFF;">{</span>
+      <span style="color: #BA36A5;">payload</span>: <span style="color: #008000;">`hello </span><span style="color: #0000FF;">${</span><span style="color: #333333; background-color: #FFFFFF;">i</span><span style="color: #0000FF; background-color: #FFFFFF;">}</span><span style="color: #008000;">!`</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+      <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'delay'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
 
-  setMessage(action: Action&lt;Date&gt;) {
-    return {
-      payload: action.payload!.getMilliseconds(),
-      type: 'set-message',
-    };
-  }
-}
+  <span style="color: #006699;">setMessage</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">action</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">Date</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
+      <span style="color: #BA36A5;">payload</span>: action<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #D0372D; font-style: italic;">payload</span><span style="color: #0000FF;">!</span><span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">getMilliseconds</span><span style="color: #709870; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+      <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'set-message'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #909183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-// 修改 Connect 的类型，让 connected 的类型变成预期的类型
-type FuncName&lt;T&gt; = {
-  [P in keyof T]: T[P] extends Function ? P : never;
-}[keyof T];
+<span style="color: #8D8D84; font-style: italic;">// &#20462;&#25913; Connect &#30340;&#31867;&#22411;&#65292;&#35753; connected &#30340;&#31867;&#22411;&#21464;&#25104;&#39044;&#26399;&#30340;&#31867;&#22411;</span>
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">FuncName</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #BA36A5;">T</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">P</span> <span style="color: #0000FF;">in</span> <span style="color: #0000FF;">keyof</span> <span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span>: <span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">P</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Function</span> ? <span style="color: #6434A3;">P</span> : <span style="color: #006FE0;">never</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}[</span><span style="color: #0000FF;">keyof</span> <span style="color: #6434A3;">T</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-type Connect = (module: EffectModule) =&gt; {
-  [T in FuncName&lt;EffectModule&gt;]: EffectModule[T] extends (
-    a: Promise&lt;infer R&gt;
-  ) =&gt; Promise&lt;Action&lt;infer S&gt;&gt;
-    ? (a: R) =&gt; Action&lt;S&gt;
-    : EffectModule[T] extends (a: Action&lt;infer R&gt;) =&gt; Action&lt;infer S&gt;
-    ? (a: R) =&gt; Action&lt;S&gt;
-    : never;
-};
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Connect</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">module</span>: <span style="color: #6434A3;">EffectModule</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span> <span style="color: #0000FF;">in</span> <span style="color: #6434A3;">FuncName</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">EffectModule</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span>: <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span>
+    <span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">R</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Promise</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;&gt;</span>
+    ? <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">R</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    : <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #6434A3;">T</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">extends</span> <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">R</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span>infer <span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    ? <span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">a</span>: <span style="color: #6434A3;">R</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #6434A3;">S</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span>
+    : <span style="color: #006FE0;">never</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-const connect: Connect = (m) =&gt; ({
-  delay: (input: number) =&gt; ({
-    type: 'delay',
-    payload: `hello 2`,
-  }),
-  setMessage: (input: Date) =&gt; ({
-    type: 'set-message',
-    payload: input.getMilliseconds(),
-  }),
-});
+<span style="color: #0000FF;">const</span> <span style="color: #006699;">connect</span>: <span style="color: #6434A3;">Connect</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">m</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+  <span style="color: #006699;">delay</span>: <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #006FE0;">number</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'delay'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #BA36A5;">payload</span>: <span style="color: #008000;">`hello 2`</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+  <span style="color: #709870; background-color: #FFFFFF;">}</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+  <span style="color: #006699;">setMessage</span>: <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #6434A3;">Date</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #0000FF;">=&gt;</span> <span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #709870; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">type</span>: <span style="color: #008000;">'set-message'</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+    <span style="color: #BA36A5;">payload</span>: input<span style="color: #333333; background-color: #FFFFFF;">.</span><span style="color: #006DAF; font-style: italic;">getMilliseconds</span><span style="color: #707183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+  <span style="color: #709870; background-color: #FFFFFF;">}</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">,</span>
+<span style="color: #7388D6; background-color: #FFFFFF;">}</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-type Connected = {
-  delay(input: number): Action&lt;string&gt;;
-  setMessage(action: Date): Action&lt;number&gt;;
-};
+<span style="color: #0000FF;">type</span> <span style="color: #6434A3;">Connected</span> <span style="color: #0000FF;">=</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #006699;">delay</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">input</span>: <span style="color: #006FE0;">number</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">string</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #006699;">setMessage</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">action</span>: <span style="color: #6434A3;">Date</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span>: <span style="color: #6434A3;">Action</span><span style="color: #333333; background-color: #FFFFFF;">&lt;</span><span style="color: #006FE0;">number</span><span style="color: #333333; background-color: #FFFFFF;">&gt;</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 
-export const connected: Connected = connect(new EffectModule());
+<span style="color: #0000FF;">export</span> <span style="color: #0000FF;">const</span> <span style="color: #BA36A5;">connected</span>: <span style="color: #6434A3;">Connected</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">connect</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">new</span> <span style="color: #6434A3;">EffectModule</span><span style="color: #7388D6; background-color: #FFFFFF;">()</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb5e7f7d" class="outline-2">
-<h2 id="orgb5e7f7d">&amp; JS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></h2>
-<div class="outline-text-2" id="text-orgb5e7f7d">
+<div id="outline-container-orgeec5858" class="outline-2">
+<h2 id="orgeec5858">&amp; JS <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="programming">programming</span></span></h2>
+<div class="outline-text-2" id="text-orgeec5858">
 </div>
-<div id="outline-container-orgf49766d" class="outline-3">
-<h3 id="orgf49766d">尾调用优化</h3>
-<div class="outline-text-3" id="text-orgf49766d">
+<div id="outline-container-orgfaf34b0" class="outline-3">
+<h3 id="orgfaf34b0">尾调用优化</h3>
+<div class="outline-text-3" id="text-orgfaf34b0">
 <p>
 尾调用：某个函数的最后一步是调用另一个函数。
 </p>
@@ -321,9 +310,9 @@ g(<span style="color: #D0372D;">3</span>);
 </div>
 </div>
 </div>
-<div id="outline-container-org0290a49" class="outline-3">
-<h3 id="org0290a49">尾递归</h3>
-<div class="outline-text-3" id="text-org0290a49">
+<div id="outline-container-orgda9aa6a" class="outline-3">
+<h3 id="orgda9aa6a">尾递归</h3>
+<div class="outline-text-3" id="text-orgda9aa6a">
 <p>
 函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
 递归非常耗费内存，因为需要同时保存成千上百个调用记录，很容易发生“栈溢出”错误（stack overflow）。但对于尾递归来说，由于只存在一个调用记录，所以永远不会发生&ldquo;栈溢出&rdquo;错误。
@@ -345,9 +334,9 @@ factorial(<span style="color: #D0372D;">5</span>, <span style="color: #D0372D;">
 </div>
 </div>
 </div>
-<div id="outline-container-org9d9dfea" class="outline-3">
-<h3 id="org9d9dfea">&rsquo;use strict&rsquo;</h3>
-<div class="outline-text-3" id="text-org9d9dfea">
+<div id="outline-container-orgcbe4fe5" class="outline-3">
+<h3 id="orgcbe4fe5">&rsquo;use strict&rsquo;</h3>
+<div class="outline-text-3" id="text-orgcbe4fe5">
 <p>
 use strict 是一种 ECMAscript5 添加的（严格）运行模式，这种模式使得 Javascript 在更严格的条件下运行。 设立“严格模式”的目的，主要有以下几个:
 </p>
@@ -368,31 +357,31 @@ use strict 是一种 ECMAscript5 添加的（严格）运行模式，这种模�
 </ul>
 </div>
 </div>
-<div id="outline-container-org3818a89" class="outline-3">
-<h3 id="org3818a89">tips</h3>
-<div class="outline-text-3" id="text-org3818a89">
+<div id="outline-container-org54fca51" class="outline-3">
+<h3 id="org54fca51">tips</h3>
+<div class="outline-text-3" id="text-org54fca51">
 </div>
-<div id="outline-container-orgb1c758b" class="outline-4">
-<h4 id="orgb1c758b">对象判空</h4>
-<div class="outline-text-4" id="text-orgb1c758b">
+<div id="outline-container-orge7f0b5a" class="outline-4">
+<h4 id="orge7f0b5a">对象判空</h4>
+<div class="outline-text-4" id="text-orge7f0b5a">
 <div class="org-src-container">
 <pre class="src src-js">Object.keys(obj).length === <span style="color: #D0372D;">0</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org38a1c91" class="outline-4">
-<h4 id="org38a1c91">[] == ![]</h4>
-<div class="outline-text-4" id="text-org38a1c91">
+<div id="outline-container-org22ec755" class="outline-4">
+<h4 id="org22ec755">[] == ![]</h4>
+<div class="outline-text-4" id="text-org22ec755">
 <div class="org-src-container">
 <pre class="src src-nil">== 中，左右两边都需要转换为数字然后进行比较。 [] 转换为数字为0。 ![] 首先是转换为布尔值，由于 [] 作为一个引用类型转换为布尔值为 true, 因此 ![] 为 false ，进而在转换成数字，变为 0 。 0 == 0 ， 结果为 true
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc205a0a" class="outline-4">
-<h4 id="orgc205a0a">instanceof</h4>
-<div class="outline-text-4" id="text-orgc205a0a">
+<div id="outline-container-org4836b7c" class="outline-4">
+<h4 id="org4836b7c">instanceof</h4>
+<div class="outline-text-4" id="text-org4836b7c">
 <div class="org-src-container">
 <pre class="src src-js"><span style="color: #0000FF;">class</span> PrimitiveNumber {
     <span style="color: #0000FF;">static</span> [Symbol.hasInstance](x) {
@@ -408,17 +397,17 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </p>
 </div>
 </div>
-<div id="outline-container-orgbbda376" class="outline-4">
-<h4 id="orgbbda376">0.1 + 0.2</h4>
-<div class="outline-text-4" id="text-orgbbda376">
+<div id="outline-container-org6f60048" class="outline-4">
+<h4 id="org6f60048">0.1 + 0.2</h4>
+<div class="outline-text-4" id="text-org6f60048">
 <p>
 0.1 和 0.2 在转换成二进制后会无限循环，由于标准位数的限制后面多余的位数会被截掉，此时就已经出现了精度的损失，相加后因浮点数小数位的限制而截断的二进制数字在转换为十进制就会变成 0.30000000000000004 。
 </p>
 </div>
 </div>
-<div id="outline-container-org07c0d63" class="outline-4">
-<h4 id="org07c0d63">前端判断可视</h4>
-<div class="outline-text-4" id="text-org07c0d63">
+<div id="outline-container-org4a6e108" class="outline-4">
+<h4 id="org4a6e108">前端判断可视</h4>
+<div class="outline-text-4" id="text-org4a6e108">
 <ul class="org-ul">
 <li>offsetTop, scrollTop</li>
 <li>getBoundingClientRect</li>
@@ -427,9 +416,9 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </div>
 </div>
 </div>
-<div id="outline-container-orgac0f908" class="outline-3">
-<h3 id="orgac0f908">节流和防抖</h3>
-<div class="outline-text-3" id="text-orgac0f908">
+<div id="outline-container-org5eb4daf" class="outline-3">
+<h3 id="org5eb4daf">节流和防抖</h3>
+<div class="outline-text-3" id="text-org5eb4daf">
 <p>
 本质上是优化高频率执行代码的一种手段。
 </p>
@@ -453,9 +442,9 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </p>
 </div>
 </div>
-<div id="outline-container-org394ac61" class="outline-3">
-<h3 id="org394ac61">数字精度</h3>
-<div class="outline-text-3" id="text-org394ac61">
+<div id="outline-container-org0be2872" class="outline-3">
+<h3 id="org0be2872">数字精度</h3>
+<div class="outline-text-3" id="text-org0be2872">
 <p>
 计算机存储双精度浮点数需要先把十进制数转换为二进制的科学记数法的形式，然后计算机以自己的规则 <code>{符号位+(指数位+指数偏移量的二进制)+小数部分}</code> 存储二进制的科学记数法
 因为存储时有位数限制（64 位），并且某些十进制的浮点数在转换为二进制数时会出现无限循环，会造成二进制的舍入操作（0 舍 1 入），当再转换为十进制时就造成了计算误差。
@@ -485,25 +474,25 @@ console.log(<span style="color: #D0372D;">111</span> <span style="color: #0000FF
 </div>
 </div>
 </div>
-<div id="outline-container-orgb1de5ed" class="outline-3">
-<h3 id="orgb1de5ed">跨域问题</h3>
-<div class="outline-text-3" id="text-orgb1de5ed">
+<div id="outline-container-org51074ff" class="outline-3">
+<h3 id="org51074ff">跨域问题</h3>
+<div class="outline-text-3" id="text-org51074ff">
 <p>
 跨域产生的原因是同源策略，同源是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到 XSS、CSRF 等攻击。所谓同源是指 &ldquo;协议 + 域名 + 端口&rdquo; 三者完全相同。
 常见解决方案：
 </p>
 </div>
-<div id="outline-container-org4bc973a" class="outline-4">
-<h4 id="org4bc973a">JSONP</h4>
-<div class="outline-text-4" id="text-org4bc973a">
+<div id="outline-container-org484c9d5" class="outline-4">
+<h4 id="org484c9d5">JSONP</h4>
+<div class="outline-text-4" id="text-org484c9d5">
 <p>
 利用 <code>&lt;script&gt;</code> 可以跨域的特性，可以在 src 属性中请求其他域名，利用 URL 参数传递信息以便服务器进行处理最后通过 HTTP 响应获取数据。
 </p>
 </div>
 </div>
-<div id="outline-container-org2160f2c" class="outline-4">
-<h4 id="org2160f2c">CORS</h4>
-<div class="outline-text-4" id="text-org2160f2c">
+<div id="outline-container-org0da0f6a" class="outline-4">
+<h4 id="org0da0f6a">CORS</h4>
+<div class="outline-text-4" id="text-org0da0f6a">
 <p>
 利用服务器（后端）制定的 <code>Access-Control-Allow-Origin</code> 以便浏览器判定是否能把响应资源给前端。
 这种方式实际上请求已经发送了，服务器也接受到了，如果不是被允许的跨域，响应会被浏览器拦截。
@@ -536,14 +525,14 @@ Content-Type:
 </p>
 </div>
 </div>
-<div id="outline-container-orgcd5eaa9" class="outline-4">
-<h4 id="orgcd5eaa9">postMessage</h4>
+<div id="outline-container-orgcd41cfd" class="outline-4">
+<h4 id="orgcd41cfd">postMessage</h4>
 </div>
-<div id="outline-container-org7415013" class="outline-4">
-<h4 id="org7415013">websocket</h4>
+<div id="outline-container-orgf4f4b18" class="outline-4">
+<h4 id="orgf4f4b18">websocket</h4>
 </div>
-<div id="outline-container-org9b8d337" class="outline-4">
-<h4 id="org9b8d337">NodeJS 中间代理 / Nginx 反向代理</h4>
+<div id="outline-container-org140b93e" class="outline-4">
+<h4 id="org140b93e">NodeJS 中间代理 / Nginx 反向代理</h4>
 </div>
 </div>
 </div>
@@ -559,13 +548,7 @@ Content-Type:
 </div>
 </div></div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

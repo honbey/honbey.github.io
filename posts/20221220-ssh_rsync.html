@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ssh &amp; rsync</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,23 +16,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0794226">ssh</a>
+<li><a href="#orgf0c3df6">ssh</a>
 <ul>
-<li><a href="#org2a70a62">端口转发</a></li>
-<li><a href="#org5cf068d">scp</a></li>
+<li><a href="#org4d67864">端口转发</a></li>
+<li><a href="#org1c1913f">scp</a></li>
 </ul>
 </li>
-<li><a href="#org10cefe5">rsync</a>
+<li><a href="#org14ed429">rsync</a>
 <ul>
-<li><a href="#org3c5836f">增量备份</a></li>
+<li><a href="#orgab92d8f">增量备份</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org0794226" class="outline-2">
-<h2 id="org0794226">ssh</h2>
-<div class="outline-text-2" id="text-org0794226">
+<div id="outline-container-orgf0c3df6" class="outline-2">
+<h2 id="orgf0c3df6">ssh</h2>
+<div class="outline-text-2" id="text-orgf0c3df6">
 <p>
 Secure Shell
 </p>
@@ -120,15 +109,15 @@ Handshake protocol: ServerHello
 ssh 命令参数：
 </p>
 </div>
-<div id="outline-container-org2a70a62" class="outline-3">
-<h3 id="org2a70a62">端口转发</h3>
-<div class="outline-text-3" id="text-org2a70a62">
+<div id="outline-container-org4d67864" class="outline-3">
+<h3 id="org4d67864">端口转发</h3>
+<div class="outline-text-3" id="text-org4d67864">
 <p>
 动态转发指的是，本机与 SSH 服务器之间创建了一个加密连接，然后本机内部针对某个端口的通信，都通过这个加密连接转发。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">ssh -D local-port tunnel-host -N
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-D</span> local-port tunnel-host <span style="color: #D0372D;">-N</span>
 </pre>
 </div>
 
@@ -144,7 +133,7 @@ SOCKS5 协议 <code>curl -x socks5://localhost:local-port http://www.example.com
 指定一个本地端口（local-port），所有发向那个端口的请求，都会转发到 SSH 跳板机（tunnel-host），然后 SSH 跳板机作为中介，将收到的请求发到目标服务器（target-host）的目标端口（target-port）：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">ssh -L local-port:target-host:target-port tunnel-host
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-L</span> local-port:target-host:target-port tunnel-host
 </pre>
 </div>
 
@@ -165,14 +154,14 @@ LocalForward client-IP:client-port server-IP:server-port
 远程转发，通过远程计算机访问本地计算机：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">ssh -R remote-port:target-host:target-port -N remotehost
+<pre class="src src-bash"><span style="color: #006DAF;">ssh</span> <span style="color: #D0372D;">-R</span> remote-port:target-host:target-port <span style="color: #D0372D;">-N</span> remotehost
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org5cf068d" class="outline-3">
-<h3 id="org5cf068d">scp</h3>
-<div class="outline-text-3" id="text-org5cf068d">
+<div id="outline-container-org1c1913f" class="outline-3">
+<h3 id="org1c1913f">scp</h3>
+<div class="outline-text-3" id="text-org1c1913f">
 <p>
 语法类似 cp 命令，但远程主机要加 <code>:</code> 不然会复制到本地的当前目录。
 </p>
@@ -193,9 +182,9 @@ LocalForward client-IP:client-port server-IP:server-port
 </div>
 </div>
 </div>
-<div id="outline-container-org10cefe5" class="outline-2">
-<h2 id="org10cefe5">rsync</h2>
-<div class="outline-text-2" id="text-org10cefe5">
+<div id="outline-container-org14ed429" class="outline-2">
+<h2 id="org14ed429">rsync</h2>
+<div class="outline-text-2" id="text-org14ed429">
 <table>
 
 
@@ -390,14 +379,14 @@ LocalForward client-IP:client-port server-IP:server-port
 </tbody>
 </table>
 </div>
-<div id="outline-container-org3c5836f" class="outline-3">
-<h3 id="org3c5836f">增量备份</h3>
-<div class="outline-text-3" id="text-org3c5836f">
+<div id="outline-container-orgab92d8f" class="outline-3">
+<h3 id="orgab92d8f">增量备份</h3>
+<div class="outline-text-3" id="text-orgab92d8f">
 <p>
 默认复制有变动的文件：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">rsync -a --delete --link-dest /compare/path /source/path /target/path
+<pre class="src src-bash"><span style="color: #006DAF;">rsync</span> <span style="color: #D0372D;">-a</span> <span style="color: #D0372D;">--delete</span> <span style="color: #D0372D;">--link-dest</span> /compare/path /source/path /target/path
 </pre>
 </div>
 
@@ -409,13 +398,7 @@ LocalForward client-IP:client-port server-IP:server-port
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

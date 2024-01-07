@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>内存与寄存器</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,29 +16,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6461eae">函数栈帧</a></li>
-<li><a href="#org7853ea1">常用寄存器</a></li>
-<li><a href="#org9fd0c28">程序执行过程中内存和寄存器的变化</a>
+<li><a href="#org4999009">函数栈帧</a></li>
+<li><a href="#org07b83d2">常用寄存器</a></li>
+<li><a href="#orgb7b5149">程序执行过程中内存和寄存器的变化</a>
 <ul>
-<li><a href="#orgad10c8f">源代码</a></li>
+<li><a href="#orgd764e96">源代码</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org6461eae" class="outline-2">
-<h2 id="org6461eae">函数栈帧</h2>
-<div class="outline-text-2" id="text-org6461eae">
+<div id="outline-container-org4999009" class="outline-2">
+<h2 id="org4999009">函数栈帧</h2>
+<div class="outline-text-2" id="text-org4999009">
 
-<figure id="org68a4347">
+<figure id="orgc640943">
 <img src="./../images/memory_and_register_1.png" alt="memory_and_register_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org7853ea1" class="outline-2">
-<h2 id="org7853ea1">常用寄存器</h2>
-<div class="outline-text-2" id="text-org7853ea1">
+<div id="outline-container-org07b83d2" class="outline-2">
+<h2 id="org07b83d2">常用寄存器</h2>
+<div class="outline-text-2" id="text-org07b83d2">
 <table>
 
 
@@ -93,14 +82,14 @@
 </table>
 </div>
 </div>
-<div id="outline-container-org9fd0c28" class="outline-2">
-<h2 id="org9fd0c28">程序执行过程中内存和寄存器的变化</h2>
-<div class="outline-text-2" id="text-org9fd0c28">
+<div id="outline-container-orgb7b5149" class="outline-2">
+<h2 id="orgb7b5149">程序执行过程中内存和寄存器的变化</h2>
+<div class="outline-text-2" id="text-orgb7b5149">
 <p>
 给 a 赋值后
 </p>
 
-<figure id="org69b6ab3">
+<figure id="org7d9e4b2">
 <img src="./../images/memory_and_register_3.png" alt="memory_and_register_3.png">
 
 </figure>
@@ -110,7 +99,7 @@
 </p>
 
 
-<figure id="org7259f63">
+<figure id="orgd15f40c">
 <img src="./../images/memory_and_register_4.png" alt="memory_and_register_4.png">
 
 </figure>
@@ -119,7 +108,7 @@
 继续执行，进入了 fun 函数的栈帧，EBP，ESP 的值都改变了，新 EBP 指向原 ESP-4 的值，也就是 EBP 移动到了原 ESP 的上方，而新 EBP 指向的内存中储存的值是原 EBP 的值
 </p>
 
-<figure id="org32f96d4">
+<figure id="org11a5839">
 <img src="./../images/memory_and_register_5.png" alt="memory_and_register_5.png">
 
 </figure>
@@ -128,7 +117,7 @@
 fun 函数最后的加法运算，值也是先保存到寄存器中，再写入到 fun 函数的栈帧中
 </p>
 
-<figure id="orgefc25a3">
+<figure id="org47c00bd">
 <img src="./../images/memory_and_register_6.png" alt="memory_and_register_6.png">
 
 </figure>
@@ -138,14 +127,14 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 最后可看到 ESP 指向了 0x12FF2C，即程序一开始时 ESP 的值，说明传递给 fun 的形参都被弹出， 恢复到调用 fun 之前的栈帧状态。return 0 程序正常结束。
 </p>
 
-<figure id="orgf8da231">
+<figure id="org56e2735">
 <img src="./../images/memory_and_register_7.png" alt="memory_and_register_7.png">
 
 </figure>
 </div>
-<div id="outline-container-orgad10c8f" class="outline-3">
-<h3 id="orgad10c8f">源代码</h3>
-<div class="outline-text-3" id="text-orgad10c8f">
+<div id="outline-container-orgd764e96" class="outline-3">
+<h3 id="orgd764e96">源代码</h3>
+<div class="outline-text-3" id="text-orgd764e96">
 <p>
 一个简单的加法函数和主函数，主函数中调用 fun() 实现两个变量的加法运算
 </p>
@@ -153,17 +142,17 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;stdio.h&gt;</span>
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">fun</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_m</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">_n</span>) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i_local</span>;
-    i_local = _m + _n;
-}
+<span style="color: #006FE0;">void</span> <span style="color: #006699;">fun</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_m</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">_n</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">i_local</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">i_local</span> <span style="color: #0000FF;">=</span> _m <span style="color: #0000FF;">+</span> _n<span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">argc</span>, <span style="color: #6434A3;">char</span> <span style="color: #0000FF;">const</span> *<span style="color: #BA36A5;">argv</span>[]) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span> = <span style="color: #D0372D;">0x1111</span>;
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">b</span> = <span style="color: #D0372D;">0x2222</span>;
-    fun(a, b);
-    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span>;
-}
+<span style="color: #006FE0;">int</span> <span style="color: #006699;">main</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">argc</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">char</span> <span style="color: #0000FF;">const</span> <span style="color: #0000FF;">*</span>argv<span style="color: #7388D6; background-color: #FFFFFF;">[]</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">a</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x1111</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">b</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0x2222</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #006DAF;">fun</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span>a<span style="color: #333333; background-color: #FFFFFF;">,</span> b<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
 </pre>
 </div>
 </div>
@@ -171,13 +160,7 @@ fun 函数最后的加法运算，值也是先保存到寄存器中，再写入�
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

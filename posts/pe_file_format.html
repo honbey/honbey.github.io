@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PE 文件格式</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,12 +16,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4dc5692">Release 版本</a></li>
-<li><a href="#orgf1e9694">Debug 版本</a>
+<li><a href="#orgbf30663">Release 版本</a></li>
+<li><a href="#orgedb7aef">Debug 版本</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org8e25ee5">参考链接</a></li>
+<li><a href="#orga62cbc3">参考链接</a></li>
 </ul>
 </li>
 </ul>
@@ -43,22 +32,22 @@
 <p>
 分析所使用的 exe 程序的源代码见：<a href="overflow_attack.html#ID-0c6a4a3b-bcc6-461c-a5db-118fdf4cdfa2">寻找栈溢出</a>。
 </p>
-<div id="outline-container-org4dc5692" class="outline-2">
-<h2 id="org4dc5692">Release 版本</h2>
-<div class="outline-text-2" id="text-org4dc5692">
+<div id="outline-container-orgbf30663" class="outline-2">
+<h2 id="orgbf30663">Release 版本</h2>
+<div class="outline-text-2" id="text-orgbf30663">
 <p>
 Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本的程序进行了各种优化，比如精简掉无关的函数调用等，使得程序在文件大小和运行速度上都比较优秀
 </p>
 
-<figure id="orgbf8661b">
+<figure id="org1af9476">
 <img src="./../images/pe_file_format_1.png" alt="pe_file_format_1.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-orgf1e9694" class="outline-2">
-<h2 id="orgf1e9694">Debug 版本</h2>
-<div class="outline-text-2" id="text-orgf1e9694">
+<div id="outline-container-orgedb7aef" class="outline-2">
+<h2 id="orgedb7aef">Debug 版本</h2>
+<div class="outline-text-2" id="text-orgedb7aef">
 <p>
 前面部分中的 DOS MZ 文件头以及 DOS 插桩程序和 Release 版本一样，这一部分是 PE 文件格式通用格式。MS-DOS Stub Program 之后的近百个字节的作用不知用处。
 </p>
@@ -67,7 +56,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 地址 0x3C 处的 D0 标识了 PE 文件真正的开始位置，从 0xD0 开始，PE 头前面的文件头标识，也就是 signature 都是相同的，之后就是 PE 文件头信息
 </p>
 
-<figure id="org6806d16">
+<figure id="org93a94c4">
 <img src="./../images/pe_file_format_2.png" alt="pe_file_format_2.png">
 
 </figure>
@@ -77,7 +66,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 文件头标识了运行环境 i386 ，节的数量 5，这个文件的符号表指针和符号数量均为 0 ，可选头信心的大小 00E0 ，文件特征值 010E ，二进制 0000 0001 0000 1110 的含义： 0002（exe 文件）+ 0004（不存在行信息）+ 0008（不存在符号信息）+ 0100（32 位机器），以二进制位取值来对 PE 文件进行说明
 </p>
 
-<figure id="orgae2dd15">
+<figure id="org7b0d3ad">
 <img src="./../images/pe_file_format_3.png" alt="pe_file_format_3.png">
 
 </figure>
@@ -86,7 +75,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 可选头大小 224 字节，标识了代码区、数据区、栈区、堆区的大小，还有程序入口点地址 Address of Entry Point 位于文件 0xF8 处，值为 00001650 。还包含了某些节表的地址和大小信息
 </p>
 
-<figure id="org2a14c70">
+<figure id="org7410bb8">
 <img src="./../images/pe_file_format_4.png" alt="pe_file_format_4.png">
 
 </figure>
@@ -110,7 +99,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 </ul>
 
 
-<figure id="orga2e20a6">
+<figure id="org6254c75">
 <img src="./../images/pe_file_format_5.png" alt="pe_file_format_5.png">
 
 </figure>
@@ -125,7 +114,7 @@ Release 版本相对于 Debug 版本精简许多，编译器对 Release 版本�
 IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指向对应外部函数的内存相对虚拟地址， DLL 间用双字 0 分隔
 </p>
 
-<figure id="org8e3e124">
+<figure id="org94f720d">
 <img src="./../images/pe_file_format_6.png" alt="pe_file_format_6.png">
 
 </figure>
@@ -135,14 +124,14 @@ IAT 表由导入 DLL 的函数个数决定，每个 IAT 项占 4 个字节，指
 IDT 表记录 PE 文件要导入的库文件及函数的信息，实验所用的这个文件只导入了 kernel32.dll 这一个 dll 文件。表项先指出 IAT 的 RVA，和 PE 头中的完全对应。之后两个不清楚，在之后是 dll 文件名这个字符串的 RVA，命名表的 RVA。表项 2 全为 0
 </p>
 
-<figure id="org6c2a16a">
+<figure id="org537ccd8">
 <img src="./../images/pe_file_format_7.png" alt="pe_file_format_7.png">
 
 </figure>
 </div>
-<div id="outline-container-org8e25ee5" class="outline-4">
-<h4 id="org8e25ee5">参考链接</h4>
-<div class="outline-text-4" id="text-org8e25ee5">
+<div id="outline-container-orga62cbc3" class="outline-4">
+<h4 id="orga62cbc3">参考链接</h4>
+<div class="outline-text-4" id="text-orga62cbc3">
 <p>
 <a href="https://www.cnblogs.com/findumars/p/5037657.html">PE 文件格式 - 博客园</a>
 </p>
@@ -151,13 +140,7 @@ IDT 表记录 PE 文件要导入的库文件及函数的信息，实验所用的
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

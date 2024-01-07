@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,68 +16,68 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7591722">Some Useful Modules</a>
+<li><a href="#org41bd956">Some Useful Modules</a>
 <ul>
-<li><a href="#org5ed3d15">numpy - Scientific calculation</a></li>
-<li><a href="#org301d7bb">re - Regexp</a></li>
-<li><a href="#orgb83209b">sqlalchemy - ORM</a></li>
-<li><a href="#org81e863f">seleium - Headless browser</a></li>
-<li><a href="#orgfb49a24">pandas</a>
+<li><a href="#org8176830">numpy - Scientific calculation</a></li>
+<li><a href="#org0f86480">re - Regexp</a></li>
+<li><a href="#org64e1806">sqlalchemy - ORM</a></li>
+<li><a href="#org4ce8507">seleium - Headless browser</a></li>
+<li><a href="#orgcf28f70">pandas</a>
 <ul>
-<li><a href="#orgcbc5204">excel process</a></li>
-<li><a href="#org66bbbb1">定位数据</a></li>
-<li><a href="#org2ceb3a4">多级索引</a></li>
+<li><a href="#orgdff9ea9">excel process</a></li>
+<li><a href="#orgf510f70">定位数据</a></li>
+<li><a href="#org22780f5">多级索引</a></li>
 </ul>
 </li>
-<li><a href="#org83efdef">tensorflow</a>
+<li><a href="#org46d3acf">tensorflow</a>
 <ul>
-<li><a href="#orgd0a62f4">tensorflow-gpu 2.4.0 with conda on Windows 10</a></li>
-<li><a href="#orgc6f8ed1">tensorflow on macOS</a></li>
+<li><a href="#orge83474d">tensorflow-gpu 2.4.0 with conda on Windows 10</a></li>
+<li><a href="#org5fb0a85">tensorflow on macOS</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org644ac77">Dict</a>
+<li><a href="#org7eccf58">Dict</a>
 <ul>
-<li><a href="#org18720b6">Merge dictionary in Python</a></li>
+<li><a href="#org7e5c559">Merge dictionary in Python</a></li>
 </ul>
 </li>
-<li><a href="#org14d9831">Information Security</a>
+<li><a href="#orgd138724">Information Security</a>
 <ul>
-<li><a href="#org8e8b0ef">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
-<li><a href="#org5094659">Avoid SSRF</a></li>
+<li><a href="#orge427d3c">Avoid Directory Traversal Vulnerability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></a></li>
+<li><a href="#org93562b2">Avoid SSRF</a></li>
 </ul>
 </li>
-<li><a href="#orgc823056">playground</a></li>
+<li><a href="#org9a2ae93">playground</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org7591722" class="outline-2">
-<h2 id="org7591722">Some Useful Modules</h2>
-<div class="outline-text-2" id="text-org7591722">
+<div id="outline-container-org41bd956" class="outline-2">
+<h2 id="org41bd956">Some Useful Modules</h2>
+<div class="outline-text-2" id="text-org41bd956">
 </div>
-<div id="outline-container-org5ed3d15" class="outline-3">
-<h3 id="org5ed3d15">numpy - Scientific calculation</h3>
-<div class="outline-text-3" id="text-org5ed3d15">
+<div id="outline-container-org8176830" class="outline-3">
+<h3 id="org8176830">numpy - Scientific calculation</h3>
+<div class="outline-text-3" id="text-org8176830">
 <p>
 Numpy remove scientific notation<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
+<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/env/bin python</span>
 <span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
-np.set_printoptions(suppress=<span style="color: #D0372D;">True</span>, formatter={
-    <span style="color: #008000;">'float_kind'</span>: <span style="color: #008000;">'{:0.1f}'</span>.<span style="color: #006FE0;">format</span>
+np.<span style="color: #006DAF; font-style: italic;">set_printoptions</span>(<span style="color: #808080;">suppress</span><span style="color: #0000FF;">=</span><span style="color: #006FE0;">True</span>, <span style="color: #808080;">formatter</span><span style="color: #0000FF;">=</span>{
+    <span style="color: #008000;">'float_kind'</span>: <span style="color: #008000;">'{:0.1f}'</span>.<span style="color: #D0372D; font-style: italic;">format</span>
 })
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org301d7bb" class="outline-3">
-<h3 id="org301d7bb">re - <a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regex</a>p</h3>
+<div id="outline-container-org0f86480" class="outline-3">
+<h3 id="org0f86480">re - <a href="20220820-regex.html#ID-36c84656-c086-40fc-9d40-a9181c4b7dc5">Regex</a>p</h3>
 </div>
-<div id="outline-container-orgb83209b" class="outline-3">
-<h3 id="orgb83209b">sqlalchemy - <a href="20220821-database.html#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></h3>
-<div class="outline-text-3" id="text-orgb83209b">
+<div id="outline-container-org64e1806" class="outline-3">
+<h3 id="org64e1806">sqlalchemy - <a href="20220821-database.html#ID-787cf0fd-8725-403d-b115-a26c87d7dfcc">ORM</a></h3>
+<div class="outline-text-3" id="text-org64e1806">
 <table>
 
 
@@ -122,38 +111,38 @@ np.set_printoptions(suppress=<span style="color: #D0372D;">True</span>, formatte
 </table>
 </div>
 </div>
-<div id="outline-container-org81e863f" class="outline-3">
-<h3 id="org81e863f">seleium - Headless browser</h3>
-<div class="outline-text-3" id="text-org81e863f">
+<div id="outline-container-org4ce8507" class="outline-3">
+<h3 id="org4ce8507">seleium - Headless browser</h3>
+<div class="outline-text-3" id="text-org4ce8507">
 <p>
 Selenium use specific browser:
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">from</span> selenium <span style="color: #0000FF;">import</span> webdriver
 
-<span style="color: #BA36A5;">driver_path</span> = <span style="color: #008000;">"C:/Users/username/PycharmProjects/chromedriver.exe"</span>
-<span style="color: #BA36A5;">brave_path</span> = <span style="color: #008000;">"C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"</span>
+<span style="color: #BA36A5;">driver_path</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"C:/Users/username/PycharmProjects/chromedriver.exe"</span>
+<span style="color: #BA36A5;">brave_path</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">"C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"</span>
 
-<span style="color: #BA36A5;">option</span> = webdriver.ChromeOptions()
-option.<span style="color: #BA36A5;">binary_location</span> = brave_path
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">option.add_argument("--incognito") OPTIONAL</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">option.add_argument("--headless") OPTIONAL</span>
+<span style="color: #BA36A5;">option</span> <span style="color: #0000FF;">=</span> webdriver.<span style="color: #6434A3; font-style: italic;">ChromeOptions</span>()
+option.<span style="color: #BA36A5; font-style: italic;">binary_location</span> <span style="color: #0000FF;">=</span> brave_path
+<span style="color: #8D8D84; font-style: italic;"># option.add_argument("--incognito") OPTIONAL</span>
+<span style="color: #8D8D84; font-style: italic;"># option.add_argument("--headless") OPTIONAL</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create new Instance of Chrome</span>
-<span style="color: #BA36A5;">browser</span> = webdriver.Chrome(executable_path=driver_path, chrome_options=option)
+<span style="color: #8D8D84; font-style: italic;"># Create new Instance of Chrome</span>
+<span style="color: #BA36A5;">browser</span> <span style="color: #0000FF;">=</span> webdriver.<span style="color: #6434A3; font-style: italic;">Chrome</span>(<span style="color: #808080;">executable_path</span><span style="color: #0000FF;">=</span>driver_path, <span style="color: #808080;">chrome_options</span><span style="color: #0000FF;">=</span>option)
 
-browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
+browser.<span style="color: #006DAF; font-style: italic;">get</span>(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb49a24" class="outline-3">
-<h3 id="orgfb49a24">pandas</h3>
-<div class="outline-text-3" id="text-orgfb49a24">
+<div id="outline-container-orgcf28f70" class="outline-3">
+<h3 id="orgcf28f70">pandas</h3>
+<div class="outline-text-3" id="text-orgcf28f70">
 </div>
-<div id="outline-container-orgcbc5204" class="outline-4">
-<h4 id="orgcbc5204">excel process</h4>
-<div class="outline-text-4" id="text-orgcbc5204">
+<div id="outline-container-orgdff9ea9" class="outline-4">
+<h4 id="orgdff9ea9">excel process</h4>
+<div class="outline-text-4" id="text-orgdff9ea9">
 <table>
 
 
@@ -204,9 +193,9 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org66bbbb1" class="outline-4">
-<h4 id="org66bbbb1">定位数据</h4>
-<div class="outline-text-4" id="text-org66bbbb1">
+<div id="outline-container-orgf510f70" class="outline-4">
+<h4 id="orgf510f70">定位数据</h4>
+<div class="outline-text-4" id="text-orgf510f70">
 <p>
 <code>loc[]</code>  通过索引名/标签定位单行、单列、多行、多列，前闭后闭
 </p>
@@ -220,25 +209,25 @@ browser.get(<span style="color: #008000;">"https://www.baidu.com"</span>)
 </p>
 </div>
 </div>
-<div id="outline-container-org2ceb3a4" class="outline-4">
-<h4 id="org2ceb3a4">多级索引</h4>
-<div class="outline-text-4" id="text-org2ceb3a4">
+<div id="outline-container-org22780f5" class="outline-4">
+<h4 id="org22780f5">多级索引</h4>
+<div class="outline-text-4" id="text-org22780f5">
 <p>
 <code>pd.MultiIndex.from_product([[list1], [list2]])</code>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org83efdef" class="outline-3">
-<h3 id="org83efdef">tensorflow</h3>
-<div class="outline-text-3" id="text-org83efdef">
+<div id="outline-container-org46d3acf" class="outline-3">
+<h3 id="org46d3acf">tensorflow</h3>
+<div class="outline-text-3" id="text-org46d3acf">
 <p>
 tensorflow 与 cuda, cudnn 对应关系：<a href="https://tensorflow.google.cn/install/source?hl=tr#gpu">https://tensorflow.google.cn/install/source?hl=tr#gpu</a>
 </p>
 </div>
-<div id="outline-container-orgd0a62f4" class="outline-4">
-<h4 id="orgd0a62f4">tensorflow-gpu 2.4.0 with conda on Windows 10</h4>
-<div class="outline-text-4" id="text-orgd0a62f4">
+<div id="outline-container-orge83474d" class="outline-4">
+<h4 id="orge83474d">tensorflow-gpu 2.4.0 with conda on Windows 10</h4>
+<div class="outline-text-4" id="text-orge83474d">
 <p>
 requirements.txt:
 </p>
@@ -261,26 +250,26 @@ h5py==2.10.0
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6f8ed1" class="outline-4">
-<h4 id="orgc6f8ed1">tensorflow on macOS</h4>
-<div class="outline-text-4" id="text-orgc6f8ed1">
+<div id="outline-container-org5fb0a85" class="outline-4">
+<h4 id="org5fb0a85">tensorflow on macOS</h4>
+<div class="outline-text-4" id="text-org5fb0a85">
 <div class="org-src-container">
-<pre class="src src-sh">pip install tensorflow-macos tensorflow-metal
+<pre class="src src-sh"><span style="color: #006DAF;">pip</span> install tensorflow-macos tensorflow-metal
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org644ac77" class="outline-2">
-<h2 id="org644ac77">Dict</h2>
-<div class="outline-text-2" id="text-org644ac77">
+<div id="outline-container-org7eccf58" class="outline-2">
+<h2 id="org7eccf58">Dict</h2>
+<div class="outline-text-2" id="text-org7eccf58">
 </div>
-<div id="outline-container-org18720b6" class="outline-3">
-<h3 id="org18720b6">Merge dictionary in Python</h3>
-<div class="outline-text-3" id="text-org18720b6">
+<div id="outline-container-org7e5c559" class="outline-3">
+<h3 id="org7e5c559">Merge dictionary in Python</h3>
+<div class="outline-text-3" id="text-org7e5c559">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> = {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
+<pre class="src src-python"><span style="color: #BA36A5;">a</span>, <span style="color: #BA36A5;">b</span> <span style="color: #0000FF;">=</span> {<span style="color: #008000;">'a'</span>: <span style="color: #D0372D;">1</span>}, {<span style="color: #008000;">'b'</span>: <span style="color: #D0372D;">2</span>}
 </pre>
 </div>
 <ol class="org-ol">
@@ -290,8 +279,8 @@ Example:
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">from</span> copy <span style="color: #0000FF;">import</span> deepcopy
-<span style="color: #BA36A5;">ab</span> = deepcopy(a)
-ab.update(b)
+<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006DAF;">deepcopy</span>(a)
+ab.<span style="color: #006DAF; font-style: italic;">update</span>(b)
 </pre>
 </div></li>
 <li><p>
@@ -299,7 +288,7 @@ use <code>**</code> to destruct
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = {**a, **b}
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> {<span style="color: #0000FF;">**</span>a, <span style="color: #0000FF;">**</span>b}
 </pre>
 </div></li>
 <li><p>
@@ -308,7 +297,7 @@ Example:
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> itertools
-<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(itertools.chain(a.items(), b.items()))
+<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(itertools.<span style="color: #006DAF; font-style: italic;">chain</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>(), b.<span style="color: #006DAF; font-style: italic;">items</span>()))
 </pre>
 </div></li>
 <li><p>
@@ -317,8 +306,8 @@ This method will not update the value of same key.
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">from</span> collections <span style="color: #0000FF;">import</span> ChainMap
-<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(ChainMap(a, b))
+<pre class="src src-python"><span style="color: #0000FF;">from</span> collections <span style="color: #0000FF;">import</span> <span style="color: #6434A3;">ChainMap</span>
+<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(<span style="color: #6434A3;">ChainMap</span>(a, b))
 </pre>
 </div></li>
 <li><p>
@@ -326,9 +315,9 @@ dict.items()
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(a.items() | b.items())
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">or</span>
-<span style="color: #BA36A5;">ab</span> = <span style="color: #006FE0;">dict</span>(<span style="color: #006FE0;">list</span>(a.items() + <span style="color: #006FE0;">list</span>(b.items())))
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>() <span style="color: #0000FF;">|</span> b.<span style="color: #006DAF; font-style: italic;">items</span>())
+<span style="color: #8D8D84; font-style: italic;"># or</span>
+<span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">dict</span>(<span style="color: #006FE0;">list</span>(a.<span style="color: #006DAF; font-style: italic;">items</span>() <span style="color: #0000FF;">+</span> <span style="color: #006FE0;">list</span>(b.<span style="color: #006DAF; font-style: italic;">items</span>())))
 </pre>
 </div></li>
 <li><p>
@@ -336,7 +325,7 @@ Pythonnic
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = {k:v <span style="color: #0000FF;">for</span> d <span style="color: #0000FF;">in</span> [a, b] <span style="color: #0000FF;">for</span> k, v <span style="color: #0000FF;">in</span> d.items()}
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> {k:v <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">d</span> <span style="color: #0000FF;">in</span> [a, b] <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">k</span>, <span style="color: #BA36A5;">v</span> <span style="color: #0000FF;">in</span> d.<span style="color: #006DAF; font-style: italic;">items</span>()}
 </pre>
 </div></li>
 <li><p>
@@ -344,31 +333,31 @@ Python 3.9
 Example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #BA36A5;">ab</span> = a | b
+<pre class="src src-python"><span style="color: #BA36A5;">ab</span> <span style="color: #0000FF;">=</span> a <span style="color: #0000FF;">|</span> b
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-org14d9831" class="outline-2">
-<h2 id="org14d9831"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
-<div class="outline-text-2" id="text-org14d9831">
+<div id="outline-container-orgd138724" class="outline-2">
+<h2 id="orgd138724"><a href="20220708-information_security.html#ID-f206c9e0-f8d8-4b31-b74e-449365305a46">Information Security</a></h2>
+<div class="outline-text-2" id="text-orgd138724">
 </div>
-<div id="outline-container-org8e8b0ef" class="outline-3">
-<h3 id="org8e8b0ef">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
-<div class="outline-text-3" id="text-org8e8b0ef">
+<div id="outline-container-orge427d3c" class="outline-3">
+<h3 id="orge427d3c">Avoid Directory Traversal Vulnerability<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="security">security</span></span></h3>
+<div class="outline-text-3" id="text-orge427d3c">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/env/bin python</span>
+<pre class="src src-python"><span style="color: #8D8D84; font-style: italic;">#!/usr/env/bin python</span>
 <span style="color: #0000FF;">import</span> os
 
-<span style="color: #BA36A5;">app_root</span> = <span style="color: #008000;">'/data/app'</span>
-<span style="color: #BA36A5;">filename</span> = <span style="color: #008000;">'../../etc/passwd'</span>
+<span style="color: #BA36A5;">app_root</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">'/data/app'</span>
+<span style="color: #BA36A5;">filename</span> <span style="color: #0000FF;">=</span> <span style="color: #008000;">'../../etc/passwd'</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">abspath = os.path.join(app_root, filename)</span>
-<span style="color: #BA36A5;">abspath</span> = os.path.realpath(os.path.join(app_root, filename))
+<span style="color: #8D8D84; font-style: italic;"># abspath = os.path.join(app_root, filename)</span>
+<span style="color: #BA36A5;">abspath</span> <span style="color: #0000FF;">=</span> os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">realpath</span>(os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">join</span>(app_root, filename))
 
-<span style="color: #0000FF;">if</span> os.path.commonprefix([app_root, abspath]) != app_root:
+<span style="color: #0000FF;">if</span> os.<span style="color: #D0372D; font-style: italic;">path</span>.<span style="color: #006DAF; font-style: italic;">commonprefix</span>([app_root, abspath]) <span style="color: #0000FF;">!=</span> app_root:
     <span style="color: #006FE0;">print</span>(<span style="color: #008000;">'403 forbidden'</span>)
 <span style="color: #0000FF;">else</span>:
     <span style="color: #006FE0;">print</span>(abspath)
@@ -376,71 +365,71 @@ Example:
 </div>
 </div>
 </div>
-<div id="outline-container-org5094659" class="outline-3">
-<h3 id="org5094659">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
-<div class="outline-text-3" id="text-org5094659">
+<div id="outline-container-org93562b2" class="outline-3">
+<h3 id="org93562b2">Avoid SSRF<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
+<div class="outline-text-3" id="text-org93562b2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> ipaddress
 <span style="color: #0000FF;">import</span> dns.resolver
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Configure the whitelist to check</span>
-<span style="color: #BA36A5;">DOMAINS_WHITELIST</span> = [<span style="color: #008000;">"baidu.com"</span>, <span style="color: #008000;">"labslinux"</span>]
-<span style="color: #BA36A5;">DNS_RESOLVER</span> = dns.resolver.Resolver()
-DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="color: #008000;">"1.1.1.1"</span>]
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">verify_dns_records</span>(domain, records, <span style="color: #006FE0;">type</span>):
-    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">False</span>
-    <span style="color: #0000FF;">if</span> records <span style="color: #0000FF;">is</span> <span style="color: #0000FF;">not</span> <span style="color: #D0372D;">None</span>:
-        <span style="color: #0000FF;">for</span> record <span style="color: #0000FF;">in</span> records:
-            <span style="color: #BA36A5;">value</span> = record.to_text().strip()
+<span style="color: #8D8D84; font-style: italic;"># Configure the whitelist to check</span>
+<span style="color: #BA36A5;">DOMAINS_WHITELIST</span> <span style="color: #0000FF;">=</span> [<span style="color: #008000;">"baidu.com"</span>, <span style="color: #008000;">"labslinux"</span>]
+<span style="color: #BA36A5;">DNS_RESOLVER</span> <span style="color: #0000FF;">=</span> dns.<span style="color: #D0372D; font-style: italic;">resolver</span>.<span style="color: #6434A3; font-style: italic;">Resolver</span>()
+<span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #BA36A5; font-style: italic;">nameservers</span> <span style="color: #0000FF;">=</span> [<span style="color: #008000;">"1.1.1.1"</span>]
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">verify_dns_records</span>(<span style="color: #BA36A5;">domain</span>, <span style="color: #BA36A5;">records</span>, <span style="color: #BA36A5;">type</span>):
+    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">False</span>
+    <span style="color: #0000FF;">if</span> records <span style="color: #0000FF;">is</span> <span style="color: #0000FF;">not</span> <span style="color: #006FE0;">None</span>:
+        <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">record</span> <span style="color: #0000FF;">in</span> records:
+            <span style="color: #BA36A5;">value</span> <span style="color: #0000FF;">=</span> record.<span style="color: #006DAF; font-style: italic;">to_text</span>().<span style="color: #006DAF; font-style: italic;">strip</span>()
             <span style="color: #0000FF;">try</span>:
-                <span style="color: #BA36A5;">ip</span> = ipaddress.ip_address(value)
+                <span style="color: #BA36A5;">ip</span> <span style="color: #0000FF;">=</span> ipaddress.<span style="color: #006DAF; font-style: italic;">ip_address</span>(value)
 
-                <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> ip.is_global:
-                    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] DNS record type '%s' for domain name '%s' resolve to</span>
-<span style="color: #008000;">                    a non public IP address '%s'!"</span> % (<span style="color: #006FE0;">type</span>, domain, value))
-                    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
+                <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> ip.<span style="color: #D0372D; font-style: italic;">is_global</span>:
+                    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"</span>[!] <span style="color: #D0372D;">DNS</span> record type <span style="color: #008000;">'%s'</span> <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">domain</span> name <span style="color: #008000;">'%s'</span> <span style="color: #BA36A5;">resolve</span> <span style="color: #BA36A5;">to</span>
+                    <span style="color: #BA36A5;">a</span> <span style="color: #BA36A5;">non</span> <span style="color: #BA36A5;">public</span> <span style="color: #BA36A5;">IP</span> <span style="color: #BA36A5;">address</span> <span style="color: #008000;">'%s'</span>!<span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (type, domain, value))
+                    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
             <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">ValueError</span>:
-                <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
-                <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] '%s' is not valid IP address!"</span> % value)
+                <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
+                <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[!] '%s' is not valid IP address!"</span> <span style="color: #0000FF;">%</span> value)
     <span style="color: #0000FF;">return</span> error_detected
 <span style="color: #0000FF;">def</span> <span style="color: #006699;">check</span>():
-    <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">False</span>
-    <span style="color: #0000FF;">for</span> domain <span style="color: #0000FF;">in</span> DOMAINS_WHITELIST:
-        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Get the IPs of the current domain</span>
-        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">See https://en.wikipedia.org/wiki/List_of_DNS_record_types</span>
+    <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">False</span>
+    <span style="color: #0000FF;">for</span> <span style="color: #BA36A5;">domain</span> <span style="color: #0000FF;">in</span> <span style="color: #D0372D;">DOMAINS_WHITELIST</span>:
+        <span style="color: #8D8D84; font-style: italic;"># Get the IPs of the current domain</span>
+        <span style="color: #8D8D84; font-style: italic;"># See https://en.wikipedia.org/wiki/List_of_DNS_record_types</span>
         <span style="color: #0000FF;">try</span>:
-            <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A = IPv4 address record</span>
-            <span style="color: #BA36A5;">ip_v4_records</span> = DNS_RESOLVER.query(domain, <span style="color: #008000;">"A"</span>)
+            <span style="color: #8D8D84; font-style: italic;"># A = IPv4 address record</span>
+            <span style="color: #BA36A5;">ip_v4_records</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #006DAF; font-style: italic;">query</span>(domain, <span style="color: #008000;">"A"</span>)
         <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
-            <span style="color: #BA36A5;">ip_v4_records</span> = <span style="color: #D0372D;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">"</span> % (domain,e))
+            <span style="color: #BA36A5;">ip_v4_records</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get A record for domain '%s': %s</span><span style="color: #0000FF;">\n</span><span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (domain,e))
         <span style="color: #0000FF;">try</span>:
-           <span style="color: #BA36A5;">ip_v6_records</span> = DNS_RESOLVER.query(domain, <span style="color: #008000;">"AAAA"</span>)
+           <span style="color: #BA36A5;">ip_v6_records</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">DNS_RESOLVER</span>.<span style="color: #006DAF; font-style: italic;">query</span>(domain, <span style="color: #008000;">"AAAA"</span>)
         <span style="color: #0000FF;">except</span> <span style="color: #6434A3;">Exception</span> <span style="color: #0000FF;">as</span> e:
-            <span style="color: #BA36A5;">ip_v6_records</span> = <span style="color: #D0372D;">None</span>
-            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">"</span> % (domain,e))
-        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Verify the IPs obtained</span>
-        <span style="color: #0000FF;">if</span> verify_dns_records(domain, ip_v4_records, <span style="color: #008000;">"A"</span>)
-        <span style="color: #0000FF;">or</span> verify_dns_records(domain, ip_v6_records, <span style="color: #008000;">"AAAA"</span>):
-            <span style="color: #BA36A5;">error_detected</span> = <span style="color: #D0372D;">True</span>
+            <span style="color: #BA36A5;">ip_v6_records</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">None</span>
+            <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"[i] Cannot get AAAA record for domain '%s': %s</span><span style="color: #0000FF;">\n</span><span style="color: #008000;">"</span> <span style="color: #0000FF;">%</span> (domain,e))
+        <span style="color: #8D8D84; font-style: italic;"># Verify the IPs obtained</span>
+        <span style="color: #0000FF;">if</span> <span style="color: #006DAF;">verify_dns_records</span>(domain, ip_v4_records, <span style="color: #008000;">"A"</span>)
+        <span style="color: #0000FF;">or</span> <span style="color: #006DAF;">verify_dns_records</span>(domain, ip_v6_records, <span style="color: #008000;">"AAAA"</span>):
+            <span style="color: #BA36A5;">error_detected</span> <span style="color: #0000FF;">=</span> <span style="color: #006FE0;">True</span>
     <span style="color: #0000FF;">return</span> error_detected
-<span style="color: #0000FF;">if</span> <span style="color: #006FE0;">__name__</span>== <span style="color: #008000;">"__main__"</span>:
-    <span style="color: #0000FF;">if</span> check():
-        <span style="color: #D0372D;">exit</span>(<span style="color: #D0372D;">1</span>)
+<span style="color: #0000FF;">if</span> <span style="color: #006FE0;">__name__</span><span style="color: #0000FF;">==</span> <span style="color: #008000;">"__main__"</span>:
+    <span style="color: #0000FF;">if</span> <span style="color: #006DAF;">check</span>():
+        <span style="color: #006DAF;">exit</span>(<span style="color: #D0372D;">1</span>)
     <span style="color: #0000FF;">else</span>:
-        <span style="color: #D0372D;">exit</span>(<span style="color: #D0372D;">0</span>)
+        <span style="color: #006DAF;">exit</span>(<span style="color: #D0372D;">0</span>)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc823056" class="outline-2">
-<h2 id="orgc823056">playground</h2>
-<div class="outline-text-2" id="text-orgc823056">
+<div id="outline-container-org9a2ae93" class="outline-2">
+<h2 id="org9a2ae93">playground</h2>
+<div class="outline-text-2" id="text-org9a2ae93">
 <div class="org-src-container">
 <pre class="src src-python-jit">print('Hello world')
 </pre>
 </div>
-<div class="klipsify div" id="org151e085">
+<div class="klipsify div" id="org7be6e90">
 <script>window.klipse_settings = {selector_eval_python_client: '.src-python-jit',};</script>
 <script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
@@ -468,13 +457,7 @@ DNS_RESOLVER.<span style="color: #BA36A5;">nameservers</span> = [<span style="co
 </div>
 </div></div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

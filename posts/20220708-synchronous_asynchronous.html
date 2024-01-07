@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous/Asynchronous</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,20 +16,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org43874ea">Synchronous/Asynchronous</a></li>
-<li><a href="#org111fa35">Linux 事件模型</a>
+<li><a href="#orgc820900">Synchronous/Asynchronous</a></li>
+<li><a href="#org2ab8bf5">Linux 事件模型</a>
 <ul>
-<li><a href="#org136ab4c">epoll</a></li>
+<li><a href="#org7fd2f8e">epoll</a></li>
 </ul>
 </li>
-<li><a href="#orgf26db68">Python 异步编程</a></li>
-<li><a href="#org2509733">Reference</a></li>
+<li><a href="#orgcfc014d">Python 异步编程</a></li>
+<li><a href="#org46416c2">Reference</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org43874ea" class="outline-2">
-<h2 id="org43874ea">Synchronous/Asynchronous</h2>
-<div class="outline-text-2" id="text-org43874ea">
+<div id="outline-container-orgc820900" class="outline-2">
+<h2 id="orgc820900">Synchronous/Asynchronous</h2>
+<div class="outline-text-2" id="text-orgc820900">
 <p>
 同步/异步关注任务运行之后需不需要处理。
 </p>
@@ -75,33 +64,33 @@ Concurrency(Simultaneous) / Parallel
 </blockquote>
 
 <p>
-<a href="#orgf26db68">Python 异步编程</a>
+<a href="#orgcfc014d">Python 异步编程</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org111fa35" class="outline-2">
-<h2 id="org111fa35">Linux 事件模型</h2>
-<div class="outline-text-2" id="text-org111fa35">
+<div id="outline-container-org2ab8bf5" class="outline-2">
+<h2 id="org2ab8bf5">Linux 事件模型</h2>
+<div class="outline-text-2" id="text-org2ab8bf5">
 </div>
-<div id="outline-container-org136ab4c" class="outline-3">
-<h3 id="org136ab4c">epoll</h3>
-<div class="outline-text-3" id="text-org136ab4c">
+<div id="outline-container-org7fd2f8e" class="outline-3">
+<h3 id="org7fd2f8e">epoll</h3>
+<div class="outline-text-3" id="text-org7fd2f8e">
 <p>
 当事件没准备好时，放到 epoll 里面，事件准备好了就去读写。当读写返回 EAGAIN 时，将它再次加入到 epoll 里面。这样，只要有事件准备好了就去处理它，只有当事件没准备好时，才在 epoll 里面等着。
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf26db68" class="outline-2">
-<h2 id="orgf26db68">Python 异步编程</h2>
-<div class="outline-text-2" id="text-orgf26db68">
+<div id="outline-container-orgcfc014d" class="outline-2">
+<h2 id="orgcfc014d">Python 异步编程</h2>
+<div class="outline-text-2" id="text-orgcfc014d">
 <p>
 使用 Python 3.4 起引入的 <code>asyncio</code> 标准库实现。
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> asyncio
-<span style="color: #0000FF;">async def</span> <span style="color: #006699;">say</span>(what, when):
-    <span style="color: #0000FF;">await</span> asyncio.sleep(when)
+<span style="color: #0000FF;">async</span> <span style="color: #0000FF;">def</span> <span style="color: #006699;">say</span>(<span style="color: #BA36A5;">what</span>, <span style="color: #BA36A5;">when</span>):
+    <span style="color: #0000FF;">await</span> asyncio.<span style="color: #006DAF; font-style: italic;">sleep</span>(when)
     <span style="color: #0000FF;">return</span> what
 </pre>
 </div>
@@ -110,15 +99,15 @@ Concurrency(Simultaneous) / Parallel
 asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。
 </p>
 
-<figure id="orgc54107a">
+<figure id="orged9c6ea">
 <img src="./../images/synchronous_asynchronous_python_js_async_001.png" alt="synchronous_asynchronous_python_js_async_001.png">
 
 </figure>
 </div>
 </div>
-<div id="outline-container-org2509733" class="outline-2">
-<h2 id="org2509733">Reference</h2>
-<div class="outline-text-2" id="text-org2509733">
+<div id="outline-container-org46416c2" class="outline-2">
+<h2 id="org46416c2">Reference</h2>
+<div class="outline-text-2" id="text-org46416c2">
 <ul class="org-ul">
 <li><a href="https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html">https://www.ruanyifeng.com/blog/2019/11/python-asyncio.html</a></li>
 </ul>
@@ -126,13 +115,7 @@ asyncio 模块在单线程上启动一个事件循环（event loop），时刻�
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

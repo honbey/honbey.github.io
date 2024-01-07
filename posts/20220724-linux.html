@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,31 +16,31 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2ff8811">Architecture</a></li>
-<li><a href="#org8b74b9f">I/O</a>
+<li><a href="#orgb580f3e">Architecture</a></li>
+<li><a href="#org97e4db3">I/O</a>
 <ul>
-<li><a href="#org85440ce">零拷贝技术 - sendfile</a></li>
+<li><a href="#orgbbce3a2">零拷贝技术 - sendfile</a></li>
 </ul>
 </li>
-<li><a href="#org16e733e">Process</a></li>
-<li><a href="#org5d4add5">Useful Command</a>
+<li><a href="#org5e16ebc">Process</a></li>
+<li><a href="#org81d0a30">Useful Command</a>
 <ul>
-<li><a href="#org047eb26">Let non-root/normal user use port which less then 1024</a></li>
-<li><a href="#orgd5f52a1">Recover files on Linux</a></li>
-<li><a href="#orgd346818">Safe rm</a></li>
-<li><a href="#org81a2d46">Read file</a></li>
-<li><a href="#org56f977e">utils tools</a></li>
-<li><a href="#org1190c30">Set timezone</a></li>
-<li><a href="#org7ddcab9">git completely remove files</a></li>
-<li><a href="#org2d23b6e">xargs</a></li>
+<li><a href="#org3d71d7a">Let non-root/normal user use port which less then 1024</a></li>
+<li><a href="#org01eed51">Recover files on Linux</a></li>
+<li><a href="#org0f78a59">Safe rm</a></li>
+<li><a href="#org8492671">Read file</a></li>
+<li><a href="#orge7f8e86">utils tools</a></li>
+<li><a href="#orgb7fd983">Set timezone</a></li>
+<li><a href="#org7c74ab0">git completely remove files</a></li>
+<li><a href="#orgffc0214">xargs</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org2ff8811" class="outline-2">
-<h2 id="org2ff8811">Architecture</h2>
-<div class="outline-text-2" id="text-org2ff8811">
+<div id="outline-container-orgb580f3e" class="outline-2">
+<h2 id="orgb580f3e">Architecture</h2>
+<div class="outline-text-2" id="text-orgb580f3e">
 <div class="org-src-container">
 <pre class="src src-nil">   Application
 Shell | Lib Function
@@ -61,9 +50,9 @@ Shell | Lib Function
 </div>
 </div>
 </div>
-<div id="outline-container-org8b74b9f" class="outline-2">
-<h2 id="org8b74b9f">I/O</h2>
-<div class="outline-text-2" id="text-org8b74b9f">
+<div id="outline-container-org97e4db3" class="outline-2">
+<h2 id="org97e4db3">I/O</h2>
+<div class="outline-text-2" id="text-org97e4db3">
 <p>
 传统 I/O （缓存 I/O）：硬盘 -&gt; 内核缓冲区 -&gt; 用户缓冲区 -&gt; 内核 socket 缓冲区 -&gt; 协议引擎
 </p>
@@ -76,12 +65,12 @@ sendfile: 硬盘 -&gt; 内核缓冲区 -&gt; 内核 socket 缓冲区 -&gt; 协�
 sendfile（<a href="20220708-hardware.html#ID-3bc17eaf-8d5c-48d4-8efa-58f9429b2794">DMA</a> 收集拷贝）：硬盘 -&gt; 内核缓冲区 -&gt; 协议引擎
 </p>
 </div>
-<div id="outline-container-org85440ce" class="outline-3">
-<h3 id="org85440ce">零拷贝技术 - sendfile</h3>
-<div class="outline-text-3" id="text-org85440ce">
+<div id="outline-container-orgbbce3a2" class="outline-3">
+<h3 id="orgbbce3a2">零拷贝技术 - sendfile</h3>
+<div class="outline-text-3" id="text-orgbbce3a2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #808080;">#include</span> <span style="color: #008000;">&lt;sys/sendfile.h&gt;</span>
-<span style="color: #6434A3;">ssize_t</span> <span style="color: #006699;">snedfile</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">out_fd</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">in_fd</span>, <span style="color: #6434A3;">off_t</span>* <span style="color: #BA36A5;">offset</span>, <span style="color: #6434A3;">size_t</span> <span style="color: #BA36A5;">count</span>);
+<span style="color: #006FE0;">ssize_t</span> <span style="color: #006699;">snedfile</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">out_fd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">int</span> <span style="color: #BA36A5;">in_fd</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #6434A3;">off_t</span><span style="color: #0000FF;">*</span> <span style="color: #BA36A5;">offset</span><span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #006FE0;">size_t</span> <span style="color: #BA36A5;">count</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
 </pre>
 </div>
 
@@ -91,97 +80,97 @@ sendfile 函数是在两个文件描述符中直接传递数据（完全在内�
 </div>
 </div>
 </div>
-<div id="outline-container-org16e733e" class="outline-2">
-<h2 id="org16e733e">Process</h2>
-<div class="outline-text-2" id="text-org16e733e">
+<div id="outline-container-org5e16ebc" class="outline-2">
+<h2 id="org5e16ebc">Process</h2>
+<div class="outline-text-2" id="text-org5e16ebc">
 <ul class="org-ul">
 <li><a href="20220912-linux_fork.html#ID-fe4f5bde-dd07-4119-a55e-d994e263146b">Linux <code>fork()</code></a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d4add5" class="outline-2">
-<h2 id="org5d4add5">Useful Command</h2>
-<div class="outline-text-2" id="text-org5d4add5">
+<div id="outline-container-org81d0a30" class="outline-2">
+<h2 id="org81d0a30">Useful Command</h2>
+<div class="outline-text-2" id="text-org81d0a30">
 </div>
-<div id="outline-container-org047eb26" class="outline-3">
-<h3 id="org047eb26">Let non-root/normal user use port which less then 1024</h3>
-<div class="outline-text-3" id="text-org047eb26">
+<div id="outline-container-org3d71d7a" class="outline-3">
+<h3 id="org3d71d7a">Let non-root/normal user use port which less then 1024</h3>
+<div class="outline-text-3" id="text-org3d71d7a">
 <div class="org-src-container">
-<pre class="src src-bash">setcap <span style="color: #BA36A5;">cap_net_bind_service</span>=+eip /path/executable_program
+<pre class="src src-bash"><span style="color: #006DAF;">setcap</span> cap_net_bind_service=+eip /path/executable_program
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd5f52a1" class="outline-3">
-<h3 id="orgd5f52a1">Recover files on Linux</h3>
-<div class="outline-text-3" id="text-orgd5f52a1">
+<div id="outline-container-org01eed51" class="outline-3">
+<h3 id="org01eed51">Recover files on Linux</h3>
+<div class="outline-text-3" id="text-org01eed51">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">backup sector</span>
-dd <span style="color: #BA36A5;">if</span>=/path/filename <span style="color: #BA36A5;">of</span>=/dev/vda1
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">unmount</span>
-umount /dev/vda1
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">force unmount</span>
-fuser -m -v -i -k /dev/vda1
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">scan</span>
-extundelete --inode <span style="color: #D0372D;">2</span> /dev/vda1
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">recover</span>
-extundelete /dev/vda1 --restore-all
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;"># backup sector</span>
+<span style="color: #006DAF;">dd</span> if=/path/filename of=/dev/vda1
+<span style="color: #8D8D84; font-style: italic;"># unmount</span>
+<span style="color: #006DAF;">umount</span> /dev/vda1
+<span style="color: #8D8D84; font-style: italic;"># force unmount</span>
+<span style="color: #006DAF;">fuser</span> <span style="color: #D0372D;">-m</span> <span style="color: #D0372D;">-v</span> <span style="color: #D0372D;">-i</span> <span style="color: #D0372D;">-k</span> /dev/vda1
+<span style="color: #8D8D84; font-style: italic;"># scan</span>
+<span style="color: #006DAF;">extundelete</span> <span style="color: #D0372D;">--inode</span> <span style="color: #D0372D;">2</span> /dev/vda1
+<span style="color: #8D8D84; font-style: italic;"># recover</span>
+<span style="color: #006DAF;">extundelete</span> /dev/vda1 <span style="color: #D0372D;">--restore-all</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd346818" class="outline-3">
-<h3 id="orgd346818">Safe rm</h3>
-<div class="outline-text-3" id="text-orgd346818">
+<div id="outline-container-org0f78a59" class="outline-3">
+<h3 id="org0f78a59">Safe rm</h3>
+<div class="outline-text-3" id="text-org0f78a59">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/</span><span style="color: #0000FF;">env</span><span style="color: #8D8D84; font-style: italic;"> bash</span>
-<span style="color: #BA36A5;">args</span>=<span style="color: #008000;">""</span>
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
+<span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">""</span>
 
-<span style="color: #0000FF;">while </span><span style="color: #006FE0;">getopts</span> <span style="color: #008000;">':rRfiIdv'</span> OPTION; <span style="color: #0000FF;">do</span>
-    <span style="color: #0000FF;">case</span> <span style="color: #008000;">"$OPTION"</span><span style="color: #0000FF;"> in</span>
-        <span style="color: #006FE0;">r</span>|R|<span style="color: #008000;">\?</span>)
-            ;;
+<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">getopts</span> <span style="color: #008000;">':rRfiIdv'</span> OPTION<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
+    <span style="color: #0000FF;">case</span> <span style="color: #BA36A5;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">OPTION</span><span style="color: #BA36A5;">"</span> <span style="color: #0000FF;">in</span>
+        <span style="color: #D0372D;">r</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">R</span><span style="color: #0000FF;">|</span><span style="color: #D0372D;">\?</span>)
+            <span style="color: #0000FF;">;;</span>
 
-        *)
-            <span style="color: #BA36A5;">args</span>=<span style="color: #008000;">"$args$OPTION"</span>
-            ;;
+        <span style="color: #D0372D;">*</span>)
+            <span style="color: #BA36A5; font-style: italic;">args</span>=<span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #0000FF;">$</span><span style="color: #D0372D; font-style: italic;">OPTION</span><span style="color: #008000;">"</span>
+            <span style="color: #0000FF;">;;</span>
     <span style="color: #0000FF;">esac</span>
 <span style="color: #0000FF;">done</span>
 
-<span style="color: #006FE0;">shift</span> <span style="color: #008000;">"$(($OPTIND - 1))"</span>
+<span style="color: #006FE0;">shift</span> <span style="color: #008000;">"</span><span style="color: #FF1493;">$(</span><span style="color: #FF1493; background-color: #FFFFFF;">(</span><span style="color: #FF1493; background-color: #FFFFFF;">$</span><span style="color: #FF1493; background-color: #FFFFFF; font-style: italic;">OPTIND</span><span style="color: #FF1493; background-color: #FFFFFF;"> </span><span style="color: #FF1493; background-color: #FFFFFF;">-</span><span style="color: #FF1493; background-color: #FFFFFF;"> 1)</span><span style="color: #008000;">)</span><span style="color: #008000;">"</span>
 
-<span style="color: #0000FF;">if</span> [[ -n <span style="color: #008000;">"$args"</span> ]]; <span style="color: #0000FF;">then</span>
-    mv <span style="color: #008000;">"-$args"</span> <span style="color: #008000;">"$@"</span> /opt/data/.trash
+<span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span><span style="color: #7388D6;">[</span> -n <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #7388D6;">]</span><span style="color: #707183;">]</span><span style="color: #0000FF;">;</span> <span style="color: #0000FF;">then</span>
+    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"-</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">args</span><span style="color: #008000;">"</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
 <span style="color: #0000FF;">else</span>
-    mv <span style="color: #008000;">"$@"</span> /opt/data/.trash
+    <span style="color: #006DAF;">mv</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-weight: bold;">@</span><span style="color: #008000;">"</span> /opt/data/.trash
 <span style="color: #0000FF;">fi</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org81a2d46" class="outline-3">
-<h3 id="org81a2d46">Read file</h3>
-<div class="outline-text-3" id="text-org81a2d46">
+<div id="outline-container-org8492671" class="outline-3">
+<h3 id="org8492671">Read file</h3>
+<div class="outline-text-3" id="text-org8492671">
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/</span><span style="color: #0000FF;">env</span><span style="color: #8D8D84; font-style: italic;"> bash</span>
+<pre class="src src-bash"><span style="color: #8D8D84; font-style: italic;">#!/usr/bin/env bash</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">This is correct way to read file.</span>
-<span style="color: #BA36A5;">FILE</span>=<span style="color: #008000;">"./tmp/use.py"</span>
-<span style="color: #BA36A5;">k</span>=<span style="color: #D0372D;">1</span>
+<span style="color: #8D8D84; font-style: italic;"># This is correct way to read file.</span>
+<span style="color: #BA36A5; font-style: italic;">FILE</span>=<span style="color: #008000;">"./tmp/use.py"</span>
+<span style="color: #BA36A5; font-style: italic;">k</span>=<span style="color: #D0372D;">1</span>
 
-<span style="color: #0000FF;">while </span><span style="color: #006FE0;">read</span> -r line; <span style="color: #0000FF;">do</span>
-    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"$line"</span>
-    ((k++))
-<span style="color: #0000FF;">done</span> &lt; <span style="color: #008000;">"$FILE"</span>
+<span style="color: #0000FF;">while</span> <span style="color: #006FE0;">read</span> <span style="color: #D0372D;">-r</span> line<span style="color: #0000FF;">;</span> <span style="color: #0000FF;">do</span>
+    <span style="color: #006FE0;">echo</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">line</span><span style="color: #008000;">"</span>
+    <span style="color: #707183;">(</span><span style="color: #7388D6;">(</span>k++<span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #0000FF;">done</span> <span style="color: #0000FF;">&lt;</span> <span style="color: #008000;">"</span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">FILE</span><span style="color: #008000;">"</span>
 
-<span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Total number of lines in file: $k"</span>
+<span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Total number of lines in file: </span><span style="color: #D0372D;">$</span><span style="color: #BA36A5; font-style: italic;">k</span><span style="color: #008000;">"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org56f977e" class="outline-3">
-<h3 id="org56f977e">utils tools</h3>
-<div class="outline-text-3" id="text-org56f977e">
+<div id="outline-container-orge7f8e86" class="outline-3">
+<h3 id="orge7f8e86">utils tools</h3>
+<div class="outline-text-3" id="text-orge7f8e86">
 <p>
 Rust-alternatives <code>[3/7]</code>:
 </p>
@@ -196,39 +185,39 @@ Rust-alternatives <code>[3/7]</code>:
 </ul>
 </div>
 </div>
-<div id="outline-container-org1190c30" class="outline-3">
-<h3 id="org1190c30">Set timezone</h3>
-<div class="outline-text-3" id="text-org1190c30">
+<div id="outline-container-orgb7fd983" class="outline-3">
+<h3 id="orgb7fd983">Set timezone</h3>
+<div class="outline-text-3" id="text-orgb7fd983">
 <div class="org-src-container">
-<pre class="src src-bash">timedatectl list-timezones | grep Shanghai
-sudo timedatectl set-timezone Asia/Shanghai
+<pre class="src src-bash"><span style="color: #006DAF;">timedatectl</span> list-timezones <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">grep</span> Shanghai
+<span style="color: #006DAF;">sudo</span> timedatectl set-timezone Asia/Shanghai
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org7ddcab9" class="outline-3">
-<h3 id="org7ddcab9">git completely remove files</h3>
-<div class="outline-text-3" id="text-org7ddcab9">
+<div id="outline-container-org7c74ab0" class="outline-3">
+<h3 id="org7c74ab0">git completely remove files</h3>
+<div class="outline-text-3" id="text-org7c74ab0">
 <div class="org-src-container">
-<pre class="src src-bash">git filter-branch --force --index-filter <span style="color: #008000;">'git rm -r --cached --ignore-unmatch &lt;files&gt;'</span> --prune-empty --tag-name-filter cat -- --all
+<pre class="src src-bash"><span style="color: #006DAF;">git</span> filter-branch <span style="color: #D0372D;">--force</span> <span style="color: #D0372D;">--index-filter</span> <span style="color: #008000;">'</span><span style="color: #008000;">git</span><span style="color: #008000;"> </span><span style="color: #008000;">rm</span><span style="color: #008000;"> -r --cached --ignore-unmatch &lt;files&gt;'</span> <span style="color: #D0372D;">--prune-empty</span> <span style="color: #D0372D;">--tag-name-filter</span> <span style="color: #6434A3;">cat</span> <span style="color: #D0372D;">--</span> <span style="color: #D0372D;">--all</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-bash">git rm --cached -r .
-git gc --prune
+<pre class="src src-bash"><span style="color: #006DAF;">git</span> <span style="color: #6434A3;">rm</span> <span style="color: #D0372D;">--cached</span> <span style="color: #D0372D;">-r</span> .
+<span style="color: #006DAF;">git</span> gc <span style="color: #D0372D;">--prune</span>
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">repack</span>
-git for-each-ref --format=<span style="color: #008000;">'delete %(refname)'</span> refs/original | git update-ref --stdin
-git reflog expire --expire=now --all
-git gc --prune=now
+<span style="color: #8D8D84; font-style: italic;"># repack</span>
+<span style="color: #006DAF;">git</span> for-each-ref <span style="color: #808080;">--format=</span><span style="color: #808080;">'delete %(refname)'</span> refs/original <span style="color: #0000FF;">|</span> <span style="color: #006DAF;">git</span> update-ref <span style="color: #D0372D;">--stdin</span>
+<span style="color: #006DAF;">git</span> reflog expire <span style="color: #808080;">--expire=now</span> <span style="color: #D0372D;">--all</span>
+<span style="color: #006DAF;">git</span> gc <span style="color: #808080;">--prune=now</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2d23b6e" class="outline-3">
-<h3 id="org2d23b6e">xargs</h3>
-<div class="outline-text-3" id="text-org2d23b6e">
+<div id="outline-container-orgffc0214" class="outline-3">
+<h3 id="orgffc0214">xargs</h3>
+<div class="outline-text-3" id="text-orgffc0214">
 <table>
 
 
@@ -271,13 +260,7 @@ git gc --prune=now
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

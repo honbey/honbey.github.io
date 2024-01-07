@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Info Scan</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,46 +16,46 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org586f82f">Layer 2</a></li>
-<li><a href="#org386c2b4">Layer 3</a></li>
-<li><a href="#org20849ab">Layer 4</a></li>
-<li><a href="#org72c03ed">Layer 7</a>
+<li><a href="#org50139e9">Layer 2</a></li>
+<li><a href="#org857e8d6">Layer 3</a></li>
+<li><a href="#org8a51bfc">Layer 4</a></li>
+<li><a href="#orgee92f35">Layer 7</a>
 <ul>
-<li><a href="#org4624b95">Detect which WAF is protecting a website</a></li>
+<li><a href="#orgdd4070f">Detect which WAF is protecting a website</a></li>
 </ul>
 </li>
-<li><a href="#orgf9ff008">Nmap</a></li>
-<li><a href="#org189dee6">Attack Surface</a></li>
+<li><a href="#orgd4bae9b">Nmap</a></li>
+<li><a href="#orgbb797b1">Attack Surface</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org586f82f" class="outline-2">
-<h2 id="org586f82f">Layer 2</h2>
-<div class="outline-text-2" id="text-org586f82f">
+<div id="outline-container-org50139e9" class="outline-2">
+<h2 id="org50139e9">Layer 2</h2>
+<div class="outline-text-2" id="text-org50139e9">
 <div class="org-src-container">
 <pre class="src src-nil">arping
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org386c2b4" class="outline-2">
-<h2 id="org386c2b4">Layer 3</h2>
+<div id="outline-container-org857e8d6" class="outline-2">
+<h2 id="org857e8d6">Layer 3</h2>
 </div>
 
-<div id="outline-container-org20849ab" class="outline-2">
-<h2 id="org20849ab">Layer 4</h2>
+<div id="outline-container-org8a51bfc" class="outline-2">
+<h2 id="org8a51bfc">Layer 4</h2>
 </div>
 
-<div id="outline-container-org72c03ed" class="outline-2">
-<h2 id="org72c03ed">Layer 7</h2>
-<div class="outline-text-2" id="text-org72c03ed">
+<div id="outline-container-orgee92f35" class="outline-2">
+<h2 id="orgee92f35">Layer 7</h2>
+<div class="outline-text-2" id="text-orgee92f35">
 </div>
-<div id="outline-container-org4624b95" class="outline-3">
-<h3 id="org4624b95">Detect which WAF is protecting a website</h3>
-<div class="outline-text-3" id="text-org4624b95">
+<div id="outline-container-orgdd4070f" class="outline-3">
+<h3 id="orgdd4070f">Detect which WAF is protecting a website</h3>
+<div class="outline-text-3" id="text-orgdd4070f">
 <ul class="org-ul">
 <li><p>
-<a href="#orgf9ff008">nmap</a>
+<a href="#orgd4bae9b">nmap</a>
 </p>
 <div class="org-src-container">
 <pre class="src src-nil">nmap --script=http-waf-fingerprint targetwebsite.com
@@ -80,14 +69,14 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgf9ff008" class="outline-2">
-<h2 id="orgf9ff008">Nmap</h2>
-<div class="outline-text-2" id="text-orgf9ff008">
+<div id="outline-container-orgd4bae9b" class="outline-2">
+<h2 id="orgd4bae9b">Nmap</h2>
+<div class="outline-text-2" id="text-orgd4bae9b">
 </div>
 </div>
-<div id="outline-container-org189dee6" class="outline-2">
-<h2 id="org189dee6">Attack Surface</h2>
-<div class="outline-text-2" id="text-org189dee6">
+<div id="outline-container-orgbb797b1" class="outline-2">
+<h2 id="orgbb797b1">Attack Surface</h2>
+<div class="outline-text-2" id="text-orgbb797b1">
 <p>
 攻击面：任何能使网络资产在未授权的情况下能被访问和利用的所有可能入口的总和。
 </p>
@@ -139,13 +128,7 @@
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

